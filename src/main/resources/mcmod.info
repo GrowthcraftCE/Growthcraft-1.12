@@ -1,0 +1,31 @@
+[
+{
+  "modid": "growthcraft",
+  "name": "Growthcraft",
+  "description": "Growthcraft - A low tech farming and brewing mod.",
+  "version": "4.0.0",
+  "mcversion": "1.12",
+  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["mod_MinecraftForge"]
+},
+{
+  "modid": "growthcraft|fishtrap",
+  "name": "Growthcraft Fishtrap",
+  "description": "Growthcraft Fishtrap - Fishing made simple. ",
+  "version": "4.0.0",
+  "mcversion": "1.12",
+  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["mod_MinecraftForge", "growthcraft"],
+  "parent": "growthcraft"
+}
+]
