@@ -1,0 +1,16 @@
+[
+{
+  "modid": "growthcraft",
+  "name": "Growthcraft",
+  "description": "Example placeholder mod.",
+  "version": "3.0.0-alpha",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
