@@ -1,6 +1,7 @@
 package growthcraft.core;
 
 import growthcraft.core.creativetabs.TabGrowthcraft;
+import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.init.GrowthcraftCoreRecipes;
 import growthcraft.core.proxy.CommonProxy;
@@ -28,6 +29,8 @@ public class GrowthcraftCore {
         GrowthcraftLogger.getLogger().info(Reference.NAME + " pre-initializing ...");
         GrowthcraftCoreItems.init();
         GrowthcraftCoreItems.register();
+        GrowthcraftCoreBlocks.init();
+        GrowthcraftCoreBlocks.register();
 
         proxy.registerRenders();
     }

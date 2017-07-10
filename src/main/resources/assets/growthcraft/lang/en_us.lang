@@ -15,3 +15,6 @@ item.crowbar.brown.name=Brown Crowbar
 item.crowbar.green.name=Green Crowbar
 item.crowbar.red.name=Red Crowbar
 item.crowbar.black.name=Black Crowbar
+item.salt.name=Salt
+
+tile.salt_block.name=Salt Block

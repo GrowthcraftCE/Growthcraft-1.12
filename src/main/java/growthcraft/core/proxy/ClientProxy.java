@@ -1,6 +1,7 @@
 package growthcraft.core.proxy;
 
 import growthcraft.core.Reference;
+import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.util.ResourceLocation;
@@ -9,6 +10,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenders() {
         GrowthcraftCoreItems.registerRenders();
+        GrowthcraftCoreBlocks.registerRenders();
     }
 
     @Override

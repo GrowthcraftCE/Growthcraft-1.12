@@ -15,9 +15,10 @@ public class GrowthcraftCoreRecipes {
 
     private static void registerCraftingRecipes() {
 
-        // Crowbar Recipes
+
         Item ironIngot = Items.IRON_INGOT;
 
+        // Crowbar Recipes
         for ( EnumDyeColor dye : EnumDyeColor.values() ) {
             GameRegistry.addShapedRecipe( new ItemStack(GrowthcraftCoreItems.crowbar, 1, dye.getMetadata()),
                     "  I", "DI ", "ID ",
@@ -25,5 +26,15 @@ public class GrowthcraftCoreRecipes {
                     'D', new ItemStack(Items.DYE, 1, dye.getDyeDamage())
                     );
         }
+
+        GameRegistry.addRecipe( new ItemStack(GrowthcraftCoreBlocks.salt_block, 1),
+                "SSS", "SSS", "SSS",
+                'S', GrowthcraftCoreItems.salt
+        );
+        GameRegistry.addRecipe( new ItemStack(GrowthcraftCoreItems.salt, 9),
+                "S",
+                'S', GrowthcraftCoreBlocks.salt_block
+        );
+
     }
 }
