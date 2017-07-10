@@ -1,7 +1,5 @@
 {
   "variants": {
-    "normal": {
-      "model": "growthcraft_fisthrap:fishtrap"
-    }
+    "normal": { "model": "growthcraft_fishtrap:fishtrap" }
   }
 }

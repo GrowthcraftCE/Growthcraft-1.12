@@ -32,7 +32,7 @@ public class GrowthcraftFishtrapBlocks {
     }
 
     public static void registerBlock(Block block) {
-        //block.setCreativeTab(tabGrowthcraft);
+        block.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(block);
         GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
     }

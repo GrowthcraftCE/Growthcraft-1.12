@@ -17,16 +17,19 @@ public class GrowthcraftFishtrap {
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         GrowthcraftFishtrapBlocks.init();
         GrowthcraftFishtrapBlocks.register();
         proxy.registerRenders();
     }
 
+    @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
 
     }
 
+    @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
     }
 
