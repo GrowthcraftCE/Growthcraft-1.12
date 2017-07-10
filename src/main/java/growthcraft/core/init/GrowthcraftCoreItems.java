@@ -4,7 +4,6 @@ import growthcraft.core.Reference;
 import growthcraft.core.handlers.EnumHandler;
 import growthcraft.core.items.ItemCrowbar;
 import growthcraft.core.items.ItemSalt;
-import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -32,7 +31,6 @@ public class GrowthcraftCoreItems {
         registerRender(salt);
         for ( int i = 0; i < EnumHandler.CrowbarTypes.values().length; i++ ) {
             registerRender(crowbar, i, "crowbar_" + EnumHandler.CrowbarTypes.values()[i].getName());
-            GrowthcraftLogger.getLogger().info("Registering render for " + "crowbar_" + EnumHandler.CrowbarTypes.values()[i].getName());
         }
     }
 

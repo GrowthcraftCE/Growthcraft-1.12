@@ -5,12 +5,27 @@
   "description": "Example placeholder mod.",
   "version": "3.0.0-alpha",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
   "updateUrl": "",
   "authorList": ["ExampleDude"],
   "credits": "The Forge and FML guys, for making this example",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": []
+  "dependencies": ["mod_MinecraftForge"]
+},
+{
+  "modid": "growthcraft_fishtrap",
+  "name": "Growthcraft Fishtrap",
+  "description": "Growthcraft Fishtrap - Fishing made simple. ",
+  "version": "3.0.0-alpha",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
+  "updateUrl": "",
+  "authorList": ["ExampleDude"],
+  "credits": "The Forge and FML guys, for making this example",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["mod_MinecraftForge", "growthcraft"],
+  "parent": "growthcraft"
 }
 ]

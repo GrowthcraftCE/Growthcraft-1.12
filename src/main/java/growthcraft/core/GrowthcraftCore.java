@@ -5,7 +5,6 @@ import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.init.GrowthcraftCoreRecipes;
 import growthcraft.core.proxy.CommonProxy;
-import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -26,25 +25,22 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftLogger.getLogger().info(Reference.NAME + " pre-initializing ...");
         GrowthcraftCoreItems.init();
         GrowthcraftCoreItems.register();
         GrowthcraftCoreBlocks.init();
         GrowthcraftCoreBlocks.register();
-
         proxy.registerRenders();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        GrowthcraftLogger.getLogger().info(Reference.NAME + " initializing ...");
         proxy.registerModelBakeryVariants();
         GrowthcraftCoreRecipes.registerRecipes();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        GrowthcraftLogger.getLogger().info(Reference.NAME + " post-initializing ...");
+
     }
 
 }
