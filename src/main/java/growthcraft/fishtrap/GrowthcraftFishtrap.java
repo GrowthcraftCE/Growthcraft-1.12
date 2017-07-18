@@ -11,6 +11,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftFishtrap {
 
+
+
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftFishtrap instance;
 
@@ -22,6 +24,7 @@ public class GrowthcraftFishtrap {
         GrowthcraftFishtrapBlocks.init();
         GrowthcraftFishtrapBlocks.register();
         proxy.registerRenders();
+        proxy.registerTitleEntities();
     }
 
     @Mod.EventHandler
