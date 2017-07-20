@@ -14,8 +14,6 @@ cache:
 before_install:
 # ensure we have ruby
 - ruby --version
-- gem install bundler
-- bundle install
 - chmod +x ./gradlew
 
 install: ./gradlew setupCIWorkspace -S
