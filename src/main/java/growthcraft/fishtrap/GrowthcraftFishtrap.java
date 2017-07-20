@@ -1,5 +1,6 @@
 package growthcraft.fishtrap;
 
+import growthcraft.fishtrap.client.gui.GuiHandler;
 import growthcraft.fishtrap.init.GrowthcraftFishtrapBlocks;
 import growthcraft.fishtrap.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -7,6 +8,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftFishtrap {
@@ -25,11 +27,15 @@ public class GrowthcraftFishtrap {
         GrowthcraftFishtrapBlocks.register();
         proxy.registerRenders();
         proxy.registerTitleEntities();
+
+        //NetworkRegistry.INSTANCE.registerGuiHandler(GrowthcraftFishtrap.instance, new GuiHandler());
+
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-
+        proxy.init();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
     }
 
     @Mod.EventHandler
