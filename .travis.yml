@@ -1,7 +1,7 @@
 language: java
 sudo: false
 jdk:
-- openjdk7
+- openjdk8
 
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -16,8 +16,6 @@ before_install:
 - ruby --version
 - gem install bundler
 - bundle install
-# fetch 3rd party apis and such
-- git submodule update --init
 - chmod +x ./gradlew
 
 install: ./gradlew setupCIWorkspace -S
