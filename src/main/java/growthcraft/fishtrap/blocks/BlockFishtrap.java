@@ -1,7 +1,7 @@
 package growthcraft.fishtrap.blocks;
 
-import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.fishtrap.Reference;
+import growthcraft.fishtrap.client.gui.GuiHandler;
 import growthcraft.fishtrap.tileentity.TileEntityFishtrap;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -69,15 +69,9 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            // TODO: Remove when done.
-            TileEntityFishtrap te = (TileEntityFishtrap) worldIn.getTileEntity(pos);
-            IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-            for (int slot = 0; slot < handler.getSlots(); slot++) {
-                ItemStack stack = handler.getStackInSlot(slot);
-                GrowthcraftLogger.getLogger().info("Slot[" + slot + "] contains " + handler.getStackInSlot(slot).getCount() + " " + stack.getUnlocalizedName());
-            }
+            playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
-        return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+        return true;
     }
 
     @Override

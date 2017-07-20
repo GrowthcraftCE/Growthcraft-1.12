@@ -25,14 +25,14 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     private int cooldown;
     private int random;
     private int intMinCooldown = 256;
-    private int intMaxCooldown = 768;
+    private int intMaxCooldown = 1024;
 
     private ItemStackHandler handler;
 
     public TileEntityFishtrap() {
         this.cooldown = 0;
         this.random = intMaxCooldown;
-        this.handler = new ItemStackHandler(5);
+        this.handler = new ItemStackHandler(7);
     }
 
     private int getRandomCooldown() {
@@ -41,8 +41,13 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
 
     private void doFishing() {
         if ( !getWorld().isRemote ) {
-            // Get a random item from the Fishing_Rod LootTable. Pull this from the EntityFishHook class.
+            // Get a random item from the Fishing_Rod LootTable. Pulled this from the EntityFishHook class.
             LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
+
+            // If we have bait, increase the luck ... this needs to be in a config file for the luck items.
+            //ItemStack stack = handler.getStackInSlot(6);
+            //lootcontext$builder.withLuck((float)this.field_191518_aw + this.angler.getLuck());
+
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(LootTableList.GAMEPLAY_FISHING).generateLootForPools(new Random(), lootcontext$builder.build());
 
             for (ItemStack itemstack : result) {
@@ -87,10 +92,10 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     @Override
     public void update() {
         this.cooldown++;
-        this.cooldown %= intMaxCooldown;
-        if ( cooldown == 0 ) {
+        this.cooldown %= this.random;
+        if (cooldown == 0) {
             this.random = getRandomCooldown();
-            if ( !isInventoryFull(this.handler)) {
+            if (!isInventoryFull(this.handler)) {
                 this.doFishing();
             }
         }
@@ -134,7 +139,8 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if ( capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
             return (T)this.handler;
-            return super.getCapability(capability, facing);
+
+        return super.getCapability(capability, facing);
     }
 
     @Override
@@ -143,4 +149,5 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             return true;
         return super.hasCapability(capability, facing);
     }
+
 }

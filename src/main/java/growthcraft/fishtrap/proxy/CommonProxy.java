@@ -6,10 +6,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
+    public void init() { }
+
     public void registerRenders() { }
 
     public void registerTitleEntities() {
-        GameRegistry.registerTileEntity(TileEntityFishtrap.class, Reference.MODID + ":block_fishtrap");
+        GameRegistry.registerTileEntity(TileEntityFishtrap.class, Reference.MODID + ":fishtrap");
     }
 
 }
