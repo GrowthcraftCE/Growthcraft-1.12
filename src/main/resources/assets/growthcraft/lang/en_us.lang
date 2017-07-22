@@ -17,4 +17,6 @@ item.crowbar.red.name=Red Crowbar
 item.crowbar.black.name=Black Crowbar
 item.salt.name=Salt
 
+itemGroup.Growthcraft=Growthcraft
+
 tile.salt_block.name=Salt Block
