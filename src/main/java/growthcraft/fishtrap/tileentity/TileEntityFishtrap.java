@@ -1,5 +1,10 @@
 package growthcraft.fishtrap.tileentity;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockStaticLiquid;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -7,6 +12,9 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTableList;
@@ -23,16 +31,17 @@ import java.util.Random;
 public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabilityProvider {
 
     private int cooldown;
-    private int random;
+    private int randomMaxCooldown;
     private int intMinCooldown = 256;
     private int intMaxCooldown = 1024;
-
+    private Random rand;
     private ItemStackHandler handler;
 
     public TileEntityFishtrap() {
         this.cooldown = 0;
-        this.random = intMaxCooldown;
+        this.randomMaxCooldown = intMaxCooldown;
         this.handler = new ItemStackHandler(7);
+        rand = new Random();
     }
 
     private int getRandomCooldown() {
@@ -43,36 +52,62 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         if ( !getWorld().isRemote ) {
             // Get a random item from the Fishing_Rod LootTable. Pulled this from the EntityFishHook class.
             LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
-
-            // If we have bait, increase the luck ... this needs to be in a config file for the luck items.
-            //ItemStack stack = handler.getStackInSlot(6);
-            //lootcontext$builder.withLuck((float)this.field_191518_aw + this.angler.getLuck());
-
-            List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(LootTableList.GAMEPLAY_FISHING).generateLootForPools(new Random(), lootcontext$builder.build());
-
+            List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(this.getLootTableList()).generateLootForPools(new Random(), lootcontext$builder.build());
             for (ItemStack itemstack : result) {
                 if ( !this.isInventoryFull(this.handler)) {
                     this.addStackToInventory(this.handler, itemstack, false);
                 }
             }
         }
+
+        this.world.playSound((EntityPlayer)null, pos.getY(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 10000.0F, 0.8F + rand.nextFloat() * 0.2F);
+
     }
 
+    /**
+     * Determine which loot table should be used.
+     * @return ResourceLocation of the LootTable
+     */
+    private ResourceLocation getLootTableList() {
+        ResourceLocation lootTableList;
+        lootTableList = LootTableList.GAMEPLAY_FISHING;
+
+        if ( this.handler.getStackInSlot(0).getCount() > 0 ) {
+            this.handler.getStackInSlot(0).shrink(1);
+            lootTableList = LootTableList.GAMEPLAY_FISHING_FISH;
+        }
+
+        return lootTableList;
+    }
+
+    /**
+     * Add the stack to the handler.
+     * @param handler
+     * @param stack
+     * @param simulate
+     * @return
+     */
     private ItemStack addStackToInventory(IItemHandler handler, ItemStack stack, boolean simulate) {
         ItemStack remainder = stack;
-        for(int slot = 0; slot < handler.getSlots(); slot++) {
+        for(int slot = 1; slot < handler.getSlots(); slot++) {
             remainder = handler.insertItem(slot, stack, simulate);
             if ( remainder == ItemStack.EMPTY) break;
         }
         return remainder;
     }
 
+
+    /**
+     * Check if the inventory handler is full.
+     * @param handler
+     * @return
+     */
     private boolean isInventoryFull(IItemHandler handler) {
         int filledSlots = 0;
-        for ( int slot = 0; slot < handler.getSlots(); slot++ ) {
+        for ( int slot = 1; slot < handler.getSlots(); slot++ ) {
             if(handler.getStackInSlot(slot).getCount() == handler.getSlotLimit(slot)) filledSlots++;
         }
-        return filledSlots == handler.getSlots();
+        return filledSlots == handler.getSlots() - 1; // -1 due to the bait slot.
     }
 
     @Override
@@ -92,14 +127,44 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     @Override
     public void update() {
         this.cooldown++;
-        this.cooldown %= this.random;
+        this.cooldown %= this.randomMaxCooldown;
         if (cooldown == 0) {
-            this.random = getRandomCooldown();
-            if (!isInventoryFull(this.handler)) {
+            this.randomMaxCooldown = getRandomCooldown();
+            if (inWater() && !isInventoryFull(this.handler)) {
                 this.doFishing();
             }
         }
     }
+
+    /**
+     * Check to determine if the surrounding blocks are static fluid.
+     * @return
+     */
+    private Boolean inWater() {
+
+        BlockPos[] neighborBlockPos = {
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX()+1, pos.getY(), pos.getZ()-1)),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX()+1, pos.getY(), pos.getZ())),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX()+1, pos.getY(), pos.getZ()+1)),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX(), pos.getY(), pos.getZ()-1)),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX(), pos.getY(), pos.getZ()+1)),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX()-1, pos.getY(), pos.getZ()-1)),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX()-1, pos.getY(), pos.getZ())),
+                pos.offset(EnumFacing.getFacingFromVector(pos.getX()-1, pos.getY(), pos.getZ()+1))
+        };
+
+        for(BlockPos neighborPos : neighborBlockPos) {
+            IBlockState state = this.world.getBlockState(neighborPos);
+            Block block = state.getBlock();
+            if(!(block instanceof BlockStaticLiquid)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
 
     @Nullable
     @Override
@@ -149,5 +214,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             return true;
         return super.hasCapability(capability, facing);
     }
+
+
 
 }
