@@ -30,7 +30,6 @@ deploy:
   file:
   - "checksums.txt"
   - "build/libs/growthcraft-*.jar"
-  - "build/libs/growthcraft-*-sources.jar"
   skip_cleanup: true
   on:
     tags: true
