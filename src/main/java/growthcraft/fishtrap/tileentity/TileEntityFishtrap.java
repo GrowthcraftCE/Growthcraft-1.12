@@ -23,6 +23,7 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -35,17 +36,20 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     private int intMinCooldown = 256;
     private int intMaxCooldown = 1024;
     private Random rand;
-    private ItemStackHandler handler;
+    private ItemStackHandler handlerOutput;
+    private ItemStackHandler handlerInput;
+
 
     public TileEntityFishtrap() {
         this.cooldown = 0;
         this.randomMaxCooldown = intMaxCooldown;
-        this.handler = new ItemStackHandler(7);
+        this.handlerOutput = new ItemStackHandler(6);
+        this.handlerInput = new ItemStackHandler(1);
         rand = new Random();
     }
 
     private int getRandomCooldown() {
-        return new Random().nextInt((intMaxCooldown - intMinCooldown) + 1) + intMinCooldown;
+        return rand.nextInt((intMaxCooldown - intMinCooldown) + 1) + intMinCooldown;
     }
 
     private void doFishing() {
@@ -54,8 +58,8 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(this.getLootTableList()).generateLootForPools(new Random(), lootcontext$builder.build());
             for (ItemStack itemstack : result) {
-                if ( !this.isInventoryFull(this.handler)) {
-                    this.addStackToInventory(this.handler, itemstack, false);
+                if ( !this.isInventoryFull(this.handlerOutput)) {
+                    this.addStackToInventory(this.handlerOutput, itemstack, false);
                 }
             }
         }
@@ -72,8 +76,8 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         ResourceLocation lootTableList;
         lootTableList = LootTableList.GAMEPLAY_FISHING;
 
-        if ( this.handler.getStackInSlot(0).getCount() > 0 ) {
-            this.handler.getStackInSlot(0).shrink(1);
+        if ( this.handlerInput.getStackInSlot(0).getCount() > 0 ) {
+            this.handlerInput.getStackInSlot(0).shrink(1);
             lootTableList = LootTableList.GAMEPLAY_FISHING_FISH;
         }
 
@@ -89,7 +93,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
      */
     private ItemStack addStackToInventory(IItemHandler handler, ItemStack stack, boolean simulate) {
         ItemStack remainder = stack;
-        for(int slot = 1; slot < handler.getSlots(); slot++) {
+        for(int slot = 0; slot < handler.getSlots(); slot++) {
             remainder = handler.insertItem(slot, stack, simulate);
             if ( remainder == ItemStack.EMPTY) break;
         }
@@ -104,23 +108,25 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
      */
     private boolean isInventoryFull(IItemHandler handler) {
         int filledSlots = 0;
-        for ( int slot = 1; slot < handler.getSlots(); slot++ ) {
+        for ( int slot = 0; slot < handler.getSlots(); slot++ ) {
             if(handler.getStackInSlot(slot).getCount() == handler.getSlotLimit(slot)) filledSlots++;
         }
-        return filledSlots == handler.getSlots() - 1; // -1 due to the bait slot.
+        return filledSlots == handler.getSlots();
     }
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         this.cooldown = compound.getInteger("Cooldown");
-        this.handler.deserializeNBT(compound.getCompoundTag("ItemStackHandler"));
+        this.handlerOutput.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
+        this.handlerInput.deserializeNBT(compound.getCompoundTag("InventoryInput"));
         super.readFromNBT(compound);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setInteger("Cooldown", this.cooldown);
-        compound.setTag("ItemStackHandler", this.handler.serializeNBT());
+        compound.setTag("InventoryOutput", this.handlerOutput.serializeNBT());
+        compound.setTag("InventoryInput", this.handlerInput.serializeNBT());
         return super.writeToNBT(compound);
     }
 
@@ -130,7 +136,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         this.cooldown %= this.randomMaxCooldown;
         if (cooldown == 0) {
             this.randomMaxCooldown = getRandomCooldown();
-            if (inWater() && !isInventoryFull(this.handler)) {
+            if (inWater() && !isInventoryFull(this.handlerOutput)) {
                 this.doFishing();
             }
         }
@@ -202,17 +208,35 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if ( capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-            return (T)this.handler;
+
+        if ( capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+
+            if (facing == null) {
+                return (T) new CombinedInvWrapper(handlerInput, handlerOutput);
+            }
+
+            switch (facing) {
+                case UP:
+                    return (T)this.handlerInput;
+                case EAST:
+                    return null;
+                case WEST:
+                    return null;
+                case NORTH:
+                    return null;
+                case SOUTH:
+                    return null;
+                default:
+                    return (T)this.handlerOutput;
+            }
+        }
 
         return super.getCapability(capability, facing);
     }
 
     @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        if ( capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-            return true;
-        return super.hasCapability(capability, facing);
+        return this.getCapability(capability, facing) != null;
     }
 
 
