@@ -5,6 +5,7 @@ import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.handlers.EnumHandler;
 import growthcraft.grapes.items.ItemGrape;
+import growthcraft.grapes.items.ItemGrapeSeed;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -13,16 +14,20 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GrowthcraftGrapesItems {
     public static Item grape;
+    public static Item grape_seed;
 
     public static void init() {
         grape = new ItemGrape("grape", 1, 1, false);
+        grape_seed = new ItemGrapeSeed("grape_seed");
     }
 
     public static void register() {
         registerItem(grape);
+        registerItem(grape_seed);
     }
 
     public static void registerRenders() {
+        registerRender(grape_seed);
         for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
            registerRender(grape, i, "grape_" + EnumHandler.GrapeTypes.values()[i].getName());
         }
