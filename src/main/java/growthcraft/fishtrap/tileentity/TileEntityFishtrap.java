@@ -1,9 +1,9 @@
 package growthcraft.fishtrap.tileentity;
 
+import growthcraft.core.utils.GrowthcraftPlaySound;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -64,7 +64,9 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             }
         }
 
-        this.world.playSound((EntityPlayer)null, pos.getY(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 10000.0F, 0.8F + rand.nextFloat() * 0.2F);
+        GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 3);
+
+        //this.world.playSound((EntityPlayer)null, pos.getY(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 10000.0F, 0.8F + rand.nextFloat() * 0.2F);
 
     }
 
@@ -86,10 +88,10 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
 
     /**
      * Add the stack to the handler.
-     * @param handler
-     * @param stack
-     * @param simulate
-     * @return
+     * @param handler Inventory handler.
+     * @param stack ItemStack to be added to the given Inventory Handler
+     * @param simulate Not implemented
+     * @return ItemStack that cannot be added to the inventory.
      */
     private ItemStack addStackToInventory(IItemHandler handler, ItemStack stack, boolean simulate) {
         ItemStack remainder = stack;
