@@ -102,11 +102,8 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         return remainder;
     }
 
-
     /**
      * Check if the inventory handler is full.
-     * @param handler
-     * @return
      */
     private boolean isInventoryFull(IItemHandler handler) {
         int filledSlots = 0;
