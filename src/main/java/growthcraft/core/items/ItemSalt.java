@@ -10,7 +10,4 @@ public class ItemSalt extends Item {
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }
 
-
-
-
 }

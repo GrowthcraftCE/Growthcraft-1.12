@@ -169,8 +169,6 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         return true;
     }
 
-
-
     @Nullable
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
