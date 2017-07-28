@@ -30,6 +30,7 @@ public class GrowthcraftCore {
         GrowthcraftCoreBlocks.init();
         GrowthcraftCoreBlocks.register();
         proxy.registerRenders();
+        proxy.registerSpecialRenders();
     }
 
     @Mod.EventHandler

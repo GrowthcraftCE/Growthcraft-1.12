@@ -236,6 +236,4 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         return this.getCapability(capability, facing) != null;
     }
 
-
-
 }

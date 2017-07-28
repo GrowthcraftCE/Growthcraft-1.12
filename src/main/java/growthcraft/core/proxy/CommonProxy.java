@@ -5,4 +5,6 @@ public class CommonProxy {
     public void registerRenders() { }
 
     public void registerModelBakeryVariants() { }
+
+    public void registerSpecialRenders() {}
 }

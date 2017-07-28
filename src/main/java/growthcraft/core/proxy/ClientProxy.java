@@ -34,4 +34,9 @@ public class ClientProxy extends CommonProxy {
                 new ResourceLocation(Reference.MODID, "crowbar_black")
         );
     }
+
+    @Override
+    public void registerSpecialRenders() {
+        
+    }
 }
