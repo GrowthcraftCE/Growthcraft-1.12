@@ -1,10 +1,13 @@
 package growthcraft.core.blocks;
 
 import growthcraft.core.Reference;
+import growthcraft.core.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -48,5 +51,12 @@ public class BlockRopeKnot extends Block {
         super.addCollisionBoxToList(pos, entityBox, collidingBoxes, COLLISION_BOX);
     }
 
+    @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        ItemStack rope = new ItemStack(GrowthcraftCoreItems.rope, 1);
+        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
 
+        // TODO: Drop the RopeKnot inventory as well.
+        super.breakBlock(worldIn, pos, state);
+    }
 }

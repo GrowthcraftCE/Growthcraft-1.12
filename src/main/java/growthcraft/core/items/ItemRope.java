@@ -1,6 +1,7 @@
 package growthcraft.core.items;
 
 import growthcraft.core.Reference;
+import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -38,6 +39,8 @@ public class ItemRope extends Item {
                 // TODO: Added the selected FENCE to the inventory of the BlockRopeKnot
 
                 // TODO: Switch block with out new BlockRopeKnot
+                worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
+                return EnumActionResult.SUCCESS;
             }
         }
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
