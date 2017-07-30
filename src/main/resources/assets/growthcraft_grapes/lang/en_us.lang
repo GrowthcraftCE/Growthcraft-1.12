@@ -1,0 +1,8 @@
+item.grape.tooltip=Grape
+
+item.grape.green.name=Green Grapes
+item.grape.purple.name=Purple Grapes
+item.grape.red.name=Red Grapes
+
+item.grape_seed.name=Grape Seeds
+item.grape_seed.tooltip=Seed that grow into a grape vine

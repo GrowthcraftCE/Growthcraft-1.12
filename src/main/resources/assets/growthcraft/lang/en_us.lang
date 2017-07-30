@@ -2,7 +2,7 @@ item.crowbar.tooltip=Growthcraft Utility Tool
 item.crowbar.white.name=White Crowbar
 item.crowbar.orange.name=Orange Crowbar
 item.crowbar.magenta.name=Magenta Crowbar
-item.crowbar.lightblue.name=Light Blue Crowbar
+item.crowbar.lightBlue.name=Light Blue Crowbar
 item.crowbar.yellow.name=Yellow Crowbar
 item.crowbar.lime.name=Lime Crowbar
 item.crowbar.pink.name=Pink Crowbar
@@ -15,6 +15,10 @@ item.crowbar.brown.name=Brown Crowbar
 item.crowbar.green.name=Green Crowbar
 item.crowbar.red.name=Red Crowbar
 item.crowbar.black.name=Black Crowbar
+item.rope.name=Rope
 item.salt.name=Salt
 
+itemGroup.Growthcraft=Growthcraft
+
+tile.rope.name=Rope Knot
 tile.salt_block.name=Salt Block

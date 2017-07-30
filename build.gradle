@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "3.0.0-alpha"
+version = "3.0.0.2"
 group = "growthcraft"
 archivesBaseName = "growthcraft"
 
@@ -22,7 +22,6 @@ minecraft {
     version = "1.11.2-13.20.1.2386"
     runDir = "run"
     mappings = "snapshot_20161220"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
 }
 
 dependencies {

@@ -18,23 +18,24 @@ public class ContainerFishtrap extends Container {
 
         IItemHandler handler = tileEntityFishtrap.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
+        // Fishtrap Bait Inventory
+        SlotItemHandler baitSlot = new SlotItemHandler(handler, 0, 17, 20);
+        //baitSlot.canTakeStack()
+        this.addSlotToContainer(baitSlot);
+
         // Fishtrap Output Inventory Slots
         SlotItemHandler[] fishTrapInventorySlots = {
-                new SlotItemHandler(handler, 0, 44, 20),
-                new SlotItemHandler(handler, 1, 62, 20),
-                new SlotItemHandler(handler, 2, 80, 20),
-                new SlotItemHandler(handler, 3, 98, 20),
-                new SlotItemHandler(handler, 4, 116, 20),
-                new SlotItemHandler(handler, 5, 134, 20)
+                new SlotItemHandler(handler, 1, 44, 20),
+                new SlotItemHandler(handler, 2, 62, 20),
+                new SlotItemHandler(handler, 3, 80, 20),
+                new SlotItemHandler(handler, 4, 98, 20),
+                new SlotItemHandler(handler, 5, 116, 20),
+                new SlotItemHandler(handler, 6, 134, 20)
         };
 
         for(SlotItemHandler fishTrapInventorySlot : fishTrapInventorySlots) {
             this.addSlotToContainer(fishTrapInventorySlot);
         }
-
-        // Fishtrap Bait Inventory
-        SlotItemHandler baitSlot = new SlotItemHandler(handler, 6, 17, 20);
-        this.addSlotToContainer(baitSlot);
 
         // Player Inventory Containers
         int posX = 8;
@@ -81,4 +82,6 @@ public class ContainerFishtrap extends Container {
 
         return itemStackCopy;
     }
+
+
 }

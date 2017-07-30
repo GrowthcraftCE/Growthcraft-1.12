@@ -1,6 +1,7 @@
 package growthcraft.core.init;
 
 import growthcraft.core.Reference;
+import growthcraft.core.blocks.BlockRopeKnot;
 import growthcraft.core.blocks.BlockSalt;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -15,18 +16,22 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftCoreBlocks {
 
     public static Block salt_block;
+    public static Block rope_knot;
 
     public static void init() {
         salt_block = new BlockSalt("salt_block");
+        rope_knot = new BlockRopeKnot("rope_knot");
     }
 
     public static void register() {
         registerBlock(salt_block);
+        registerBlock(rope_knot);
 
     }
 
     public static void  registerRenders() {
         registerRender(salt_block);
+        registerRender(rope_knot);
     }
 
     public static void registerBlock(Block block) {
