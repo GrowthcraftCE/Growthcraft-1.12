@@ -1,10 +1,13 @@
 package growthcraft.core.tileentity;
 
+import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -19,10 +22,20 @@ public class TileEntityRopeKnot extends TileEntity implements ICapabilityProvide
         this.handlerInventory = new ItemStackHandler(1);
     }
 
+    public TileEntityRopeKnot(ItemStack stack) {
+        this.handlerInventory = new ItemStackHandler(1);
+        this.addStackToInventory(handlerInventory, stack, false);
+    }
+
+    public void addStackToInventory(ItemStack stack) {
+        this.addStackToInventory(this.handlerInventory, stack, false);
+    }
+
     private ItemStack addStackToInventory(IItemHandler handler, ItemStack stack, boolean simulate) {
         ItemStack remainder = stack;
         for(int slot = 0; slot < handler.getSlots(); slot++) {
             remainder = handler.insertItem(slot, stack, simulate);
+            GrowthcraftLogger.getLogger().info("Added " + stack.getUnlocalizedName() + " to inventory.");
             if ( remainder == ItemStack.EMPTY) break;
         }
         return remainder;
@@ -73,4 +86,14 @@ public class TileEntityRopeKnot extends TileEntity implements ICapabilityProvide
         return compound;
     }
 
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        return (T)this.handlerInventory;
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return this.getCapability(capability, facing) != null;
+    }
 }

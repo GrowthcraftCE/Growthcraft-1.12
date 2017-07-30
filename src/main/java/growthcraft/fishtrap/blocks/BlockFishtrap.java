@@ -35,6 +35,7 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(1.0F);
         this.setSoundType(SoundType.WOOD);
+        this.setHarvestLevel("axe", 1);
     }
 
     @Nullable
