@@ -1,6 +1,5 @@
 package growthcraft.core.tileentity;
 
-import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -35,7 +34,6 @@ public class TileEntityRopeKnot extends TileEntity implements ICapabilityProvide
         ItemStack remainder = stack;
         for(int slot = 0; slot < handler.getSlots(); slot++) {
             remainder = handler.insertItem(slot, stack, simulate);
-            GrowthcraftLogger.getLogger().info("Added " + stack.getUnlocalizedName() + " to inventory.");
             if ( remainder == ItemStack.EMPTY) break;
         }
         return remainder;
