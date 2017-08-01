@@ -20,5 +20,6 @@ item.salt.name=Salt
 
 itemGroup.Growthcraft=Growthcraft
 
-tile.rope.name=Rope Knot
+tile.rope_knot.name=Rope Knot
+tile.rope_fence.name=Rope
 tile.salt_block.name=Salt Block

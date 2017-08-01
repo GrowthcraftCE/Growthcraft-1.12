@@ -26,7 +26,6 @@ public class GrowthcraftCoreBlocks {
     public static void register() {
         registerBlock(salt_block);
         registerBlock(rope_knot);
-
     }
 
     public static void  registerRenders() {

@@ -40,6 +40,9 @@ public class ItemRope extends Item {
             tileEntity.addStackToInventory(new ItemStack(block));
 
             return EnumActionResult.SUCCESS;
+        } else {
+            // Place a RopeBlock into the world.
+
         }
         return EnumActionResult.PASS;
     }

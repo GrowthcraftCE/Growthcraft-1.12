@@ -1,6 +1,7 @@
 {
   "textures": {
-    "0": "growthcraft:blocks/rope_knot"
+    "0": "growthcraft:blocks/rope_knot",
+    "particle": "growthcraft:blocks/rope_knot"
   },
   "elements": [
     {

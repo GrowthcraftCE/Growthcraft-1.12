@@ -41,7 +41,8 @@ public class GuiFishtrap extends GuiContainer {
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
         String s = I18n.format("container.fishtrap");
-        this.mc.fontRendererObj.drawString(s, this.xSize / 2 - this.mc.fontRendererObj.getStringWidth(s) / 2, 6, 4210752);
-        this.mc.fontRendererObj.drawString(this.inventory.getDisplayName().getFormattedText(), 8, 40, 4210752);
+
+        this.mc.fontRenderer.drawString(s, this.xSize / 2 - this.mc.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
+        this.mc.fontRenderer.drawString(this.inventory.getDisplayName().getFormattedText(), 8, 40, 4210752);
     }
 }
