@@ -1,6 +1,6 @@
 {
-  "parent": "block/crop",
+  "parent": "block/cross",
   "textures": {
-    "crop": "growthcraft_milk:blocks/thistle_stage3"
+    "cross": "growthcraft_milk:blocks/thistle_stage3"
   }
 }
