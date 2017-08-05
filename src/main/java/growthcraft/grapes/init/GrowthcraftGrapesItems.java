@@ -27,7 +27,11 @@ public class GrowthcraftGrapesItems {
     }
 
     public static void registerRenders() {
-        registerRender(grape_seed);
+
+        for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
+            registerRender(grape_seed, i, "grape_seed_" + EnumHandler.GrapeTypes.values()[i].getName());
+        }
+
         for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
            registerRender(grape, i, "grape_" + EnumHandler.GrapeTypes.values()[i].getName());
         }

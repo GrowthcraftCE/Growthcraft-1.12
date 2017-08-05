@@ -5,12 +5,20 @@ import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IPlantable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
 
@@ -22,7 +30,7 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
     }
 
     protected Item getSeed() {
-        return GrowthcraftMilkItems.thistle;
+        return GrowthcraftMilkItems.thistle_seed;
     }
 
     protected Item getCrop() {
@@ -39,7 +47,13 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
         return BOUNDING_BOX;
     }
 
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
+        super.addInformation(stack, playerIn, tooltip, advanced);
+        tooltip.add(TextFormatting.BLUE + I18n.format(this.getUnlocalizedName() + ".tooltip"));
+    }
 
-
+    
 
 }

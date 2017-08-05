@@ -9,14 +9,12 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftMilkBlocks {
 
-    public static Block thistle;
+    public static BlockThistle thistle;
 
     public static void init() {
         thistle = new BlockThistle("thistle");
@@ -27,7 +25,7 @@ public class GrowthcraftMilkBlocks {
     }
 
     public static void  registerRenders() {
-
+        registerRender(thistle);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
