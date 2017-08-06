@@ -41,7 +41,7 @@ public class ItemRope extends Item {
 
             return EnumActionResult.SUCCESS;
         } else {
-            // Place a RopeBlock into the world.
+            // Place a BlockRopeFence into the world.
 
         }
         return EnumActionResult.PASS;

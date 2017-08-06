@@ -54,6 +54,4 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
         tooltip.add(TextFormatting.BLUE + I18n.format(this.getUnlocalizedName() + ".tooltip"));
     }
 
-    
-
 }

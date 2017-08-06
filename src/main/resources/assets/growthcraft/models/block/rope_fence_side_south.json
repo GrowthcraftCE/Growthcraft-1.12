@@ -1,0 +1,22 @@
+{
+  "textures": {
+    "0": "blocks/rope_fence_post",
+    "1": "blocks/rope_fence",
+    "2": "blocks/rope_fence_1"
+  },
+  "elements": [
+    {
+      "name": "rope_fence_south",
+      "from": [ 7.0, 7.0, 10.0 ],
+      "to": [ 9.0, 9.0, 16.0 ],
+      "faces": {
+        "north": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+        "east": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+        "south": { "texture": "#0", "uv": [ 0.0, 0.0, 2.0, 2.0 ] },
+        "west": { "texture": "#1", "uv": [ 0.0, 0.0, 16.0, 2.0 ] },
+        "up": { "texture": "#2", "uv": [ 0.0, 0.0, 2.0, 16.0 ] },
+        "down": { "texture": "#2", "uv": [ 0.0, 0.0, 2.0, 16.0 ] }
+      }
+    }
+  ]
+}

@@ -14,7 +14,7 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftMilkBlocks {
 
-    public static BlockThistle thistle;
+    public static Block thistle;
 
     public static void init() {
         thistle = new BlockThistle("thistle");
