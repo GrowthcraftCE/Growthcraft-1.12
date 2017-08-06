@@ -29,12 +29,7 @@ public class ItemRope extends Item {
         Block block = worldIn.getBlockState(pos).getBlock();
 
         if(block instanceof BlockFence) {
-            /**
-             * TODO: Get the texture of the given fence and apply it the the fencePost layer in our RopeKnot block model.
-             * IBlockState state = worldIn.getBlockState(pos);
-             * int meta = block.getMetaFromState(state);
-             * String model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(state).getIconName();
-            */
+
             worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
             TileEntityRopeKnot tileEntity = (TileEntityRopeKnot)worldIn.getTileEntity(pos);
             tileEntity.addStackToInventory(new ItemStack(block));

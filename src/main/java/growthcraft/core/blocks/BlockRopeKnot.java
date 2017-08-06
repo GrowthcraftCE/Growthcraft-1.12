@@ -116,11 +116,10 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider {
             // Returned the stored ItemFence
             IItemHandler inventoryHandler = this.getInventoryHandler(worldIn, pos);
             ItemStack stack = inventoryHandler.getStackInSlot(0);
-            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
+            InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, stack);
         }
-        // Always set it to false upon block break.
+
         this.wasActivated = false;
-        //super.breakBlock(worldIn, pos, state);
     }
 
     @Override
@@ -135,19 +134,19 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider {
         return new TileEntityRopeKnot();
     }
 
-
-    /**
-     *
-     * @param worldIn
-     * @param pos
-     * @return
-     */
     private IItemHandler getInventoryHandler(World worldIn, BlockPos pos) {
         TileEntityRopeKnot te = (TileEntityRopeKnot) worldIn.getTileEntity(pos);
         IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
         return handler;
     }
 
+    /**
+     * Determines if this RopeKnot block can connect to a neighbor block on the given face.
+     * @param world world
+     * @param pos RopeKnot Position
+     * @param facing Requesting Side
+     * @return
+     */
     private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot) {
