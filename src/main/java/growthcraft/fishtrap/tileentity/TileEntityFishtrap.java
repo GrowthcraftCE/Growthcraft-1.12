@@ -66,8 +66,6 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
 
         GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 3);
 
-        //this.world.playSound((EntityPlayer)null, pos.getY(), pos.getY(), pos.getZ(), SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 10000.0F, 0.8F + rand.nextFloat() * 0.2F);
-
     }
 
     /**

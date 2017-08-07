@@ -29,16 +29,20 @@ public class ItemRope extends Item {
         Block block = worldIn.getBlockState(pos).getBlock();
 
         if(block instanceof BlockFence) {
-            /**
-             * TODO: Get the texture of the given fence and apply it the the fencePost layer in our RopeKnot block model.
-             * IBlockState state = worldIn.getBlockState(pos);
-             * int meta = block.getMetaFromState(state);
-             * String model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(state).getIconName();
-            */
+            // If the target block is a BlockFence, then replace it with a RopeKnot block.
             worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
+            // Add the fence to the inventory
             TileEntityRopeKnot tileEntity = (TileEntityRopeKnot)worldIn.getTileEntity(pos);
             tileEntity.addStackToInventory(new ItemStack(block));
+            // Decrease the player inventory as we used the rope.
+            player.getHeldItem(hand).shrink(1);
+            return EnumActionResult.SUCCESS;
 
+        } else if (worldIn.getBlockState(pos.offset(facing)).getBlock().canPlaceBlockAt(worldIn, pos.offset(facing))) {
+            // Since we are not using this item on a BlockFence, check to see if we can place a
+            // block on the side we are selecting.
+            worldIn.setBlockState(pos.offset(facing), GrowthcraftCoreBlocks.rope_fence.getDefaultState());
+            player.getHeldItem(hand).shrink(1);
             return EnumActionResult.SUCCESS;
         }
         return EnumActionResult.PASS;

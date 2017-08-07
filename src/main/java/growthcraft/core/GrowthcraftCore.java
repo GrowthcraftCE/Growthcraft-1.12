@@ -25,17 +25,17 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftCoreItems.init();
-        GrowthcraftCoreItems.register();
         GrowthcraftCoreBlocks.init();
         GrowthcraftCoreBlocks.register();
+        GrowthcraftCoreItems.init();
+        GrowthcraftCoreItems.register();
         proxy.registerRenders();
-        proxy.registerSpecialRenders();
         proxy.registerTitleEntities();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        proxy.registerSpecialRenders();
         proxy.registerModelBakeryVariants();
         GrowthcraftCoreRecipes.registerRecipes();
     }

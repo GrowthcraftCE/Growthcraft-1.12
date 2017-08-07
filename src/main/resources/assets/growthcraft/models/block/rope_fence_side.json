@@ -1,0 +1,23 @@
+{
+  "textures": {
+    "0": "growthcraft:blocks/rope_fence_post",
+    "1": "growthcraft:blocks/rope_fence",
+    "2": "growthcraft:blocks/rope_fence_1",
+    "particle": "growthcraft:blocks/rope_fence_post"
+  },
+  "elements": [
+    {
+      "name": "rope_fence_north",
+      "from": [ 7.5, 7.5, 0.0 ],
+      "to":   [ 8.5, 8.5, 7.0 ],
+      "faces": {
+        "north": { "texture": "#0", "uv": [ 0.0, 0.0,  2.0,  2.0 ] },
+        "east":  { "texture": "#1", "uv": [ 0.0, 0.0, 16.0,  2.0 ] },
+        "south": { "texture": "#0", "uv": [ 0.0, 0.0,  2.0,  2.0 ] },
+        "west":  { "texture": "#1", "uv": [ 0.0, 0.0, 16.0,  2.0 ] },
+        "up":    { "texture": "#2", "uv": [ 0.0, 0.0,  2.0, 16.0 ] },
+        "down":  { "texture": "#2", "uv": [ 0.0, 0.0,  2.0, 16.0 ] }
+      }
+    }
+  ]
+}

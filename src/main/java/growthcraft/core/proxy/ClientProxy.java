@@ -37,6 +37,9 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerSpecialRenders() {
-        
+        // TileEntitySpecialRenderer for RopeKnot to display the fence post that it was tied around.
+        // Still needs work.
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRopeKnot.class, new TileEntityRopeKnotRenderer());
     }
+
 }

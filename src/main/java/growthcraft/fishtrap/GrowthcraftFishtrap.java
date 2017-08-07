@@ -39,6 +39,7 @@ public class GrowthcraftFishtrap {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
+
     }
 
 

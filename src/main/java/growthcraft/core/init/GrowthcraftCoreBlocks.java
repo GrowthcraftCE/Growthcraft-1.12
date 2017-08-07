@@ -1,6 +1,7 @@
 package growthcraft.core.init;
 
 import growthcraft.core.Reference;
+import growthcraft.core.blocks.BlockRopeFence;
 import growthcraft.core.blocks.BlockRopeKnot;
 import growthcraft.core.blocks.BlockSalt;
 import net.minecraft.block.Block;
@@ -17,33 +18,46 @@ public class GrowthcraftCoreBlocks {
 
     public static Block salt_block;
     public static Block rope_knot;
+    public static Block rope_fence;
 
     public static void init() {
+        rope_fence = new BlockRopeFence( "rope_fence" );
         salt_block = new BlockSalt("salt_block");
         rope_knot = new BlockRopeKnot("rope_knot");
     }
 
     public static void register() {
         registerBlock(salt_block);
-        registerBlock(rope_knot);
+        registerBlock(rope_fence, false, false);
+        registerBlock(rope_knot, false, false);
 
     }
 
     public static void  registerRenders() {
         registerRender(salt_block);
+        registerRender(rope_fence);
         registerRender(rope_knot);
     }
 
     public static void registerBlock(Block block) {
-        block.setCreativeTab(tabGrowthcraft);
-        GameRegistry.register(block);
-        GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        registerBlock(block, true, true);
     }
 
     public static void registerBlock(Block block, ItemBlock itemBlock) {
         block.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(block);
         GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
+    }
+
+    public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
+        GameRegistry.register(block);
+
+        if(setCreativeTab) {
+            block.setCreativeTab(tabGrowthcraft);
+        }
+        if(registerItemBlock) {
+            GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+        }
     }
 
     public static void registerRender(Block block) {
