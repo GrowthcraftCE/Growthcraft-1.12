@@ -3,11 +3,8 @@ package growthcraft.core.proxy;
 import growthcraft.core.Reference;
 import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
-import growthcraft.core.tileentity.TileEntityRopeKnot;
-import growthcraft.core.tileentity.renderer.TileEntityRopeKnotRenderer;
 import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
     @Override
@@ -40,7 +37,9 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerSpecialRenders() {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRopeKnot.class, new TileEntityRopeKnotRenderer());
+        // TileEntitySpecialRenderer for RopeKnot to display the fence post that it was tied around.
+        // Still needs work.
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityRopeKnot.class, new TileEntityRopeKnotRenderer());
     }
 
 }
