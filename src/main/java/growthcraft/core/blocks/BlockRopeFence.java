@@ -1,13 +1,15 @@
 package growthcraft.core.blocks;
 
 import growthcraft.core.Reference;
-import growthcraft.core.utils.GrowthcraftLogger;
+import growthcraft.core.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -15,9 +17,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class BlockRopeFence extends Block {
 
-    private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 6, 0.0625 * 6, 0.0625 * 10, 0.0625 * 10, 0.0625 * 10);
+    private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 7, 0.0625 * 9, 0.0625 * 9, 0.0625 * 9);
     private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
     private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
     private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
@@ -52,6 +56,18 @@ public class BlockRopeFence extends Block {
     }
 
     @Override
+    public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        // Always return a rope when broken
+        ItemStack rope = new ItemStack(GrowthcraftCoreItems.rope, 1);
+        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
@@ -74,19 +90,15 @@ public class BlockRopeFence extends Block {
     private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot) {
-            GrowthcraftLogger.getLogger().info(block.getClass().toString() + " isInstanceOf " + BlockRopeFence.class.toString());
             return true;
         }
-        GrowthcraftLogger.getLogger().info(block.getClass().toString() + " isInstanceOf " + BlockRopeFence.class.toString());
         return false ;
     }
 
     @Override
     public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos).getBlock();
-        //if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot) {
         if ( BlockRopeFence.class.isInstance(block) ) {
-            GrowthcraftLogger.getLogger().info(block.getClass().toString() + " isInstanceOf " + BlockRopeFence.class.toString());
             return true;
         }
         return false ;
