@@ -3,8 +3,9 @@ Growthcraft
 
 [![Minecraft Version](http://img.shields.io/minecraft/1.11.2.png?color=green)](https://minecraft.net/)
 [![Growthcraft Version](http://img.shields.io/growthcraft/3.0.2.png?color=green)](https://github.com/GrowthcraftCE/Growthcraft-1.11)
-[![Forge Version](http://img.shields.io/forge/13.20.1.2386.png?color=green)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.11.2.html)]
-[![Java Version](http://img.shields.io/java/8.png?color=green)(https://www.java.com/en/)]
+[![Forge Version](http://img.shields.io/forge/13.20.1.2386.png?color=green)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.11.2.html)
+[![Java Version](http://img.shields.io/java/8.png?color=green)](https://www.java.com/en/)
+
 [![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11.svg?branch=master)(https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11)
 [![Discord Channel](https://img.shields.io/discord/333690296334548994.svg?color=green)](https://discord.gg/Quh76Jn)
 
