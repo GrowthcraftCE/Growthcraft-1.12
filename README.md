@@ -6,7 +6,7 @@ Growthcraft
 [![Forge Version](http://img.shields.io/forge/13.20.1.2386.png?color=green)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.11.2.html)
 [![Java Version](http://img.shields.io/java/8.png?color=green)](https://www.java.com/en/)
 
-[![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11.svg?branch=master)(https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11)
+[![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11.svg?branch=master)](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11)
 [![Discord Channel](https://img.shields.io/discord/333690296334548994.svg?color=green)](https://discord.gg/Quh76Jn)
 
 This is a second major community fork of the original GrowthCraft developed by Gwafu.
