@@ -25,7 +25,7 @@ public class GrowthcraftGrapesBlocks {
     }
 
     public static void  registerRenders() {
-
+        registerRender(grape_vine);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
@@ -39,12 +39,6 @@ public class GrowthcraftGrapesBlocks {
         }
     }
 
-    public static void registerBlock(Block block, ItemBlock itemBlock) {
-        block.setCreativeTab(tabGrowthcraft);
-        GameRegistry.register(block);
-        GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
-    }
-
     public static void registerRender(Block block) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(
                 new ResourceLocation(Reference.MODID, block.getUnlocalizedName().substring(5)), "inventory"));
@@ -54,4 +48,6 @@ public class GrowthcraftGrapesBlocks {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
+
+
 }

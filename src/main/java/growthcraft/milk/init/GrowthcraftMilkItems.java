@@ -13,7 +13,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftMilkItems {
-
     public static Item thistle_seed;
     public static Item thistle;
 
