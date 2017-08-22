@@ -1,8 +1,10 @@
 package growthcraft.grapes.blocks;
 
-import growthcraft.core.utils.GrowthcraftLogger;
+import growthcraft.core.blocks.BlockRopeFence;
 import growthcraft.grapes.Reference;
-import growthcraft.grapes.init.GrowthcraftGrapesItems;
+import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.PropertyInteger;
@@ -57,12 +59,19 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
 
     @Override
     protected Item getSeed() {
-        return new ItemStack(GrowthcraftGrapesItems.grape_seed, 1, 0).getItem();
+        // Only the BlockGrapeVineBush should return a seed.
+        return null;
     }
 
     @Override
     protected Item getCrop() {
-        return new ItemStack(GrowthcraftGrapesItems.grape_seed, 1, 0).getItem();
+        // Only the BlockGrapeVineBush should return a seed.
+        return null;
+    }
+
+    @Override
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        return super.getDrops(world, pos, state, fortune);
     }
 
     @Override
@@ -84,7 +93,6 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
         if (this.getAge(state) == 7) {
-            GrowthcraftLogger.getLogger().info("updateTick = Age = 7");
             this.generateGrapeVine(worldIn, pos, state);
         }
     }
@@ -97,6 +105,11 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
         }
     }
 
+    @Override
+    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
+        return true;
+    }
+
     /**
      * Generate the vine head up until you find a rope.
      * @param worldIn
@@ -105,9 +118,18 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
      */
     public void generateGrapeVine(World worldIn, BlockPos pos, IBlockState state) {
         // Locate the rope block to bind to.
+        Block blockUpOne = worldIn.getBlockState(pos.up(1)).getBlock();
 
-        GrowthcraftLogger.getLogger().info("generateGrapeVine HAS BEEN CALLED!!!!");
+        if ( blockUpOne instanceof BlockRopeFence ) {
+            // Then we have a short vine.
+            // Spawn in a BlockGrapeVineBush
+            worldIn.setBlockState(pos.up(), GrowthcraftGrapesBlocks.grape_vine_bush.getDefaultState());
+        } else if ( blockUpOne instanceof BlockAir) {
+            // Then we have a normal vine.
+            // Spawn in a GrapeVine at pos.up()
+            worldIn.setBlockState(pos.up(), state);
+        } else if ( blockUpOne instanceof BlockGrapeVineBush || blockUpOne instanceof BlockGrapeVine ) {
+            // Then don't do anything.
+        }
     }
-
-
 }

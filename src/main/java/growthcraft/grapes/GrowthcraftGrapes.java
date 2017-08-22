@@ -27,13 +27,13 @@ public class GrowthcraftGrapes {
         GrowthcraftGrapesItems.init();
         GrowthcraftGrapesItems.register();
 
-        proxy.registerRenders();
+        proxy.preInit();
 
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.registerModelBakeryVariants();
+        proxy.init();
     }
 
     @Mod.EventHandler
