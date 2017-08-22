@@ -1,6 +1,21 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "growthcraft_fishtrap:blocks/fishtrap"
-  }
+    "0": "growthcraft_fishtrap:blocks/fishtrap"
+  },
+  "elements": [
+    {
+      "name": "fishtrap_side",
+      "from": [ 0.0, 0.0, 0.0 ],
+      "to": [ 16.0, 16.0, 0.0 ],
+      "faces": {
+        "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+        "east": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+        "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+        "west": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+        "up": { "texture": "#-1", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+        "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 16.0, 16.0 ] }
+      }
+    }
+  ]
 }

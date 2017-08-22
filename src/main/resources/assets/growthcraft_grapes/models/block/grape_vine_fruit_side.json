@@ -1,0 +1,21 @@
+{
+  "textures": {
+    "0": "growthcraft_grapes:blocks/leaves_half",
+    "particle": "growthcraft_grapes:blocks/leaves_opaque"
+  },
+  "elements": [
+    {
+      "name": "leaves",
+      "from": [ 0.0, 8.0, 0.0 ],
+      "to": [ 16.0, 16.0, 0.0 ],
+      "faces": {
+        "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+        "east": { "texture": "#0", "uv": [ 0.0, 0.0, 8.0, 16.0 ] },
+        "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+        "west": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 8.0 ] },
+        "up": { "texture": "#-1", "uv": [ 0.0, 0.0, 0.0, 0.0 ] },
+        "down": { "texture": "#-1", "uv": [ 0.0, 0.0, 0.0, 0.0 ] }
+      }
+    }
+  ]
+}

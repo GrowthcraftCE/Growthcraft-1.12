@@ -14,6 +14,20 @@
   "dependencies": ["mod_MinecraftForge"]
 },
 {
+  "modid": "growthcraft_cellar",
+  "name": "Growthcraft Cellar",
+  "description": "Growthcraft Cellar - ",
+  "version": "3.0.0.2",
+  "mcversion": "1.11.2",
+  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
+  "updateUrl": "",
+  "authorList": ["Alatyami"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["mod_MinecraftForge", "growthcraft"],
+  "parent": "growthcraft"
+},{
   "modid": "growthcraft_fishtrap",
   "name": "Growthcraft Fishtrap",
   "description": "Growthcraft Fishtrap - Fishing made simple. ",

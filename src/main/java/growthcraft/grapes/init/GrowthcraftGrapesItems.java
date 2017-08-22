@@ -1,7 +1,6 @@
 package growthcraft.grapes.init;
 
 import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.handlers.EnumHandler;
 import growthcraft.grapes.items.ItemGrape;
@@ -28,9 +27,8 @@ public class GrowthcraftGrapesItems {
 
     public static void registerRenders() {
 
-        for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-            registerRender(grape_seed, i, "grape_seed_" + EnumHandler.GrapeTypes.values()[i].getName());
-        }
+        registerRender(grape_seed);
+
 
         for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
            registerRender(grape, i, "grape_" + EnumHandler.GrapeTypes.values()[i].getName());
@@ -44,11 +42,10 @@ public class GrowthcraftGrapesItems {
 
     public static void  registerRender(Item item) {
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(Reference.MODID, item.getUnlocalizedName().substring(5)), "inventory"));
-        GrowthcraftLogger.getLogger().info("Registering non-metadata render for " + item.getUnlocalizedName());
+
     }
 
     public static void registerRender(Item item, int meta, String fileName) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-        GrowthcraftLogger.getLogger().info("Registering metadata render for " + item.getUnlocalizedName() + " [" + meta + "] filename = " + fileName);
     }
 }

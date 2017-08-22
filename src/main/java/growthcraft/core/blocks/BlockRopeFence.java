@@ -2,6 +2,7 @@ package growthcraft.core.blocks;
 
 import growthcraft.core.Reference;
 import growthcraft.core.init.GrowthcraftCoreItems;
+import growthcraft.grapes.blocks.BlockGrapeVineBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -57,6 +58,11 @@ public class BlockRopeFence extends Block {
 
     @Override
     public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+        // Return nothing as we only want to drop a Rope if it is broken by a player.
+    }
+
+    @Override
+    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
         // Always return a rope when broken
         ItemStack rope = new ItemStack(GrowthcraftCoreItems.rope, 1);
         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
@@ -78,18 +84,13 @@ public class BlockRopeFence extends Block {
     }
 
     @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-        return false;
-    }
-
-    @Override
     public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
         return super.canPlaceBlockOnSide(worldIn, pos, side);
     }
 
     private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot) {
+        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush) {
             return true;
         }
         return false ;
@@ -122,7 +123,7 @@ public class BlockRopeFence extends Block {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState();
-    }
+}
 
     @Override
     public int getMetaFromState(IBlockState state) {

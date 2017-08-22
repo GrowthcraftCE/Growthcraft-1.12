@@ -1,6 +1,5 @@
 package growthcraft.milk.init;
 
-import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.milk.Reference;
 import growthcraft.milk.items.ItemSeedThistle;
 import growthcraft.milk.items.ItemThistle;
@@ -13,7 +12,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftMilkItems {
-
     public static Item thistle_seed;
     public static Item thistle;
 
@@ -39,7 +37,7 @@ public class GrowthcraftMilkItems {
 
     public static void  registerRender(Item item) {
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(Reference.MODID, item.getUnlocalizedName().substring(5)), "inventory"));
-        GrowthcraftLogger.getLogger().info("Registering Render for " + item.getUnlocalizedName());
+
     }
 
     public static void registerRender(Item item, int meta, String fileName) {

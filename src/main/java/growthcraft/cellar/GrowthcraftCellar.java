@@ -1,8 +1,6 @@
-package growthcraft.milk;
+package growthcraft.cellar;
 
-import growthcraft.milk.init.GrowthcraftMilkBlocks;
-import growthcraft.milk.init.GrowthcraftMilkItems;
-import growthcraft.milk.proxy.CommonProxy;
+import growthcraft.cellar.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -10,24 +8,19 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
-public class GrowthcraftMilk {
-
+public class GrowthcraftCellar {
     @Mod.Instance(Reference.MODID)
-    public static GrowthcraftMilk instance;
+    public static GrowthcraftCellar instance;
 
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        //GrowthcraftGrapesItems.init();
+        //GrowthcraftGrapesItems.register();
 
-        GrowthcraftMilkBlocks.init();
-        GrowthcraftMilkItems.init();
-
-        GrowthcraftMilkBlocks.register();
-        GrowthcraftMilkItems.register();
-
-        proxy.init();
+        proxy.registerRenders();
     }
 
     @Mod.EventHandler
@@ -37,10 +30,6 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
+
     }
-
-
-
-
-
 }

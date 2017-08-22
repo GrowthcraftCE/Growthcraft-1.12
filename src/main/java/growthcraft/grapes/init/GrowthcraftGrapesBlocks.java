@@ -2,6 +2,8 @@ package growthcraft.grapes.init;
 
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.blocks.BlockGrapeVine;
+import growthcraft.grapes.blocks.BlockGrapeVineBush;
+import growthcraft.grapes.blocks.BlockGrapeVineFruit;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -15,17 +17,25 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftGrapesBlocks {
 
     public static Block grape_vine;
+    public static Block grape_vine_bush;
+    public static Block grape_vine_fruit;
 
     public static void init() {
         grape_vine = new BlockGrapeVine("grape_vine");
+        grape_vine_bush = new BlockGrapeVineBush("grape_vine_bush");
+        grape_vine_fruit = new BlockGrapeVineFruit();
     }
 
     public static void register() {
         registerBlock(grape_vine, false, false);
+        registerBlock(grape_vine_bush, false, false);
+        registerBlock(grape_vine_fruit, false, false);
     }
 
     public static void  registerRenders() {
-
+        registerRender(grape_vine);
+        registerRender(grape_vine_bush);
+        registerRender(grape_vine_fruit);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
@@ -39,12 +49,6 @@ public class GrowthcraftGrapesBlocks {
         }
     }
 
-    public static void registerBlock(Block block, ItemBlock itemBlock) {
-        block.setCreativeTab(tabGrowthcraft);
-        GameRegistry.register(block);
-        GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
-    }
-
     public static void registerRender(Block block) {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(
                 new ResourceLocation(Reference.MODID, block.getUnlocalizedName().substring(5)), "inventory"));
@@ -54,4 +58,6 @@ public class GrowthcraftGrapesBlocks {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
+
+
 }
