@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "growthcraft_hops:hops_vine"
+      }
+    }
+  ]
+}
