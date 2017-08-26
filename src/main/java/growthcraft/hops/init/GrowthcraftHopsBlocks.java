@@ -1,7 +1,7 @@
 package growthcraft.hops.init;
 
 import growthcraft.hops.Reference;
-import growthcraft.hops.blocks.BlockHops;
+import growthcraft.hops.blocks.BlockHopsTrunk;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -16,7 +16,7 @@ public class GrowthcraftHopsBlocks {
     public static Block block_hops;
 
     public static void init() {
-        block_hops = new BlockHops("hops_vine");
+        block_hops = new BlockHopsTrunk("hops_vine");
     }
 
     public static void register() {

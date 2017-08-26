@@ -18,7 +18,7 @@ public class CommonProxy {
     public void registerRenders() {}
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityGrapeVineFruit.class, Reference.MODID + ":fishtrap");
+        GameRegistry.registerTileEntity(TileEntityGrapeVineFruit.class, Reference.MODID + ":grape_vine_fruit");
     }
 
     public void registerModelBakeryVariants() { }

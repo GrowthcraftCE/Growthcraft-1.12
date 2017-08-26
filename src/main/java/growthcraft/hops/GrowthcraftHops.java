@@ -1,6 +1,7 @@
 package growthcraft.hops;
 
 import growthcraft.hops.init.GrowthcraftHopsBlocks;
+import growthcraft.hops.init.GrowthcraftHopsItems;
 import growthcraft.hops.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -21,6 +22,10 @@ public class GrowthcraftHops {
     public static void preInit(FMLPreInitializationEvent event) {
         GrowthcraftHopsBlocks.init();
         GrowthcraftHopsBlocks.register();
+
+        GrowthcraftHopsItems.init();
+        GrowthcraftHopsItems.register();
+
         proxy.preInit();
     }
 

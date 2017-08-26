@@ -1,5 +1,7 @@
 package growthcraft.hops.proxy;
 
+import growthcraft.hops.init.GrowthcraftHopsItems;
+
 public class ClientProxy extends CommonProxy {
 
     @Override
@@ -15,7 +17,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenders() {
-
+        GrowthcraftHopsItems.registerRenders();
     }
 
     @Override
