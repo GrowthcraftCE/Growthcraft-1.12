@@ -1,8 +1,10 @@
 package growthcraft.hops.blocks;
 
-import growthcraft.core.utils.GrowthcraftLogger;
+import growthcraft.core.blocks.BlockRopeFence;
 import growthcraft.hops.Reference;
+import growthcraft.hops.init.GrowthcraftHopsBlocks;
 import growthcraft.hops.init.GrowthcraftHopsItems;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
@@ -25,7 +27,10 @@ public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
     /* Private */
     private void growHopPlant(World worldIn, BlockPos pos, IBlockState state) {
-        GrowthcraftLogger.getLogger().info("Going to grow some hops!");
+        Block blockUp = worldIn.getBlockState(pos.up()).getBlock();
+        if ( blockUp instanceof BlockRopeFence) {
+            worldIn.setBlockState(pos.up(), GrowthcraftHopsBlocks.hops_bush.getDefaultState());
+        }
     }
 
     /* BlockCrops */
@@ -67,7 +72,11 @@ public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        return true;
+        Block blockUp = worldIn.getBlockState(pos.up()).getBlock();
+        if ( blockUp instanceof BlockRopeFence) {
+            return true;
+        }
+        return false;
     }
 
     @Override

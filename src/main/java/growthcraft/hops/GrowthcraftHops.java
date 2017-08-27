@@ -20,6 +20,7 @@ public class GrowthcraftHops {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+
         GrowthcraftHopsBlocks.init();
         GrowthcraftHopsBlocks.register();
 
@@ -27,6 +28,7 @@ public class GrowthcraftHops {
         GrowthcraftHopsItems.register();
 
         proxy.preInit();
+        proxy.registerTileEntities();
     }
 
     @Mod.EventHandler

@@ -15,7 +15,8 @@ public class CommonProxy {
         registerRenders();
         registerTileEntities();
     }
-    public void registerRenders() {}
+
+    public void registerRenders() { }
 
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityGrapeVineFruit.class, Reference.MODID + ":grape_vine_fruit");
@@ -23,6 +24,6 @@ public class CommonProxy {
 
     public void registerModelBakeryVariants() { }
 
-    public void registerSpecialRenders() {}
+    public void registerSpecialRenders() { }
 
 }

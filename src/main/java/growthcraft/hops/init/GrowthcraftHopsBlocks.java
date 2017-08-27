@@ -1,6 +1,7 @@
 package growthcraft.hops.init;
 
 import growthcraft.hops.Reference;
+import growthcraft.hops.blocks.BlockHopsBush;
 import growthcraft.hops.blocks.BlockHopsTrunk;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -14,17 +15,21 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftHopsBlocks {
     public static Block block_hops;
+    public static Block hops_bush;
 
     public static void init() {
         block_hops = new BlockHopsTrunk("hops_vine");
+        hops_bush = new BlockHopsBush();
     }
 
     public static void register() {
         registerBlock(block_hops, false, false);
+        registerBlock(hops_bush, false, false);
     }
 
     public static void  registerRenders() {
         registerRender(block_hops);
+        registerRender(hops_bush);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
