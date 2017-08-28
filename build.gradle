@@ -10,7 +10,7 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "${mc_version}-${growthcraft_version}"
+version = "1.11.2-3.0.0.3"
 group = "growthcraft"
 archivesBaseName = "growthcraft"
 
@@ -20,7 +20,7 @@ compileJava {
 }
 
 minecraft {
-    version = "${mc_version}-${forge_version}"
+    version = "13.20.1.2386"
     runDir = "run"
     mappings = "stable_32"
 }
@@ -38,10 +38,6 @@ processResources {
     def task = from(sourceSets.main.resources.srcDirs) {
         include 'mcmod.info'
 
-        filter(ReplaceTokens,
-            tokens: [version: project.version]
-        )
-        
         // replace version and mcversion
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
