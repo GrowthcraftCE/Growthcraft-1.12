@@ -1,8 +1,8 @@
-package growthcraft.grapes.tileentity;
+package growthcraft.hops.tileentity;
 
 import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.core.utils.GrowthcraftPlaySound;
-import growthcraft.grapes.init.GrowthcraftGrapesItems;
+import growthcraft.hops.init.GrowthcraftHopsItems;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,13 +17,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, ICapabilityProvider {
+public class TileEntityHopsBush extends TileEntity implements ITickable, ICapabilityProvider {
 
     private int cooldown;
     private int randomMaxCooldown;
@@ -31,18 +30,13 @@ public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, I
     private int intMaxCooldown = 1024;
 
     private ItemStackHandler inventory;
+    private Random random;
 
-    private Random rand;
-
-    public TileEntityGrapeVineFruit() {
-        this.inventory = new ItemStackHandler(1);
+    public TileEntityHopsBush() {
+        this.inventory = new ItemStackHandler(4);
         this.cooldown = 0;
         this.randomMaxCooldown = intMaxCooldown;
-        this.rand = new Random();
-    }
-
-    private int getRandomCooldown() {
-        return rand.nextInt((intMaxCooldown - intMinCooldown) + 1) + intMinCooldown;
+        this.random = new Random();
     }
 
     @Override
@@ -104,12 +98,19 @@ public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, I
         return this.getCapability(capability, facing) != null;
     }
 
+    public void markBlockUpdate(World worldIn, BlockPos pos ) {
+        worldIn.markBlockRangeForRenderUpdate(pos, pos);
+        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
+        worldIn.scheduleBlockUpdate(pos, this.blockType, 0,0);
+        markDirty();
+    }
+
     @Override
     public void update() {
         this.cooldown++;
         this.cooldown %= this.randomMaxCooldown;
         if (cooldown == 0) {
-            if ( world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0 ) {
+            if ( world.getLightFromNeighbors(pos.up()) >= 9 && random.nextInt(7) == 0 ) {
                 this.grow( world, pos );
                 // Reset the max cool down to something random.
                 randomMaxCooldown = getRandomCooldown();
@@ -119,26 +120,22 @@ public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, I
         markBlockUpdate(world, pos);
     }
 
-    public void grow(World worldIn, BlockPos pos ) {
-        TileEntityGrapeVineFruit te = (TileEntityGrapeVineFruit) worldIn.getTileEntity(pos);
-        IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
+    private int getRandomCooldown() {
+        return random.nextInt((intMaxCooldown - intMinCooldown) + 1) + intMinCooldown;
+    }
 
-        for ( int slot = 0; slot < handler.getSlots(); slot++ ) {
-            if ( handler.getStackInSlot(slot).isEmpty() ) {
-                ItemStack stack = new ItemStack(GrowthcraftGrapesItems.grape, 1, rand.nextInt(3));
-                handler.insertItem(slot, stack, false);
+    private void grow(World worldIn, BlockPos pos) {
+        // Iterate over the handler and add one hop if the slot is empty.
+        for ( int slot = 0; slot < inventory.getSlots(); slot++ ) {
+            if ( inventory.getStackInSlot(slot).isEmpty() ) {
+                GrowthcraftLogger.getLogger().info("Adding Hops to slot(" + slot + ")");
+                inventory.insertItem(slot, new ItemStack(GrowthcraftHopsItems.hops, 1), false);
                 GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 16);
-            } else {
-                GrowthcraftLogger.getLogger().info("Skipping growing becuase there is already a " + handler.getStackInSlot(slot).getUnlocalizedName());
+                break;
             }
         }
         markBlockUpdate(worldIn, pos);
+    }
 
-    }
-    private void markBlockUpdate(World worldIn, BlockPos pos ) {
-        worldIn.markBlockRangeForRenderUpdate(pos, pos);
-        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
-        worldIn.scheduleBlockUpdate(pos, this.blockType, 0,0);
-        markDirty();
-    }
+
 }

@@ -145,23 +145,35 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
      */
     private Boolean inWater() {
 
+        boolean underFluid = false;
+        boolean surroundedByFluid = false;
+
         BlockPos[] neighborBlockPos = {
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX()+1, pos.getY(), pos.getZ()-1)),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX()+1, pos.getY(), pos.getZ())),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX()+1, pos.getY(), pos.getZ()+1)),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX(), pos.getY(), pos.getZ()-1)),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX(), pos.getY(), pos.getZ()+1)),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX()-1, pos.getY(), pos.getZ()-1)),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX()-1, pos.getY(), pos.getZ())),
-                pos.offset(EnumFacing.getFacingFromVector(pos.getX()-1, pos.getY(), pos.getZ()+1))
+                pos.offset(EnumFacing.NORTH),
+                pos.offset(EnumFacing.EAST),
+                pos.offset(EnumFacing.SOUTH),
+                pos.offset(EnumFacing.WEST)
+        };
+
+        BlockPos[] upDownNeighborBlockPos = {
+                pos.offset(EnumFacing.UP),
+                pos.offset(EnumFacing.DOWN)
         };
 
         for(BlockPos neighborPos : neighborBlockPos) {
             IBlockState state = this.world.getBlockState(neighborPos);
             Block block = state.getBlock();
             if(!(block instanceof BlockStaticLiquid)) {
-                return false;
+                underFluid = false;
             }
+        }
+
+        /**
+         * If underFluid is still false, then let's see if there is fluid on the .UP and the .DOWN. This will allow you
+         * to have a cluster of fishtraps, but you can only branch them out horizontally.
+         */
+        if (underFluid == false) {
+
         }
 
         return true;
