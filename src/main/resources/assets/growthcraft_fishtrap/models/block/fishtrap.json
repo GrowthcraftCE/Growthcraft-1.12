@@ -1,5 +1,5 @@
 {
-  "parent": "block/cube_all",
+  "parent": "block/cube",
   "textures": {
     "0": "growthcraft_fishtrap:blocks/fishtrap"
   },

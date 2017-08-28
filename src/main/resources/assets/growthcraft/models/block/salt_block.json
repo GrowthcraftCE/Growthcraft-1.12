@@ -1,6 +1,24 @@
 {
-    "parent": "block/cube_all",
+    "parent": "block/cube",
     "textures": {
-        "all": "growthcraft:blocks/salt_block"
-    }
+        "0": "growthcraft:blocks/rock_salt_block_normal",
+        "1": "growthcraft:blocks/rock_salt_block_bottom",
+        "2": "growthcraft:blocks/rock_salt_block_top",
+        "particle": "growthcraft:blocks/rock_salt_block_normal"
+    },
+    "elements": [
+        {
+            "name": "salt_block_cube",
+            "from": [ 0.0, 0.0, 0.0 ],
+            "to":   [ 16.0, 16.0, 16.0 ],
+            "faces": {
+                "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0,  16.0 ] },
+                "east":  { "texture": "#0", "uv": [ 0.0, 0.0, 16.0,  16.0 ] },
+                "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0,  16.0 ] },
+                "west":  { "texture": "#0", "uv": [ 0.0, 0.0, 16.0,  16.0 ] },
+                "up":    { "texture": "#2", "uv": [ 0.0, 0.0, 16.0,  16.0 ] },
+                "down":  { "texture": "#1", "uv": [ 0.0, 0.0, 16.0,  16.0 ] }
+            }
+        }
+    ]
 }

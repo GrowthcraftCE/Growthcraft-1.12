@@ -1,7 +1,7 @@
-package growthcraft.grapes.proxy;
+package growthcraft.hops.proxy;
 
-import growthcraft.grapes.Reference;
-import growthcraft.grapes.tileentity.TileEntityGrapeVineFruit;
+import growthcraft.hops.Reference;
+import growthcraft.hops.tileentity.TileEntityHopsBush;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -19,7 +19,7 @@ public class CommonProxy {
     public void registerRenders() { }
 
     public void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileEntityGrapeVineFruit.class, Reference.MODID + ":grape_vine_fruit");
+        GameRegistry.registerTileEntity(TileEntityHopsBush.class, Reference.MODID + ":hops_bush");
     }
 
     public void registerModelBakeryVariants() { }

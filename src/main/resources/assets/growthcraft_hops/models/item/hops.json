@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "growthcraft:items/rock_salt"
+    "layer0": "growthcraft_hops:items/hops"
   }
 }

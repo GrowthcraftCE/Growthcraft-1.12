@@ -1,0 +1,20 @@
+{
+  "textures": {
+    "leaves_hops": "growthcraft_hops:blocks/leaves_hops"
+  },
+  "elements": [
+    {
+      "name": "hops_grown",
+      "from": [   0.0,  0.0,  -0.001 ],
+      "to":   [  16.0, 16.0,  -0.001 ],
+      "faces": {
+        "north": { "texture": "#leaves_hops", "uv": [ 0.0, 0.0, 16.0, 16.0 ] },
+        "east":  { "texture": "#leaves_hops", "uv": [ 0.0, 0.0, 0.0, 0.0 ] },
+        "south": { "texture": "#leaves_hops", "uv": [ 0.0, 0.0, 0.0, 0.0 ] },
+        "west":  { "texture": "#leaves_hops", "uv": [ 0.0, 0.0, 0.0, 0.0 ] },
+        "up":    { "texture": "#leaves_hops", "uv": [ 0.0, 0.0, 0.0, 0.0 ] },
+        "down":  { "texture": "#leaves_hops", "uv": [ 0.0, 0.0, 0.0, 0.0 ] }
+      }
+    }
+  ]
+}
