@@ -89,4 +89,5 @@ public class BlockGrapeVineBush extends BlockBush implements IGrowable {
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return false;
     }
+
 }

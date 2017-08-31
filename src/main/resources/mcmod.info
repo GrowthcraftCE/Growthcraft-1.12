@@ -72,19 +72,34 @@
      "dependencies": ["mod_MinecraftForge", "growthcraft"],
      "parent": "growthcraft"
    },
-       {
-         "modid": "growthcraft_hops",
-         "name": "Growthcraft Hops",
-         "description": "Growthcraft Hops - ",
-         "version": "3.0.0.3",
-         "mcversion": "1.11.2",
-         "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
-         "updateUrl": "",
-         "authorList": ["Alatyami"],
-         "credits": "1.7.10 IceDragon, Gwafu",
-         "logoFile": "",
-         "screenshots": [],
-         "dependencies": ["mod_MinecraftForge", "growthcraft"],
-         "parent": "growthcraft"
-       }
+   {
+     "modid": "growthcraft_hops",
+     "name": "Growthcraft Hops",
+     "description": "Growthcraft Hops - ",
+     "version": "3.0.0.3",
+     "mcversion": "1.11.2",
+     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
+     "updateUrl": "",
+     "authorList": ["Alatyami"],
+     "credits": "1.7.10 IceDragon, Gwafu",
+     "logoFile": "",
+     "screenshots": [],
+     "dependencies": ["mod_MinecraftForge", "growthcraft"],
+     "parent": "growthcraft"
+   },
+   {
+     "modid": "growthcraft_bamboo",
+     "name": "Growthcraft Bamboo",
+     "description": "Growthcraft Bamboo - ",
+     "version": "3.0.0.3",
+     "mcversion": "1.11.2",
+     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
+     "updateUrl": "",
+     "authorList": ["Alatyami"],
+     "credits": "1.7.10 IceDragon, Gwafu",
+     "logoFile": "",
+     "screenshots": [],
+     "dependencies": ["mod_MinecraftForge", "growthcraft"],
+     "parent": "growthcraft"
+   }
 ]

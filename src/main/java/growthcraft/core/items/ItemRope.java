@@ -3,6 +3,7 @@ package growthcraft.core.items;
 import growthcraft.core.Reference;
 import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.tileentity.TileEntityRopeKnot;
+import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,6 +27,9 @@ public class ItemRope extends Item {
 
     @Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+
+        GrowthcraftLogger.debugDumpLog(worldIn, pos);
+
         Block block = worldIn.getBlockState(pos).getBlock();
 
         if(block instanceof BlockFence) {
