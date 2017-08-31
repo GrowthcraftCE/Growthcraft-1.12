@@ -90,4 +90,13 @@ public class BlockGrapeVineBush extends BlockBush implements IGrowable {
         return false;
     }
 
+
+    @Override
+    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
+        super.onBlockDestroyedByPlayer(worldIn, pos, state);
+        Block blockDown = worldIn.getBlockState(pos.down()).getBlock();
+        if ( blockDown instanceof BlockGrapeVineFruit) {
+            worldIn.destroyBlock(pos.down(), false);
+        }
+    }
 }
