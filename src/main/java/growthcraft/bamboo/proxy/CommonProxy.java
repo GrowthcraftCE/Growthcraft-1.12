@@ -1,5 +1,7 @@
 package growthcraft.bamboo.proxy;
 
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
+
 public class CommonProxy {
 
     public void init() {
@@ -13,6 +15,7 @@ public class CommonProxy {
     }
 
     public void registerRenders() {
+
     }
 
     public void registerTileEntities() {

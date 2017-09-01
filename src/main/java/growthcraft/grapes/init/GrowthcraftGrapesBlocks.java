@@ -16,9 +16,9 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftGrapesBlocks {
 
-    public static Block grape_vine;
-    public static Block grape_vine_bush;
-    public static Block grape_vine_fruit;
+    public static BlockGrapeVine grape_vine;
+    public static BlockGrapeVineBush grape_vine_bush;
+    public static BlockGrapeVineFruit grape_vine_fruit;
 
     public static void init() {
         grape_vine = new BlockGrapeVine("grape_vine");
