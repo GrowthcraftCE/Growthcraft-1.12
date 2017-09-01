@@ -19,7 +19,7 @@ public class BlockSalt extends Block {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(1.0F);
-        this.setSoundType(SoundType.GROUND);
+        this.setSoundType(SoundType.STONE);
     }
 
     @Override

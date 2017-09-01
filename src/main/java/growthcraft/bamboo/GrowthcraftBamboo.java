@@ -1,5 +1,6 @@
 package growthcraft.bamboo;
 
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.bamboo.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -18,6 +19,9 @@ public class GrowthcraftBamboo {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        GrowthcraftBambooBlocks.init();
+        GrowthcraftBambooBlocks.register();
+
         proxy.preInit();
     }
 

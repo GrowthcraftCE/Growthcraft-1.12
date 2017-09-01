@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "growthcraft_bamboo:bamboo_slab_bottom" },
+    "half=top": { "model": "growthcraft_bamboo:bamboo_slab_top" }
+  }
+}
