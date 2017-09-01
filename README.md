@@ -1,7 +1,7 @@
 Growthcraft
 ===========
 [![Minecraft Version](https://img.shields.io/badge/Minecraft-1.11.2-green.svg)](https://minecraft.net/)
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-3.0.0.3-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.11)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-3.0.0.4-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.11)
 [![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-13.20.1.2386-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.11.2.html)
 [![Java Version](https://img.shields.io/badge/JAVA-8-blue.svg)](https://www.java.com/en/)
 [![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11.svg?branch=master)](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.11)
