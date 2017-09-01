@@ -4,6 +4,7 @@ import growthcraft.bamboo.Reference;
 import growthcraft.bamboo.blocks.BlockBambooPlank;
 import growthcraft.bamboo.blocks.BlockBambooSlabDouble;
 import growthcraft.bamboo.blocks.BlockBambooSlabHalf;
+import growthcraft.bamboo.blocks.BlockBambooStairs;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -20,22 +21,26 @@ public class GrowthcraftBambooBlocks {
     public static BlockBambooPlank bambooPlank;
     public static BlockBambooSlabHalf bambooSlabHalf;
     public static BlockBambooSlabDouble bambooSlabDouble;
+    public static BlockBambooStairs bambooStairs;
 
     public static void init() {
         bambooPlank = new BlockBambooPlank();
         bambooSlabHalf = new BlockBambooSlabHalf("bamboo_slab_half");
         bambooSlabDouble = new BlockBambooSlabDouble("bamboo_slab_double" );
+        bambooStairs = new BlockBambooStairs("bamboo_stairs", bambooPlank.getDefaultState());
     }
 
     public static void register() {
         registerBlock(bambooPlank);
         registerBlock(bambooSlabHalf, new ItemSlab(bambooSlabHalf, bambooSlabHalf, bambooSlabDouble));
         registerBlock(bambooSlabDouble, false, false);
+        registerBlock(bambooStairs);
     }
 
     public static void  registerRenders() {
         registerRender(bambooPlank);
         registerRender(bambooSlabHalf);
+        registerRender(bambooStairs);
     }
 
     public static void registerBlock(Block block) {
@@ -60,10 +65,13 @@ public class GrowthcraftBambooBlocks {
     }
 
     public static void registerRender(Block block) {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(new ResourceLocation(Reference.MODID, block.getUnlocalizedName().substring(5)), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0,
+                new ModelResourceLocation(new ResourceLocation(Reference.MODID,
+                        block.getUnlocalizedName().substring(5)), "inventory"));
     }
 
     public static void  registerRender(Block block, int meta, String fileName){
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
+        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
+                new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
 }
