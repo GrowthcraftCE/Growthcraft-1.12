@@ -1,18 +1,19 @@
 package growthcraft.bamboo.init;
 
 import growthcraft.bamboo.Reference;
-import growthcraft.bamboo.blocks.BlockBambooPlank;
-import growthcraft.bamboo.blocks.BlockBambooSlabDouble;
-import growthcraft.bamboo.blocks.BlockBambooSlabHalf;
-import growthcraft.bamboo.blocks.BlockBambooStairs;
+import growthcraft.bamboo.blocks.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
@@ -22,12 +23,16 @@ public class GrowthcraftBambooBlocks {
     public static BlockBambooSlabHalf bambooSlabHalf;
     public static BlockBambooSlabDouble bambooSlabDouble;
     public static BlockBambooStairs bambooStairs;
+    public static BlockBambooFence bambooFence;
+    public static BlockBambooFenceGate bambooFenceGate;
 
     public static void init() {
         bambooPlank = new BlockBambooPlank();
         bambooSlabHalf = new BlockBambooSlabHalf("bamboo_slab_half");
         bambooSlabDouble = new BlockBambooSlabDouble("bamboo_slab_double" );
         bambooStairs = new BlockBambooStairs("bamboo_stairs", bambooPlank.getDefaultState());
+        bambooFence = new BlockBambooFence("bamboo_fence");
+        bambooFenceGate = new BlockBambooFenceGate("bamboo_fence_gate");
     }
 
     public static void register() {
@@ -35,12 +40,24 @@ public class GrowthcraftBambooBlocks {
         registerBlock(bambooSlabHalf, new ItemSlab(bambooSlabHalf, bambooSlabHalf, bambooSlabDouble));
         registerBlock(bambooSlabDouble, false, false);
         registerBlock(bambooStairs);
+        registerBlock(bambooFence);
+        registerBlock(bambooFenceGate);
     }
 
     public static void  registerRenders() {
         registerRender(bambooPlank);
         registerRender(bambooSlabHalf);
         registerRender(bambooStairs);
+        registerRender(bambooFence);
+        registerRender(bambooFenceGate);
+    }
+
+    /*
+     * Credit to CJMinecraft for identifying how to ignore properties.
+     */
+    @SideOnly(Side.CLIENT)
+    public static void setCustomStateMappers() {
+        ModelLoader.setCustomStateMapper(bambooFenceGate, (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
     }
 
     public static void registerBlock(Block block) {
