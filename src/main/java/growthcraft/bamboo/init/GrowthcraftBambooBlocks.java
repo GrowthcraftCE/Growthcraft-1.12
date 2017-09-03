@@ -27,6 +27,7 @@ public class GrowthcraftBambooBlocks {
     public static BlockBambooFenceGate bambooFenceGate;
     public static BlockBambooLeaves bambooLeaves;
     public static BlockBambooStalk bambooStalk;
+    public static BlockBambooShoot bambooShoot;
 
     public static void init() {
         bambooPlank = new BlockBambooPlank();
@@ -37,6 +38,7 @@ public class GrowthcraftBambooBlocks {
         bambooFenceGate = new BlockBambooFenceGate("bamboo_fence_gate");
         bambooLeaves = new BlockBambooLeaves("bamboo_leaves");
         bambooStalk = new BlockBambooStalk("bamboo_stalk");
+        bambooShoot = new BlockBambooShoot("bamboo_shhot");
     }
 
     public static void register() {
@@ -48,6 +50,7 @@ public class GrowthcraftBambooBlocks {
         registerBlock(bambooFenceGate);
         registerBlock(bambooLeaves);
         registerBlock(bambooStalk);
+        registerRender(bambooShoot);
     }
 
     public static void  registerRenders() {
@@ -58,6 +61,7 @@ public class GrowthcraftBambooBlocks {
         registerRender(bambooFenceGate);
         registerRender(bambooLeaves);
         registerRender(bambooStalk);
+        registerRender(bambooShoot);
     }
 
     /*
