@@ -1,4 +1,4 @@
 package growthcraft.bamboo.items;
 
-public class ItemBamboo {
+public class ItemBambooStick {
 }

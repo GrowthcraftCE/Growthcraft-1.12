@@ -25,6 +25,8 @@ public class GrowthcraftBambooBlocks {
     public static BlockBambooStairs bambooStairs;
     public static BlockBambooFence bambooFence;
     public static BlockBambooFenceGate bambooFenceGate;
+    public static BlockBambooLeaves bambooLeaves;
+    public static BlockBambooStalk bambooStalk;
 
     public static void init() {
         bambooPlank = new BlockBambooPlank();
@@ -33,6 +35,8 @@ public class GrowthcraftBambooBlocks {
         bambooStairs = new BlockBambooStairs("bamboo_stairs", bambooPlank.getDefaultState());
         bambooFence = new BlockBambooFence("bamboo_fence");
         bambooFenceGate = new BlockBambooFenceGate("bamboo_fence_gate");
+        bambooLeaves = new BlockBambooLeaves("bamboo_leaves");
+        bambooStalk = new BlockBambooStalk("bamboo_stalk");
     }
 
     public static void register() {
@@ -42,6 +46,8 @@ public class GrowthcraftBambooBlocks {
         registerBlock(bambooStairs);
         registerBlock(bambooFence);
         registerBlock(bambooFenceGate);
+        registerBlock(bambooLeaves);
+        registerBlock(bambooStalk);
     }
 
     public static void  registerRenders() {
@@ -50,6 +56,8 @@ public class GrowthcraftBambooBlocks {
         registerRender(bambooStairs);
         registerRender(bambooFence);
         registerRender(bambooFenceGate);
+        registerRender(bambooLeaves);
+        registerRender(bambooStalk);
     }
 
     /*
@@ -60,16 +68,31 @@ public class GrowthcraftBambooBlocks {
         ModelLoader.setCustomStateMapper(bambooFenceGate, (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
     }
 
+    /**
+     * Simple Block Resgistration.
+     * @param block block
+     */
     public static void registerBlock(Block block) {
         registerBlock(block, true, true);
     }
 
+    /**
+     * Block registration with a custom ItemBlock
+     * @param block block
+     * @param itemBlock itemBlock
+     */
     public static void registerBlock(Block block, ItemBlock itemBlock) {
         block.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(block);
         GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
     }
 
+    /**
+     * Advanced block registration
+     * @param block block
+     * @param setCreativeTab Add a creative tab entry.
+     * @param registerItemBlock Add an ItemBlock entry.
+     */
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
         GameRegistry.register(block);
 
