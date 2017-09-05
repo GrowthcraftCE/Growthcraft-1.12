@@ -38,7 +38,7 @@ public class GrowthcraftBambooBlocks {
         bambooFenceGate = new BlockBambooFenceGate("bamboo_fence_gate");
         bambooLeaves = new BlockBambooLeaves("bamboo_leaves");
         bambooStalk = new BlockBambooStalk("bamboo_stalk");
-        bambooShoot = new BlockBambooShoot("bamboo_shhot");
+        bambooShoot = new BlockBambooShoot("bamboo_shoot");
     }
 
     public static void register() {
@@ -50,7 +50,7 @@ public class GrowthcraftBambooBlocks {
         registerBlock(bambooFenceGate);
         registerBlock(bambooLeaves);
         registerBlock(bambooStalk);
-        registerRender(bambooShoot);
+        registerBlock(bambooShoot);
     }
 
     public static void  registerRenders() {

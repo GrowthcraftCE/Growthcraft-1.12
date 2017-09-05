@@ -1,12 +1,10 @@
 package growthcraft.bamboo.blocks;
 
-import com.sun.org.apache.xalan.internal.utils.XMLSecurityPropertyManager;
 import growthcraft.bamboo.Reference;
 import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -30,6 +28,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     public BlockBambooShoot(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+        GrowthcraftLogger.getLogger().info("Constructing bamboo shoot ...");
     }
 
     @Override
