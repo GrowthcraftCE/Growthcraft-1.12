@@ -56,7 +56,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
         if ( !worldIn.isRemote ) {
             super.updateTick(worldIn, pos, state, rand);
             if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
-                this.grow(worldIn, rand, pos, state);
+                this.grow(worldIn, pos, state, rand);
             }
         }
     }

@@ -29,8 +29,9 @@ import java.util.Random;
 
 public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityProvider {
 
-    private static final AxisAlignedBB BOUNDING_BOX =
-            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+            0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
+            0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
 
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");

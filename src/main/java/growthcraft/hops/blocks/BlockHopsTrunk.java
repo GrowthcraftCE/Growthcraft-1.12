@@ -11,18 +11,35 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
 public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+            0.0625 * 6, 0.0625 * 0, 0.0625 * 6,
+            0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
+
     public BlockHopsTrunk(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+    }
+
+    @Override
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDING_BOX;
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
     }
 
     /* Private */

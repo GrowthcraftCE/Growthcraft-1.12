@@ -20,6 +20,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -49,6 +50,17 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        if ( this.getAge(state) <= 3 ) {
+            return BOUNDING_BOXES[0];
+        } else if ( this.getAge(state) <= 6) {
+            return BOUNDING_BOXES[1];
+        }
+        return BOUNDING_BOXES[2];
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         if ( this.getAge(state) <= 3 ) {
             return BOUNDING_BOXES[0];
         } else if ( this.getAge(state) <= 6) {
