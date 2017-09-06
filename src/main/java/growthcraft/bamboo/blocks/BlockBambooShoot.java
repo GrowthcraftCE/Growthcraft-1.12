@@ -95,6 +95,8 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
 
     public void generateTree( World worldIn, BlockPos pos, IBlockState state, Random rand ) {
         GrowthcraftLogger.getLogger().info("Going to grow a tree!");
+        if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
+
     }
 
 }
