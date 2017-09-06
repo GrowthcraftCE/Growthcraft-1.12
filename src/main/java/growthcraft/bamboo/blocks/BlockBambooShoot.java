@@ -1,6 +1,7 @@
 package growthcraft.bamboo.blocks;
 
 import growthcraft.bamboo.Reference;
+import growthcraft.bamboo.worldgen.WorldGenBambooTree;
 import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -13,6 +14,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
@@ -96,7 +98,8 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     public void generateTree( World worldIn, BlockPos pos, IBlockState state, Random rand ) {
         GrowthcraftLogger.getLogger().info("Going to grow a tree!");
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
-
+        WorldGenerator worldGenerator = new WorldGenBambooTree(true, false);
+        worldGenerator.generate(worldIn, rand, pos);
     }
 
 }

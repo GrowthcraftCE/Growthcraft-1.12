@@ -1,5 +1,7 @@
 package growthcraft.bamboo.worldgen;
 
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
+import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.util.math.BlockPos;
@@ -22,8 +24,9 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
 
     public boolean canGrow(World worldIn, BlockPos pos, int height) {
         for ( int i = 1; i <= height; i++ ) {
-            Block block = worldIn.getBlockState(pos).getBlock();
+            Block block = worldIn.getBlockState(pos.up(i)).getBlock();
             if ( ! ( block instanceof BlockAir ) ) {
+                GrowthcraftLogger.getLogger().info("canGrow tree is false, there isn't BlockAir at pos.up(" + i + ") there is a " + block.getUnlocalizedName() );
                 return false;
             }
         }
@@ -31,12 +34,17 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
     }
 
     @Override
-    public boolean generate(World worldIn, Random rand, BlockPos position) {
+    public boolean generate(World worldIn, Random rand, BlockPos pos) {
+        GrowthcraftLogger.getLogger().info("worldgenerator.generate has been called!");
         final int height = rand.nextInt(maxBambooTreeHieght - minBambooTreeHieght) + minBambooTreeHieght;
 
         // Is there room to generate?
-        if ( canGrow(worldIn, position, height) ) {
-
+        if ( canGrow(worldIn, pos, height) ) {
+            for ( int i = 1; 1 <= height; i++ ) {
+                worldIn.setBlockState(pos.up(i), GrowthcraftBambooBlocks.bambooStalk.getDefaultState());
+                //TODO: Fix the tree generation.
+            }
+            return true;
         }
 
         return false;
