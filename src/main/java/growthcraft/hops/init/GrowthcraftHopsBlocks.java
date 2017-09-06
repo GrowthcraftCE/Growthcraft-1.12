@@ -23,8 +23,8 @@ public class GrowthcraftHopsBlocks {
     }
 
     public static void register() {
-        registerBlock(block_hops, false, false);
-        registerBlock(hops_bush, false, false);
+        registerBlock(block_hops, false, true);
+        registerBlock(hops_bush, false, true);
     }
 
     public static void  registerRenders() {

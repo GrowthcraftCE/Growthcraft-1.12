@@ -22,6 +22,8 @@ import java.util.Random;
 
 public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
+    private int maxHeight = 3;
+
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 6, 0.0625 * 0, 0.0625 * 6,
             0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
@@ -29,6 +31,7 @@ public class BlockHopsTrunk extends BlockCrops implements IGrowable {
     public BlockHopsTrunk(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+        this.setTickRandomly(true);
     }
 
     @Override
@@ -44,9 +47,12 @@ public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
     /* Private */
     private void growHopPlant(World worldIn, BlockPos pos, IBlockState state) {
-        Block blockUp = worldIn.getBlockState(pos.up()).getBlock();
-        if ( blockUp instanceof BlockRopeFence) {
-            worldIn.setBlockState(pos.up(), GrowthcraftHopsBlocks.hops_bush.getDefaultState());
+        for ( int i = 1; i <= maxHeight; i++ ) {
+            Block blockUp = worldIn.getBlockState(pos.up(i)).getBlock();
+            if (blockUp instanceof BlockRopeFence) {
+                worldIn.setBlockState(pos.up(), GrowthcraftHopsBlocks.hops_bush.getDefaultState());
+                break;
+            }
         }
     }
 
@@ -89,9 +95,11 @@ public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        Block blockUp = worldIn.getBlockState(pos.up()).getBlock();
-        if ( blockUp instanceof BlockRopeFence) {
-            return true;
+        for ( int i = 1; i <= maxHeight; i++ ) {
+            Block blockUp = worldIn.getBlockState(pos.up(i)).getBlock();
+            if (blockUp instanceof BlockRopeFence) {
+                return true;
+            }
         }
         return false;
     }

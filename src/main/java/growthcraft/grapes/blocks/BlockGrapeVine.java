@@ -40,6 +40,7 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setMaxAge(7);
+        this.setTickRandomly(true);
     }
 
     @Override

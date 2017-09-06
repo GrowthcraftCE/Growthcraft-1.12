@@ -1,0 +1,21 @@
+{
+  "textures": {
+    "0": "growthcraft_hops:blocks/hops_vine_trunk",
+    "particle": "growthcraft_hops:blocks/hops_vine_trunk"
+  },
+  "elements": [
+    {
+      "name": "trunk",
+      "from": [ 6.0, -1.0, 6.0 ],
+      "to":   [ 10.0, 16.0, 10.0 ],
+      "faces": {
+        "north": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 16.0 ] },
+        "east": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 16.0 ] },
+        "south": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 16.0 ] },
+        "west": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 16.0 ] },
+        "up": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 4.0 ] },
+        "down": { "texture": "#0", "uv": [ 0.0, 0.0, 4.0, 4.0 ] }
+      }
+    }
+  ]
+}

@@ -28,8 +28,8 @@ public class GrowthcraftCoreBlocks {
 
     public static void register() {
         registerBlock(salt_block);
-        registerBlock(rope_fence, false, false);
-        registerBlock(rope_knot, false, false);
+        registerBlock(rope_fence, false, true);
+        registerBlock(rope_knot, false, true);
     }
 
     public static void  registerRenders() {
