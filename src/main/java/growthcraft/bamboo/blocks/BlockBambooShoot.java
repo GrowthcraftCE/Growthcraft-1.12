@@ -28,7 +28,6 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     public BlockBambooShoot(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
-        GrowthcraftLogger.getLogger().info("Constructing bamboo shoot ...");
     }
 
     @Override
@@ -38,12 +37,20 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        super.updateTick(worldIn, pos, state, rand);
+        if (!worldIn.isRemote)
+        {
+            super.updateTick(worldIn, pos, state, rand);
+
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
+            {
+                this.grow(worldIn, pos, state, rand);
+            }
+        }
     }
 
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        return false;
+        return true;
     }
 
     @Override
