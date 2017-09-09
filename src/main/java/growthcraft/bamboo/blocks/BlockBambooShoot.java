@@ -2,7 +2,6 @@ package growthcraft.bamboo.blocks;
 
 import growthcraft.bamboo.Reference;
 import growthcraft.bamboo.worldgen.WorldGenBambooTree;
-import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
@@ -39,14 +38,9 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (!worldIn.isRemote)
-        {
-            super.updateTick(worldIn, pos, state, rand);
-
-            if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0)
-            {
-                this.grow(worldIn, pos, state, rand);
-            }
+        super.updateTick(worldIn, pos, state, rand);
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+            this.grow(worldIn, pos, state, rand);
         }
     }
 
@@ -62,12 +56,11 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
 
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        if ( !worldIn.isRemote ) {
-            super.updateTick(worldIn, pos, state, rand);
-            if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
-                this.grow(worldIn, pos, state, rand);
-            }
+        super.updateTick(worldIn, pos, state, rand);
+        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+            this.grow(worldIn, pos, state, rand);
         }
+
     }
 
     @Override
@@ -96,7 +89,6 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     }
 
     public void generateTree( World worldIn, BlockPos pos, IBlockState state, Random rand ) {
-        GrowthcraftLogger.getLogger().info("Going to grow a tree!");
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
         WorldGenerator worldGenerator = new WorldGenBambooTree(true, false);
         worldGenerator.generate(worldIn, rand, pos);
