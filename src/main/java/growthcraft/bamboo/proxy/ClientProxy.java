@@ -1,6 +1,7 @@
 package growthcraft.bamboo.proxy;
 
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
+import growthcraft.bamboo.init.GrowthcraftBambooItems;
 
 public class ClientProxy extends CommonProxy {
 
@@ -20,6 +21,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenders() {
         GrowthcraftBambooBlocks.registerRenders();
+        GrowthcraftBambooItems.registerRenders();
     }
 
     @Override

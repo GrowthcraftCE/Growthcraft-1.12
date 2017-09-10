@@ -1,9 +1,8 @@
 package growthcraft.bamboo.init;
 
 import growthcraft.bamboo.Reference;
-import growthcraft.bamboo.items.ItemBambooShoot;
-import growthcraft.bamboo.items.ItemBambooStick;
 import growthcraft.bamboo.items.ItemBambooCoal;
+import growthcraft.bamboo.items.ItemBambooStick;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -16,18 +15,20 @@ public class GrowthcraftBambooItems {
 
     public static ItemBambooCoal bambooCoal;
     public static ItemBambooStick bambooStick;
-    public static ItemBambooShoot bambooShoot;
 
     public static void init() {
-        //rope = new ItemRope("rope");
+        bambooStick = new ItemBambooStick("bamboo_stick");
+        bambooCoal = new ItemBambooCoal("bamboo_coal");
     }
 
     public static void register() {
-        //registerItem(rope);
+        registerItem(bambooStick);
+        registerItem(bambooCoal);
     }
 
     public static void registerRenders() {
-        //registerRender(salt);
+        registerRender(bambooStick);
+        registerRender(bambooCoal);
     }
 
     public static void registerItem(Item item) {
