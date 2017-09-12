@@ -1,8 +1,9 @@
-package growthcraft.bamboo.blocks;
+package growthcraft.apples.blocks;
 
-import growthcraft.bamboo.Reference;
-import growthcraft.bamboo.worldgen.WorldGenBambooTree;
+import growthcraft.apples.Reference;
+import growthcraft.apples.worldgen.WorldGenAppleTree;
 import net.minecraft.block.BlockBush;
+import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -17,7 +18,7 @@ import net.minecraft.world.gen.feature.WorldGenerator;
 
 import java.util.Random;
 
-public class BlockBambooShoot extends BlockBush implements IGrowable {
+public class BlockAppleSapling extends BlockBush implements IGrowable {
 
     public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
@@ -26,7 +27,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
             0.8999999761481421D, 0.800000011920929D, 0.8999999761481421D
     );
 
-    public BlockBambooShoot(String unlocalizedName) {
+    public BlockAppleSapling(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
@@ -37,21 +38,13 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        super.updateTick(worldIn, pos, state, rand);
-        if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
-            this.grow(worldIn, pos, state, rand);
-        }
-    }
-
-    @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
         return true;
     }
 
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return (double) worldIn.rand.nextFloat() < 0.45D;
+        return worldIn.rand.nextInt(10) < 5;
     }
 
     @Override
@@ -60,7 +53,14 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
         if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
             this.grow(worldIn, pos, state, rand);
         }
+    }
 
+    public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        if (((Integer)state.getValue(STAGE)).intValue() == 0) {
+            worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
+        } else {
+            this.generateTree(worldIn, pos, state, rand);
+        }
     }
 
     @Override
@@ -77,22 +77,12 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
 
     @Override
     protected BlockStateContainer createBlockState() {
-
         return new BlockStateContainer(this, new IProperty[]{STAGE});
     }
 
-    public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (((Integer)state.getValue(STAGE)).intValue() == 0) {
-            worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
-        } else {
-            this.generateTree(worldIn, pos, state, rand);
-        }
-    }
-
-    public void generateTree( World worldIn, BlockPos pos, IBlockState state, Random rand ) {
+    public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
-        WorldGenerator worldGenerator = new WorldGenBambooTree(true, false);
+        WorldGenerator worldGenerator = new WorldGenAppleTree(true);
         worldGenerator.generate(worldIn, rand, pos);
     }
-
 }
