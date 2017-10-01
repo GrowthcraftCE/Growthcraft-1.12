@@ -24,7 +24,7 @@ public class GrowthcraftApplesBlocks {
 
     public static void preInit() {
         blockAppleSapling = new BlockAppleSapling("apple_sapling");
-        blockAppleLog = new BlockAppleLog("apple_wood");
+        blockAppleLog = new BlockAppleLog("apple_log");
         blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
         blockApple = new BlockApple("apple_crop");
         register();

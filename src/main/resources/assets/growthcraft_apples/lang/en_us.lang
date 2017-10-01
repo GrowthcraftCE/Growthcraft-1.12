@@ -1,1 +1,4 @@
 tile.apple_sapling.name=Apple Tree Sapling
+tile.apple_leaves.name=Apple Tree Leaves
+tile.apple_log.name=Apple Wood
+tile.apple_crop.name=Apple

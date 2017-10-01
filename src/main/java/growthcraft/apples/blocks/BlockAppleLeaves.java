@@ -11,4 +11,6 @@ public class BlockAppleLeaves extends Block {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
+
+    // TODO: On random tick, generate BlockApple.
 }

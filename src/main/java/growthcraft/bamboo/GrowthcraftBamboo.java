@@ -4,6 +4,7 @@ import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import growthcraft.bamboo.init.GrowthcraftBambooItems;
 import growthcraft.bamboo.init.GrowthcraftBambooRecipes;
 import growthcraft.bamboo.proxy.CommonProxy;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -12,6 +13,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftBamboo {
+
+    public static Configuration configuration;
 
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftBamboo instance;
@@ -36,6 +39,5 @@ public class GrowthcraftBamboo {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-
     }
 }
