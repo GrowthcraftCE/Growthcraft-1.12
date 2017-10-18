@@ -3,7 +3,6 @@ package growthcraft.apples.blocks;
 import growthcraft.apples.Reference;
 import growthcraft.apples.worldgen.WorldGenAppleTree;
 import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
@@ -35,6 +34,14 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDING_BOX;
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(worldIn, pos, state, rand);
+        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+            this.grow(worldIn, pos, state, rand);
+        }
     }
 
     @Override

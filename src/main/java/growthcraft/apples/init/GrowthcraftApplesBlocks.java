@@ -26,7 +26,7 @@ public class GrowthcraftApplesBlocks {
         blockAppleSapling = new BlockAppleSapling("apple_sapling");
         blockAppleLog = new BlockAppleLog("apple_log");
         blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
-        blockApple = new BlockApple("apple_crop");
+        //blockApple = new BlockApple("apple_crop");
         register();
     }
 
@@ -34,14 +34,14 @@ public class GrowthcraftApplesBlocks {
         registerBlock(blockAppleSapling);
         registerBlock(blockAppleLog);
         registerBlock(blockAppleLeaves);
-        registerBlock(blockApple, false, false);
+        //registerBlock(blockApple, false, false);
     }
 
     public static void registerRenders() {
         registerRender(blockAppleSapling);
         registerRender(blockAppleLog);
         registerRender(blockAppleLeaves);
-        registerRender(blockApple);
+        //registerRender(blockApple);
     }
 
     /* No need to edit below */

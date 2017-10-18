@@ -1,7 +1,6 @@
 package growthcraft.apples.worldgen;
 
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
-import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.util.math.BlockPos;
@@ -28,24 +27,39 @@ public class WorldGenAppleTree extends WorldGenAbstractTree {
             final int maxGrowthHeight = rand.nextInt(maxTreeHeight - minTreeHeight) + minTreeHeight;
 
             if (canGrow(worldIn, pos, maxGrowthHeight)) {
-                GrowthcraftLogger.getLogger().info("Grow a apple tree!");
                 worldIn.setBlockState(pos, blockLog.getDefaultState());
                 for ( int i = 1; i <= maxGrowthHeight; i++ ) {
                     worldIn.setBlockState(pos.up(i), blockLog.getDefaultState());
-                }
+                    if ( i == maxGrowthHeight ) {
+                        spawnLeaves(worldIn, pos.up(i+1));
+                        spawnLeaves(worldIn, pos.up(i+1).north());
+                        spawnLeaves(worldIn, pos.up(i+1).east());
+                        spawnLeaves(worldIn, pos.up(i+1).south());
+                        spawnLeaves(worldIn, pos.up(i+1).west());
 
+                        spawnLeaves(worldIn, pos.up(i).north());
+                        spawnLeaves(worldIn, pos.up(i).east().north());
+                        spawnLeaves(worldIn, pos.up(i).east());
+                        spawnLeaves(worldIn, pos.up(i).east().south());
+                        spawnLeaves(worldIn, pos.up(i).south());
+                        spawnLeaves(worldIn, pos.up(i).west().north());
+                        spawnLeaves(worldIn, pos.up(i).west());
+                        spawnLeaves(worldIn, pos.up(i).west().south());
+                    }
+                }
+                return true;
             }
         }
         return false;
     }
 
     private boolean canGrow(World worldIn, BlockPos pos, int growthHeight) {
-        // Can this tree fit in the space provided?
-        for ( int i = 1; i <= growthHeight; i++) {
-            if (!(worldIn.getBlockState(pos).getBlock() instanceof BlockAir))
+        for ( int i = 1; i <= growthHeight; i++ ) {
+            Block block = worldIn.getBlockState(pos.up(i)).getBlock();
+            if ( ! ( block instanceof BlockAir ) ) {
                 return false;
+            }
         }
-
         return true;
     }
 
