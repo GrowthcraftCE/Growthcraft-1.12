@@ -65,9 +65,16 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (((Integer)state.getValue(STAGE)).intValue() == 0) {
             worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
+            this.markBlockUpdate(worldIn, pos);
         } else {
             this.generateTree(worldIn, pos, state, rand);
         }
+    }
+
+    private void markBlockUpdate(World worldIn, BlockPos pos ) {
+        worldIn.markBlockRangeForRenderUpdate(pos, pos);
+        worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
+        worldIn.scheduleBlockUpdate(pos, this, 0,0);
     }
 
     @Override

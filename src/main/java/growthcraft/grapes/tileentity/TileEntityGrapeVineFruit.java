@@ -132,6 +132,7 @@ public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, I
         markBlockUpdate(worldIn, pos);
 
     }
+
     private void markBlockUpdate(World worldIn, BlockPos pos ) {
         worldIn.markBlockRangeForRenderUpdate(pos, pos);
         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
