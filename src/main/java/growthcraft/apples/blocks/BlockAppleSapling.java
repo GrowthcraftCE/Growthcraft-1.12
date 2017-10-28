@@ -51,7 +51,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
 
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return worldIn.rand.nextInt(10) < 5;
+        return true;
     }
 
     @Override
@@ -72,7 +72,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));
+        return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 7) >> 3));
     }
 
     @Override

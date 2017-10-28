@@ -26,7 +26,7 @@ public class GrowthcraftApplesBlocks {
         blockAppleSapling = new BlockAppleSapling("apple_sapling");
         blockAppleLog = new BlockAppleLog("apple_log");
         blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
-        //blockApple = new BlockApple("apple_crop");
+        blockApple = new BlockApple("apple_crop");
         register();
     }
 
@@ -34,43 +34,28 @@ public class GrowthcraftApplesBlocks {
         registerBlock(blockAppleSapling);
         registerBlock(blockAppleLog);
         registerBlock(blockAppleLeaves);
-        //registerBlock(blockApple, false, false);
+        registerBlock(blockApple, false, false);
     }
 
     public static void registerRenders() {
         registerRender(blockAppleSapling);
         registerRender(blockAppleLog);
         registerRender(blockAppleLeaves);
-        //registerRender(blockApple);
+        registerRender(blockApple);
     }
 
     /* No need to edit below */
 
-    /**
-     * Simple block registration
-     * @param block block
-     */
     public static void registerBlock(Block block) {
         registerBlock(block, true, true);
     }
 
-    /**
-     * Block registration with a custom ItemBlock
-     * @param block block
-     * @param itemBlock itemBlock
-     */
     public static void registerBlock(Block block, ItemBlock itemBlock) {
         block.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(block);
         GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
     }
 
-    /**
-     * Advanced block registration
-     * @param block block
-     * @param setCreativeTab Add a creative tab entry.
-     * @param registerItemBlock Add an ItemBlock entry.
-     */
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
         GameRegistry.register(block);
 
