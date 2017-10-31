@@ -4,6 +4,7 @@ import growthcraft.bamboo.Reference;
 import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
+import net.minecraft.block.BlockDirt;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -69,10 +70,12 @@ public class BlockBambooStalk extends Block {
                 BlockPos posSouthWest = new BlockPos(pos.south(2).west(2));
 
                 // TODO: Add Bamboo Spread Max Area to GrowthcraftBamboo GrowthcraftBambooConfig
-                int offsetNorth = rand.nextInt(4);
-                int offsetEast = rand.nextInt(4);
+                int offsetNorth = rand.nextInt(2);
+                int offsetEast = rand.nextInt(2);
 
-                if ( worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast)).getBlock() instanceof BlockAir ) {
+                // If the random block is Air and the below block is Dirt
+                if ( worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast)).getBlock() instanceof BlockAir
+                        && worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast).down()).getBlock() instanceof BlockDirt) {
                     worldIn.setBlockState(posSouthWest.north(offsetNorth).east(offsetEast),
                             GrowthcraftBambooBlocks.bambooShoot.getDefaultState().withProperty(BlockBambooShoot.STAGE, 0));
                 }

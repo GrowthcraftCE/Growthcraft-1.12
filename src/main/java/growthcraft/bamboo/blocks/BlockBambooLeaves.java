@@ -1,11 +1,13 @@
 package growthcraft.bamboo.blocks;
 
 import growthcraft.bamboo.Reference;
+import growthcraft.bamboo.init.GrowthcraftBambooBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.ResourceLocation;
@@ -36,7 +38,8 @@ public class BlockBambooLeaves extends Block implements IShearable {
 
     @Override
     public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return null;
+        return java.util.Arrays.asList(new ItemStack(Item.getItemFromBlock(GrowthcraftBambooBlocks.bambooLeaves), 1));
+
     }
 
     @Override

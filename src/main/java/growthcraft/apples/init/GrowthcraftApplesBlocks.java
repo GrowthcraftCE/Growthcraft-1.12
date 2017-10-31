@@ -1,17 +1,19 @@
 package growthcraft.apples.init;
 
 import growthcraft.apples.Reference;
-import growthcraft.apples.blocks.BlockApple;
-import growthcraft.apples.blocks.BlockAppleLeaves;
-import growthcraft.apples.blocks.BlockAppleLog;
-import growthcraft.apples.blocks.BlockAppleSapling;
+import growthcraft.apples.blocks.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemSlab;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
@@ -21,12 +23,27 @@ public class GrowthcraftApplesBlocks {
     public static BlockAppleLog blockAppleLog;
     public static BlockAppleLeaves blockAppleLeaves;
     public static BlockApple blockApple;
+    public static BlockApplePlanks blockApplePlanks;
+
+    public static BlockAppleFence blockAppleFence;
+    public static BlockAppleFenceGate blockAppleFenceGate;
+    public static BlockAppleSlabHalf blockAppleSlabHalf;
+    public static BlockAppleSlabDouble blockAppleSlabDouble;
+    public static BlockAppleStairs blockAppleStairs;
+
 
     public static void preInit() {
         blockAppleSapling = new BlockAppleSapling("apple_sapling");
         blockAppleLog = new BlockAppleLog("apple_log");
         blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
         blockApple = new BlockApple("apple_crop");
+        blockApplePlanks = new BlockApplePlanks("apple_planks");
+        blockAppleFence = new BlockAppleFence("apple_fence");
+        blockAppleFenceGate = new BlockAppleFenceGate("apple_fence_gate");
+        blockAppleSlabHalf = new BlockAppleSlabHalf("apple_slab_half");
+        blockAppleSlabDouble = new BlockAppleSlabDouble("apple_slab_double");
+        blockAppleStairs = new BlockAppleStairs("apple_stairs", blockApplePlanks.getDefaultState());
+
         register();
     }
 
@@ -35,6 +52,14 @@ public class GrowthcraftApplesBlocks {
         registerBlock(blockAppleLog);
         registerBlock(blockAppleLeaves);
         registerBlock(blockApple, false, false);
+        registerBlock(blockApplePlanks);
+        registerBlock(blockAppleFence);
+        registerBlock(blockAppleFenceGate);
+        registerBlock(blockAppleSlabHalf,
+                new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
+        registerBlock(blockAppleSlabDouble, false, false);
+        registerBlock(blockAppleStairs);
+
     }
 
     public static void registerRenders() {
@@ -42,6 +67,18 @@ public class GrowthcraftApplesBlocks {
         registerRender(blockAppleLog);
         registerRender(blockAppleLeaves);
         registerRender(blockApple);
+        registerRender(blockApplePlanks);
+        registerRender(blockAppleFence);
+        registerRender(blockAppleFenceGate);
+        registerRender(blockAppleStairs);
+    }
+
+    /*
+     * Credit to CJMinecraft for identifying how to ignore properties.
+     */
+    @SideOnly(Side.CLIENT)
+    public static void setCustomStateMappers() {
+        ModelLoader.setCustomStateMapper(blockAppleFenceGate, (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
     }
 
     /* No need to edit below */

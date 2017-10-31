@@ -1,0 +1,8 @@
+{
+  "parent": "block/stairs",
+  "textures": {
+    "bottom": "growthcraft_apples:blocks/apple_planks",
+    "top": "growthcraft_apples:blocks/apple_planks",
+    "side": "growthcraft_apples:blocks/apple_planks"
+  }
+}
