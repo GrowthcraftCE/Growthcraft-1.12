@@ -7,6 +7,7 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 
 public class BlockAppleLog extends BlockLog {
@@ -20,6 +21,8 @@ public class BlockAppleLog extends BlockLog {
         this.setHardness(2.0F);
         this.setSoundType(SoundType.WOOD);
         this.setDefaultState(this.blockState.getBaseState().withProperty(LOG_AXIS, BlockLog.EnumAxis.Y));
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+
     }
 
     @Override

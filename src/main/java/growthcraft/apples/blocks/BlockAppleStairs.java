@@ -4,6 +4,7 @@ import growthcraft.apples.Reference;
 import net.minecraft.block.BlockStairs;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 
 public class BlockAppleStairs extends BlockStairs {
@@ -17,5 +18,7 @@ public class BlockAppleStairs extends BlockStairs {
         this.setHarvestLevel("axe", 1);
         this.setSoundType(SoundType.WOOD);
         this.useNeighborBrightness = true;
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+
     }
 }
