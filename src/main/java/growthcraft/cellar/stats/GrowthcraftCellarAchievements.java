@@ -9,7 +9,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 
 public class GrowthcraftCellarAchievements {
-	// INITIALIZE
 	// OPEN_ADHOC
 	// REVISE_ME 0
 

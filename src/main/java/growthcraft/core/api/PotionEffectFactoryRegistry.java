@@ -8,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 public class PotionEffectFactoryRegistry extends AbstractClassRegistry<IPotionEffectFactory>
 {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 //	@Override
 	public IPotionEffectFactory loadPotionEffectFactoryFromNBT(@Nonnull NBTTagCompound data, @Nonnull String name)

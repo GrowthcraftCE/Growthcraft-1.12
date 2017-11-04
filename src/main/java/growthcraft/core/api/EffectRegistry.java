@@ -16,7 +16,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class EffectRegistry extends AbstractClassRegistry<IEffect> {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	public EffectRegistry initialize()
 	{

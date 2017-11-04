@@ -1,12 +1,14 @@
 package growthcraft.cellar.api;
 
+import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.api.booze.BoozeEntry;
 import growthcraft.cellar.api.booze.BoozeRegistry;
 import growthcraft.cellar.init.CellarEffects;
 
 public class CellarRegistry {
 	// REVISE_ME 0
 	// OPEN_ADHOC
-	// INITIALIZE
 	
 	private static final CellarRegistry INSTANCE = new CellarRegistry().initialize();
 
@@ -32,5 +34,16 @@ public class CellarRegistry {
 	public BoozeRegistry booze()
 	{
 		return boozeRegistry;
+	}
+	
+	public static void onPostInit() {
+		if (!GrowthcraftCellarConfig.boozeEffectsEnabled)
+		{
+			GrowthcraftCellar.logger.debug("Stripping ALL booze effects except tipsy");
+			for (BoozeEntry entry : CellarRegistry.instance().booze().getBoozeEntries())
+			{
+				entry.getEffect().clearEffects();
+			}
+		}
 	}
 }

@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GrowthcraftCellarItems {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	public static ItemChievDummy chievItemDummy;
 

@@ -15,7 +15,6 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BoozeRegistry {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	private Map<Fluid, BoozeEntry> boozeMap = new HashMap<Fluid, BoozeEntry>();
 	private Map<FluidTag, IModifierFunction> tagModifierFunctions = new HashMap<FluidTag, IModifierFunction>();

@@ -5,7 +5,6 @@ import growthcraft.core.api.fluids.FluidTag;
 
 public class BoozeTag {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	// the booze is young and probably has no effects
 	public static final FluidTag YOUNG = CoreRegistry.instance().fluidTags().createTag("young");
