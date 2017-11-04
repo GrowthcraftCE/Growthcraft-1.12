@@ -1,5 +1,8 @@
 package growthcraft.core;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import growthcraft.core.creativetabs.TabGrowthcraft;
 import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
@@ -22,6 +25,9 @@ public class GrowthcraftCore {
 
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
+    
+    // REVISE_TEAM
+    public static Logger logger = LogManager.getLogger(Reference.MODID);
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
