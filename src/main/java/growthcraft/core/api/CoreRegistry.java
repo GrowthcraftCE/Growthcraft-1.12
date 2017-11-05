@@ -6,7 +6,6 @@ import growthcraft.core.api.fluids.FluidTagsRegistry;
 public class CoreRegistry {
 	// OPEN_ADHOC
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	private static final CoreRegistry instance = new CoreRegistry();
 

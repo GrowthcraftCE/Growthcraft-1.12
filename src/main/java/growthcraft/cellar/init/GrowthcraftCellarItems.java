@@ -16,19 +16,20 @@ public class GrowthcraftCellarItems {
 	public static ItemChievDummy chievItemDummy;
 
     public static void init() {
-    	chievItemDummy = new ItemChievDummy("bamboo_stick");
+    	chievItemDummy = new ItemChievDummy("achievement_dummy");
     }
 
     public static void register() {
-        registerItem(chievItemDummy);
+        registerItem(chievItemDummy, false);
     }
 
     public static void registerRenders() {
         registerRender(chievItemDummy);
     }
 
-    public static void registerItem(Item item) {
-        item.setCreativeTab(tabGrowthcraft);
+    public static void registerItem(Item item, boolean bAddToCreativeTab) {
+        if( bAddToCreativeTab )
+        	item.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(item);
     }
 

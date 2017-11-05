@@ -74,7 +74,7 @@ public class EffectChance extends AbstractEffect
 			effect.getDescription(tempList);
 			if (tempList.size() > 0)
 			{
-				final String str = I18n.format("grc.effect.chance.format", (int)(chance * 100));
+				final String str = I18n.format("effect.chance.format", (int)(chance * 100));
 				Describer.compactDescription(str, list, tempList);
 			}
 		}

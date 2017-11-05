@@ -4,7 +4,7 @@ import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.GrowthcraftCellarConfig;
 import growthcraft.cellar.api.booze.BoozeEntry;
 import growthcraft.cellar.api.booze.BoozeRegistry;
-import growthcraft.cellar.init.CellarEffects;
+import growthcraft.cellar.init.GrowthcraftCellarEffects;
 
 public class CellarRegistry {
 	// REVISE_ME 0
@@ -24,7 +24,7 @@ public class CellarRegistry {
 	
 	private CellarRegistry initialize()
 	{
-		CellarEffects.init();
+		GrowthcraftCellarEffects.init();
 		return this;
 	}
 	

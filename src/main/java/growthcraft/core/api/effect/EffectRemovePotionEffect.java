@@ -62,7 +62,7 @@ public class EffectRemovePotionEffect extends AbstractEffect
 	{
 		final PotionEffect pe = new PotionEffect(getPotion(), 1000, 0);
 		final String potionName = I18n.format(pe.getEffectName()).trim();
-		list.add(I18n.format("grc.effect.remove_potion_effect.format", potionName));
+		list.add(I18n.format("effect.remove_potion_effect.format", potionName));
 	}
 
 	@Override

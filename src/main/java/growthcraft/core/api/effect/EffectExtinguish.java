@@ -25,7 +25,7 @@ public class EffectExtinguish extends AbstractEffect
 	@Override
 	protected void getActualDescription(List<String> list)
 	{
-		list.add(I18n.format("grc.effect.extinguish.desc"));
+		list.add(I18n.format("effect.extinguish.desc"));
 	}
 
 	@Override

@@ -8,11 +8,11 @@ import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.api.EffectRegistry;
 import net.minecraft.potion.Potion;
 
-public class CellarEffects
+public class GrowthcraftCellarEffects
 {
 	// REVISE_ME 0
 	
-	private CellarEffects() {}
+	private GrowthcraftCellarEffects() {}
 
 	public static void init()
 	{

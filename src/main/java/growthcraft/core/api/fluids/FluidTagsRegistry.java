@@ -13,7 +13,6 @@ import growthcraft.core.common.DuplicateRegistrationError;
 public class FluidTagsRegistry
 {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	private Map<String, FluidTag> nameToTag = new HashMap<String, FluidTag>();
 

@@ -1,6 +1,6 @@
 package growthcraft.cellar.events;
 
-import growthcraft.cellar.init.CellarPotions;
+import growthcraft.cellar.init.GrowthcraftCellarPotions;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
@@ -10,22 +10,21 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class EventHandlerLivingUpdateEventCellar
 {
 	// REVISE_ME 0
-	// INITIALIZE
 	
 	@SubscribeEvent
 	public void onEntityUpdate(LivingUpdateEvent event)
 	{
 		final EntityLivingBase ent = event.getEntityLiving();
 
-		if (ent.isPotionActive(CellarPotions.potionTipsy))
+		if (ent.isPotionActive(GrowthcraftCellarPotions.potionTipsy))
 		{
-			if (ent.getActivePotionEffect(CellarPotions.potionTipsy).getDuration() == 0)
+			if (ent.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getDuration() == 0)
 			{
-				ent.removePotionEffect(CellarPotions.potionTipsy);
+				ent.removePotionEffect(GrowthcraftCellarPotions.potionTipsy);
 				return;
 			}
 
-			final int lvl = ent.getActivePotionEffect(CellarPotions.potionTipsy).getAmplifier();
+			final int lvl = ent.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getAmplifier();
 
 			if (lvl >= 3)
 			{

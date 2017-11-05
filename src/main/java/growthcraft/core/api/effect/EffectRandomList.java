@@ -53,7 +53,7 @@ public class EffectRandomList extends AbstractEffectList
 		if (effects.size() > 0)
 		{
 			final List<String> tempList = new ArrayList<String>();
-			list.add(I18n.format("grc.effect.random_list.head"));
+			list.add(I18n.format("effect.random_list.head"));
 			for (IEffect effect : effects)
 			{
 				tempList.clear();

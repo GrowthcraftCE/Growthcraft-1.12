@@ -244,7 +244,7 @@ public class EffectWeightedRandomList extends AbstractEffect
 			if (tempList.size() > 0)
 			{
 				final float chance = totalWeight > 0 ? (float)effect.itemWeight / (float)totalWeight : 0f;
-				final String head = I18n.format("grc.effect.weighted_random_list.format", (int)(chance * 100f));
+				final String head = I18n.format("effect.weighted_random_list.format", (int)(chance * 100f));
 				Describer.compactDescription(head, list, tempList);
 			}
 		}

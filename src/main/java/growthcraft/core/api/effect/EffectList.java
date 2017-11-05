@@ -46,7 +46,7 @@ public class EffectList extends AbstractEffectList
 
 	protected void addDescriptionHead(List<String> list)
 	{
-		list.add(I18n.format("grc.effect.list.head"));
+		list.add(I18n.format("effect.list.head"));
 	}
 
 	/**

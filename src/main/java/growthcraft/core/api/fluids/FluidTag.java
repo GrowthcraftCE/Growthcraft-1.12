@@ -21,7 +21,7 @@ public class FluidTag {
 
 	public String getUnlocalizedName()
 	{
-		return "grc.fluids.tag." + getName();
+		return "fluids.tag." + getName();
 	}
 
 	public String getLocalizedName()

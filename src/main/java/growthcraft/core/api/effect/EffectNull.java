@@ -22,7 +22,7 @@ public class EffectNull extends AbstractEffect
 	protected void getActualDescription(List<String> list)
 	{
 		// Set the description as "Does Nothing."
-		list.add(I18n.format("grc.effect.null.desc"));
+		list.add(I18n.format("effect.null.desc"));
 	}
 
 	@Override

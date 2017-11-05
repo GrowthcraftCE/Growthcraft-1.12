@@ -13,3 +13,13 @@ tile.grape_vine.name=Grape Vine
 tile.grape_vine.tooltip=Grows the finest grapes
 tile.grape_vine_bush.name=Grape Vine
 tile.grape_vine_fruit.name=Grape Vine
+
+# Fluid Buckets
+item.bucket.fluid.grc.grapeWine0.name=Grape Juice Bucket
+item.bucket.fluid.grc.grapeWine1.name=Grape Wine Bucket
+item.bucket.fluid.grc.grapeWine2.name=Grape Wine Bucket
+item.bucket.fluid.grc.grapeWine3.name=Grape Wine Bucket
+item.bucket.fluid.grc.grapeWine4.name=Ambrosia Bucket
+item.bucket.fluid.grc.grapeWine5.name=Port Wine Bucket
+item.bucket.fluid.grc.grapeWine6.name=Grape Wine Bucket
+item.bucket.fluid.grc.grapeWine7.name=Grape Wine Bucket

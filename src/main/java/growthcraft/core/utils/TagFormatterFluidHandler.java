@@ -35,7 +35,7 @@ public class TagFormatterFluidHandler {
 				{
 					// If the FluidHandler has multiple tanks, then prefix them as such,
 					// otherwise, display their content like normal
-					content += TextFormatting.GRAY + I18n.format("grc.format.tank_id", tankTag.getInteger("tank_id") + 1) + " ";
+					content += TextFormatting.GRAY + I18n.format("format.tank_id", tankTag.getInteger("tank_id") + 1) + " ";
 				}
 			}
 
@@ -46,7 +46,7 @@ public class TagFormatterFluidHandler {
 				final String fluidName = UnitFormatter.fluidNameForContainer(fluidStack);
 				content = content +
 					UnitFormatter.fractionNum(fluidStack.amount, tankTag.getInteger("capacity")) +
-					TextFormatting.GRAY + " " + I18n.format("grc.format.tank.content_suffix", fluidName);
+					TextFormatting.GRAY + " " + I18n.format("format.tank.content_suffix", fluidName);
 			}
 			else
 			{

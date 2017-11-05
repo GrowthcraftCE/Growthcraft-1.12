@@ -28,7 +28,7 @@ public class GrowthcraftCellarAchievements {
 		// OPEN_ADHOC
 		
 		achievements.put(CellarAchievement.GET_DRUNK,
-				(new Achievement("grc.achievement.getDrunk", "getDrunk",
+				(new Achievement("achievement.getDrunk", "getDrunk",
 					0, -4,
 					new ItemStack( GrowthcraftCellarItems.chievItemDummy ),
 					NO_ACHIEVEMENT /*achievements.get(CellarAchievement.FERMENT_BOOZE) */)

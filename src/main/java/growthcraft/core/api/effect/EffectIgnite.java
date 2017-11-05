@@ -48,7 +48,7 @@ public class EffectIgnite extends AbstractEffect
 	@Override
 	protected void getActualDescription(List<String> list)
 	{
-		list.add(I18n.format("grc.effect.ignite.desc", time));
+		list.add(I18n.format("effect.ignite.desc", time));
 	}
 
 	@Override

@@ -6,10 +6,10 @@ import org.apache.logging.log4j.Logger;
 import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
 import growthcraft.cellar.events.CellarEvents;
-import growthcraft.cellar.init.CellarPotions;
+import growthcraft.cellar.init.GrowthcraftCellarPotions;
+import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.proxy.CommonProxy;
 import growthcraft.cellar.stats.GrowthcraftCellarAchievements;
-import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -31,12 +31,12 @@ public class GrowthcraftCellar {
     public static void preInit(FMLPreInitializationEvent event) {
     	
     	GrowthcraftModifierFunctions.registerBoozeModifierFunctions();
-        GrowthcraftGrapesItems.init();
-        GrowthcraftGrapesItems.register();
+        GrowthcraftCellarItems.init();
+        GrowthcraftCellarItems.register();
 
         proxy.registerRenders();
         GrowthcraftCellarAchievements.instance().init();
-        CellarPotions.registerPotions();
+        GrowthcraftCellarPotions.registerPotions();
     }
 
     @Mod.EventHandler

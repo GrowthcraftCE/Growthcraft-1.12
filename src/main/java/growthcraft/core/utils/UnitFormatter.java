@@ -116,7 +116,7 @@ public class UnitFormatter
 	 */
 	public static String noItem()
 	{
-		return TextFormatting.GRAY + I18n.format("grc.format.itemslot.empty");
+		return TextFormatting.GRAY + I18n.format("format.itemslot.empty");
 	}
 
 	/**
@@ -124,7 +124,7 @@ public class UnitFormatter
 	 */
 	public static String invalidItem()
 	{
-		return TextFormatting.RED + I18n.format("grc.format.itemslot.invalid");
+		return TextFormatting.RED + I18n.format("format.itemslot.invalid");
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class UnitFormatter
 	 */
 	public static String invalidFluid()
 	{
-		return TextFormatting.RED + I18n.format("grc.format.invalid_fluid");
+		return TextFormatting.RED + I18n.format("format.invalid_fluid");
 	}
 
 	/**
@@ -149,7 +149,7 @@ public class UnitFormatter
 	 */
 	public static String booleanAsState(boolean b)
 	{
-		return I18n.format("grc.format.state." + b);
+		return I18n.format("format.state." + b);
 	}
 
 	/**
@@ -158,6 +158,6 @@ public class UnitFormatter
 	 */
 	public static String booleanAsValue(boolean b)
 	{
-		return I18n.format("grc.format.value." + b);
+		return I18n.format("format.value." + b);
 	}
 }

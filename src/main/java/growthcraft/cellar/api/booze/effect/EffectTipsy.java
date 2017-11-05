@@ -102,7 +102,7 @@ public class EffectTipsy extends AbstractEffect
 	protected void getActualDescription(List<String> list)
 	{
 		final PotionEffect nausea = new PotionEffect(MobEffects.NAUSEA, getTipsyTime(), 0);
-		final String p = I18n.format("grc.cellar.format.tipsy_chance", Math.round(getTipsyChance() * 100));
+		final String p = I18n.format("format.tipsy_chance", Math.round(getTipsyChance() * 100));
 
 		String n = "";
 		if (nausea.getDuration() > 20)
