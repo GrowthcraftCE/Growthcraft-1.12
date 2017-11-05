@@ -3,14 +3,12 @@ package growthcraft.grapes.blocks;
 import growthcraft.core.blocks.BlockRopeFence;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.IGrowable;
+import net.minecraft.block.*;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -144,5 +142,14 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
         } else if ( blockUpOne instanceof BlockGrapeVineBush || blockUpOne instanceof BlockGrapeVine ) {
             // Then don't do anything.
         }
+
+        // Fixes the Villager harvest issue. Grape veins are mature plants and once planted
+        // do not need tilled land to continue to grow.
+        Block blockDownOne = worldIn.getBlockState(pos.down()).getBlock();
+        if ( blockDownOne instanceof BlockFarmland) {
+            worldIn.setBlockState(pos.down(), Blocks.DIRT.getDefaultState());
+        }
+
     }
+
 }
