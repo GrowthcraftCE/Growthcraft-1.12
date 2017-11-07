@@ -27,9 +27,13 @@ public class GrowthcraftApplesBlocks {
 
     public static BlockAppleFence blockAppleFence;
     public static BlockAppleFenceGate blockAppleFenceGate;
+
     public static BlockAppleSlabHalf blockAppleSlabHalf;
     public static BlockAppleSlabDouble blockAppleSlabDouble;
+
     public static BlockAppleStairs blockAppleStairs;
+
+    public static BlockAppleDoor blockAppleDoor;
 
 
     public static void preInit() {
@@ -40,9 +44,13 @@ public class GrowthcraftApplesBlocks {
         blockApplePlanks = new BlockApplePlanks("apple_planks");
         blockAppleFence = new BlockAppleFence("apple_fence");
         blockAppleFenceGate = new BlockAppleFenceGate("apple_fence_gate");
+
         blockAppleSlabHalf = new BlockAppleSlabHalf("apple_slab_half");
         blockAppleSlabDouble = new BlockAppleSlabDouble("apple_slab_double");
+
         blockAppleStairs = new BlockAppleStairs("apple_stairs", blockApplePlanks.getDefaultState());
+
+        blockAppleDoor = new BlockAppleDoor("apple_door");
 
         register();
     }
@@ -59,6 +67,7 @@ public class GrowthcraftApplesBlocks {
                 new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
         registerBlock(blockAppleSlabDouble, false, false);
         registerBlock(blockAppleStairs);
+        registerBlock(blockAppleDoor, true, true);
 
     }
 
@@ -71,6 +80,8 @@ public class GrowthcraftApplesBlocks {
         registerRender(blockAppleFence);
         registerRender(blockAppleFenceGate);
         registerRender(blockAppleStairs);
+        registerRender(blockAppleSlabHalf);
+        registerRender(blockAppleDoor);
     }
 
     /*

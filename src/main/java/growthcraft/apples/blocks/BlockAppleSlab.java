@@ -16,7 +16,7 @@ import net.minecraft.util.ResourceLocation;
 
 import java.util.Random;
 
-public class BlockAppleSlab extends BlockSlab {
+public abstract class BlockAppleSlab extends BlockSlab {
 
     public BlockAppleSlab(String unlocalizedName) {
         super(Material.WOOD, MapColor.WOOD);
@@ -29,11 +29,11 @@ public class BlockAppleSlab extends BlockSlab {
         this.useNeighborBrightness = true;
         Blocks.FIRE.setFireInfo(this, 5, 20);
 
-
         IBlockState state = this.blockState.getBaseState();
         if(!this.isDouble()) {
             state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
         }
+
         this.setDefaultState(state);
     }
 
