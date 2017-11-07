@@ -38,6 +38,7 @@ public class BlockAppleLog extends BlockLog {
                 break;
             case 8:
                 state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.Z);
+                break;
             default:
                 state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.NONE);
         }
@@ -47,7 +48,24 @@ public class BlockAppleLog extends BlockLog {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return 0;
+        int i = 0;
+
+        switch (state.getValue(LOG_AXIS))
+        {
+            case Y:
+                i = 0;
+                break;
+            case X:
+                i = 4;
+                break;
+            case Z:
+                i = 8;
+                break;
+            case NONE:
+                i = 12;
+        }
+
+        return i;
     }
 
     @Override
