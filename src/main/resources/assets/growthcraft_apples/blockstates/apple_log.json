@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "growthcraft_apples:apple_log" },
+    "axis=z":   { "model": "growthcraft_apples:apple_log", "x": 90 },
+    "axis=x":   { "model": "growthcraft_apples:apple_log", "x": 90, "y": 90 },
+    "axis=none": { "model": "growthcraft_apples:apple_bark" }
+  }
+}

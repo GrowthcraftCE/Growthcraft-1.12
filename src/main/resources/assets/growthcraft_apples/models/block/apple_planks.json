@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "growthcraft_hops:blocks/leaves_opaque"
+    "all": "growthcraft_apples:blocks/apple_planks"
   }
 }

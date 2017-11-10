@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_apples:blocks/apple_sapling"
+  }
+}

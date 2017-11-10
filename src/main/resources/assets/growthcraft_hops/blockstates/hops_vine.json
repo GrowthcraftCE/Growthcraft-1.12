@@ -1,12 +1,12 @@
 {
   "variants": {
-    "age=0": { "model": "growthcraft_grapes:grape_vine_stage0" },
-    "age=1": { "model": "growthcraft_grapes:grape_vine_stage0" },
-    "age=2": { "model": "growthcraft_grapes:grape_vine_stage0" },
-    "age=3": { "model": "growthcraft_grapes:grape_vine_stage0" },
-    "age=4": { "model": "growthcraft_grapes:grape_vine_stage1" },
-    "age=5": { "model": "growthcraft_grapes:grape_vine_stage1" },
-    "age=6": { "model": "growthcraft_grapes:grape_vine_stage1" },
-    "age=7": { "model": "growthcraft_grapes:grape_vine_trunk" }
+    "age=0": { "model": "growthcraft_hops:hops_vine_stage0" },
+    "age=1": { "model": "growthcraft_hops:hops_vine_stage0" },
+    "age=2": { "model": "growthcraft_hops:hops_vine_stage0" },
+    "age=3": { "model": "growthcraft_hops:hops_vine_stage0" },
+    "age=4": { "model": "growthcraft_hops:hops_vine_stage1" },
+    "age=5": { "model": "growthcraft_hops:hops_vine_stage1" },
+    "age=6": { "model": "growthcraft_hops:hops_vine_stage1" },
+    "age=7": { "model": "growthcraft_hops:hops_vine_trunk" }
   }
 }

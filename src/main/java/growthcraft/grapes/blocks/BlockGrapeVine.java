@@ -3,14 +3,12 @@ package growthcraft.grapes.blocks;
 import growthcraft.core.blocks.BlockRopeFence;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockAir;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.IGrowable;
+import net.minecraft.block.*;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -20,6 +18,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -39,6 +38,7 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setMaxAge(7);
+        this.setTickRandomly(true);
     }
 
     @Override
@@ -49,6 +49,17 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        if ( this.getAge(state) <= 3 ) {
+            return BOUNDING_BOXES[0];
+        } else if ( this.getAge(state) <= 6) {
+            return BOUNDING_BOXES[1];
+        }
+        return BOUNDING_BOXES[2];
+    }
+
+    @Nullable
+    @Override
+    public AxisAlignedBB getCollisionBoundingBox(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         if ( this.getAge(state) <= 3 ) {
             return BOUNDING_BOXES[0];
         } else if ( this.getAge(state) <= 6) {
@@ -131,5 +142,14 @@ public class BlockGrapeVine extends BlockCrops implements IGrowable {
         } else if ( blockUpOne instanceof BlockGrapeVineBush || blockUpOne instanceof BlockGrapeVine ) {
             // Then don't do anything.
         }
+
+        // Fixes the Villager harvest issue. Grape veins are mature plants and once planted
+        // do not need tilled land to continue to grow.
+        Block blockDownOne = worldIn.getBlockState(pos.down()).getBlock();
+        if ( blockDownOne instanceof BlockFarmland) {
+            worldIn.setBlockState(pos.down(), Blocks.DIRT.getDefaultState());
+        }
+
     }
+
 }

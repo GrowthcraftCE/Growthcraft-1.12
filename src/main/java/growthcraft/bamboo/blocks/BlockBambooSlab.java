@@ -9,6 +9,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -26,6 +27,8 @@ public abstract class BlockBambooSlab extends BlockSlab {
         this.setHardness(2.0F);
         this.setHarvestLevel("axe", 1);
         this.useNeighborBrightness = true;
+        Blocks.FIRE.setFireInfo(this, 5, 20);
+
 
         IBlockState state = this.blockState.getBaseState();
         if(!this.isDouble()) {

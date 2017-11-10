@@ -145,8 +145,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
      */
     private Boolean inWater() {
 
-        boolean underFluid = false;
-        boolean surroundedByFluid = false;
+        boolean underFluid = true;
 
         BlockPos[] neighborBlockPos = {
                 pos.offset(EnumFacing.NORTH),
@@ -165,6 +164,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             Block block = state.getBlock();
             if(!(block instanceof BlockStaticLiquid)) {
                 underFluid = false;
+                break;
             }
         }
 
@@ -173,10 +173,14 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
          * to have a cluster of fishtraps, but you can only branch them out horizontally.
          */
         if (underFluid == false) {
-
+            Block block0 = this.world.getBlockState(upDownNeighborBlockPos[0]).getBlock();
+            Block block1 = this.world.getBlockState(upDownNeighborBlockPos[1]).getBlock();
+            if ( block0 instanceof BlockStaticLiquid && block1 instanceof BlockStaticLiquid ) {
+                underFluid = true;
+            }
         }
 
-        return true;
+        return underFluid;
     }
 
     @Nullable

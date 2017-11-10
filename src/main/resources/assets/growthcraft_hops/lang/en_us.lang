@@ -1,4 +1,7 @@
+Hops.name=Hops
+
 item.hops.name=Hops
 item.hop_seeds.name=Hop Seeds
 
+tile.hops_bush.name=Hops
 tile.hops_vine=Hops

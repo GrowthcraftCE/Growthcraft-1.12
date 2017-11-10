@@ -4,6 +4,7 @@ import growthcraft.core.Reference;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.tileentity.TileEntityRopeKnot;
 import growthcraft.grapes.blocks.BlockGrapeVineBush;
+import growthcraft.hops.blocks.BlockHopsBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -150,7 +151,7 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider {
      */
     private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush) {
+        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush) {
             return true;
         }
         return false ;

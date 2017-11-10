@@ -101,5 +101,20 @@
      "screenshots": [],
      "dependencies": ["mod_MinecraftForge", "growthcraft"],
      "parent": "growthcraft"
-   }
+   },
+  {
+    "modid": "growthcraft_apples",
+    "name": "Growthcraft Apples",
+    "description": "Growthcraft Apples - Additional sources for Apple farming.",
+    "version": "3.0.0.4",
+    "mcversion": "1.11.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
+    "updateUrl": "",
+    "authorList": ["Alatyami"],
+    "credits": "1.7.10 IceDragon, Gwafu",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": ["mod_MinecraftForge", "growthcraft"],
+    "parent": "growthcraft"
+  }
 ]

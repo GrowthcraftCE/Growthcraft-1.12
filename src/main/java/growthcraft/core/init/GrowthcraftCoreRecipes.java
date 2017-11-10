@@ -15,7 +15,6 @@ public class GrowthcraftCoreRecipes {
 
     private static void registerCraftingRecipes() {
 
-
         Item ironIngot = Items.IRON_INGOT;
 
         // Crowbar Recipes

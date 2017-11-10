@@ -35,6 +35,7 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
+        proxy.init();
         proxy.registerSpecialRenders();
         proxy.registerModelBakeryVariants();
         GrowthcraftCoreRecipes.registerRecipes();

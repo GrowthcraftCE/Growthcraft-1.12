@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "stage=0": { "model": "growthcraft_apples:apple_sapling" },
+    "stage=1": { "model": "growthcraft_apples:apple_sapling" }
+  }
+}

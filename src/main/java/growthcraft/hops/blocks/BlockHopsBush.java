@@ -29,8 +29,9 @@ import java.util.Random;
 
 public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityProvider {
 
-    private static final AxisAlignedBB BOUNDING_BOX =
-            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+            0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
+            0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
 
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
@@ -49,6 +50,7 @@ public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityPr
                 .withProperty(SOUTH, Boolean.valueOf(false))
                 .withProperty(WEST, Boolean.valueOf(false))
         );
+        this.setTickRandomly(true);
     }
 
     public boolean hasHops(IBlockAccess world, BlockPos pos, EnumFacing facing) {
@@ -85,7 +87,7 @@ public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityPr
 
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        BlockPos[] blockPositions = new BlockPos[] { pos.north(), pos.east(), pos.south(), pos.west(), pos.down() };
+        BlockPos[] blockPositions = new BlockPos[] { pos.north(), pos.east(), pos.south(), pos.west(), pos.up() };
 
         for ( BlockPos blockPosition : blockPositions ) {
             Block block = worldIn.getBlockState(blockPosition).getBlock();
@@ -102,12 +104,19 @@ public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityPr
         return true;
     }
 
+    
+
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        Block blockUp = worldIn.getBlockState(pos.up()).getBlock();
-        if ( blockUp instanceof BlockRopeFence) {
-            worldIn.setBlockState(pos.up(), GrowthcraftHopsBlocks.hops_bush.getDefaultState());
+        BlockPos[] blockPositions = new BlockPos[] { pos.north(), pos.east(), pos.south(), pos.west(), pos.up(), pos.down() };
+
+        for ( BlockPos blockPosition : blockPositions ) {
+            Block block = worldIn.getBlockState(blockPosition).getBlock();
+            if ( block instanceof BlockRopeFence ) {
+                worldIn.setBlockState(blockPosition, GrowthcraftHopsBlocks.hops_bush.getDefaultState());
+            }
         }
+
     }
 
     @Override
@@ -164,7 +173,5 @@ public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityPr
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEntityHopsBush();
     }
-
-
 
 }

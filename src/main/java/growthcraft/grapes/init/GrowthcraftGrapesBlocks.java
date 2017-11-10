@@ -27,9 +27,9 @@ public class GrowthcraftGrapesBlocks {
     }
 
     public static void register() {
-        registerBlock(grape_vine, false, false);
-        registerBlock(grape_vine_bush, false, false);
-        registerBlock(grape_vine_fruit, false, false);
+        registerBlock(grape_vine, false, true);
+        registerBlock(grape_vine_bush, false, true);
+        registerBlock(grape_vine_fruit, false, true);
     }
 
     public static void  registerRenders() {

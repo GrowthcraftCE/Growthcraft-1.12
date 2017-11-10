@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_side",
+  "textures": {
+    "texture": "growthcraft_bamboo:blocks/block"
+  }
+}

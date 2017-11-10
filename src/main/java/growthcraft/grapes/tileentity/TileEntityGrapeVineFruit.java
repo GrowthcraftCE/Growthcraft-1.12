@@ -1,6 +1,5 @@
 package growthcraft.grapes.tileentity;
 
-import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.core.utils.GrowthcraftPlaySound;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import net.minecraft.init.SoundEvents;
@@ -128,13 +127,12 @@ public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, I
                 ItemStack stack = new ItemStack(GrowthcraftGrapesItems.grape, 1, rand.nextInt(3));
                 handler.insertItem(slot, stack, false);
                 GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 16);
-            } else {
-                GrowthcraftLogger.getLogger().info("Skipping growing becuase there is already a " + handler.getStackInSlot(slot).getUnlocalizedName());
             }
         }
         markBlockUpdate(worldIn, pos);
 
     }
+
     private void markBlockUpdate(World worldIn, BlockPos pos ) {
         worldIn.markBlockRangeForRenderUpdate(pos, pos);
         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);

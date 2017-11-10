@@ -28,9 +28,8 @@ public class GrowthcraftCoreBlocks {
 
     public static void register() {
         registerBlock(salt_block);
-        registerBlock(rope_fence, false, false);
-        registerBlock(rope_knot, false, false);
-
+        registerBlock(rope_fence, false, true);
+        registerBlock(rope_knot, false, true);
     }
 
     public static void  registerRenders() {
@@ -43,13 +42,17 @@ public class GrowthcraftCoreBlocks {
         registerBlock(block, true, true);
     }
 
-    public static void registerBlock(Block block, ItemBlock itemBlock) {
-        block.setCreativeTab(tabGrowthcraft);
+    public static void registerBlock(Block block, boolean setCreativeTab, ItemBlock itemBlock) {
         GameRegistry.register(block);
+
+        if(setCreativeTab) {
+            block.setCreativeTab(tabGrowthcraft);
+        }
+
         GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
     }
 
-    public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
+    public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock) {
         GameRegistry.register(block);
 
         if(setCreativeTab) {
