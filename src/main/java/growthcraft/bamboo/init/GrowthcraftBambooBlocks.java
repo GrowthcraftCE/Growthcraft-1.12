@@ -2,10 +2,14 @@ package growthcraft.bamboo.init;
 
 import growthcraft.bamboo.Reference;
 import growthcraft.bamboo.blocks.*;
+import growthcraft.bamboo.handler.ColorHandlerBlockBambooLeaves;
+import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
@@ -28,6 +32,7 @@ public class GrowthcraftBambooBlocks {
     public static BlockBambooLeaves bambooLeaves;
     public static BlockBambooStalk bambooStalk;
     public static BlockBambooShoot bambooShoot;
+    public static BlockBambooDoor blockBambooDoor;
 
     public static void init() {
         bambooPlank = new BlockBambooPlank();
@@ -39,6 +44,7 @@ public class GrowthcraftBambooBlocks {
         bambooLeaves = new BlockBambooLeaves("bamboo_leaves");
         bambooStalk = new BlockBambooStalk("bamboo_stalk");
         bambooShoot = new BlockBambooShoot("bamboo_shoot");
+        blockBambooDoor = new BlockBambooDoor("bamboo_door");
     }
 
     public static void register() {
@@ -51,6 +57,7 @@ public class GrowthcraftBambooBlocks {
         registerBlock(bambooLeaves);
         registerBlock(bambooStalk);
         registerBlock(bambooShoot);
+        registerBlock(blockBambooDoor, false, false);
     }
 
     public static void  registerRenders() {
@@ -62,6 +69,11 @@ public class GrowthcraftBambooBlocks {
         registerRender(bambooLeaves);
         registerRender(bambooStalk);
         registerRender(bambooShoot);
+        registerRender(blockBambooDoor);
+    }
+
+    public static void registerBlockColorHandlers() {
+        registerBlockColorHandler(blockBambooDoor);
     }
 
     /*
@@ -70,6 +82,13 @@ public class GrowthcraftBambooBlocks {
     @SideOnly(Side.CLIENT)
     public static void setCustomStateMappers() {
         ModelLoader.setCustomStateMapper(bambooFenceGate, (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void registerBlockColorHandler(Block block) {
+        GrowthcraftLogger.getLogger().info("[DEBUG::DEBUG] Registering " + block.getUnlocalizedName() + " color handlers.");
+        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+        blockColors.registerBlockColorHandler(new ColorHandlerBlockBambooLeaves(), block);
     }
 
     /**

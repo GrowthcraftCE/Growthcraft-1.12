@@ -1,7 +1,7 @@
 package growthcraft.apples.blocks;
 
 import growthcraft.apples.Reference;
-import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.apples.init.GrowthcraftApplesItems;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,11 +27,11 @@ public class BlockAppleDoor extends BlockDoor {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(GrowthcraftApplesBlocks.blockAppleDoor);
+        return GrowthcraftApplesItems.itemAppleDoor;
     }
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return new ItemStack(GrowthcraftApplesBlocks.blockAppleDoor, 1);
+        return new ItemStack(GrowthcraftApplesItems.itemAppleDoor, 1);
     }
 }

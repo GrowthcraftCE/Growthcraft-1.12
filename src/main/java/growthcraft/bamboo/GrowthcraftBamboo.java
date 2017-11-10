@@ -33,8 +33,8 @@ public class GrowthcraftBamboo {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.init();
         GrowthcraftBambooRecipes.registerRecipes();
+        proxy.init();
     }
 
     @Mod.EventHandler

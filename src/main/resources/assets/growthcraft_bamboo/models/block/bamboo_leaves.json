@@ -1,7 +1,7 @@
 {
   "parent": "block/leaves",
   "textures": {
-    "0": "growthcraft_bamboo:blocks/leaves",
+    "all": "growthcraft_bamboo:blocks/leaves",
     "particle": "growthcraft_bamboo:blocks/leaves"
   },
   "elements": [
@@ -10,12 +10,12 @@
       "from": [ 0.0, 0.0, 0.0 ],
       "to":   [ 16.0, 16.0, 16.0 ],
       "faces": {
-        "north": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "tintindex": 0 },
-        "east":  { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "tintindex": 0 },
-        "south": { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "tintindex": 0 },
-        "west":  { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "tintindex": 0 },
-        "up":    { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "tintindex": 0 },
-        "down":  { "texture": "#0", "uv": [ 0.0, 0.0, 16.0, 16.0 ], "tintindex": 0 }
+        "down":  { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "down", "tintindex": 0 },
+        "up":    { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "up", "tintindex": 0  },
+        "north": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "north", "tintindex": 0  },
+        "south": { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "south", "tintindex": 0  },
+        "west":  { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "west", "tintindex": 0  },
+        "east":  { "uv": [ 0, 0, 16, 16 ], "texture": "#all", "cullface": "east", "tintindex": 0  }
       }
     }
   ]
