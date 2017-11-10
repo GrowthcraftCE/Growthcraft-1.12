@@ -22,69 +22,60 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftApplesBlocks {
 
-    public static BlockAppleSapling blockAppleSapling;
-    public static BlockAppleLog blockAppleLog;
-    public static BlockAppleLeaves blockAppleLeaves;
     public static BlockApple blockApple;
-    public static BlockApplePlanks blockApplePlanks;
-
+    public static BlockAppleDoor blockAppleDoor;
     public static BlockAppleFence blockAppleFence;
     public static BlockAppleFenceGate blockAppleFenceGate;
-
+    public static BlockAppleLeaves blockAppleLeaves;
+    public static BlockAppleLog blockAppleLog;
+    public static BlockApplePlanks blockApplePlanks;
+    public static BlockAppleSapling blockAppleSapling;
     public static BlockAppleSlabHalf blockAppleSlabHalf;
     public static BlockAppleSlabDouble blockAppleSlabDouble;
-
     public static BlockAppleStairs blockAppleStairs;
 
-    public static BlockAppleDoor blockAppleDoor;
-
-
     public static void preInit() {
-        blockAppleSapling = new BlockAppleSapling("apple_sapling");
-        blockAppleLog = new BlockAppleLog("apple_log");
-        blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
         blockApple = new BlockApple("apple_crop");
-        blockApplePlanks = new BlockApplePlanks("apple_planks");
+        blockAppleDoor = new BlockAppleDoor("apple_door");
         blockAppleFence = new BlockAppleFence("apple_fence");
         blockAppleFenceGate = new BlockAppleFenceGate("apple_fence_gate");
-
+        blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
+        blockAppleLog = new BlockAppleLog("apple_log");
+        blockApplePlanks = new BlockApplePlanks("apple_planks");
+        blockAppleSapling = new BlockAppleSapling("apple_sapling");
         blockAppleSlabHalf = new BlockAppleSlabHalf("apple_slab_half");
         blockAppleSlabDouble = new BlockAppleSlabDouble("apple_slab_double");
-
         blockAppleStairs = new BlockAppleStairs("apple_stairs", blockApplePlanks.getDefaultState());
-
-        blockAppleDoor = new BlockAppleDoor("apple_door");
-
+        // Register the blocks
         register();
     }
 
     public static void register() {
-        registerBlock(blockAppleSapling);
-        registerBlock(blockAppleLog);
-        registerBlock(blockAppleLeaves);
         registerBlock(blockApple, false, false);
-        registerBlock(blockApplePlanks);
+        registerBlock(blockAppleDoor, false, false);
         registerBlock(blockAppleFence);
         registerBlock(blockAppleFenceGate);
+        registerBlock(blockAppleLeaves);
+        registerBlock(blockAppleLog);
+        registerBlock(blockApplePlanks);
+        registerBlock(blockAppleSapling);
         registerBlock(blockAppleSlabHalf,
                 new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
         registerBlock(blockAppleSlabDouble, false, false);
         registerBlock(blockAppleStairs);
-        registerBlock(blockAppleDoor, false, false);
-
     }
 
     public static void registerRenders() {
-        registerRender(blockAppleSapling);
-        registerRender(blockAppleLog);
-        registerRender(blockAppleLeaves);
         registerRender(blockApple);
-        registerRender(blockApplePlanks);
+        registerRender(blockAppleDoor);
         registerRender(blockAppleFence);
         registerRender(blockAppleFenceGate);
+        registerRender(blockAppleLeaves);
+        registerRender(blockAppleLog);
+        registerRender(blockAppleSapling);
+        registerRender(blockApplePlanks);
         registerRender(blockAppleStairs);
         registerRender(blockAppleSlabHalf);
-        registerRender(blockAppleDoor);
     }
 
     public static void registerBlockColorHandlers() {

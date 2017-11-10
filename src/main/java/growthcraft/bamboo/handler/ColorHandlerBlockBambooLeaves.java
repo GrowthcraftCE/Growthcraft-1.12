@@ -7,17 +7,23 @@ import net.minecraft.world.IBlockAccess;
 
 import javax.annotation.Nullable;
 
-public class LeavesColorHandler implements IBlockColor {
+public class ColorHandlerBlockBambooLeaves implements IBlockColor {
 
-    public LeavesColorHandler() {
+    public ColorHandlerBlockBambooLeaves() {
 
     }
 
     @Override
     public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
-        int color = 0xbbd284;
-
-
+        int color = 0;
+        switch ( tintIndex ) {
+            case 0:
+                color = 6192150;
+                break;
+            case 1:
+                color = 0xbbd284;
+                break;
+        }
         return color;
     }
 }
