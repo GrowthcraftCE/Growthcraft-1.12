@@ -70,7 +70,7 @@ public class GrowthcraftApplesBlocks {
                 new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
         registerBlock(blockAppleSlabDouble, false, false);
         registerBlock(blockAppleStairs);
-        registerBlock(blockAppleDoor, true, true);
+        registerBlock(blockAppleDoor, false, false);
 
     }
 
@@ -103,7 +103,6 @@ public class GrowthcraftApplesBlocks {
         BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
         blockColors.registerBlockColorHandler(new GrowthcraftApplesColorHandler(), block);
     }
-
 
     /* No need to edit below */
 

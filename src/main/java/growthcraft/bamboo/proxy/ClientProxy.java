@@ -14,6 +14,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
+        GrowthcraftBambooBlocks.registerBlockColorHandlers();
+
         registerModelBakeryVariants();
         registerSpecialRenders();
     }
@@ -26,11 +28,11 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-
+        // Not needed at this time.
     }
 
     @Override
     public void registerSpecialRenders() {
-
+        // Not needed at this time.
     }
 }

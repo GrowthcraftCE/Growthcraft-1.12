@@ -1,6 +1,7 @@
 package growthcraft.apples.proxy;
 
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.apples.init.GrowthcraftApplesItems;
 
 public class ClientProxy extends CommonProxy {
 
@@ -12,7 +13,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-
         GrowthcraftApplesBlocks.registerBlockColorHandlers();
 
         registerModelBakeryVariants();
@@ -22,6 +22,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenders() {
         GrowthcraftApplesBlocks.registerRenders();
+        GrowthcraftApplesItems.registerRenders();
     }
 
     @Override

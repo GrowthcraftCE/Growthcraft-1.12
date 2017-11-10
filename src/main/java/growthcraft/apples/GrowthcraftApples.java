@@ -1,6 +1,7 @@
 package growthcraft.apples;
 
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
+import growthcraft.apples.init.GrowthcraftApplesItems;
 import growthcraft.apples.init.GrowthcraftApplesRecipes;
 import growthcraft.apples.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -21,7 +22,7 @@ public class GrowthcraftApples {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         GrowthcraftApplesBlocks.preInit();
-
+        GrowthcraftApplesItems.preInit();
         proxy.preInit();
     }
 
@@ -29,7 +30,6 @@ public class GrowthcraftApples {
     public static void init(FMLInitializationEvent event) {
         GrowthcraftApplesRecipes.registerRecipes();
         proxy.init();
-
     }
 
     @Mod.EventHandler
