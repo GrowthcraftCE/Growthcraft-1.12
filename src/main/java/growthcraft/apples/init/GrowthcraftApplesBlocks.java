@@ -2,10 +2,13 @@ package growthcraft.apples.init;
 
 import growthcraft.apples.Reference;
 import growthcraft.apples.blocks.*;
+import growthcraft.apples.handlers.GrowthcraftApplesColorHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
+import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
@@ -84,6 +87,9 @@ public class GrowthcraftApplesBlocks {
         registerRender(blockAppleDoor);
     }
 
+    public static void registerBlockColorHandlers() {
+        registerBlockColorHandler(blockAppleLeaves);
+    }
     /*
      * Credit to CJMinecraft for identifying how to ignore properties.
      */
@@ -91,6 +97,13 @@ public class GrowthcraftApplesBlocks {
     public static void setCustomStateMappers() {
         ModelLoader.setCustomStateMapper(blockAppleFenceGate, (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
     }
+
+    @SideOnly(Side.CLIENT)
+    public static void registerBlockColorHandler(Block block) {
+        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+        blockColors.registerBlockColorHandler(new GrowthcraftApplesColorHandler(), block);
+    }
+
 
     /* No need to edit below */
 
