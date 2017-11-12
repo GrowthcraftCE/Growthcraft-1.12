@@ -1,8 +1,10 @@
 package growthcraft.milk;
 
+import growthcraft.milk.handlers.EntityDropsHandler;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.proxy.CommonProxy;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -37,6 +39,7 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new EntityDropsHandler());
     }
 
 
