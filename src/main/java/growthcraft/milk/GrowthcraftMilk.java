@@ -2,9 +2,11 @@ package growthcraft.milk;
 
 import growthcraft.milk.handlers.EntityDropsHandler;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.proxy.CommonProxy;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -22,6 +24,10 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        FluidRegistry.enableUniversalBucket();
+
+        GrowthcraftMilkFluids.init();
+        GrowthcraftMilkFluids.register();
 
         GrowthcraftMilkBlocks.init();
         GrowthcraftMilkItems.init();

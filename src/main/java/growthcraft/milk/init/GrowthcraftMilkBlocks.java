@@ -1,6 +1,8 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
+import growthcraft.milk.blocks.BlockFluidMilk;
+import growthcraft.milk.blocks.BlockFluidRennet;
 import growthcraft.milk.blocks.BlockThistle;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -15,17 +17,25 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftMilkBlocks {
 
     public static Block thistle;
+    public static BlockFluidMilk blockFluidMilk;
+    public static BlockFluidRennet blockFluidRennet;
 
     public static void init() {
         thistle = new BlockThistle("thistle");
+        blockFluidMilk = new BlockFluidMilk("fluid_milk");
+       blockFluidRennet = new BlockFluidRennet("fluid_rennet");
     }
 
     public static void register() {
         registerBlock(thistle, false, false);
+        registerBlock(blockFluidMilk, true, true);
+        registerBlock(blockFluidRennet, true, true);
     }
 
     public static void  registerRenders() {
         registerRender(thistle);
+        //registerRender(blockFluidMilk);
+        //registerRender(blockFluidRennet);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
@@ -54,5 +64,7 @@ public class GrowthcraftMilkBlocks {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
+
+
 
 }
