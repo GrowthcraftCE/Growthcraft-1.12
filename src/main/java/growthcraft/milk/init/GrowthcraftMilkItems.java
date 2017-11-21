@@ -17,6 +17,12 @@ public class GrowthcraftMilkItems {
     public static Item itemStomach;
     public static Item thistle_seed;
     public static Item thistle;
+    // TODO: ItemButter
+    // TODO: ItemCheeseSlice w/ meta
+    // TODO: ItemIceCream w/ meta 
+    // TODO: ItemYogurt w/ meta
+    // TODO: ItemCheeseCloth
+    // TODO: ItemStarterCulture
 
     public static void init() {
         thistle = new ItemThistle("thistle");

@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "fluid_butter_milk": [
+      {
+        "custom": {
+          "fluid": "fluid_butter_milk"
+        }
+      }
+    ]
+  }
+}

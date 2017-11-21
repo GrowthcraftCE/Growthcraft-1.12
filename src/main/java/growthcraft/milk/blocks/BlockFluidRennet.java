@@ -8,13 +8,15 @@ import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
+import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
+
 public class BlockFluidRennet extends BlockFluidClassic {
 
     public BlockFluidRennet(String unlocalizedName) {
         super(GrowthcraftMilkFluids.fluidRennet, Material.WATER);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
-
+        this.setCreativeTab(tabGrowthcraft);
     }
 
     @Override

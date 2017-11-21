@@ -1,9 +1,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
-import growthcraft.milk.blocks.BlockFluidMilk;
-import growthcraft.milk.blocks.BlockFluidRennet;
-import growthcraft.milk.blocks.BlockThistle;
+import growthcraft.milk.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -19,23 +17,46 @@ public class GrowthcraftMilkBlocks {
     public static Block thistle;
     public static BlockFluidMilk blockFluidMilk;
     public static BlockFluidRennet blockFluidRennet;
+    public static BlockFluidButterMilk blockFluidButterMilk;
+    public static BlockFluidCream blockFluidCream;
+    public static BlockFluidMilkCurds blockFluidMilkCurds;
+    public static BlockFluidPasteurizedMilk blockFluidPasteurizedMilk;
+    public static BlockFluidSkimMilk blockFluidSkimMilk;
+    public static BlockFluidWhey blockFluidWhey;
+
+    // TODO: BlockButterChurn
+    // TODO: BlockCheese
+    // TODO: BlockCheesePress
+    // TODO: BlockCheeseCurds
+    // TODO: BlockPancheon
+    // TODO: Issue #49 - BlockCultureJar
 
     public static void init() {
         thistle = new BlockThistle("thistle");
         blockFluidMilk = new BlockFluidMilk("fluid_milk");
-       blockFluidRennet = new BlockFluidRennet("fluid_rennet");
+        blockFluidRennet = new BlockFluidRennet("fluid_rennet");
+        blockFluidButterMilk = new BlockFluidButterMilk("fluid_butter_milk");
+        blockFluidCream = new BlockFluidCream("fluid_cream");
+        blockFluidMilkCurds = new BlockFluidMilkCurds("fluid_milk_curds");
+        blockFluidPasteurizedMilk = new BlockFluidPasteurizedMilk("fluid_pasteurized_milk");
+        blockFluidSkimMilk = new BlockFluidSkimMilk("fluid_skim_milk");
+        blockFluidWhey = new BlockFluidWhey("fluid_whey");
     }
 
     public static void register() {
         registerBlock(thistle, false, false);
-        registerBlock(blockFluidMilk, true, true);
-        registerBlock(blockFluidRennet, true, true);
+        registerBlock(blockFluidMilk, true, false);
+        registerBlock(blockFluidRennet, true, false);
+        registerBlock(blockFluidButterMilk, true, false);
+        registerBlock(blockFluidCream, true, false);
+        registerBlock(blockFluidMilkCurds, true, false);
+        registerBlock(blockFluidPasteurizedMilk, true, false);
+        registerBlock(blockFluidSkimMilk, true, false);
+        registerBlock(blockFluidWhey, true, false);
     }
 
     public static void  registerRenders() {
         registerRender(thistle);
-        //registerRender(blockFluidMilk);
-        //registerRender(blockFluidRennet);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
@@ -64,7 +85,4 @@ public class GrowthcraftMilkBlocks {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
-
-
-
 }

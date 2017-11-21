@@ -22,9 +22,12 @@ public class GrowthcraftMilk {
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        FluidRegistry.enableUniversalBucket();
 
         GrowthcraftMilkFluids.init();
         GrowthcraftMilkFluids.register();

@@ -1,7 +1,16 @@
+fluid.fluid_milk=Milk
+fluid.fluid_rennet=Rennet
+fluid.fluid_butter_milk=Butter Milk
+fluid.fluid_cream=Cream
+fluid.fluid_milk_curds=Milk Curds
+fluid.fluid_skim_milk=Skim Milk
+fluid.fluid_whey=Whey
+fluid.fluid_pasteurized_milk=Pasteurized Milk
 
 item.thistle.name=Thistle
 item.thistle.tooltip=Used to make rennet
 item.thistle_seed.name=Thistle
+
 tile.milk.name=Milk
 tile.rennet.name=Rennet
 tile.thistle.name=Thistle

@@ -10,10 +10,10 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
-public class BlockFluidMilk extends BlockFluidClassic {
+public class BlockFluidPasteurizedMilk extends BlockFluidClassic {
 
-    public BlockFluidMilk(String unlocalizedName) {
-        super(GrowthcraftMilkFluids.fluidMilk, Material.WATER);
+    public BlockFluidPasteurizedMilk(String unlocalizedName) {
+        super(GrowthcraftMilkFluids.fluidPasteurizedMilk, Material.WATER);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setCreativeTab(tabGrowthcraft);
@@ -23,4 +23,5 @@ public class BlockFluidMilk extends BlockFluidClassic {
     public EnumBlockRenderType getRenderType(IBlockState state) {
         return EnumBlockRenderType.MODEL;
     }
+
 }
