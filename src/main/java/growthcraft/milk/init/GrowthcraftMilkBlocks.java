@@ -15,6 +15,7 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftMilkBlocks {
 
     public static Block thistle;
+    public static Block blockCheeseVat;
     public static BlockFluidMilk blockFluidMilk;
     public static BlockFluidRennet blockFluidRennet;
     public static BlockFluidButterMilk blockFluidButterMilk;
@@ -23,16 +24,16 @@ public class GrowthcraftMilkBlocks {
     public static BlockFluidPasteurizedMilk blockFluidPasteurizedMilk;
     public static BlockFluidSkimMilk blockFluidSkimMilk;
     public static BlockFluidWhey blockFluidWhey;
+    public static BlockPancheon blockPancheon;
 
     // TODO: BlockButterChurn
     // TODO: BlockCheese
     // TODO: BlockCheesePress
     // TODO: BlockCheeseCurds
-    // TODO: BlockPancheon
-    // TODO: Issue #49 - BlockCultureJar
 
     public static void init() {
         thistle = new BlockThistle("thistle");
+        blockCheeseVat = new BlockCheeseVat("cheese_vat");
         blockFluidMilk = new BlockFluidMilk("fluid_milk");
         blockFluidRennet = new BlockFluidRennet("fluid_rennet");
         blockFluidButterMilk = new BlockFluidButterMilk("fluid_butter_milk");
@@ -41,10 +42,12 @@ public class GrowthcraftMilkBlocks {
         blockFluidPasteurizedMilk = new BlockFluidPasteurizedMilk("fluid_pasteurized_milk");
         blockFluidSkimMilk = new BlockFluidSkimMilk("fluid_skim_milk");
         blockFluidWhey = new BlockFluidWhey("fluid_whey");
+        blockPancheon = new BlockPancheon("pancheon");
     }
 
     public static void register() {
         registerBlock(thistle, false, false);
+        registerBlock(blockCheeseVat, true, true);
         registerBlock(blockFluidMilk, true, false);
         registerBlock(blockFluidRennet, true, false);
         registerBlock(blockFluidButterMilk, true, false);
@@ -53,10 +56,13 @@ public class GrowthcraftMilkBlocks {
         registerBlock(blockFluidPasteurizedMilk, true, false);
         registerBlock(blockFluidSkimMilk, true, false);
         registerBlock(blockFluidWhey, true, false);
+        registerBlock(blockPancheon, true, true);
     }
 
     public static void  registerRenders() {
         registerRender(thistle);
+        registerRender(blockCheeseVat);
+        registerRender(blockPancheon);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {

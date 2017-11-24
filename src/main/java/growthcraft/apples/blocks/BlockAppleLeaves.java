@@ -2,7 +2,10 @@ package growthcraft.apples.blocks;
 
 import growthcraft.apples.Reference;
 import growthcraft.apples.init.GrowthcraftApplesBlocks;
-import net.minecraft.block.*;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockAir;
+import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
@@ -78,10 +81,7 @@ public class BlockAppleLeaves extends Block implements IGrowable {
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
         Block block = worldIn.getBlockState(pos.down()).getBlock();
-        if ( block instanceof BlockAir) {
-            return true;
-        }
-        return false;
+        return block instanceof BlockAir;
     }
 
     @Override

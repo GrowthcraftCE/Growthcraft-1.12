@@ -6,7 +6,6 @@ import growthcraft.grapes.blocks.BlockGrapeVineBush;
 import growthcraft.hops.blocks.BlockHopsBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -87,19 +86,13 @@ public class BlockRopeFence extends Block {
 
     private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush  || BlockHopsBush.class.isInstance(block)) {
-            return true;
-        }
-        return false ;
+        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || BlockHopsBush.class.isInstance(block);
     }
 
     @Override
     public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos).getBlock();
-        if ( BlockRopeFence.class.isInstance(block)) {
-            return true;
-        }
-        return false ;
+        return BlockRopeFence.class.isInstance(block);
     }
 
     @Override
@@ -114,7 +107,7 @@ public class BlockRopeFence extends Block {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] { NORTH, EAST, SOUTH, WEST, UP, DOWN } );
+        return new BlockStateContainer(this, NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
     @Override

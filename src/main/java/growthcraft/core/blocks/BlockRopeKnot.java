@@ -9,7 +9,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -151,19 +150,13 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider {
      */
     private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush) {
-            return true;
-        }
-        return false ;
+        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
     }
 
     @Override
     public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        if ( block instanceof BlockRopeFence || block instanceof BlockRopeKnot) {
-            return true;
-        }
-        return false ;
+        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot;
     }
 
     @Override
@@ -178,7 +171,7 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] { NORTH, EAST, SOUTH, WEST, UP, DOWN } );
+        return new BlockStateContainer(this, NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
     @Override

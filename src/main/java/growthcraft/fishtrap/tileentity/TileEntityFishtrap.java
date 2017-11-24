@@ -172,7 +172,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
          * If underFluid is still false, then let's see if there is fluid on the .UP and the .DOWN. This will allow you
          * to have a cluster of fishtraps, but you can only branch them out horizontally.
          */
-        if (underFluid == false) {
+        if (!underFluid) {
             Block block0 = this.world.getBlockState(upDownNeighborBlockPos[0]).getBlock();
             Block block1 = this.world.getBlockState(upDownNeighborBlockPos[1]).getBlock();
             if ( block0 instanceof BlockStaticLiquid && block1 instanceof BlockStaticLiquid ) {
