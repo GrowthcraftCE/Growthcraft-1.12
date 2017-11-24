@@ -1,6 +1,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
+import growthcraft.milk.items.ItemCheeseCloth;
 import growthcraft.milk.items.ItemSeedThistle;
 import growthcraft.milk.items.ItemStomach;
 import growthcraft.milk.items.ItemThistle;
@@ -17,29 +18,32 @@ public class GrowthcraftMilkItems {
     public static Item itemStomach;
     public static Item thistle_seed;
     public static Item thistle;
+    public static Item itemCheeseCloth;
     // TODO: ItemButter
     // TODO: ItemCheeseSlice w/ meta
     // TODO: ItemIceCream w/ meta 
     // TODO: ItemYogurt w/ meta
-    // TODO: ItemCheeseCloth
     // TODO: ItemStarterCulture
 
     public static void init() {
         thistle = new ItemThistle("thistle");
         thistle_seed = new ItemSeedThistle("thistle_seed");
         itemStomach = new ItemStomach("stomach");
+        itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
     }
 
     public static void register() {
         registerItem(thistle);
         registerItem(thistle_seed);
         registerItem(itemStomach);
+        registerItem(itemCheeseCloth);
     }
 
     public static void registerRenders() {
         registerRender(thistle);
         registerRender(thistle_seed);
         registerRender(itemStomach);
+        registerRender(itemCheeseCloth);
     }
 
     public static void registerItem(Item item) {
