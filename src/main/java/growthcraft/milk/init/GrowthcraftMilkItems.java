@@ -1,6 +1,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
+import growthcraft.milk.handlers.EnumHandler;
 import growthcraft.milk.items.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -16,7 +17,7 @@ public class GrowthcraftMilkItems {
     public static Item thistle_seed;
     public static Item thistle;
     public static Item itemCheeseCloth;
-    // TODO: ItemButter
+    public static Item itemButter;
     // TODO: ItemCheeseSlice w/ meta
     // TODO: ItemIceCream w/ meta 
     // TODO: ItemYogurt w/ meta
@@ -28,6 +29,7 @@ public class GrowthcraftMilkItems {
         itemStomach = new ItemStomach("stomach");
         itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
         itemStarterCulture = new ItemStarterCulture("starter_culture");
+        itemButter = new ItemButter("butter", 2, 0.3F, false);
     }
 
     public static void register() {
@@ -36,6 +38,7 @@ public class GrowthcraftMilkItems {
         registerItem(itemStomach);
         registerItem(itemCheeseCloth);
         registerItem(itemStarterCulture);
+        registerItem(itemButter);
     }
 
     public static void registerRenders() {
@@ -44,6 +47,10 @@ public class GrowthcraftMilkItems {
         registerRender(itemStomach);
         registerRender(itemCheeseCloth);
         registerRender(itemStarterCulture);
+
+        for (int i = 0; i < EnumHandler.ButterTypes.values().length; i++) {
+            registerRender(itemButter, i, "butter_" + EnumHandler.ButterTypes.values()[i].getName());
+        }
     }
 
     public static void registerItem(Item item) {

@@ -7,6 +7,9 @@ fluid.fluid_skim_milk=Skim Milk
 fluid.fluid_whey=Whey
 fluid.fluid_pasteurized_milk=Pasteurized Milk
 
+item.butter.tooltip=Used for baking
+item.butter.salted.name=Butter (Salted)
+item.butter.unsalted.name=Butter (Unsalted)
 item.thistle.name=Thistle
 item.thistle.tooltip=Used to make rennet
 item.thistle_seed.name=Thistle
