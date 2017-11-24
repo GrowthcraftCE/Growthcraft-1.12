@@ -1,10 +1,7 @@
 package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
-import growthcraft.milk.items.ItemCheeseCloth;
-import growthcraft.milk.items.ItemSeedThistle;
-import growthcraft.milk.items.ItemStomach;
-import growthcraft.milk.items.ItemThistle;
+import growthcraft.milk.items.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -23,13 +20,14 @@ public class GrowthcraftMilkItems {
     // TODO: ItemCheeseSlice w/ meta
     // TODO: ItemIceCream w/ meta 
     // TODO: ItemYogurt w/ meta
-    // TODO: ItemStarterCulture
+    public static Item itemStarterCulture;
 
     public static void init() {
         thistle = new ItemThistle("thistle");
         thistle_seed = new ItemSeedThistle("thistle_seed");
         itemStomach = new ItemStomach("stomach");
         itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
+        itemStarterCulture = new ItemStarterCulture("starter_culture");
     }
 
     public static void register() {
@@ -37,6 +35,7 @@ public class GrowthcraftMilkItems {
         registerItem(thistle_seed);
         registerItem(itemStomach);
         registerItem(itemCheeseCloth);
+        registerItem(itemStarterCulture);
     }
 
     public static void registerRenders() {
@@ -44,6 +43,7 @@ public class GrowthcraftMilkItems {
         registerRender(thistle_seed);
         registerRender(itemStomach);
         registerRender(itemCheeseCloth);
+        registerRender(itemStarterCulture);
     }
 
     public static void registerItem(Item item) {
