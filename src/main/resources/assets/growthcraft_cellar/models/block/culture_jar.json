@@ -1,0 +1,505 @@
+﻿{
+  "ambientocclusion": true,
+  "textures": {
+    "0": "growthcraft_cellar:blocks/culture_jar",
+    "particle": "growthcraft_cellar:blocks/culture_jar"
+  },
+  "elements": [
+    {
+      "name": "base",
+      "from": [
+        7,
+        0,
+        7
+      ],
+      "to": [
+        9,
+        1,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            10.5,
+            2,
+            11
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            10.5,
+            2,
+            11
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0,
+            10.5,
+            2,
+            11
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            10.5,
+            2,
+            11
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "south_side",
+      "from": [
+        6,
+        0,
+        9
+      ],
+      "to": [
+        10,
+        5,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "north_side",
+      "from": [
+        6,
+        0,
+        6
+      ],
+      "to": [
+        10,
+        5,
+        7
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "west_side",
+      "from": [
+        6,
+        0,
+        7
+      ],
+      "to": [
+        7,
+        5,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            2,
+            8.5,
+            3,
+            10.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "east_side",
+      "from": [
+        9,
+        0,
+        7
+      ],
+      "to": [
+        10,
+        5,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        },
+        "east": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        },
+        "south": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        },
+        "west": {
+          "uv": [
+            2,
+            8.5,
+            4,
+            10.5
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [
+            2,
+            8.5,
+            3,
+            10.5
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        },
+        "down": {
+          "uv": [
+            2,
+            8.5,
+            3,
+            10.5
+          ],
+          "texture": "#0",
+          "cullface": "down"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "inner_cork",
+      "from": [
+        7,
+        4.5,
+        7
+      ],
+      "to": [
+        9,
+        5,
+        9
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            1,
+            0,
+            3,
+            0.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            1,
+            0,
+            3,
+            0.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            1,
+            0,
+            3,
+            0.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            1,
+            0,
+            3,
+            0.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            1,
+            0,
+            3,
+            2
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1,
+            0,
+            2,
+            1
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "outer_cork",
+      "from": [
+        6,
+        5,
+        6
+      ],
+      "to": [
+        10,
+        5.5,
+        10
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            1,
+            1.5,
+            1.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            1,
+            1.5,
+            1.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0,
+            1,
+            1.5,
+            1.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            1,
+            1.5,
+            1.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0,
+            1,
+            1.5,
+            1.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            1,
+            0,
+            2,
+            1
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    }
+  ]
+}

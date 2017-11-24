@@ -1,6 +1,8 @@
 package growthcraft.cellar;
 
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.proxy.CommonProxy;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -15,12 +17,20 @@ public class GrowthcraftCellar {
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        //GrowthcraftGrapesItems.init();
-        //GrowthcraftGrapesItems.register();
+        // Fluids First
 
-        proxy.registerRenders();
+
+        GrowthcraftCellarBlocks.init();
+
+        GrowthcraftCellarBlocks.register();
+
+        proxy.preInit();
     }
 
     @Mod.EventHandler
@@ -30,6 +40,6 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-
+        // Any custom event buses
     }
 }
