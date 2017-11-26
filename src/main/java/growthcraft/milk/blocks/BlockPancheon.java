@@ -14,6 +14,10 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.List;
 
+/**
+ * The pancheon is used for making Skim Milk and Cream. Placing one bucket
+ * of milk into the pancheon will, after time, result in ...
+ */
 public class BlockPancheon extends Block {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
@@ -44,6 +48,11 @@ public class BlockPancheon extends Block {
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 }
