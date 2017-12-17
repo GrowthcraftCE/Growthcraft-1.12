@@ -17,7 +17,6 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerBrewKettle extends Container {
 
     private final TileEntityBrewKettle tileBrewKettle;
-    //private final Slot slot;
 
     public ContainerBrewKettle(IInventory inventory, TileEntityBrewKettle tileBrewKettle) {
 

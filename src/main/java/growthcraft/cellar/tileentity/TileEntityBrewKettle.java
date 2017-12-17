@@ -7,6 +7,7 @@ import growthcraft.hops.items.ItemHops;
 import net.minecraft.block.BlockFire;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -16,8 +17,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -34,15 +37,14 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
     private boolean heated;
 
     private ItemStackHandler itemStackHandlerInput;
-    //private ItemStackHandler itemStackHandlerOutput;
 
-    private IFluidHandler fluidHandlerInput;
-    //private IFluidHandler fluidHandlerOutput;
+    private FluidTank inputFiludTank;
+    private FluidHandlerItemStack fluidHandlerOutput;
 
     public TileEntityBrewKettle() {
         itemStackHandlerInput = new ItemStackHandler(1);
-        //itemStackHandlerOutput = new ItemStackHandler(1);
-
+        fluidHandlerOutput = new FluidHandlerItemStack(new ItemStack(Items.BUCKET), 5000);
+        inputFiludTank = new FluidTank(5000);
         // 2000 ticks = 100 seconds
         this.maxBrewTime = 2000;
         this.heated = false;
@@ -58,6 +60,15 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
         return (int) percentage;
     }
 
+    public int getInputFluidAmount() {
+        return inputFiludTank.getFluidAmount();
+    }
+
+    public void addFluid(FluidStack fluid) {
+        fluidHandlerOutput.fill(fluid, true);
+        //GrowthcraftLogger.getLogger().info("Fluid Tank contains: " + fluidHandlerOutput.getFluid().amount);
+    }
+
     public boolean isHeated() {
         if (world.getBlockState(pos.down()).getBlock() instanceof BlockFire) {
             return true;
@@ -65,10 +76,10 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
         return heated;
     }
 
+
     private boolean canCook() {
         ItemStack inputStack = this.itemStackHandlerInput.getStackInSlot(0);
-        // TODO: Check for the inputFluidTank.
-        return inputStack.getItem() instanceof ItemHops;
+        return inputStack.getItem() instanceof ItemHops && inputFiludTank.getFluidAmount() >= 1000;
     }
 
 
@@ -92,15 +103,13 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
         if (this.heated && !inputStack.isEmpty() && this.canCook()) {
             this.brewTime += 1;
 
-            //GrowthcraftLogger.getLogger().info("We are cooking: brewTime(" + brewTime + ") maxBrewTime" + maxBrewTime + ")");
-
             if (this.brewTime == this.maxBrewTime) {
                 // Decrease the input stack by one item.
                 itemStackHandlerInput.getStackInSlot(0).shrink(1);
 
-                // TODO: Decrease the fluid in the input FluidTank
+                // TODO: Decrease the fluid in the input FluidTank by one bucket
 
-                // TODO: Increase the fluid in the output FluidTank
+                // TODO: Increase the fluid in the output FluidTank by one bucket
 
                 // Reset the cooking timers
                 this.brewTime = 0;
@@ -124,7 +133,7 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             //if (facing != null) {
-            //return (T) new CombinedInvWrapper(itemStackHandlerInput, itemStackHandlerOutput);
+            //return (T) new CombinedInvWrapper(itemStackHandlerInput, fluidHandlerOutput);
             return (T) new CombinedInvWrapper(itemStackHandlerInput);
 
             //}
@@ -132,7 +141,7 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
         if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
             //if (facing != null) {
             //return (T) new CombinedInvWrapper(itemStackHandlerInput, itemStackHandlerOutput);
-            return (T) new CombinedInvWrapper(itemStackHandlerInput);
+            return (T) new CombinedInvWrapper(fluidHandlerOutput);
 
             //}
         }
@@ -150,7 +159,7 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
     public void readFromNBT(NBTTagCompound compound) {
         this.brewTime = compound.getInteger("brewTime");
         this.maxBrewTime = compound.getInteger("maxBrewTime");
-        //this.itemStackHandlerOutput.deserializeNBT(compound.getCompoundTag("inventoryOutput"));
+        this.fluidHandlerOutput.deserializeNBT(compound.getCompoundTag("inventoryOutput"));
         this.itemStackHandlerInput.deserializeNBT(compound.getCompoundTag("inventoryInput"));
         super.readFromNBT(compound);
     }
@@ -197,9 +206,5 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
         this.writeToNBT(compound);
         return compound;
     }
-
-
-    // TODO: setup setField and getField these are needed to update the progress bar in real time.
-    // https://github.com/TheGreyGhost/MinecraftByExample/tree/master/src/main/java/minecraftbyexample/mbe31_inventory_furnace
 
 }

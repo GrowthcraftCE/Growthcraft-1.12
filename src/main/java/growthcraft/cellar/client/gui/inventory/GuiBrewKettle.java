@@ -84,7 +84,11 @@ public class GuiBrewKettle extends GuiContainer {
         // If the mouse is over the progress bar ...
         if (isInRect(guiLeft + 98, guiTop + 30, 9, 28, mouseX, mouseY)) {
             hoveringText.add("Progress: ");
-            hoveringText.add(tileEntityBrewKettle.getPercentComplete() + "%");
+            if (tileEntityBrewKettle.getInputFluidAmount() > 0) {
+                hoveringText.add(tileEntityBrewKettle.getPercentComplete() + "%");
+            } else {
+                hoveringText.add("Need Imput Fluid!");
+            }
         }
 
         // TODO: MouseOver inputFluidSlot
