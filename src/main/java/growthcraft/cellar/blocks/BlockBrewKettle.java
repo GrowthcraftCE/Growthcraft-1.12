@@ -55,7 +55,10 @@ public class BlockBrewKettle extends Block implements ITileEntityProvider {
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(2.0F);
         this.setSoundType(SoundType.METAL);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(HEATED, Boolean.valueOf(false)));
+        this.setDefaultState(
+                this.blockState.getBaseState().
+                        withProperty(HEATED, Boolean.valueOf(false))
+        );
     }
 
     @Override

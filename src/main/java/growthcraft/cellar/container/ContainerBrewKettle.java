@@ -7,29 +7,29 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerBrewKettle extends Container {
 
-    //private TileEntityBrewKettle tileEntityBrewKettle;
+    private final TileEntityBrewKettle tileBrewKettle;
+    //private final Slot slot;
 
-    public ContainerBrewKettle(IInventory inventory, TileEntityBrewKettle tileEntityBrewKettle) {
+    public ContainerBrewKettle(IInventory inventory, TileEntityBrewKettle tileBrewKettle) {
 
+        IItemHandler handler = tileBrewKettle.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 
-        IItemHandler handler = tileEntityBrewKettle.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-
-        IFluidHandler fluidInputHandler = tileEntityBrewKettle.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+        this.tileBrewKettle = tileBrewKettle;
 
         SlotItemHandler inputSlot = new SlotItemHandler(handler, 0, 80, 35);
         this.addSlotToContainer(inputSlot);
 
         SlotItemHandler outputSlot = new SlotItemHandler(handler, 1, 141, 17);
         this.addSlotToContainer(outputSlot);
-
 
         // Player Inventory Containers
         int posX = 8;
@@ -44,7 +44,6 @@ public class ContainerBrewKettle extends Container {
         for (int x = 0; x < 9; ++x) {
             this.addSlotToContainer(new Slot(inventory, x, posX + x * 18, posY + 58));
         }
-
 
     }
 
@@ -78,5 +77,29 @@ public class ContainerBrewKettle extends Container {
 
         return itemStackCopy;
     }
+
+    @Override
+    public void detectAndSendChanges() {
+        super.detectAndSendChanges();
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void updateProgressBar(int id, int data) {
+        super.updateProgressBar(id, data);
+    }
+
+    /**
+     * FluidSlot reflects the contents of a FluidTank
+     */
+    static class FluidSlot extends Slot {
+
+        public FluidTank fluidTank;
+
+        public FluidSlot(IInventory inventoryIn, int index, int xPosition, int yPosition) {
+            super(inventoryIn, index, xPosition, yPosition);
+        }
+    }
+
 
 }

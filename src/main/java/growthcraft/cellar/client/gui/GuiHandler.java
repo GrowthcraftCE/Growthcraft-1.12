@@ -1,5 +1,6 @@
 package growthcraft.cellar.client.gui;
 
+import growthcraft.cellar.client.gui.inventory.GuiBrewKettle;
 import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import net.minecraft.entity.player.EntityPlayer;
