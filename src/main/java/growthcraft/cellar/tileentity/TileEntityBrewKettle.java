@@ -1,26 +1,13 @@
 package growthcraft.cellar.tileentity;
 
-import growthcraft.cellar.blocks.BlockBrewKettle;
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
-import growthcraft.core.utils.GrowthcraftLogger;
-import growthcraft.hops.items.ItemHops;
 import net.minecraft.block.BlockFire;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.templates.FluidHandlerItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -29,147 +16,68 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nullable;
 
-public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapabilityProvider {
+public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvider {
 
-    public int brewTime;
-    public int maxBrewTime;
-
+    // Is this TE attached to a block that is heated
     private boolean heated;
+    // How long have we been brewing
+    private int brewTime;
+    // How long it takes to brew a recipe.
+    private int maxBrewTime;
 
-    private ItemStackHandler itemStackHandlerInput;
-
-    private FluidTank inputFiludTank;
-    private FluidHandlerItemStack fluidHandlerOutput;
+    private ItemStackHandler itemStackHandler;
 
     public TileEntityBrewKettle() {
-        itemStackHandlerInput = new ItemStackHandler(1);
-        fluidHandlerOutput = new FluidHandlerItemStack(new ItemStack(Items.BUCKET), 5000);
-        inputFiludTank = new FluidTank(5000);
-        // 2000 ticks = 100 seconds
-        this.maxBrewTime = 2000;
-        this.heated = false;
+        itemStackHandler = new ItemStackHandler(2);
+        heated = false;
+        brewTime = 0;
+        maxBrewTime = 2000;
     }
 
-    public int getBrewProgress() {
-        return brewTime > 0 ? brewTime : 0;
+    private boolean canBrew() {
+        /**
+         * Determines if we have a valid recipe for brewing. 
+         * - Must have a valid fluid in tank0
+         * - Must have a brewable item in itemStackHandler.slot0
+         * - Must have a heat source in the block below.
+         */
+        return true;
     }
 
-    public int getPercentComplete() {
-        float percentage = (brewTime * 100.0f) / maxBrewTime;
-        GrowthcraftLogger.getLogger().info("TileEntityBrewKettle.getPercentComplete(" + brewTime + "/" + maxBrewTime + "*100) == " + percentage);
-        return (int) percentage;
+    private void doBrewing() {
+        // We will need a brewing timer.
+        
     }
 
-    public int getInputFluidAmount() {
-        return inputFiludTank.getFluidAmount();
+    public int getBrewTime() {
+        return brewTime;
     }
 
-    public void addFluid(FluidStack fluid) {
-        fluidHandlerOutput.fill(fluid, true);
-        //GrowthcraftLogger.getLogger().info("Fluid Tank contains: " + fluidHandlerOutput.getFluid().amount);
+    public int getMaxBrewTime() {
+        return maxBrewTime;
+    }
+
+    public float getBrewProgress() {
+        return (brewTime * 100 / maxBrewTime);
     }
 
     public boolean isHeated() {
-        if (world.getBlockState(pos.down()).getBlock() instanceof BlockFire) {
-            return true;
-        }
-        return heated;
+        return world.getBlockState(pos.down()).getBlock() instanceof BlockFire;
     }
-
-
-    private boolean canCook() {
-        ItemStack inputStack = this.itemStackHandlerInput.getStackInSlot(0);
-        return inputStack.getItem() instanceof ItemHops && inputFiludTank.getFluidAmount() >= 1000;
-    }
-
-
-    /* -- ITickable -- */
-
-    @Override
-    public void update() {
-
-        // Check to determine if we have heat or not.
-        // TODO: Need to implement a better heat detection system.
-        this.heated = this.world.getBlockState(this.pos.down()).getMaterial() == Material.FIRE;
-        world.setBlockState(
-                pos,
-                GrowthcraftCellarBlocks.blockBrewKettle.getDefaultState().withProperty(BlockBrewKettle.HEATED, Boolean.valueOf(this.heated)), 3
-        );
-
-        //if (!this.world.isRemote) {
-        ItemStack inputStack = this.itemStackHandlerInput.getStackInSlot(0);
-
-        // If the BrewKettle is heated,
-        if (this.heated && !inputStack.isEmpty() && this.canCook()) {
-            this.brewTime += 1;
-
-            if (this.brewTime == this.maxBrewTime) {
-                // Decrease the input stack by one item.
-                itemStackHandlerInput.getStackInSlot(0).shrink(1);
-
-                // TODO: Decrease the fluid in the input FluidTank by one bucket
-
-                // TODO: Increase the fluid in the output FluidTank by one bucket
-
-                // Reset the cooking timers
-                this.brewTime = 0;
-            }
-
-        }
-        //} else {
-        IBlockState iblockstate = this.world.getBlockState(pos);
-        final int FLAGS = 3;
-        world.notifyBlockUpdate(pos, iblockstate, iblockstate, FLAGS);
-        //}
-
-        this.markDirty();
-    }
-
-
-    /* -- ICapabilityProvider -- */
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
-            //if (facing != null) {
-            //return (T) new CombinedInvWrapper(itemStackHandlerInput, fluidHandlerOutput);
-            return (T) new CombinedInvWrapper(itemStackHandlerInput);
-
-            //}
-        }
-        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
-            //if (facing != null) {
-            //return (T) new CombinedInvWrapper(itemStackHandlerInput, itemStackHandlerOutput);
-            return (T) new CombinedInvWrapper(fluidHandlerOutput);
-
-            //}
-        }
-        return super.getCapability(capability, facing);
-    }
-
-    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        return this.getCapability(capability, facing) != null;
-    }
-
-    /* -- TileEntity -- */
 
     @Override
     public void readFromNBT(NBTTagCompound compound) {
-        this.brewTime = compound.getInteger("brewTime");
-        this.maxBrewTime = compound.getInteger("maxBrewTime");
-        this.fluidHandlerOutput.deserializeNBT(compound.getCompoundTag("inventoryOutput"));
-        this.itemStackHandlerInput.deserializeNBT(compound.getCompoundTag("inventoryInput"));
+        brewTime = compound.getInteger("BrewTime");
+        maxBrewTime = compound.getInteger("MaxBrewTime");
+        itemStackHandler.deserializeNBT(compound.getCompoundTag("ItemInventory"));
         super.readFromNBT(compound);
     }
 
     @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setInteger("brewTime", this.brewTime);
-        compound.setInteger("maxBrewTime", this.maxBrewTime);
-        //compound.setTag("inventoryOutput", this.itemStackHandlerOutput.serializeNBT());
-        compound.setTag("inventoryInput", this.itemStackHandlerInput.serializeNBT());
+        compound.setInteger("BrewTime", brewTime);
+        compound.setInteger("MaxBrewTime", maxBrewTime);
+        compound.setTag("ItemInventory", itemStackHandler.serializeNBT());
         return super.writeToNBT(compound);
     }
 
@@ -206,5 +114,42 @@ public class TileEntityBrewKettle extends TileEntity implements ITickable, ICapa
         this.writeToNBT(compound);
         return compound;
     }
+
+    /* -- ICapabilityProvider -- */
+
+    @Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+
+            if (facing == null) {
+                return (T) new CombinedInvWrapper(itemStackHandler);
+            }
+
+            switch (facing) {
+                case UP:
+                    return (T) this.itemStackHandler;
+                case EAST:
+                    return null;
+                case WEST:
+                    return null;
+                case NORTH:
+                    return null;
+                case SOUTH:
+                    return null;
+                default:
+                    return (T) this.itemStackHandler;
+            }
+        }
+
+        return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return this.getCapability(capability, facing) != null;
+    }
+
 
 }

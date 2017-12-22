@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.gui.inventory;
+package growthcraft.cellar.client.gui;
 
 import cjminecraft.bitofeverything.client.gui.ProgressBar;
 import growthcraft.cellar.Reference;
@@ -23,7 +23,6 @@ public class GuiBrewKettle extends GuiContainer {
     private ProgressBar progressBarCooking;
     private ProgressBar progressBarHeatLevel;
 
-
     private int heat;
     private int maxHeat;
     private int recipeProgress;
@@ -46,7 +45,10 @@ public class GuiBrewKettle extends GuiContainer {
         this.progressBarHeatLevel = new ProgressBar(BREW_KETTLE_TEXTURE, ProgressBar.ProgressBarDirection.DOWN_TO_UP, 14, 14, 67, 54, 176, 28);
 
         this.progressBarCooking = new ProgressBar(BREW_KETTLE_TEXTURE, ProgressBar.ProgressBarDirection.UP_TO_DOWN, 9, 28, 98, 30, 176, 0);
+    }
 
+    public static boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY) {
+        return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));
     }
 
     @Override
@@ -59,10 +61,6 @@ public class GuiBrewKettle extends GuiContainer {
         GlStateManager.color(1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(BREW_KETTLE_TEXTURE);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-    }
-
-    public static boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY) {
-        return ((mouseX >= x && mouseX <= x + xSize) && (mouseY >= y && mouseY <= y + ySize));
     }
 
     @Override
@@ -78,17 +76,17 @@ public class GuiBrewKettle extends GuiContainer {
         this.progressBarHeatLevel.draw(this.mc);
 
         //this.progressBarCooking.setMin(recipeProgress).setMax(tileEntityBrewKettle.maxBrewTime);
-        this.progressBarCooking.setMin(tileEntityBrewKettle.getBrewProgress()).setMax(tileEntityBrewKettle.maxBrewTime);
+        this.progressBarCooking.setMin(tileEntityBrewKettle.getBrewTime()).setMax(tileEntityBrewKettle.getMaxBrewTime());
         this.progressBarCooking.draw(this.mc);
 
         // If the mouse is over the progress bar ...
         if (isInRect(guiLeft + 98, guiTop + 30, 9, 28, mouseX, mouseY)) {
             hoveringText.add("Progress: ");
-            if (tileEntityBrewKettle.getInputFluidAmount() > 0) {
-                hoveringText.add(tileEntityBrewKettle.getPercentComplete() + "%");
-            } else {
-                hoveringText.add("Need Imput Fluid!");
-            }
+            //if (tileEntityBrewKettle.getInputFluidAmount() > 0) {
+            hoveringText.add(tileEntityBrewKettle.getBrewProgress() + "%");
+            //} else {
+            //    hoveringText.add("Need Imput Fluid!");
+            //}
         }
 
         // TODO: MouseOver inputFluidSlot
@@ -104,4 +102,6 @@ public class GuiBrewKettle extends GuiContainer {
     // TODO: Fluid Gui
     // https://github.com/thebrightspark/S.T.E.M/blob/79b595cbc79be7e388d7bb6c23e8b4c91a7799e4/src/main/java/brightspark/stem/gui/GuiLiquidEnergiser.java#L30-L34
     // https://github.com/Ellpeck/ActuallyAdditions/blob/master/src/main/java/de/ellpeck/actuallyadditions/mod/inventory/gui/FluidDisplay.java
+
+
 }

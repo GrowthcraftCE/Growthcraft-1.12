@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class CommonProxy {
 
     public void preInit() {
-        registerTitleEntities();
     }
 
     public void registerRenders() {

@@ -16,7 +16,7 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftCellarBlocks {
 
     public static Block blockCultureJar;
-    public static BlockBrewKettle blockBrewKettle;
+    public static Block blockBrewKettle;
 
     public static void init() {
         blockCultureJar = new BlockCultureJar("culture_jar");
@@ -27,12 +27,12 @@ public class GrowthcraftCellarBlocks {
     public static void register() {
         registerBlock(blockCultureJar, true, true);
         registerBlock(blockBrewKettle, true, true);
+
     }
 
     public static void registerRenders() {
         registerRender(blockCultureJar);
         registerRender(blockBrewKettle);
-
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock) {

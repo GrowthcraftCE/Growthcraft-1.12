@@ -1,6 +1,5 @@
 package growthcraft.cellar.client.gui;
 
-import growthcraft.cellar.client.gui.inventory.GuiBrewKettle;
 import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +12,6 @@ import javax.annotation.Nullable;
 public class GuiHandler implements IGuiHandler {
 
     public static final int BREW_KETTLE = 0;
-
 
     @Nullable
     @Override

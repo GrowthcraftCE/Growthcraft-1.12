@@ -38,9 +38,8 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.registerModelBakeryVariants();
         NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
-
+        proxy.registerModelBakeryVariants();
     }
 
     @Mod.EventHandler
