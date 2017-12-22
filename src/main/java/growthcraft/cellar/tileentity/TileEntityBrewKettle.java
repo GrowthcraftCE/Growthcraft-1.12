@@ -1,11 +1,15 @@
 package growthcraft.cellar.tileentity;
 
+import growthcraft.hops.items.ItemHops;
 import net.minecraft.block.BlockFire;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.relauncher.Side;
@@ -16,7 +20,7 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 
 import javax.annotation.Nullable;
 
-public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvider {
+public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvider, ITickable {
 
     // Is this TE attached to a block that is heated
     private boolean heated;
@@ -30,18 +34,25 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
     public TileEntityBrewKettle() {
         itemStackHandler = new ItemStackHandler(2);
         heated = false;
-        brewTime = 0;
-        maxBrewTime = 2000;
     }
 
     private boolean canBrew() {
+        boolean goodItem = false;
+        boolean goodFluid = false;
+
         /**
          * Determines if we have a valid recipe for brewing. 
          * - Must have a valid fluid in tank0
          * - Must have a brewable item in itemStackHandler.slot0
          * - Must have a heat source in the block below.
          */
-        return true;
+        ItemStack inputStack = this.itemStackHandler.getStackInSlot(0);
+        goodItem = inputStack.getItem() instanceof ItemHops;
+
+        // TODO: Check for a legit fluid in Tank0
+        goodFluid = true;
+
+        return (goodItem && goodFluid && isHeated());
     }
 
     private void doBrewing() {
@@ -57,8 +68,12 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
         return maxBrewTime;
     }
 
-    public float getBrewProgress() {
-        return (brewTime * 100 / maxBrewTime);
+    public int getBrewProgress() {
+        if (maxBrewTime == 0) {
+            maxBrewTime = 2000;
+        }
+        float percentage = (brewTime * 100.0f) / maxBrewTime;
+        return (int) percentage;
     }
 
     public boolean isHeated() {
@@ -151,5 +166,21 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
         return this.getCapability(capability, facing) != null;
     }
 
+    /* -- ITickable -- */
 
+    @Override
+    public void update() {
+
+        if (canBrew()) {
+            this.brewTime += 1;
+            if (this.brewTime >= this.maxBrewTime) {
+                // Then our brew is done and we need to process the results.
+                this.brewTime = 0;
+            }
+
+            IBlockState iblockstate = this.world.getBlockState(pos);
+            final int FLAGS = 3;
+            world.notifyBlockUpdate(pos, iblockstate, iblockstate, FLAGS);
+        }
+    }
 }
