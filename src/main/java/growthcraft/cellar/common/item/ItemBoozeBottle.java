@@ -33,7 +33,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidItem
 {
-	private Booze[] boozes;
+	private Fluid[] boozes;
 
 /*	@SideOnly(Side.CLIENT)
 	private IIcon bottle;

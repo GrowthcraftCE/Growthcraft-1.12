@@ -14,11 +14,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
+import growthcraft.cellar.common.definition.BlockBoozeDefinition;
+
 public class GrowthcraftGrapesBlocks {
 
     public static BlockGrapeVine grape_vine;
     public static BlockGrapeVineBush grape_vine_bush;
     public static BlockGrapeVineFruit grape_vine_fruit;
+    
+	public static BlockBoozeDefinition[] grapeWineFluidBlocks;
 
     public static void init() {
         grape_vine = new BlockGrapeVine("grape_vine");

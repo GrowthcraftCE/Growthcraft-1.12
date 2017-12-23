@@ -9,6 +9,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -54,10 +55,12 @@ public class ItemUtils
 
 	public static ItemStack increaseStack(ItemStack itemstack, int amount)
 	{
+		ItemStack containerItem = getContainerItem(itemstack);
+		
 		itemstack.setCount( MathHelper.clamp(itemstack.getCount() + amount, 0, itemstack.getMaxStackSize()) );
 		if (itemstack.isEmpty())
 		{
-			final Item item = itemstack.getItem();
+/*			final Item item = itemstack.getItem();
 			if (item.hasContainerItem(itemstack))
 			{
 				return item.getContainerItem(itemstack);
@@ -65,9 +68,22 @@ public class ItemUtils
 			else
 			{
 				return null;
-			}
+			}*/
+			return containerItem;
 		}
 		return itemstack;
+	}
+	
+	public static ItemStack getContainerItem(ItemStack itemstack) {
+		final Item item = itemstack.getItem();
+		if (item.hasContainerItem(itemstack))
+		{
+			return item.getContainerItem(itemstack);
+		}
+		else
+		{
+			return new ItemStack(Items.AIR, 1, 0);
+		}
 	}
 
 	public static ItemStack increaseStack(ItemStack itemstack)

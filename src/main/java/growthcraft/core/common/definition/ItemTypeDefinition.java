@@ -44,7 +44,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	{
 		getItem().setUnlocalizedName(name.getResourcePath());
 		getItem().setRegistryName(name);
-		GameRegistry.register(getItem(), name);
+		GameRegistry.register(getItem());
 	}
 	
 	public void register()

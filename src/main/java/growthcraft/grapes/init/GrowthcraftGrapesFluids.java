@@ -25,6 +25,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -40,7 +41,7 @@ public class GrowthcraftGrapesFluids
 	public static void init() {
 		grapeWineBooze = new BoozeDefinition[8];
 		grapeWineFluidBlocks = new BlockBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeBoozeFluids("fluid_booze_", grapeWineBooze);
+		BoozeRegistryHelper.initializeAndRegisterBoozeFluids("fluid_booze_", grapeWineBooze);
 		for (BoozeDefinition booze : grapeWineBooze)
 		{
 			booze.getFluid().setColor(GrowthcraftGrapesConfig.grapeWineColor).setDensity(1120);

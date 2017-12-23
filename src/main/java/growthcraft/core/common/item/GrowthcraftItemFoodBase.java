@@ -78,6 +78,8 @@ public class GrowthcraftItemFoodBase extends ItemFood
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
+		ItemStack result = stack;
+		
 		if( entityLiving instanceof EntityPlayer ) {
 			EntityPlayer player = (EntityPlayer)entityLiving;
 			
@@ -85,8 +87,8 @@ public class GrowthcraftItemFoodBase extends ItemFood
 			{
 				if (!worldIn.isRemote)
 				{
-					final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
-					ItemUtils.addStackToPlayer(result, player, worldIn, false);
+					result = ItemUtils.consumeStack(stack.splitStack(1));
+//					ItemUtils.addStackToPlayer(result, player, worldIn, false);
 				}
 			}
 
@@ -96,7 +98,8 @@ public class GrowthcraftItemFoodBase extends ItemFood
 			this.onFoodEaten(stack, worldIn, player);
 		}
 
-		return stack.getCount() <= 0 ? null : stack;
+//		return result.getCount() <= 0 ? null : result;
+		return result;
 	}
 
 	@Override

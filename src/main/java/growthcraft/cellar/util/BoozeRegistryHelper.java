@@ -3,9 +3,6 @@ package growthcraft.cellar.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
-import growthcraft.apples.Reference;
 import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.cellar.api.booze.Booze;
 import growthcraft.cellar.api.booze.BoozeEffect;
@@ -19,15 +16,14 @@ import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.GrowthcraftCoreConfig;
 import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.api.fluids.FluidDictionary;
-import growthcraft.core.common.definition.FluidDefinition;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
+import growthcraft.grapes.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -37,11 +33,13 @@ public class BoozeRegistryHelper {
 	
 	private BoozeRegistryHelper() {}
 
-	public static void initializeBoozeFluids(String basename, BoozeDefinition[] boozes)
+	public static void initializeAndRegisterBoozeFluids(String basename, BoozeDefinition[] boozes)
 	{
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			boozes[i] = new BoozeDefinition( new Booze(basename + i) );
+			boozes[i].register(true);
+			CellarRegistry.instance().booze().registerBooze(boozes[i].getFluid());
 		}
 	}
 
@@ -90,12 +88,8 @@ public class BoozeRegistryHelper {
 	{
 		for (int i = 0; i < boozes.length; ++i)
 		{
-			boozes[i].register(true);
-//			FluidRegistry.registerFluid(boozes[i]);
-			CellarRegistry.instance().booze().registerBooze(boozes[i].getFluid());
-			
 //			buckets[i].register(basename + "Bucket." + i);
-			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, basename + "fluid_" + basename + i ));
+			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, "fluid_" + basename + i ));
 
 //			EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 

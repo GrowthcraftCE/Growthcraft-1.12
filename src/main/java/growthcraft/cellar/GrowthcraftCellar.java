@@ -12,6 +12,7 @@ import growthcraft.cellar.proxy.CommonProxy;
 import growthcraft.cellar.stats.GrowthcraftCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.UserApis;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -34,7 +35,6 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-    	
 		userApis.getUserBrewingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
 		userApis.getUserCultureRecipes()
@@ -76,4 +76,8 @@ public class GrowthcraftCellar {
     	CellarEvents.registerEvents();
     	CellarRegistry.onPostInit();
     }
+    
+	static {
+		FluidRegistry.enableUniversalBucket();
+	}
 }
