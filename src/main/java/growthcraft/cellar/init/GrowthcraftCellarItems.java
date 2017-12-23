@@ -1,33 +1,28 @@
 package growthcraft.cellar.init;
 
-import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
-
-import growthcraft.cellar.Reference;
 import growthcraft.cellar.items.ItemChievDummy;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import growthcraft.core.common.definition.ItemDefinition;
 
 public class GrowthcraftCellarItems {
 	// REVISE_ME 0
 	
-	public static ItemChievDummy chievItemDummy;
+	public static ItemDefinition chievItemDummy;
 
     public static void init() {
-    	chievItemDummy = new ItemChievDummy("achievement_dummy");
+    	chievItemDummy = new ItemDefinition( new ItemChievDummy("achievement_dummy") );
     }
 
     public static void register() {
-        registerItem(chievItemDummy, false);
+    	chievItemDummy.register();
+//        registerItem(chievItemDummy, false);
     }
 
     public static void registerRenders() {
-        registerRender(chievItemDummy);
+    	chievItemDummy.registerRender();
+//        registerRender(chievItemDummy);
     }
 
-    public static void registerItem(Item item, boolean bAddToCreativeTab) {
+/*    public static void registerItem(Item item, boolean bAddToCreativeTab) {
         if( bAddToCreativeTab )
         	item.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(item);
@@ -41,5 +36,5 @@ public class GrowthcraftCellarItems {
     public static void registerRender(Item item, int meta, String fileName) {
         ModelLoader.setCustomModelResourceLocation(item, meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
+    } */
 }

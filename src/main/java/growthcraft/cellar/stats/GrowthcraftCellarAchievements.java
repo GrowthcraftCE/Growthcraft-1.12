@@ -30,7 +30,7 @@ public class GrowthcraftCellarAchievements {
 		achievements.put(CellarAchievement.GET_DRUNK,
 				(new Achievement("achievement.getDrunk", "getDrunk",
 					0, -4,
-					new ItemStack( GrowthcraftCellarItems.chievItemDummy ),
+					GrowthcraftCellarItems.chievItemDummy.asStack(),
 					NO_ACHIEVEMENT /*achievements.get(CellarAchievement.FERMENT_BOOZE) */)
 				).setSpecial().registerStat()
 			);

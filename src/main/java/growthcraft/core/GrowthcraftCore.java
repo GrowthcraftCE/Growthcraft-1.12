@@ -9,6 +9,8 @@ import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.init.GrowthcraftCoreRecipes;
 import growthcraft.core.proxy.CommonProxy;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -29,12 +31,17 @@ public class GrowthcraftCore {
     // REVISE_TEAM
     public static Logger logger = LogManager.getLogger(Reference.MODID);
 
+	public static ItemStack EMPTY_BOTTLE;
+
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         GrowthcraftCoreBlocks.init();
         GrowthcraftCoreBlocks.register();
         GrowthcraftCoreItems.init();
         GrowthcraftCoreItems.register();
+        
+        EMPTY_BOTTLE = new ItemStack(Items.GLASS_BOTTLE);
+        
         proxy.registerRenders();
         proxy.registerTitleEntities();
     }

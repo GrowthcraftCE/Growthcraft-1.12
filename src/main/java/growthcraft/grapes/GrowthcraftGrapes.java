@@ -1,6 +1,7 @@
 package growthcraft.grapes;
 
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
+import growthcraft.grapes.init.GrowthcraftGrapesFluids;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import growthcraft.grapes.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -20,7 +21,9 @@ public class GrowthcraftGrapes {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-
+    	GrowthcraftGrapesFluids.init();
+    	GrowthcraftGrapesFluids.register();
+    	
         GrowthcraftGrapesBlocks.init();
         GrowthcraftGrapesBlocks.register();
 

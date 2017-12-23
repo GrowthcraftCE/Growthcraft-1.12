@@ -13,6 +13,7 @@ import growthcraft.core.api.item.MultiItemStacks;
 import growthcraft.core.api.utils.StringUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 
 public class ItemStackSchema implements IItemStackFactory, IItemStackListProvider, IValidatable, ICommentable
 {
@@ -33,9 +34,10 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListProvide
 
 	public ItemStackSchema(@Nonnull ItemStack stack)
 	{
-		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(stack.getItem());
-		this.mod_id = uuid.modId;
-		this.name = uuid.name;
+		final ResourceLocation resloc = stack.getItem().getRegistryName();
+//		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(stack.getItem());
+		this.mod_id = resloc.getResourceDomain(); // uuid.modId;
+		this.name = resloc.getResourcePath(); // uuid.name;
 		this.amount = stack.getCount();
 		this.meta = stack.getItemDamage();
 		this.comment = stack.getDisplayName();
