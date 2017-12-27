@@ -6,6 +6,8 @@ import growthcraft.cellar.container.ContainerBrewKettle;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
@@ -17,14 +19,16 @@ import java.util.List;
 public class GuiBrewKettle extends GuiContainer {
 
     public static final ResourceLocation BREW_KETTLE_TEXTURE = new ResourceLocation(Reference.MODID, "textures/guis/brew_kettle_gui.png");
-    private ResourceLocation BREW_KETTLE_TANK_0_TEXTURE = new ResourceLocation("blocks/water_still");
+    //private ResourceLocation BREW_KETTLE_TANK_0_TEXTURE;
+    private ResourceLocation BREW_KETTLE_TANK_0_TEXTURE = new ResourceLocation(Reference.MODID, "textures/blocks/fluids/fluid_rennet_still.png");
+
 
     private TileEntityBrewKettle tileEntityBrewKettle;
     private IInventory inventory;
 
     private ProgressBar progressBarCooking;
     private ProgressBar progressBarHeatLevel;
-    private ProgressBar progressBarTankInputLevel;
+    //private ProgressBar progressBarTankInputLevel;
 
     private int heat;
     private int maxHeat;
@@ -47,7 +51,6 @@ public class GuiBrewKettle extends GuiContainer {
 
         this.progressBarHeatLevel = new ProgressBar(BREW_KETTLE_TEXTURE, ProgressBar.ProgressBarDirection.DOWN_TO_UP, 14, 14, 67, 54, 176, 28);
         this.progressBarCooking = new ProgressBar(BREW_KETTLE_TEXTURE, ProgressBar.ProgressBarDirection.UP_TO_DOWN, 9, 28, 98, 30, 176, 0);
-        this.progressBarTankInputLevel = new ProgressBar(BREW_KETTLE_TANK_0_TEXTURE, ProgressBar.ProgressBarDirection.DOWN_TO_UP, 16, 52, 46, 17, 0, 0);
 
     }
 
@@ -65,6 +68,18 @@ public class GuiBrewKettle extends GuiContainer {
         GlStateManager.color(1.0F, 1.0F, 1.0F);
         this.mc.getTextureManager().bindTexture(BREW_KETTLE_TEXTURE);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
+
+        try {
+            TextureAtlasSprite fluidTexture = mc.getTextureMapBlocks().getTextureExtry(tileEntityBrewKettle.getTankFluidStack().getFluid().getStill().toString());
+            mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            int fluidHeight = (tileEntityBrewKettle.getTankAmount() * 52) / tileEntityBrewKettle.getTankCapacity();
+            drawTexturedModalRect(46 + guiLeft, 17 + guiTop + (52 - fluidHeight), fluidTexture, 16, fluidHeight);
+        } catch (NullPointerException npe) {
+            /* Simply catch the NPE if the getFluid from the TE is NULL */
+        }
+
+        // TODO: Added texture for rendering the Tank1
+
     }
 
     @Override
@@ -81,18 +96,8 @@ public class GuiBrewKettle extends GuiContainer {
         this.progressBarHeatLevel.setMin(tileEntityBrewKettle.isHeated() ? 1 : 0).setMax(maxHeat);
         this.progressBarHeatLevel.draw(this.mc);
 
-        //this.progressBarCooking.setMin(recipeProgress).setMax(tileEntityBrewKettle.maxBrewTime);
         this.progressBarCooking.setMin(tileEntityBrewKettle.getBrewTime()).setMax(tileEntityBrewKettle.getMaxBrewTime());
         this.progressBarCooking.draw(this.mc);
-
-        //fluidStack.getFluid().getBlock().getRegistryName()
-
-        //Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture()
-
-        if (fluidStack != null) {
-            this.progressBarTankInputLevel.setMin(fluidStack.amount).setMax(5000);
-            this.progressBarTankInputLevel.draw(this.mc);
-        }
 
         // If the mouse is over the progress bar ...
         if (isInRect(guiLeft + 98, guiTop + 30, 9, 28, mouseX, mouseY)) {
@@ -120,10 +125,5 @@ public class GuiBrewKettle extends GuiContainer {
         }
 
     }
-
-    // TODO: Fluid Gui
-    // https://github.com/thebrightspark/S.T.E.M/blob/79b595cbc79be7e388d7bb6c23e8b4c91a7799e4/src/main/java/brightspark/stem/gui/GuiLiquidEnergiser.java#L30-L34
-    // https://github.com/Ellpeck/ActuallyAdditions/blob/master/src/main/java/de/ellpeck/actuallyadditions/mod/inventory/gui/FluidDisplay.java
-
 
 }

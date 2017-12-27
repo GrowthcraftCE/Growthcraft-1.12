@@ -107,6 +107,22 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
         return fluidHandler.getFluidTank().getFluid();
     }
 
+    public int getTankAmount() {
+        try {
+            return fluidHandler.getFluidTank().getFluidAmount();
+        } catch (NullPointerException npe) {
+            return 0;
+        }
+    }
+
+    public int getTankCapacity() {
+        try {
+            return fluidHandler.getFluidTank().getCapacity();
+        } catch (NullPointerException npe) {
+            return 0;
+        }
+    }
+
     // public boolean isTankFull(int tankId) {
     //     if fluidHandler.getFluidTank().canFillFluidType()
     //}

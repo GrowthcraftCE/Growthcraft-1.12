@@ -64,9 +64,12 @@ public class BlockBrewKettle extends Block implements ITileEntityProvider {
             FluidStack fluidStack = FluidUtil.getFluidContained(playerIn.getHeldItem(hand));
             TileEntityBrewKettle tileEntity = (TileEntityBrewKettle) worldIn.getTileEntity(pos);
 
+            if (fluidStack != null) {
+                GrowthcraftLogger.getLogger().info("Holding " + fluidStack.getUnlocalizedName() + " which is a " + fluidStack.getFluid().getClass().toString());
+            }
+
             if (fluidStack != null && fluidStack.getFluid() instanceof FluidRennet) {
                 FluidHandler fluidHandler = (FluidHandler) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
-                GrowthcraftLogger.getLogger().info("Checking Brew Kettle Tank: " + fluidHandler.getFluidTank().getFluidAmount() + " + " + fluidStack.amount + " ?= " + fluidHandler.getFluidTank().getCapacity());
 
                 if (fluidHandler.getFluidTank().getFluidAmount() + fluidStack.amount <= fluidHandler.getFluidTank().getCapacity()) {
                     fluidHandler.fill(fluidStack, true);
@@ -75,9 +78,6 @@ public class BlockBrewKettle extends Block implements ITileEntityProvider {
                         playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
                     }
                     return true;
-
-                } else {
-                    GrowthcraftLogger.getLogger().info("Not enough room in brew kettle " + fluidHandler.getFluidTank().getFluidAmount() + "mb is in Tank0.");
                 }
             }
 
