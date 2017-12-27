@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,16 +83,24 @@ public class GuiBrewKettle extends GuiContainer {
         // If the mouse is over the progress bar ...
         if (isInRect(guiLeft + 98, guiTop + 30, 9, 28, mouseX, mouseY)) {
             hoveringText.add("Progress: ");
-            //if (tileEntityBrewKettle.getInputFluidAmount() > 0) {
-            hoveringText.add(tileEntityBrewKettle.getBrewProgress() + "%");
-            //} else {
-            //    hoveringText.add("Need Imput Fluid!");
-            //}
+            if (tileEntityBrewKettle.canBrew()) {
+                hoveringText.add(tileEntityBrewKettle.getBrewProgress() + "%");
+            } else {
+                hoveringText.add("Unable to brew");
+            }
         }
 
-        // TODO: MouseOver inputFluidSlot
+        if (isInRect(guiLeft + 46, guiTop + 17, 16, 51, mouseX, mouseY)) {
+            FluidStack fluidStack = tileEntityBrewKettle.getTankFluidStack();
+            if (fluidStack != null) {
+                hoveringText.add(fluidStack.getLocalizedName() + " (" + fluidStack.amount + "mb)");
+            }
+        }
 
         // TODO: MouseOver outputFluidSlot
+        if (isInRect(guiLeft + 114, guiTop + 17, 16, 51, mouseX, mouseY)) {
+            hoveringText.add("Need to implement output fluid.");
+        }
 
         if (!hoveringText.isEmpty()) {
             drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRenderer);

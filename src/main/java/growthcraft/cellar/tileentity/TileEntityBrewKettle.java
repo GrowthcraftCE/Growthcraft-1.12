@@ -1,7 +1,10 @@
 package growthcraft.cellar.tileentity;
 
+import growthcraft.core.handlers.FluidHandler;
 import growthcraft.hops.items.ItemHops;
+import growthcraft.milk.blocks.fluids.FluidRennet;
 import net.minecraft.block.BlockFire;
+import net.minecraft.block.BlockMagma;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,6 +15,9 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -30,34 +36,51 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
     private int maxBrewTime;
 
     private ItemStackHandler itemStackHandler;
+    private FluidHandler fluidHandler;
 
     public TileEntityBrewKettle() {
         itemStackHandler = new ItemStackHandler(2);
+        fluidHandler = new FluidHandler(this, new FluidTank(5000));
         heated = false;
+        maxBrewTime = 2000;
     }
 
-    private boolean canBrew() {
+    public boolean canBrew() {
         boolean goodItem = false;
         boolean goodFluid = false;
 
-        /**
-         * Determines if we have a valid recipe for brewing. 
-         * - Must have a valid fluid in tank0
-         * - Must have a brewable item in itemStackHandler.slot0
-         * - Must have a heat source in the block below.
-         */
         ItemStack inputStack = this.itemStackHandler.getStackInSlot(0);
-        goodItem = inputStack.getItem() instanceof ItemHops;
+        if (inputStack != null) {
+            goodItem = inputStack.getItem() instanceof ItemHops;
+        }
 
-        // TODO: Check for a legit fluid in Tank0
-        goodFluid = true;
+        FluidStack fluidStack = fluidHandler.getFluidTank().getFluid();
+        if (fluidStack != null && fluidStack.amount > 0) {
+            if (fluidStack.getFluid() instanceof FluidRennet) {
+                goodFluid = true;
+            }
+        }
 
-        return (goodItem && goodFluid && isHeated());
+        // Check heat source
+        this.heated = isHeated();
+
+        return (goodItem && goodFluid && this.heated);
     }
 
     private void doBrewing() {
-        // We will need a brewing timer.
-        
+        if (canBrew()) {
+            this.brewTime += 1;
+
+            if (this.brewTime != 0 && this.brewTime >= this.maxBrewTime) {
+                this.brewTime = 0;
+                itemStackHandler.getStackInSlot(0).shrink(1);
+                fluidHandler.drain(1000, true);
+            }
+
+            IBlockState iblockstate = this.world.getBlockState(pos);
+            final int FLAGS = 3;
+            world.notifyBlockUpdate(pos, iblockstate, iblockstate, FLAGS);
+        }
     }
 
     public int getBrewTime() {
@@ -77,7 +100,11 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
     }
 
     public boolean isHeated() {
-        return world.getBlockState(pos.down()).getBlock() instanceof BlockFire;
+        return world.getBlockState(pos.down()).getBlock() instanceof BlockFire || world.getBlockState(pos.down()).getBlock() instanceof BlockMagma;
+    }
+
+    public FluidStack getTankFluidStack() {
+        return fluidHandler.getFluidTank().getFluid();
     }
 
     @Override
@@ -85,6 +112,7 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
         brewTime = compound.getInteger("BrewTime");
         maxBrewTime = compound.getInteger("MaxBrewTime");
         itemStackHandler.deserializeNBT(compound.getCompoundTag("ItemInventory"));
+        fluidHandler.setFluidTank(new FluidTank(5000).readFromNBT(compound.getCompoundTag("FluidInventory")));
         super.readFromNBT(compound);
     }
 
@@ -93,6 +121,11 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
         compound.setInteger("BrewTime", brewTime);
         compound.setInteger("MaxBrewTime", maxBrewTime);
         compound.setTag("ItemInventory", itemStackHandler.serializeNBT());
+
+        FluidTank tank = fluidHandler.getFluidTank();
+        NBTTagCompound tagTank = new NBTTagCompound();
+        compound.setTag("FluidInventory", tank.writeToNBT(tagTank));
+
         return super.writeToNBT(compound);
     }
 
@@ -158,6 +191,10 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
             }
         }
 
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+            return (T) this.fluidHandler;
+        }
+
         return super.getCapability(capability, facing);
     }
 
@@ -170,17 +207,9 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
 
     @Override
     public void update() {
-
-        if (canBrew()) {
-            this.brewTime += 1;
-            if (this.brewTime >= this.maxBrewTime) {
-                // Then our brew is done and we need to process the results.
-                this.brewTime = 0;
-            }
-
-            IBlockState iblockstate = this.world.getBlockState(pos);
-            final int FLAGS = 3;
-            world.notifyBlockUpdate(pos, iblockstate, iblockstate, FLAGS);
-        }
+        doBrewing();
     }
+
+    // TODO: Fluid storage with capabilities.
+    // https://github.com/EwyBoy/ITank/blob/master/src/main/java/com/ewyboy/itank/common/tiles/TileEntityTank.java
 }

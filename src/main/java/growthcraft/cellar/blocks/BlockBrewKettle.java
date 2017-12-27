@@ -3,6 +3,7 @@ package growthcraft.cellar.blocks;
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
+import growthcraft.milk.blocks.fluids.FluidRennet;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -17,6 +18,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -52,6 +57,19 @@ public class BlockBrewKettle extends Block implements ITileEntityProvider {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
+
+            FluidStack fluidStack = FluidUtil.getFluidContained(playerIn.getHeldItem(hand));
+
+            // TODO: Figure out why the GUI does not open with an empty hand.
+            if (fluidStack != null && fluidStack.getFluid() instanceof FluidRennet) {
+                TileEntity tileEntity = worldIn.getTileEntity(pos);
+                if (tileEntity instanceof TileEntityBrewKettle) {
+                    IFluidHandler fluidHandler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                    fluidHandler.fill(fluidStack, true);
+                    return true;
+                }
+            }
+
             playerIn.openGui(Reference.MODID, GuiHandler.BREW_KETTLE, worldIn, pos.getX(), pos.getY(), pos.getZ());
         }
         return true;
