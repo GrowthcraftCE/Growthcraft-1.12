@@ -107,6 +107,10 @@ public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvi
         return fluidHandler.getFluidTank().getFluid();
     }
 
+    // public boolean isTankFull(int tankId) {
+    //     if fluidHandler.getFluidTank().canFillFluidType()
+    //}
+
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         brewTime = compound.getInteger("BrewTime");

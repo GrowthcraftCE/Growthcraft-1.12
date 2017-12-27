@@ -17,12 +17,14 @@ import java.util.List;
 public class GuiBrewKettle extends GuiContainer {
 
     public static final ResourceLocation BREW_KETTLE_TEXTURE = new ResourceLocation(Reference.MODID, "textures/guis/brew_kettle_gui.png");
+    private ResourceLocation BREW_KETTLE_TANK_0_TEXTURE = new ResourceLocation("blocks/water_still");
 
     private TileEntityBrewKettle tileEntityBrewKettle;
     private IInventory inventory;
 
     private ProgressBar progressBarCooking;
     private ProgressBar progressBarHeatLevel;
+    private ProgressBar progressBarTankInputLevel;
 
     private int heat;
     private int maxHeat;
@@ -44,8 +46,9 @@ public class GuiBrewKettle extends GuiContainer {
         this.inventory = inventory;
 
         this.progressBarHeatLevel = new ProgressBar(BREW_KETTLE_TEXTURE, ProgressBar.ProgressBarDirection.DOWN_TO_UP, 14, 14, 67, 54, 176, 28);
-
         this.progressBarCooking = new ProgressBar(BREW_KETTLE_TEXTURE, ProgressBar.ProgressBarDirection.UP_TO_DOWN, 9, 28, 98, 30, 176, 0);
+        this.progressBarTankInputLevel = new ProgressBar(BREW_KETTLE_TANK_0_TEXTURE, ProgressBar.ProgressBarDirection.DOWN_TO_UP, 16, 52, 46, 17, 0, 0);
+
     }
 
     public static boolean isInRect(int x, int y, int xSize, int ySize, int mouseX, int mouseY) {
@@ -70,6 +73,8 @@ public class GuiBrewKettle extends GuiContainer {
 
         String s = I18n.format("container.brew_kettle");
 
+        FluidStack fluidStack = tileEntityBrewKettle.getTankFluidStack();
+
         this.mc.fontRenderer.drawString(s, this.xSize / 2 - this.mc.fontRenderer.getStringWidth(s) / 2, 6, 4210752);
         this.mc.fontRenderer.drawString(this.inventory.getDisplayName().getFormattedText(), 8, 73, 4210752);
 
@@ -79,6 +84,15 @@ public class GuiBrewKettle extends GuiContainer {
         //this.progressBarCooking.setMin(recipeProgress).setMax(tileEntityBrewKettle.maxBrewTime);
         this.progressBarCooking.setMin(tileEntityBrewKettle.getBrewTime()).setMax(tileEntityBrewKettle.getMaxBrewTime());
         this.progressBarCooking.draw(this.mc);
+
+        //fluidStack.getFluid().getBlock().getRegistryName()
+
+        //Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture()
+
+        if (fluidStack != null) {
+            this.progressBarTankInputLevel.setMin(fluidStack.amount).setMax(5000);
+            this.progressBarTankInputLevel.draw(this.mc);
+        }
 
         // If the mouse is over the progress bar ...
         if (isInRect(guiLeft + 98, guiTop + 30, 9, 28, mouseX, mouseY)) {
@@ -91,7 +105,6 @@ public class GuiBrewKettle extends GuiContainer {
         }
 
         if (isInRect(guiLeft + 46, guiTop + 17, 16, 51, mouseX, mouseY)) {
-            FluidStack fluidStack = tileEntityBrewKettle.getTankFluidStack();
             if (fluidStack != null) {
                 hoveringText.add(fluidStack.getLocalizedName() + " (" + fluidStack.amount + "mb)");
             }

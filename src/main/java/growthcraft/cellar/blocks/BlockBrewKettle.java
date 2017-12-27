@@ -3,6 +3,8 @@ package growthcraft.cellar.blocks;
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
+import growthcraft.core.handlers.FluidHandler;
+import growthcraft.core.utils.GrowthcraftLogger;
 import growthcraft.milk.blocks.fluids.FluidRennet;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -10,6 +12,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -21,7 +25,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -59,14 +62,22 @@ public class BlockBrewKettle extends Block implements ITileEntityProvider {
         if (!worldIn.isRemote) {
 
             FluidStack fluidStack = FluidUtil.getFluidContained(playerIn.getHeldItem(hand));
+            TileEntityBrewKettle tileEntity = (TileEntityBrewKettle) worldIn.getTileEntity(pos);
 
-            // TODO: Figure out why the GUI does not open with an empty hand.
             if (fluidStack != null && fluidStack.getFluid() instanceof FluidRennet) {
-                TileEntity tileEntity = worldIn.getTileEntity(pos);
-                if (tileEntity instanceof TileEntityBrewKettle) {
-                    IFluidHandler fluidHandler = tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                FluidHandler fluidHandler = (FluidHandler) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+                GrowthcraftLogger.getLogger().info("Checking Brew Kettle Tank: " + fluidHandler.getFluidTank().getFluidAmount() + " + " + fluidStack.amount + " ?= " + fluidHandler.getFluidTank().getCapacity());
+
+                if (fluidHandler.getFluidTank().getFluidAmount() + fluidStack.amount <= fluidHandler.getFluidTank().getCapacity()) {
                     fluidHandler.fill(fluidStack, true);
+
+                    if (!playerIn.capabilities.isCreativeMode) {
+                        playerIn.setHeldItem(hand, new ItemStack(Items.BUCKET));
+                    }
                     return true;
+
+                } else {
+                    GrowthcraftLogger.getLogger().info("Not enough room in brew kettle " + fluidHandler.getFluidTank().getFluidAmount() + "mb is in Tank0.");
                 }
             }
 
