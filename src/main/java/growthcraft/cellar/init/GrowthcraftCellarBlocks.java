@@ -1,6 +1,7 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.Reference;
+import growthcraft.cellar.blocks.BlockBrewKettle;
 import growthcraft.cellar.blocks.BlockCultureJar;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -15,20 +16,23 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftCellarBlocks {
 
     public static Block blockCultureJar;
+    public static Block blockBrewKettle;
 
     public static void init() {
         blockCultureJar = new BlockCultureJar("culture_jar");
+        blockBrewKettle = new BlockBrewKettle("brew_kettle");
 
     }
 
     public static void register() {
         registerBlock(blockCultureJar, true, true);
+        registerBlock(blockBrewKettle, true, true);
 
     }
 
     public static void registerRenders() {
         registerRender(blockCultureJar);
-
+        registerRender(blockBrewKettle);
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock) {

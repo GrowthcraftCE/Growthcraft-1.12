@@ -3,6 +3,7 @@ package growthcraft.cellar.proxy;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 
 public class ClientProxy extends CommonProxy {
+
     @Override
     public void preInit() {
         registerRenders();
