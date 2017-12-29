@@ -5,7 +5,6 @@ import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.tileentity.TileEntityBrewKettle;
 import growthcraft.core.handlers.FluidHandler;
 import growthcraft.core.utils.GrowthcraftLogger;
-import growthcraft.milk.blocks.fluids.FluidRennet;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -68,7 +67,8 @@ public class BlockBrewKettle extends Block implements ITileEntityProvider {
                 GrowthcraftLogger.getLogger().info("Holding " + fluidStack.getUnlocalizedName() + " which is a " + fluidStack.getFluid().getClass().toString());
             }
 
-            if (fluidStack != null && fluidStack.getFluid() instanceof FluidRennet) {
+            //if (fluidStack != null && fluidStack.getFluid() instanceof FluidRennet) {
+            if (fluidStack != null) {
                 FluidHandler fluidHandler = (FluidHandler) tileEntity.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
 
                 if (fluidHandler.getFluidTank().getFluidAmount() + fluidStack.amount <= fluidHandler.getFluidTank().getCapacity()) {

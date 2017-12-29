@@ -12,6 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTank;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,17 +70,20 @@ public class GuiBrewKettle extends GuiContainer {
         this.mc.getTextureManager().bindTexture(BREW_KETTLE_TEXTURE);
         this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
 
+        renderTankGui(tileEntityBrewKettle.getTank("output"), 114, 17, 16);
+        renderTankGui(tileEntityBrewKettle.getTank("input"), 46, 17, 16);
+
+    }
+
+    private void renderTankGui(FluidTank tank, int xCoord, int yCoord, int widthLn) {
         try {
-            TextureAtlasSprite fluidTexture = mc.getTextureMapBlocks().getTextureExtry(tileEntityBrewKettle.getTankFluidStack().getFluid().getStill().toString());
+            TextureAtlasSprite fluidTexture = mc.getTextureMapBlocks().getTextureExtry(tank.getFluid().getFluid().getStill().toString());
             mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
-            int fluidHeight = (tileEntityBrewKettle.getTankAmount() * 52) / tileEntityBrewKettle.getTankCapacity();
-            drawTexturedModalRect(46 + guiLeft, 17 + guiTop + (52 - fluidHeight), fluidTexture, 16, fluidHeight);
+            int fluidHeight = (tank.getFluidAmount() * 52) / tank.getCapacity();
+            drawTexturedModalRect(xCoord + guiLeft, yCoord + guiTop + (52 - fluidHeight), fluidTexture, widthLn, fluidHeight);
         } catch (NullPointerException npe) {
             /* Simply catch the NPE if the getFluid from the TE is NULL */
         }
-
-        // TODO: Added texture for rendering the Tank1
-
     }
 
     @Override
@@ -99,6 +103,7 @@ public class GuiBrewKettle extends GuiContainer {
         this.progressBarCooking.setMin(tileEntityBrewKettle.getBrewTime()).setMax(tileEntityBrewKettle.getMaxBrewTime());
         this.progressBarCooking.draw(this.mc);
 
+
         // If the mouse is over the progress bar ...
         if (isInRect(guiLeft + 98, guiTop + 30, 9, 28, mouseX, mouseY)) {
             hoveringText.add("Progress: ");
@@ -109,17 +114,24 @@ public class GuiBrewKettle extends GuiContainer {
             }
         }
 
-        if (isInRect(guiLeft + 46, guiTop + 17, 16, 51, mouseX, mouseY)) {
-            if (fluidStack != null) {
-                hoveringText.add(fluidStack.getLocalizedName() + " (" + fluidStack.amount + "mb)");
+        try {
+            if (isInRect(guiLeft + 46, guiTop + 17, 16, 51, mouseX, mouseY)) {
+                if (fluidStack != null) {
+                    hoveringText.add(fluidStack.getLocalizedName() + " (" + fluidStack.amount + "mb)");
+                }
             }
-        }
 
-        // TODO: MouseOver outputFluidSlot
-        if (isInRect(guiLeft + 114, guiTop + 17, 16, 51, mouseX, mouseY)) {
-            hoveringText.add("Need to implement output fluid.");
-        }
+            if (isInRect(guiLeft + 114, guiTop + 17, 16, 51, mouseX, mouseY)) {
+                FluidTank tankOutput = tileEntityBrewKettle.getTank("output");
 
+                if (tankOutput != null) {
+                    hoveringText.add(tankOutput.getFluid().getLocalizedName() + " (" + tankOutput.getFluidAmount() + "mb)");
+                }
+            }
+
+        } catch (NullPointerException npe) {
+
+        }
         if (!hoveringText.isEmpty()) {
             drawHoveringText(hoveringText, mouseX - guiLeft, mouseY - guiTop, fontRenderer);
         }
