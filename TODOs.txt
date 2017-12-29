@@ -1,6 +1,10 @@
-BUG: Fix string formatting with arguments.
-BUG: Booze color is too dark.
+BUG: Fix string formatting with arguments when logging.
 
-TODO: Add yeast
-TODO: Languages for boozes.
-TODO: Buckets für Boozes to appear in CreativeTab.
+TODO: Add Grapewine name enum.
+TODO: Add yeasts
+TODO: Languages for grapewine.
+TODO: Booze Fluid behavior like bubbles etc.
+
+Solved:
+DONE: Buckets für Boozes to appear in CreativeTab.
+NOTABUG: BUG: Booze color is too dark.

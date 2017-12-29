@@ -33,7 +33,7 @@ public class GrowthcraftFluid extends Fluid implements IDescribable
 	@Override
 	public int getColor()
 	{
-		return color;
+		return color | 0xFF000000;
 	}
 
 	/**

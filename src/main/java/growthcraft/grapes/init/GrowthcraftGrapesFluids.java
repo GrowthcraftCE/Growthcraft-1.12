@@ -86,7 +86,6 @@ public class GrowthcraftGrapesFluids
 		for (int i = 0; i < grapeWineBooze.length; ++i) {
 			grapeWine.registerRender(i, "grapewine");
 		}
-
 	}
 	
 	// TODO: Move to BoozeRegistryHelper

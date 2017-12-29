@@ -12,8 +12,8 @@ public class Booze extends GrowthcraftFluid
 {
 	// REVISE_ME 0
 	
-	private static final ResourceLocation ICON_STILL = new ResourceLocation(Reference.MODID.toLowerCase(Locale.US), "blocks/fluids/booze_still");
-	private static final ResourceLocation ICON_FLOW = new ResourceLocation(Reference.MODID.toLowerCase(Locale.US), "blocks/fluids/booze_flow");
+	private static final ResourceLocation ICON_STILL = new ResourceLocation(Reference.MODID, "blocks/fluids/booze_still");
+	private static final ResourceLocation ICON_FLOW = new ResourceLocation(Reference.MODID, "blocks/fluids/booze_flow");
 	
 	public Booze(@Nonnull String fluidName )
 	{
