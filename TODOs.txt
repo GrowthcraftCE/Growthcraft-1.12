@@ -1,0 +1,6 @@
+BUG: Fix string formatting with arguments.
+BUG: Booze color is too dark.
+
+TODO: Add yeast
+TODO: Languages for boozes.
+TODO: Buckets für Boozes to appear in CreativeTab.

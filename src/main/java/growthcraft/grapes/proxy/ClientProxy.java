@@ -1,6 +1,7 @@
 package growthcraft.grapes.proxy;
 
 import growthcraft.grapes.Reference;
+import growthcraft.grapes.init.GrowthcraftGrapesFluids;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import growthcraft.grapes.tileentity.TileEntityGrapeVineFruit;
 import growthcraft.grapes.tileentity.render.RendererGrapeVineFruit;
@@ -14,11 +15,13 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         registerModelBakeryVariants();
         registerSpecialRenders();
+        GrowthcraftGrapesFluids.registerBoozeColorHandler();
     }
 
     @Override
     public void registerRenders() {
         GrowthcraftGrapesItems.registerRenders();
+        GrowthcraftGrapesFluids.registerRenders();
     }
 
     @Override
@@ -28,6 +31,7 @@ public class ClientProxy extends CommonProxy {
                 new ResourceLocation(Reference.MODID, "grape_green"),
                 new ResourceLocation(Reference.MODID, "grape_red")
         );
+        GrowthcraftGrapesFluids.registerItemVariants();
     }
 
     @Override

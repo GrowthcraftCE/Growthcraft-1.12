@@ -44,10 +44,10 @@ public class BoozeRegistryHelper {
 	}
 
 	public static void initializeBooze(BoozeDefinition[] boozes, BlockBoozeDefinition[] grapeWineFluids) {
-		// OPEN
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i].getFluid());
+//TODO			boozeBlock.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
 			grapeWineFluids[i] = new BlockBoozeDefinition(boozeBlock);
 		}		
 	}

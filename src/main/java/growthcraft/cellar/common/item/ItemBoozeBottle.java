@@ -182,7 +182,8 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName();
+		int meta = stack.getItemDamage();
+		return super.getUnlocalizedName() + "_" + meta;
 	}
 
 	@Override

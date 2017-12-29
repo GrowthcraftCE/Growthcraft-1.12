@@ -21,8 +21,13 @@ import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.handlers.EnumHandler;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.block.model.ModelBakery;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -32,7 +37,6 @@ import net.minecraftforge.oredict.OreDictionary;
 public class GrowthcraftGrapesFluids
 {
 	// REVISE_ME Move blocks to specific class
-	// INITIALIZE
 	
 	public static BoozeDefinition[] grapeWineBooze;
 	public static BlockBoozeDefinition[] grapeWineFluidBlocks;
@@ -59,12 +63,51 @@ public class GrowthcraftGrapesFluids
 	}
 	
 	public static void register() {
-		grapeWine.register(new ResourceLocation(Reference.MODID, "grapeWine"));
+		grapeWine.register(new ResourceLocation(Reference.MODID, "grapewine"));
 		
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, grapeWineFluidBlocks, grapeWine, "booze_");
 		registerFermentations();
 		
 		OreDictionary.registerOre("foodGrapejuice", grapeWine.asStack(1, 0));
+	}
+	
+	// TODO: Move to BoozeRegistryHelper
+	public static void registerItemVariants() {
+		ResourceLocation[] variants = new ResourceLocation[grapeWineBooze.length];
+		ResourceLocation name = grapeWine.getItem().getRegistryName();
+		for (int i = 0; i < grapeWineBooze.length; ++i) {
+			variants[i] = new ResourceLocation(name.getResourceDomain(), name.getResourcePath() + "_" + i);
+		}
+		ModelBakery.registerItemVariants(grapeWine.getItem(), variants);
+	}
+	
+	// TODO: Move to BoozeRegistryHelper
+	public static void registerBoozeItemRender() {
+		for (int i = 0; i < grapeWineBooze.length; ++i) {
+			grapeWine.registerRender(i, "grapewine");
+		}
+
+	}
+	
+	// TODO: Move to BoozeRegistryHelper
+	public static void registerBoozeColorHandler() {
+		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		itemColors.registerItemColorHandler(new IItemColor() {
+
+			@Override
+			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
+				if( tintIndex != 0 )
+					return -1;
+				Item item = stack.getItem();
+				if( !(item instanceof ItemBoozeBottle) )
+					return -1;
+				ItemBoozeBottle boozeBottle = (ItemBoozeBottle)item;
+				int value = boozeBottle.getColor(stack);
+				
+				return value;
+			}
+			
+		}, grapeWine.getItem());
 	}
 	
 	private static void registerFermentations() {
@@ -158,6 +201,7 @@ public class GrowthcraftGrapesFluids
 	
 	public static void registerRenders() {
 		BoozeRegistryHelper.registerBoozeRenderers(grapeWineBooze, grapeWineFluidBlocks);
-		grapeWine.registerRender();
+//		grapeWine.registerRender();
+		registerBoozeItemRender();
 	}
 }
