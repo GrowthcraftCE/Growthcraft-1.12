@@ -24,3 +24,9 @@ fluids.tag.poisoned=Poisoned
 fluids.tag.potent=Potent
 fluids.tag.wine=Wine
 fluids.tag.young=Young
+
+# Gui
+container.brew_kettle=Brew Kettle
+
+# Tile Entities
+tile.brew_kettle.name=Brew Kettle

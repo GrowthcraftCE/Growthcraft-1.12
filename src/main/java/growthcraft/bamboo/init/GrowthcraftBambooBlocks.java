@@ -3,7 +3,6 @@ package growthcraft.bamboo.init;
 import growthcraft.bamboo.Reference;
 import growthcraft.bamboo.blocks.*;
 import growthcraft.bamboo.handler.ColorHandlerBlockBambooLeaves;
-import growthcraft.core.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.Minecraft;
@@ -86,7 +85,6 @@ public class GrowthcraftBambooBlocks {
 
     @SideOnly(Side.CLIENT)
     public static void registerBlockColorHandler(Block block) {
-        GrowthcraftLogger.getLogger().info("[DEBUG::DEBUG] Registering " + block.getUnlocalizedName() + " color handlers.");
         BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
         blockColors.registerBlockColorHandler(new ColorHandlerBlockBambooLeaves(), block);
     }

@@ -47,11 +47,12 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
         return BlockRenderLayer.CUTOUT;
     }
 
-    public boolean isFullCube(IBlockState state)
-    {
+    @SuppressWarnings("deprecation")
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;

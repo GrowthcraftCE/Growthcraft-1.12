@@ -18,18 +18,18 @@ public class BlockSalt extends Block {
         super(Material.CLAY);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
-        this.setHardness(1.0F);
+        this.setHardness(0.5F);
         this.setSoundType(SoundType.STONE);
     }
 
     @Override
     public int quantityDroppedWithBonus(int fortune, Random random) {
-        return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 1, 13);
+        return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 1, 9);
     }
 
     @Override
     public int quantityDropped(Random random) {
-        return 9;
+        return random.nextInt(4) + 1;
     }
 
     @Override

@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCellar {
@@ -53,8 +54,12 @@ public class GrowthcraftCellar {
     	
         GrowthcraftCellarItems.init();
         GrowthcraftCellarItems.register();
+        
+        GrowthcraftCellarBlocks.init();
+        GrowthcraftCellarBlocks.register();
 
-        proxy.registerRenders();
+        proxy.preInit();
+        proxy.registerTitleEntities();
         GrowthcraftCellarAchievements.instance().init();
         GrowthcraftCellarPotions.registerPotions();
         
@@ -64,13 +69,21 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.registerModelBakeryVariants();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
+
+
+        GrowthcraftCellarRecipes.registerCraftingRecipes();
+
+        proxy.init();
+
         
         userApis.init();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
+    	// ... Any custom event buses
+    	
     	userApis.loadConfigs();
     	userApis.postInit();
     	CellarEvents.registerEvents();
