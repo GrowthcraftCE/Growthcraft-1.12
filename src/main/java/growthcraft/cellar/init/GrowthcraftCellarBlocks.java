@@ -27,7 +27,6 @@ public class GrowthcraftCellarBlocks {
     public static void register() {
         registerBlock(blockCultureJar, true, true);
         registerBlock(blockBrewKettle, true, true);
-
     }
 
     public static void registerRenders() {

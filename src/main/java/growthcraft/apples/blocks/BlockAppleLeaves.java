@@ -10,11 +10,13 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -116,4 +118,18 @@ public class BlockAppleLeaves extends Block implements IGrowable {
         }
     }
 
+    @Override
+    public int quantityDroppedWithBonus(int fortune, Random random) {
+        return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 0, 2);
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return random.nextInt(5) == 0 ? 1 : 0;
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return Item.getItemFromBlock(GrowthcraftApplesBlocks.blockAppleSapling);
+    }
 }

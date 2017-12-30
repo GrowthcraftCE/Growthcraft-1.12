@@ -14,7 +14,7 @@ public class RecipeHandler {
                 'A', Blocks.PLANKS,
                 'B', Items.LEAD,
                 'C', Items.STRING
-                );
+        );
     }
 
     public static void registerSmeltingRecipes() {

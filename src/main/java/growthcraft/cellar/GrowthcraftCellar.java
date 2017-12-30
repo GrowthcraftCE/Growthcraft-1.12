@@ -2,6 +2,7 @@ package growthcraft.cellar;
 
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.proxy.CommonProxy;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -39,7 +40,12 @@ public class GrowthcraftCellar {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
-        proxy.registerModelBakeryVariants();
+
+
+        GrowthcraftCellarRecipes.registerCraftingRecipes();
+
+        proxy.init();
+
     }
 
     @Mod.EventHandler
