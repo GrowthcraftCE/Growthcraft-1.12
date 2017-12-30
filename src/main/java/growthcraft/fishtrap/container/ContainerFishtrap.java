@@ -57,10 +57,11 @@ public class ContainerFishtrap extends Container {
         return true;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public ItemStack transferStackInSlot(EntityPlayer playerIn, int slotIndex) {
         ItemStack itemStackCopy = ItemStack.EMPTY;
-        Slot slot = (Slot) this.inventorySlots.get(slotIndex);
+        Slot slot = this.inventorySlots.get(slotIndex);
         if(slot != null && slot.getHasStack()) {
             ItemStack itemStack = slot.getStack();
             itemStackCopy = itemStack.copy();
@@ -71,15 +72,12 @@ public class ContainerFishtrap extends Container {
             } else if (!this.mergeItemStack(itemStack, 0, 9, false)) {
                 return ItemStack.EMPTY;
             }
-
             if(itemStack.getCount() == 0) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
-
         }
-
         return itemStackCopy;
     }
 

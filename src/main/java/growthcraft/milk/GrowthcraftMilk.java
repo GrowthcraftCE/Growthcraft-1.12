@@ -1,8 +1,12 @@
 package growthcraft.milk;
 
+import growthcraft.milk.handlers.EntityDropsHandler;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.proxy.CommonProxy;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -18,8 +22,15 @@ public class GrowthcraftMilk {
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+
+        GrowthcraftMilkFluids.init();
+        GrowthcraftMilkFluids.register();
 
         GrowthcraftMilkBlocks.init();
         GrowthcraftMilkItems.init();
@@ -37,6 +48,7 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new EntityDropsHandler());
     }
 
 

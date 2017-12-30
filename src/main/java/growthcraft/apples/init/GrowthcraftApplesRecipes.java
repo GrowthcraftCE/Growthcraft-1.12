@@ -55,9 +55,10 @@ public class GrowthcraftApplesRecipes {
                 'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1) );
 
         GameRegistry.addShapedRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleDoor, 1),
+                new ItemStack(GrowthcraftApplesItems.itemAppleDoor),
                 "PP ", "PP ", "PP ",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1) );
+                'P', GrowthcraftApplesBlocks.blockApplePlanks
+        );
 
         GameRegistry.addShapelessRecipe(
                 new ItemStack(GrowthcraftApplesBlocks.blockAppleSapling, 1),

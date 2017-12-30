@@ -1,0 +1,490 @@
+﻿{
+  "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+  "ambientocclusion": false,
+  "textures": {
+    "0": "growthcraft_milk:blocks/pancheon",
+    "particle": "growthcraft_milk:blocks/pancheon"
+  },
+  "elements": [
+    {
+      "name": "bottom",
+      "from": [
+        1,
+        0,
+        1
+      ],
+      "to": [
+        15,
+        1,
+        15
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            7.75,
+            4,
+            11.25,
+            4.25
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            7.75,
+            4,
+            11.25,
+            4.25
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            7.75,
+            4,
+            11.25,
+            4.25
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            7.75,
+            4,
+            11.25,
+            4.25
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            4.25,
+            0.5,
+            7.75,
+            4
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            7.75,
+            0.5,
+            11.25,
+            4
+          ],
+          "texture": "#0"
+        }
+      },
+      "rotation": {
+        "origin": [
+          9,
+          8,
+          9
+        ],
+        "axis": "y",
+        "angle": 0
+      },
+      "type": "cube"
+    },
+    {
+      "name": "north_edge",
+      "from": [
+        1,
+        1,
+        0
+      ],
+      "to": [
+        15,
+        5,
+        1
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            1,
+            4
+          ],
+          "texture": "#missing"
+        },
+        "south": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            1,
+            4
+          ],
+          "texture": "#missing"
+        },
+        "up": {
+          "uv": [
+            0.25,
+            13.5,
+            2.75,
+            13.75
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0.25,
+            13.5,
+            7.25,
+            13.75
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "south_edge",
+      "from": [
+        1,
+        1,
+        15
+      ],
+      "to": [
+        15,
+        5,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            1,
+            4
+          ],
+          "texture": "#missing"
+        },
+        "south": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            1,
+            4
+          ],
+          "texture": "#missing"
+        },
+        "up": {
+          "uv": [
+            0.25,
+            13.5,
+            2.75,
+            13.75
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            0.25,
+            13.5,
+            7.25,
+            13.75
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "west_edge",
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        1,
+        5,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            11.5,
+            8.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            8,
+            11.5,
+            8.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            11.5,
+            7.5,
+            12,
+            11.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            11.5,
+            7.5,
+            12,
+            11.5
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    },
+    {
+      "name": "east_edge",
+      "from": [
+        15,
+        1,
+        0
+      ],
+      "to": [
+        16,
+        5,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            8,
+            11.5,
+            8.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            8,
+            11.5,
+            8.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            8,
+            11.5,
+            11.5,
+            12.5
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            11.5,
+            7.5,
+            12,
+            11.5
+          ],
+          "texture": "#0"
+        },
+        "down": {
+          "uv": [
+            11.5,
+            7.5,
+            12,
+            11.5
+          ],
+          "texture": "#0"
+        }
+      },
+      "type": "cube"
+    }
+  ],
+  "display": {
+    "thirdperson_righthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        64,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        3.5,
+        0
+      ]
+    },
+    "firstperson_righthand": {
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        60
+      ]
+    },
+    "ground": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "firstperson_lefthand": {
+      "scale": [
+        0.4,
+        0.4,
+        0.4
+      ],
+      "rotation": [
+        0,
+        0,
+        60
+      ],
+      "translation": [
+        0,
+        0,
+        0
+      ]
+    },
+    "thirdperson_lefthand": {
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "rotation": [
+        64,
+        45,
+        0
+      ],
+      "translation": [
+        0,
+        3.5,
+        0
+      ]
+    },
+    "fixed": {
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ],
+      "rotation": [
+        91,
+        180,
+        -180
+      ],
+      "translation": [
+        0.5,
+        -0.5,
+        -6
+      ]
+    },
+    "gui": {
+      "scale": [
+        0.75,
+        0.75,
+        0.75
+      ],
+      "rotation": [
+        30,
+        225,
+        0
+      ],
+      "translation": [
+        0,
+        1,
+        0
+      ]
+    }
+  }
+}

@@ -1,35 +1,55 @@
 package growthcraft.cellar;
 
+import growthcraft.cellar.client.gui.GuiHandler;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.proxy.CommonProxy;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCellar {
+
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftCellar instance;
 
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    static {
+        FluidRegistry.enableUniversalBucket();
+    }
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        //GrowthcraftGrapesItems.init();
-        //GrowthcraftGrapesItems.register();
+        // Fluids First
 
-        proxy.registerRenders();
+        GrowthcraftCellarBlocks.init();
+
+        GrowthcraftCellarBlocks.register();
+
+        proxy.preInit();
+        proxy.registerTitleEntities();
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.registerModelBakeryVariants();
+        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
+
+
+        GrowthcraftCellarRecipes.registerCraftingRecipes();
+
+        proxy.init();
+
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-
+        // Any custom event buses
     }
 }

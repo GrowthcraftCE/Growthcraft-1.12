@@ -4,7 +4,6 @@ import growthcraft.apples.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -49,7 +48,7 @@ public class BlockApple extends BlockBush implements IGrowable {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] { AGE });
+        return new BlockStateContainer(this, AGE);
     }
 
     @Override
@@ -91,13 +90,12 @@ public class BlockApple extends BlockBush implements IGrowable {
 
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        if (this.getAge(state) != 7) { return true; }
-        return false;
+        return this.getAge(state) != 7;
     }
 
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return this.getAge(state) < 7 ? true : false;
+        return this.getAge(state) < 7;
     }
 
     @Override
@@ -123,14 +121,11 @@ public class BlockApple extends BlockBush implements IGrowable {
     @Override
     public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
-        if ( block instanceof BlockAppleLeaves) {
-            return true;
-        }
-        return false;
+        return block instanceof BlockAppleLeaves;
     }
 
     private int getAge(IBlockState state) {
-        return ((Integer)state.getValue(AGE)).intValue();
+        return state.getValue(AGE).intValue();
     }
 
     @Override
