@@ -78,8 +78,6 @@ public class GrowthcraftItemFoodBase extends ItemFood
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
 	{
-		ItemStack result = stack;
-		
 		if( entityLiving instanceof EntityPlayer ) {
 			EntityPlayer player = (EntityPlayer)entityLiving;
 			
@@ -87,19 +85,19 @@ public class GrowthcraftItemFoodBase extends ItemFood
 			{
 				if (!worldIn.isRemote)
 				{
-					result = ItemUtils.consumeStack(stack.splitStack(1));
-//					ItemUtils.addStackToPlayer(result, player, worldIn, false);
+					stack = stack.copy();
+					final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
+					ItemUtils.addStackToPlayer(result, player, worldIn, false);
 				}
 			}
 
 			player.getFoodStats().addStats(this, stack);
-//			worldIn.playSoundAtEntity(player, "random.burp", 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
 			worldIn.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
 			this.onFoodEaten(stack, worldIn, player);
 		}
 
 //		return result.getCount() <= 0 ? null : result;
-		return result;
+		return stack;
 	}
 
 	@Override

@@ -1,9 +1,12 @@
 package growthcraft.cellar.init;
 
+import growthcraft.cellar.Reference;
 import growthcraft.cellar.api.booze.effect.EffectTipsy;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.stats.CellarAchievement;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GrowthcraftCellarPotions {
 	// REVISE_ME 0
@@ -11,8 +14,15 @@ public class GrowthcraftCellarPotions {
 	public static Potion potionTipsy;
 	
 	public static void registerPotions() {
-		potionTipsy = new PotionCellar(false, 0, 0, 0).setPotionName("potion.tipsy");
+		// TODO: Add some class PotionDefinition like BlockDefinition or ItemDefinition
+		potionTipsy = new PotionCellar(false, 0, 1, 0).setPotionName("potion.tipsy");
+		registerPotion(potionTipsy);
+		
 		EffectTipsy.potionTipsy = potionTipsy;
 		EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
+	}
+	
+	protected static void registerPotion(Potion potion) {
+		GameRegistry.register(potion, new ResourceLocation(Reference.MODID, potion.getName()));
 	}
 }

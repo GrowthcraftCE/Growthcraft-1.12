@@ -6,5 +6,7 @@ TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
 
 Solved:
+DONE: BUG: Tipsy Effect not saved when game is saved.
+DONE: BUG: No Tipsy Effect icon. 
 DONE: Buckets für Boozes to appear in CreativeTab.
 NOTABUG: BUG: Booze color is too dark.

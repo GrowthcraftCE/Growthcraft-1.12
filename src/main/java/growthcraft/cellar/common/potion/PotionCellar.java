@@ -8,9 +8,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionCellar extends Potion {
-	// REVISE_ME 0
-	// OPEN
-	
 	private static final ResourceLocation POTIONS_LOCATION = new ResourceLocation(Reference.MODID, "textures/potions/potion_tipsy.png");
 	
 	public PotionCellar(boolean isBadEffectIn, int liquidColorIn, int x, int y) {
