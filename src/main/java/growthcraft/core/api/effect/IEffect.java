@@ -2,8 +2,8 @@ package growthcraft.core.api.effect;
 
 import java.util.Random;
 
+import growthcraft.core.api.nbt.INBTSerializableContext;
 import growthcraft.core.description.IDescribable;
-import growthcraft.core.nbt.INBTSerializableContext;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
 

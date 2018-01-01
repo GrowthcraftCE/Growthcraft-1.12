@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 
-import growthcraft.core.nbt.INBTSerializableContext;
+import growthcraft.core.api.nbt.INBTSerializableContext;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class AbstractClassRegistry<T extends INBTSerializableContext> {

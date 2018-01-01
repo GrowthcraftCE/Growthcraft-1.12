@@ -1,4 +1,4 @@
-package growthcraft.core.nbt;
+package growthcraft.core.api.nbt;
 
 import net.minecraft.nbt.NBTTagCompound;
 

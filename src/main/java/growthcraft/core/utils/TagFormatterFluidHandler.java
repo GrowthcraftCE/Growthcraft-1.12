@@ -2,7 +2,7 @@ package growthcraft.core.utils;
 
 import java.util.List;
 
-import growthcraft.core.nbt.NBTType;
+import growthcraft.core.api.nbt.NBTType;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

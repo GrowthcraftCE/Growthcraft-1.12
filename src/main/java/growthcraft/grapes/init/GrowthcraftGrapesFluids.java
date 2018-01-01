@@ -2,10 +2,8 @@ package growthcraft.grapes.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.api.booze.Booze;
 import growthcraft.cellar.api.booze.BoozeTag;
 import growthcraft.cellar.api.processing.common.Residue;
-import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.BoozeDefinition;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
@@ -30,13 +28,13 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GrowthcraftGrapesFluids
 {
 	// REVISE_ME Move blocks to specific class
+	// REVISE_ME Move items to specific class
 	
 	public static BoozeDefinition[] grapeWineBooze;
 	public static BlockBoozeDefinition[] grapeWineFluidBlocks;

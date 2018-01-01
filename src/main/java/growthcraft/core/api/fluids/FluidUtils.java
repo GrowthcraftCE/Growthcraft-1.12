@@ -19,7 +19,9 @@ import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.UniversalBucket;
+import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class FluidUtils
 {
@@ -163,7 +165,11 @@ public class FluidUtils
 			// An invalid fluid
 			return null;
 		}
+		return replaceFluidStack(fluid, srcStack);
+	}
 
+	public static FluidStack replaceFluidStack(Fluid fluid, FluidStack srcStack)
+	{
 		if (srcStack == null)
 		{
 			return new FluidStack(fluid, 0);
@@ -171,6 +177,7 @@ public class FluidUtils
 		return new FluidStack(fluid, srcStack.amount);
 	}
 
+	
 	public static FluidStack updateFluidStackAmount(FluidStack srcStack, int amount)
 	{
 		if (srcStack == null)
@@ -179,5 +186,14 @@ public class FluidUtils
 		}
 		srcStack.amount = amount;
 		return srcStack;
+	}
+
+	public static FluidTankInfo[] convertTankPropsToInfo(IFluidTankProperties[] tankProperties) {
+		FluidTankInfo[] infos = new FluidTankInfo[tankProperties.length];
+		for( int i = 0; i < tankProperties.length; i ++ ) {
+			IFluidTankProperties prop = tankProperties[i];
+			infos[i] = new FluidTankInfo(prop.getContents(), prop.getCapacity());
+		}
+		return infos;
 	}
 }

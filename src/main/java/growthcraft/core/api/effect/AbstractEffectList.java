@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.nbt.NBTHelper;
+import growthcraft.core.api.nbt.NBTHelper;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**

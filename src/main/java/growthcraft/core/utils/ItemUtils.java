@@ -178,7 +178,7 @@ public class ItemUtils
 		return player.inventory.decrStackSize(player.inventory.currentItem, amount);
 	}
 
-	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, int x, int y, int z, boolean checkCreative)
+	public static void addStackToPlayer(ItemStack itemstack, @Nonnull EntityPlayer player, World world, BlockPos pos, boolean checkCreative)
 	{
 		final boolean flag = checkCreative ? !player.capabilities.isCreativeMode : true;
 		if (flag)
@@ -196,7 +196,8 @@ public class ItemUtils
 
 	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, World world, boolean checkCreative)
 	{
-		addStackToPlayer(itemstack, player, world, (int)player.posX, (int)player.posY, (int)player.posZ, checkCreative);
+		BlockPos pos = new BlockPos((int)player.posX, (int)player.posY, (int)player.posZ);
+		addStackToPlayer(itemstack, player, world, pos, checkCreative);
 	}
 
 	public static void addStackToPlayer(ItemStack itemstack, EntityPlayer player, boolean checkCreative)
@@ -220,8 +221,12 @@ public class ItemUtils
 			world.spawnEntity(entityitem);
 		}
 	}
+	
+	public static void spawnItemStack(World world, BlockPos pos, ItemStack stack, Random random) {
+		spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), stack, random);
+	}
 
-	public static void spawnBrokenItemStack(World world, int x, int y, int z, ItemStack stack, Random random)
+	public static void spawnBrokenItemStack(World world, BlockPos pos, ItemStack stack, Random random)
 	{
 		if (stack != null)
 		{
@@ -236,7 +241,7 @@ public class ItemUtils
 
 				final ItemStack entityStack = stack.splitStack(k1);
 
-				spawnItemStack(world, x, y, z, entityStack, random);
+				spawnItemStack(world, pos.getX(), pos.getY(), pos.getZ(), entityStack, random);
 			}
 		}
 	}
@@ -320,7 +325,7 @@ public class ItemUtils
 		return isIToolWrench(item);
 	}
 
-	public static boolean canWrench(ItemStack item, EntityPlayer player, int x, int y, int z)
+	public static boolean canWrench(ItemStack item, EntityPlayer player, BlockPos pos)
 	{
 		// OPEN_ADHOC
 		
@@ -331,7 +336,7 @@ public class ItemUtils
 		return false;
 	}
 
-	public static void wrenchUsed(ItemStack item, EntityPlayer player, int x, int y, int z)
+	public static void wrenchUsed(ItemStack item, EntityPlayer player, BlockPos pos)
 	{
 		// OPEN_ADHOC
 		

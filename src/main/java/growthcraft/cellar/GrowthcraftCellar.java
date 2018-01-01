@@ -4,14 +4,18 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import growthcraft.cellar.api.CellarRegistry;
+import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
 import growthcraft.cellar.events.CellarEvents;
 import growthcraft.cellar.init.GrowthcraftCellarPotions;
+import growthcraft.cellar.init.GrowthcraftCellarRecipes;
+import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.proxy.CommonProxy;
 import growthcraft.cellar.stats.GrowthcraftCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
 import growthcraft.cellar.util.UserApis;
+import growthcraft.core.GrowthcraftGuiProvider;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -30,6 +34,8 @@ public class GrowthcraftCellar {
     
     public static CellarBoozeBuilderFactory boozeBuilderFactory;
     private static UserApis userApis = new UserApis();
+    
+    public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
     // REVISE_TEAM
     public static Logger logger = LogManager.getLogger(Reference.MODID);
@@ -69,13 +75,9 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
-
-
+        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
         GrowthcraftCellarRecipes.registerCraftingRecipes();
-
         proxy.init();
-
         
         userApis.init();
     }

@@ -7,8 +7,8 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.api.CoreRegistry;
+import growthcraft.core.api.nbt.NBTHelper;
 import growthcraft.core.description.Describer;
-import growthcraft.core.nbt.NBTHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;

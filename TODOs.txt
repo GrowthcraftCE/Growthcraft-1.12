@@ -1,5 +1,6 @@
 BUG: Fix string formatting with arguments when logging.
 
+TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
 TODO: Add Grapewine name enum.
 TODO: Add yeasts
 TODO: Languages for grapewine.

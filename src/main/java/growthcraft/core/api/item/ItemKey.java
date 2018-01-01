@@ -4,8 +4,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.definition.IItemStackFactory;
+import growthcraft.core.api.nbt.NBTHelper;
 import growthcraft.core.api.utils.HashKey;
-import growthcraft.core.nbt.NBTHelper;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
