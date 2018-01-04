@@ -7,7 +7,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class GrowthcraftBlockBase extends Block
+public abstract class GrowthcraftBlockBase extends Block
 {
 	public GrowthcraftBlockBase(Material material)
 	{

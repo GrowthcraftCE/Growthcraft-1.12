@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.core.api.item.ItemKey;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 
 public class HeatSourceRegistry
 {
@@ -56,6 +57,12 @@ public class HeatSourceRegistry
 		addHeatSource(block, ItemKey.WILDCARD_VALUE);
 	}
 
+	public IHeatSourceBlock getHeatSource(IBlockState state) {
+		Block block = state.getBlock();
+		int meta = block.getMetaFromState(state);
+		return getHeatSource(block, meta);
+	}
+	
 	public IHeatSourceBlock getHeatSource(Block block, int meta)
 	{
 		final HeatMap map = heatSources.get(block);

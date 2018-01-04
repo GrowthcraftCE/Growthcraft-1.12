@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 
 public class GuiHandler extends GrowthcraftGuiProvider implements IGuiHandler {
 
-    public static final int BREW_KETTLE = 0;
+    public static final int BREW_KETTLE = 1;
 
     @Nullable
     @Override

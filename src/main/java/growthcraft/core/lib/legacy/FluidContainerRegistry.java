@@ -8,10 +8,12 @@ import com.google.common.collect.Sets;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
@@ -84,6 +86,15 @@ public abstract class FluidContainerRegistry
     }
 
     private FluidContainerRegistry(){}
+    
+    public static boolean addBucketForFluid(Fluid fluid) {
+    	if( !FluidRegistry.addBucketForFluid(fluid) )
+    		return false;
+    	final UniversalBucket universalBucket = ForgeModContainer.getInstance().universalBucket;
+    	final ItemStack emptyContainer = new ItemStack(Items.BUCKET, 1);
+    	final ItemStack filledContainer = UniversalBucket.getFilledBucket(universalBucket, fluid);
+    	return registerFluidContainer(new FluidStack(fluid, BUCKET_VOLUME), filledContainer, emptyContainer);
+    }
 
     /**
      * Register a new fluid containing item.

@@ -1,6 +1,7 @@
 package growthcraft.core.blocks;
 
 import growthcraft.core.Reference;
+import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.tileentity.TileEntityRopeKnot;
 import growthcraft.grapes.blocks.BlockGrapeVineBush;
@@ -31,7 +32,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockRopeKnot extends Block implements ITileEntityProvider {
+public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockRope {
 
     private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
     private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
@@ -148,9 +149,11 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider {
      * @param facing Requesting Side
      * @return
      */
-    private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    @Override
+    public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
+        // return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
+        return block instanceof IBlockRope;
     }
 
     @Override

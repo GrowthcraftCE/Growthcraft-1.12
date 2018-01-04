@@ -28,7 +28,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class BlockBrewKettle extends BlockCellarContainer implements ITileEntityProvider {
+public class BlockBrewKettle extends Block implements ITileEntityProvider {
 
     private static final AxisAlignedBB AABB_FULL_BLOCK = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,

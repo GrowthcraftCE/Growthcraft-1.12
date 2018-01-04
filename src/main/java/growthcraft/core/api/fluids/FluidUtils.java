@@ -65,7 +65,7 @@ public class FluidUtils
 			// Universal bucket
 //			final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluidStack.getFluid());
 //			fluidContainers.add(bucket);
-			addBucketIfAvailable(fluidContainers, fluidStack.getFluid());
+//			addBucketIfAvailable(fluidContainers, fluidStack.getFluid());
 			
 			return fluidContainers;
 		} 
@@ -86,18 +86,18 @@ public class FluidUtils
 			// Universal bucket
 //			final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluidStack.getFluid());
 //			fluidContainers.add(bucket);
-			addBucketIfAvailable(fluidContainers, fluidStack.getFluid());
+//			addBucketIfAvailable(fluidContainers, fluidStack.getFluid());
 		}
 		
 		return fluidContainers;
 	}
 	
-	private static void addBucketIfAvailable(List<ItemStack> toList, Fluid fluid) {
+/*	private static void addBucketIfAvailable(List<ItemStack> toList, Fluid fluid) {
 		final UniversalBucket universalBucket = ForgeModContainer.getInstance().universalBucket;
 		final ItemStack bucket = UniversalBucket.getFilledBucket(universalBucket, fluid);
 		if( bucket.getItem() != universalBucket || universalBucket.getFluid(bucket) != null )
 			toList.add(bucket);
-	}
+	}*/
 
 	public static FluidStack drainFluidBlock(World world, BlockPos pos, boolean doDrain)
 	{

@@ -42,7 +42,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 
-public class GrowthcraftBlockContainer extends GrowthcraftBlockBase implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider
+public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider
 {
 	public final static PropertyEnum<EnumFacing> TYPE_ROTATION = PropertyEnum.create("rotation", EnumFacing.class);
 	

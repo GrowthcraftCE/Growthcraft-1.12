@@ -1,6 +1,7 @@
 package growthcraft.grapes.blocks;
 
 import growthcraft.core.blocks.BlockRopeFence;
+import growthcraft.core.common.block.IBlockRope;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
 import net.minecraft.block.Block;
@@ -8,6 +9,7 @@ import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -17,7 +19,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockGrapeVineBush extends BlockBush implements IGrowable {
+public class BlockGrapeVineBush extends BlockBush implements IGrowable, IBlockRope {
 
     private static final AxisAlignedBB BOUNDING_BOX =
             new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
@@ -106,4 +108,12 @@ public class BlockGrapeVineBush extends BlockBush implements IGrowable {
             worldIn.destroyBlock(pos.down(), false);
         }
     }
+    
+    @Override
+    public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        // return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
+        return block instanceof IBlockRope;
+    }
+
 }
