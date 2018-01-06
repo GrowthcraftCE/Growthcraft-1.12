@@ -10,9 +10,9 @@ public class PacketSwitchTankButton extends AbstractPacketButton
 {
 	public PacketSwitchTankButton() {}
 
-	public PacketSwitchTankButton(int x, int y, int z)
+	public PacketSwitchTankButton(BlockPos pos)
 	{
-		super(x, y, z);
+		super(pos);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class PacketSwitchTankButton extends AbstractPacketButton
 	public void handleServerSide(EntityPlayer player)
 	{
 		final World world = player.world;
-		final TileEntity te = world.getTileEntity(new BlockPos(xCoord, yCoord, zCoord));
+		final TileEntity te = world.getTileEntity(coord);
 
 		if (te instanceof PREVTileEntityBrewKettle)
 		{

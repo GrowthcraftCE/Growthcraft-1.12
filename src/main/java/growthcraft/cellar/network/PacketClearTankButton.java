@@ -10,9 +10,9 @@ public class PacketClearTankButton extends AbstractPacketButton
 {
 	public PacketClearTankButton(){}
 
-	public PacketClearTankButton(int x, int y, int z)
+	public PacketClearTankButton(BlockPos pos)
 	{
-		super(x, y, z);
+		super(pos);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class PacketClearTankButton extends AbstractPacketButton
 	public void handleServerSide(EntityPlayer player)
 	{
 		final World world = player.world;
-		final TileEntity te = world.getTileEntity(new BlockPos(xCoord, yCoord, zCoord));
+		final TileEntity te = world.getTileEntity(coord);
 
 		if (te instanceof TileEntityCellarDevice)
 		{

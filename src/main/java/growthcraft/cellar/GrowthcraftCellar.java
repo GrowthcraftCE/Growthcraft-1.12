@@ -9,6 +9,7 @@ import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
 import growthcraft.cellar.events.CellarEvents;
 import growthcraft.cellar.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
+import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.proxy.CommonProxy;
@@ -27,7 +28,9 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCellar {
-    @Mod.Instance(Reference.MODID)
+    // REVISE_TEAM
+	
+	@Mod.Instance(Reference.MODID)
     public static GrowthcraftCellar instance;
 
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
@@ -38,10 +41,11 @@ public class GrowthcraftCellar {
     
     public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
-    // REVISE_TEAM
     public static Logger logger = LogManager.getLogger(Reference.MODID);
 
 	public static EventBus CELLAR_BUS = new EventBus();
+	
+	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
@@ -78,7 +82,8 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
+    	packetPipeline.initialise();
+    	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
         GrowthcraftCellarRecipes.registerCraftingRecipes();
         proxy.init();
         
@@ -90,6 +95,7 @@ public class GrowthcraftCellar {
     	// ... Any custom event buses
     	
     	userApis.loadConfigs();
+    	packetPipeline.postInitialise();
     	userApis.postInit();
     	CellarEvents.registerEvents();
     	CellarRegistry.onPostInit();
