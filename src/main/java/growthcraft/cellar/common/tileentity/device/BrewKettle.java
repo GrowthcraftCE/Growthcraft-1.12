@@ -6,6 +6,7 @@ import growthcraft.cellar.api.processing.brewing.BrewingRecipe;
 import growthcraft.cellar.api.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
+import growthcraft.cellar.events.EventBrewed;
 import growthcraft.core.api.definition.IMultiItemStacks;
 import growthcraft.core.common.tileentity.device.DeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;

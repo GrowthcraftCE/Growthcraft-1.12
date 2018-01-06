@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventBus;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
@@ -39,6 +40,8 @@ public class GrowthcraftCellar {
     
     // REVISE_TEAM
     public static Logger logger = LogManager.getLogger(Reference.MODID);
+
+	public static EventBus CELLAR_BUS = new EventBus();
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {

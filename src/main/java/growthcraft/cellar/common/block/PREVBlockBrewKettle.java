@@ -16,9 +16,11 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -28,11 +30,9 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class PREVBlockBrewKettle extends BlockCellarContainer {
-	// OPEN
 	// INITIALIZE
 
-	// TODO: Represent coordinates of AABB_CONTENTS as 0 to 1 numbers
-	private static final AxisAlignedBB AABB_CONTENTS = new AxisAlignedBB(2, 4, 2, 12, 10, 12); // .scale(1f / 16f);
+	private static final AxisAlignedBB AABB_CONTENTS = new AxisAlignedBB(2/16.0, 4/16.0, 2/16.0, 12/16.0, 10/16.0, 12/16.0);
 	
     private static final AxisAlignedBB AABB_FULL_BLOCK = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
@@ -92,18 +92,19 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 						final EntityItem item = (EntityItem)entityIn;
 						if (te.tryMergeItemIntoMainSlot(item.getItem()) != null)
 						{
-							worldIn.playSoundEffect((double)x, (double)y, (double)z, "liquid.splash", 0.3f, 0.5f);
+							worldIn.playSound((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
 						}
 					}
 				}
 				if (GrowthcraftCellarConfig.setFireToFallenLivingEntities)
 				{
+					// TODO: If brew kettle is full and player is on fire, extinguish the player.0
+					
 					if (entityIn instanceof EntityLivingBase)
 					{
 						if (te.getHeatMultiplier() >= 0.5f)
 						{
 							Vec3d epos = new Vec3d(entityIn.posX - pos.getX(), entityIn.posY - pos.getY(), entityIn.posZ - pos.getZ());
-							epos.scale(16);
 							if (AABB_CONTENTS.contains(epos))
 							{
 								entityIn.setFire(1);
@@ -128,6 +129,29 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 		return 1;
 	}
     
+	/************
+	 * RENDERS
+	 ************/
+    
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+    
+	/************
+	 * BOXES
+	 ************/
+
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BASE);
@@ -142,5 +166,23 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
         return AABB_FULL_BLOCK;
     }
 
-    // ...
+	/************
+	 * COMPARATOR
+	 ************/
+	@Override
+	public boolean hasComparatorInputOverride(IBlockState state)
+	{
+		return true;
+	}
+
+	@Override
+	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
+	{
+		final PREVTileEntityBrewKettle te = getTileEntity(world, pos);
+		if (te != null)
+		{
+			return te.getFluidAmountScaled(15, 1);
+		}
+		return 0;
+	}
 }

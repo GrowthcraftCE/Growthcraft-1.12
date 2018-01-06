@@ -1,13 +1,20 @@
 BUG: Fix string formatting with arguments when logging.
+DONE: BUG: Tipsy Effect not saved when game is saved.
+DONE: BUG: No Tipsy Effect icon. 
+NOTABUG: BUG: Booze color is too dark.
 
-TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
-TODO: Add Grapewine name enum.
+-----------------
+Not ported stuff:
+-----------------
 TODO: Add yeasts
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
-
-Solved:
-DONE: BUG: Tipsy Effect not saved when game is saved.
-DONE: BUG: No Tipsy Effect icon. 
 DONE: Buckets für Boozes to appear in CreativeTab.
-NOTABUG: BUG: Booze color is too dark.
+
+------------
+Refactoring:
+------------
+TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
+TODO: Add item handler capability to GrowthcraftTileInventoryBase
+TODO: Add fluid handler capability to GrowthcraftTileDeviceBase
+TODO: Add Grapewine name enum.
