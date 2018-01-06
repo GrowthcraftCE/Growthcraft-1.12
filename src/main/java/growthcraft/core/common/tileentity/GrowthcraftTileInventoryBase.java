@@ -171,6 +171,31 @@ public abstract class GrowthcraftTileInventoryBase extends GrowthcraftTileBase i
 	{
 		return NO_SLOTS;
 	}
+	
+	@Override
+	public boolean isEmpty() {
+		return inventory.isEmpty();
+	}
+	
+	@Override
+	public void clear() {
+		inventory.clear();
+	}
+
+	@Override
+	public int getField(int id) {
+		return inventory.getField(id);
+	}
+
+	@Override
+	public void setField(int id, int value) {
+		inventory.setField(id, value);
+	}
+
+	@Override
+	public int getFieldCount() {
+		return inventory.getFieldCount();
+	}
 
 	protected void readInventoryFromNBT(NBTTagCompound nbt)
 	{

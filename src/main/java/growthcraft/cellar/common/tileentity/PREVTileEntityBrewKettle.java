@@ -3,6 +3,9 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.common.fluids.CellarTank;
+import growthcraft.cellar.common.inventory.PREVContainerBrewKettle;
+import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.core.common.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
@@ -11,14 +14,16 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements ITileHeatedDevice, ITileProgressiveDevice
+public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice
 {
 	public static enum BrewKettleDataID
 	{
@@ -85,7 +90,7 @@ public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
-		return new ContainerBrewKettle(playerInventory, this);
+		return new PREVContainerBrewKettle(playerInventory, this);
 	}
 
 	@Override
@@ -101,9 +106,8 @@ public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements 
 	}
 
 	@Override
-	public void updateEntity()
+	public void update()
 	{
-		super.updateEntity();
 		if (!world.isRemote)
 		{
 			brewKettle.update();
@@ -134,17 +138,17 @@ public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements 
 	}
 
 	@Override
-	public int[] getAccessibleSlotsFromSide(int side)
+	public int[] getSlotsForFace(EnumFacing side)
 	{
 		// 0 = raw
 		// 1 = residue
-		return side == 0 ? rawSlotIDs : residueSlotIDs;
+		return side == EnumFacing.DOWN ? rawSlotIDs : residueSlotIDs;
 	}
 
 	@Override
-	public boolean canExtractItem(int index, ItemStack stack, int side)
+	public boolean canExtractItem(int slot, ItemStack stack, EnumFacing side)
 	{
-		return side != 0 || index == 1;
+		return side != EnumFacing.DOWN || slot == 1;
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
@@ -212,12 +216,12 @@ public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements 
 	}
 
 	@Override
-	public void sendGUINetworkData(Container container, ICrafting iCrafting)
+	public void sendGUINetworkData(Container container, IContainerListener iCrafting)
 	{
 		super.sendGUINetworkData(container, iCrafting);
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME.ordinal(), (int)brewKettle.getTime());
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.TIME_MAX.ordinal(), (int)brewKettle.getTimeMax());
-		iCrafting.sendProgressBarUpdate(container, BrewKettleDataID.HEAT_AMOUNT.ordinal(), (int)(brewKettle.getHeatMultiplier() * 0x7FFF));
+		iCrafting.sendWindowProperty(container, BrewKettleDataID.TIME.ordinal(), (int)brewKettle.getTime());
+		iCrafting.sendWindowProperty(container, BrewKettleDataID.TIME_MAX.ordinal(), (int)brewKettle.getTimeMax());
+		iCrafting.sendWindowProperty(container, BrewKettleDataID.HEAT_AMOUNT.ordinal(), (int)(brewKettle.getHeatMultiplier() * 0x7FFF));
 	}
 
 	@Override

@@ -53,16 +53,23 @@ public interface ILegacyFluidHandler extends IFluidHandler {
 		return false;
 	}
 
-	default int fill(EnumFacing dir, FluidStack stack, boolean shouldFill) {
-		return fill(stack, shouldFill);
+	int fill(EnumFacing dir, FluidStack stack, boolean shouldFill);
+	
+	@Override
+	default int fill(FluidStack stack, boolean shouldFill) {
+		return fill(EnumFacing.NORTH, stack, shouldFill);
 	}
 
-	default FluidStack drain(EnumFacing dir, int amount, boolean shouldDrain) {
-		return drain(amount, shouldDrain);
+	FluidStack drain(EnumFacing dir, int amount, boolean shouldDrain);
+	
+	default FluidStack drain(int amount, boolean shouldDrain) {
+		return drain(EnumFacing.NORTH, amount, shouldDrain);
 	}
 
-	default FluidStack drain(EnumFacing dir, FluidStack stack, boolean shouldDrain) {
-		return drain(stack, shouldDrain);
+	FluidStack drain(EnumFacing dir, FluidStack stack, boolean shouldDrain);
+	
+	default FluidStack drain(FluidStack stack, boolean shouldDrain) {
+		return drain(EnumFacing.NORTH, stack, shouldDrain);
 	}
 
 }
