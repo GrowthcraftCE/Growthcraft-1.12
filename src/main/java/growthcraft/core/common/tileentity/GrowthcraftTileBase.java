@@ -33,7 +33,10 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
 	public void markForUpdate()
 	{
 		IBlockState curState = getWorld().getBlockState(pos);
-		world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+        world.markBlockRangeForRenderUpdate(pos, pos);
+        world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+        world.scheduleBlockUpdate(pos, blockType, 0,0);
+//		world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
 
 //		world.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}

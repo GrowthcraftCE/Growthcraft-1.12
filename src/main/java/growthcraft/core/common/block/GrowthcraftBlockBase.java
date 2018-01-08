@@ -27,6 +27,8 @@ public abstract class GrowthcraftBlockBase extends Block
 	
 	public void markBlockForUpdate(World worldIn, BlockPos pos) {
 		IBlockState state = worldIn.getBlockState(pos);
-		worldIn.notifyBlockUpdate(pos, state, state, BlockFlags.UPDATE_AND_SYNC);
+        worldIn.markBlockRangeForRenderUpdate(pos, pos);
+        worldIn.notifyBlockUpdate(pos, state, state, BlockFlags.UPDATE_AND_SYNC);
+        worldIn.scheduleBlockUpdate(pos, this, 0,0);
 	}
 }

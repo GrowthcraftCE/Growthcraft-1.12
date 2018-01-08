@@ -168,7 +168,8 @@ public class GrowthcraftInternalInventory implements IInventory, INBTSerializabl
 	@Override
 	public ItemStack getStackInSlot(int index)
 	{
-		return items[index];
+		ItemStack stack = items[index];
+		return stack != null? stack : ItemStack.EMPTY;
 	}
 
 	@Override

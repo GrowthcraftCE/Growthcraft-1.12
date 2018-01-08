@@ -35,7 +35,7 @@ public class WidgetFluidTank extends Widget
 			final int h = getHeight();
 			if (tanks.getFluidAmountScaled(h, tankIndex) > 0)
 			{
-				manager.gui.drawFluidStack(manager.gui.getGuiX(), manager.gui.getGuiY(), getX(), getY(), w, h,
+				manager.gui.drawFluidStack(getX(), getY(), manager.gui.getGuiX(), manager.gui.getGuiY(), w, h,
 					tanks.getFluidAmountScaled(h, tankIndex),
 					tanks.getFluidStack(tankIndex)/*, tanks.getFluidTank(tankIndex)*/);
 			}

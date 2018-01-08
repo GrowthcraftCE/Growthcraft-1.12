@@ -170,9 +170,9 @@ public class FluidUtils
 
 	public static FluidStack replaceFluidStack(Fluid fluid, FluidStack srcStack)
 	{
-		if (srcStack == null)
+		if (fluid == null || srcStack == null)
 		{
-			return new FluidStack(fluid, 0);
+			return new FluidStack(FluidRegistry.WATER, 0);
 		}
 		return new FluidStack(fluid, srcStack.amount);
 	}

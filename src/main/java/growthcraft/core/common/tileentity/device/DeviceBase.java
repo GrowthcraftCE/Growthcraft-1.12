@@ -53,7 +53,10 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 		IBlockState curState = getWorld().getBlockState(pos);
 		
 //		getWorld().markBlockForUpdate(parent.xCoord, parent.yCoord, parent.zCoord);
+//		getWorld().notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+		getWorld().markBlockRangeForRenderUpdate(pos, pos);
 		getWorld().notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+		getWorld().scheduleBlockUpdate(pos, parent.getBlockType(), 0,0);
 	}
 
 	protected void markDirty()

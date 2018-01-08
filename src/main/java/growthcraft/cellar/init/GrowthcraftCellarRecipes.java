@@ -30,7 +30,7 @@ public class GrowthcraftCellarRecipes {
         */
 
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GrowthcraftCellarBlocks.blockBrewKettle, 1),
+                new ItemStack(GrowthcraftCellarBlocks.brewKettle.getBlock(), 1),
                 Items.CAULDRON
         );
 

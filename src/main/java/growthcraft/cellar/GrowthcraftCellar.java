@@ -11,6 +11,7 @@ import growthcraft.cellar.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.init.GrowthcraftCellarHeatsources;
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.proxy.CommonProxy;
 import growthcraft.cellar.stats.GrowthcraftCellarAchievements;
@@ -37,7 +38,7 @@ public class GrowthcraftCellar {
     public static CommonProxy proxy;
     
     public static CellarBoozeBuilderFactory boozeBuilderFactory;
-    private static UserApis userApis = new UserApis();
+    public static UserApis userApis = new UserApis();
     
     public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
@@ -64,6 +65,9 @@ public class GrowthcraftCellar {
     	
     	GrowthcraftModifierFunctions.registerBoozeModifierFunctions();
     	boozeBuilderFactory = new CellarBoozeBuilderFactory(userApis);
+    	
+    	GrowthcraftCellarHeatsources.init();
+    	GrowthcraftCellarHeatsources.register();
     	
         GrowthcraftCellarItems.init();
         GrowthcraftCellarItems.register();

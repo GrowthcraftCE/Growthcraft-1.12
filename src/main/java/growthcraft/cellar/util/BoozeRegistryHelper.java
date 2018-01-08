@@ -89,7 +89,7 @@ public class BoozeRegistryHelper {
 		for (int i = 0; i < boozes.length; ++i)
 		{
 //			buckets[i].register(basename + "Bucket." + i);
-			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, "fluid_" + basename + i ));
+			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, "fluid_" + basename + i ), false);
 
 //			EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 

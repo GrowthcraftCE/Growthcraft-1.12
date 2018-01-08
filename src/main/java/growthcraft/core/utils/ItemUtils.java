@@ -82,7 +82,7 @@ public class ItemUtils
 		}
 		else
 		{
-			return new ItemStack(Items.AIR, 1, 0);
+			return ItemStack.EMPTY; //new ItemStack(Items.AIR, 1, 0);
 		}
 	}
 
@@ -113,17 +113,17 @@ public class ItemUtils
 	 */
 	public static ItemStack mergeStacksBang(ItemStack a, ItemStack b)
 	{
-		if (a == null && b == null)
+		if (isEmpty(a) && isEmpty(b))
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
-		else if (a == null && b != null)
+		else if (isEmpty(a) && !isEmpty(b))
 		{
 			final ItemStack result = b.copy();
 			b.setCount(0);
 			return result;
 		}
-		else if (a != null && b == null)
+		else if (!isEmpty(a) && isEmpty(b))
 		{
 			return a;
 		}
@@ -137,7 +137,11 @@ public class ItemUtils
 				return a;
 			}
 		}
-		return null;
+		return ItemStack.EMPTY;
+	}
+	
+	public static boolean isEmpty(ItemStack stack) {
+		return stack == null || stack.isEmpty() || stack.getItem() == null || stack.getItem() == Items.AIR;
 	}
 
 	/**
@@ -149,7 +153,7 @@ public class ItemUtils
 	 */
 	public static ItemStack mergeStacks(ItemStack a, ItemStack b)
 	{
-		return mergeStacksBang(a, b != null ? b.copy() : b);
+		return mergeStacksBang(a, !isEmpty(b) ? b.copy() : b);
 	}
 
 	public static void replacePlayerCurrentItem(@Nonnull EntityPlayer player, ItemStack stack)
@@ -294,7 +298,7 @@ public class ItemUtils
 	 */
 	public static boolean equals(Block block, int meta, ItemStack stack)
 	{
-		if (stack == null) return false;
+		if (isEmpty(stack)) return false;
 		return block == getBlock(stack) && meta == stack.getItemDamage();
 	}
 

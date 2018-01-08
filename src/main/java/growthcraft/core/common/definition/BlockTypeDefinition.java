@@ -88,6 +88,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 		getBlock().setUnlocalizedName(name.getResourcePath());
 		getBlock().setRegistryName(name);
         GameRegistry.register(getBlock());
+        if( itemBlock != null )
         GameRegistry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
         
 		// OPEN
@@ -98,16 +99,25 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	 * @param name - block name
 	 * @param itemBlock - item class to register to
 	 */
-	public void register(ResourceLocation name)
+	public void register(ResourceLocation name, boolean registerItemBlock)
 	{
 		getBlock().setUnlocalizedName(name.getResourcePath());
 		getBlock().setRegistryName(name);
-        GameRegistry.register(getBlock());
         
+        register(registerItemBlock);
 		// OPEN
 //		GameRegistry.registerBlock(getBlock(), itemClass, name);
 	}
 
+	public void register(boolean registerItemBlock)
+	{
+		Block block = getBlock();
+		GameRegistry.register(block);
+		if( registerItemBlock )
+			GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+	}
+
+	
 	/**
 	 * @param name - block name
 	 */
