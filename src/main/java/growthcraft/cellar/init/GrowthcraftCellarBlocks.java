@@ -4,6 +4,7 @@ import growthcraft.cellar.Reference;
 import growthcraft.cellar.blocks.BlockBrewKettle;
 import growthcraft.cellar.blocks.BlockCultureJar;
 import growthcraft.cellar.client.render.RenderBrewKettle;
+import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.PREVBlockBrewKettle;
 import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.common.definition.BlockDefinition;
@@ -23,11 +24,13 @@ public class GrowthcraftCellarBlocks {
     public static Block blockCultureJar;
 //    public static Block blockBrewKettle;
     public static BlockDefinition brewKettle;
+    public static BlockDefinition fermentBarrel;
 
     public static void init() {
         blockCultureJar = new BlockCultureJar("culture_jar");
 //        blockBrewKettle = new BlockBrewKettle("brew_kettle");
         brewKettle = new BlockDefinition(new PREVBlockBrewKettle("brew_kettle"));
+        fermentBarrel = new BlockDefinition(new BlockFermentBarrel("ferment_barrel"));
     }
 
     public static void register() {
@@ -35,6 +38,8 @@ public class GrowthcraftCellarBlocks {
 //        registerBlock(blockBrewKettle, true, true);
         brewKettle.getBlock().setCreativeTab(tabGrowthcraft);
         brewKettle.register(true);
+        fermentBarrel.getBlock().setCreativeTab(tabGrowthcraft);
+        fermentBarrel.register(true);
     }
 
     public static void registerRenders() {
@@ -42,6 +47,7 @@ public class GrowthcraftCellarBlocks {
 //        registerRender(blockBrewKettle);
         brewKettle.registerRender();
         ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
+        fermentBarrel.registerRender();
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock) {
