@@ -35,7 +35,7 @@ public class DeviceInventorySlot
 	public int getSize()
 	{
 		final ItemStack stack = get();
-		if (stack == null) return 0;
+		if (ItemUtils.isEmpty(stack)) return 0;
 		return stack.getCount();
 	}
 
@@ -48,7 +48,7 @@ public class DeviceInventorySlot
 	public int getCapacity()
 	{
 		final ItemStack stack = get();
-		if (stack != null)
+		if (!ItemUtils.isEmpty(stack))
 		{
 			return stack.getMaxStackSize();
 		}
@@ -115,11 +115,11 @@ public class DeviceInventorySlot
 	public boolean hasMatching(ItemStack stack)
 	{
 		final ItemStack s = get();
-		if (stack == null)
+		if (ItemUtils.isEmpty(stack))
 		{
-			return s == null;
+			return ItemUtils.isEmpty(s);
 		}
-		else if (stack != null && s != null)
+		else if (!ItemUtils.isEmpty(stack) && !ItemUtils.isEmpty(s))
 		{
 			return stack.isItemEqual(s);
 		}
@@ -135,11 +135,11 @@ public class DeviceInventorySlot
 	public boolean hasMatching(IMultiItemStacks stack)
 	{
 		final ItemStack s = get();
-		if (stack == null || stack.isEmpty())
+		if (ItemUtils.isEmpty(stack))
 		{
-			return s == null;
+			return ItemUtils.isEmpty(s);
 		}
-		else if (stack != null && s != null)
+		else if (!ItemUtils.isEmpty(stack) && !ItemUtils.isEmpty(s))
 		{
 			return stack.containsItemStack(s);
 		}
@@ -154,7 +154,7 @@ public class DeviceInventorySlot
 	 */
 	public boolean hasMatchingWithCapacity(ItemStack stack)
 	{
-		if (stack == null) return true;
+		if (ItemUtils.isEmpty(stack)) return true;
 		if (!isEmpty())
 		{
 			if (!hasMatching(stack)) return false;
@@ -171,7 +171,7 @@ public class DeviceInventorySlot
 	 */
 	public boolean hasCapacityFor(ItemStack stack)
 	{
-		if (stack == null) return true;
+		if (ItemUtils.isEmpty(stack)) return true;
 		if (hasContent())
 		{
 			if (!hasMatching(stack)) return false;
@@ -187,7 +187,7 @@ public class DeviceInventorySlot
 	{
 		if (hasMatching(stack))
 		{
-			if (stack != null)
+			if (!ItemUtils.isEmpty(stack))
 			{
 				final ItemStack s = get();
 				if (s.getCount() >= stack.getCount())
@@ -211,7 +211,7 @@ public class DeviceInventorySlot
 	{
 		if (hasMatching(stack))
 		{
-			if (stack != null)
+			if (!ItemUtils.isEmpty(stack))
 			{
 				final ItemStack s = get();
 				if (s.getCount() >= stack.getStackSize())
@@ -239,24 +239,25 @@ public class DeviceInventorySlot
 	public ItemStack consume(ItemStack stack)
 	{
 		if (hasEnough(stack)) return consume(stack.getCount());
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public ItemStack consume(IMultiItemStacks stack)
 	{
 		if (hasEnough(stack)) return consume(stack.getStackSize());
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public ItemStack increaseStack(ItemStack stack)
 	{
 		final ItemStack result = ItemUtils.mergeStacks(get(), stack);
-		if (result != null)
+		if (!ItemUtils.isEmpty(result))
 		{
 			set(result);
-			return result;
+//			return result;
 		}
-		return null;
+//		return ItemStack.EMPTY;
+		return result;
 	}
 
 	/**

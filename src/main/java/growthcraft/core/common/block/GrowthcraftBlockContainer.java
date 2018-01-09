@@ -327,7 +327,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 				for (int index = 0; index < inventory.getSizeInventory(); ++index)
 				{
 					final ItemStack stack = inventory.getStackInSlot(index);
-					if (stack != null)
+					if (!ItemUtils.isEmpty(stack))
 					{
 						ItemUtils.spawnItemStack(world, pos, stack, rand);
 					}
@@ -369,7 +369,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 			final ArrayList<ItemStack> items = new ArrayList<ItemStack>();
 			final ItemStack itemstack = createHarvestedBlockItemStack(worldIn, player, pos, state);
 
-			if (itemstack != null)
+			if (!ItemUtils.isEmpty(itemstack))
 			{
 				items.add(itemstack);
 			}

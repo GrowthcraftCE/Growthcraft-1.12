@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.api.definition.IMultiItemStacks;
 import growthcraft.core.api.item.ItemTest;
+import growthcraft.core.utils.ItemUtils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -65,7 +66,7 @@ public class InventoryProcessor
 	 */
 	public boolean slotIsEmpty(@Nonnull IInventory inv, int slot)
 	{
-		return inv.getStackInSlot(slot) == null;
+		return ItemUtils.isEmpty(inv.getStackInSlot(slot));
 	}
 
 	/**
@@ -79,7 +80,8 @@ public class InventoryProcessor
 	{
 		for (int slot : slots)
 		{
-			if (inv.getStackInSlot(slot) != null) return false;
+			if (!ItemUtils.isEmpty(inv.getStackInSlot(slot)))
+				return false;
 		}
 		return true;
 	}
@@ -94,7 +96,8 @@ public class InventoryProcessor
 	{
 		for (int slot = 0; slot < inv.getSizeInventory(); ++slot)
 		{
-			if (inv.getStackInSlot(slot) != null) return false;
+			if (!ItemUtils.isEmpty(inv.getStackInSlot(slot)))
+				return false;
 		}
 		return true;
 	}
@@ -112,7 +115,7 @@ public class InventoryProcessor
 		if (!ItemTest.isValid(item)) return false;
 
 		final ItemStack existing = inv.getStackInSlot(slot);
-		if (existing == null || existing.isEmpty())
+		if (ItemUtils.isEmpty(existing))
 		{
 			inv.setInventorySlotContents(slot, item.copy());
 			item.setCount( item.getCount() - MathHelper.clamp(item.getCount(), 0, item.getMaxStackSize()) );
@@ -155,7 +158,7 @@ public class InventoryProcessor
 	 */
 	public boolean mergeWithSlots(@Nonnull IInventory inv, @Nullable ItemStack stack, int[] slots)
 	{
-		if (stack == null) return false;
+		if (ItemUtils.isEmpty(stack)) return false;
 		boolean anythingMerged = false;
 		for (int slot : slots)
 		{
@@ -174,7 +177,7 @@ public class InventoryProcessor
 	 */
 	public boolean mergeWithSlots(@Nonnull IInventory inv, @Nullable ItemStack stack)
 	{
-		if (stack == null) return false;
+		if (ItemUtils.isEmpty(stack)) return false;
 		boolean anythingMerged = false;
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
@@ -189,18 +192,18 @@ public class InventoryProcessor
 	 *
 	 * @param inv - inventory to merge to
 	 * @param stack -
-	 * @param remaining stack OR null if the item was completely expeneded
+	 * @param remaining stack OR empty if the item was completely expeneded
 	 */
 	public ItemStack mergeWithSlotsStack(@Nonnull IInventory inv, @Nullable ItemStack stack)
 	{
-		if (stack == null) return null;
+		if (ItemUtils.isEmpty(stack)) return ItemStack.EMPTY;
 
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			if (stack.isEmpty()) break;
 			mergeWithSlot(inv, stack, i);
 		}
-		return stack.isEmpty() ? null : stack;
+		return stack.isEmpty() ? ItemStack.EMPTY : stack;
 	}
 
 	/**
@@ -215,7 +218,7 @@ public class InventoryProcessor
 		boolean clearedAnything = false;
 		for (int slot : src)
 		{
-			clearedAnything |= inv.removeStackFromSlot(slot) != null;
+			clearedAnything |= !ItemUtils.isEmpty(inv.removeStackFromSlot(slot));
 		}
 		return clearedAnything;
 	}
@@ -231,7 +234,7 @@ public class InventoryProcessor
 		boolean clearedAnything = false;
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
-			clearedAnything |= inv.removeStackFromSlot(i) != null;
+			clearedAnything |= !ItemUtils.isEmpty(inv.removeStackFromSlot(i));
 		}
 		return clearedAnything;
 	}
@@ -246,16 +249,16 @@ public class InventoryProcessor
 	public ItemStack yankSlot(@Nonnull IInventory inv, int slot)
 	{
 		final ItemStack stack = inv.getStackInSlot(slot);
-		if (stack != null)
+		if (!ItemUtils.isEmpty(stack))
 		{
 			return inv.decrStackSize(slot, stack.getCount());
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	protected boolean checkItemEquality(ItemStack actual, ItemStack expected)
 	{
-		if (actual == null) return false;
+		if (ItemUtils.isEmpty(actual)) return false;
 		if (!expected.isItemEqual(actual)) return false;
 		return true;
 	}
@@ -265,7 +268,7 @@ public class InventoryProcessor
 	 *
 	 * @param inv - inventory to check
 	 * @param expected - itemstack expected
-	 *   If the stack is null, then the slot is expected to be null as well
+	 *   If the stack is empty, then the slot is expected to be empty as well
 	 *   Otherwise it is required
 	 * @param src - slot to check
 	 */
@@ -273,10 +276,10 @@ public class InventoryProcessor
 	{
 		final ItemStack actual = inv.getStackInSlot(src);
 
-		if (expected == null)
+		if (ItemUtils.isEmpty(expected))
 		{
 			// if the item is not needed, and is not available
-			if (actual != null) return false;
+			if (!ItemUtils.isEmpty(actual)) return false;
 		}
 		else
 		{
@@ -290,7 +293,7 @@ public class InventoryProcessor
 	 *
 	 * @param inv - inventory to check
 	 * @param expected - itemstack expected
-	 *   If the stack is null, then the slot is expected to be null as well
+	 *   If the stack is empty, then the slot is expected to be empty as well
 	 *   Otherwise it is required
 	 * @param src - slot to check
 	 */
@@ -298,10 +301,10 @@ public class InventoryProcessor
 	{
 		final ItemStack actual = inv.getStackInSlot(src);
 
-		if (expected == null)
+		if (ItemUtils.isEmpty(expected))
 		{
 			// if the item is not needed, and is not available
-			if (actual != null) return false;
+			if (!ItemUtils.isEmpty(actual)) return false;
 		}
 		else
 		{
@@ -316,7 +319,7 @@ public class InventoryProcessor
 	 *
 	 * @param inv - inventory to check
 	 * @param expected - itemstack expected
-	 *   If the stack is null, then the slot is expected to be null as well
+	 *   If the stack is empty, then the slot is expected to be empty as well
 	 *   Otherwise it is required
 	 * @param src - slot to check
 	 */
@@ -324,14 +327,14 @@ public class InventoryProcessor
 	{
 		final ItemStack actual = inv.getStackInSlot(src);
 
-		if (expected == null)
+		if (ItemUtils.isEmpty(expected))
 		{
 			// if the item is not needed, and is not available
-			if (actual != null) return false;
+			if (!ItemUtils.isEmpty(actual)) return false;
 		}
 		else
 		{
-			if (actual == null) return false;
+			if (ItemUtils.isEmpty(actual)) return false;
 			if (!expected.containsItemStack(actual)) return false;
 			if (actual.getCount() < expected.getStackSize()) return false;
 		}
@@ -421,7 +424,7 @@ public class InventoryProcessor
 
 		for (int i = 0; i < filter.length; ++i)
 		{
-			if (filter[i] != null)
+			if (!ItemUtils.isEmpty(filter[i]))
 			{
 				final ItemStack stack = inv.decrStackSize(from[i], filter[i].getCount());
 				inv.setInventorySlotContents(to[i], stack);
@@ -443,7 +446,7 @@ public class InventoryProcessor
 
 		for (int i = 0; i < filter.length; ++i)
 		{
-			if (filter[i] != null)
+			if (!ItemUtils.isEmpty(filter[i]))
 			{
 				final ItemStack stack = inv.decrStackSize(from[i], filter[i].getStackSize());
 				inv.setInventorySlotContents(to[i], stack);
@@ -482,7 +485,7 @@ public class InventoryProcessor
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			final ItemStack stack = inv.getStackInSlot(i);
-			if (stack != null)
+			if (!ItemUtils.isEmpty(stack))
 			{
 				if (stack.getItem() == query) return i;
 			}
@@ -500,11 +503,11 @@ public class InventoryProcessor
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
 			final ItemStack stack = inv.getStackInSlot(i);
-			if (query == null && stack == null)
+			if (ItemUtils.isEmpty(query) && ItemUtils.isEmpty(stack) )
 			{
 				return i;
 			}
-			else if (query != null && stack != null)
+			else if (!ItemUtils.isEmpty(query) && !ItemUtils.isEmpty(stack))
 			{
 				if (query.isItemEqual(stack)) return i;
 			}
@@ -581,7 +584,7 @@ public class InventoryProcessor
 	{
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
-			if (inv.getStackInSlot(i) == null) return i;
+			if (ItemUtils.isEmpty(inv.getStackInSlot(i))) return i;
 		}
 		return -1;
 	}
@@ -596,7 +599,7 @@ public class InventoryProcessor
 	{
 		for (int i = inv.getSizeInventory() - 1; i >= 0; --i)
 		{
-			if (inv.getStackInSlot(i) == null) return i;
+			if (ItemUtils.isEmpty(inv.getStackInSlot(i))) return i;
 		}
 		return -1;
 	}
@@ -611,7 +614,7 @@ public class InventoryProcessor
 	{
 		for (int i = 0; i < inv.getSizeInventory(); ++i)
 		{
-			if (inv.getStackInSlot(i) != null) return i;
+			if (!ItemUtils.isEmpty(inv.getStackInSlot(i))) return i;
 		}
 		return -1;
 	}
@@ -626,7 +629,7 @@ public class InventoryProcessor
 	{
 		for (int i = inv.getSizeInventory() - 1; i >= 0; --i)
 		{
-			if (inv.getStackInSlot(i) != null) return i;
+			if (!ItemUtils.isEmpty(inv.getStackInSlot(i))) return i;
 		}
 		return -1;
 	}
@@ -746,7 +749,7 @@ public class InventoryProcessor
 	public boolean canInsertItem(@Nonnull IInventory inv, @Nullable ItemStack stack, int slot)
 	{
 		final ItemStack expected = inv.getStackInSlot(slot);
-		if (expected != null)
+		if (!ItemUtils.isEmpty(expected))
 		{
 			if (!checkSlot(inv, stack, slot)) return false;
 			if (expected.getCount() >= inv.getInventoryStackLimit()) return false;
@@ -765,7 +768,7 @@ public class InventoryProcessor
 	public boolean canExtractItem(@Nonnull IInventory inv, @Nullable ItemStack stack, int slot)
 	{
 		final ItemStack expected = inv.getStackInSlot(slot);
-		if (expected == null) return false;
+		if (ItemUtils.isEmpty(expected)) return false;
 		return checkSlotAndSize(inv, stack, slot);
 	}
 

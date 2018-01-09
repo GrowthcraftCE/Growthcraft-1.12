@@ -85,7 +85,7 @@ public abstract class GrowthcraftTileInventoryBase extends GrowthcraftTileBase i
 	public ItemStack tryMergeItemIntoSlot(ItemStack itemstack, int index)
 	{
 		final ItemStack result = ItemUtils.mergeStacksBang(getStackInSlot(index), itemstack);
-		if (result != null)
+		if (!ItemUtils.isEmpty(result))
 		{
 			inventory.setInventorySlotContents(index, result);
 		}

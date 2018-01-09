@@ -177,7 +177,7 @@ public class GrowthcraftInternalInventory implements IInventory, INBTSerializabl
 	{
 		final ItemStack oldStack = items[index];
 		items[index] = stack;
-		if (stack != null)
+		if (!ItemUtils.isEmpty(stack))
 		{
 			if (stack.getCount() > getInventoryStackLimit())
 			{
@@ -203,7 +203,7 @@ public class GrowthcraftInternalInventory implements IInventory, INBTSerializabl
 	{
 		final ItemStack stack = items[index];
 		items[index] = null;
-		if (stack != null) onSlotChanged(index);
+		if (!ItemUtils.isEmpty(stack)) onSlotChanged(index);
 		return stack;
 	}
 
@@ -242,7 +242,7 @@ public class GrowthcraftInternalInventory implements IInventory, INBTSerializabl
 	@Override
 	public boolean isEmpty() {
 		for( ItemStack stack : items ) {
-			if( !stack.isEmpty() )
+			if( !ItemUtils.isEmpty(stack) )
 				return false;
 		}
 		return true;

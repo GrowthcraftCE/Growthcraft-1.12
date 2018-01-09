@@ -10,6 +10,7 @@ import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.Utils;
 import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -90,7 +91,7 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 					if (entityIn instanceof EntityItem)
 					{
 						final EntityItem item = (EntityItem)entityIn;
-						if (te.tryMergeItemIntoMainSlot(item.getItem()) != null)
+						if (!ItemUtils.isEmpty(te.tryMergeItemIntoMainSlot(item.getItem())))
 						{
 							worldIn.playSound((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
 						}

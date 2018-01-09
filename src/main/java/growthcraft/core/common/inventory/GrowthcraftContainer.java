@@ -5,6 +5,7 @@ import growthcraft.core.common.inventory.slot.SlotPlayer;
 import growthcraft.core.common.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.common.inventory.slot.SlotPlayerHotbar;
 import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
+import growthcraft.core.utils.ItemUtils;
 import growthcraft.core.utils.Platform;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -31,8 +32,7 @@ public class GrowthcraftContainer extends Container
 
 	public boolean mergeWithSlot(Slot slot, ItemStack stack)
 	{
-		if (stack == null) return false;
-		if (stack.isEmpty() ) return false;
+		if (ItemUtils.isEmpty(stack)) return false;
 
 		if (slot.isItemValid(stack))
 		{
@@ -46,8 +46,7 @@ public class GrowthcraftContainer extends Container
 
 	public boolean mergeWithSlotsOfKind(ItemStack stack, Class<? extends Slot> slotClass)
 	{
-		if (stack == null) return false;
-		if (stack.isEmpty()) return false;
+		if (ItemUtils.isEmpty(stack)) return false;
 
 		int start = -1;
 		int end = -1;
@@ -67,7 +66,7 @@ public class GrowthcraftContainer extends Container
 		if (start <= -1 || end <= -1) return false;
 
 		boolean merged = false;
-		for (int i = start; i < end; ++i)
+		for (int i = start; i <= end; ++i)
 		{
 			// Stop iterating if the stack has been successfully merged
 			if (stack.isEmpty()) break;
@@ -109,11 +108,11 @@ public class GrowthcraftContainer extends Container
 	{
 		if (Platform.isClient())
 		{
-			return null;
+			return ItemStack.EMPTY;
 		}
 
 		final Slot s = getSlot(index);
-		ItemStack itemstack = null;
+		ItemStack itemstack = ItemStack.EMPTY;
 
 		if (s != null && s.getHasStack())
 		{
@@ -148,18 +147,18 @@ public class GrowthcraftContainer extends Container
 			}
 			else
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			if (stack.isEmpty())
 			{
-				s.putStack((ItemStack)null);
+				s.putStack(ItemStack.EMPTY);
 			}
 			s.onSlotChanged();
 
 			if (stack.getCount() == itemstack.getCount())
 			{
-				return null;
+				return ItemStack.EMPTY;
 			}
 
 			s.onTake(player, stack);

@@ -4,6 +4,8 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.core.api.definition.IMultiItemStacks;
+import growthcraft.core.api.item.ItemTest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -132,7 +134,7 @@ public class ItemUtils
 			if (a.isItemEqual(b))
 			{
 				final int newSize = MathHelper.clamp(a.getCount() + b.getCount(), 0, a.getMaxStackSize());
-				b.setCount( b.getCount() - newSize - a.getCount() );
+				b.setCount( b.getCount() - (newSize - a.getCount()) );
 				a.setCount(newSize);
 				return a;
 			}
@@ -141,7 +143,11 @@ public class ItemUtils
 	}
 	
 	public static boolean isEmpty(ItemStack stack) {
-		return stack == null || stack.isEmpty() || stack.getItem() == null || stack.getItem() == Items.AIR;
+		return !ItemTest.isValid(stack) || stack.getItem() == Items.AIR;
+	}
+	
+	public static boolean isEmpty(IMultiItemStacks stacks) {
+		return stacks == null || stacks.isEmpty();
 	}
 
 	/**
