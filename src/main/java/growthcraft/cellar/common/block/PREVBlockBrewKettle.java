@@ -103,12 +103,20 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 					
 					if (entityIn instanceof EntityLivingBase)
 					{
-						if (te.getHeatMultiplier() >= 0.5f)
+						Vec3d epos = new Vec3d(entityIn.posX - pos.getX(), entityIn.posY - pos.getY(), entityIn.posZ - pos.getZ());
+						if (AABB_CONTENTS.contains(epos))
 						{
-							Vec3d epos = new Vec3d(entityIn.posX - pos.getX(), entityIn.posY - pos.getY(), entityIn.posZ - pos.getZ());
-							if (AABB_CONTENTS.contains(epos))
+							boolean isFull = te.isFluidTankFull(0) || te.isFluidTankFull(1);
+							boolean containsLava = te.getFluid(0) == FluidRegistry.LAVA || te.getFluid(1) == FluidRegistry.LAVA;
+							
+							if (containsLava || te.getHeatMultiplier() >= 0.5f)
 							{
 								entityIn.setFire(1);
+							}
+							else if( isFull && entityIn.isBurning() )
+							{
+								entityIn.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
+								entityIn.extinguish();
 							}
 						}
 					}

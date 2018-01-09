@@ -92,6 +92,12 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
 
 		return new SPacketUpdateTileEntity(pos, 127, data);
 	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		NBTTagCompound tag = super.getUpdateTag();
+		return writeToNBT(tag);
+	}
 
 	@Override
 	public final boolean readFromStream(ByteBuf stream)

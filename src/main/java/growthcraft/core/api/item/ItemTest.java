@@ -6,10 +6,13 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.definition.IMultiItemStacks;
+import growthcraft.core.utils.ItemUtils;
 import net.minecraft.item.ItemStack;
 
 public class ItemTest
 {
+	// TODO: Code duplications with another classes like ItemUtils and InventoryProcessor existing. Fix it.
+	
 	private ItemTest() {}
 
 	public static boolean isValid(@Nonnull ItemStack stack)
@@ -22,13 +25,13 @@ public class ItemTest
 
 	public static boolean itemMatches(@Nullable IMultiItemStacks expected, @Nullable ItemStack actual)
 	{
-		if (expected == null || expected.isEmpty())
+		if (ItemUtils.isEmpty(expected))
 		{
-			return actual == null;
+			return ItemUtils.isEmpty(actual);
 		}
 		else
 		{
-			if (actual != null)
+			if (!ItemUtils.isEmpty(actual))
 			{
 				return expected.containsItemStack(actual);
 			}
@@ -38,13 +41,13 @@ public class ItemTest
 
 	public static boolean itemMatches(@Nullable ItemStack expected, @Nullable ItemStack actual)
 	{
-		if (expected == null)
+		if (ItemUtils.isEmpty(expected))
 		{
-			return actual == null;
+			return ItemUtils.isEmpty(actual);
 		}
 		else
 		{
-			if (actual != null)
+			if (!ItemUtils.isEmpty(actual))
 			{
 				if (expected.getItemDamage() == ItemKey.WILDCARD_VALUE)
 				{
@@ -111,7 +114,7 @@ public class ItemTest
 			}
 			else
 			{
-				if (actual != null) return false;
+				if (!ItemUtils.isEmpty(actual)) return false;
 			}
 		}
 		return true;

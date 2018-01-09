@@ -1,3 +1,7 @@
+-----------------
+Bugs:
+-----------------
+BUG: Collision boxes for brewing kettle walls are not correct.
 BUG: Rope bounding boxes are broken.
 BUG: No splash sound when dropping items into brewing kettle.
 BUG: Fix string formatting with arguments when logging.
@@ -6,8 +10,15 @@ DONE: BUG: No Tipsy Effect icon.
 NOTABUG: BUG: Booze color is too dark.
 
 -----------------
+Improvements:
+-----------------
+TODO: Only accepted items are consumed, thrown into brewing kettle 
+TODO: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
+
+-----------------
 Not ported stuff:
 -----------------
+TODO: Brew Kettle fluid render.
 TODO: Add yeasts
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.

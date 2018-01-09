@@ -3,6 +3,7 @@ package growthcraft.core;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import growthcraft.core.lib.legacy.IFluidContainerItem;
 import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import growthcraft.core.utils.ItemUtils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -95,7 +96,7 @@ public class Utils
 
 	public static boolean playerFillTank(World world, BlockPos pos, ILegacyFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
-		if (held == null) return false;
+		if (ItemUtils.isEmpty(held)) return false;
 
 		final EnumFacing direction = EnumFacing.NORTH;	// Doesn't matter for MC 1.11.2 or newer.
 
@@ -149,7 +150,7 @@ public class Utils
 					held.shrink(1);
 					if (held.isEmpty())
 					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
 					}
 				}
 			}
@@ -159,7 +160,7 @@ public class Utils
 
 	public static FluidStack playerDrainTank(World world, BlockPos pos, ILegacyFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
 	{
-		if (held == null) return null;
+		if (ItemUtils.isEmpty(held)) return null;
 
 		final EnumFacing direction = EnumFacing.NORTH;	// Doesn't matter for MC 1.11.2 or newer.
 		
@@ -198,7 +199,7 @@ public class Utils
 				held.shrink(1);
 				if (held.isEmpty())
 				{
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, (ItemStack)null);
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
 				}
 			}
 

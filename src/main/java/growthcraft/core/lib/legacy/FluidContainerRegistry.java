@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,6 +51,8 @@ public abstract class FluidContainerRegistry
             int code = 1;
             code = 31*code + container.getItem().hashCode();
             code = 31*code + container.getItemDamage();
+            if (container.getTagCompound() != null )
+            	code = 31*code + container.getTagCompound().hashCode();
             if (stack != null)
                 code = 31*code + stack.getFluid().hashCode();
             return code;
@@ -59,12 +62,13 @@ public abstract class FluidContainerRegistry
         {
             if (!(o instanceof ContainerKey)) return false;
             ContainerKey ck = (ContainerKey)o;
-            if (container.getItem() != ck.container.getItem()) return false;
-            if (container.getItemDamage() != ck.container.getItemDamage()) return false;
+            if (!ItemStack.areItemsEqual(container, ck.container) ) return false;
+            if (!ItemStack.areItemStackTagsEqual(container, ck.container) ) return false;
             if (stack == null && ck.stack != null) return false;
             if (stack != null && ck.stack == null) return false;
             if (stack == null && ck.stack == null) return true;
             if (stack.getFluid() != ck.stack.getFluid()) return false;
+            if (!FluidStack.areFluidStackTagsEqual(stack, stack)) return false;
             return true;
         }
     }
