@@ -1,6 +1,8 @@
 package growthcraft.grapes.handlers;
 
+import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
@@ -30,6 +32,14 @@ public class EnumHandler {
 
         public int getID() {
             return this.ID;
+        }
+        
+        public ItemStack asStack(int amount) {
+        	return new ItemStack(GrowthcraftGrapesItems.grape,amount,ID);
+        }
+        
+        public ItemStack asStack() {
+        	return asStack(1);
         }
     }
 

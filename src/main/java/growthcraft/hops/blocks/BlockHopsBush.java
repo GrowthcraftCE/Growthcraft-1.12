@@ -1,6 +1,7 @@
 package growthcraft.hops.blocks;
 
 import growthcraft.core.blocks.BlockRopeFence;
+import growthcraft.core.common.block.IBlockRope;
 import growthcraft.hops.Reference;
 import growthcraft.hops.init.GrowthcraftHopsBlocks;
 import growthcraft.hops.tileentity.TileEntityHopsBush;
@@ -27,7 +28,7 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityProvider {
+public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityProvider, IBlockRope {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
@@ -173,5 +174,13 @@ public class BlockHopsBush extends BlockBush implements IGrowable, ITileEntityPr
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEntityHopsBush();
     }
+    
+    @Override
+    public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        // return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
+        return block instanceof IBlockRope;
+    }
+
 
 }

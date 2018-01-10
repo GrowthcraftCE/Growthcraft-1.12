@@ -1,6 +1,7 @@
 package growthcraft.core.blocks;
 
 import growthcraft.core.Reference;
+import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.grapes.blocks.BlockGrapeVineBush;
 import growthcraft.hops.blocks.BlockHopsBush;
@@ -20,7 +21,7 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class BlockRopeFence extends Block {
+public class BlockRopeFence extends Block implements IBlockRope {
 
     private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 7, 0.0625 * 9, 0.0625 * 9, 0.0625 * 9);
 
@@ -84,9 +85,12 @@ public class BlockRopeFence extends Block {
         return super.canPlaceBlockOnSide(worldIn, pos, side);
     }
 
-    private boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    @Override
+    public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || BlockHopsBush.class.isInstance(block);
+//        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || BlockHopsBush.class.isInstance(block);
+        return block instanceof IBlockRope;
+        
     }
 
     @Override

@@ -23,3 +23,38 @@ itemGroup.Growthcraft=Growthcraft
 tile.rope_knot.name=Rope Knot
 tile.rope_fence.name=Rope
 tile.salt_block.name=Salt Block
+
+# Effects
+effect.chance.format=%d%% Chance of
+effect.extinguish.desc=Extinguishes Burning
+effect.ignite.desc=Sets Fire for %ds
+effect.list.head=Applies the following:
+effect.null.desc=Does Nothing
+effect.random_list.head=Applies one of the following:
+effect.remove_potion_effect.format=Removes %s
+effect.weighted_random_list.format=%d%% Chance of
+
+# Formats and Units
+format.value.true=YES
+format.value.false=NO
+format.state.true=ON
+format.state.false=OFF
+format.invalid_fluid=<Invalid Fluid>
+# Displayed for items
+format.itemslot.empty=<Empty>
+format.itemslot.invalid=<Invalid Item>
+
+# Modifier name
+format.booze.name=%2$s %1$s
+
+# When a fluid is not a booze
+format.fluid.name=%1$s
+
+# Name (stack_size)
+format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+format.tank_id=Tank %d :
+# When the tank is empty
+format.tank.empty=<Empty>
+# %s is the fluid name
+format.tank.content_suffix=mB of %s

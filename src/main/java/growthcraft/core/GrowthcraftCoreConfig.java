@@ -21,6 +21,10 @@ public class GrowthcraftCoreConfig {
 
     public static String loggingLevel;
 
+	public static boolean hidePoisonedBooze = true;
+
+	public static int bottleCapacity = 333;
+
     public static void preInit() {
         File configFile = new File(Loader.instance().getConfigDir(), "growthcraft/growthcraft-core.cfg");
         config = new Configuration(configFile);

@@ -3,12 +3,17 @@ package growthcraft.cellar.init;
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.blocks.BlockBrewKettle;
 import growthcraft.cellar.blocks.BlockCultureJar;
+import growthcraft.cellar.client.render.RenderBrewKettle;
+import growthcraft.cellar.common.block.PREVBlockBrewKettle;
+import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
+import growthcraft.core.common.definition.BlockDefinition;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
@@ -16,22 +21,27 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 public class GrowthcraftCellarBlocks {
 
     public static Block blockCultureJar;
-    public static Block blockBrewKettle;
+//    public static Block blockBrewKettle;
+    public static BlockDefinition brewKettle;
 
     public static void init() {
         blockCultureJar = new BlockCultureJar("culture_jar");
-        blockBrewKettle = new BlockBrewKettle("brew_kettle");
-
+//        blockBrewKettle = new BlockBrewKettle("brew_kettle");
+        brewKettle = new BlockDefinition(new PREVBlockBrewKettle("brew_kettle"));
     }
 
     public static void register() {
         registerBlock(blockCultureJar, true, true);
-        registerBlock(blockBrewKettle, true, true);
+//        registerBlock(blockBrewKettle, true, true);
+        brewKettle.getBlock().setCreativeTab(tabGrowthcraft);
+        brewKettle.register(true);
     }
 
     public static void registerRenders() {
         registerRender(blockCultureJar);
-        registerRender(blockBrewKettle);
+//        registerRender(blockBrewKettle);
+        brewKettle.registerRender();
+        ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock) {
