@@ -90,7 +90,7 @@ public class YeastGenerator extends DeviceProgressive
 		if (fluidSlot.getAmount() < consumption) return false;
 		final ItemStack yeastItem = invSlot.get();
 		// we can ignore null items, this will fallback to the initProduceYeast
-		if (yeastItem != null)
+		if (!ItemUtils.isEmpty(yeastItem))
 		{
 			if (!canReplicateYeast(yeastItem)) return false;
 		}
