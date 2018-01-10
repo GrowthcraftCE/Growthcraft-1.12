@@ -6,6 +6,7 @@ import growthcraft.cellar.blocks.BlockCultureJar;
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.PREVBlockBrewKettle;
+import growthcraft.cellar.common.block.PREVBlockCultureJar;
 import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.common.definition.BlockDefinition;
 import net.minecraft.block.Block;
@@ -21,33 +22,41 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftCellarBlocks {
 
-    public static Block blockCultureJar;
+//    public static Block blockCultureJar;
 //    public static Block blockBrewKettle;
     public static BlockDefinition brewKettle;
     public static BlockDefinition fermentBarrel;
+    public static BlockDefinition cultureJar;
 
     public static void init() {
-        blockCultureJar = new BlockCultureJar("culture_jar");
+//        blockCultureJar = new BlockCultureJar("culture_jar");
 //        blockBrewKettle = new BlockBrewKettle("brew_kettle");
         brewKettle = new BlockDefinition(new PREVBlockBrewKettle("brew_kettle"));
         fermentBarrel = new BlockDefinition(new BlockFermentBarrel("ferment_barrel"));
+        cultureJar = new BlockDefinition(new PREVBlockCultureJar("culture_jar"));
     }
 
     public static void register() {
-        registerBlock(blockCultureJar, true, true);
+//        registerBlock(blockCultureJar, true, true);
 //        registerBlock(blockBrewKettle, true, true);
         brewKettle.getBlock().setCreativeTab(tabGrowthcraft);
         brewKettle.register(true);
         fermentBarrel.getBlock().setCreativeTab(tabGrowthcraft);
         fermentBarrel.register(true);
+        cultureJar.getBlock().setCreativeTab(tabGrowthcraft);
+        cultureJar.register(true);
     }
 
     public static void registerRenders() {
-        registerRender(blockCultureJar);
+//        registerRender(blockCultureJar);
 //        registerRender(blockBrewKettle);
         brewKettle.registerRender();
-        ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
         fermentBarrel.registerRender();
+        cultureJar.registerRender();
+    }
+    
+    public static void registerSpecialRenders() {
+        ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock) {
@@ -60,7 +69,7 @@ public class GrowthcraftCellarBlocks {
             GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
         }
     }
-
+/*
     public static void registerBlock(Block block, ItemBlock itemBlock) {
         block.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(block);
@@ -76,4 +85,5 @@ public class GrowthcraftCellarBlocks {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
+    */
 }

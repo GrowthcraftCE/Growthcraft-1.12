@@ -13,7 +13,7 @@ public class GrowthcraftCellarRecipes {
     public static void registerCraftingRecipes() {
 
 
-        GameRegistry.addRecipe(new ItemStack(GrowthcraftCellarBlocks.blockCultureJar),
+        GameRegistry.addRecipe(new ItemStack(GrowthcraftCellarBlocks.cultureJar.getBlock()),
                 "BAB", "B B", "BBB",
                 'A', Blocks.PLANKS,
                 'B', Blocks.GLASS_PANE

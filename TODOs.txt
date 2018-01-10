@@ -14,14 +14,19 @@ Improvements:
 -----------------
 TODO: Only accepted items are consumed, thrown into brewing kettle 
 TODO: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
+TODO: isItemValid for culture jar and fermenting barrel containers
 
 -----------------
 Not ported stuff:
 -----------------
-TODO: Brew Kettle fluid render.
+TODO: Culture Jar fluid render.
+TODO: Textures and models of Ferment Barrel.
+TODO: Step sounds
 TODO: Add yeasts
+TODO: Language files for Cellar.
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Brew Kettle fluid render.
 DONE: Buckets für Boozes to appear in CreativeTab.
 
 ------------

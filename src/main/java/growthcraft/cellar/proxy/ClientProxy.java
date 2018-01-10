@@ -2,6 +2,7 @@ package growthcraft.cellar.proxy;
 
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.client.gui.GuiCultureJar;
 import growthcraft.cellar.client.gui.GuiFermentBarrel;
 import growthcraft.cellar.client.gui.PREVGuiBrewKettle;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
@@ -20,6 +21,7 @@ public class ClientProxy extends CommonProxy {
     	super.init();
     	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:brew_kettle", PREVGuiBrewKettle.class);
     	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:ferment_barrel", GuiFermentBarrel.class);
+    	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:culture_jar", GuiCultureJar.class);
     }
 
     @Override
@@ -36,6 +38,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerSpecialRenders() {
-
+    	super.registerSpecialRenders();
+    	GrowthcraftCellarBlocks.registerSpecialRenders();
     }
 }
