@@ -64,28 +64,27 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return te != null ? te.receiveClientEvent(id, param) : false;
 	}
 
-	  @Nonnull
-	  @Override
-	  protected BlockStateContainer createBlockState() {
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
 	    return new BlockStateContainer(this, TYPE_ROTATION);
-	  }
+	}
 
-	  @Nonnull
-	  @Override
-	  public IBlockState getStateFromMeta(int meta) {
+	@Nonnull
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState().withProperty(TYPE_ROTATION, EnumFacing.getFront(meta));
-	  }
+	}
 
-	  @Override
-	  public int getMetaFromState(IBlockState state) {
+	@Override
+	public int getMetaFromState(IBlockState state) {
 	    return state.getValue(TYPE_ROTATION).getIndex();
-	  }
+	}
 
-	  @Override
-	  public int damageDropped(IBlockState state) {
+	@Override
+	public int damageDropped(IBlockState state) {
 	    return getMetaFromState(state);
-	  }
-
+	}
 	
 	protected void setTileEntityType(Class<? extends TileEntity> klass)
 	{
