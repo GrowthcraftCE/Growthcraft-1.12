@@ -64,7 +64,6 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
     }
     
-/*
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
@@ -74,7 +73,6 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
     public boolean isFullCube(IBlockState state) {
         return false;
     }
- */
     
 	/************
 	 * TRIGGERS

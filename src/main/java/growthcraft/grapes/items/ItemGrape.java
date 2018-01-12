@@ -26,7 +26,8 @@ public class ItemGrape extends ItemFood {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-            subItems.add(new ItemStack(itemIn, 1, i));
+        	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+            subItems.add(new ItemStack(itemIn, 1, type.getID()));
         }
     }
 

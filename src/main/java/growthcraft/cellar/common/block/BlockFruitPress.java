@@ -13,6 +13,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -84,7 +85,9 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 			// NOTE: A state like BlockSkull.NODROP is not existing, so ignored (m & 8) != 0 condition.  
 			
 			world.destroyBlock(pos.up(), true);
-			world.getTileEntity(pos.up()).invalidate();
+			TileEntity te = world.getTileEntity(pos.up());
+			if( te != null)
+				te.invalidate();
 		}
 		
 		super.onBlockHarvested(world, pos, state, player);
