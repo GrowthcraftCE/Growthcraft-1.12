@@ -134,7 +134,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	 */
 	public boolean presserIsAbove(IBlockAccess world, BlockPos pos)
 	{
-		return getPresserBlock() == world.getBlockState(pos.up());
+		return getPresserBlock() == world.getBlockState(pos.up()).getBlock();
 	}
 
 	public boolean canBlockStay(IBlockAccess world, BlockPos pos)

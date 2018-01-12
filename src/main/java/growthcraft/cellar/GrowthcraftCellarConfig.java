@@ -17,4 +17,5 @@ public class GrowthcraftCellarConfig {
 	public static int cultureJarTimeMax = 1200;
 	public static int cultureJarConsumption = 1000 / 4;
 	public static int cultureJarMaxCap = 1000;
+	public static int fruitPressMaxCap = 1000;
 }

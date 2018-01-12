@@ -172,6 +172,8 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 	private void updatePressState(World world, BlockPos pos)
 	{
 		final IBlockState state = world.getBlockState(pos);
+		if( state.getBlock() != GrowthcraftCellarBlocks.fruitPresser.getBlock() )
+			return;
 		final boolean flag = world.isBlockPowered(pos);
 		final PressState pressed = state.getValue(TYPE_PRESSED);
 
@@ -221,7 +223,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 	@Override
 	@SideOnly(Side.CLIENT)
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		return GrowthcraftCellarBlocks.fruitPress.getItem();
+		return GrowthcraftCellarBlocks.fruitPress.getItemAsStack(1, 0);
 	}
 	
 	/************
