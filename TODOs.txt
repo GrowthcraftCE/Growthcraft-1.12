@@ -2,12 +2,12 @@
 Bugs:
 -----------------
 BUG: Collision boxes for brewing kettle walls are not correct.
-BUG: Rope bounding boxes are broken.
 BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 BUG: Fix string formatting with arguments when logging.
 DONE: BUG: Tipsy Effect not saved when game is saved.
 DONE: BUG: No Tipsy Effect icon. 
 NOTABUG: BUG: Booze color is too dark.
+NOTABUG - not implemented: BUG: Rope bounding boxes are broken.
 
 -----------------
 Improvements:
