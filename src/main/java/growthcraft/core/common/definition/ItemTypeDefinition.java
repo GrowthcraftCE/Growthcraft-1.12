@@ -54,7 +54,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	
     public void registerRender() {
         ModelLoader.setCustomModelResourceLocation(getItem(), 0,
-                new ModelResourceLocation(/*new ResourceLocation(Reference.MODID, getItem().getUnlocalizedName().substring(5))*/getItem().getRegistryName(), "inventory"));
+                new ModelResourceLocation(getItem().getRegistryName(), "inventory"));
     }
 
     public void registerRender(int meta, String fileName) {

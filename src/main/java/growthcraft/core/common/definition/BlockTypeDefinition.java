@@ -87,12 +87,21 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	{
 		getBlock().setUnlocalizedName(name.getResourcePath());
 		getBlock().setRegistryName(name);
+
+		if( itemBlock != null )
+			register(itemBlock);
+		else
+			register(null);
+	}
+	
+	/**
+	 * @param itemBlock - item class to register to
+	 */
+	public void register(ItemBlock itemBlock)
+	{
         GameRegistry.register(getBlock());
         if( itemBlock != null )
-        GameRegistry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
-        
-		// OPEN
-//		GameRegistry.registerBlock(getBlock(), itemClass, name);
+        	GameRegistry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
 	}
 	
 	/**
@@ -105,16 +114,14 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 		getBlock().setRegistryName(name);
         
         register(registerItemBlock);
-		// OPEN
-//		GameRegistry.registerBlock(getBlock(), itemClass, name);
 	}
 
 	public void register(boolean registerItemBlock)
 	{
-		Block block = getBlock();
-		GameRegistry.register(block);
 		if( registerItemBlock )
-			GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+			register(new ItemBlock(getBlock()));
+		else
+			register(null);
 	}
 
 	
@@ -124,9 +131,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	public void registerRender()
 	{
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(getBlock()), 0, new ModelResourceLocation(
-                /*new ResourceLocation(Reference.MODID, block.getUnlocalizedName().substring(5))*/ getBlock().getRegistryName(), "inventory"));
-		// OPEN
-//		GameRegistry.registerBlock(getBlock(), name);
+                getBlock().getRegistryName(), "inventory"));
 	}
 	
     public void registerRender(int meta, String fileName){

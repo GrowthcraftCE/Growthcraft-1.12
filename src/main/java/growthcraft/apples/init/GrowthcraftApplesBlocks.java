@@ -3,7 +3,10 @@ package growthcraft.apples.init;
 import growthcraft.apples.Reference;
 import growthcraft.apples.blocks.*;
 import growthcraft.apples.handlers.GrowthcraftApplesColorHandler;
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -22,71 +25,100 @@ import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftApplesBlocks {
 
-    public static BlockApple blockApple;
-    public static BlockAppleDoor blockAppleDoor;
-    public static BlockAppleFence blockAppleFence;
-    public static BlockAppleFenceGate blockAppleFenceGate;
-    public static BlockAppleLeaves blockAppleLeaves;
-    public static BlockAppleLog blockAppleLog;
-    public static BlockApplePlanks blockApplePlanks;
-    public static BlockAppleSapling blockAppleSapling;
-    public static BlockAppleSlabHalf blockAppleSlabHalf;
-    public static BlockAppleSlabDouble blockAppleSlabDouble;
-    public static BlockAppleStairs blockAppleStairs;
+    public static BlockDefinition blockApple;
+    public static BlockDefinition blockAppleDoor;
+    public static BlockDefinition blockAppleFence;
+    public static BlockDefinition blockAppleFenceGate;
+    public static BlockDefinition blockAppleLeaves;
+    public static BlockDefinition blockAppleLog;
+    public static BlockDefinition blockApplePlanks;
+    public static BlockDefinition blockAppleSapling;
+    public static BlockTypeDefinition<BlockSlab> blockAppleSlabHalf;
+    public static BlockTypeDefinition<BlockSlab> blockAppleSlabDouble;
+    public static BlockDefinition blockAppleStairs;
 
     public static void preInit() {
-        blockApple = new BlockApple("apple_crop");
-        blockAppleDoor = new BlockAppleDoor("apple_door");
-        blockAppleFence = new BlockAppleFence("apple_fence");
-        blockAppleFenceGate = new BlockAppleFenceGate("apple_fence_gate");
-        blockAppleLeaves = new BlockAppleLeaves("apple_leaves");
-        blockAppleLog = new BlockAppleLog("apple_log");
-        blockApplePlanks = new BlockApplePlanks("apple_planks");
-        blockAppleSapling = new BlockAppleSapling("apple_sapling");
-        blockAppleSlabHalf = new BlockAppleSlabHalf("apple_slab_half");
-        blockAppleSlabDouble = new BlockAppleSlabDouble("apple_slab_double");
-        blockAppleStairs = new BlockAppleStairs("apple_stairs", blockApplePlanks.getDefaultState());
+        blockApple = new BlockDefinition( new BlockApple("apple_crop") );
+        blockAppleDoor = new BlockDefinition( new BlockAppleDoor("apple_door") );
+        blockAppleFence = new BlockDefinition( new BlockAppleFence("apple_fence") );
+        blockAppleFenceGate = new BlockDefinition( new BlockAppleFenceGate("apple_fence_gate") );
+        blockAppleLeaves = new BlockDefinition( new BlockAppleLeaves("apple_leaves") );
+        blockAppleLog = new BlockDefinition( new BlockAppleLog("apple_log") );
+        blockApplePlanks = new BlockDefinition( new BlockApplePlanks("apple_planks") );
+        blockAppleSapling = new BlockDefinition( new BlockAppleSapling("apple_sapling") );
+        blockAppleSlabHalf = new BlockTypeDefinition<BlockSlab>( new BlockAppleSlabHalf("apple_slab_half") );
+        blockAppleSlabDouble = new BlockTypeDefinition<BlockSlab>( new BlockAppleSlabDouble("apple_slab_double") );
+        blockAppleStairs = new BlockDefinition( new BlockAppleStairs("apple_stairs", blockApplePlanks.getBlock().getDefaultState()) );
         // Register the blocks
         register();
     }
 
     public static void register() {
-        registerBlock(blockApple, false, false);
-        registerBlock(blockAppleDoor, false, false);
-        registerBlock(blockAppleFence);
-        registerBlock(blockAppleFenceGate);
-        registerBlock(blockAppleLeaves);
-        registerBlock(blockAppleLog);
-        registerBlock(blockApplePlanks);
-        registerBlock(blockAppleSapling);
-        registerBlock(blockAppleSlabHalf,
-                new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
-        registerBlock(blockAppleSlabDouble, false, false);
-        registerBlock(blockAppleStairs);
+        // registerBlock(blockApple, false, false);
+    	blockApple.register(false);
+        // registerBlock(blockAppleDoor, false, false);
+    	blockAppleDoor.register(false);
+        // registerBlock(blockAppleFence);
+    	blockAppleFence.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleFence.register(true);
+        // registerBlock(blockAppleFenceGate);
+    	blockAppleFenceGate.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleFenceGate.register(true);
+        // registerBlock(blockAppleLeaves);
+    	blockAppleLeaves.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleLeaves.register(true);
+    	// registerBlock(blockAppleLog);
+    	blockAppleLog.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleLog.register(true);
+        // registerBlock(blockApplePlanks);
+    	blockApplePlanks.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockApplePlanks.register(true);
+        // registerBlock(blockAppleSapling);
+    	blockAppleSapling.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleSapling.register(true);
+        // registerBlock(blockAppleSlabHalf,
+        //        new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
+    	blockAppleSlabHalf.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleSlabHalf.register(new ItemSlab(blockAppleSlabHalf.getBlock(), blockAppleSlabHalf.getBlock(), blockAppleSlabDouble.getBlock()));
+        // registerBlock(blockAppleSlabDouble, false, false);
+    	blockAppleSlabDouble.register(false);
+        // registerBlock(blockAppleStairs);
+    	blockAppleStairs.getBlock().setCreativeTab(tabGrowthcraft);
+    	blockAppleStairs.register(true);
     }
 
     public static void registerRenders() {
-        registerRender(blockApple);
-        registerRender(blockAppleDoor);
-        registerRender(blockAppleFence);
-        registerRender(blockAppleFenceGate);
-        registerRender(blockAppleLeaves);
-        registerRender(blockAppleLog);
-        registerRender(blockAppleSapling);
-        registerRender(blockApplePlanks);
-        registerRender(blockAppleStairs);
-        registerRender(blockAppleSlabHalf);
+        // registerRender(blockApple);
+    	blockApple.registerRender();
+        // registerRender(blockAppleDoor);
+    	blockAppleDoor.registerRender();
+        // registerRender(blockAppleFence);
+    	blockAppleFence.registerRender();
+        // registerRender(blockAppleFenceGate);
+    	blockAppleFenceGate.registerRender();
+        // registerRender(blockAppleLeaves);
+    	blockAppleLeaves.registerRender();
+        // registerRender(blockAppleLog);
+    	blockAppleLog.registerRender();
+        // registerRender(blockAppleSapling);
+    	blockAppleSapling.registerRender();
+        // registerRender(blockApplePlanks);
+    	blockApplePlanks.registerRender();
+        // registerRender(blockAppleStairs);
+    	blockAppleStairs.registerRender();
+    	// registerRender(blockAppleSlabHalf);
+    	blockAppleSlabHalf.registerRender();
     }
 
     public static void registerBlockColorHandlers() {
-        registerBlockColorHandler(blockAppleLeaves);
+        registerBlockColorHandler(blockAppleLeaves.getBlock());
     }
     /*
      * Credit to CJMinecraft for identifying how to ignore properties.
      */
     @SideOnly(Side.CLIENT)
     public static void setCustomStateMappers() {
-        ModelLoader.setCustomStateMapper(blockAppleFenceGate, (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
+        ModelLoader.setCustomStateMapper(blockAppleFenceGate.getBlock(), (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
     }
 
     @SideOnly(Side.CLIENT)
@@ -96,7 +128,7 @@ public class GrowthcraftApplesBlocks {
     }
 
     /* No need to edit below */
-
+/*
     public static void registerBlock(Block block) {
         registerBlock(block, true, true);
     }
@@ -127,5 +159,5 @@ public class GrowthcraftApplesBlocks {
     public static void  registerRender(Block block, int meta, String fileName){
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
+    } */
 }

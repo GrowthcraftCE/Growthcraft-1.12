@@ -94,7 +94,7 @@ public class BlockAppleLeaves extends Block implements IGrowable {
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
         if ( worldIn.getBlockState(pos.down()).getBlock() instanceof BlockAir ){
-            worldIn.setBlockState(pos.down(), GrowthcraftApplesBlocks.blockApple.getDefaultState());
+            worldIn.setBlockState(pos.down(), GrowthcraftApplesBlocks.blockApple.getBlock().getDefaultState());
         }
     }
 
@@ -130,6 +130,6 @@ public class BlockAppleLeaves extends Block implements IGrowable {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(GrowthcraftApplesBlocks.blockAppleSapling);
+        return Item.getItemFromBlock(GrowthcraftApplesBlocks.blockAppleSapling.getBlock());
     }
 }

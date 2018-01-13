@@ -14,8 +14,8 @@ public class WorldGenAppleTree extends WorldGenAbstractTree {
     private int minTreeHeight = 4;
     private int maxTreeHeight = 5;
 
-    private static Block blockLog = GrowthcraftApplesBlocks.blockAppleLog;
-    private static Block blockLeaves = GrowthcraftApplesBlocks.blockAppleLeaves;
+    private static Block blockLog = GrowthcraftApplesBlocks.blockAppleLog.getBlock();
+    private static Block blockLeaves = GrowthcraftApplesBlocks.blockAppleLeaves.getBlock();
 
     public WorldGenAppleTree(boolean notify) {
         super(notify);
