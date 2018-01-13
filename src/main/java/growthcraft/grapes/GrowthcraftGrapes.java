@@ -21,12 +21,12 @@ public class GrowthcraftGrapes {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftGrapesItems.init();
-        GrowthcraftGrapesItems.register();
-
         GrowthcraftGrapesBlocks.init();
         GrowthcraftGrapesBlocks.register();
 
+        GrowthcraftGrapesItems.init();
+        GrowthcraftGrapesItems.register();
+        
     	GrowthcraftGrapesFluids.init();
     	GrowthcraftGrapesFluids.register();
 

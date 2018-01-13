@@ -34,8 +34,9 @@ public class ItemGrape extends ItemFood {
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         for (int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-            if ( stack.getItemDamage() == i ) {
-                return  this.getUnlocalizedName() + "." + EnumHandler.GrapeTypes.values()[i].getName();
+        	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+            if ( stack.getItemDamage() == type.getVariantID() ) {
+                return  this.getUnlocalizedName() + "." + type.getName();
             } else {
                 continue;
             }
