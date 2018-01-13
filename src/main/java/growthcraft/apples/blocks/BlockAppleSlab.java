@@ -81,7 +81,7 @@ public abstract class BlockAppleSlab extends BlockSlab {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(GrowthcraftApplesBlocks.blockAppleSlabHalf.getBlock());
+        return GrowthcraftApplesBlocks.blockAppleSlabHalf.getItem();
     }
 
     @Override

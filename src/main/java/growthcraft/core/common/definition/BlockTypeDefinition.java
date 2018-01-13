@@ -38,6 +38,12 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	}
 
 	@Nonnull
+	public ItemStack getItemAsStack(int size)
+	{
+		return new ItemStack(getItem(), size);
+	}
+	
+	@Nonnull
 	public ItemStack getItemAsStack(int size, int damage)
 	{
 		return new ItemStack(getItem(), size, damage);

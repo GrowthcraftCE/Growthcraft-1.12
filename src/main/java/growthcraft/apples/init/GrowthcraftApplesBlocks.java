@@ -1,6 +1,5 @@
 package growthcraft.apples.init;
 
-import growthcraft.apples.Reference;
 import growthcraft.apples.blocks.*;
 import growthcraft.apples.handlers.GrowthcraftApplesColorHandler;
 import growthcraft.core.common.definition.BlockDefinition;
@@ -9,15 +8,10 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSlab;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -54,59 +48,37 @@ public class GrowthcraftApplesBlocks {
     }
 
     public static void register() {
-        // registerBlock(blockApple, false, false);
     	blockApple.register(false);
-        // registerBlock(blockAppleDoor, false, false);
     	blockAppleDoor.register(false);
-        // registerBlock(blockAppleFence);
     	blockAppleFence.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleFence.register(true);
-        // registerBlock(blockAppleFenceGate);
     	blockAppleFenceGate.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleFenceGate.register(true);
-        // registerBlock(blockAppleLeaves);
     	blockAppleLeaves.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleLeaves.register(true);
-    	// registerBlock(blockAppleLog);
     	blockAppleLog.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleLog.register(true);
-        // registerBlock(blockApplePlanks);
     	blockApplePlanks.getBlock().setCreativeTab(tabGrowthcraft);
     	blockApplePlanks.register(true);
-        // registerBlock(blockAppleSapling);
     	blockAppleSapling.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleSapling.register(true);
-        // registerBlock(blockAppleSlabHalf,
-        //        new ItemSlab(blockAppleSlabHalf, blockAppleSlabHalf, blockAppleSlabDouble));
     	blockAppleSlabHalf.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleSlabHalf.register(new ItemSlab(blockAppleSlabHalf.getBlock(), blockAppleSlabHalf.getBlock(), blockAppleSlabDouble.getBlock()));
-        // registerBlock(blockAppleSlabDouble, false, false);
     	blockAppleSlabDouble.register(false);
-        // registerBlock(blockAppleStairs);
     	blockAppleStairs.getBlock().setCreativeTab(tabGrowthcraft);
     	blockAppleStairs.register(true);
     }
 
     public static void registerRenders() {
-        // registerRender(blockApple);
     	blockApple.registerRender();
-        // registerRender(blockAppleDoor);
     	blockAppleDoor.registerRender();
-        // registerRender(blockAppleFence);
     	blockAppleFence.registerRender();
-        // registerRender(blockAppleFenceGate);
     	blockAppleFenceGate.registerRender();
-        // registerRender(blockAppleLeaves);
     	blockAppleLeaves.registerRender();
-        // registerRender(blockAppleLog);
     	blockAppleLog.registerRender();
-        // registerRender(blockAppleSapling);
     	blockAppleSapling.registerRender();
-        // registerRender(blockApplePlanks);
     	blockApplePlanks.registerRender();
-        // registerRender(blockAppleStairs);
     	blockAppleStairs.registerRender();
-    	// registerRender(blockAppleSlabHalf);
     	blockAppleSlabHalf.registerRender();
     }
 
