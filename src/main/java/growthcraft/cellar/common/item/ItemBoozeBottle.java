@@ -13,6 +13,7 @@ import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.definition.FluidDefinition;
 import growthcraft.core.common.definition.FluidTypeDefinition;
 import growthcraft.core.common.item.GrowthcraftItemFoodBase;
+import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.lib.GrowthcraftCoreState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,18 +33,18 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidItem
+public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidItem
 {
 	private Booze[] boozes;
 
 	public ItemBoozeBottle()
 	{
-		super(0, 0.0f, false);
+		super(null, 0, 0.0f, false);
 		this.setAlwaysEdible();
 		this.setMaxStackSize(4);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		this.setContainerItem(Items.GLASS_BOTTLE);
+//		this.setContainerItem(Items.GLASS_BOTTLE);
 		this.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
 	}
 	
@@ -103,6 +104,7 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 		return 0.0f;
 	}
 
+	@Override
 	public int getColor(ItemStack stack)
 	{
 		final Fluid booze = getFluid(stack);

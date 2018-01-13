@@ -18,15 +18,10 @@ import growthcraft.core.GrowthcraftCoreConfig;
 import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.core.api.fluids.FluidDictionary;
-import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import growthcraft.grapes.Reference;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -56,7 +51,6 @@ public class BoozeRegistryHelper {
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			final BlockFluidBooze boozeBlock = new BlockFluidBooze(boozes[i].getFluid());
-//TODO			boozeBlock.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
 			grapeWineFluids[i] = new BlockBoozeDefinition(boozeBlock);
 		}		
 	}
@@ -102,8 +96,6 @@ public class BoozeRegistryHelper {
 			int bottleVariantID = values[i].getVariantID();
 			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, "fluid_" + basename + "_" + boozeName ), false);
 
-//			EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
-
 			final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, boozes[i].getFluid());
 
 			final FluidStack fluidStack = boozes[i].asFluidStack( GrowthcraftCoreConfig.bottleCapacity );
@@ -117,29 +109,7 @@ public class BoozeRegistryHelper {
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			boozes[i].registerRenderer();
-//			fluidBlocks[i].registerRender();
 		}
-		
-	}
-	
-	public static void registerBoozeColorHandler(ItemBoozeBottle bottle) {
-		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-		itemColors.registerItemColorHandler(new IItemColor() {
-
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				if( tintIndex != 0 )
-					return -1;
-				Item item = stack.getItem();
-				if( !(item instanceof ItemBoozeBottle) )
-					return -1;
-				ItemBoozeBottle boozeBottle = (ItemBoozeBottle)item;
-				int value = boozeBottle.getColor(stack);
-				
-				return value;
-			}
-			
-		}, bottle);
 	}
 
 }
