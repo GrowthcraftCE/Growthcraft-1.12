@@ -25,8 +25,6 @@ public class GrowthcraftCellarItems {
 
     public static void registerRenders() {
     	chievItemDummy.registerRender();
-//    	for( EnumYeast type : EnumYeast.values() )
-//    		yeast.registerRender(type.ordinal(), "yeast_" + type.toString().toLowerCase() );
     	yeast.registerRenders(EnumYeast.values());
     }
 }

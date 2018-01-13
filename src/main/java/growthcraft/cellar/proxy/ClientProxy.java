@@ -1,10 +1,7 @@
 package growthcraft.cellar.proxy;
 
 import growthcraft.cellar.init.GrowthcraftCellarItems;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.util.ResourceLocation;
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.Reference;
 import growthcraft.cellar.client.gui.GuiCultureJar;
 import growthcraft.cellar.client.gui.GuiFermentBarrel;
 import growthcraft.cellar.client.gui.GuiFruitPress;
@@ -39,14 +36,6 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-/*    	ResourceLocation yeastReslocs[] = new ResourceLocation[EnumYeast.values().length];
-    	
-    	for( int i = 0; i < yeastReslocs.length; i ++ ) {
-    		EnumYeast type = EnumYeast.values()[i]; 
-    		yeastReslocs[i] = new ResourceLocation(Reference.MODID, "yeast_" + type.toString().toLowerCase() );	
-    	}
-    	
-    	ModelBakery.registerItemVariants(GrowthcraftCellarItems.yeast.getItem(), yeastReslocs);*/
     	GrowthcraftCellarItems.yeast.registerModelBakeryVariants(EnumYeast.values());
     }
 

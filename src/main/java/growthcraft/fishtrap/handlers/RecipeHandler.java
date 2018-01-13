@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class RecipeHandler {
 
     public static void registerCraftingRecipes() {
-        GameRegistry.addRecipe(new ItemStack(GrowthcraftFishtrapBlocks.fishtrap, 1),
+        GameRegistry.addRecipe(GrowthcraftFishtrapBlocks.fishtrap.asStack(1),
                 "ACA", "CBC", "ACA",
                 'A', Blocks.PLANKS,
                 'B', Items.LEAD,
