@@ -15,29 +15,34 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GrowthcraftGrapesItems {
-    public static Item grape;
-    public static Item grape_seed;
+    public static ItemDefinition grape;
+    public static ItemDefinition grape_seed;
 	public static ItemTypeDefinition<ItemBoozeBottle> grapeWine;
 
     public static void init() {
-        grape = new ItemGrape("grape", 1, 1, false);
-        grape_seed = new ItemGrapeSeed("grape_seed");
+        grape = new ItemDefinition( new ItemGrape("grape", 1, 1, false) );
+        grape_seed = new ItemDefinition( new ItemGrapeSeed("grape_seed") );
         grapeWine = null;	// Is registered in GrowthcraftGrapesFluids
     }
 
     public static void register() {
-        registerItem(grape);
-        registerItem(grape_seed);
+        // registerItem(grape);
+    	grape.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+    	grape.register();
+        // registerItem(grape_seed);
+    	grape_seed.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+    	grape_seed.register();
     }
 
     public static void registerRenders() {
+        // registerRender(grape_seed);
+    	grape_seed.registerRender();
 
-        registerRender(grape_seed);
-
-        for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
+/*        for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
            EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
            registerRender(grape, type.getVariantID(), "grape_" + type.getName());
-        }
+        } */
+    	grape.registerRenders(EnumHandler.GrapeTypes.class);
     }
 
     public static void registerItem(Item item) {

@@ -46,7 +46,8 @@ public class EnumHandler {
         
         @Override
         public ItemStack asStack(int amount) {
-        	return new ItemStack(GrowthcraftGrapesItems.grape,amount,ID);
+//        	return new ItemStack(GrowthcraftGrapesItems.grape,amount,ID);
+        	return GrowthcraftGrapesItems.grape.asStack(amount, getVariantID());
         }
         
         @Override

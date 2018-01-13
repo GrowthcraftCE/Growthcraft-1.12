@@ -15,34 +15,41 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
+import growthcraft.core.common.definition.BlockDefinition;
 
 public class GrowthcraftGrapesBlocks {
 
-    public static BlockGrapeVine grape_vine;
-    public static BlockGrapeVineBush grape_vine_bush;
-    public static BlockGrapeVineFruit grape_vine_fruit;
+    public static BlockDefinition grape_vine;
+    public static BlockDefinition grape_vine_bush;
+    public static BlockDefinition grape_vine_fruit;
     
 	public static BlockBoozeDefinition[] grapeWineFluidBlocks;
 	
     public static void init() {
-        grape_vine = new BlockGrapeVine("grape_vine");
-        grape_vine_bush = new BlockGrapeVineBush("grape_vine_bush");
-        grape_vine_fruit = new BlockGrapeVineFruit();
+        grape_vine = new BlockDefinition( new BlockGrapeVine("grape_vine") );
+        grape_vine_bush = new BlockDefinition( new BlockGrapeVineBush("grape_vine_bush") );
+        grape_vine_fruit = new BlockDefinition( new BlockGrapeVineFruit() );
         grapeWineFluidBlocks = null; // Is initialized in GrowthcraftGrapesFluids
     }
 
     public static void register() {
-        registerBlock(grape_vine, false, true);
-        registerBlock(grape_vine_bush, false, true);
-        registerBlock(grape_vine_fruit, false, true);
+//        registerBlock(grape_vine, false, true);
+    	grape_vine.register(true);
+//        registerBlock(grape_vine_bush, false, true);
+    	grape_vine_bush.register(true);
+//        registerBlock(grape_vine_fruit, false, true);
+    	grape_vine_fruit.register(true);
     }
 
     public static void  registerRenders() {
-        registerRender(grape_vine);
-        registerRender(grape_vine_bush);
-        registerRender(grape_vine_fruit);
+//        registerRender(grape_vine);
+    	grape_vine.registerRender();
+//        registerRender(grape_vine_bush);
+    	grape_vine_bush.registerRender();
+//        registerRender(grape_vine_fruit);
+    	grape_vine_fruit.registerRender();
     }
-
+/*
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
         GameRegistry.register(block);
 
@@ -63,6 +70,6 @@ public class GrowthcraftGrapesBlocks {
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
-
+*/
 
 }
