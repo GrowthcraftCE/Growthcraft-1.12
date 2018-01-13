@@ -36,7 +36,7 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 {
 	private Booze[] boozes;
 
-	public ItemBoozeBottle(BoozeDefinition[] boozeAry)
+	public ItemBoozeBottle()
 	{
 		super(0, 0.0f, false);
 		this.setAlwaysEdible();
@@ -45,8 +45,11 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 		this.setMaxDamage(0);
 		this.setContainerItem(Items.GLASS_BOTTLE);
 		this.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
-
+	}
+	
+	public ItemBoozeBottle setBoozes(BoozeDefinition[] boozeAry) {
 		this.boozes = FluidDefinition.convertArray(boozeAry, Booze.class);
+		return this;
 	}
 
 	public Booze[] getFluidArray()
@@ -56,6 +59,8 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 
 	public Booze getFluidByIndex(int i)
 	{
+		if( boozes == null )
+			return null;	// Boozes not initialized, yet. Fallback
 		return (i < 0 || i >= boozes.length) ? boozes[0] : boozes[i];
 	}
 

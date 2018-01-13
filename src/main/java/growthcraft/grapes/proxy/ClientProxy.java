@@ -1,22 +1,18 @@
 package growthcraft.grapes.proxy;
 
-import growthcraft.grapes.Reference;
-import growthcraft.grapes.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.init.GrowthcraftGrapesFluids;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import growthcraft.grapes.tileentity.TileEntityGrapeVineFruit;
 import growthcraft.grapes.tileentity.render.RendererGrapeVineFruit;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
 public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-        registerModelBakeryVariants();
-        registerSpecialRenders();
-        GrowthcraftGrapesFluids.registerBoozeColorHandlers();
+    	GrowthcraftGrapesItems.registerItemColorHandlers();
+    	registerModelBakeryVariants();
+        registerSpecialRenders();        
     }
 
     @Override
@@ -27,14 +23,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-/*        ModelBakery.registerItemVariants(GrowthcraftGrapesItems.grape,
-                new ResourceLocation(Reference.MODID, "grape_purple"),
-                new ResourceLocation(Reference.MODID, "grape_green"),
-                new ResourceLocation(Reference.MODID, "grape_red")
-        ); */
-    	GrowthcraftGrapesItems.grape.registerModelBakeryVariants(GrapeTypes.class);
-    	
-        GrowthcraftGrapesFluids.registerItemVariants();
+        GrowthcraftGrapesItems.registerItemVariants();
     }
 
     @Override

@@ -7,6 +7,7 @@ TODO: Step sound of apple fences should be changed to wood.
 -----------------
 Bugs:
 -----------------
+BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
 BUG: Collision boxes for brewing kettle walls are not correct.
 BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 BUG: Fix string formatting with arguments when logging.

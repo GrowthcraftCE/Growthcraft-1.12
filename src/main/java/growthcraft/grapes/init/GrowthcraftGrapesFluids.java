@@ -47,42 +47,12 @@ public class GrowthcraftGrapesFluids
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks[WineTypes.PURPLE_AMBROSIA.ordinal()].getBlock().refreshColor();
 		grapeWineBooze[WineTypes.PURPLE_PORTWINE.ordinal()].getFluid().setColor(GrowthcraftGrapesConfig.portWineColor);
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks[WineTypes.PURPLE_PORTWINE.ordinal()].getBlock().refreshColor();
-		
-		GrowthcraftGrapesItems.grapeWine = new ItemTypeDefinition<ItemBoozeBottle>(new ItemBoozeBottle(grapeWineBooze));
 	}
 	
 	public static void register() {
-		GrowthcraftGrapesItems.grapeWine.register(new ResourceLocation(Reference.MODID, "grapewine"));
-		
+		GrowthcraftGrapesItems.grapeWine.getItem().setBoozes(grapeWineBooze);
 		BoozeRegistryHelper.registerBooze(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks, GrowthcraftGrapesItems.grapeWine, "grapebooze", WineTypes.class);
 		registerFermentations();
-		
-		OreDictionary.registerOre("foodGrapejuice", GrowthcraftGrapesItems.grapeWine.asStack(1, 0));
-	}
-	
-	// TODO: Move to BoozeRegistryHelper
-	public static void registerItemVariants() {
-/*		ResourceLocation[] variants = new ResourceLocation[grapeWineBooze.length];
-		ResourceLocation name = GrowthcraftGrapesItems.grapeWine.getItem().getRegistryName();
-		for (int i = 0; i < grapeWineBooze.length; ++i) {
-//			String boozeRegistryName = WineTypes.values()[i].getName();
-			variants[i] = new ResourceLocation(name.getResourceDomain(), name.getResourcePath() + "_" + i);
-		}
-		ModelBakery.registerItemVariants(GrowthcraftGrapesItems.grapeWine.getItem(), variants);
-		*/
-		GrowthcraftGrapesItems.grapeWine.registerModelBakeryVariants(WineTypes.class);
-	}
-	
-	// TODO: Move to BoozeRegistryHelper
-	public static void registerBoozeItemRender() {
-/*		for (int i = 0; i < grapeWineBooze.length; ++i) {
-			GrowthcraftGrapesItems.grapeWine.registerRender(i, "grapewine");
-		} */
-		GrowthcraftGrapesItems.grapeWine.registerRenders(WineTypes.class);
-	}
-	
-	public static void registerBoozeColorHandlers() {
-		BoozeRegistryHelper.registerBoozeColorHandler(GrowthcraftGrapesItems.grapeWine.getItem());
 	}
 	
 	private static void registerFermentations() {
@@ -177,6 +147,5 @@ public class GrowthcraftGrapesFluids
 	
 	public static void registerRenders() {
 		BoozeRegistryHelper.registerBoozeRenderers(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks);
-		registerBoozeItemRender();
 	}
 }
