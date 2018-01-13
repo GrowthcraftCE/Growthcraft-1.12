@@ -1,15 +1,19 @@
 package growthcraft.core.handlers;
 
+import growthcraft.core.api.definition.IItemStackFactory;
+import growthcraft.core.api.definition.IObjectVariant;
+import growthcraft.core.init.GrowthcraftCoreItems;
 import net.minecraft.item.EnumDyeColor;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
 
-    public enum CrowbarTypes implements IStringSerializable {
+    public enum CrowbarTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
         WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getUnlocalizedName()),
         ORANGE(EnumDyeColor.ORANGE.getMetadata(), EnumDyeColor.ORANGE.getUnlocalizedName()),
         MAGENTA(EnumDyeColor.MAGENTA.getMetadata(), EnumDyeColor.MAGENTA.getUnlocalizedName()),
-        LIGHT_BLUE(EnumDyeColor.LIGHT_BLUE.getMetadata(), EnumDyeColor.LIGHT_BLUE.getUnlocalizedName()),
+        LIGHTBLUE(EnumDyeColor.LIGHT_BLUE.getMetadata(), EnumDyeColor.LIGHT_BLUE.getUnlocalizedName()),
         YELLOW(EnumDyeColor.YELLOW.getMetadata(), EnumDyeColor.YELLOW.getUnlocalizedName()),
         LIME(EnumDyeColor.LIME.getMetadata(), EnumDyeColor.LIME.getUnlocalizedName()),
         PINK(EnumDyeColor.PINK.getMetadata(), EnumDyeColor.PINK.getUnlocalizedName()),
@@ -42,8 +46,19 @@ public class EnumHandler {
             return this.NAME;
         }
 
-        public int getID() {
+        @Override
+        public int getVariantID() {
             return this.ID;
+        }
+        
+        @Override
+        public ItemStack asStack(int amount) {
+        	return GrowthcraftCoreItems.crowbar.asStack(amount, getVariantID());
+        }
+        
+        @Override
+        public ItemStack asStack() {
+        	return asStack(1);
         }
     }
 }

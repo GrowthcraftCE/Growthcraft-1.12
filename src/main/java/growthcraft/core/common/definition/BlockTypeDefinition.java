@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.api.definition.ISubItemStackFactory;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -20,14 +21,19 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	}
 
 	@Nonnull
-	public T getBlock()
+	public final T getBlock()
 	{
 		return getObject();
 	}
 
-	public Item getItem()
+	public final Item getItem()
 	{
 		return Item.getItemFromBlock(getBlock());
+	}
+	
+	@Nonnull
+	public final IBlockState getDefaultState() {
+		return getBlock().getDefaultState();
 	}
 
 	@Nonnull

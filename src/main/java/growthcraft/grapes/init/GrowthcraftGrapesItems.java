@@ -31,7 +31,7 @@ public class GrowthcraftGrapesItems {
 
         for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
            EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
-           registerRender(grape, type.getID(), "grape_" + type.getName());
+           registerRender(grape, type.getVariantID(), "grape_" + type.getName());
         }
     }
 

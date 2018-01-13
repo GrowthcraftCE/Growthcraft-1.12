@@ -34,6 +34,6 @@ public class BlockSalt extends Block {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return GrowthcraftCoreItems.salt;
+        return GrowthcraftCoreItems.salt.getItem();
     }
 }

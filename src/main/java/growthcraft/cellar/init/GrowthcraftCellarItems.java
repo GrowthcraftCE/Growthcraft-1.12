@@ -21,29 +21,12 @@ public class GrowthcraftCellarItems {
     	chievItemDummy.register();
     	yeast.getItem().setCreativeTab(tabGrowthcraft);
     	yeast.register();
-//        registerItem(chievItemDummy, false);
     }
 
     public static void registerRenders() {
     	chievItemDummy.registerRender();
-    	for( EnumYeast type : EnumYeast.values() )
-    		yeast.registerRender(type.ordinal(), "yeast_" + type.toString().toLowerCase() /*yeast.getItem().getUnlocalizedName(yeast.asStack()).substring(5)*/ );  // Skip prefix "items."
-//        registerRender(chievItemDummy);
+//    	for( EnumYeast type : EnumYeast.values() )
+//    		yeast.registerRender(type.ordinal(), "yeast_" + type.toString().toLowerCase() );
+    	yeast.registerRenders(EnumYeast.values());
     }
-
-/*    public static void registerItem(Item item, boolean bAddToCreativeTab) {
-        if( bAddToCreativeTab )
-        	item.setCreativeTab(tabGrowthcraft);
-        GameRegistry.register(item);
-    }
-
-    public static void  registerRender(Item item) {
-        ModelLoader.setCustomModelResourceLocation(item, 0,
-                new ModelResourceLocation(new ResourceLocation(Reference.MODID, item.getUnlocalizedName().substring(5)), "inventory"));
-    }
-
-    public static void registerRender(Item item, int meta, String fileName) {
-        ModelLoader.setCustomModelResourceLocation(item, meta,
-                new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    } */
 }

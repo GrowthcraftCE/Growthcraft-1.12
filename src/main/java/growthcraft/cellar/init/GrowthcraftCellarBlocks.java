@@ -75,7 +75,6 @@ public class GrowthcraftCellarBlocks {
     }
     
     public static void registerTileEntities() {
-//      GameRegistry.registerTileEntity(TileEntityBrewKettle.class, Reference.MODID + ":brew_kettle");
       GameRegistry.registerTileEntity(PREVTileEntityBrewKettle.class, Reference.MODID + ":brew_kettle");
       GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, Reference.MODID + ":ferment_barrel");
       GameRegistry.registerTileEntity(TileEntityCultureJar.class, Reference.MODID + ":culture_jar");
@@ -93,21 +92,4 @@ public class GrowthcraftCellarBlocks {
             GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
         }
     }
-/*
-    public static void registerBlock(Block block, ItemBlock itemBlock) {
-        block.setCreativeTab(tabGrowthcraft);
-        GameRegistry.register(block);
-        GameRegistry.register(itemBlock.setRegistryName(block.getRegistryName()));
-    }
-
-    public static void registerRender(Block block) {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(
-                new ResourceLocation(Reference.MODID, block.getUnlocalizedName().substring(5)), "inventory"));
-    }
-
-    public static void registerRender(Block block, int meta, String fileName) {
-        ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
-                new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
-    */
 }

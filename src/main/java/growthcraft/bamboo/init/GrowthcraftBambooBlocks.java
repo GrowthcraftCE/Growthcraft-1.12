@@ -34,7 +34,7 @@ public class GrowthcraftBambooBlocks {
         bambooPlank = new BlockDefinition( new BlockBambooPlank() );
         bambooSlabHalf = new BlockTypeDefinition<BlockSlab>( new BlockBambooSlabHalf("bamboo_slab_half") );
         bambooSlabDouble = new BlockTypeDefinition<BlockSlab>( new BlockBambooSlabDouble("bamboo_slab_double" ) );
-        bambooStairs = new BlockDefinition( new BlockBambooStairs("bamboo_stairs", bambooPlank.getBlock().getDefaultState()) );
+        bambooStairs = new BlockDefinition( new BlockBambooStairs("bamboo_stairs", bambooPlank.getDefaultState()) );
         bambooFence = new BlockDefinition( new BlockBambooFence("bamboo_fence") );
         bambooFenceGate = new BlockDefinition( new BlockBambooFenceGate("bamboo_fence_gate") );
         bambooLeaves = new BlockDefinition( new BlockBambooLeaves("bamboo_leaves") );

@@ -2,10 +2,11 @@ package growthcraft.cellar.handlers;
 
 import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.api.definition.IItemStackFactory;
+import growthcraft.core.api.definition.IObjectVariant;
 import net.minecraft.item.ItemStack;
 
 public class EnumHandler {
-	public enum EnumYeast implements IItemStackFactory
+	public enum EnumYeast implements IItemStackFactory, IObjectVariant
 	{
 		BREWERS,
 		LAGER,
@@ -22,6 +23,7 @@ public class EnumHandler {
 		 * @param size - size of the stack to create
 		 * @return yeast stack
 		 */
+		@Override
 		public ItemStack asStack(int size)
 		{
 			return GrowthcraftCellarItems.yeast.asStack(size, ordinal());
@@ -30,10 +32,16 @@ public class EnumHandler {
 		/**
 		 * @return yeast stack, size: 1
 		 */
+		@Override
 		public ItemStack asStack()
 		{
 			return asStack(1);
 		}
+		
+        @Override
+        public int getVariantID() {
+            return this.ordinal();
+        }
 		
 		public String toOreName() {
 			String yeastName = toString();

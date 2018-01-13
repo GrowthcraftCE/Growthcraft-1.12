@@ -60,7 +60,7 @@ public class BlockRopeFence extends Block implements IBlockRope {
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
         // Always return a rope when broken
         if ( !worldIn.isRemote) {
-            ItemStack rope = new ItemStack(GrowthcraftCoreItems.rope, 1);
+            ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
             InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
         }
     }

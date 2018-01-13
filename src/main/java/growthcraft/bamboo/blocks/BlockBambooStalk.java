@@ -80,7 +80,7 @@ public class BlockBambooStalk extends Block {
                 if ( worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast)).getBlock() instanceof BlockAir
                         && worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast).down()).getBlock() instanceof BlockDirt) {
                     worldIn.setBlockState(posSouthWest.north(offsetNorth).east(offsetEast),
-                            GrowthcraftBambooBlocks.bambooShoot.getBlock().getDefaultState().withProperty(BlockBambooShoot.STAGE, 0));
+                            GrowthcraftBambooBlocks.bambooShoot.getDefaultState().withProperty(BlockBambooShoot.STAGE, 0));
                 }
             }
         }

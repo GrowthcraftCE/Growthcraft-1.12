@@ -42,7 +42,7 @@ public class GrowthcraftApplesBlocks {
         blockAppleSapling = new BlockDefinition( new BlockAppleSapling("apple_sapling") );
         blockAppleSlabHalf = new BlockTypeDefinition<BlockSlab>( new BlockAppleSlabHalf("apple_slab_half") );
         blockAppleSlabDouble = new BlockTypeDefinition<BlockSlab>( new BlockAppleSlabDouble("apple_slab_double") );
-        blockAppleStairs = new BlockDefinition( new BlockAppleStairs("apple_stairs", blockApplePlanks.getBlock().getDefaultState()) );
+        blockAppleStairs = new BlockDefinition( new BlockAppleStairs("apple_stairs", blockApplePlanks.getDefaultState()) );
         // Register the blocks
         register();
     }

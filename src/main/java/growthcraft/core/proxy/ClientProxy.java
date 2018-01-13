@@ -1,6 +1,7 @@
 package growthcraft.core.proxy;
 
 import growthcraft.core.Reference;
+import growthcraft.core.handlers.EnumHandler;
 import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import net.minecraft.client.renderer.block.model.ModelBakery;
@@ -15,7 +16,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-        ModelBakery.registerItemVariants(GrowthcraftCoreItems.crowbar,
+/*        ModelBakery.registerItemVariants(GrowthcraftCoreItems.crowbar.getItem(),
                 new ResourceLocation(Reference.MODID, "crowbar_white"),
                 new ResourceLocation(Reference.MODID, "crowbar_orange"),
                 new ResourceLocation(Reference.MODID, "crowbar_magenta"),
@@ -32,7 +33,8 @@ public class ClientProxy extends CommonProxy {
                 new ResourceLocation(Reference.MODID, "crowbar_green"),
                 new ResourceLocation(Reference.MODID, "crowbar_red"),
                 new ResourceLocation(Reference.MODID, "crowbar_black")
-        );
+        ); */
+    	GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(EnumHandler.CrowbarTypes.values());
     }
 
     @Override

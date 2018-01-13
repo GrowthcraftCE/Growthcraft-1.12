@@ -40,9 +40,9 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
             if (canGrow(worldIn, pos, height)) {
 
                 // Grow the Tree
-                worldIn.setBlockState(pos, GrowthcraftBambooBlocks.bambooStalk.getBlock().getDefaultState());
+                worldIn.setBlockState(pos, GrowthcraftBambooBlocks.bambooStalk.getDefaultState());
                 for (int i = 1; i <= height; i++) {
-                    worldIn.setBlockState(pos.up(i), GrowthcraftBambooBlocks.bambooStalk.getBlock().getDefaultState());
+                    worldIn.setBlockState(pos.up(i), GrowthcraftBambooBlocks.bambooStalk.getDefaultState());
 
                     if ( i == height ) {
                         // Then this is last iteration and we need to generate the leaves.
@@ -66,7 +66,7 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
 
     private void spawnLeaves(World worldIn, BlockPos pos) {
         if (worldIn.getBlockState(pos).getBlock() instanceof BlockAir ) {
-            worldIn.setBlockState(pos, GrowthcraftBambooBlocks.bambooLeaves.getBlock().getDefaultState());
+            worldIn.setBlockState(pos, GrowthcraftBambooBlocks.bambooLeaves.getDefaultState());
         }
     }
 

@@ -20,7 +20,7 @@ public class BlockSaltGeneration implements IWorldGenerator {
     private WorldGenerator salt_overworld;
 
     public BlockSaltGeneration() {
-        salt_overworld = new WorldGenMinable(GrowthcraftCoreBlocks.salt_block.getDefaultState(), 16);
+        salt_overworld = new WorldGenMinable(GrowthcraftCoreBlocks.salt_block.getBlock().getDefaultState(), 16);
     }
 
     // runGenerator from CJMinecraft
