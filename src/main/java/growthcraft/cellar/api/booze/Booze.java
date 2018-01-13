@@ -17,6 +17,6 @@ public class Booze extends GrowthcraftFluid
 	
 	public Booze(@Nonnull String fluidName )
 	{
-		super(fluidName, ICON_STILL, ICON_FLOW);
+		super( "fluid_booze_" + fluidName, ICON_STILL, ICON_FLOW);
 	}
 }

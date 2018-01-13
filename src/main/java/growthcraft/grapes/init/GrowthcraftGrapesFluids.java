@@ -15,18 +15,13 @@ import growthcraft.core.api.effect.EffectWeightedRandomList;
 import growthcraft.core.api.effect.SimplePotionEffectFactory;
 import growthcraft.core.api.item.OreItemStacks;
 import growthcraft.core.api.utils.TickUtils;
-import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.handlers.EnumHandler.WineTypes;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelBakery;
-import net.minecraft.client.renderer.color.IItemColor;
-import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
@@ -39,7 +34,7 @@ public class GrowthcraftGrapesFluids
 	public static void init() {
 		grapeWineBooze = new BoozeDefinition[WineTypes.values().length];
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks = new BlockBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeAndRegisterBoozeFluids("fluid_booze_", grapeWineBooze);
+		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(grapeWineBooze, WineTypes.class);
 		for (BoozeDefinition booze : grapeWineBooze)
 		{
 			booze.getFluid().setColor(GrowthcraftGrapesConfig.grapeWineColor).setDensity(1120);
@@ -53,13 +48,13 @@ public class GrowthcraftGrapesFluids
 		grapeWineBooze[WineTypes.PURPLE_PORTWINE.ordinal()].getFluid().setColor(GrowthcraftGrapesConfig.portWineColor);
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks[WineTypes.PURPLE_PORTWINE.ordinal()].getBlock().refreshColor();
 		
-		GrowthcraftGrapesItems.grapeWine = new ItemDefinition(new ItemBoozeBottle(grapeWineBooze));
+		GrowthcraftGrapesItems.grapeWine = new ItemTypeDefinition<ItemBoozeBottle>(new ItemBoozeBottle(grapeWineBooze));
 	}
 	
 	public static void register() {
 		GrowthcraftGrapesItems.grapeWine.register(new ResourceLocation(Reference.MODID, "grapewine"));
 		
-		BoozeRegistryHelper.registerBooze(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks, GrowthcraftGrapesItems.grapeWine, "booze_");
+		BoozeRegistryHelper.registerBooze(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks, GrowthcraftGrapesItems.grapeWine, "grapebooze", WineTypes.class);
 		registerFermentations();
 		
 		OreDictionary.registerOre("foodGrapejuice", GrowthcraftGrapesItems.grapeWine.asStack(1, 0));
@@ -67,41 +62,27 @@ public class GrowthcraftGrapesFluids
 	
 	// TODO: Move to BoozeRegistryHelper
 	public static void registerItemVariants() {
-		ResourceLocation[] variants = new ResourceLocation[grapeWineBooze.length];
+/*		ResourceLocation[] variants = new ResourceLocation[grapeWineBooze.length];
 		ResourceLocation name = GrowthcraftGrapesItems.grapeWine.getItem().getRegistryName();
 		for (int i = 0; i < grapeWineBooze.length; ++i) {
 //			String boozeRegistryName = WineTypes.values()[i].getName();
 			variants[i] = new ResourceLocation(name.getResourceDomain(), name.getResourcePath() + "_" + i);
 		}
 		ModelBakery.registerItemVariants(GrowthcraftGrapesItems.grapeWine.getItem(), variants);
+		*/
+		GrowthcraftGrapesItems.grapeWine.registerModelBakeryVariants(WineTypes.class);
 	}
 	
 	// TODO: Move to BoozeRegistryHelper
 	public static void registerBoozeItemRender() {
-		for (int i = 0; i < grapeWineBooze.length; ++i) {
+/*		for (int i = 0; i < grapeWineBooze.length; ++i) {
 			GrowthcraftGrapesItems.grapeWine.registerRender(i, "grapewine");
-		}
+		} */
+		GrowthcraftGrapesItems.grapeWine.registerRenders(WineTypes.class);
 	}
 	
-	// TODO: Move to BoozeRegistryHelper
-	public static void registerBoozeColorHandler() {
-		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-		itemColors.registerItemColorHandler(new IItemColor() {
-
-			@Override
-			public int getColorFromItemstack(ItemStack stack, int tintIndex) {
-				if( tintIndex != 0 )
-					return -1;
-				Item item = stack.getItem();
-				if( !(item instanceof ItemBoozeBottle) )
-					return -1;
-				ItemBoozeBottle boozeBottle = (ItemBoozeBottle)item;
-				int value = boozeBottle.getColor(stack);
-				
-				return value;
-			}
-			
-		}, GrowthcraftGrapesItems.grapeWine.getItem());
+	public static void registerBoozeColorHandlers() {
+		BoozeRegistryHelper.registerBoozeColorHandler(GrowthcraftGrapesItems.grapeWine.getItem());
 	}
 	
 	private static void registerFermentations() {

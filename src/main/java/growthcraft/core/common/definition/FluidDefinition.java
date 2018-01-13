@@ -1,5 +1,7 @@
 package growthcraft.core.common.definition;
 
+import java.lang.reflect.Array;
+
 import javax.annotation.Nonnull;
 
 import growthcraft.cellar.api.booze.Booze;
@@ -23,8 +25,8 @@ public class FluidDefinition extends FluidTypeDefinition<Fluid>
 		return defs;
 	}
 
-	public static <T extends Fluid> T[] convertArray(FluidTypeDefinition<T>[] fluidDefs) {
-		final T[] fluids = (T[]) new Fluid[fluidDefs.length];
+	public static <T extends Fluid> T[] convertArray(FluidTypeDefinition<T>[] fluidDefs, Class<T> clazz) {
+		final T[] fluids = (T[]) Array.newInstance(clazz, fluidDefs.length); //(T[]) new Fluid[fluidDefs.length];
 		for (int i = 0; i < fluidDefs.length; ++i)
 		{
 			fluids[i] = fluidDefs[i].getFluid(); 

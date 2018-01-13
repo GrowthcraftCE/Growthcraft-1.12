@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "fluid_booze_0": [
+    "fluid_booze_ambrosia": [
       {
         "custom": {
-          "fluid": "fluid_booze_0"
+          "fluid": "fluid_booze_ambrosia"
         }
       }
     ]

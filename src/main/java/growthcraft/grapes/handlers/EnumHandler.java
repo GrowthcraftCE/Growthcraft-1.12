@@ -2,6 +2,7 @@ package growthcraft.grapes.handlers;
 
 import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.cellar.api.booze.Booze;
+import growthcraft.cellar.api.definition.IObjectBooze;
 import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.BoozeDefinition;
@@ -54,7 +55,7 @@ public class EnumHandler {
         }
     }
     
-    public enum WineTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
+    public enum WineTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
     	PURPLE_JUICE(0, "juice"),
     	PURPLE_WINE(1, "wine"),
     	PURPLE_WINE_POTENT(2, "wine_potent"),
@@ -97,11 +98,13 @@ public class EnumHandler {
         	return asStack(1);
         }
         
+        @Override
         public BoozeDefinition getFluidDefinition() {
         	return GrowthcraftGrapesFluids.grapeWineBooze[ordinal()];
         }
         
-        public BlockBoozeDefinition getBoozeBlock() {
+        @Override
+        public BlockBoozeDefinition getBoozeBlockDefinition() {
         	return GrowthcraftGrapesBlocks.grapeWineFluidBlocks[ordinal()];
         }
     }

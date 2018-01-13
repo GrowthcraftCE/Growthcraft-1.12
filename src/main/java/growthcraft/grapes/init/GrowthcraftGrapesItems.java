@@ -1,7 +1,9 @@
 package growthcraft.grapes.init;
 
+import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.handlers.EnumHandler;
 import growthcraft.grapes.items.ItemGrape;
@@ -15,7 +17,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class GrowthcraftGrapesItems {
     public static Item grape;
     public static Item grape_seed;
-	public static ItemDefinition grapeWine;
+	public static ItemTypeDefinition<ItemBoozeBottle> grapeWine;
 
     public static void init() {
         grape = new ItemGrape("grape", 1, 1, false);

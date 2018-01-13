@@ -15,7 +15,7 @@ public class ClientProxy extends CommonProxy {
     public void init() {
         registerModelBakeryVariants();
         registerSpecialRenders();
-        GrowthcraftGrapesFluids.registerBoozeColorHandler();
+        GrowthcraftGrapesFluids.registerBoozeColorHandlers();
     }
 
     @Override
