@@ -23,11 +23,12 @@ public class GrowthcraftGrapesBlocks {
     public static BlockGrapeVineFruit grape_vine_fruit;
     
 	public static BlockBoozeDefinition[] grapeWineFluidBlocks;
-
+	
     public static void init() {
         grape_vine = new BlockGrapeVine("grape_vine");
         grape_vine_bush = new BlockGrapeVineBush("grape_vine_bush");
         grape_vine_fruit = new BlockGrapeVineFruit();
+        grapeWineFluidBlocks = null; // Is initialized in GrowthcraftGrapesFluids
     }
 
     public static void register() {

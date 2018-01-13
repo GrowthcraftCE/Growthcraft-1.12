@@ -7,8 +7,6 @@ import growthcraft.core.common.definition.ItemDefinition;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftCellarItems {
-	// REVISE_ME 0
-	
 	public static ItemDefinition chievItemDummy;
 	public static ItemDefinition yeast;
 
@@ -25,6 +23,6 @@ public class GrowthcraftCellarItems {
 
     public static void registerRenders() {
     	chievItemDummy.registerRender();
-    	yeast.registerRenders(EnumYeast.values());
+    	yeast.registerRenders(EnumYeast.class);
     }
 }

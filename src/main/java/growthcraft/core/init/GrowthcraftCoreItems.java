@@ -31,6 +31,6 @@ public class GrowthcraftCoreItems {
     public static void registerRenders() {
     	salt.registerRender();
     	rope.registerRender();
-    	crowbar.registerRenders(EnumHandler.CrowbarTypes.values());
+    	crowbar.registerRenders(EnumHandler.CrowbarTypes.class);
     }
 }

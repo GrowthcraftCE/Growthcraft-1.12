@@ -36,7 +36,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-    	GrowthcraftCellarItems.yeast.registerModelBakeryVariants(EnumYeast.values());
+    	GrowthcraftCellarItems.yeast.registerModelBakeryVariants(EnumYeast.class);
     }
 
     @Override

@@ -4,9 +4,10 @@ import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.core.api.definition.IItemStackFactory;
 import growthcraft.core.api.definition.IObjectVariant;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
-	public enum EnumYeast implements IItemStackFactory, IObjectVariant
+	public enum EnumYeast implements IStringSerializable, IItemStackFactory, IObjectVariant
 	{
 		BREWERS,
 		LAGER,
@@ -44,7 +45,7 @@ public class EnumHandler {
         }
 		
 		public String toOreName() {
-			String yeastName = toString();
+			String yeastName = getName();
 			return "yeast" + Character.toUpperCase(yeastName.charAt(0)) + yeastName.substring(1).toLowerCase();
 		}
 
@@ -52,6 +53,16 @@ public class EnumHandler {
 			if( meta < 0 || meta >= values().length )
 				return BREWERS;
 			return values()[meta];
+		}
+
+		@Override
+		public String getName() {
+			return super.toString().toLowerCase();
+		}
+		
+		@Override
+		public String toString() {
+			return getName();
 		}
 	}
 }
