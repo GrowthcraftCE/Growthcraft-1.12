@@ -21,7 +21,7 @@ public class GrowthcraftMilkItems {
     public static Item thistle_seed;
     public static ItemDefinition thistle;
     public static Item itemCheeseCloth;
-    public static Item itemButter;
+    public static ItemDefinition butter;
     public static Item itemIceCream;
     public static Item itemYogurt;
     public static ItemDefinition starterCulture;
@@ -35,7 +35,7 @@ public class GrowthcraftMilkItems {
         stomach = new ItemDefinition(new ItemStomach("stomach") );
         itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
         starterCulture = new ItemDefinition( new ItemStarterCulture("starter_culture") );
-        itemButter = new ItemButter("butter", 2, 0.3F, false);
+        butter = new ItemDefinition( new ItemButter("butter", 2, 0.3F, false) );
         itemIceCream = new ItemIceCream("ice_cream", 2, 0.3F, false);
         itemYogurt = new ItemYogurt("yogurt", 2, 0.3F, false);
         itemAgedCheeseSlice = new ItemAgedCheeseSlice("cheese_aged_slice", 2, 0.3F, false);
@@ -55,7 +55,9 @@ public class GrowthcraftMilkItems {
 //        registerItem(itemStarterCulture);
         starterCulture.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
         starterCulture.register();
-        registerItem(itemButter);
+        // registerItem(itemButter);
+        butter.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+        butter.register();
         registerItem(itemIceCream);
         registerItem(itemYogurt);
         registerItem(itemAgedCheeseSlice);
@@ -81,9 +83,10 @@ public class GrowthcraftMilkItems {
         // registerRender(itemStarterCulture);
         starterCulture.registerRender();
 
-        for (int i = 0; i < EnumHandler.ButterTypes.values().length; i++) {
-            registerRender(itemButter, i, "butter/butter_" + EnumHandler.ButterTypes.values()[i].getName());
-        }
+//        for (int i = 0; i < EnumHandler.ButterTypes.values().length; i++) {
+//            registerRender(itemButter, i, "butter/butter_" + EnumHandler.ButterTypes.values()[i].getName());
+//        }
+        butter.registerRenders(EnumHandler.ButterTypes.class);
 
         for (int i = 0; i < EnumHandler.IceCreamTypes.values().length; i++) {
             registerRender(itemIceCream, i, "ice_cream/ice_cream_" + EnumHandler.IceCreamTypes.values()[i].getName());
@@ -105,6 +108,10 @@ public class GrowthcraftMilkItems {
             registerRender(itemSimpleCheeseSlice, i, "cheese_slice/" + EnumHandler.SimpleCheeseTypes.values()[i].getName());
         }
     }
+    
+	public static void registerModelBakeryVariants() {
+		butter.registerModelBakeryVariants(EnumHandler.ButterTypes.class);
+	}
 
     public static void registerItem(Item item) {
         item.setCreativeTab(tabGrowthcraft);
@@ -119,6 +126,8 @@ public class GrowthcraftMilkItems {
     public static void registerRender(Item item, int meta, String fileName) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
+
+
 
 
 

@@ -20,6 +20,7 @@ import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import growthcraft.core.utils.FluidFactory;
 import growthcraft.core.utils.FluidFactory.FluidDetails;
 import growthcraft.core.utils.FluidFactory.FluidDetailsBuilder;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.GrowthcraftMilkConfig;
 import growthcraft.milk.Reference;
 import growthcraft.milk.api.MilkFluidTags;
@@ -163,15 +164,22 @@ public class GrowthcraftMilkFluids {
 		return milks;
 	}
     
+	public static int roundToBottles(int fluidAmount) {
+		int numBottles = fluidAmount / GrowthcraftCoreConfig.bottleCapacity;
+		return numBottles * GrowthcraftCoreConfig.bottleCapacity;
+	}
+	
     public static void init() {
-		final List<Fluid> milks = getMilkFluids();
+		int restCapRounded = roundToBottles(1000 - GrowthcraftCoreConfig.bottleCapacity);
+    	
+    	final List<Fluid> milks = getMilkFluids();
 		for (Fluid f : milks)
 		{
 			CoreRegistry.instance().fluidDictionary().addFluidTags(f, MilkFluidTags.MILK);
-
+			
 			MilkRegistry.instance().pancheon().addRecipe(
 				new FluidStack(f, 1000),
-				cream.asFluidStack(GrowthcraftCoreConfig.bottleCapacity), skimMilk.asFluidStack(1000 - GrowthcraftCoreConfig.bottleCapacity),
+				cream.asFluidStack(GrowthcraftCoreConfig.bottleCapacity), skimMilk.asFluidStack(restCapRounded),
 				TickUtils.minutes(1));
 		}
 	}
@@ -241,6 +249,13 @@ public class GrowthcraftMilkFluids {
 		GrowthcraftCellar.boozeBuilderFactory.create(skimMilk.getFluid())
 			.culturesTo(250, GrowthcraftMilkItems.starterCulture.asStack(), 0.7f, TickUtils.seconds(10));
 
+		GrowthcraftMilk.userApis.churnRecipes.addDefault(
+				cream.asFluidStack(roundToBottles(1000)),
+				butterMilk.asFluidStack(roundToBottles(500)),
+				GrowthcraftMilkItems.butter.asStack(2),
+				16);
+
+		
 		registerOres();
     }
     

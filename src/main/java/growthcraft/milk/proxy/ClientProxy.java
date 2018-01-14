@@ -24,7 +24,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerModelBakeryVariants() {
-
+    	GrowthcraftMilkItems.registerModelBakeryVariants();
     }
 
     @Override

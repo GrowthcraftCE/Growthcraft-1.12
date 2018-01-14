@@ -1,4 +1,4 @@
-package growthcraft.milk.common.block.pancheon;
+package growthcraft.milk.common.block;
 
 import java.util.List;
 

@@ -1,10 +1,14 @@
 package growthcraft.milk.handlers;
 
+import growthcraft.core.api.definition.IItemStackFactory;
+import growthcraft.core.api.definition.IObjectVariant;
+import growthcraft.milk.init.GrowthcraftMilkItems;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
 
-    public enum ButterTypes implements IStringSerializable {
+    public enum ButterTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
         UNSALTED(0, "unsalted"),
         SALTED(1, "salted");
 
@@ -26,9 +30,20 @@ public class EnumHandler {
             return this.NAME;
         }
 
-        public int getID() {
-            return this.ID;
-        }
+		@Override
+		public int getVariantID() {
+			return this.ID;
+		}
+
+		@Override
+		public ItemStack asStack(int size) {
+			return GrowthcraftMilkItems.butter.asStack(1, getVariantID());
+		}
+
+		@Override
+		public ItemStack asStack() {
+			return asStack(1);
+		}
     }
 
     public enum IceCreamTypes implements IStringSerializable {

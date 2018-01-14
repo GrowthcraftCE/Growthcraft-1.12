@@ -29,6 +29,8 @@ Not ported stuff:
 TODO: Item model jsons for all cellar devices.
 TODO: Textures and models of Ferment Barrel.
 TODO: Textures and models of Fruit Press.
+TODO: Textures and models for Butter Churn.
+TODO: Render for Butter Churn.
 TODO: Step sounds
 TODO: Add yeasts
 TODO: Language files for Cellar.
