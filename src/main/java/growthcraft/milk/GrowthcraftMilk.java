@@ -1,10 +1,14 @@
 package growthcraft.milk;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import growthcraft.milk.handlers.EntityDropsHandler;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.proxy.CommonProxy;
+import growthcraft.milk.utils.GrowthcraftMilkUserApis;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -22,20 +26,28 @@ public class GrowthcraftMilk {
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+	public static Logger logger = LogManager.getLogger(Reference.MODID);
+
+	public static final GrowthcraftMilkUserApis userApis = new GrowthcraftMilkUserApis();
+	
     static {
         FluidRegistry.enableUniversalBucket();
     }
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-
+    	
+    	userApis.setConfigDirectory(event.getModConfigurationDirectory());
+    	
         GrowthcraftMilkFluids.init();
         GrowthcraftMilkBlocks.init();
         GrowthcraftMilkItems.init();
+        userApis.preInit();
 
         GrowthcraftMilkFluids.register();
         GrowthcraftMilkBlocks.register();
         GrowthcraftMilkItems.register();
+        userApis.register();
         
         proxy.preInit();
     }
@@ -43,15 +55,14 @@ public class GrowthcraftMilk {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
+        userApis.init();
+        userApis.loadConfigs();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
         MinecraftForge.EVENT_BUS.register(new EntityDropsHandler());
+        userApis.postInit();
     }
-
-
-
-
 
 }
