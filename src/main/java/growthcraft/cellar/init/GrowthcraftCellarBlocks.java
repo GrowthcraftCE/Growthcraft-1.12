@@ -4,6 +4,7 @@ import growthcraft.cellar.Reference;
 import growthcraft.cellar.blocks.BlockBrewKettle;
 import growthcraft.cellar.blocks.BlockCultureJar;
 import growthcraft.cellar.client.render.RenderBrewKettle;
+import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
@@ -72,6 +73,7 @@ public class GrowthcraftCellarBlocks {
     
     public static void registerSpecialRenders() {
         ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultureJar.class, new RenderCultureJar());
     }
     
     public static void registerTileEntities() {

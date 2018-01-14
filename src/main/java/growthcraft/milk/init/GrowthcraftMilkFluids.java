@@ -1,9 +1,13 @@
 package growthcraft.milk.init;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.api.processing.common.Residue;
 import growthcraft.cellar.init.GrowthcraftCellarPotions;
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.GrowthcraftCoreConfig;
 import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.api.effect.EffectExtinguish;
 import growthcraft.core.api.effect.EffectList;
@@ -19,6 +23,7 @@ import growthcraft.core.utils.FluidFactory.FluidDetailsBuilder;
 import growthcraft.milk.GrowthcraftMilkConfig;
 import growthcraft.milk.Reference;
 import growthcraft.milk.api.MilkFluidTags;
+import growthcraft.milk.api.MilkRegistry;
 import growthcraft.milk.blocks.BlockFluidButterMilk;
 import growthcraft.milk.blocks.BlockFluidCream;
 import growthcraft.milk.blocks.BlockFluidMilk;
@@ -39,6 +44,7 @@ import growthcraft.milk.common.effect.EffectMilk;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -140,9 +146,35 @@ public class GrowthcraftMilkFluids {
 					.setCreativeTab(GrowthcraftCore.tabGrowthcraft).setItemColor(0xFFFFFA);
     }
     
-    public static void init() {
+    public static void preInit() {
     	initFluids();
     }
+    
+	public static List<Fluid> getMilkFluids()
+	{
+		final List<Fluid> milks = new ArrayList<Fluid>();
+		if (milk != null)
+			milks.add(milk.getFluid());
+//		if (ForestryFluids.MILK.exists()) milks.add(ForestryFluids.MILK.getFluid());
+		// Automagy Milk
+		final Fluid fluidmilk = FluidRegistry.getFluid("fluidmilk");
+		if (fluidmilk != null)
+			milks.add(fluidmilk);
+		return milks;
+	}
+    
+    public static void init() {
+		final List<Fluid> milks = getMilkFluids();
+		for (Fluid f : milks)
+		{
+			CoreRegistry.instance().fluidDictionary().addFluidTags(f, MilkFluidTags.MILK);
+
+			MilkRegistry.instance().pancheon().addRecipe(
+				new FluidStack(f, 1000),
+				cream.asFluidStack(GrowthcraftCoreConfig.bottleCapacity), skimMilk.asFluidStack(1000 - GrowthcraftCoreConfig.bottleCapacity),
+				TickUtils.minutes(1));
+		}
+	}
     
 	private static void registerOres()
 	{
@@ -211,6 +243,7 @@ public class GrowthcraftMilkFluids {
 
 		registerOres();
     }
+    
 
     public static void registerRenders() {
     	if( milk != null )

@@ -39,7 +39,7 @@ public class GrowthcraftMilk {
     	
     	userApis.setConfigDirectory(event.getModConfigurationDirectory());
     	
-        GrowthcraftMilkFluids.init();
+        GrowthcraftMilkFluids.preInit();
         GrowthcraftMilkBlocks.init();
         GrowthcraftMilkItems.init();
         userApis.preInit();
@@ -55,6 +55,7 @@ public class GrowthcraftMilk {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
+        GrowthcraftMilkFluids.init();
         userApis.init();
         userApis.loadConfigs();
     }

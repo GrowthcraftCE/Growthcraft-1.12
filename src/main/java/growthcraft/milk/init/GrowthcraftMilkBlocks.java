@@ -2,12 +2,16 @@ package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
 import growthcraft.milk.blocks.*;
+import growthcraft.milk.client.render.RenderPancheon;
+import growthcraft.milk.common.block.pancheon.PREVBlockPancheon;
+import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -28,7 +32,7 @@ public class GrowthcraftMilkBlocks {
     public static GrowthcraftBlockFluidDefinition blockFluidPasteurizedMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidSkimMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidWhey;
-    public static BlockPancheon blockPancheon;
+    public static BlockDefinition pancheon;
 
     // TODO: BlockButterChurn
     // TODO: BlockCheese
@@ -46,29 +50,32 @@ public class GrowthcraftMilkBlocks {
         blockFluidPasteurizedMilk = GrowthcraftMilkFluids.pasteurizedMilk.getFluidBlockDefinition(); // new BlockFluidPasteurizedMilk("fluid_pasteurized_milk");
         blockFluidSkimMilk = GrowthcraftMilkFluids.skimMilk.getFluidBlockDefinition(); // new BlockFluidSkimMilk("fluid_skim_milk");
         blockFluidWhey = GrowthcraftMilkFluids.whey.getFluidBlockDefinition(); // new BlockFluidWhey("fluid_whey");
-        blockPancheon = new BlockPancheon("pancheon");
+        pancheon = new BlockDefinition( new PREVBlockPancheon("pancheon") );
     }
 
     public static void register() {
         // registerBlock(thistle, false, false);
     	thistle.register(false);
         registerBlock(blockCheeseVat, true, true);
-/*        registerBlock(blockFluidMilk, true, false);
-        registerBlock(blockFluidRennet, true, false);
-        registerBlock(blockFluidButterMilk, true, false);
-        registerBlock(blockFluidCream, true, false);
-        registerBlock(blockFluidMilkCurds, true, false);
-        registerBlock(blockFluidPasteurizedMilk, true, false);
-        registerBlock(blockFluidSkimMilk, true, false);
-        registerBlock(blockFluidWhey, true, false); */
-        registerBlock(blockPancheon, true, true);
+        //registerBlock(blockPancheon, true, true);
+        pancheon.getBlock().setCreativeTab(tabGrowthcraft);
+        pancheon.register(true);
     }
     
-    public static void  registerRenders() {
+    public static void registerRenders() {
         // registerRender(thistle);
     	thistle.registerRender();
         registerRender(blockCheeseVat);
-        registerRender(blockPancheon);
+        // registerRender(blockPancheon);
+        pancheon.registerRender();
+    }
+    
+    public static void registerTileEntities() {
+    	GameRegistry.registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
+    }
+    
+    public static void registerSpecialRenders() {
+    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPancheon.class, new RenderPancheon());
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {

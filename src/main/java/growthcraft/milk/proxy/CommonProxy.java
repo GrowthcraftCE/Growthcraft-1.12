@@ -1,5 +1,7 @@
 package growthcraft.milk.proxy;
 
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
+
 public class CommonProxy {
 
     public void init() {
@@ -15,6 +17,8 @@ public class CommonProxy {
     public void registerRenders() { }
     public void registerModelBakeryVariants() { }
     public void registerSpecialRenders() { }
-    public void registerTileEntities() { }
+    public void registerTileEntities() {
+    	GrowthcraftMilkBlocks.registerTileEntities();
+    }
 
 }
