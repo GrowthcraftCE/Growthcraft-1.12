@@ -96,8 +96,10 @@ public class BoozeRegistryHelper {
 			int bottleVariantID = values[i].getVariantID();
 			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, "fluid_" + basename + "_" + boozeName ), false);
 
+//OBSOLET	EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
+			
 			final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, boozes[i].getFluid());
-
+			
 			final FluidStack fluidStack = boozes[i].asFluidStack( GrowthcraftCoreConfig.bottleCapacity );
 			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, bottleVariantID), GrowthcraftCore.EMPTY_BOTTLE);
 

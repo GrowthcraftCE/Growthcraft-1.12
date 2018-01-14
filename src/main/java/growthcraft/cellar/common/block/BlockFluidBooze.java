@@ -13,10 +13,5 @@ public class BlockFluidBooze extends GrowthcraftBlockFluid {
 		super(fluid, GrowthcraftCellarConfig.boozeIsWater ? Material.WATER : Materials.booze);
 		refreshColor();
 	}
-	
-	public void refreshColor()
-	{
-		setColor(getFluid().getColor());
-		refreshLight();
-	}
+
 }

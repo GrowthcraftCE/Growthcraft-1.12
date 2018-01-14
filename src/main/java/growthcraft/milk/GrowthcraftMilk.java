@@ -30,20 +30,19 @@ public class GrowthcraftMilk {
     public static void preInit(FMLPreInitializationEvent event) {
 
         GrowthcraftMilkFluids.init();
-        GrowthcraftMilkFluids.register();
-
         GrowthcraftMilkBlocks.init();
         GrowthcraftMilkItems.init();
 
+        GrowthcraftMilkFluids.register();
         GrowthcraftMilkBlocks.register();
         GrowthcraftMilkItems.register();
-
-        proxy.init();
+        
+        proxy.preInit();
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.registerModelBakeryVariants();
+        proxy.init();
     }
 
     @Mod.EventHandler

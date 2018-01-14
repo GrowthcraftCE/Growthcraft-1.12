@@ -8,9 +8,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-        registerRenders();
-        registerModelBakeryVariants();
-        registerSpecialRenders();
+    	super.init();
+    	GrowthcraftMilkFluids.registerColorHandlers();
     }
 
     @Override

@@ -11,6 +11,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
+import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.common.definition.ItemDefinition;
+
 public class GrowthcraftMilkItems {
 
     public static Item itemStomach;
@@ -20,7 +23,7 @@ public class GrowthcraftMilkItems {
     public static Item itemButter;
     public static Item itemIceCream;
     public static Item itemYogurt;
-    public static Item itemStarterCulture;
+    public static ItemDefinition starterCulture;
     public static Item itemAgedCheeseSlice;
     public static Item itemWaxedCheeseSlice;
     public static Item itemSimpleCheeseSlice;
@@ -30,7 +33,7 @@ public class GrowthcraftMilkItems {
         thistle_seed = new ItemSeedThistle("thistle_seed");
         itemStomach = new ItemStomach("stomach");
         itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
-        itemStarterCulture = new ItemStarterCulture("starter_culture");
+        starterCulture = new ItemDefinition( new ItemStarterCulture("starter_culture") );
         itemButter = new ItemButter("butter", 2, 0.3F, false);
         itemIceCream = new ItemIceCream("ice_cream", 2, 0.3F, false);
         itemYogurt = new ItemYogurt("yogurt", 2, 0.3F, false);
@@ -44,7 +47,9 @@ public class GrowthcraftMilkItems {
         registerItem(thistle_seed);
         registerItem(itemStomach);
         registerItem(itemCheeseCloth);
-        registerItem(itemStarterCulture);
+//        registerItem(itemStarterCulture);
+        starterCulture.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+        starterCulture.register();
         registerItem(itemButter);
         registerItem(itemIceCream);
         registerItem(itemYogurt);
@@ -59,7 +64,8 @@ public class GrowthcraftMilkItems {
         registerRender(thistle_seed);
         registerRender(itemStomach);
         registerRender(itemCheeseCloth);
-        registerRender(itemStarterCulture);
+        // registerRender(itemStarterCulture);
+        starterCulture.registerRender();
 
         for (int i = 0; i < EnumHandler.ButterTypes.values().length; i++) {
             registerRender(itemButter, i, "butter/butter_" + EnumHandler.ButterTypes.values()[i].getName());

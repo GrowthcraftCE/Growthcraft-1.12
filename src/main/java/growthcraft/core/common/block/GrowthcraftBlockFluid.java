@@ -34,6 +34,14 @@ public class GrowthcraftBlockFluid extends BlockFluidClassic {
 		}
 		return super.getUnlocalizedName();
 	}
+	
+	public GrowthcraftBlockFluid refreshColor()
+	{
+		setColor(getFluid().getColor());
+		refreshLight();
+		
+		return this;
+	}
 
 	public GrowthcraftBlockFluid refreshSettings() {
 		setDensity(definedFluid.getDensity());
