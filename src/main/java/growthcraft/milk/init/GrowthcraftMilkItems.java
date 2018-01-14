@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
@@ -16,9 +17,9 @@ import growthcraft.core.common.definition.ItemDefinition;
 
 public class GrowthcraftMilkItems {
 
-    public static Item itemStomach;
+    public static ItemDefinition stomach;
     public static Item thistle_seed;
-    public static Item thistle;
+    public static ItemDefinition thistle;
     public static Item itemCheeseCloth;
     public static Item itemButter;
     public static Item itemIceCream;
@@ -29,9 +30,9 @@ public class GrowthcraftMilkItems {
     public static Item itemSimpleCheeseSlice;
 
     public static void init() {
-        thistle = new ItemThistle("thistle");
+        thistle = new ItemDefinition( new ItemThistle("thistle") );
         thistle_seed = new ItemSeedThistle("thistle_seed");
-        itemStomach = new ItemStomach("stomach");
+        stomach = new ItemDefinition(new ItemStomach("stomach") );
         itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
         starterCulture = new ItemDefinition( new ItemStarterCulture("starter_culture") );
         itemButter = new ItemButter("butter", 2, 0.3F, false);
@@ -43,9 +44,13 @@ public class GrowthcraftMilkItems {
     }
 
     public static void register() {
-        registerItem(thistle);
+        // registerItem(thistle);
+    	thistle.getItem().setCreativeTab(tabGrowthcraft);
+    	thistle.register();
         registerItem(thistle_seed);
-        registerItem(itemStomach);
+        // registerItem(itemStomach);
+        stomach.getItem().setCreativeTab(tabGrowthcraft);
+        stomach.register();
         registerItem(itemCheeseCloth);
 //        registerItem(itemStarterCulture);
         starterCulture.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
@@ -57,12 +62,21 @@ public class GrowthcraftMilkItems {
         registerItem(itemWaxedCheeseSlice);
         registerItem(itemSimpleCheeseSlice);
 
+        registerOres();
     }
+    
+	private static void registerOres()
+	{
+		OreDictionary.registerOre("rennetSource", thistle.getItem());
+		OreDictionary.registerOre("rennetSource", stomach.asStack());
+	}
 
     public static void registerRenders() {
-        registerRender(thistle);
+        // registerRender(thistle);
+    	thistle.registerRender();
         registerRender(thistle_seed);
-        registerRender(itemStomach);
+        // registerRender(itemStomach);
+        stomach.registerRender();
         registerRender(itemCheeseCloth);
         // registerRender(itemStarterCulture);
         starterCulture.registerRender();

@@ -87,8 +87,11 @@ public class FluidFactory
 
 		public ItemStack asBucketItemStack(int size)
 		{
-			return bucketStack; 
-//			return bucket != null ? bucket.asStack(size) : null;
+			if( bucketStack == null )
+				return null;
+			ItemStack stack = bucketStack.copy();
+			stack.setCount(size);
+			return stack;
 		}
 
 		public ItemStack asBucketItemStack()
@@ -334,32 +337,6 @@ public class FluidFactory
 
 	public FluidFactory() {}
 	
-/*
-	public FluidDetails create(Fluid fluid, int features)
-	{
-		final FluidDetails details = new FluidDetails();
-		details.fluid = new FluidDefinition(fluid);
-		details.fluid.register(NumUtils.isFlagged(features, FEATURE_BUCKET));
-		if (NumUtils.isFlagged(features, FEATURE_BLOCK))
-			details.block = GrowthcraftBlockFluidDefinition.create(details.fluid);
-
-		if (NumUtils.isFlagged(features, FEATURE_BOTTLE))
-			details.bottle = new ItemTypeDefinition<ItemBottleFluid>(new ItemBottleFluid(fluid));
-
-		if (NumUtils.isFlagged(features, FEATURE_BUCKET))
-			details.bucketStack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, details.fluid.getFluid());
-//			details.bucket = new ItemTypeDefinition<ItemBucketFluid>(new ItemBucketFluid(details.block != null ? details.block.getBlock() : null, fluid, null));
-
-		details.refreshItemColor();
-		details.refreshBlockColor();
-		return details;
-	}
-
-	public FluidDetails create(Fluid fluid)
-	{
-		return create(fluid, FEATURE_ALL_NON_EDIBLE);
-	}
-*/
 	public static FluidFactory instance()
 	{
 		return INSTANCE;

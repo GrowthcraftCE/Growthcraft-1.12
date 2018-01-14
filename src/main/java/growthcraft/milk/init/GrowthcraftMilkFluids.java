@@ -11,8 +11,6 @@ import growthcraft.core.api.effect.EffectUtils;
 import growthcraft.core.api.effect.IEffect;
 import growthcraft.core.api.item.OreItemStacks;
 import growthcraft.core.api.utils.TickUtils;
-import growthcraft.core.common.definition.GrowthcraftBlockFluidDefinition;
-import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import growthcraft.core.utils.FluidFactory;
@@ -46,7 +44,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GrowthcraftMilkFluids {
-	// INITIALIZE
 	
 	public static FluidDetails butterMilk;
 	public static FluidDetails cream;
@@ -158,24 +155,24 @@ public class GrowthcraftMilkFluids {
 		if (skimMilk != null)
 		{
 			OreDictionary.registerOre("bottleSkimmilk", skimMilk.asFoodBottleItemStack());
-//			OreDictionary.registerOre("bucketSkimmilk", skimMilk.bucket.asStack());
+			OreDictionary.registerOre("bucketSkimmilk", skimMilk.asBucketItemStack());
 		}
 		if (butterMilk != null)
 		{
 			OreDictionary.registerOre("bottleButtermilk", butterMilk.asFoodBottleItemStack());
-//			OreDictionary.registerOre("bucketButtermilk", butterMilk.bucket.asStack());
+			OreDictionary.registerOre("bucketButtermilk", butterMilk.asBucketItemStack());
 		}
 		if (whey != null)
 		{
 			OreDictionary.registerOre("bottleWhey", whey.asFoodBottleItemStack());
-//			OreDictionary.registerOre("bucketWhey", whey.bucket.asStack());
+			OreDictionary.registerOre("bucketWhey", whey.asBucketItemStack());
 			// https://github.com/GrowthcraftCE/Growthcraft-1.7/issues/419
 			OreDictionary.registerOre("foodStock", whey.asFoodBottleItemStack());
 		}
 		if (cream != null)
 		{
 			OreDictionary.registerOre("bottleCream", cream.asBottleItemStack());
-//			OreDictionary.registerOre("bucketCream", cream.bucket.asStack());
+			OreDictionary.registerOre("bucketCream", cream.asBucketItemStack());
 		}
 	}
 
@@ -213,31 +210,6 @@ public class GrowthcraftMilkFluids {
 			.culturesTo(250, GrowthcraftMilkItems.starterCulture.asStack(), 0.7f, TickUtils.seconds(10));
 
 		registerOres();
-/*
-        FluidRegistry.registerFluid(fluidMilk);
-        FluidRegistry.addBucketForFluid(fluidMilk);
-
-        FluidRegistry.registerFluid(fluidRennet);
-        FluidRegistry.addBucketForFluid(fluidRennet);
-
-        FluidRegistry.registerFluid(fluidButterMilk);
-        FluidRegistry.addBucketForFluid(fluidButterMilk);
-
-        FluidRegistry.registerFluid(fluidCream);
-        FluidRegistry.addBucketForFluid(fluidCream);
-
-        FluidRegistry.registerFluid(fluidMilkCurds);
-        FluidRegistry.addBucketForFluid(fluidMilkCurds);
-
-        FluidRegistry.registerFluid(fluidSkimMilk);
-        FluidRegistry.addBucketForFluid(fluidSkimMilk);
-
-        FluidRegistry.registerFluid(fluidWhey);
-        FluidRegistry.addBucketForFluid(fluidWhey);
-
-        FluidRegistry.registerFluid(fluidPasteurizedMilk);
-        FluidRegistry.addBucketForFluid(fluidPasteurizedMilk);
-*/
     }
 
     public static void registerRenders() {
@@ -250,15 +222,6 @@ public class GrowthcraftMilkFluids {
 		skimMilk.registerRenderer();
 		whey.registerRenderer();
 		pasteurizedMilk.registerRenderer();
-		
-/*        registerRender(fluidMilk);
-        registerRender(fluidRennet);
-        registerRender(fluidButterMilk);
-        registerRender(fluidCream);
-        registerRender(fluidMilkCurds);
-        registerRender(fluidSkimMilk);
-        registerRender(fluidWhey);
-        registerRender(fluidPasteurizedMilk); */
     }
     
     public static void registerColorHandlers() {
@@ -272,26 +235,4 @@ public class GrowthcraftMilkFluids {
 		whey.registerColorHandlers();
 		pasteurizedMilk.registerColorHandlers();
     }
-
-/*
-    public static void  registerRender(Fluid fluid) {
-
-        Item item = Item.getItemFromBlock(fluid.getBlock());
-
-        // subString 6 because "fluid." is 6.
-        ModelResourceLocation modelResourceLocation = new ModelResourceLocation(Reference.MODID + ":" + fluid.getUnlocalizedName().substring(6), fluid.getName());
-
-        // Set the custom mesh definition for the item using a lambda
-        ModelLoader.setCustomMeshDefinition(item, stack -> modelResourceLocation);
-
-        // Set the custom state mapper for the fluid material
-        ModelLoader.setCustomStateMapper(fluid.getBlock(), new StateMapperBase() {
-            @Override
-            protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-                return modelResourceLocation;
-            }
-        });
-    }
- */
-
 }

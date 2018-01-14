@@ -9,14 +9,16 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
+import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.GrowthcraftBlockFluidDefinition;
 
 public class GrowthcraftMilkBlocks {
 
-    public static Block thistle;
+    public static BlockDefinition thistle;
     public static Block blockCheeseVat;
     public static GrowthcraftBlockFluidDefinition blockFluidMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidRennet;
@@ -34,7 +36,7 @@ public class GrowthcraftMilkBlocks {
     // TODO: BlockCheeseCurds
 
     public static void init() {
-        thistle = new BlockThistle("thistle");
+        thistle = new BlockDefinition( new BlockThistle("thistle") );
         blockCheeseVat = new BlockCheeseVat("cheese_vat");
         blockFluidMilk = GrowthcraftMilkFluids.milk.getFluidBlockDefinition(); // new GrowthcraftBlockFluidDefinition( new BlockFluidMilk("fluid_milk") );
         blockFluidRennet = GrowthcraftMilkFluids.rennet.getFluidBlockDefinition(); // new BlockFluidRennet("fluid_rennet");
@@ -48,7 +50,8 @@ public class GrowthcraftMilkBlocks {
     }
 
     public static void register() {
-        registerBlock(thistle, false, false);
+        // registerBlock(thistle, false, false);
+    	thistle.register(false);
         registerBlock(blockCheeseVat, true, true);
 /*        registerBlock(blockFluidMilk, true, false);
         registerBlock(blockFluidRennet, true, false);
@@ -60,9 +63,10 @@ public class GrowthcraftMilkBlocks {
         registerBlock(blockFluidWhey, true, false); */
         registerBlock(blockPancheon, true, true);
     }
-
+    
     public static void  registerRenders() {
-        registerRender(thistle);
+        // registerRender(thistle);
+    	thistle.registerRender();
         registerRender(blockCheeseVat);
         registerRender(blockPancheon);
     }
