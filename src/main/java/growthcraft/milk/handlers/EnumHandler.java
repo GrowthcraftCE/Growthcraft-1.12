@@ -1,7 +1,12 @@
 package growthcraft.milk.handlers;
 
+import growthcraft.core.api.definition.IFluidStackFactory;
 import growthcraft.core.api.definition.IItemStackFactory;
 import growthcraft.core.api.definition.IObjectVariant;
+import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.api.definition.ICheeseCurdStackFactory;
+import growthcraft.milk.api.definition.ICheeseItemStackFactory;
+import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -108,16 +113,18 @@ public class EnumHandler {
         }
     }
 
-    public enum WaxedCheeseTypes implements IStringSerializable {
-        CHEDDAR(0, "cheddar"),
-        MONTEREY(1, "monterey");
+    public enum WaxedCheeseTypes implements IStringSerializable, ICheeseType {
+        CHEDDAR(0, "cheddar", 0xed9200),
+        MONTEREY(1, "monterey", 0xf5f5da);
 
         private int ID;
         private String NAME;
+        private int color;
 
-        WaxedCheeseTypes(int id, String name) {
+        WaxedCheeseTypes(int id, String name, int color) {
             this.ID = id;
             this.NAME = name;
+            this.color = color;
         }
 
         @Override
@@ -133,18 +140,55 @@ public class EnumHandler {
         public int getID() {
             return this.ID;
         }
+
+		@Override
+		public boolean canWax(ItemStack stack) {
+			return false;
+		}
+
+		@Override
+		public int getColor() {
+			return this.color;
+		}
+
+		@Override
+		public ICheeseItemStackFactory getCheeseItems() {
+			return new ICheeseItemStackFactory() {
+				@Override
+				public ItemStack asStack(int size) {
+					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getID());
+				}
+			};
+		}
+
+		@Override
+		public ICheeseBlockStackFactory getCheeseBlocks() {
+			return null;
+		}
+
+		@Override
+		public ICheeseCurdStackFactory getCurdBlocks() {
+			return null;
+		}
+
+		@Override
+		public IFluidStackFactory getFluids() {
+			return null;
+		}
 
     }
 
-    public enum SimpleCheeseTypes implements IStringSerializable {
-        RICOTTA(0, "ricotta");
+    public enum SimpleCheeseTypes implements IStringSerializable, ICheeseType {
+        RICOTTA(0, "ricotta", 0xc8c8c5);
 
         private int ID;
         private String NAME;
+        private int color;
 
-        SimpleCheeseTypes(int id, String name) {
+        SimpleCheeseTypes(int id, String name, int color) {
             this.ID = id;
             this.NAME = name;
+            this.color = color;
         }
 
         @Override
@@ -160,21 +204,58 @@ public class EnumHandler {
         public int getID() {
             return this.ID;
         }
+
+		@Override
+		public boolean canWax(ItemStack stack) {
+			return false;
+		}
+
+		@Override
+		public int getColor() {
+			return this.color;
+		}
+
+		@Override
+		public ICheeseItemStackFactory getCheeseItems() {
+			return new ICheeseItemStackFactory() {
+				@Override
+				public ItemStack asStack(int size) {
+					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getID());
+				}
+			};
+		}
+
+		@Override
+		public ICheeseBlockStackFactory getCheeseBlocks() {
+			return null;
+		}
+
+		@Override
+		public ICheeseCurdStackFactory getCurdBlocks() {
+			return null;
+		}
+
+		@Override
+		public IFluidStackFactory getFluids() {
+			return null;
+		}
     }
 
-    public enum AgedCheeseTypes implements IStringSerializable {
-        GORGONZOLA(0, "gorgonzola"),
-        EMMENTALER(1, "emmentaler"),
-        APPENZELLER(2, "appenzeller"),
-        ASIAGO(3, "asiago"),
-        PARMESAN(4, "parmesan");
+    public enum AgedCheeseTypes implements IStringSerializable, ICheeseType {
+        GORGONZOLA(0, "gorgonzola", 0xeae7de),
+        EMMENTALER(1, "emmentaler", 0xddddbc),
+        APPENZELLER(2, "appenzeller", 0xf3e2a7),
+        ASIAGO(3, "asiago", 0xbfb68d),
+        PARMESAN(4, "parmesan", 0xd8d5c6);
 
         private int ID;
         private String NAME;
+        private int color;
 
-        AgedCheeseTypes(int id, String name) {
+        AgedCheeseTypes(int id, String name, int color) {
             this.ID = id;
             this.NAME = name;
+            this.color = color;
         }
 
         @Override
@@ -190,5 +271,40 @@ public class EnumHandler {
         public int getID() {
             return this.ID;
         }
+
+		@Override
+		public boolean canWax(ItemStack stack) {
+			return false;
+		}
+
+		@Override
+		public int getColor() {
+			return this.color;
+		}
+
+		@Override
+		public ICheeseItemStackFactory getCheeseItems() {
+			return new ICheeseItemStackFactory() {
+				@Override
+				public ItemStack asStack(int size) {
+					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getID());
+				}
+			};
+		}
+
+		@Override
+		public ICheeseBlockStackFactory getCheeseBlocks() {
+			return null;
+		}
+
+		@Override
+		public ICheeseCurdStackFactory getCurdBlocks() {
+			return null;
+		}
+
+		@Override
+		public IFluidStackFactory getFluids() {
+			return null;
+		}
     }
 }
