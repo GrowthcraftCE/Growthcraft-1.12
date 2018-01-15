@@ -30,3 +30,5 @@ container.brew_kettle=Brew Kettle
 
 # Tile Entities
 tile.brew_kettle.name=Brew Kettle
+tile.ferment_barrel.name=Fermentation Barrel
+
