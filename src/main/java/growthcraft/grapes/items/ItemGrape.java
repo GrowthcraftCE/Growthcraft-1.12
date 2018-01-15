@@ -26,15 +26,17 @@ public class ItemGrape extends ItemFood {
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-            subItems.add(new ItemStack(itemIn, 1, i));
+        	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+            subItems.add(new ItemStack(itemIn, 1, type.getVariantID()));
         }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
         for (int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-            if ( stack.getItemDamage() == i ) {
-                return  this.getUnlocalizedName() + "." + EnumHandler.GrapeTypes.values()[i].getName();
+        	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+            if ( stack.getItemDamage() == type.getVariantID() ) {
+                return  this.getUnlocalizedName() + "." + type.getName();
             } else {
                 continue;
             }

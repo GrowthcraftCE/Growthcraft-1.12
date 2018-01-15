@@ -12,4 +12,10 @@ public class GrowthcraftCellarConfig {
 	public static int brewKettleRainFillPerUnit = 10;
 	public static boolean dropItemsInBrewKettle = true;
 	public static boolean setFireToFallenLivingEntities = true;
+	public static boolean fermentBarrelUseCachedRecipe = true;
+	public static int fermentBarrelMaxCap = 3000;
+	public static int cultureJarTimeMax = 1200;
+	public static int cultureJarConsumption = 1000 / 4;
+	public static int cultureJarMaxCap = 1000;
+	public static int fruitPressMaxCap = 1000;
 }

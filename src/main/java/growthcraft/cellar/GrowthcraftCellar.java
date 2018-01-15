@@ -9,6 +9,7 @@ import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
 import growthcraft.cellar.events.CellarEvents;
 import growthcraft.cellar.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.init.GrowthcraftCellarRecipes;
+import growthcraft.cellar.init.GrowthcraftCellarYeasts;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.init.GrowthcraftCellarHeatsources;
@@ -86,6 +87,8 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
+    	GrowthcraftCellarYeasts.init();
+    	GrowthcraftCellarYeasts.register();
     	packetPipeline.initialise();
     	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
         GrowthcraftCellarRecipes.registerCraftingRecipes();

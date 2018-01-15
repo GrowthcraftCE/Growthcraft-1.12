@@ -12,25 +12,29 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
+import growthcraft.core.common.definition.BlockDefinition;
+
 public class GrowthcraftFishtrapBlocks {
 
-    public static Block fishtrap;
+    public static BlockDefinition fishtrap;
 
     public static void init() {
-        fishtrap = new BlockFishtrap("fishtrap");
+        fishtrap = new BlockDefinition( new BlockFishtrap("fishtrap") );
 
     }
 
     public static void register() {
-        registerBlock(fishtrap);
-
+        // registerBlock(fishtrap);
+    	fishtrap.getBlock().setCreativeTab(tabGrowthcraft);
+    	fishtrap.register(true);
     }
 
     public static void  registerRenders() {
-        registerRender(fishtrap);
-
+        // registerRender(fishtrap);
+    	fishtrap.registerRender();
     }
-
+    
+/*
     public static void registerBlock(Block block) {
         block.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(block);
@@ -50,6 +54,6 @@ public class GrowthcraftFishtrapBlocks {
     public static void  registerRender(Block block, int meta, String fileName){
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
-
+*/
 
 }

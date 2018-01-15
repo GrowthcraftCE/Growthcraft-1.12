@@ -14,7 +14,7 @@ public class ItemChievDummy extends Item {
 		this.setMaxStackSize(1);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		this.setCreativeTab(tabGrowthcraft);
+//		this.setCreativeTab(tabGrowthcraft);
 		
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));

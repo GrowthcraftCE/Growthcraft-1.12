@@ -2,6 +2,7 @@ package growthcraft.apples.init;
 
 import growthcraft.apples.Reference;
 import growthcraft.apples.items.ItemAppleDoor;
+import growthcraft.core.common.definition.ItemDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -11,22 +12,25 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftApplesItems {
-    public static ItemAppleDoor itemAppleDoor;
+    public static ItemDefinition itemAppleDoor;
 
     public static void preInit() {
-        itemAppleDoor = new ItemAppleDoor("apple_door_item", GrowthcraftApplesBlocks.blockAppleDoor);
+        itemAppleDoor = new ItemDefinition( new ItemAppleDoor("apple_door_item", GrowthcraftApplesBlocks.blockAppleDoor.getBlock()) );
         register();
     }
 
     public static void register() {
-        registerItem(itemAppleDoor);
+        // registerItem(itemAppleDoor);
+    	itemAppleDoor.getItem().setCreativeTab(tabGrowthcraft);
+    	itemAppleDoor.register();
     }
 
     public static void registerRenders() {
-        registerRender(itemAppleDoor);
+        // registerRender(itemAppleDoor);
+    	itemAppleDoor.registerRender();
     }
 
-    public static void registerItem(Item item) {
+/*    public static void registerItem(Item item) {
         item.setCreativeTab(tabGrowthcraft);
         GameRegistry.register(item);
     }
@@ -39,5 +43,5 @@ public class GrowthcraftApplesItems {
     public static void registerRender(Item item, int meta, String fileName) {
         ModelLoader.setCustomModelResourceLocation(item, meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
+    } */
 }

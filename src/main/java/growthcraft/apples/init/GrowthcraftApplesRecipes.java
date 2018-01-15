@@ -13,56 +13,56 @@ public class GrowthcraftApplesRecipes {
     private static void registerCraftingRecipes() {
 
         GameRegistry.addRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 4),
+                GrowthcraftApplesBlocks.blockApplePlanks.asStack(4),
                 "W",
-                'W', new ItemStack(GrowthcraftApplesBlocks.blockAppleLog, 1));
+                'W', GrowthcraftApplesBlocks.blockAppleLog.getBlock());
 
         GameRegistry.addShapedRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleStairs, 4),
+        		GrowthcraftApplesBlocks.blockAppleStairs.asStack(4),
                 "  P", " PP", "PPP",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1));
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock());
 
         GameRegistry.addShapedRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleStairs, 4),
+        		GrowthcraftApplesBlocks.blockAppleStairs.asStack(4),
                 "P  ", "PP ", "PPP",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1));
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock());
 
         GameRegistry.addRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleSlabHalf, 4),
+        		GrowthcraftApplesBlocks.blockAppleSlabHalf.asStack(4),
                 "PPP",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1));
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock());
 
         GameRegistry.addShapedRecipe(
                 new ItemStack(Blocks.CHEST, 1),
                 "PPP", "P P", "PPP",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1));
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock());
 
         GameRegistry.addShapedRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleFence, 3),
+        		GrowthcraftApplesBlocks.blockAppleFence.asStack(3),
                 "PSP", "PSP",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1),
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock(),
                 'S', new ItemStack(Items.STICK, 1));
 
         GameRegistry.addShapedRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleFenceGate, 1),
+        		GrowthcraftApplesBlocks.blockAppleFenceGate.asStack(1),
                 "SPS", "SPS",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1),
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock(),
                 'S', new ItemStack(Items.STICK, 1));
 
         GameRegistry.addShapedRecipe(
                 new ItemStack(Items.STICK, 4),
                 "P", "P",
-                'P', new ItemStack(GrowthcraftApplesBlocks.blockApplePlanks, 1) );
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock() );
 
         GameRegistry.addShapedRecipe(
-                new ItemStack(GrowthcraftApplesItems.itemAppleDoor),
+        		GrowthcraftApplesItems.itemAppleDoor.asStack(1),
                 "PP ", "PP ", "PP ",
-                'P', GrowthcraftApplesBlocks.blockApplePlanks
+                'P', GrowthcraftApplesBlocks.blockApplePlanks.getBlock()
         );
 
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GrowthcraftApplesBlocks.blockAppleSapling, 1),
-                 new ItemStack(Items.APPLE, 1),
+        		GrowthcraftApplesBlocks.blockAppleSapling.asStack(1),
+                new ItemStack(Items.APPLE, 1),
                 new ItemStack(Blocks.SAPLING, 1),
                 new ItemStack(Items.WOODEN_SWORD, 1) );
 

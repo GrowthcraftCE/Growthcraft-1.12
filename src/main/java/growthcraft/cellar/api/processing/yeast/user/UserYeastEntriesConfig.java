@@ -23,16 +23,16 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 	@Override
 	protected String getDefault()
 	{
-		final ItemKeySchema brewersYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 0);
+		final ItemKeySchema brewersYeast = new ItemKeySchema("growthcraft_cellar", "yeast", 1, 0);
 		brewersYeast.setComment("Brewers Yeast");
 
-		final ItemKeySchema lagerYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 1);
+		final ItemKeySchema lagerYeast = new ItemKeySchema("growthcraft_cellar", "yeast", 1, 1);
 		lagerYeast.setComment("Lager Yeast");
 
-		final ItemKeySchema etherealYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 3);
+		final ItemKeySchema etherealYeast = new ItemKeySchema("growthcraft_cellar", "yeast", 1, 3);
 		etherealYeast.setComment("Ethereal Yeast");
 
-		final ItemKeySchema originYeast = new ItemKeySchema("Growthcraft|Cellar", "grc.yeast", 1, 4);
+		final ItemKeySchema originYeast = new ItemKeySchema("growthcraft_cellar", "yeast", 1, 4);
 		etherealYeast.setComment("Origin Yeast");
 
 		final UserYeastEntry brewers = new UserYeastEntry(brewersYeast, 1, new ArrayList<String>());

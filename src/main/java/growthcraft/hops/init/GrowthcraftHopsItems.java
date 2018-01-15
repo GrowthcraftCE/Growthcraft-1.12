@@ -1,6 +1,7 @@
 package growthcraft.hops.init;
 
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.hops.Reference;
 import growthcraft.hops.items.ItemHops;
 import growthcraft.hops.items.ItemSeedHops;
@@ -12,24 +13,30 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GrowthcraftHopsItems {
 
-    public static Item hops;
-    public static Item hop_seeds;
+    public static ItemDefinition hops;
+    public static ItemDefinition hop_seeds;
 
     public static void init() {
-        hops = new ItemHops("hops");
-        hop_seeds = new ItemSeedHops("hop_seeds");
+        hops = new ItemDefinition( new ItemHops("hops") );
+        hop_seeds = new ItemDefinition( new ItemSeedHops("hop_seeds") );
     }
 
     public static void register() {
-        registerItem(hops);
-        registerItem(hop_seeds);
+        // registerItem(hops);
+    	hops.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+    	hops.register();
+        // registerItem(hop_seeds);
+    	hop_seeds.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+    	hop_seeds.register();
     }
 
     public static void registerRenders() {
-        registerRender(hops);
-        registerRender(hop_seeds);
+        // registerRender(hops);
+    	hops.registerRender();
+        // registerRender(hop_seeds);
+    	hop_seeds.registerRender();
     }
-
+/*
     public static void registerItem(Item item) {
         item.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
         GameRegistry.register(item);
@@ -42,5 +49,5 @@ public class GrowthcraftHopsItems {
 
     public static void registerRender(Item item, int meta, String fileName) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
+    } */
 }

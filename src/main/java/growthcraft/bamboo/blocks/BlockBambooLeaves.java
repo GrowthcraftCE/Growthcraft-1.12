@@ -17,6 +17,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.IShearable;
 
 import javax.annotation.Nonnull;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class BlockBambooLeaves extends Block implements IShearable {
@@ -41,8 +43,7 @@ public class BlockBambooLeaves extends Block implements IShearable {
 
     @Override
     public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return java.util.Arrays.asList(new ItemStack(Item.getItemFromBlock(GrowthcraftBambooBlocks.bambooLeaves), 1));
-
+        return Arrays.asList(GrowthcraftBambooBlocks.bambooLeaves.getItemAsStack(1) /*new ItemStack(Item.getItemFromBlock(GrowthcraftBambooBlocks.bambooLeaves), 1)*/ );
     }
 
     @Override

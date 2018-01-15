@@ -1,38 +1,33 @@
 package growthcraft.hops.init;
 
-import growthcraft.hops.Reference;
 import growthcraft.hops.blocks.BlockHopsBush;
 import growthcraft.hops.blocks.BlockHopsTrunk;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
-import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
+import growthcraft.core.common.definition.BlockDefinition;
 
 public class GrowthcraftHopsBlocks {
-    public static Block block_hops;
-    public static Block hops_bush;
+    public static BlockDefinition block_hops;
+    public static BlockDefinition hops_bush;
 
     public static void init() {
-        block_hops = new BlockHopsTrunk("hops_vine");
-        hops_bush = new BlockHopsBush();
+        block_hops = new BlockDefinition( new BlockHopsTrunk("hops_vine") );
+        hops_bush = new BlockDefinition( new BlockHopsBush() );
     }
 
     public static void register() {
-        registerBlock(block_hops, false, true);
-        registerBlock(hops_bush, false, true);
+        // registerBlock(block_hops, false, true);
+    	block_hops.register(true);
+        // registerBlock(hops_bush, false, true);
+    	hops_bush.register(true);
     }
 
     public static void  registerRenders() {
-        registerRender(block_hops);
-        registerRender(hops_bush);
+        // registerRender(block_hops);
+    	block_hops.registerRender();
+        // registerRender(hops_bush);
+    	hops_bush.registerRender();
     }
 
-    public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
+/*    public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
         GameRegistry.register(block);
 
         if(setCreativeTab) {
@@ -51,6 +46,6 @@ public class GrowthcraftHopsBlocks {
     public static void  registerRender(Block block, int meta, String fileName){
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), meta,
                 new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
+    } */
 
 }

@@ -1,6 +1,7 @@
 package growthcraft.grapes.tileentity;
 
 import growthcraft.core.utils.GrowthcraftPlaySound;
+import growthcraft.grapes.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -124,7 +125,8 @@ public class TileEntityGrapeVineFruit extends TileEntity implements ITickable, I
 
         for ( int slot = 0; slot < handler.getSlots(); slot++ ) {
             if ( handler.getStackInSlot(slot).isEmpty() ) {
-                ItemStack stack = new ItemStack(GrowthcraftGrapesItems.grape, 1, rand.nextInt(3));
+            	GrapeTypes type = GrapeTypes.values()[rand.nextInt(3)];
+                ItemStack stack = type.asStack(); // new ItemStack(GrowthcraftGrapesItems.grape, 1, );
                 handler.insertItem(slot, stack, false);
                 GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 16);
             }

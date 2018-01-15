@@ -13,7 +13,7 @@ public class GrowthcraftCellarRecipes {
     public static void registerCraftingRecipes() {
 
 
-        GameRegistry.addRecipe(new ItemStack(GrowthcraftCellarBlocks.blockCultureJar),
+        GameRegistry.addRecipe(GrowthcraftCellarBlocks.cultureJar.asStack(1),
                 "BAB", "B B", "BBB",
                 'A', Blocks.PLANKS,
                 'B', Blocks.GLASS_PANE
@@ -30,7 +30,7 @@ public class GrowthcraftCellarRecipes {
         */
 
         GameRegistry.addShapelessRecipe(
-                new ItemStack(GrowthcraftCellarBlocks.brewKettle.getBlock(), 1),
+        		GrowthcraftCellarBlocks.brewKettle.asStack(1),
                 Items.CAULDRON
         );
 

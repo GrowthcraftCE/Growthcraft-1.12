@@ -127,7 +127,7 @@ public class TileEntityHopsBush extends TileEntity implements ITickable, ICapabi
         // Iterate over the handler and add one hop if the slot is empty.
         for ( int slot = 0; slot < inventory.getSlots(); slot++ ) {
             if ( inventory.getStackInSlot(slot).isEmpty() ) {
-                inventory.insertItem(slot, new ItemStack(GrowthcraftHopsItems.hops, 1), false);
+                inventory.insertItem(slot, GrowthcraftHopsItems.hops.asStack(1), false);
                 GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_GRASS_PLACE, SoundCategory.BLOCKS, 16);
                 break;
             }

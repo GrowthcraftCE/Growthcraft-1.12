@@ -75,7 +75,7 @@ public class BlockHopsTrunk extends BlockCrops implements IGrowable {
 
     @Override
     protected Item getSeed() {
-        return GrowthcraftHopsItems.hop_seeds;
+        return GrowthcraftHopsItems.hop_seeds.getItem();
     }
 
     @Override
