@@ -1,4 +1,9 @@
 -----------------
+To discuss:
+-----------------
+* Maximal 8 cheese stages? -> Needed to encode stage and cheese type in item meta.
+
+-----------------
 To implement:
 -----------------
 TODO: Rope bounding boxes are not reacting according neighbor blocks.

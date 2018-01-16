@@ -15,6 +15,12 @@ public class CheeseRegistry {
 	private Map<ResourceLocation, Integer> cheeseNameToId = new HashMap<ResourceLocation, Integer>();
 	private List<ICheeseType> cheeseFromId = new ArrayList<ICheeseType>();	// Default cheese is cheese with Id 1
 	
+	public <ET extends Enum<?> & ICheeseType> void registerCheeses(@Nonnull Class<ET> enumClazz ) {
+		ET[] values = enumClazz.getEnumConstants();
+		for( ET type : values )
+			registerCheese(type);
+	}
+	
 	public void registerCheese(@Nonnull ICheeseType type) {
 		registerCheese(type.getRegistryName(), type);
 	}

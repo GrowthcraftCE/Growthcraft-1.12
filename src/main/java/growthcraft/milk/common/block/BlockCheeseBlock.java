@@ -5,9 +5,12 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.Reference;
+import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import net.minecraft.block.Block;
@@ -29,14 +32,16 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCheeseBlock extends GrowthcraftBlockContainer {
-    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+    
+	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 8, 0.0625 * 16);
 	
-	public BlockCheeseBlock(String unlocalizedName) {
+	public BlockCheeseBlock() {
 		super(Material.CAKE);
-        this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+		
+//        this.setUnlocalizedName(unlocalizedName);
+//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		this.setHardness(0.5F);
 //		setStepSound(soundTypeCloth);
 		setTileEntityType(TileEntityCheeseBlock.class);
@@ -80,14 +85,16 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	}
 
 	@Override
-	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, int meta)
+	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, IBlockState state)
 	{
 		final TileEntityCheeseBlock te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.asItemStack();
 		}
-		return new ItemStack(this, 1, meta);
+		
+		// TODO: Check if correct
+		return new ItemStack(this, 1, state.getBlock().getMetaFromState(state));
 	}
 
 	@Override
@@ -148,7 +155,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		return ret;
 	}
 	
-	@Override
+/*	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
@@ -156,11 +163,12 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		if (itemIn instanceof ItemBlockCheeseBlock)
 		{
 			final ItemBlockCheeseBlock ib = (ItemBlockCheeseBlock)itemIn;
-			for (EnumCheeseType cheese : EnumCheeseType.VALUES)
+			for (T cheese : typeEnum.getEnumConstants() )
 			{
-				if (cheese.hasBlock())
+				final ICheeseBlockStackFactory blockStackFactory = cheese.getCheeseBlocks();
+				if (blockStackFactory != null)
 				{
-					final ItemStack stack = new ItemStack(itemIn, 1, cheese.getMetaForInitialStage());
+					final ItemStack stack = blockStackFactory.asItemStackForStage(1, blockStackFactory.getInitialStage()); // ew ItemStack(itemIn, 1, cheese.getMetaForInitialStage());
 					// This causes the NBT data to refresh
 					ib.getTileTagCompound(stack);
 					list.add(stack);
@@ -168,6 +176,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 			}
 		}
 	}
+	*/
 	
 	@Override
 	public int damageDropped(IBlockState state)

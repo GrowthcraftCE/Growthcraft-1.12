@@ -8,6 +8,8 @@ import growthcraft.core.common.tileentity.GrowthcraftTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IAltItemHandler;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.struct.Cheese;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import io.netty.buffer.ByteBuf;
@@ -102,7 +104,8 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 
 	public ItemStack asItemStack()
 	{
-		final ItemStack stack = cheese.getType().getCheeseBlocks().asStackForInitialStage();// GrowthcraftMilkBlocks.cheeseBlock.asStack();
+		final ICheeseBlockStackFactory blockStackFactory = cheese.getType().getCheeseBlocks();
+		final ItemStack stack = blockStackFactory.asStackForStage(blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
 		final NBTTagCompound tag = ItemBlockCheeseBlock.openNBT(stack);
 		writeToNBTForItem(tag);
 		return stack;

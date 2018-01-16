@@ -3,13 +3,18 @@ package growthcraft.milk.handlers;
 import growthcraft.core.api.definition.IFluidStackFactory;
 import growthcraft.core.api.definition.IItemStackFactory;
 import growthcraft.core.api.definition.IObjectVariant;
+import growthcraft.milk.Reference;
+import growthcraft.milk.api.cheese.CheeseUtils;
+import growthcraft.milk.api.definition.EnumCheeseStage;
 import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
 import growthcraft.milk.api.definition.ICheeseCurdStackFactory;
 import growthcraft.milk.api.definition.ICheeseItemStackFactory;
 import growthcraft.milk.api.definition.ICheeseType;
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.ResourceLocation;
 
 public class EnumHandler {
 
@@ -113,17 +118,17 @@ public class EnumHandler {
         }
     }
 
-    public enum WaxedCheeseTypes implements IStringSerializable, ICheeseType {
+    public enum WaxedCheeseTypes implements ICheeseType, IObjectVariant, IStringSerializable {
         CHEDDAR(0, "cheddar", 0xed9200),
         MONTEREY(1, "monterey", 0xf5f5da);
 
         private int ID;
-        private String NAME;
+        private ResourceLocation name;
         private int color;
 
         WaxedCheeseTypes(int id, String name, int color) {
             this.ID = id;
-            this.NAME = name;
+            this.name = new ResourceLocation( Reference.MODID, name );
             this.color = color;
         }
 
@@ -134,10 +139,16 @@ public class EnumHandler {
 
         @Override
         public String getName() {
-            return this.NAME;
+            return this.name.getResourcePath();
         }
+        
+		@Override
+		public ResourceLocation getRegistryName() {
+			return this.name;
+		}
 
-        public int getID() {
+		@Override
+        public int getVariantID() {
             return this.ID;
         }
 
@@ -156,7 +167,7 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getID());
+					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getVariantID());
 				}
 			};
 		}
@@ -178,16 +189,16 @@ public class EnumHandler {
 
     }
 
-    public enum SimpleCheeseTypes implements IStringSerializable, ICheeseType {
+    public enum SimpleCheeseTypes implements IStringSerializable, ICheeseType, IObjectVariant {
         RICOTTA(0, "ricotta", 0xc8c8c5);
 
         private int ID;
-        private String NAME;
+        private ResourceLocation name;
         private int color;
 
         SimpleCheeseTypes(int id, String name, int color) {
             this.ID = id;
-            this.NAME = name;
+            this.name = new ResourceLocation( Reference.MODID, name );
             this.color = color;
         }
 
@@ -198,10 +209,16 @@ public class EnumHandler {
 
         @Override
         public String getName() {
-            return this.NAME;
+            return this.name.getResourcePath();
         }
+        
+		@Override
+		public ResourceLocation getRegistryName() {
+			return this.name;
+		}
 
-        public int getID() {
+		@Override
+        public int getVariantID() {
             return this.ID;
         }
 
@@ -220,7 +237,7 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getID());
+					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getVariantID());
 				}
 			};
 		}
@@ -241,7 +258,7 @@ public class EnumHandler {
 		}
     }
 
-    public enum AgedCheeseTypes implements IStringSerializable, ICheeseType {
+    public enum AgedCheeseTypes implements IStringSerializable, ICheeseType, IObjectVariant {
         GORGONZOLA(0, "gorgonzola", 0xeae7de),
         EMMENTALER(1, "emmentaler", 0xddddbc),
         APPENZELLER(2, "appenzeller", 0xf3e2a7),
@@ -249,12 +266,12 @@ public class EnumHandler {
         PARMESAN(4, "parmesan", 0xd8d5c6);
 
         private int ID;
-        private String NAME;
+        private ResourceLocation name;
         private int color;
 
         AgedCheeseTypes(int id, String name, int color) {
             this.ID = id;
-            this.NAME = name;
+            this.name = new ResourceLocation( Reference.MODID, name );
             this.color = color;
         }
 
@@ -265,10 +282,16 @@ public class EnumHandler {
 
         @Override
         public String getName() {
-            return this.NAME;
+            return this.name.getResourcePath();
         }
+        
+		@Override
+		public ResourceLocation getRegistryName() {
+			return this.name;
+		}
 
-        public int getID() {
+		@Override
+        public int getVariantID() {
             return this.ID;
         }
 
@@ -287,14 +310,30 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getID());
+					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getVariantID());
 				}
 			};
 		}
 
 		@Override
 		public ICheeseBlockStackFactory getCheeseBlocks() {
-			return null;
+			return new ICheeseBlockStackFactory() {
+
+				@Override
+				public ItemStack asStackForStage(int size, EnumCheeseStage stage) {
+					return GrowthcraftMilkBlocks.agedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, stage));
+				}
+
+				@Override
+				public ItemStack asItemStackForStage(int size, EnumCheeseStage stage) {
+					return GrowthcraftMilkItems.agedCheeseBlockItem.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, stage));
+				}
+
+				@Override
+				public EnumCheeseStage getInitialStage() {
+					return EnumCheeseStage.UNAGED;
+				}
+			};
 		}
 
 		@Override

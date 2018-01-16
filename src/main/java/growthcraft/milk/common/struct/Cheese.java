@@ -3,8 +3,11 @@ package growthcraft.milk.common.struct;
 import growthcraft.core.api.stream.IStreamable;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.GrowthcraftMilkConfig;
+import growthcraft.milk.api.MilkRegistry;
+import growthcraft.milk.api.cheese.CheeseIO;
 import growthcraft.milk.api.definition.EnumCheeseStage;
 import growthcraft.milk.api.definition.ICheeseType;
+import growthcraft.milk.handlers.EnumHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,11 +19,11 @@ public class Cheese implements IStreamable
 
 	private int ageMax = GrowthcraftMilkConfig.cheeseMaxAge;
 	private int age;
-	private int slicesMax = GrowthcraftMilkConfig.cheeseMaxSlices;
-	private int slices = GrowthcraftMilkConfig.cheeseMaxSlices;
+	private final int slicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+	private int slices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
 	private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
-	private ICheeseType cheese = EnumCheeseType.CHEDDAR;
-	private EnumCheeseStage cheeseStage = EnumCheeseType.CHEDDAR.stages.get(0);
+	private ICheeseType cheese = EnumHandler.WaxedCheeseTypes.CHEDDAR;
+	private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
 
 	public ICheeseType getType()
 	{
@@ -41,7 +44,7 @@ public class Cheese implements IStreamable
 
 	public int getId()
 	{
-		return cheese.getMetaForStage(cheeseStage);
+		return MilkRegistry.instance().cheese().getCheeseId(cheese);
 	}
 
 	public int getStageId()
@@ -118,7 +121,7 @@ public class Cheese implements IStreamable
 
 	public void writeToNBT(NBTTagCompound nbt)
 	{
-		cheese.writeToNBT(nbt, cheeseStage);
+		CheeseIO.writeToNBT(nbt, cheese);
 		cheeseStage.writeToNBT(nbt);
 		nbt.setInteger("age", age);
 		nbt.setInteger("slices", slices);
@@ -132,7 +135,7 @@ public class Cheese implements IStreamable
 	 */
 	public void readFromNBT(NBTTagCompound nbt)
 	{
-		this.cheese = EnumCheeseType.loadFromNBT(nbt);
+		this.cheese = CheeseIO.loadFromNBT(nbt);
 		this.cheeseStage = EnumCheeseStage.loadFromNBT(nbt);
 		if (nbt.hasKey("age"))
 		{
@@ -142,27 +145,27 @@ public class Cheese implements IStreamable
 		{
 			this.slices = nbt.getInteger("slices");
 		}
-		if (nbt.hasKey("slices_max"))
+/*		if (nbt.hasKey("slices_max"))
 		{
 			this.slicesMax = nbt.getInteger("slices_max");
-		}
+		} */
 	}
 
 	@Override
 	public boolean readFromStream(ByteBuf stream)
 	{
-		this.cheese = EnumCheeseType.loadFromStream(stream);
+		this.cheese = CheeseIO.loadFromStream(stream);
 		this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
 		this.age = stream.readInt();
 		this.slices = stream.readInt();
-		this.slicesMax = stream.readInt();
+//		this.slicesMax = stream.readInt();
 		return false;
 	}
 
 	@Override
 	public boolean writeToStream(ByteBuf stream)
 	{
-		cheese.writeToStream(stream, cheeseStage);
+		CheeseIO.writeToStream(stream, cheese);
 		cheeseStage.writeToStream(stream);
 		stream.writeInt(age);
 		stream.writeInt(slices);

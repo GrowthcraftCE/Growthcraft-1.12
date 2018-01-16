@@ -4,8 +4,10 @@ import growthcraft.milk.Reference;
 import growthcraft.milk.blocks.*;
 import growthcraft.milk.client.render.RenderPancheon;
 import growthcraft.milk.common.block.BlockButterChurn;
+import growthcraft.milk.common.block.BlockCheeseBlock;
 import growthcraft.milk.common.block.PREVBlockPancheon;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
+import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -36,12 +38,13 @@ public class GrowthcraftMilkBlocks {
     public static GrowthcraftBlockFluidDefinition blockFluidWhey;
     public static BlockDefinition pancheon;
     public static BlockDefinition churn;
+    public static BlockDefinition agedCheeseBlock;
 
     // TODO: BlockCheese
     // TODO: BlockCheesePress
     // TODO: BlockCheeseCurds
 
-    public static void init() {
+    public static void preInit() {
         thistle = new BlockDefinition( new BlockThistle("thistle") );
         cheeseVat = new BlockDefinition( new BlockCheeseVat("cheese_vat") );
         blockFluidMilk = GrowthcraftMilkFluids.milk.getFluidBlockDefinition(); // new GrowthcraftBlockFluidDefinition( new BlockFluidMilk("fluid_milk") );
@@ -54,6 +57,7 @@ public class GrowthcraftMilkBlocks {
         blockFluidWhey = GrowthcraftMilkFluids.whey.getFluidBlockDefinition(); // new BlockFluidWhey("fluid_whey");
         pancheon = new BlockDefinition( new PREVBlockPancheon("pancheon") );
         churn = new BlockDefinition( new BlockButterChurn("churn") );
+        agedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );
     }
 
     public static void register() {
@@ -67,6 +71,7 @@ public class GrowthcraftMilkBlocks {
         pancheon.register(true);
         churn.getBlock().setCreativeTab(tabGrowthcraft);
         churn.register(true);
+        agedCheeseBlock.register(new ResourceLocation(Reference.MODID, "cheese_aged"), false);
     }
     
     public static void registerRenders() {
@@ -77,11 +82,13 @@ public class GrowthcraftMilkBlocks {
         // registerRender(blockPancheon);
         pancheon.registerRender();
         churn.registerRender();
+        agedCheeseBlock.registerRender();
     }
     
     public static void registerTileEntities() {
     	GameRegistry.registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
     	GameRegistry.registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
+    	GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_aged");
     }
     
     public static void registerSpecialRenders() {

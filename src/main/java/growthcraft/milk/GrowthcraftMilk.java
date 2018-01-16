@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import growthcraft.milk.handlers.EntityDropsHandler;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkCheeses;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.proxy.CommonProxy;
@@ -37,11 +38,13 @@ public class GrowthcraftMilk {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
     	
+    	GrowthcraftMilkCheeses.perInit();
+    	
     	userApis.setConfigDirectory(event.getModConfigurationDirectory());
     	
         GrowthcraftMilkFluids.preInit();
-        GrowthcraftMilkBlocks.init();
-        GrowthcraftMilkItems.init();
+        GrowthcraftMilkBlocks.preInit();
+        GrowthcraftMilkItems.preInit();
         userApis.preInit();
 
         GrowthcraftMilkFluids.register();
