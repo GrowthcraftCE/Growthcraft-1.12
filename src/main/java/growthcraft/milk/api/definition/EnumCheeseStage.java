@@ -2,8 +2,9 @@ package growthcraft.milk.api.definition;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.IStringSerializable;
 
-public enum EnumCheeseStage
+public enum EnumCheeseStage implements IStringSerializable
 {
 	UNAGED("unaged"),
 	AGED("aged"),
@@ -55,5 +56,15 @@ public enum EnumCheeseStage
 	{
 		final int id = nbt.getInteger("cheese_stage_id");
 		return getSafeById(id);
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+	
+	@Override
+	public String toString() {
+		return getName();
 	}
 }
