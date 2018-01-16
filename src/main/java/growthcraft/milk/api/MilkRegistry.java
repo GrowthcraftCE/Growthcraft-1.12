@@ -1,5 +1,6 @@
 package growthcraft.milk.api;
 
+import growthcraft.milk.api.cheese.CheeseRegistry;
 import growthcraft.milk.api.processing.cheesepress.CheesePressRegistry;
 import growthcraft.milk.api.processing.cheesevat.CheeseVatRegistry;
 import growthcraft.milk.api.processing.churn.ChurnRegistry;
@@ -13,6 +14,7 @@ public class MilkRegistry
 	private final CheeseVatRegistry cheeseVatRegistry = new CheeseVatRegistry();
 	private final ChurnRegistry churnRegistry = new ChurnRegistry();
 	private final PancheonRegistry pancheonRegistry = new PancheonRegistry();
+	private final CheeseRegistry cheeseRegistry = new CheeseRegistry();
 
 	/**
 	 * @return current instrance of the MilkRegistry
@@ -52,5 +54,12 @@ public class MilkRegistry
 	public PancheonRegistry pancheon()
 	{
 		return pancheonRegistry;
+	}
+	
+	/**
+	 * @return instance of the CheeseRegistry
+	 */
+	public CheeseRegistry cheese() {
+		return cheeseRegistry;
 	}
 }

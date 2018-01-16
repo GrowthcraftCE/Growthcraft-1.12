@@ -13,5 +13,5 @@ public interface ICheeseBlockStackFactory {
 		return asStackForInitialStage(1);
 	}
 
-	EnumCheeseStage getStageFromStack(ItemStack blockItemStack);
+//	EnumCheeseStage getStageFromStack(ItemStack blockItemStack);
 }
