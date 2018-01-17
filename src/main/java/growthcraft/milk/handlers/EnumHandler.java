@@ -324,10 +324,10 @@ public class EnumHandler {
 					return GrowthcraftMilkBlocks.agedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, stage));
 				}
 
-				@Override
+/*				@Override
 				public ItemStack asItemStackForStage(int size, EnumCheeseStage stage) {
 					return GrowthcraftMilkItems.agedCheeseBlockItem.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, stage));
-				}
+				}*/
 
 				@Override
 				public EnumCheeseStage getInitialStage() {

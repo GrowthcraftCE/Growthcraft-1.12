@@ -138,7 +138,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
     		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
 //    		int meta = CheeseUtils.getItemMetaFor(type, blockStackFactory.getInitialStage());
 //    		ItemStack stack = new ItemStack(this, 1, meta);
-    		ItemStack stack = blockStackFactory.asItemStackForStage(blockStackFactory.getInitialStage());
+    		ItemStack stack = blockStackFactory.asStackForStage(blockStackFactory.getInitialStage());
     		subItems.add(stack);
     	}
     }

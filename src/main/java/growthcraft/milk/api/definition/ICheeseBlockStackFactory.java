@@ -13,10 +13,10 @@ public interface ICheeseBlockStackFactory {
 		return asStackForInitialStage(1);
 	} */
 	
-	ItemStack asItemStackForStage(int size, EnumCheeseStage stage);
+/*	ItemStack asItemStackForStage(int size, EnumCheeseStage stage);
 	default ItemStack asItemStackForStage(EnumCheeseStage stage) {
 		return asItemStackForStage(1, stage);
-	}
+	} */
 
 	EnumCheeseStage getInitialStage();
 

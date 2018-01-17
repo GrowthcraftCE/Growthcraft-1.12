@@ -268,7 +268,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return null;
 	}
 
-	protected void setTileTagCompound(World world, BlockPos pos, ItemStack stack, NBTTagCompound tag)
+	protected void setTileTagCompound(IBlockAccess world, BlockPos pos, ItemStack stack, NBTTagCompound tag)
 	{
 		final Item item = stack.getItem();
 		if (item instanceof IItemTileBlock)
@@ -388,17 +388,17 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		}
 	}
 
-	protected boolean shouldDropTileStack(World world, BlockPos pos, IBlockState state, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return false;
 	}
 
-	private void getDefaultDrops(List<ItemStack> ret, World world, BlockPos pos, IBlockState state, int fortune)
+	private void getDefaultDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
-		final int count = quantityDropped(state, fortune, world.rand);
+		final int count = quantityDropped(state, fortune, /*world.*/rand);
 		for (int i = 0; i < count; ++i)
 		{
-			final Item item = getItemDropped(state, world.rand, fortune);
+			final Item item = getItemDropped(state, /*world.*/rand, fortune);
 			if (item != null)
 			{
 				ret.add(new ItemStack(item, 1, damageDropped(state)));
@@ -406,7 +406,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		}
 	}
 
-	protected void getTileItemStackDrops(List<ItemStack> ret, World world, BlockPos pos, IBlockState state, int fortune)
+	protected void getTileItemStackDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		final TileEntity te = getTileEntity(world, pos);
 		if (te instanceof INBTItemSerializable)
@@ -423,7 +423,8 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		}
 	}
 
-	public ArrayList<ItemStack> getDrops(World world, BlockPos pos, IBlockState state, int fortune)
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		if (shouldDropTileStack(world, pos, state, fortune))

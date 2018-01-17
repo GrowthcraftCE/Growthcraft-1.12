@@ -71,6 +71,7 @@ public class GrowthcraftMilkBlocks {
         pancheon.register(true);
         churn.getBlock().setCreativeTab(tabGrowthcraft);
         churn.register(true);
+        agedCheeseBlock.getBlock().setCreativeTab(tabGrowthcraft);
         agedCheeseBlock.register(new ResourceLocation(Reference.MODID, "cheese_aged"), false);
     }
     

@@ -9,10 +9,12 @@ import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.Reference;
+import growthcraft.milk.api.definition.EnumCheeseStage;
 import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
 import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import growthcraft.milk.handlers.EnumHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -79,7 +81,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	}
 
 	@Override
-	protected boolean shouldDropTileStack(World world, BlockPos pos, IBlockState state, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return false;
 	}
@@ -94,11 +96,11 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		}
 		
 		// TODO: Check if correct
-		return new ItemStack(this, 1, state.getBlock().getMetaFromState(state));
+		return new ItemStack(this, 1, damageDropped(state)/*state.getBlock().getMetaFromState(state)*/);
 	}
 
 	@Override
-	protected void getTileItemStackDrops(List<ItemStack> ret, World world, BlockPos pos, IBlockState state, int fortune)
+	protected void getTileItemStackDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		final TileEntityCheeseBlock te = getTileEntity(world, pos);
 		if (te != null)
@@ -142,9 +144,11 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		}
 		return super.getPickBlock(state, target, world, pos, player);
 	}
+	
+	// 
 
 	@Override
-	public ArrayList<ItemStack> getDrops(World world, BlockPos pos, IBlockState state, int fortune)
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		final ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
 		final TileEntityCheeseBlock te = getTileEntity(world, pos);
@@ -154,6 +158,18 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		}
 		return ret;
 	}
+	
+/*	@Override
+	@SideOnly(Side.CLIENT)
+	@SuppressWarnings({"rawtypes", "unchecked"})
+	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
+	{
+		if (itemIn instanceof ItemBlockCheeseBlock)
+		{
+			final ItemStack stack = EnumHandler.AgedCheeseTypes.APPENZELLER.getCheeseBlocks().asStackForStage(EnumCheeseStage.UNAGED);
+			list.add(stack);
+		}		
+	} */
 	
 /*	@Override
 	@SideOnly(Side.CLIENT)
@@ -181,6 +197,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	@Override
 	public int damageDropped(IBlockState state)
 	{
+		// TODO: Will create always initial stage block. Maybe find a better approach.
 		return state.getBlock().getMetaFromState(state);
 	}
 }

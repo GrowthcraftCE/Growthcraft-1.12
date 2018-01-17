@@ -67,8 +67,8 @@ public class GrowthcraftMilkItems {
         registerItem(itemAgedCheeseSlice);
         registerItem(itemWaxedCheeseSlice);
         registerItem(itemSimpleCheeseSlice);
-        agedCheeseBlockItem.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
-        agedCheeseBlockItem.register(new ResourceLocation(Reference.MODID, "cheese_aged"));
+//        agedCheeseBlockItem.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+        agedCheeseBlockItem.register(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock().getRegistryName() /*new ResourceLocation(Reference.MODID, "cheese_aged")*/);
 
         registerOres();
     }

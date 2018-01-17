@@ -40,7 +40,7 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 	}
 
 	@Override
-	protected boolean shouldDropTileStack(World world, BlockPos pos, IBlockState state, int fortune)
+	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{
 		return true;
 	}

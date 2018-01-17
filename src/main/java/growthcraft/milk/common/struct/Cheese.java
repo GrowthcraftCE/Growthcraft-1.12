@@ -101,7 +101,7 @@ public class Cheese implements IStreamable
 			}
 			return cheese.getCheeseItems().asStack(quantity);
 		}
-		return null;
+		return ItemStack.EMPTY;
 	}
 
 	public ItemStack asFullStack()
