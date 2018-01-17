@@ -41,6 +41,7 @@ item.yogurt.plain.name=Yogurt (Plain)
 item.yogurt.watermelon.name=Yogurt (Watermelon)
 
 tile.cheese_vat.name=Cheese Vat
+tile.churn.name=Churn
 tile.milk.name=Milk
 tile.pancheon.name=Pancheon
 tile.rennet.name=Rennet
