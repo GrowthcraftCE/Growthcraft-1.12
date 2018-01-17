@@ -1,5 +1,7 @@
 package growthcraft.cellar.common.block;
 
+import java.util.Random;
+
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
@@ -62,6 +64,17 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		setOrientWhenPlacing(worldIn, pos, state, placer, true);
+	}
+	
+	@Override
+	public int quantityDropped(Random random)
+	{
+		return 1;
+	}
+	
+	@Override
+	public int damageDropped(IBlockState state) {
+	    return 0;
 	}
 	
 	/************

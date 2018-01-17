@@ -58,7 +58,7 @@ public class GrowthcraftCellarBlocks {
         cultureJar.register(true);
         fruitPress.getBlock().setCreativeTab(tabGrowthcraft);
         fruitPress.register(true);
-        fruitPresser.register(true);
+        fruitPresser.register(false);
     }
 
     public static void registerRenders() {

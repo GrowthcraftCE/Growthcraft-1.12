@@ -84,7 +84,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 		{
 			// NOTE: A state like BlockSkull.NODROP is not existing, so ignored (m & 8) != 0 condition.  
 			
-			world.destroyBlock(pos.up(), true);
+			world.destroyBlock(pos.up(), false);
 			TileEntity te = world.getTileEntity(pos.up());
 			if( te != null)
 				te.invalidate();
@@ -160,6 +160,12 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	{
 		return 1;
 	}
+	
+	@Override
+	public int damageDropped(IBlockState state) {
+	    return 0;
+	}
+
 	
 	/************
 	 * RENDERS
