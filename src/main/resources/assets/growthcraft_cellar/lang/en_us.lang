@@ -27,6 +27,11 @@ fluids.tag.young=Young
 
 # Gui
 container.brew_kettle=Brew Kettle
+container.grc.fermentBarrel=Fermentation Barrel
+container.grc.fruitPress=Fruit Press
 
 # Tile Entities
 tile.brew_kettle.name=Brew Kettle
+tile.ferment_barrel.name=Fermentation Barrel
+tile.fruit_press.name=Fruit Press
+

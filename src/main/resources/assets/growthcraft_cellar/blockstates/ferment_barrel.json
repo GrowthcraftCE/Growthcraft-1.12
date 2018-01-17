@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "rotation=up":  { "model": "growthcraft_cellar:ferment_barrel", "x": 90 },
+    "rotation=down":  { "model": "growthcraft_cellar:ferment_barrel", "x": 270 },
+    "rotation=east":  { "model": "growthcraft_cellar:ferment_barrel", "y": 90 },
+    "rotation=west":  { "model": "growthcraft_cellar:ferment_barrel", "y": 270 },
+    "rotation=south":  { "model": "growthcraft_cellar:ferment_barrel", "y": 180 },
+    "rotation=north":  { "model": "growthcraft_cellar:ferment_barrel" }
+  }
+}
