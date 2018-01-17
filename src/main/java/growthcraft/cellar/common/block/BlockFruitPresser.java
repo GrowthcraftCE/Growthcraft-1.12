@@ -270,7 +270,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 	@Override
 	public int getMetaFromState(IBlockState state) {
 	    return state.getValue(TYPE_ORIENT).ordinal() |
-	    	   (state.getValue(TYPE_ORIENT).ordinal() << 1);
+	    	   (state.getValue(TYPE_PRESSED).ordinal() << 1);
 	}
 	
 	public static enum Orient implements IStringSerializable {
