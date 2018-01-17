@@ -25,11 +25,9 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 {
 	private final T[] typeLookup;
 	
-	public ItemBlockCheeseBlock(/*String unlocalizedName, */Block block, T[] typeLookup)
+	public ItemBlockCheeseBlock(Block block, T[] typeLookup)
 	{
 		super(block);
-//        this.setUnlocalizedName(unlocalizedName);
-//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		this.maxStackSize = 1;
 		this.typeLookup = typeLookup;
 	}
@@ -58,8 +56,10 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 			final NBTTagCompound cheeseTag = new NBTTagCompound();
 			final ICheeseType cheese = getTypeForVariantID(CheeseUtils.getVariantIDFromMeta(stack.getItemDamage())); // EnumCheeseType.getSafeById(EnumCheeseType.getTypeFromMeta(stack.getItemDamage()));
 			final EnumCheeseStage stage = CheeseUtils.getStageFromMeta(stack.getItemDamage());
+			final int slices = CheeseUtils.getSlicesFromMeta(stack.getItemDamage());
 			CheeseIO.writeToNBT(cheeseTag, cheese);
 			stage.writeToNBT(cheeseTag);
+			cheeseTag.setInteger("slices", slices);
 			tag.setTag("te_cheese_block", cheeseTag);
 		}
 		return tag.getCompoundTag("te_cheese_block");
@@ -76,13 +76,6 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 	public NBTTagCompound getTileTagCompound(ItemStack stack)
 	{
 		final NBTTagCompound tag = getTileTagCompoundABS(stack);
-/*		final ICheeseType type = getCheeseType(stack);
-		final EnumCheeseStage stage = getCheeseStage(stack);
-		int cheeseMeta = CheeseUtils.getItemMetaFor(type, stage);
-		if (stack.getItemDamage() != cheeseMeta)
-		{
-			stack.setItemDamage(cheeseMeta);
-		}*/
 		return tag;
 	}
 
@@ -136,9 +129,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
     {
     	for( T type : typeLookup ) {
     		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
-//    		int meta = CheeseUtils.getItemMetaFor(type, blockStackFactory.getInitialStage());
-//    		ItemStack stack = new ItemStack(this, 1, meta);
-    		ItemStack stack = blockStackFactory.asStackForStage(blockStackFactory.getInitialStage());
+    		ItemStack stack = blockStackFactory.asStackForStage(4, blockStackFactory.getInitialStage());
     		subItems.add(stack);
     	}
     }

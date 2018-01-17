@@ -4,6 +4,7 @@ import growthcraft.milk.Reference;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.handlers.EnumHandler;
 import growthcraft.milk.handlers.EnumHandler.AgedCheeseTypes;
+import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
 import growthcraft.milk.items.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -29,6 +30,7 @@ public class GrowthcraftMilkItems {
     public static ItemDefinition starterCulture;
     public static Item itemAgedCheeseSlice;
     public static ItemDefinition agedCheeseBlockItem;
+    public static ItemDefinition waxedCheeseBlockItem;
     public static Item itemWaxedCheeseSlice;
     public static Item itemSimpleCheeseSlice;
 
@@ -43,6 +45,7 @@ public class GrowthcraftMilkItems {
         itemYogurt = new ItemYogurt("yogurt", 2, 0.3F, false);
         itemAgedCheeseSlice = new ItemAgedCheeseSlice("cheese_aged_slice", 2, 0.3F, false);
         agedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock(), AgedCheeseTypes.values()) );
+        waxedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock(), WaxedCheeseTypes.values()) );
         itemWaxedCheeseSlice = new ItemWaxedCheeseSlice("cheese_waxed_slice", 2, 0.3F, false);
         itemSimpleCheeseSlice = new ItemSimpleCheeseSlice("cheese_simple_slice", 2, 0.3F, false);
     }
@@ -67,8 +70,8 @@ public class GrowthcraftMilkItems {
         registerItem(itemAgedCheeseSlice);
         registerItem(itemWaxedCheeseSlice);
         registerItem(itemSimpleCheeseSlice);
-//        agedCheeseBlockItem.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
         agedCheeseBlockItem.register(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock().getRegistryName() /*new ResourceLocation(Reference.MODID, "cheese_aged")*/);
+        waxedCheeseBlockItem.register(GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock().getRegistryName());
 
         registerOres();
     }
@@ -114,12 +117,12 @@ public class GrowthcraftMilkItems {
             registerRender(itemSimpleCheeseSlice, i, "cheese_slice/" + EnumHandler.SimpleCheeseTypes.values()[i].getName());
         }
         
-        agedCheeseBlockItem.registerRenders(AgedCheeseTypes.class);
+//        agedCheeseBlockItem.registerRenders(AgedCheeseTypes.class);
     }
     
 	public static void registerModelBakeryVariants() {
 		butter.registerModelBakeryVariants(EnumHandler.ButterTypes.class);
-		agedCheeseBlockItem.registerModelBakeryVariants(AgedCheeseTypes.class);
+//		agedCheeseBlockItem.registerModelBakeryVariants(AgedCheeseTypes.class);
 	}
 
     public static void registerItem(Item item) {

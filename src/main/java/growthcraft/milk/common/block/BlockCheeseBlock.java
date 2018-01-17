@@ -41,9 +41,6 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	
 	public BlockCheeseBlock() {
 		super(Material.CAKE);
-		
-//        this.setUnlocalizedName(unlocalizedName);
-//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		this.setHardness(0.5F);
 //		setStepSound(soundTypeCloth);
 		setTileEntityType(TileEntityCheeseBlock.class);
@@ -158,41 +155,6 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		}
 		return ret;
 	}
-	
-/*	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
-	{
-		if (itemIn instanceof ItemBlockCheeseBlock)
-		{
-			final ItemStack stack = EnumHandler.AgedCheeseTypes.APPENZELLER.getCheeseBlocks().asStackForStage(EnumCheeseStage.UNAGED);
-			list.add(stack);
-		}		
-	} */
-	
-/*	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubBlocks(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> list)
-	{
-		if (itemIn instanceof ItemBlockCheeseBlock)
-		{
-			final ItemBlockCheeseBlock ib = (ItemBlockCheeseBlock)itemIn;
-			for (T cheese : typeEnum.getEnumConstants() )
-			{
-				final ICheeseBlockStackFactory blockStackFactory = cheese.getCheeseBlocks();
-				if (blockStackFactory != null)
-				{
-					final ItemStack stack = blockStackFactory.asItemStackForStage(1, blockStackFactory.getInitialStage()); // ew ItemStack(itemIn, 1, cheese.getMetaForInitialStage());
-					// This causes the NBT data to refresh
-					ib.getTileTagCompound(stack);
-					list.add(stack);
-				}
-			}
-		}
-	}
-	*/
 	
 	@Override
 	public int damageDropped(IBlockState state)

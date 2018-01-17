@@ -3,9 +3,9 @@ package growthcraft.milk.api.definition;
 import net.minecraft.item.ItemStack;
 
 public interface ICheeseBlockStackFactory {
-	ItemStack asStackForStage(int size, EnumCheeseStage stage);
-	default ItemStack asStackForStage(EnumCheeseStage stage) {
-		return asStackForStage(1, stage);
+	ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage);
+	default ItemStack asStackForStage(int slices, EnumCheeseStage stage) {
+		return asStackForStage(1, slices, stage);
 	}
 	
 /*	ItemStack asStackForInitialStage(int size);

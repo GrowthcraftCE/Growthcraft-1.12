@@ -19,7 +19,7 @@ public class Cheese implements IStreamable
 
 	private int ageMax = GrowthcraftMilkConfig.cheeseMaxAge;
 	private int age;
-	private final int slicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+	private int slicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
 	private int slices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
 	private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
 	private ICheeseType cheese = EnumHandler.WaxedCheeseTypes.CHEDDAR;
@@ -145,10 +145,10 @@ public class Cheese implements IStreamable
 		{
 			this.slices = nbt.getInteger("slices");
 		}
-/*		if (nbt.hasKey("slices_max"))
+		if (nbt.hasKey("slices_max"))
 		{
 			this.slicesMax = nbt.getInteger("slices_max");
-		} */
+		}
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class Cheese implements IStreamable
 		this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
 		this.age = stream.readInt();
 		this.slices = stream.readInt();
-//		this.slicesMax = stream.readInt();
+		this.slicesMax = stream.readInt();
 		return false;
 	}
 

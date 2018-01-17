@@ -174,7 +174,17 @@ public class EnumHandler {
 
 		@Override
 		public ICheeseBlockStackFactory getCheeseBlocks() {
-			return null;
+			return new ICheeseBlockStackFactory() {
+				@Override
+				public ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage) {
+					return GrowthcraftMilkBlocks.waxedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, slices, stage));
+				}
+
+				@Override
+				public EnumCheeseStage getInitialStage() {
+					return EnumCheeseStage.UNWAXED;
+				}
+			};
 		}
 
 		@Override
@@ -320,14 +330,9 @@ public class EnumHandler {
 			return new ICheeseBlockStackFactory() {
 
 				@Override
-				public ItemStack asStackForStage(int size, EnumCheeseStage stage) {
-					return GrowthcraftMilkBlocks.agedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, stage));
+				public ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage) {
+					return GrowthcraftMilkBlocks.agedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, slices, stage));
 				}
-
-/*				@Override
-				public ItemStack asItemStackForStage(int size, EnumCheeseStage stage) {
-					return GrowthcraftMilkItems.agedCheeseBlockItem.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, stage));
-				}*/
 
 				@Override
 				public EnumCheeseStage getInitialStage() {

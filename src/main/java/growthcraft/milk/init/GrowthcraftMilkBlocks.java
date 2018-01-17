@@ -39,8 +39,8 @@ public class GrowthcraftMilkBlocks {
     public static BlockDefinition pancheon;
     public static BlockDefinition churn;
     public static BlockDefinition agedCheeseBlock;
+    public static BlockDefinition waxedCheeseBlock;
 
-    // TODO: BlockCheese
     // TODO: BlockCheesePress
     // TODO: BlockCheeseCurds
 
@@ -58,6 +58,7 @@ public class GrowthcraftMilkBlocks {
         pancheon = new BlockDefinition( new PREVBlockPancheon("pancheon") );
         churn = new BlockDefinition( new BlockButterChurn("churn") );
         agedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );
+        waxedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );
     }
 
     public static void register() {
@@ -73,6 +74,8 @@ public class GrowthcraftMilkBlocks {
         churn.register(true);
         agedCheeseBlock.getBlock().setCreativeTab(tabGrowthcraft);
         agedCheeseBlock.register(new ResourceLocation(Reference.MODID, "cheese_aged"), false);
+        waxedCheeseBlock.getBlock().setCreativeTab(tabGrowthcraft);
+        waxedCheeseBlock.register(new ResourceLocation(Reference.MODID, "cheese_waxed"), false);
     }
     
     public static void registerRenders() {
@@ -84,12 +87,13 @@ public class GrowthcraftMilkBlocks {
         pancheon.registerRender();
         churn.registerRender();
         agedCheeseBlock.registerRender();
+        waxedCheeseBlock.registerRender();
     }
     
     public static void registerTileEntities() {
     	GameRegistry.registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
     	GameRegistry.registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
-    	GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_aged");
+    	GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_block");
     }
     
     public static void registerSpecialRenders() {
