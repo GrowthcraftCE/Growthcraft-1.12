@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "orient=tosouth,pressed=unpressed":  { "model": "growthcraft_cellar:fruit_presser_up", "y": 270 },
+    "orient=tosouth,pressed=pressed":  { "model": "growthcraft_cellar:fruit_presser_down", "y": 270 },
+    "orient=toeast,pressed=unpressed":  { "model": "growthcraft_cellar:fruit_presser_up" },
+    "orient=toeast,pressed=pressed":  { "model": "growthcraft_cellar:fruit_presser_down" }
+  }
+}
