@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 public class ItemSeedThistle extends ItemSeeds {
 
     public ItemSeedThistle(String unlocalizedName) {
-        super(GrowthcraftMilkBlocks.thistle, Blocks.FARMLAND );
+        super(GrowthcraftMilkBlocks.thistle.getBlock(), Blocks.FARMLAND );
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }

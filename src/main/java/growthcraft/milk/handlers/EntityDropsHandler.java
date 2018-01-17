@@ -14,7 +14,7 @@ public class EntityDropsHandler {
     public void onEnityDrops(LivingDropsEvent event) {
         if ( event.getEntityLiving() instanceof EntityCow ) {
             Entity eventEntity = event.getEntity();
-            ItemStack itemStackStomach = new ItemStack(GrowthcraftMilkItems.itemStomach);
+            ItemStack itemStackStomach = GrowthcraftMilkItems.stomach.asStack();
             EntityItem entityItem = new EntityItem(eventEntity.world, eventEntity.posX, eventEntity.posY, eventEntity.posZ, itemStackStomach);
             event.getDrops().add(entityItem);
         }

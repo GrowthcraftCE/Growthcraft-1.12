@@ -1,9 +1,15 @@
 -----------------
+To implement:
+-----------------
+TODO: Rope bounding boxes are not reacting according neighbor blocks.
+TODO: Step sound of apple fences should be changed to wood.
+
+-----------------
 Bugs:
 -----------------
+BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
 BUG: Collision boxes for brewing kettle walls are not correct.
-BUG: Rope bounding boxes are broken.
-BUG: No splash sound when dropping items into brewing kettle.
+BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 BUG: Fix string formatting with arguments when logging.
 DONE: BUG: Tipsy Effect not saved when game is saved.
 DONE: BUG: No Tipsy Effect icon. 
@@ -15,17 +21,22 @@ Improvements:
 TODO: Only accepted items are consumed, thrown into brewing kettle 
 TODO: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
 TODO: isItemValid for culture jar and fermenting barrel containers
+TODO: Fruit Press fluid render.
 
 -----------------
 Not ported stuff:
 -----------------
-TODO: Culture Jar fluid render.
+TODO: Item model jsons for all cellar devices.
 TODO: Textures and models of Ferment Barrel.
+TODO: Textures and models of Fruit Press.
+TODO: Textures and models for Butter Churn.
+TODO: Render for Butter Churn.
 TODO: Step sounds
 TODO: Add yeasts
 TODO: Language files for Cellar.
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Culture Jar fluid render.
 DONE: Brew Kettle fluid render.
 DONE: Buckets für Boozes to appear in CreativeTab.
 

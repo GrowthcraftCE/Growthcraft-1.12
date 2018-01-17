@@ -11,7 +11,9 @@ import growthcraft.cellar.common.definition.BoozeDefinition;
 import growthcraft.cellar.util.BoozeUtils;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.definition.FluidDefinition;
+import growthcraft.core.common.definition.FluidTypeDefinition;
 import growthcraft.core.common.item.GrowthcraftItemFoodBase;
+import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.lib.GrowthcraftCoreState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
@@ -31,40 +33,40 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidItem
+public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidItem
 {
-	private Fluid[] boozes;
+	private Booze[] boozes;
 
-/*	@SideOnly(Side.CLIENT)
-	private IIcon bottle;
-	@SideOnly(Side.CLIENT)
-	private IIcon contents; */
-
-	public ItemBoozeBottle(BoozeDefinition[] boozeAry)
+	public ItemBoozeBottle()
 	{
-		super(0, 0.0f, false);
+		super(null, 0, 0.0f, false);
 		this.setAlwaysEdible();
 		this.setMaxStackSize(4);
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
-		this.setContainerItem(Items.GLASS_BOTTLE);
+//		this.setContainerItem(Items.GLASS_BOTTLE);
 		this.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
-
-		this.boozes = FluidDefinition.convertArray(boozeAry);
+	}
+	
+	public ItemBoozeBottle setBoozes(BoozeDefinition[] boozeAry) {
+		this.boozes = FluidDefinition.convertArray(boozeAry, Booze.class);
+		return this;
 	}
 
-	public Fluid[] getFluidArray()
+	public Booze[] getFluidArray()
 	{
 		return this.boozes;
 	}
 
-	public Fluid getFluidByIndex(int i)
+	public Booze getFluidByIndex(int i)
 	{
+		if( boozes == null )
+			return null;	// Boozes not initialized, yet. Fallback
 		return (i < 0 || i >= boozes.length) ? boozes[0] : boozes[i];
 	}
 
 	@Override
-	public Fluid getFluid(ItemStack stack)
+	public Booze getFluid(ItemStack stack)
 	{
 		if (stack == null) return null;
 		return getFluidByIndex(stack.getItemDamage());
@@ -102,6 +104,7 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 		return 0.0f;
 	}
 
+	@Override
 	public int getColor(ItemStack stack)
 	{
 		final Fluid booze = getFluid(stack);
@@ -141,40 +144,9 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 		}
 	}
 
-/*
 	@Override
 	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.bottle = reg.registerIcon("grccellar:booze");
-		this.contents = reg.registerIcon("grccellar:booze_contents");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int par1, int pass)
-	{
-		return pass == 0 ? this.contents : this.bottle;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int pass)
-	{
-		return pass == 0 ? getColor(stack) : 0xFFFFFF;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses()
-	{
-		return true;
-	}
-*/
-	
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean hasEffect(ItemStack stack/*, int pass*/)
+	public boolean hasEffect(ItemStack stack)
 	{
 		return BoozeUtils.hasEffect(getFluid(stack));
 	}
@@ -182,8 +154,10 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		int meta = stack.getItemDamage();
-		return super.getUnlocalizedName() + "_" + meta;
+		Booze booze = getFluid(stack);
+//		int meta = stack.getItemDamage();
+//		return super.getUnlocalizedName() + "_" + meta;
+		return super.getUnlocalizedName() + "_" + booze.getName().substring(12);  // skipping "fluid_booze_" part
 	}
 
 	@Override
@@ -204,8 +178,6 @@ public class ItemBoozeBottle extends GrowthcraftItemFoodBase implements IFluidIt
 		ItemStack stack = playerIn.getHeldItem(handIn);
 		playerIn.setActiveHand(handIn);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
-//TODO		playerIn.setItemInUse(stack, this.getMaxItemUseDuration(stack));
-//		return stack;
 	}
 
 	@Override

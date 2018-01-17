@@ -130,6 +130,6 @@ public class BlockAppleLeaves extends Block implements IGrowable {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        return Item.getItemFromBlock(GrowthcraftApplesBlocks.blockAppleSapling);
+        return GrowthcraftApplesBlocks.blockAppleSapling.getItem();
     }
 }

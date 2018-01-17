@@ -2,14 +2,16 @@ package growthcraft.core.common.definition;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.Reference;
 import growthcraft.core.api.definition.ISubItemStackFactory;
+import net.minecraft.client.renderer.block.model.ModelBakery;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import growthcraft.core.api.definition.IObjectVariant;
 
 public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
@@ -54,7 +56,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	
     public void registerRender() {
         ModelLoader.setCustomModelResourceLocation(getItem(), 0,
-                new ModelResourceLocation(/*new ResourceLocation(Reference.MODID, getItem().getUnlocalizedName().substring(5))*/getItem().getRegistryName(), "inventory"));
+                new ModelResourceLocation(getItem().getRegistryName(), "inventory"));
     }
 
     public void registerRender(int meta, String fileName) {
@@ -62,5 +64,27 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
     	
         ModelLoader.setCustomModelResourceLocation(getItem(), meta,
                 new ModelResourceLocation(new ResourceLocation(modID, fileName), "inventory"));
+    }
+    
+    public <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerRenders(Class<ET> clazz) {
+    	ET[] values = clazz.getEnumConstants();
+    	ResourceLocation itemResloc = getItem().getRegistryName();
+    	
+    	for( ET type : values ) {
+    		registerRender(type.getVariantID(), itemResloc.getResourcePath() + "_" + type.getName() );
+    	}
+    }
+    
+    public <ET extends Enum<?> & IStringSerializable> void registerModelBakeryVariants(Class<ET> clazz) {
+    	ET[] values = clazz.getEnumConstants();
+    	ResourceLocation itemResloc = getItem().getRegistryName();
+    	ResourceLocation reslocs[] = new ResourceLocation[values.length];
+    	
+    	for( int i = 0; i < reslocs.length; i ++ ) {
+    		ET type = values[i]; 
+    		reslocs[i] = new ResourceLocation(itemResloc.getResourceDomain(), itemResloc.getResourcePath() + "_" + type.getName() );	
+    	}
+    	
+    	ModelBakery.registerItemVariants(getItem(), reslocs);
     }
 }

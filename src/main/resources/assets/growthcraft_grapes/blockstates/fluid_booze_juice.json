@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "fluid_booze_7": [
+    "fluid_booze_juice": [
       {
         "custom": {
-          "fluid": "fluid_booze_7"
+          "fluid": "fluid_booze_juice"
         }
       }
     ]

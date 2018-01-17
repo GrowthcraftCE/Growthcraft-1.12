@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.api.definition.ISubItemStackFactory;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -20,14 +21,19 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	}
 
 	@Nonnull
-	public T getBlock()
+	public final T getBlock()
 	{
 		return getObject();
 	}
 
-	public Item getItem()
+	public final Item getItem()
 	{
 		return Item.getItemFromBlock(getBlock());
+	}
+	
+	@Nonnull
+	public final IBlockState getDefaultState() {
+		return getBlock().getDefaultState();
 	}
 
 	@Nonnull
@@ -37,6 +43,12 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 		return new ItemStack(getBlock(), size, damage);
 	}
 
+	@Nonnull
+	public ItemStack getItemAsStack(int size)
+	{
+		return new ItemStack(getItem(), size);
+	}
+	
 	@Nonnull
 	public ItemStack getItemAsStack(int size, int damage)
 	{
@@ -87,12 +99,21 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	{
 		getBlock().setUnlocalizedName(name.getResourcePath());
 		getBlock().setRegistryName(name);
+
+		if( itemBlock != null )
+			register(itemBlock);
+		else
+			register(null);
+	}
+	
+	/**
+	 * @param itemBlock - item class to register to
+	 */
+	public void register(ItemBlock itemBlock)
+	{
         GameRegistry.register(getBlock());
         if( itemBlock != null )
-        GameRegistry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
-        
-		// OPEN
-//		GameRegistry.registerBlock(getBlock(), itemClass, name);
+        	GameRegistry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
 	}
 	
 	/**
@@ -105,16 +126,14 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 		getBlock().setRegistryName(name);
         
         register(registerItemBlock);
-		// OPEN
-//		GameRegistry.registerBlock(getBlock(), itemClass, name);
 	}
 
 	public void register(boolean registerItemBlock)
 	{
-		Block block = getBlock();
-		GameRegistry.register(block);
 		if( registerItemBlock )
-			GameRegistry.register(new ItemBlock(block).setRegistryName(block.getRegistryName()));
+			register(new ItemBlock(getBlock()));
+		else
+			register(null);
 	}
 
 	
@@ -124,9 +143,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	public void registerRender()
 	{
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(getBlock()), 0, new ModelResourceLocation(
-                /*new ResourceLocation(Reference.MODID, block.getUnlocalizedName().substring(5))*/ getBlock().getRegistryName(), "inventory"));
-		// OPEN
-//		GameRegistry.registerBlock(getBlock(), name);
+                getBlock().getRegistryName(), "inventory"));
 	}
 	
     public void registerRender(int meta, String fileName){

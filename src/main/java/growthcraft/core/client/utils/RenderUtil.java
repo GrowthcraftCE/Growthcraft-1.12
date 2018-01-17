@@ -1,4 +1,4 @@
-package growthcraft.core.client.render;
+package growthcraft.core.client.utils;
 
 import org.lwjgl.opengl.GL11;
 
