@@ -1,4 +1,9 @@
 -----------------
+To discuss:
+-----------------
+* Maximal 8 cheese stages? -> Needed to encode stage and cheese type in item meta.
+
+-----------------
 To implement:
 -----------------
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
@@ -27,14 +32,16 @@ TODO: Fruit Press fluid render.
 Not ported stuff:
 -----------------
 TODO: Item model jsons for all cellar devices.
-TODO: Culture Jar fluid render.
 TODO: Textures and models of Ferment Barrel.
 TODO: Textures and models of Fruit Press.
+TODO: Textures and models for Butter Churn.
+TODO: Render for Butter Churn.
 TODO: Step sounds
 TODO: Add yeasts
 TODO: Language files for Cellar.
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Culture Jar fluid render.
 DONE: Brew Kettle fluid render.
 DONE: Buckets für Boozes to appear in CreativeTab.
 

@@ -2,6 +2,24 @@
   "variants": {
     "normal": {
       "model": "growthcraft_milk:pancheon"
+    },
+    "rotation=north": {
+      "model": "growthcraft_milk:pancheon"
+    },
+    "rotation=south": {
+      "model": "growthcraft_milk:pancheon"
+    },
+    "rotation=east": {
+      "model": "growthcraft_milk:pancheon"
+    },
+    "rotation=west": {
+      "model": "growthcraft_milk:pancheon"
+    },
+    "rotation=up": {
+      "model": "growthcraft_milk:pancheon"
+    },
+    "rotation=down": {
+      "model": "growthcraft_milk:pancheon"
     }
   }
 }

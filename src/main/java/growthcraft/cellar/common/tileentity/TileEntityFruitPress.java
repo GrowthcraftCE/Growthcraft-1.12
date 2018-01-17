@@ -120,6 +120,13 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
 		}
 		return false;
 	}
+	
+	@Override
+	protected void markFluidDirty()
+	{
+		super.markFluidDirty();
+		markDirtyAndUpdate();
+	}
 
 	/************
 	 * NBT

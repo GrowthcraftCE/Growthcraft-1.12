@@ -207,7 +207,7 @@ public class NBTHelper
 	 * @param data - tag to read from
 	 *   Expects a `data: NBTTagIntArray` field, `size: int` will be ignored.
 	 */
-/*	public static void readIntegerCollection(@Nonnull Collection<Integer> coll, @Nonnull NBTTagCompound data)
+	public static void readIntegerCollection(@Nonnull Collection<Integer> coll, @Nonnull NBTTagCompound data)
 	{
 		final NBTBase base = data.getTag("data");
 		if (base instanceof NBTTagIntArray)
@@ -223,5 +223,5 @@ public class NBTHelper
 			final NBTType actual = NBTType.byId(base.getId());
 			throw UnexpectedNBTTagType.createFor(NBTType.INT_ARRAY, actual);
 		}
-	} */
+	}
 }

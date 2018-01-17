@@ -25,7 +25,7 @@ public class ItemYeast extends GrowthcraftItemBase {
 	@Override
 	public String getUnlocalizedName(ItemStack stack)
 	{
-		return super.getUnlocalizedName(stack) + "." + EnumYeast.getTypeFromMeta(stack.getItemDamage()).toString().toLowerCase();
+		return super.getUnlocalizedName(stack) + "." + EnumYeast.getSafeByMeta(stack.getItemDamage()).toString().toLowerCase();
 	}
 
 	@Override

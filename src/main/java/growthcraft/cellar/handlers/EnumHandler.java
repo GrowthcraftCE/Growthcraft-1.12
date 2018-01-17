@@ -49,7 +49,7 @@ public class EnumHandler {
 			return "yeast" + Character.toUpperCase(yeastName.charAt(0)) + yeastName.substring(1).toLowerCase();
 		}
 
-		public static EnumYeast getTypeFromMeta(int meta) {
+		public static EnumYeast getSafeByMeta(int meta) {
 			if( meta < 0 || meta >= values().length )
 				return BREWERS;
 			return values()[meta];

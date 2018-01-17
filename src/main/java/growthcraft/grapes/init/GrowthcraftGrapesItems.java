@@ -3,6 +3,7 @@ package growthcraft.grapes.init;
 import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.cellar.util.BoozeRegistryHelper;
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.client.utils.ItemRenderUtils;
 import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.grapes.Reference;
@@ -45,7 +46,7 @@ public class GrowthcraftGrapesItems {
     }
     
 	public static void registerItemColorHandlers() {
-		BoozeRegistryHelper.registerBoozeColorHandler(GrowthcraftGrapesItems.grapeWine.getItem());
+		ItemRenderUtils.registerItemColorHandler(GrowthcraftGrapesItems.grapeWine.getItem());
 	}
 
 	public static void registerItemVariants() {

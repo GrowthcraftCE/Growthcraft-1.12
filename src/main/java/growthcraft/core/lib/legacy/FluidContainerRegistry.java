@@ -7,8 +7,10 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 import net.minecraft.init.Items;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -78,6 +80,7 @@ public abstract class FluidContainerRegistry
     private static Set<ContainerKey> emptyContainers = Sets.newHashSet();
 
     public static final int BUCKET_VOLUME = Fluid.BUCKET_VOLUME;
+    public static final int BOTTLE_VOLUME = BUCKET_VOLUME / 4;
     public static final ItemStack EMPTY_BUCKET = new ItemStack(Items.BUCKET);
     public static final ItemStack EMPTY_BOTTLE = new ItemStack(Items.GLASS_BOTTLE);
     private static final ItemStack NULL_EMPTYCONTAINER = new ItemStack(Items.BUCKET);
@@ -86,7 +89,9 @@ public abstract class FluidContainerRegistry
     {
         registerFluidContainer(FluidRegistry.WATER, new ItemStack(Items.WATER_BUCKET), EMPTY_BUCKET);
         registerFluidContainer(FluidRegistry.LAVA,  new ItemStack(Items.LAVA_BUCKET),  EMPTY_BUCKET);
-        registerFluidContainer(FluidRegistry.WATER, new ItemStack(Items.POTIONITEM),   EMPTY_BOTTLE);
+        registerFluidContainer(new FluidStack( FluidRegistry.WATER, BOTTLE_VOLUME),
+        		               PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.WATER),
+        		               EMPTY_BOTTLE);
     }
 
     private FluidContainerRegistry(){}

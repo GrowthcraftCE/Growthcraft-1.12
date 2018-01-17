@@ -2,67 +2,102 @@ package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
 import growthcraft.milk.blocks.*;
+import growthcraft.milk.client.render.RenderPancheon;
+import growthcraft.milk.common.block.BlockButterChurn;
+import growthcraft.milk.common.block.BlockCheeseBlock;
+import growthcraft.milk.common.block.PREVBlockPancheon;
+import growthcraft.milk.common.tileentity.TileEntityButterChurn;
+import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.OreDictionary;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
+import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.GrowthcraftBlockFluidDefinition;
+
 public class GrowthcraftMilkBlocks {
 
-    public static Block thistle;
-    public static Block blockCheeseVat;
-    public static BlockFluidMilk blockFluidMilk;
-    public static BlockFluidRennet blockFluidRennet;
-    public static BlockFluidButterMilk blockFluidButterMilk;
-    public static BlockFluidCream blockFluidCream;
-    public static BlockFluidMilkCurds blockFluidMilkCurds;
-    public static BlockFluidPasteurizedMilk blockFluidPasteurizedMilk;
-    public static BlockFluidSkimMilk blockFluidSkimMilk;
-    public static BlockFluidWhey blockFluidWhey;
-    public static BlockPancheon blockPancheon;
+    public static BlockDefinition thistle;
+    public static BlockDefinition cheeseVat;
+    public static GrowthcraftBlockFluidDefinition blockFluidMilk;
+    public static GrowthcraftBlockFluidDefinition blockFluidRennet;
+    public static GrowthcraftBlockFluidDefinition blockFluidButterMilk;
+    public static GrowthcraftBlockFluidDefinition blockFluidCream;
+    public static GrowthcraftBlockFluidDefinition blockFluidMilkCurds;
+    public static GrowthcraftBlockFluidDefinition blockFluidPasteurizedMilk;
+    public static GrowthcraftBlockFluidDefinition blockFluidSkimMilk;
+    public static GrowthcraftBlockFluidDefinition blockFluidWhey;
+    public static BlockDefinition pancheon;
+    public static BlockDefinition churn;
+    public static BlockDefinition agedCheeseBlock;
+    public static BlockDefinition waxedCheeseBlock;
 
-    // TODO: BlockButterChurn
-    // TODO: BlockCheese
     // TODO: BlockCheesePress
     // TODO: BlockCheeseCurds
 
-    public static void init() {
-        thistle = new BlockThistle("thistle");
-        blockCheeseVat = new BlockCheeseVat("cheese_vat");
-        blockFluidMilk = new BlockFluidMilk("fluid_milk");
-        blockFluidRennet = new BlockFluidRennet("fluid_rennet");
-        blockFluidButterMilk = new BlockFluidButterMilk("fluid_butter_milk");
-        blockFluidCream = new BlockFluidCream("fluid_cream");
-        blockFluidMilkCurds = new BlockFluidMilkCurds("fluid_milk_curds");
-        blockFluidPasteurizedMilk = new BlockFluidPasteurizedMilk("fluid_pasteurized_milk");
-        blockFluidSkimMilk = new BlockFluidSkimMilk("fluid_skim_milk");
-        blockFluidWhey = new BlockFluidWhey("fluid_whey");
-        blockPancheon = new BlockPancheon("pancheon");
+    public static void preInit() {
+        thistle = new BlockDefinition( new BlockThistle("thistle") );
+        cheeseVat = new BlockDefinition( new BlockCheeseVat("cheese_vat") );
+        blockFluidMilk = GrowthcraftMilkFluids.milk.getFluidBlockDefinition(); // new GrowthcraftBlockFluidDefinition( new BlockFluidMilk("fluid_milk") );
+        blockFluidRennet = GrowthcraftMilkFluids.rennet.getFluidBlockDefinition(); // new BlockFluidRennet("fluid_rennet");
+        blockFluidButterMilk = GrowthcraftMilkFluids.butterMilk.getFluidBlockDefinition(); // new BlockFluidButterMilk("fluid_butter_milk");
+        blockFluidCream = GrowthcraftMilkFluids.cream.getFluidBlockDefinition(); // new BlockFluidCream("fluid_cream");
+        blockFluidMilkCurds = GrowthcraftMilkFluids.curds.getFluidBlockDefinition(); // new BlockFluidMilkCurds("fluid_milk_curds");
+        blockFluidPasteurizedMilk = GrowthcraftMilkFluids.pasteurizedMilk.getFluidBlockDefinition(); // new BlockFluidPasteurizedMilk("fluid_pasteurized_milk");
+        blockFluidSkimMilk = GrowthcraftMilkFluids.skimMilk.getFluidBlockDefinition(); // new BlockFluidSkimMilk("fluid_skim_milk");
+        blockFluidWhey = GrowthcraftMilkFluids.whey.getFluidBlockDefinition(); // new BlockFluidWhey("fluid_whey");
+        pancheon = new BlockDefinition( new PREVBlockPancheon("pancheon") );
+        churn = new BlockDefinition( new BlockButterChurn("churn") );
+        agedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );
+        waxedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );
     }
 
     public static void register() {
-        registerBlock(thistle, false, false);
-        registerBlock(blockCheeseVat, true, true);
-        registerBlock(blockFluidMilk, true, false);
-        registerBlock(blockFluidRennet, true, false);
-        registerBlock(blockFluidButterMilk, true, false);
-        registerBlock(blockFluidCream, true, false);
-        registerBlock(blockFluidMilkCurds, true, false);
-        registerBlock(blockFluidPasteurizedMilk, true, false);
-        registerBlock(blockFluidSkimMilk, true, false);
-        registerBlock(blockFluidWhey, true, false);
-        registerBlock(blockPancheon, true, true);
+        // registerBlock(thistle, false, false);
+    	thistle.register(false);
+        // registerBlock(blockCheeseVat, true, true);
+    	cheeseVat.getBlock().setCreativeTab(tabGrowthcraft);
+    	cheeseVat.register(true);
+        //registerBlock(blockPancheon, true, true);
+        pancheon.getBlock().setCreativeTab(tabGrowthcraft);
+        pancheon.register(true);
+        churn.getBlock().setCreativeTab(tabGrowthcraft);
+        churn.register(true);
+        agedCheeseBlock.getBlock().setCreativeTab(tabGrowthcraft);
+        agedCheeseBlock.register(new ResourceLocation(Reference.MODID, "cheese_aged"), false);
+        waxedCheeseBlock.getBlock().setCreativeTab(tabGrowthcraft);
+        waxedCheeseBlock.register(new ResourceLocation(Reference.MODID, "cheese_waxed"), false);
     }
-
-    public static void  registerRenders() {
-        registerRender(thistle);
-        registerRender(blockCheeseVat);
-        registerRender(blockPancheon);
+    
+    public static void registerRenders() {
+        // registerRender(thistle);
+    	thistle.registerRender();
+        // registerRender(blockCheeseVat);
+    	cheeseVat.registerRender();
+        // registerRender(blockPancheon);
+        pancheon.registerRender();
+        churn.registerRender();
+        agedCheeseBlock.registerRender();
+        waxedCheeseBlock.registerRender();
+    }
+    
+    public static void registerTileEntities() {
+    	GameRegistry.registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
+    	GameRegistry.registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
+    	GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_block");
+    }
+    
+    public static void registerSpecialRenders() {
+    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPancheon.class, new RenderPancheon());
     }
 
     public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
