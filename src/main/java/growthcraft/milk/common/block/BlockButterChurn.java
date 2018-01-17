@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.milk.Reference;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -30,7 +31,7 @@ public class BlockButterChurn extends GrowthcraftBlockContainer {
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		this.setResistance(5.0F);
 		this.setHardness(2.0F);
-//		setStepSound(soundTypeWood);
+		this.setSoundType(SoundType.WOOD);
 		setTileEntityType(TileEntityButterChurn.class);
 	}
 	

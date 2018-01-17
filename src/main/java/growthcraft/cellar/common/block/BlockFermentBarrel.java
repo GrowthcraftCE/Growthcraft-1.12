@@ -9,6 +9,7 @@ import growthcraft.cellar.events.EventBarrelDrained;
 import growthcraft.core.Utils;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,11 +29,9 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 		super(Material.WOOD);
 		setTileEntityType(TileEntityFermentBarrel.class);
 		setHardness(2.5F);
-//TODO:		setStepSound(soundTypeWood);
+		setSoundType(SoundType.WOOD);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
-
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override

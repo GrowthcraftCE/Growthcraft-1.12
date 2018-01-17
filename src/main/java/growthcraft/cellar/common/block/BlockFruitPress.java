@@ -8,6 +8,7 @@ import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.api.utils.BlockFlags;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,7 +28,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 		super(Material.WOOD);
 		setTileEntityType(TileEntityFruitPress.class);
 		setHardness(2.0F);
-//TODO:		setStepSound(soundTypeWood);
+		setSoundType(SoundType.WOOD);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	}

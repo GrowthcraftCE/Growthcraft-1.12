@@ -16,6 +16,7 @@ import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import growthcraft.milk.handlers.EnumHandler;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -42,7 +43,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	public BlockCheeseBlock() {
 		super(Material.CAKE);
 		this.setHardness(0.5F);
-//		setStepSound(soundTypeCloth);
+		this.setSoundType(SoundType.CLOTH);
 		setTileEntityType(TileEntityCheeseBlock.class);
 	}
 	

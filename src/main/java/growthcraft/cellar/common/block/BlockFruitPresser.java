@@ -14,6 +14,7 @@ import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.core.common.block.IWrenchable;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -49,7 +50,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 		this.isBlockContainer = true;
 		setTileEntityType(TileEntityFruitPresser.class);
 		setHardness(0.5F);
-//TODO:		setStepSound(soundTypePiston);
+		setSoundType(SoundType.STONE);	// Formerly soundTypePiston
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	}

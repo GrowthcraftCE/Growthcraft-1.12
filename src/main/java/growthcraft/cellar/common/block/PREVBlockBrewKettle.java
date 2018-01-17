@@ -11,6 +11,7 @@ import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.Utils;
 import growthcraft.core.lib.legacy.ILegacyFluidHandler;
 import growthcraft.core.utils.ItemUtils;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -57,7 +58,7 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 
     public PREVBlockBrewKettle(String unlocalizedName) {
         super(Material.IRON);
-//TODO        this.setStepSound(soundTypeMetal);
+        setSoundType(SoundType.METAL);
         setTileEntityType(PREVTileEntityBrewKettle.class);
         this.setHardness(2.0F);
         this.setUnlocalizedName(unlocalizedName);
