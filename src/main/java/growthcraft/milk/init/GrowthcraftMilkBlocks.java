@@ -2,6 +2,7 @@ package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
 import growthcraft.milk.blocks.*;
+import growthcraft.milk.client.render.RenderCheeseVat;
 import growthcraft.milk.client.render.RenderPancheon;
 import growthcraft.milk.common.block.BlockButterChurn;
 import growthcraft.milk.common.block.BlockCheeseBlock;
@@ -10,6 +11,7 @@ import growthcraft.milk.common.block.PREVBlockCheeseVat;
 import growthcraft.milk.common.block.PREVBlockPancheon;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import net.minecraft.util.ResourceLocation;
@@ -103,5 +105,6 @@ public class GrowthcraftMilkBlocks {
     
     public static void registerSpecialRenders() {
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPancheon.class, new RenderPancheon());
+    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheeseVat.class, new RenderCheeseVat());
     }
 }

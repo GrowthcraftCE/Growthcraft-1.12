@@ -9,6 +9,7 @@ import growthcraft.milk.init.GrowthcraftMilkCheeses;
 import growthcraft.milk.init.GrowthcraftMilkEffects;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
+import growthcraft.milk.init.GrowthcraftMilkRecipes;
 import growthcraft.milk.proxy.CommonProxy;
 import growthcraft.milk.utils.GrowthcraftMilkUserApis;
 import net.minecraftforge.common.MinecraftForge;
@@ -66,6 +67,7 @@ public class GrowthcraftMilk {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         GrowthcraftMilkFluids.init();
+        GrowthcraftMilkRecipes.init();
         userApis.init();
         userApis.loadConfigs();
     }

@@ -1,6 +1,5 @@
 package growthcraft.milk.handlers;
 
-import growthcraft.core.api.definition.IFluidStackFactory;
 import growthcraft.core.api.definition.IItemStackFactory;
 import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.milk.Reference;
@@ -12,10 +11,12 @@ import growthcraft.milk.api.definition.ICheeseFluidStackFactory;
 import growthcraft.milk.api.definition.ICheeseItemStackFactory;
 import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
+import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fluids.FluidStack;
 
 public class EnumHandler {
 
@@ -200,7 +201,12 @@ public class EnumHandler {
 
 		@Override
 		public ICheeseFluidStackFactory getFluids() {
-			return null;
+			return new ICheeseFluidStackFactory() {
+				@Override
+				public FluidStack asFluidStack(int amount) {
+					return GrowthcraftMilkFluids.cheesesWaxed.get(WaxedCheeseTypes.this).asFluidStack(amount);
+				}
+			};
 		}
 
     }
@@ -275,7 +281,12 @@ public class EnumHandler {
 
 		@Override
 		public ICheeseFluidStackFactory getFluids() {
-			return null;
+			return new ICheeseFluidStackFactory() {
+				@Override
+				public FluidStack asFluidStack(int amount) {
+					return GrowthcraftMilkFluids.cheesesSimple.get(SimpleCheeseTypes.this).asFluidStack(amount);
+				}
+			};
 		}
     }
 
@@ -364,7 +375,12 @@ public class EnumHandler {
 
 		@Override
 		public ICheeseFluidStackFactory getFluids() {
-			return null;
+			return new ICheeseFluidStackFactory() {
+				@Override
+				public FluidStack asFluidStack(int amount) {
+					return GrowthcraftMilkFluids.cheesesAged.get(AgedCheeseTypes.this).asFluidStack(amount);
+				}
+			};
 		}
     }
 }

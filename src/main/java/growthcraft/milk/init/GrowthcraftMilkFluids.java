@@ -1,7 +1,9 @@
 package growthcraft.milk.init;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.api.processing.common.Residue;
@@ -25,7 +27,9 @@ import growthcraft.milk.GrowthcraftMilkConfig;
 import growthcraft.milk.Reference;
 import growthcraft.milk.api.MilkFluidTags;
 import growthcraft.milk.api.MilkRegistry;
+import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.blocks.BlockFluidButterMilk;
+import growthcraft.milk.blocks.BlockFluidCheese;
 import growthcraft.milk.blocks.BlockFluidCream;
 import growthcraft.milk.blocks.BlockFluidMilk;
 import growthcraft.milk.blocks.BlockFluidMilkCurds;
@@ -34,6 +38,7 @@ import growthcraft.milk.blocks.BlockFluidRennet;
 import growthcraft.milk.blocks.BlockFluidSkimMilk;
 import growthcraft.milk.blocks.BlockFluidWhey;
 import growthcraft.milk.blocks.fluids.FluidButterMilk;
+import growthcraft.milk.blocks.fluids.FluidCheese;
 import growthcraft.milk.blocks.fluids.FluidCream;
 import growthcraft.milk.blocks.fluids.FluidMilk;
 import growthcraft.milk.blocks.fluids.FluidMilkCurds;
@@ -42,9 +47,13 @@ import growthcraft.milk.blocks.fluids.FluidRennet;
 import growthcraft.milk.blocks.fluids.FluidSkimMilk;
 import growthcraft.milk.blocks.fluids.FluidWhey;
 import growthcraft.milk.common.effect.EffectMilk;
+import growthcraft.milk.handlers.EnumHandler.AgedCheeseTypes;
+import growthcraft.milk.handlers.EnumHandler.SimpleCheeseTypes;
+import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -60,8 +69,51 @@ public class GrowthcraftMilkFluids {
 	public static FluidDetails skimMilk;
 	public static FluidDetails whey;
 	public static FluidDetails pasteurizedMilk;
-    
-    private static void initFluids() {
+	public static Map<SimpleCheeseTypes, FluidFactory.FluidDetails> cheesesSimple = new HashMap<SimpleCheeseTypes, FluidFactory.FluidDetails>();
+	public static Map<AgedCheeseTypes, FluidFactory.FluidDetails> cheesesAged = new HashMap<AgedCheeseTypes, FluidFactory.FluidDetails>();
+	public static Map<WaxedCheeseTypes, FluidFactory.FluidDetails> cheesesWaxed = new HashMap<WaxedCheeseTypes, FluidFactory.FluidDetails>();
+	
+	// TODO: Move these to some kind of cheese registry helper.
+	
+	private static <E extends Enum<?> & ICheeseType & IStringSerializable> void preInitCheeseTypes( Map<E, FluidFactory.FluidDetails> fluidMap, Class<E> clazz ) {
+		E[] vals = clazz.getEnumConstants();
+		for( E type : vals ) {
+			final String fluidName = "fluid_cheese_" + type.getName();
+			Fluid cheeseFluid = new FluidCheese(fluidName).setColor(type.getColor());
+			FluidDetails fluidFactory = new FluidDetailsBuilder(cheeseFluid, FluidFactory.FEATURE_NONE)
+						.setFluidBlockClass(BlockFluidCheese.class).build()
+							.setBlockColor(cheeseFluid.getColor())
+							.setItemColor(cheeseFluid.getColor());
+			fluidMap.put(type, fluidFactory);
+		}
+	}
+	
+	private static <E extends Enum<?> & ICheeseType & IStringSerializable> void registerCheeseTypes( Map<E, FluidFactory.FluidDetails> fluidMap ) {
+		for( Map.Entry<E, FluidDetails> entry : fluidMap.entrySet() ) {
+			entry.getValue().registerObjects(Reference.MODID, "cheese_" + entry.getKey().getName() );
+			CoreRegistry.instance().fluidDictionary().addFluidTags(entry.getValue().getFluid(), MilkFluidTags.CHEESE);
+		}	
+	}
+	
+	private static <E extends Enum<?> & ICheeseType & IStringSerializable> void registerCheeseRenders( Map<E, FluidFactory.FluidDetails> fluidMap ) {
+		for( Map.Entry<E, FluidDetails> entry : fluidMap.entrySet() ) {
+			entry.getValue().registerRenderer();
+		}
+	}
+
+	private static <E extends Enum<?> & ICheeseType & IStringSerializable> void registerCheeseColorHandlers( Map<E, FluidFactory.FluidDetails> fluidMap ) {
+		for( Map.Entry<E, FluidDetails> entry : fluidMap.entrySet() ) {
+			entry.getValue().registerColorHandlers();
+		}
+	}
+	
+	private static void preInitCheeseFluids() {
+		preInitCheeseTypes(cheesesSimple, SimpleCheeseTypes.class);
+		preInitCheeseTypes(cheesesAged, AgedCheeseTypes.class);
+		preInitCheeseTypes(cheesesWaxed, WaxedCheeseTypes.class);
+	}
+	
+    private static void preInitFluids() {
 		final IEffect milkEffect = EffectMilk.create(GrowthcraftCellarPotions.potionTipsy);
 		if (GrowthcraftMilkConfig.milkEnabled)
 		{
@@ -145,10 +197,12 @@ public class GrowthcraftMilkFluids {
 		pasteurizedMilk = new FluidDetailsBuilder(fluidPasteurizedMilk)
 				.setFluidBlockClass(BlockFluidPasteurizedMilk.class).build()
 					.setCreativeTab(GrowthcraftCore.tabGrowthcraft).setItemColor(0xFFFFFA);
+		
+		preInitCheeseFluids();
     }
     
     public static void preInit() {
-    	initFluids();
+    	preInitFluids();
     }
     
 	public static List<Fluid> getMilkFluids()
@@ -254,11 +308,13 @@ public class GrowthcraftMilkFluids {
 				butterMilk.asFluidStack(roundToBottles(500)),
 				GrowthcraftMilkItems.butter.asStack(2),
 				16);
-
+		
+		registerCheeseTypes(cheesesSimple);
+		registerCheeseTypes(cheesesAged);
+		registerCheeseTypes(cheesesWaxed);
 		
 		registerOres();
     }
-    
 
     public static void registerRenders() {
     	if( milk != null )
@@ -270,6 +326,9 @@ public class GrowthcraftMilkFluids {
 		skimMilk.registerRenderer();
 		whey.registerRenderer();
 		pasteurizedMilk.registerRenderer();
+		registerCheeseRenders(cheesesSimple);
+		registerCheeseRenders(cheesesAged);
+		registerCheeseRenders(cheesesWaxed);
     }
     
     public static void registerColorHandlers() {
@@ -282,5 +341,8 @@ public class GrowthcraftMilkFluids {
 		skimMilk.registerColorHandlers();
 		whey.registerColorHandlers();
 		pasteurizedMilk.registerColorHandlers();
+		registerCheeseColorHandlers(cheesesSimple);
+		registerCheeseColorHandlers(cheesesAged);
+		registerCheeseColorHandlers(cheesesWaxed);
     }
 }
