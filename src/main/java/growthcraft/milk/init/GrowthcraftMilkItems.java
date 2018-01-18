@@ -25,7 +25,7 @@ public class GrowthcraftMilkItems {
     public static ItemDefinition stomach;
     public static Item thistle_seed;
     public static ItemDefinition thistle;
-    public static Item itemCheeseCloth;
+    public static ItemDefinition cheeseCloth;
     public static ItemDefinition butter;
     public static Item itemIceCream;
     public static Item itemYogurt;
@@ -43,7 +43,7 @@ public class GrowthcraftMilkItems {
         thistle = new ItemDefinition( new ItemThistle("thistle") );
         thistle_seed = new ItemSeedThistle("thistle_seed");
         stomach = new ItemDefinition(new ItemStomach("stomach") );
-        itemCheeseCloth = new ItemCheeseCloth("cheese_cloth");
+        cheeseCloth = new ItemDefinition( new ItemCheeseCloth("cheese_cloth") );
         starterCulture = new ItemDefinition( new ItemStarterCulture("starter_culture") );
         butter = new ItemDefinition( new ItemButter("butter", 2, 0.3F, false) );
         itemIceCream = new ItemIceCream("ice_cream", 2, 0.3F, false);
@@ -66,7 +66,9 @@ public class GrowthcraftMilkItems {
         // registerItem(itemStomach);
         stomach.getItem().setCreativeTab(tabGrowthcraft);
         stomach.register();
-        registerItem(itemCheeseCloth);
+//       registerItem(itemCheeseCloth);
+        cheeseCloth.getItem().setCreativeTab(tabGrowthcraft);
+        cheeseCloth.register();
 //        registerItem(itemStarterCulture);
         starterCulture.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
         starterCulture.register();
@@ -99,7 +101,8 @@ public class GrowthcraftMilkItems {
         registerRender(thistle_seed);
         // registerRender(itemStomach);
         stomach.registerRender();
-        registerRender(itemCheeseCloth);
+        // registerRender(itemCheeseCloth);
+        cheeseCloth.registerRender();
         // registerRender(itemStarterCulture);
         starterCulture.registerRender();
 
@@ -143,7 +146,6 @@ public class GrowthcraftMilkItems {
 
     public static void  registerRender(Item item) {
         ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(Reference.MODID, item.getUnlocalizedName().substring(5)), "inventory"));
-
     }
 
     public static void registerRender(Item item, int meta, String fileName) {

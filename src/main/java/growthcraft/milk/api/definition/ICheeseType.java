@@ -1,8 +1,6 @@
 package growthcraft.milk.api.definition;
 
-import growthcraft.core.api.definition.IFluidStackFactory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 
 public interface ICheeseType {
@@ -18,5 +16,5 @@ public interface ICheeseType {
 
 	ICheeseCurdStackFactory getCurdBlocks();
 	
-	IFluidStackFactory getFluids();
+	ICheeseFluidStackFactory getFluids();
 }

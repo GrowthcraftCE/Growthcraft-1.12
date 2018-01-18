@@ -6,6 +6,7 @@ import growthcraft.milk.client.render.RenderPancheon;
 import growthcraft.milk.common.block.BlockButterChurn;
 import growthcraft.milk.common.block.BlockCheeseBlock;
 import growthcraft.milk.common.block.BlockHangingCurds;
+import growthcraft.milk.common.block.PREVBlockCheeseVat;
 import growthcraft.milk.common.block.PREVBlockPancheon;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
@@ -43,7 +44,7 @@ public class GrowthcraftMilkBlocks {
 
     public static void preInit() {
         thistle = new BlockDefinition( new BlockThistle("thistle") );
-        cheeseVat = new BlockDefinition( new BlockCheeseVat("cheese_vat") );
+        cheeseVat = new BlockDefinition( new PREVBlockCheeseVat("cheese_vat") );
         blockFluidMilk = GrowthcraftMilkFluids.milk.getFluidBlockDefinition(); // new GrowthcraftBlockFluidDefinition( new BlockFluidMilk("fluid_milk") );
         blockFluidRennet = GrowthcraftMilkFluids.rennet.getFluidBlockDefinition(); // new BlockFluidRennet("fluid_rennet");
         blockFluidButterMilk = GrowthcraftMilkFluids.butterMilk.getFluidBlockDefinition(); // new BlockFluidButterMilk("fluid_butter_milk");

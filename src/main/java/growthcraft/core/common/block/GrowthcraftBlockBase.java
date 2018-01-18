@@ -1,7 +1,10 @@
 package growthcraft.core.common.block;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.core.api.utils.BlockFlags;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
@@ -12,6 +15,10 @@ public abstract class GrowthcraftBlockBase extends Block
 	public GrowthcraftBlockBase(Material material)
 	{
 		super(material);
+	}
+
+	public GrowthcraftBlockBase(@Nonnull Material material, @Nonnull MapColor mapColor) {
+		super(material, mapColor);
 	}
 
 	/**

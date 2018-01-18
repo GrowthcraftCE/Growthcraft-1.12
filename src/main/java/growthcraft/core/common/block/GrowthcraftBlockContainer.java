@@ -19,6 +19,7 @@ import growthcraft.core.lib.legacy.ILegacyFluidHandler;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -54,6 +55,12 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		this.isBlockContainer = true;
 	}
 	
+
+	public GrowthcraftBlockContainer(@Nonnull Material material, @Nonnull MapColor mapColor) {
+		super(material, mapColor);
+		this.isBlockContainer = true;
+	}
+
 
 	@Override
 	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)

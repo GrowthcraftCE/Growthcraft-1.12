@@ -32,6 +32,8 @@ DONE: TODO: Fruit Press fluid render.
 -----------------
 Not ported stuff:
 -----------------
+TODO: Curds textures and models.
+TODO: Cheese textures and models.
 TODO: Butter churn having animation.
 TODO: Language files for Cellar.
 TODO: Languages for grapewine.

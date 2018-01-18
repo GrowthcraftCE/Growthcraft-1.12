@@ -18,6 +18,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventBus;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftMilk {
@@ -35,6 +36,10 @@ public class GrowthcraftMilk {
     static {
         FluidRegistry.enableUniversalBucket();
     }
+    
+	// Events
+	public static final EventBus MILK_BUS = new EventBus();
+
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {

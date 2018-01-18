@@ -8,6 +8,7 @@ import growthcraft.milk.api.cheese.CheeseUtils;
 import growthcraft.milk.api.definition.EnumCheeseStage;
 import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
 import growthcraft.milk.api.definition.ICheeseCurdStackFactory;
+import growthcraft.milk.api.definition.ICheeseFluidStackFactory;
 import growthcraft.milk.api.definition.ICheeseItemStackFactory;
 import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
@@ -198,7 +199,7 @@ public class EnumHandler {
 		}
 
 		@Override
-		public IFluidStackFactory getFluids() {
+		public ICheeseFluidStackFactory getFluids() {
 			return null;
 		}
 
@@ -273,7 +274,7 @@ public class EnumHandler {
 		}
 
 		@Override
-		public IFluidStackFactory getFluids() {
+		public ICheeseFluidStackFactory getFluids() {
 			return null;
 		}
     }
@@ -362,7 +363,7 @@ public class EnumHandler {
 		}
 
 		@Override
-		public IFluidStackFactory getFluids() {
+		public ICheeseFluidStackFactory getFluids() {
 			return null;
 		}
     }
