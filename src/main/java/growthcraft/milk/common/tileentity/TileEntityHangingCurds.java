@@ -10,8 +10,9 @@ import growthcraft.core.api.utils.SpatialRandom;
 import growthcraft.core.api.utils.TickUtils;
 import growthcraft.core.common.tileentity.GrowthcraftTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.milk.api.definition.ICheeseType;
+import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.struct.CheeseCurd;
-import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
@@ -194,7 +195,8 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 
 	public ItemStack asItemStack()
 	{
-		final ItemStack stack = GrowthcraftMilkBlocks.hangingCurds.asStack();
+		ICheeseType type = cheeseCurd.getType();
+		final ItemStack stack = type.getCurdBlocks().asStack();
 		final NBTTagCompound tag = ItemBlockHangingCurds.openNBT(stack);
 		writeToNBTForItem(tag);
 		return stack;

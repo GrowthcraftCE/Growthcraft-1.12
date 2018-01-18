@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import growthcraft.milk.handlers.EntityDropsHandler;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.init.GrowthcraftMilkCheeses;
+import growthcraft.milk.init.GrowthcraftMilkEffects;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
 import growthcraft.milk.proxy.CommonProxy;
@@ -45,6 +46,7 @@ public class GrowthcraftMilk {
         GrowthcraftMilkFluids.preInit();
         GrowthcraftMilkBlocks.preInit();
         GrowthcraftMilkItems.preInit();
+        GrowthcraftMilkEffects.preInit();
         userApis.preInit();
 
         GrowthcraftMilkFluids.register();

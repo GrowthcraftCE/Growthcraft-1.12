@@ -5,6 +5,6 @@
     "rotation=east":  { "model": "growthcraft_cellar:fruit_press", "y": 180 },
     "rotation=west":  { "model": "growthcraft_cellar:fruit_press", "y": 0 },
     "rotation=south":  { "model": "growthcraft_cellar:fruit_press", "y": 270 },
-    "rotation=north":  { "model": "growthcraft_cellar:fruit_press" }
+    "rotation=north":  { "model": "growthcraft_cellar:fruit_press", "y": 90 }
   }
 }
