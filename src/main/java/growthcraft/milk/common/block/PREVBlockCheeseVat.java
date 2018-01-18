@@ -36,7 +36,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PREVBlockCheeseVat extends GrowthcraftBlockContainer {
     // The amount of milk in the Cheese Vat
 
-    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 5);
+//    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 5);
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 1, 0.0625 * 0, 0.0625 * 1,
@@ -50,7 +50,7 @@ public class PREVBlockCheeseVat extends GrowthcraftBlockContainer {
         this.setHardness(2.0F);
         this.setSoundType(SoundType.METAL);
         this.useNeighborBrightness = true;
-        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, Integer.valueOf(0)));
+//        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, Integer.valueOf(0)));
         setTileEntityType(TileEntityCheeseVat.class);
     }
 

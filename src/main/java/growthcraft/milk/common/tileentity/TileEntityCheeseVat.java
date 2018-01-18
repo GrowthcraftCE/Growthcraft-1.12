@@ -305,7 +305,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 		for (int i = 0; i < getSizeInventory(); ++i)
 		{
 			final ItemStack stack = getStackInSlot(i);
-			if (stack == null) break;
+			if (ItemUtils.isEmpty(stack)) break;
 			items.add(stack);
 		}
 
@@ -338,7 +338,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 						// spawn output item stacks
 						for (ItemStack stack : recipe.getOutputItemStacks())
 						{
-							if (stack != null)
+							if (!ItemUtils.isEmpty(stack))
 							{
 								ItemUtils.spawnItemStackAtTile(stack.copy(), this, world.rand);
 							}
@@ -601,7 +601,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	{
 		if (IAltItemHandler.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
-		if (onHand == null)
+		if (ItemUtils.isEmpty(onHand))
 		{
 			final int slot = InventoryProcessor.instance().findNextPresentFromEnd(this);
 			if (slot == -1) return false;
@@ -617,7 +617,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	protected void markFluidDirty()
 	{
 		markForRecipeCheck();
-		markDirty();
+		markDirtyAndUpdate();
 	}
 
 	@Override

@@ -9,6 +9,7 @@ import growthcraft.milk.handlers.EnumHandler.SimpleCheeseTypes;
 import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
 import growthcraft.milk.items.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
@@ -93,6 +94,10 @@ public class GrowthcraftMilkItems {
 	{
 		OreDictionary.registerOre("rennetSource", thistle.getItem());
 		OreDictionary.registerOre("rennetSource", stomach.asStack());
+		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
+		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
+		OreDictionary.registerOre("foodFruit", Items.MELON);
+		OreDictionary.registerOre("foodFruit", Items.CHORUS_FRUIT);
 	}
 
     public static void registerRenders() {

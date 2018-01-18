@@ -36,9 +36,9 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftCoreBlocks.init();
+        GrowthcraftCoreBlocks.preInit();
         GrowthcraftCoreBlocks.register();
-        GrowthcraftCoreItems.init();
+        GrowthcraftCoreItems.preInit();
         GrowthcraftCoreItems.register();
         
         EMPTY_BOTTLE = new ItemStack(Items.GLASS_BOTTLE);

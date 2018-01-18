@@ -101,6 +101,7 @@ public class GrowthcraftMilkBlocks {
     	GameRegistry.registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
     	GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_block");
     	GameRegistry.registerTileEntity(TileEntityHangingCurds.class, Reference.MODID + ":cheese_curds");
+    	GameRegistry.registerTileEntity(TileEntityCheeseVat.class, Reference.MODID + ":cheese_vat");
     }
     
     public static void registerSpecialRenders() {

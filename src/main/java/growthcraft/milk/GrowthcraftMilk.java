@@ -45,14 +45,13 @@ public class GrowthcraftMilk {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
     	
-    	GrowthcraftMilkCheeses.perInit();
-    	
     	userApis.setConfigDirectory(event.getModConfigurationDirectory());
     	
         GrowthcraftMilkFluids.preInit();
         GrowthcraftMilkBlocks.preInit();
         GrowthcraftMilkItems.preInit();
         GrowthcraftMilkEffects.preInit();
+    	GrowthcraftMilkCheeses.perInit();
         userApis.preInit();
 
         GrowthcraftMilkFluids.register();
