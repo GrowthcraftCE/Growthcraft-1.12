@@ -27,21 +27,22 @@ Improvements:
 TODO: Only accepted items are consumed, thrown into brewing kettle 
 TODO: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
 TODO: isItemValid for culture jar and fermenting barrel containers
-TODO: Fruit Press fluid render.
+DONE: TODO: Fruit Press fluid render.
 
 -----------------
 Not ported stuff:
 -----------------
-TODO: Item model jsons for all cellar devices.
-TODO: Textures and models of Ferment Barrel.
-TODO: Textures and models of Fruit Press.
-TODO: Textures and models for Butter Churn.
-TODO: Render for Butter Churn.
-TODO: Step sounds
-TODO: Add yeasts
+TODO: Butter churn having animation.
 TODO: Language files for Cellar.
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Step sounds
+DONE: Item model jsons for all cellar devices.
+DONE: Add yeasts
+DONE: Textures and models of Ferment Barrel.
+DONE: Textures and models of Fruit Press.
+DONE: Textures and models for Butter Churn.
+DUPLICATED: Render for Butter Churn.
 DONE: Culture Jar fluid render.
 DONE: Brew Kettle fluid render.
 DONE: Buckets für Boozes to appear in CreativeTab.
@@ -52,4 +53,4 @@ Refactoring:
 TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
 TODO: Add item handler capability to GrowthcraftTileInventoryBase
 TODO: Add fluid handler capability to GrowthcraftTileDeviceBase
-TODO: Add Grapewine name enum.
+DONE: Add Grapewine name enum.
