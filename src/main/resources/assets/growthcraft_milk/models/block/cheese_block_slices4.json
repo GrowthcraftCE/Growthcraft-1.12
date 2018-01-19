@@ -1,10 +1,10 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11. Model by Kisutora.",
 	"textures": {
-		"0": "growthcraft_milk:blocks/cheese_block_outside_top",
-		"1": "growthcraft_milk:blocks/cheese_block_outside_bottom",
-		"2": "growthcraft_milk:blocks/cheese_block_outside_sides",
-		"particle": "growthcraft_milk:blocks/cheese_block_outside_top"
+		"0": "growthcraft_milk:textures/blocks/cheese_block_outside_top",
+		"1": "growthcraft_milk:textures/blocks/cheese_block_outside_bottom",
+		"2": "growthcraft_milk:textures/blocks/cheese_block_outside_sides",
+		"particle": "growthcraft_milk:textures/blocks/cheese_block_outside_top"
 	},
 	"elements": [
 		{
