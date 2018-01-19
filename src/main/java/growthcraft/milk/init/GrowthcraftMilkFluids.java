@@ -224,7 +224,7 @@ public class GrowthcraftMilkFluids {
 	}
 	
     public static void init() {
-		int restCapRounded = roundToBottles(1000 - GrowthcraftCoreConfig.bottleCapacity);
+		int restCapRounded = roundToBottles(FluidContainerRegistry.BUCKET_VOLUME - 2*GrowthcraftCoreConfig.bottleCapacity);
     	
     	final List<Fluid> milks = getMilkFluids();
 		for (Fluid f : milks)
@@ -233,7 +233,7 @@ public class GrowthcraftMilkFluids {
 			
 			MilkRegistry.instance().pancheon().addRecipe(
 				new FluidStack(f, 1000),
-				cream.asFluidStack(GrowthcraftCoreConfig.bottleCapacity), skimMilk.asFluidStack(restCapRounded),
+				cream.asFluidStack(2*GrowthcraftCoreConfig.bottleCapacity), skimMilk.asFluidStack(restCapRounded),
 				TickUtils.minutes(1));
 		}
 	}

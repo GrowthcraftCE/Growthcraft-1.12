@@ -1,5 +1,7 @@
 package growthcraft.milk;
 
+import growthcraft.core.lib.legacy.FluidContainerRegistry;
+
 public class GrowthcraftMilkConfig {
 	private GrowthcraftMilkConfig() { }
 	
@@ -8,7 +10,7 @@ public class GrowthcraftMilkConfig {
 	public static int cheeseMaxAge = 1200;
 	public static int cheeseItemPerBlockSlice = 32;
 	public static int cheeseVatPrimaryTankCapacity = 5000;
-	public static int cheeseVatRennetTankCapacity = 333;
+	public static int cheeseVatRennetTankCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
 	public static int cheeseVatWasteTankCapacity = 1000;
 	public static int cheeseVatRecipeTankCapacity = 1000;
 	public static int cheeseVatMilkToCurdsWheyAmount = 1000;

@@ -15,6 +15,6 @@ public class RenderCheeseVat extends TileFluidTanksSpecialRenderer<TileEntityChe
 	
 	@Override
 	public void renderTileEntityAt(@Nonnull TileEntityCheeseVat te, double x, double y, double z, float partialTicks, int destroyStage) {
-		renderStackedFluid(te, x, y, z, 7000);
+		renderStackedFluid(te, x, y, z, 6000);
 	}
 }

@@ -13,6 +13,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import growthcraft.core.lib.legacy.FluidContainerRegistry;
+
 public class GrowthcraftCoreConfig {
 
     private static Configuration config = null;
@@ -23,7 +25,7 @@ public class GrowthcraftCoreConfig {
 
 	public static boolean hidePoisonedBooze = true;
 
-	public static int bottleCapacity = 333;
+	public static int bottleCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
 
     public static void preInit() {
         File configFile = new File(Loader.instance().getConfigDir(), "growthcraft/growthcraft-core.cfg");

@@ -24,10 +24,11 @@ NOTABUG: BUG: Booze color is too dark.
 -----------------
 Improvements:
 -----------------
+TODO: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
 TODO: Only accepted items are consumed, thrown into brewing kettle 
-TODO: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
 TODO: isItemValid for culture jar and fermenting barrel containers
-DONE: TODO: Fruit Press fluid render.
+DONE: Fruit Press fluid render.
+DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
 
 -----------------
 Not ported stuff:
