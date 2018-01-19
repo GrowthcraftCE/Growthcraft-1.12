@@ -62,7 +62,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
 	public TileEntityCultureJar()
 	{
 		super();
-		this.heatComponent = new TileHeatingComponent(this, 0.0f);
+		this.heatComponent = new TileHeatingComponent(this, 1.0f);
 		this.cultureGen = new CultureGenerator(this, heatComponent, 0, 0);
 		this.yeastGen = new YeastGenerator(this, 0, 0);
 		this.yeastGen.setTimeMax(GrowthcraftCellarConfig.cultureJarTimeMax);
