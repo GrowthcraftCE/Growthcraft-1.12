@@ -198,8 +198,8 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	protected void updateSliceCount() {
 		IBlockState state = world.getBlockState(pos);
 		int cheesSlices = cheese.getSlices();
-		if( cheesSlices <= 0 )
-			cheesSlices = 1;	// 0 is not a valid block state. But value doesn't matter as this block will be removed in the next tick
+//		if( cheesSlices <= 0 )
+//			cheesSlices = 1;	// 0 is not a valid block state. But value doesn't matter as this block will be removed in the next tick
 		if( state.getValue(BlockCheeseBlock.TYPE_SLICES_COUNT) != cheesSlices ) {
 			world.setBlockState(pos, state.withProperty(BlockCheeseBlock.TYPE_SLICES_COUNT, cheesSlices), BlockFlags.UPDATE_AND_SYNC);
 		}

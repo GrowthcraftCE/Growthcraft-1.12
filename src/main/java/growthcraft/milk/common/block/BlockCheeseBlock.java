@@ -38,7 +38,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	public final static int MAX_VARIANTS = 10;
 	
 	public final static PropertyEnum<Orient> TYPE_ORIENT = PropertyEnum.create("orient", Orient.class);
-	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 1, 4);
+	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 0, 4);
 	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("type", 0, MAX_VARIANTS-1);
 
 	private static final AxisAlignedBB BOUNDING_BOX_FULL = new AxisAlignedBB(
@@ -283,14 +283,15 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState()
-	    		   .withProperty(TYPE_ORIENT, Orient.values()[meta & 0x3])
-	    		   .withProperty(TYPE_SLICES_COUNT, ((meta >> 2) & 0x3) + 1);
+	    		   .withProperty(TYPE_ORIENT, Orient.values()[meta & 0x3]);
+//	    		   .withProperty(TYPE_SLICES_COUNT, ((meta >> 2) & 0x3) + 1);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-	    return state.getValue(TYPE_ORIENT).ordinal() |
-	    	   ((state.getValue(TYPE_SLICES_COUNT)-1) << 2);
+	    return state.getValue(TYPE_ORIENT).ordinal();
+	    /* |
+	    	   ((state.getValue(TYPE_SLICES_COUNT)-1) << 2);*/
 	}
 
 	@Override
@@ -302,10 +303,10 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		if (te != null)
 		{
 			numSlices = te.getCheese().getSlices();
-			if( numSlices <= 0 ) {
+/*			if( numSlices <= 0 ) {
 				GrowthcraftMilk.logger.warn("Attempted to set a cheese block actual state with slicescount=0. Bad cheese state?");
 				numSlices = 1;	// To avoid a crash
-			}
+			} */
 			variantID = te.getCheese().getType().getVariantID();
 		}
 		

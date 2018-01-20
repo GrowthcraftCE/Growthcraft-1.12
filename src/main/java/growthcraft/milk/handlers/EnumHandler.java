@@ -169,7 +169,7 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getVariantID());
+					return new ItemStack(GrowthcraftMilkItems.itemWaxedCheeseSlice,size,getVariantID());
 				}
 			};
 		}

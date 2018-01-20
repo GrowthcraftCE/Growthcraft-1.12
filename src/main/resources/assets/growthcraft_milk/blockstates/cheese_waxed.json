@@ -49,14 +49,21 @@
     "type": {
       0: {
 	    "textures": {
-          "0": "minecraft:blocks/wool_colored_white",
-          "1": "minecraft:blocks/wool_colored_white",
-          "2": "minecraft:blocks/wool_colored_white",
-          "3": "minecraft:blocks/wool_colored_white",
-          "particle": "minecraft:blocks/wool_colored_white"
+          "0": "minecraft:blocks/bone_block_top",
+          "1": "minecraft:blocks/bone_block_top",
+          "2": "minecraft:blocks/bone_block_top",
+          "3": "minecraft:blocks/wool_colored_blue",
+          "particle": "minecraft:blocks/bone_block_top"
         }
       },
       1: {
+	    "textures": {
+          "0": "minecraft:blocks/bone_block_top",
+          "1": "minecraft:blocks/bone_block_top",
+          "2": "minecraft:blocks/bone_block_top",
+          "3": "minecraft:blocks/wool_colored_brown",
+          "particle": "minecraft:blocks/bone_block_top"
+        }
       },
       2: {
       },
