@@ -24,6 +24,10 @@ public class Cheese implements IStreamable
 	private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
 	private ICheeseType cheese = EnumHandler.WaxedCheeseTypes.CHEDDAR;
 	private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
+	
+	public Cheese() {
+		
+	}
 
 	public ICheeseType getType()
 	{
@@ -34,7 +38,7 @@ public class Cheese implements IStreamable
 	{
 		return cheeseStage;
 	}
-
+	
 	public Cheese setStage(EnumCheeseStage stage)
 	{
 		this.cheeseStage = stage;

@@ -8,6 +8,7 @@ import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.core.api.item.ItemKey;
 import growthcraft.core.api.user.AbstractUserJSONConfig;
 import net.minecraft.block.Block;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Provides users with the ability to set blocks as heat sources for Growthcraft
@@ -24,6 +25,10 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 		defaultEntries.data.add(entry);
 		return entry;
 	}
+	
+	public UserHeatSourceEntry addDefault(ResourceLocation registryName, Map<Integer, Float> s) {
+		return addDefault(registryName.getResourceDomain(), registryName.getResourcePath(), s);
+	}
 
 	@Override
 	protected String getDefault()
@@ -36,7 +41,7 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 	{
 		this.entries = gson.fromJson(buff, UserHeatSourceEntries.class);
 	}
-
+	
 	private void addHeatSource(UserHeatSourceEntry entry)
 	{
 		final Block block = Block.getBlockFromName(entry.mod_id + ":" + entry.block_name); // GameRegistry.findBlock(entry.mod_id, entry.block_name);

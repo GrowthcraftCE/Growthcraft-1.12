@@ -1,0 +1,69 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+	"textures": {
+		"0": "growthcraft_milk:blocks/cheese_block_outside_top",
+		"1": "growthcraft_milk:blocks/cheese_block_outside_bottom",
+		"2": "growthcraft_milk:blocks/cheese_block_outside_sides",
+		"3": "growthcraft_milk:blocks/cheese_inside",
+		"particle": "growthcraft_milk:blocks/cheese_block_outside_top"
+	},
+	"model": "growthcraft_milk:cheese_block_slices4"
+  },
+  "variants": {
+    "normal": [{ }],
+    "inventory": [{
+       "y": 0
+    }],
+    "orient" : {
+      "north" : {
+        "y": 90
+      },
+      "south" : {
+        "y": 270
+      },
+      "east" : {
+        "y": 180
+      },
+      "west" : {
+        "y": 0
+      }
+    },
+    "slicescount": {
+      1: {
+        "model": "growthcraft_milk:cheese_block_slices1"
+      },
+      2: {
+        "model": "growthcraft_milk:cheese_block_slices2"
+      },
+      3: {
+        "model": "growthcraft_milk:cheese_block_slices3"
+      },
+      4: {
+        "model": "growthcraft_milk:cheese_block_slices4"
+      }
+    },
+    "type": {
+      0: {
+      },
+      1: {
+      },
+      2: {
+      },
+      3: {
+      },
+      4: {
+      },
+      5: {
+      },
+      6: {
+      },
+      7: {
+      },
+      8: {
+      },
+      9: {
+      }
+    }
+  }
+}
