@@ -23,8 +23,14 @@ DONE: BUG: No Tipsy Effect icon.
 NOTABUG: BUG: Booze color is too dark.
 
 -----------------
+Potential Bugs:
+-----------------
+TODO: ShouldRefresh = false for all device tile entities. Sometimes block states are changed and a recreation of tile entity is to be avoided. 
+
+-----------------
 Improvements:
 -----------------
+TODO: Heat blocks to react on meta and supporting neighborChanged events for tiles. For heat blocks which can be turned on/off.
 TODO: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
 TODO: Only accepted items are consumed, thrown into brewing kettle 
 TODO: isItemValid for culture jar and fermenting barrel containers
