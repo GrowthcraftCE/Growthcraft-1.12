@@ -10,6 +10,7 @@ import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.utils.BlockUtils;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -24,6 +25,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -103,19 +105,33 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		}
 	}
 	
-	protected Orient setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, boolean allDirections) {
+	protected Orient setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer) {
 		Orient facing = Orient.fromFacing(EnumFacing.fromAngle(placer.rotationYaw));
+		if( worldIn.isRemote )
+			return facing;
+
 		worldIn.setBlockState(pos, state.withProperty(TYPE_ORIENT, facing), BlockFlags.UPDATE_AND_SYNC);
 		return facing;
 	}
 	
+/*	
+	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+		return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
+	}
+	*/
+	
 	protected void setPropertiesFromTileEntity(World worldIn, BlockPos pos, IBlockState state) {
+		if( worldIn.isRemote )
+			return;
+		
 		final TileEntityCheeseBlock te = getTileEntity(worldIn, pos);
 		if (te != null)
 		{
 			int numSlices = te.getCheese().getSlices();
-			if( numSlices <= 0 )
+			if( numSlices <= 0 ) {
+				GrowthcraftMilk.logger.warn("Attempted to create a cheese block with slicescount=0. Bad cheese block item meta?");
 				numSlices = 1;	// To avoid a crash
+			}
 			worldIn.setBlockState(pos, state.withProperty(TYPE_SLICES_COUNT, numSlices), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
@@ -132,7 +148,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-		setOrientWhenPlacing(worldIn, pos, state, placer, true);
+		setOrientWhenPlacing(worldIn, pos, state, placer);
 		setPropertiesFromTileEntity(worldIn, pos, state);
 	}
 
@@ -234,8 +250,8 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState()
-	    		   .withProperty(TYPE_ORIENT, Orient.values()[meta & 0x2])
-	    		   .withProperty(TYPE_SLICES_COUNT, ((meta >> 2) & 0x2) + 1);
+	    		   .withProperty(TYPE_ORIENT, Orient.values()[meta & 0x3])
+	    		   .withProperty(TYPE_SLICES_COUNT, ((meta >> 2) & 0x3) + 1);
 	}
 
 	@Override

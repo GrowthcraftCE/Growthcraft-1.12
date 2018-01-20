@@ -3,6 +3,7 @@ package growthcraft.milk.common.item;
 import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.core.api.nbt.NBTHelper;
 import growthcraft.core.common.item.IItemTileBlock;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.Reference;
 import growthcraft.milk.api.cheese.CheeseIO;
 import growthcraft.milk.api.cheese.CheeseUtils;
@@ -108,6 +109,17 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 	{
 		return getTileTagCompound(stack).getInteger("slices_max");
 	}
+	
+	@Override
+    public int getMetadata(int damage)
+    {
+        int numSlices = CheeseUtils.getSlicesFromMeta(damage);
+        if( numSlices <= 0 ) {
+        	GrowthcraftMilk.logger.warn("Cheese item meta returned slicescount=0.");
+        	numSlices = 1;
+        }
+        return (numSlices - 1) << 2;
+    }
 
 	public static NBTTagCompound openNBT(ItemStack stack)
 	{

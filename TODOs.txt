@@ -34,6 +34,7 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
+TODO: cheese block bounds adapting to slice count. 
 TODO: Cheese model items to be textured.
 TODO: Curds textures and models.
 TODO: Cheese textures and models.

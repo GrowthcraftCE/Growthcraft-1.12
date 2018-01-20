@@ -154,6 +154,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+		// return super.shouldRefresh(world, pos, oldState, newSate);
 		return false;
 	}
 	
