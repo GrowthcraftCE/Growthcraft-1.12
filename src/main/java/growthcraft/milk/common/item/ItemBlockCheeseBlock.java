@@ -129,7 +129,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
     {
     	for( T type : getAllVariants() ) {
     		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
-    		ItemStack stack = blockStackFactory.asStackForStage(4, blockStackFactory.getInitialStage());
+    		ItemStack stack = blockStackFactory.asStackForStage(4, EnumCheeseStage.AGED /*blockStackFactory.getInitialStage()*/);
     		subItems.add(stack);
     	}
     }

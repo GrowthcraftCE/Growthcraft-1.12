@@ -12,6 +12,7 @@ TODO: Step sound of apple fences should be changed to wood.
 -----------------
 Bugs:
 -----------------
+BUG: Cheese rotation needs to be fixed.
 BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
 BUG: Collision boxes for brewing kettle walls are not correct.
@@ -33,6 +34,7 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
+TODO: Cheese model items to be textured.
 TODO: Curds textures and models.
 TODO: Cheese textures and models.
 TODO: Butter churn having animation.

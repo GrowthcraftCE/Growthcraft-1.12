@@ -1,9 +1,10 @@
 package growthcraft.milk.api.definition;
 
+import growthcraft.core.api.definition.IObjectVariant;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public interface ICheeseType {
+public interface ICheeseType extends IObjectVariant {
 	ResourceLocation getRegistryName();
 	
 	boolean canWax(ItemStack stack);

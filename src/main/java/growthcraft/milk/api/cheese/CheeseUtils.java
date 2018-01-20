@@ -12,7 +12,7 @@ public class CheeseUtils {
 			throw new IllegalArgumentException("Maximal 4 slices are supported.");
 		if( atStage.ordinal() > 7 )
 			throw new IllegalArgumentException("Maximal 8 stages are supported.");
-		return (cheese.getVariantID() << 5) | (slices << 3) | atStage.ordinal();
+		return (cheese.getVariantID() << 5) | ((slices-1) << 3) | atStage.ordinal();
 	}
 	
 	public static int getVariantIDFromMeta(int meta) {
@@ -20,7 +20,7 @@ public class CheeseUtils {
 	}
 
 	public static int getSlicesFromMeta(int meta) {
-		return (meta >> 3) & 0x3;
+		return ((meta >> 3) & 0x3) + 1;
 	}
 	
 	public static EnumCheeseStage getStageFromMeta(int meta) {
