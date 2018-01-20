@@ -41,9 +41,16 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 1, 4);
 	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("type", 0, MAX_VARIANTS-1);
 
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+	private static final AxisAlignedBB BOUNDING_BOX_FULL = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 8, 0.0625 * 16);
+	private static final AxisAlignedBB BOUNDING_BOX_HALF = new AxisAlignedBB(
+            0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
+            0.0625 * 16, 0.0625 * 8, 0.0625 * 8);
+	private static final AxisAlignedBB BOUNDING_BOX_4TH = new AxisAlignedBB(
+            0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
+            0.0625 * 8, 0.0625 * 8, 0.0625 * 8);
+
 	
 	public BlockCheeseBlock() {
 		super(Material.CAKE);
@@ -55,12 +62,38 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDING_BOX;
+		final TileEntityCheeseBlock te = getTileEntity(source, pos);
+		if (te != null)
+		{
+			int numSlices = te.getCheese().getSlices();
+			Orient orient = state.getValue(TYPE_ORIENT);
+			if( numSlices >= 4 )
+				return BOUNDING_BOX_FULL;
+			else if( numSlices >= 2 ) {
+/*				source = BOUNDING_BOX_HALF;
+				switch(orient) {
+				case NORTH:
+					return 
+				case SOUTH:
+				case WEST:
+				default:
+				case EAST:
+				} */
+				return BOUNDING_BOX_HALF;
+			}
+			else if( numSlices >= 1 )
+				// source = BOUNDING_BOX_4TH;
+				return BOUNDING_BOX_4TH;
+			else
+				return BOUNDING_BOX_FULL;
+		}
+    	
+        return BOUNDING_BOX_FULL;
     }
     
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
 
     @Override
@@ -107,8 +140,8 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	
 	protected Orient setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer) {
 		Orient facing = Orient.fromFacing(EnumFacing.fromAngle(placer.rotationYaw));
-		if( worldIn.isRemote )
-			return facing;
+//		if( worldIn.isRemote )
+//			return facing;
 
 		worldIn.setBlockState(pos, state.withProperty(TYPE_ORIENT, facing), BlockFlags.UPDATE_AND_SYNC);
 		return facing;
@@ -119,7 +152,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		return getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer);
 	}
 	*/
-	
+/*
 	protected void setPropertiesFromTileEntity(World worldIn, BlockPos pos, IBlockState state) {
 		if( worldIn.isRemote )
 			return;
@@ -135,13 +168,13 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 			worldIn.setBlockState(pos, state.withProperty(TYPE_SLICES_COUNT, numSlices), BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
-	
+	*/
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
 		super.onBlockAdded(worldIn, pos, state);
 		setDefaultDirection(worldIn, pos, state);
-		setPropertiesFromTileEntity(worldIn, pos, state);
+//		setPropertiesFromTileEntity(worldIn, pos, state);
 	}
 	
 	@Override
@@ -149,7 +182,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	{
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		setOrientWhenPlacing(worldIn, pos, state, placer);
-		setPropertiesFromTileEntity(worldIn, pos, state);
+//		setPropertiesFromTileEntity(worldIn, pos, state);
 	}
 
 	@Override
@@ -264,13 +297,19 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
 		int variantID = 0;
-		final TileEntityCheeseBlock teCheeseBlock = getTileEntity(worldIn, pos);
-		if (teCheeseBlock != null)
+		int numSlices = 3;
+		final TileEntityCheeseBlock te = getTileEntity(worldIn, pos);
+		if (te != null)
 		{
-			variantID = teCheeseBlock.getCheese().getType().getVariantID();
+			numSlices = te.getCheese().getSlices();
+			if( numSlices <= 0 ) {
+				GrowthcraftMilk.logger.warn("Attempted to set a cheese block actual state with slicescount=0. Bad cheese state?");
+				numSlices = 1;	// To avoid a crash
+			}
+			variantID = te.getCheese().getType().getVariantID();
 		}
 		
-        return state.withProperty(TYPE_CHEESE_VARIANT, variantID);
+        return state.withProperty(TYPE_CHEESE_VARIANT, variantID).withProperty(TYPE_SLICES_COUNT, numSlices);
     }
 	
 	public static enum Orient implements IStringSerializable {

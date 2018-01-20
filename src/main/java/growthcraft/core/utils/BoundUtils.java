@@ -1,5 +1,7 @@
 package growthcraft.core.utils;
 
+import net.minecraft.util.math.AxisAlignedBB;
+
 /**
  * Utility class for defining block bounds, cut from IceDragon200/YATM
  * This class has 2 styles of bounding boxes:
@@ -250,4 +252,19 @@ public class BoundUtils
 	{
 		return centeredCubeBounds(newBoundsArray(), w, d, h);
 	}
+	
+/*	public static AxisAlignedBB rotateBlockBounds(AxisAlignedBB source, int amountCW) {
+		amountCW %= 4;
+		if( amountCW == 0 )
+			return source;
+		if( amountCW == 1) {
+			return new AxisAlignedBB(source.minX, source.minY, source.minZ,
+					                 source.maxZ, source.maxY, source.maxX );
+		}
+		else if( amountCW == 1) {
+			return new AxisAlignedBB(source.minX, source.minY, source.minZ,
+	                                 source.maxZ, source.maxY, source.maxX );
+		}
+
+	} */
 }
