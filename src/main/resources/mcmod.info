@@ -42,6 +42,21 @@
   "dependencies": ["mod_MinecraftForge", "growthcraft"],
   "parent": "growthcraft"
 },
+{
+  "modid": "growthcraft_bees",
+  "name": "Growthcraft Bees",
+  "description": "Growthcraft Bees - ",
+  "version": "3.0.0.5",
+  "mcversion": "1.11.2",
+  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.11",
+  "updateUrl": "",
+  "authorList": ["Alatyami"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": ["mod_MinecraftForge", "growthcraft_cellar"],
+  "parent": "growthcraft"
+},
  {
    "modid": "growthcraft_grapes",
    "name": "Growthcraft Grapes",

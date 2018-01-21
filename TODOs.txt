@@ -9,6 +9,7 @@ To implement:
 -----------------
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
 TODO: Step sound of apple fences should be changed to wood.
+TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food types.
 
 -----------------
 Bugs:
@@ -42,7 +43,6 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
-DOING: Cheese block bounds adapting to slice count. Rotation Left.
 TODO: Cheese waxing.
 TODO: Cheese model items to be textured.
 TODO: Curds textures and models.
@@ -50,6 +50,7 @@ TODO: Butter churn having animation.
 TODO: Language files for Cellar.
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Cheese block bounds adapting to slice count. Rotation Left.
 DONE: Cheese textures and models. (textures are placeholders now)
 DONE: Step sounds
 DONE: Item model jsons for all cellar devices.
