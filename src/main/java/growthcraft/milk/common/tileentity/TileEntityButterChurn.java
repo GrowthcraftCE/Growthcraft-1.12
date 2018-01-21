@@ -12,7 +12,7 @@ import growthcraft.core.common.tileentity.event.TileEventHandler;
 import growthcraft.core.common.tileentity.feature.IAltItemHandler;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.api.MilkRegistry;
-import growthcraft.milk.api.processing.churn.ChurnRecipe;
+import growthcraft.milk.api.processing.churn.IChurnRecipe;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -118,12 +118,12 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 		}
 	}
 
-	private ChurnRecipe getWorkingRecipe()
+	private IChurnRecipe getWorkingRecipe()
 	{
 		final FluidStack stack = inputFluidSlot.get();
 		if (stack != null)
 		{
-			final ChurnRecipe recipe = MilkRegistry.instance().churn().getRecipe(stack);
+			final IChurnRecipe recipe = MilkRegistry.instance().churn().getRecipe(stack);
 			return recipe;
 		}
 		return null;
@@ -132,7 +132,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	public WorkState doWork()
 	{
 		WorkState state = WorkState.NONE;
-		final ChurnRecipe recipe = getWorkingRecipe();
+		final IChurnRecipe recipe = getWorkingRecipe();
 		if (recipe != null)
 		{
 			state = WorkState.CHURN;

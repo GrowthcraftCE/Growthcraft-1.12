@@ -7,6 +7,7 @@ import growthcraft.core.api.schema.FluidStackSchema;
 import growthcraft.core.api.schema.ICommentable;
 import growthcraft.core.api.schema.ItemKeySchema;
 import growthcraft.milk.api.processing.churn.ChurnRecipe;
+import growthcraft.milk.api.processing.churn.IChurnRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -46,9 +47,9 @@ public class UserChurnRecipe implements ICommentable
 		return comment;
 	}
 
-	public List<ChurnRecipe> toChurnRecipes()
+	public List<IChurnRecipe> toChurnRecipes()
 	{
-		final List<ChurnRecipe> recipes = new ArrayList<ChurnRecipe>();
+		final List<IChurnRecipe> recipes = new ArrayList<IChurnRecipe>();
 		final FluidStack inputFluidStack = input_fluid.asFluidStack();
 		final FluidStack outputFluidStack = output_fluid != null ? output_fluid.asFluidStack() : null;
 

@@ -83,7 +83,7 @@ public class GrowthcraftMilkRecipes {
 			ICheeseBlockStackFactory blockFactory = type.getCheeseBlocks();
 			ICheeseCurdStackFactory curdsFactory = type.getCurdBlocks();
 			if(blockFactory != null && curdsFactory != null) {
-				MilkRegistry.instance().cheesePress().addRecipe(new DriedCurdsCheesePressRecipe(type.asCurdItemStack(), type.asBlockItemStack(), 200));
+				MilkRegistry.instance().cheesePress().addRecipe(new DriedCurdsCheesePressRecipe(curdsFactory.asStack(), blockFactory.asStackForStage(4, blockFactory.getInitialStage()), 200));
 			}
 		}
 	}

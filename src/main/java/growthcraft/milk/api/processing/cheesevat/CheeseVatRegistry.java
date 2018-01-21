@@ -17,9 +17,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class CheeseVatRegistry
 {
-	private List<CheeseVatRecipe> recipes = new ArrayList<CheeseVatRecipe>();
+	private List<ICheeseVatRecipe> recipes = new ArrayList<ICheeseVatRecipe>();
 
-	public void addRecipe(CheeseVatRecipe recipe)
+	public void addRecipe(ICheeseVatRecipe recipe)
 	{
 		recipes.add(recipe);
 		GrowthcraftMilk.logger.debug("Added Cheese Vat recipe {%s}", recipe);
@@ -34,7 +34,7 @@ public class CheeseVatRegistry
 	public boolean isFluidIngredient(@Nullable Fluid fluid)
 	{
 		if (!FluidTest.isValid(fluid)) return false;
-		for (CheeseVatRecipe recipe : recipes)
+		for (ICheeseVatRecipe recipe : recipes)
 		{
 			if (recipe.isFluidIngredient(fluid)) return true;
 		}
@@ -44,7 +44,7 @@ public class CheeseVatRegistry
 	public boolean isFluidIngredient(@Nullable FluidStack fluid)
 	{
 		if (!FluidTest.isValid(fluid)) return false;
-		for (CheeseVatRecipe recipe : recipes)
+		for (ICheeseVatRecipe recipe : recipes)
 		{
 			if (recipe.isFluidIngredient(fluid)) return true;
 		}
@@ -54,7 +54,7 @@ public class CheeseVatRegistry
 	public boolean isItemIngredient(@Nullable ItemStack item)
 	{
 		if (!ItemTest.isValid(item)) return false;
-		for (CheeseVatRecipe recipe : recipes)
+		for (ICheeseVatRecipe recipe : recipes)
 		{
 			if (recipe.isItemIngredient(item)) return true;
 		}
@@ -62,9 +62,9 @@ public class CheeseVatRegistry
 	}
 
 	@Nullable
-	public CheeseVatRecipe findRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> stacks)
+	public ICheeseVatRecipe findRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> stacks)
 	{
-		for (CheeseVatRecipe recipe : recipes)
+		for (ICheeseVatRecipe recipe : recipes)
 		{
 			if (recipe.isMatchingRecipe(fluids, stacks))
 			{

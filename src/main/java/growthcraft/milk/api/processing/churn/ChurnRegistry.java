@@ -17,10 +17,10 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class ChurnRegistry
 {
-	private Map<Fluid, ChurnRecipe> recipes = new HashMap<Fluid, ChurnRecipe>();
+	private Map<Fluid, IChurnRecipe> recipes = new HashMap<Fluid, IChurnRecipe>();
 	private Set<FluidKey> fluidIngredients = new HashSet<FluidKey>();
 
-	public void addRecipe(@Nonnull ChurnRecipe recipe)
+	public void addRecipe(@Nonnull IChurnRecipe recipe)
 	{
 		final FluidStack fluidStack = recipe.getInputFluidStack();
 		final Fluid fluid = fluidStack.getFluid();
@@ -68,12 +68,12 @@ public class ChurnRegistry
 	}
 
 	@Nullable
-	public ChurnRecipe getRecipe(FluidStack stack)
+	public IChurnRecipe getRecipe(FluidStack stack)
 	{
 		if (stack == null) return null;
 		final Fluid fluid = stack.getFluid();
 		if (fluid == null) return null;
-		final ChurnRecipe recipe = recipes.get(fluid);
+		final IChurnRecipe recipe = recipes.get(fluid);
 		if (recipe != null)
 		{
 			if (recipe.isValidForRecipe(stack)) return recipe;

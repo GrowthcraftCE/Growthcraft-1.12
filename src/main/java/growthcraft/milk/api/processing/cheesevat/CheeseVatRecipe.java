@@ -13,7 +13,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public class CheeseVatRecipe
+public class CheeseVatRecipe implements ICheeseVatRecipe
 {
 	private List<FluidStack> outputFluids;
 	private List<ItemStack> outputItems;
@@ -28,26 +28,31 @@ public class CheeseVatRecipe
 		this.inputItems = pInputItems;
 	}
 
+	@Override
 	public List<FluidStack> getOutputFluidStacks()
 	{
 		return outputFluids;
 	}
 
+	@Override
 	public List<ItemStack> getOutputItemStacks()
 	{
 		return outputItems;
 	}
 
+	@Override
 	public List<IMultiFluidStacks> getInputFluidStacks()
 	{
 		return inputFluids;
 	}
 
+	@Override
 	public List<IMultiItemStacks> getInputItemStacks()
 	{
 		return inputItems;
 	}
 
+	@Override
 	public boolean isMatchingRecipe(@Nonnull List<FluidStack> fluids, @Nonnull List<ItemStack> items)
 	{
 		if (!FluidTest.isValidAndExpected(inputFluids, fluids)) return false;
@@ -55,6 +60,7 @@ public class CheeseVatRecipe
 		return true;
 	}
 
+	@Override
 	public boolean isFluidIngredient(@Nullable Fluid fluid)
 	{
 		for (IMultiFluidStacks stack : inputFluids)
@@ -64,6 +70,7 @@ public class CheeseVatRecipe
 		return false;
 	}
 
+	@Override
 	public boolean isFluidIngredient(@Nullable FluidStack fluidStack)
 	{
 		for (IMultiFluidStacks stack : inputFluids)
@@ -73,6 +80,7 @@ public class CheeseVatRecipe
 		return false;
 	}
 
+	@Override
 	public boolean isItemIngredient(@Nullable ItemStack itemStack)
 	{
 		for (IMultiItemStacks item : inputItems)

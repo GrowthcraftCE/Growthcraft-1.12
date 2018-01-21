@@ -8,6 +8,7 @@ import growthcraft.core.api.user.AbstractUserJSONConfig;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.api.MilkRegistry;
 import growthcraft.milk.api.processing.churn.ChurnRecipe;
+import growthcraft.milk.api.processing.churn.IChurnRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -62,7 +63,7 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig
 			return;
 		}
 
-		for (ChurnRecipe churnRecipe : recipe.toChurnRecipes())
+		for (IChurnRecipe churnRecipe : recipe.toChurnRecipes())
 		{
 			GrowthcraftMilk.logger.debug("Adding user churn recipe {%s}", churnRecipe);
 			MilkRegistry.instance().churn().addRecipe(churnRecipe);

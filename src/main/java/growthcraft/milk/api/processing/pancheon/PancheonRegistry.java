@@ -12,9 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PancheonRegistry
 {
-	private Map<Fluid, PancheonRecipe> recipes = new HashMap<Fluid, PancheonRecipe>();
+	private Map<Fluid, IPancheonRecipe> recipes = new HashMap<Fluid, IPancheonRecipe>();
 
-	public void addRecipe(@Nonnull PancheonRecipe recipe)
+	public void addRecipe(@Nonnull IPancheonRecipe recipe)
 	{
 		final Fluid fluid = recipe.getInputFluid().getFluid();
 		if (recipes.containsKey(fluid))
@@ -41,12 +41,12 @@ public class PancheonRegistry
 	}
 
 	@Nullable
-	public PancheonRecipe getRecipe(FluidStack stack)
+	public IPancheonRecipe getRecipe(FluidStack stack)
 	{
 		if (stack == null) return null;
 		final Fluid fluid = stack.getFluid();
 		if (fluid == null) return null;
-		final PancheonRecipe recipe = recipes.get(fluid);
+		final IPancheonRecipe recipe = recipes.get(fluid);
 		if (recipe != null)
 		{
 			if (recipe.isValidForRecipe(stack)) return recipe;

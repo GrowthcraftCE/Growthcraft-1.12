@@ -29,7 +29,7 @@ import growthcraft.milk.GrowthcraftMilkConfig;
 import growthcraft.milk.api.MilkFluidTags;
 import growthcraft.milk.api.MilkRegistry;
 import growthcraft.milk.api.definition.ICheeseType;
-import growthcraft.milk.api.processing.cheesevat.CheeseVatRecipe;
+import growthcraft.milk.api.processing.cheesevat.ICheeseVatRecipe;
 import growthcraft.milk.common.tileentity.cheesevat.CheeseVatState;
 import growthcraft.milk.init.GrowthcraftMilkFluids;
 import growthcraft.milk.init.GrowthcraftMilkItems;
@@ -309,7 +309,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 			items.add(stack);
 		}
 
-		final CheeseVatRecipe recipe = MilkRegistry.instance().cheeseVat().findRecipe(fluids, items);
+		final ICheeseVatRecipe recipe = MilkRegistry.instance().cheeseVat().findRecipe(fluids, items);
 		if (recipe != null)
 		{
 			final List<IMultiItemStacks> inputItems = recipe.getInputItemStacks();
