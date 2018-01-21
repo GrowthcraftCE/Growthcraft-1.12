@@ -194,7 +194,7 @@ public class EnumHandler {
 			return new ICheeseCurdStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return GrowthcraftMilkBlocks.waxedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, 0, EnumCheeseStage.UNAGED));
+					return GrowthcraftMilkBlocks.waxedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
 				}
 			};
 		}
@@ -274,7 +274,7 @@ public class EnumHandler {
 			return new ICheeseCurdStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return GrowthcraftMilkBlocks.simpleCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(SimpleCheeseTypes.this, 0, EnumCheeseStage.UNAGED));
+					return GrowthcraftMilkBlocks.simpleCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(SimpleCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
 				}
 			};
 		}
@@ -368,7 +368,7 @@ public class EnumHandler {
 			return new ICheeseCurdStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return GrowthcraftMilkBlocks.agedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, 0, EnumCheeseStage.UNAGED));
+					return GrowthcraftMilkBlocks.agedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
 				}
 			};
 		}

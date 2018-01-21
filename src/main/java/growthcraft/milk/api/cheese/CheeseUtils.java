@@ -1,6 +1,7 @@
 package growthcraft.milk.api.cheese;
 
 import growthcraft.core.api.definition.IObjectVariant;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.api.definition.EnumCheeseStage;
 
 public class CheeseUtils {
@@ -10,6 +11,10 @@ public class CheeseUtils {
 		// The rest is for the variant.
 		if( slices > 4 )
 			throw new IllegalArgumentException("Maximal 4 slices are supported.");
+		if( slices <= 0 ) {
+			slices = 1;
+			GrowthcraftMilk.logger.warn("Cheese item meta for invalid count of 0 slices requested.");
+		}
 		if( atStage.ordinal() > 7 )
 			throw new IllegalArgumentException("Maximal 8 stages are supported.");
 		return (cheese.getVariantID() << 5) | ((slices-1) << 3) | atStage.ordinal();

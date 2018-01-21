@@ -91,19 +91,22 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 			cheeseCurd.update();
 			if (wheyPulsar.update() == PulseStepper.State.PULSE)
 			{
-				final IPancheonTile pancheonTile = getPancheonTile();
-				// When a pancheon is present, try filling it with Whey
-				if (pancheonTile != null)
+				if( !isDried() ) 
 				{
-					final FluidStack stack = GrowthcraftMilkFluids.whey.asFluidStack(100);
-					if (pancheonTile.canFill(EnumFacing.UP, stack.getFluid()))
+					final IPancheonTile pancheonTile = getPancheonTile();
+					// When a pancheon is present, try filling it with Whey
+					if (pancheonTile != null)
 					{
-						pancheonTile.fill(EnumFacing.UP, stack, true);
+						final FluidStack stack = GrowthcraftMilkFluids.whey.asFluidStack(100);
+						if (pancheonTile.canFill(EnumFacing.UP, stack.getFluid()))
+						{
+							pancheonTile.fill(EnumFacing.UP, stack, true);
+						}
 					}
+					// regardless of a pancheon being present, the curd SHOULD drip
+					serverStep++;
+					markDirtyAndUpdate();
 				}
-				// regardless of a pancheon being present, the curd SHOULD drip
-				serverStep++;
-				markDirtyAndUpdate();
 			}
 		}
 		else
@@ -116,11 +119,13 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 
 			if (animPulsar.update() == PulseStepper.State.PULSE)
 			{
-				final Pair<Double, Double> p = sprand.nextCenteredD2();
-				final double px = (double)pos.getX() + 0.5 + p.left * 0.5;
-				final double py = (double)pos.getY();
-				final double pz = (double)pos.getZ() + 0.5 + p.right * 0.5;
-				FXHelper.dropParticle(world, px, py, pz, GrowthcraftMilkFluids.whey.getItemColor());
+				if( !isDried() ) {
+					final Pair<Double, Double> p = sprand.nextCenteredD2();
+					final double px = (double)pos.getX() + 0.5 + p.left * 0.5;
+					final double py = (double)pos.getY();
+					final double pz = (double)pos.getZ() + 0.5 + p.right * 0.5;
+					FXHelper.dropParticle(world, px, py, pz, GrowthcraftMilkFluids.whey.getItemColor());
+				}
 			}
 		}
 	}

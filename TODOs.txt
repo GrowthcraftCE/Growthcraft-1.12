@@ -34,9 +34,9 @@ TODO: INVESTIGATED: ShouldRefresh = false for all device tile entities. Sometime
 Improvements:
 -----------------
 TODO: Heat blocks to react on meta and supporting neighborChanged events for tiles. For heat blocks which can be turned on/off.
-TODO: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
 TODO: Only accepted items are consumed, thrown into brewing kettle 
 TODO: isItemValid for culture jar and fermenting barrel containers
+DONE: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
 DONE: Fruit Press fluid render.
 DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
 

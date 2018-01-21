@@ -1,4 +1,4 @@
-package growthcraft.milk.common.recipes;
+package growthcraft.milk.common.processing;
 
 import javax.annotation.Nonnull;
 

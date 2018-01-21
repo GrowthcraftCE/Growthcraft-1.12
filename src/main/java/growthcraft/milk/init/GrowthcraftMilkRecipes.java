@@ -7,7 +7,8 @@ import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
 import growthcraft.milk.api.definition.ICheeseCurdStackFactory;
 import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.api.utils.CheeseVatRecipeBuilder;
-import growthcraft.milk.common.recipes.DriedCurdsCheesePressRecipe;
+import growthcraft.milk.common.processing.DriedCurdsCheesePressRecipe;
+import growthcraft.milk.handlers.EnumHandler;
 import growthcraft.milk.handlers.EnumHandler.AgedCheeseTypes;
 import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
 import net.minecraft.init.Blocks;
@@ -90,12 +91,14 @@ public class GrowthcraftMilkRecipes {
 	
 	private static void registerCheesePressRecipes()
 	{
-
+		registerCheesePressRecipesFor(AgedCheeseTypes.class);
+		registerCheesePressRecipesFor(WaxedCheeseTypes.class);
 	}
 
 	
 	public static void init() {
 		registerCheeseVatRecipes();
+		registerCheesePressRecipes();
 	}
 	
 }
