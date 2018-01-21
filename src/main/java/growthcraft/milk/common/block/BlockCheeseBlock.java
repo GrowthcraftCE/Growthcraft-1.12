@@ -9,13 +9,12 @@ import javax.annotation.Nullable;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.utils.BlockUtils;
+import growthcraft.core.utils.BoundUtils;
 import growthcraft.core.utils.ItemUtils;
-import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -25,7 +24,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -67,25 +65,16 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		{
 			int numSlices = te.getCheese().getSlices();
 			Orient orient = state.getValue(TYPE_ORIENT);
-			if( numSlices >= 4 )
+			AxisAlignedBB bounds;
+			if( numSlices >= 3 )
 				return BOUNDING_BOX_FULL;
 			else if( numSlices >= 2 ) {
-/*				source = BOUNDING_BOX_HALF;
-				switch(orient) {
-				case NORTH:
-					return 
-				case SOUTH:
-				case WEST:
-				default:
-				case EAST:
-				} */
-				return BOUNDING_BOX_HALF;
+				bounds = BOUNDING_BOX_HALF;
 			}
-			else if( numSlices >= 1 )
-				// source = BOUNDING_BOX_4TH;
-				return BOUNDING_BOX_4TH;
 			else
-				return BOUNDING_BOX_FULL;
+				bounds = BOUNDING_BOX_4TH;
+			
+			return BoundUtils.rotateBlockBounds(bounds, orient.rotationCW);			
 		}
     	
         return BOUNDING_BOX_FULL;
@@ -278,10 +267,16 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
     }
 	
 	public static enum Orient implements IStringSerializable {
-		NORTH,
-		SOUTH,
-		WEST,
-		EAST;
+		NORTH(1),
+		SOUTH(3),
+		WEST(2),
+		EAST(0);
+		
+		public final int rotationCW;
+		
+		Orient(int rotationCW) {
+			this.rotationCW = rotationCW;
+		}
 		
 		public static Orient fromFacing(EnumFacing facing) {
 			switch( facing ) {

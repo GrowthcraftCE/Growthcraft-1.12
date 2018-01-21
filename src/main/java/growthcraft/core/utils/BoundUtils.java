@@ -239,6 +239,36 @@ public class BoundUtils
 		final double z = (1 - h) / 2;
 		return cubeToBounds(target, x, y, z, w, d, h);
 	}
+	
+	/**
+	 * Creates a (axis aligned) Cuboid spanning on all given points.
+	 * 
+	 * @param points - 3d points
+	 * @return the Cuboid
+	 */
+	public static double[] newCubeFromPoints(double[] ... points) {
+		final double[] result = newBoundsArray();
+		result[0] = Double.MAX_VALUE;
+		result[1] = Double.MAX_VALUE;
+		result[2] = Double.MAX_VALUE;
+		result[3] = -Double.MIN_VALUE;
+		result[4] = -Double.MIN_VALUE;
+		result[5] = -Double.MIN_VALUE;
+		for( int i = 0; i < points.length; i ++)
+			mutableExpandCubeByPoints(result, points[i]);
+		
+		return result;
+	}
+	
+	private static void mutableExpandCubeByPoints(double[] result, double[] point) {
+		for( int i = 0; i < 3; i ++ ) {
+			if( result[i] > point[i] )
+				result[i] = point[i];
+			if( result[i+3] < point[i] )
+				result[i+3] = point[i];
+		}
+	}
+
 
 	/**
 	 * Creates a new Cuboid bounding box, centered
@@ -252,19 +282,68 @@ public class BoundUtils
 	{
 		return centeredCubeBounds(newBoundsArray(), w, d, h);
 	}
-	
-/*	public static AxisAlignedBB rotateBlockBounds(AxisAlignedBB source, int amountCW) {
-		amountCW %= 4;
-		if( amountCW == 0 )
-			return source;
-		if( amountCW == 1) {
-			return new AxisAlignedBB(source.minX, source.minY, source.minZ,
-					                 source.maxZ, source.maxY, source.maxX );
-		}
-		else if( amountCW == 1) {
-			return new AxisAlignedBB(source.minX, source.minY, source.minZ,
-	                                 source.maxZ, source.maxY, source.maxX );
-		}
 
-	} */
+	/**
+	 * Rotates a bounding box clock-wise around the center point (8,8,8)
+	 * 
+	 * @param source
+	 * @param amountCW
+	 * @return
+	 */
+	public static AxisAlignedBB rotateBlockBounds(AxisAlignedBB source, int amountCW) {
+		amountCW %= 4;
+		if( amountCW == 0)
+			return source;	// Nothing to do
+		double[] p1 = new double[] {source.minX, source.minY, source.minZ};
+		double[] p2 = new double[] {source.maxX, source.maxY, source.maxZ};
+		p1 = rotatePointInBlockHor(p1, amountCW);
+		p2 = rotatePointInBlockHor(p2, amountCW);
+		return toAxisAlignedBB(newCubeFromPoints(p1, p2));
+	}
+	
+	private static double[] rotatePointInBlockHor(double[] point, int amountCW) {
+		amountCW %= 4;
+		if( amountCW < 0 )
+			amountCW = 4 - amountCW;
+		
+		double newPoint[] = new double[] {point[0], point[1], point[2]};
+		switch(amountCW) {
+		case 1:
+			newPoint[0] = point[2];
+			newPoint[2] = 1-point[0];
+			break;
+		case 2:
+			newPoint[0] = 1-point[0];
+			newPoint[2] = 1-point[2];
+			break;
+		case 3:
+			newPoint[0] = 1-point[2];
+			newPoint[2] = point[0];
+			break;
+		default:
+		case 0:
+			break;
+		}
+		return newPoint;
+	}
+	
+	/**
+	 * Converts a BBox object to an AxisAlignedBB object.
+	 * 
+	 * @param box the BBox to convert
+	 * @return the AxisAlignedBB representation
+	 */
+	public static AxisAlignedBB toAxisAlignedBB(BBox box) {
+		return box.toAxisAlignedBB();
+	}
+	
+	/**
+	 * Converts an array representation to an AxisAlignedBB object.
+	 * 
+	 * @param box the array representation
+	 * @return the AxisAlignedBB representation
+	 */
+	public static AxisAlignedBB toAxisAlignedBB(double[] box) {
+		return new AxisAlignedBB(box[0], box[1], box[2], box[3], box[4], box[5]);
+	}
 }
