@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_bees:items/bees_wax_black"
+  }
+}

@@ -24,31 +24,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extends ItemBlockCheeseBase<T> implements IItemTileBlock
 {
-//	private final T[] typeLookup;
-	
 	public ItemBlockCheeseBlock(Block block, T[] typeLookup)
 	{
 		super(block, typeLookup);
 		this.maxStackSize = 1;
-//		this.typeLookup = typeLookup;
 	}
-/*	
-	@SuppressWarnings("unchecked")
-	private T getTypeForVariantID(int variantID) {
-		// Maybe the types are ordered in table by ID s beginning with 0 and incrementing by 1
-		if( variantID >= 0 && variantID < typeLookup.length && typeLookup[variantID].getVariantID() ==  variantID )
-			return typeLookup[variantID];
-		
-		// Need to search ...
-		for( T type : typeLookup ) {
-			if( type.getVariantID() == variantID )
-				return type;
-		}
-		
-		// Otherwise return a fallback case cheese
-		return (T)EnumHandler.WaxedCheeseTypes.CHEDDAR;
-	}
-*/
+
 	private NBTTagCompound getTileTagCompoundABS(ItemStack stack)
 	{
 		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
@@ -141,7 +122,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
     {
     	for( T type : getAllVariants() ) {
     		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
-    		ItemStack stack = blockStackFactory.asStackForStage(4, EnumCheeseStage.AGED /*blockStackFactory.getInitialStage()*/);
+    		ItemStack stack = blockStackFactory.asStackForStage(4, blockStackFactory.getInitialStage());
     		subItems.add(stack);
     	}
     }
