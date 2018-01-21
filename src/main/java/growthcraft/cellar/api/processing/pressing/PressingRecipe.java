@@ -10,7 +10,7 @@ import growthcraft.core.api.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class PressingRecipe extends ProcessingRecipe
+public class PressingRecipe extends ProcessingRecipe implements IPressingRecipe
 {
 	private IMultiItemStacks inputItemStack;
 
@@ -20,11 +20,13 @@ public class PressingRecipe extends ProcessingRecipe
 		this.inputItemStack = src;
 	}
 
+	@Override
 	public IMultiItemStacks getInput()
 	{
 		return inputItemStack;
 	}
 
+	@Override
 	public boolean matchesRecipe(@Nullable ItemStack itemStack)
 	{
 		if (itemStack != null)

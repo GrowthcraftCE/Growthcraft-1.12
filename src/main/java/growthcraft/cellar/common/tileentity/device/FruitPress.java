@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.cellar.api.processing.common.Residue;
-import growthcraft.cellar.api.processing.pressing.PressingRecipe;
+import growthcraft.cellar.api.processing.pressing.IPressingRecipe;
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
@@ -20,7 +20,7 @@ public class FruitPress extends DeviceProgressive
 	private DeviceFluidSlot fluidSlot;
 	private DeviceInventorySlot inputSlot;
 	private DeviceInventorySlot residueSlot;
-	private PressingRecipe currentResult;
+	private IPressingRecipe currentResult;
 
 	/**
 	 * @param te - parent tile
@@ -54,7 +54,7 @@ public class FruitPress extends DeviceProgressive
 
 		if (fluidSlot.isFull()) return false;
 
-		final PressingRecipe result = CellarRegistry.instance().pressing().getPressingRecipe(primarySlotItem);
+		final IPressingRecipe result = CellarRegistry.instance().pressing().getPressingRecipe(primarySlotItem);
 		if (result == null) return false;
 		if (!inputSlot.hasEnough(result.getInput())) return false;
 		this.currentResult = result;

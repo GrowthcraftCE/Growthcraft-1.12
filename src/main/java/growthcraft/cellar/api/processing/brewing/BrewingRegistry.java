@@ -14,9 +14,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingRegistry
 {
-	private List<BrewingRecipe> recipes = new ArrayList<BrewingRecipe>();
+	private List<IBrewingRecipe> recipes = new ArrayList<IBrewingRecipe>();
 
-	public void addRecipe(@Nonnull BrewingRecipe recipe)
+	public void addRecipe(@Nonnull IBrewingRecipe recipe)
 	{
 		recipes.add(recipe);
 		GrowthcraftCellar.logger.debug("Added Brewing Recipe recipe={%s}", recipe);
@@ -27,23 +27,23 @@ public class BrewingRegistry
 		addRecipe(new BrewingRecipe(sourceFluid, MultiStacksUtil.toMultiItemStacks(raw), resultFluid, time, residue));
 	}
 
-	public BrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
+	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
-		for (BrewingRecipe recipe : recipes)
+		for (IBrewingRecipe recipe : recipes)
 		{
 			if (recipe.matchesRecipe(fluidstack, itemstack)) return recipe;
 		}
 		return null;
 	}
 
-	public List<BrewingRecipe> findRecipes(@Nullable FluidStack fluid)
+	public List<IBrewingRecipe> findRecipes(@Nullable FluidStack fluid)
 	{
-		final List<BrewingRecipe> result = new ArrayList<BrewingRecipe>();
+		final List<IBrewingRecipe> result = new ArrayList<IBrewingRecipe>();
 		if (fluid != null)
 		{
-			for (BrewingRecipe recipe : recipes)
+			for (IBrewingRecipe recipe : recipes)
 			{
 				if (recipe.matchesIngredient(fluid))
 					result.add(recipe);
@@ -52,12 +52,12 @@ public class BrewingRegistry
 		return result;
 	}
 
-	public List<BrewingRecipe> findRecipes(@Nullable ItemStack fermenter)
+	public List<IBrewingRecipe> findRecipes(@Nullable ItemStack fermenter)
 	{
-		final List<BrewingRecipe> result = new ArrayList<BrewingRecipe>();
+		final List<IBrewingRecipe> result = new ArrayList<IBrewingRecipe>();
 		if (fermenter != null)
 		{
-			for (BrewingRecipe recipe : recipes)
+			for (IBrewingRecipe recipe : recipes)
 			{
 				if (recipe.matchesIngredient(fermenter))
 					result.add(recipe);
@@ -75,7 +75,7 @@ public class BrewingRegistry
 	{
 		if (itemstack == null) return false;
 
-		for (BrewingRecipe recipe : recipes)
+		for (IBrewingRecipe recipe : recipes)
 		{
 			if (recipe.isItemIngredient(itemstack)) return true;
 		}

@@ -11,7 +11,7 @@ import growthcraft.core.api.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BrewingRecipe extends ProcessingRecipe {
+public class BrewingRecipe extends ProcessingRecipe implements IBrewingRecipe {
 	private IMultiItemStacks inputItemStack;
 	private FluidStack inputFluidStack;
 
@@ -22,14 +22,17 @@ public class BrewingRecipe extends ProcessingRecipe {
 		this.inputFluidStack = pInputFluid;
 	}
 
+	@Override
 	public IMultiItemStacks getInputItemStack() {
 		return inputItemStack;
 	}
 
+	@Override
 	public FluidStack getInputFluidStack() {
 		return inputFluidStack;
 	}
 
+	@Override
 	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack) {
 		if (fluidStack != null && itemStack != null) {
 			if (!FluidTest.hasEnough(inputFluidStack, fluidStack))
@@ -41,14 +44,17 @@ public class BrewingRecipe extends ProcessingRecipe {
 		return false;
 	}
 
+	@Override
 	public boolean matchesIngredient(@Nullable FluidStack fluidStack) {
 		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
 	}
 
+	@Override
 	public boolean matchesIngredient(@Nullable ItemStack stack) {
 		return ItemTest.itemMatches(inputItemStack, stack);
 	}
 
+	@Override
 	public boolean isItemIngredient(@Nullable ItemStack stack) {
 		if (stack != null) {
 			if (inputItemStack.containsItemStack(stack))

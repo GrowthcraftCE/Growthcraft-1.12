@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import growthcraft.cellar.GrowthcraftCellarConfig;
 import growthcraft.cellar.api.CellarRegistry;
-import growthcraft.cellar.api.processing.fermenting.FermentationRecipe;
+import growthcraft.cellar.api.processing.fermenting.IFermentationRecipe;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.core.api.definition.IMultiItemStacks;
 import growthcraft.core.api.fluids.FluidTest;
@@ -60,7 +60,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	private boolean shouldUseCachedRecipe = GrowthcraftCellarConfig.fermentBarrelUseCachedRecipe;
 	private boolean recheckRecipe = true;
 	private boolean lidOn = true;
-	private FermentationRecipe activeRecipe;
+	private IFermentationRecipe activeRecipe;
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -110,14 +110,14 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		return false;
 	}
 
-	private FermentationRecipe loadRecipe()
+	private IFermentationRecipe loadRecipe()
 	{
 		return CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
 	}
 
-	private FermentationRecipe refreshRecipe()
+	private IFermentationRecipe refreshRecipe()
 	{
-		final FermentationRecipe recipe = loadRecipe();
+		final IFermentationRecipe recipe = loadRecipe();
 		if (recipe != null && recipe != activeRecipe)
 		{
 			if (activeRecipe != null)
@@ -139,7 +139,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		return activeRecipe;
 	}
 
-	private FermentationRecipe getWorkingRecipe()
+	private IFermentationRecipe getWorkingRecipe()
 	{
 		if (shouldUseCachedRecipe)
 		{
@@ -160,7 +160,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		// clients will have their timemax synced from the server in the gui
 		if (!world.isRemote)
 		{
-			final FermentationRecipe result = getWorkingRecipe();
+			final IFermentationRecipe result = getWorkingRecipe();
 			if (result != null)
 			{
 				return result.getTime();
@@ -181,7 +181,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		final ItemStack fermentItem = getStackInSlot(0);
 		if (fermentItem != null)
 		{
-			final FermentationRecipe recipe = getWorkingRecipe();
+			final IFermentationRecipe recipe = getWorkingRecipe();
 			if (recipe != null)
 			{
 				final FluidStack outputFluidStack = recipe.getOutputFluidStack();

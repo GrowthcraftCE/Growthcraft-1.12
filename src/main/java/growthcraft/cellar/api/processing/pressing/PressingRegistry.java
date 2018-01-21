@@ -14,9 +14,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class PressingRegistry
 {
-	private List<PressingRecipe> recipes = new ArrayList<PressingRecipe>();
+	private List<IPressingRecipe> recipes = new ArrayList<IPressingRecipe>();
 
-	public void addRecipe(@Nonnull PressingRecipe recipe)
+	public void addRecipe(@Nonnull IPressingRecipe recipe)
 	{
 		recipes.add(recipe);
 		GrowthcraftCellar.logger.debug("Added new Pressing Recipe recipe={%s}", recipe);
@@ -27,11 +27,11 @@ public class PressingRegistry
 		addRecipe(new PressingRecipe(MultiStacksUtil.toMultiItemStacks(inputStack), resultFluid, time, residue));
 	}
 
-	public PressingRecipe getPressingRecipe(ItemStack itemstack)
+	public IPressingRecipe getPressingRecipe(ItemStack itemstack)
 	{
 		if (itemstack == null) return null;
 
-		for (PressingRecipe recipe : recipes)
+		for (IPressingRecipe recipe : recipes)
 		{
 			if (recipe.matchesRecipe(itemstack)) return recipe;
 		}

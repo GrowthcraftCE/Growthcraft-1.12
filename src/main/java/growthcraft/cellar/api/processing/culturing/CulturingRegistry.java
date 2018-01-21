@@ -12,9 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class CulturingRegistry
 {
-	private List<CultureRecipe> recipes = new ArrayList<CultureRecipe>();
+	private List<ICultureRecipe> recipes = new ArrayList<ICultureRecipe>();
 
-	public void addRecipe(@Nonnull CultureRecipe recipe)
+	public void addRecipe(@Nonnull ICultureRecipe recipe)
 	{
 		recipes.add(recipe);
 		GrowthcraftCellar.logger.debug("Adding new Culturing Recipe, {%s}.", recipe);
@@ -25,9 +25,9 @@ public class CulturingRegistry
 		addRecipe(new CultureRecipe(fluidStack, itemStack, requiredHeat, time));
 	}
 
-	public CultureRecipe findRecipe(@Nullable FluidStack fluid, float heat)
+	public ICultureRecipe findRecipe(@Nullable FluidStack fluid, float heat)
 	{
-		for (CultureRecipe recipe : recipes)
+		for (ICultureRecipe recipe : recipes)
 		{
 			if (recipe.matchesRecipe(fluid, heat)) return recipe;
 		}

@@ -10,7 +10,7 @@ import growthcraft.core.api.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FermentationRecipe
+public class FermentationRecipe implements IFermentationRecipe
 {
 	private final IMultiItemStacks fermentingItem;
 	private final IMultiFluidStacks inputFluidStack;
@@ -25,26 +25,31 @@ public class FermentationRecipe
 		this.time = pTime;
 	}
 
+	@Override
 	public IMultiFluidStacks getInputFluidStack()
 	{
 		return inputFluidStack;
 	}
 
+	@Override
 	public FluidStack getOutputFluidStack()
 	{
 		return outputFluidStack;
 	}
 
+	@Override
 	public IMultiItemStacks getFermentingItemStack()
 	{
 		return fermentingItem;
 	}
 
+	@Override
 	public int getTime()
 	{
 		return time;
 	}
 
+	@Override
 	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack)
 	{
 		if (FluidTest.isValid(fluidStack) && ItemTest.isValid(itemStack))
@@ -57,11 +62,13 @@ public class FermentationRecipe
 		return false;
 	}
 
+	@Override
 	public boolean matchesIngredient(@Nullable FluidStack fluidStack)
 	{
 		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
 	}
 
+	@Override
 	public boolean matchesIngredient(@Nullable ItemStack stack)
 	{
 		return ItemTest.itemMatches(fermentingItem, stack);

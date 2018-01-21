@@ -7,7 +7,7 @@ import growthcraft.core.api.fluids.FluidTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class CultureRecipe
+public class CultureRecipe implements ICultureRecipe
 {
 	private FluidStack inputFluidStack;
 	private ItemStack outputItemStack;
@@ -22,26 +22,31 @@ public class CultureRecipe
 		this.time = pTime;
 	}
 
+	@Override
 	public ItemStack getOutputItemStack()
 	{
 		return outputItemStack;
 	}
 
+	@Override
 	public FluidStack getInputFluidStack()
 	{
 		return inputFluidStack;
 	}
 
+	@Override
 	public float getRequiredHeat()
 	{
 		return requiredHeat;
 	}
 
+	@Override
 	public int getTime()
 	{
 		return time;
 	}
 
+	@Override
 	public boolean matchesRecipe(@Nullable FluidStack fluid, float heat)
 	{
 		if (FluidTest.hasEnough(inputFluidStack, fluid))

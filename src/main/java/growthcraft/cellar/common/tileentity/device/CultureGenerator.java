@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.api.CellarRegistry;
-import growthcraft.cellar.api.processing.culturing.CultureRecipe;
+import growthcraft.cellar.api.processing.culturing.ICultureRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
@@ -46,7 +46,7 @@ public class CultureGenerator extends DeviceProgressive
 		return heatComponent.isHeated();
 	}
 
-	private boolean isRecipeValid(CultureRecipe recipe)
+	private boolean isRecipeValid(ICultureRecipe recipe)
 	{
 		if (recipe != null)
 		{
@@ -58,7 +58,7 @@ public class CultureGenerator extends DeviceProgressive
 		return false;
 	}
 
-	private void produceCulture(CultureRecipe recipe)
+	private void produceCulture(ICultureRecipe recipe)
 	{
 		fluidSlot.consume(recipe.getInputFluidStack(), true);
 		invSlot.increaseStack(recipe.getOutputItemStack());
@@ -67,7 +67,7 @@ public class CultureGenerator extends DeviceProgressive
 	@Override
 	public void update()
 	{
-		final CultureRecipe activeRecipe = CellarRegistry.instance().culturing().findRecipe(fluidSlot.get(), heatComponent.getHeatMultiplier());
+		final ICultureRecipe activeRecipe = CellarRegistry.instance().culturing().findRecipe(fluidSlot.get(), heatComponent.getHeatMultiplier());
 
 		if (isRecipeValid(activeRecipe))
 		{

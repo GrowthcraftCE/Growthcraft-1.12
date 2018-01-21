@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.api.CellarRegistry;
-import growthcraft.cellar.api.processing.brewing.BrewingRecipe;
+import growthcraft.cellar.api.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.api.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
@@ -98,16 +98,16 @@ public class BrewKettle extends DeviceBase
 		return getHeatMultiplier() > 0;
 	}
 
-	private BrewingRecipe findRecipe()
+	private IBrewingRecipe findRecipe()
 	{
 		return CellarRegistry.instance().brewing().findRecipe(inputFluidSlot.get(), brewingSlot.get());
 	}
 
-	public BrewingRecipe getWorkingRecipe()
+	public IBrewingRecipe getWorkingRecipe()
 	{
 		if (!isHeated()) return null;
 
-		final BrewingRecipe recipe = findRecipe();
+		final IBrewingRecipe recipe = findRecipe();
 		if (recipe == null) return null;
 
 		final IMultiItemStacks expected = recipe.getInputItemStack();
@@ -129,7 +129,7 @@ public class BrewKettle extends DeviceBase
 		return getWorkingRecipe() != null;
 	}
 
-	private void produceGrain(BrewingRecipe recipe)
+	private void produceGrain(IBrewingRecipe recipe)
 	{
 		final Residue res = recipe.getResidue();
 		if (res != null)
@@ -143,7 +143,7 @@ public class BrewKettle extends DeviceBase
 		}
 	}
 
-	private void brewItem(BrewingRecipe recipe)
+	private void brewItem(IBrewingRecipe recipe)
 	{
 		produceGrain(recipe);
 		inputFluidSlot.consume(recipe.getInputFluidStack(), true);
@@ -156,7 +156,7 @@ public class BrewKettle extends DeviceBase
 	public void update()
 	{
 		heatComponent.update();
-		final BrewingRecipe recipe = getWorkingRecipe();
+		final IBrewingRecipe recipe = getWorkingRecipe();
 		if (recipe != null)
 		{
 			this.timeMax = (double)recipe.getTime();

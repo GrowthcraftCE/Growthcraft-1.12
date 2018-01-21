@@ -13,14 +13,14 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class FermentingRegistry
 {
-	private List<FermentationRecipe> recipes = new ArrayList<FermentationRecipe>();
+	private List<IFermentationRecipe> recipes = new ArrayList<IFermentationRecipe>();
 
-	private void onRecipeAdded(@Nonnull FermentationRecipe recipe)
+	private void onRecipeAdded(@Nonnull IFermentationRecipe recipe)
 	{
 		GrowthcraftCellar.logger.debug("Added Fermentation recipe={%s}", recipe);
 	}
 
-	public void addRecipe(@Nonnull FermentationRecipe recipe)
+	public void addRecipe(@Nonnull IFermentationRecipe recipe)
 	{
 		recipes.add(recipe);
 		onRecipeAdded(recipe);
@@ -31,22 +31,22 @@ public class FermentingRegistry
 		addRecipe(new FermentationRecipe(MultiStacksUtil.toMultiFluidStacks(booze), MultiStacksUtil.toMultiItemStacks(fermenter), result, time));
 	}
 
-	public FermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter)
+	public IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter)
 	{
 		if (booze == null || fermenter == null) return null;
-		for (FermentationRecipe recipe : recipes)
+		for (IFermentationRecipe recipe : recipes)
 		{
 			if (recipe.matchesRecipe(booze, fermenter)) return recipe;
 		}
 		return null;
 	}
 
-	public List<FermentationRecipe> findRecipes(@Nullable FluidStack fluid)
+	public List<IFermentationRecipe> findRecipes(@Nullable FluidStack fluid)
 	{
-		final List<FermentationRecipe> result = new ArrayList<FermentationRecipe>();
+		final List<IFermentationRecipe> result = new ArrayList<IFermentationRecipe>();
 		if (fluid != null)
 		{
-			for (FermentationRecipe recipe : recipes)
+			for (IFermentationRecipe recipe : recipes)
 			{
 				if (recipe.matchesIngredient(fluid))
 					result.add(recipe);
@@ -55,12 +55,12 @@ public class FermentingRegistry
 		return result;
 	}
 
-	public List<FermentationRecipe> findRecipes(@Nullable ItemStack fermenter)
+	public List<IFermentationRecipe> findRecipes(@Nullable ItemStack fermenter)
 	{
-		final List<FermentationRecipe> result = new ArrayList<FermentationRecipe>();
+		final List<IFermentationRecipe> result = new ArrayList<IFermentationRecipe>();
 		if (fermenter != null)
 		{
-			for (FermentationRecipe recipe : recipes)
+			for (IFermentationRecipe recipe : recipes)
 			{
 				if (recipe.matchesIngredient(fermenter))
 					result.add(recipe);
@@ -71,10 +71,10 @@ public class FermentingRegistry
 
 	public boolean canFerment(@Nullable FluidStack fluid)
 	{
-		final List<FermentationRecipe> result = new ArrayList<FermentationRecipe>();
+		final List<IFermentationRecipe> result = new ArrayList<IFermentationRecipe>();
 		if (fluid != null)
 		{
-			for (FermentationRecipe recipe : recipes)
+			for (IFermentationRecipe recipe : recipes)
 			{
 				if (recipe.matchesIngredient(fluid))
 					return true;

@@ -1,6 +1,6 @@
 package growthcraft.cellar.events;
 
-import growthcraft.cellar.api.processing.brewing.BrewingRecipe;
+import growthcraft.cellar.api.processing.brewing.IBrewingRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
@@ -9,10 +9,10 @@ import net.minecraftforge.fml.common.eventhandler.Event;
  */
 public class EventBrewed extends Event
 {
-	public final BrewingRecipe recipe;
+	public final IBrewingRecipe recipe;
 	public final TileEntity tile;
 
-	public EventBrewed(TileEntity te, BrewingRecipe re)
+	public EventBrewed(TileEntity te, IBrewingRecipe re)
 	{
 		super();
 		this.tile = te;
