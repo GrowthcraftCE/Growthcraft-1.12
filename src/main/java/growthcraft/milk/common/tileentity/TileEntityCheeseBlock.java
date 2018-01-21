@@ -171,9 +171,9 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, onHand);
 				}
 				else
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, null);				
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);				
 			}
-			markForUpdate(); // Test, if correct
+			markDirtyAndUpdate(); // Test, if correct
 			return true;
 		}
 		return false;

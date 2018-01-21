@@ -11,10 +11,12 @@ import growthcraft.milk.items.*;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
+import scala.actors.threadpool.Arrays;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
@@ -156,5 +158,27 @@ public class GrowthcraftMilkItems {
     public static void registerRender(Item item, int meta, String fileName) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
     }
+
+	public static boolean canWax(WaxedCheeseTypes type, ItemStack stack) {
+		String oreName;
+		switch( type ) {
+		case MONTEREY:
+			oreName = "materialBeeswaxBlack";
+			break;
+		default:
+		case CHEDDAR:
+			oreName = "materialBeeswaxRed";
+			break;
+		}
+		
+		int[] oreIDsStack = OreDictionary.getOreIDs(stack);
+		int oreIDWax = OreDictionary.getOreID(oreName);
+		
+		for( int id : oreIDsStack ) {
+			if( id == oreIDWax )
+				return true;
+		}
+		return false;
+	}
 
 }

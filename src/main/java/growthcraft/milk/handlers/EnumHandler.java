@@ -156,7 +156,7 @@ public class EnumHandler {
 
 		@Override
 		public boolean canWax(ItemStack stack) {
-			return false;
+			return GrowthcraftMilkItems.canWax(this, stack);
 		}
 
 		@Override
