@@ -12,6 +12,7 @@ import growthcraft.core.utils.BlockUtils;
 import growthcraft.core.utils.BoundUtils;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.api.definition.EnumCheeseStage;
+import growthcraft.milk.common.block.BlockOrientable.Orient;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -32,11 +33,10 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockCheeseBlock extends GrowthcraftBlockContainer {
+public class BlockCheeseBlock extends BlockOrientable {
     
 	public final static int MAX_VARIANTS = 10;
 	
-	public final static PropertyEnum<Orient> TYPE_ORIENT = PropertyEnum.create("orient", Orient.class);
 	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 0, 4);
 	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("typexstage", 0, (MAX_VARIANTS-1) * 3 );
 
@@ -113,6 +113,8 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		return false;
 	}
 	
+/*
+	
 	@Override
 	public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
@@ -147,6 +149,8 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		setOrientWhenPlacing(worldIn, pos, state, placer);
 		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 	}
+	
+	*/
 
 	@Override
 	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, IBlockState state)
@@ -240,7 +244,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	    return new BlockStateContainer(this, TYPE_ORIENT, TYPE_SLICES_COUNT, TYPE_CHEESE_VARIANT);
 	}
 
-	@Nonnull
+/*	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState()
@@ -250,7 +254,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	@Override
 	public int getMetaFromState(IBlockState state) {
 	    return state.getValue(TYPE_ORIENT).ordinal();
-	}
+	} */
 
 	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
@@ -282,7 +286,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
         return state.withProperty(TYPE_CHEESE_VARIANT, variantID).withProperty(TYPE_SLICES_COUNT, numSlices);
     }
 	
-	public static enum Orient implements IStringSerializable {
+/*	public static enum Orient implements IStringSerializable {
 		NORTH(1),
 		SOUTH(3),
 		WEST(2),
@@ -326,5 +330,5 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		public String getName() {
 			return toString().toLowerCase();
 		}
-	}
+	} */
 }

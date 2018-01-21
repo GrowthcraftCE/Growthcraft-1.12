@@ -12,9 +12,9 @@ import net.minecraft.item.ItemStack;
 
 public class CheesePressRegistry
 {
-	private List<CheesePressRecipe> recipes = new ArrayList<CheesePressRecipe>();
+	private List<ICheesePressRecipe> recipes = new ArrayList<ICheesePressRecipe>();
 
-	public void addRecipe(@Nonnull CheesePressRecipe recipe)
+	public void addRecipe(@Nonnull ICheesePressRecipe recipe)
 	{
 		GrowthcraftMilk.logger.debug("Adding new cheese press recipe {%s}", recipe);
 		recipes.add(recipe);
@@ -25,11 +25,11 @@ public class CheesePressRegistry
 		addRecipe(new CheesePressRecipe(stack, output, time));
 	}
 
-	public CheesePressRecipe findRecipe(@Nullable ItemStack stack)
+	public ICheesePressRecipe findRecipe(@Nullable ItemStack stack)
 	{
 		if (ItemTest.isValid(stack))
 		{
-			for (CheesePressRecipe recipe : recipes)
+			for (ICheesePressRecipe recipe : recipes)
 			{
 				if (recipe.isMatchingRecipe(stack)) return recipe;
 			}

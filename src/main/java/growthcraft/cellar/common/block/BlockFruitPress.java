@@ -39,12 +39,11 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	}
 	
 	@Override
-	public void doRotateBlock(World world, BlockPos pos, EnumFacing side)
+	public void doRotateBlock(World world, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		IBlockState statePress = world.getBlockState(pos);
 		IBlockState statePresser = world.getBlockState(pos.up());
 		
-		EnumFacing pressFacing = statePress.getValue(TYPE_ROTATION);
+		EnumFacing pressFacing = state.getValue(TYPE_ROTATION);
 		Orient presserOrient = statePresser.getValue(BlockFruitPresser.TYPE_ORIENT);
 		if( pressFacing == EnumFacing.NORTH || pressFacing == EnumFacing.SOUTH )
 			pressFacing = EnumFacing.EAST;
@@ -52,7 +51,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 			pressFacing = EnumFacing.SOUTH;
 		presserOrient = Orient.fromFacing(pressFacing);
 
-		world.setBlockState(pos, statePress.withProperty(TYPE_ROTATION, pressFacing), BlockFlags.SYNC);
+		world.setBlockState(pos, state.withProperty(TYPE_ROTATION, pressFacing), BlockFlags.SYNC);
 		world.setBlockState(pos.up(), statePresser.withProperty(BlockFruitPresser.TYPE_ORIENT, presserOrient), BlockFlags.SYNC);
 	}
 	

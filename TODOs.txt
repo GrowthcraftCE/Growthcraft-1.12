@@ -43,6 +43,7 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
+TODO: Reintroduce interfaces for recipes
 TODO: Cheese waxing.
 TODO: Cheese model items to be textured.
 TODO: Curds textures and models.

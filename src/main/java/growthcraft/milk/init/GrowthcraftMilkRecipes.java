@@ -2,11 +2,17 @@ package growthcraft.milk.init;
 
 import growthcraft.core.api.fluids.TaggedFluidStacks;
 import growthcraft.core.api.item.OreItemStacks;
+import growthcraft.milk.api.MilkRegistry;
+import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.api.definition.ICheeseCurdStackFactory;
+import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.api.utils.CheeseVatRecipeBuilder;
+import growthcraft.milk.common.recipes.DriedCurdsCheesePressRecipe;
 import growthcraft.milk.handlers.EnumHandler.AgedCheeseTypes;
 import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 
 public class GrowthcraftMilkRecipes {
 	private static void registerCheeseVatRecipes()
@@ -70,6 +76,23 @@ public class GrowthcraftMilkRecipes {
 				.register();
 		}
 	}
+	
+	private static <E extends Enum<?> & ICheeseType & IStringSerializable> void registerCheesePressRecipesFor(Class<E> enumType) {
+		E[] values = enumType.getEnumConstants();
+		for( ICheeseType type : values ) {
+			ICheeseBlockStackFactory blockFactory = type.getCheeseBlocks();
+			ICheeseCurdStackFactory curdsFactory = type.getCurdBlocks();
+			if(blockFactory != null && curdsFactory != null) {
+				MilkRegistry.instance().cheesePress().addRecipe(new DriedCurdsCheesePressRecipe(type.asCurdItemStack(), type.asBlockItemStack(), 200));
+			}
+		}
+	}
+	
+	private static void registerCheesePressRecipes()
+	{
+
+	}
+
 	
 	public static void init() {
 		registerCheeseVatRecipes();

@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import net.minecraft.item.ItemStack;
 
-public class CheesePressRecipe
+public class CheesePressRecipe implements ICheesePressRecipe
 {
 	private ItemStack inputStack;
 	private ItemStack outputStack;
@@ -17,21 +17,25 @@ public class CheesePressRecipe
 		this.time = pTime;
 	}
 
+	@Override
 	public ItemStack getInputItemStack()
 	{
 		return inputStack;
 	}
 
+	@Override
 	public ItemStack getOutputItemStack()
 	{
 		return outputStack;
 	}
 
+	@Override
 	public int getTimeMax()
 	{
 		return time;
 	}
 
+	@Override
 	public boolean isMatchingRecipe(@Nonnull ItemStack stack)
 	{
 		if (inputStack.isItemEqual(stack))

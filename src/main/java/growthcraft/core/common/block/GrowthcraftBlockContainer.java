@@ -104,9 +104,8 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return false;
 	}
 
-	public void doRotateBlock(World world, BlockPos pos, EnumFacing side)
+	public void doRotateBlock(World world, BlockPos pos, IBlockState state, EnumFacing side)
 	{
-		IBlockState state = world.getBlockState(pos);
 		final EnumFacing current = state.getValue(TYPE_ROTATION);
 		EnumFacing newDirection = current;
 		if (current == side)
@@ -172,7 +171,8 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 	{
 		if (isRotatable(world, pos, side))
 		{
-			doRotateBlock(world, pos, side);
+			IBlockState state = world.getBlockState(pos);
+			doRotateBlock(world, pos, state, side);
 			markBlockForUpdate(world, pos);
 			return true;
 		}
