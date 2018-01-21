@@ -46,13 +46,12 @@
         "model": "growthcraft_milk:cheese_block_slices4"
       }
     },
-    "type": {
+    "typexstage": {
       0: {
 	    "textures": {
           "0": "minecraft:blocks/wool_colored_white",
           "1": "minecraft:blocks/wool_colored_white",
           "2": "minecraft:blocks/wool_colored_white",
-          "3": "minecraft:blocks/wool_colored_white",
           "particle": "minecraft:blocks/wool_colored_white"
         }
       },
@@ -73,6 +72,55 @@
       8: {
       },
       9: {
+      },
+      
+      10: {
+	    "textures": {
+          "0": "minecraft:blocks/wool_colored_yellow",
+          "1": "minecraft:blocks/wool_colored_yellow",
+          "2": "minecraft:blocks/wool_colored_yellow",
+          "3": "minecraft:blocks/wool_colored_yellow",
+          "particle": "minecraft:blocks/wool_colored_yellow"
+        }
+      },
+      11: {
+      },
+      12: {
+      },
+      13: {
+      },
+      14: {
+      },
+      15: {
+      },
+      16: {
+      },
+      17: {
+      },
+      18: {
+      },
+      19: {
+      },
+      
+      20: {
+      },
+      21: {
+      },
+      22: {
+      },
+      23: {
+      },
+      24: {
+      },
+      25: {
+      },
+      26: {
+      },
+      27: {
+      },
+      28: {
+      },
+      29: {
       }
     }
   }

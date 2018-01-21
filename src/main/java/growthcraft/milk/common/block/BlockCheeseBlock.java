@@ -11,6 +11,7 @@ import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.utils.BlockUtils;
 import growthcraft.core.utils.BoundUtils;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.milk.api.definition.EnumCheeseStage;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -37,7 +38,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	
 	public final static PropertyEnum<Orient> TYPE_ORIENT = PropertyEnum.create("orient", Orient.class);
 	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 0, 4);
-	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("type", 0, MAX_VARIANTS-1);
+	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("typexstage", 0, (MAX_VARIANTS-1) * 3 );
 
 	private static final AxisAlignedBB BOUNDING_BOX_FULL = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
@@ -259,8 +260,23 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 		final TileEntityCheeseBlock te = getTileEntity(worldIn, pos);
 		if (te != null)
 		{
+			int effectiveStageId = 0;
+			switch(te.getCheese().getStage()) {
+			case UNWAXED:
+				effectiveStageId = 2;
+				break;
+			case CUT:
+			case AGED:
+				effectiveStageId = 1;
+				break;
+			default:
+			case UNAGED:
+				effectiveStageId = 0;
+				break;
+			}
+			
 			numSlices = te.getCheese().getSlices();
-			variantID = te.getCheese().getType().getVariantID();
+			variantID = effectiveStageId*10 + te.getCheese().getType().getVariantID();
 		}
 		
         return state.withProperty(TYPE_CHEESE_VARIANT, variantID).withProperty(TYPE_SLICES_COUNT, numSlices);
