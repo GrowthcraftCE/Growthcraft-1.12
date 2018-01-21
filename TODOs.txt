@@ -1,7 +1,8 @@
 -----------------
 To discuss:
 -----------------
-* Maximal 8 cheese stages? -> Needed to encode stage and cheese type in item meta.
+DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in item meta.
+=> DECISSION: Using 4 cheese stages. [Discord:general, 14.01.2017]
 
 -----------------
 To implement:
@@ -25,7 +26,8 @@ NOTABUG: BUG: Booze color is too dark.
 -----------------
 Potential Bugs:
 -----------------
-TODO: ShouldRefresh = false for all device tile entities. Sometimes block states are changed and a recreation of tile entity is to be avoided. 
+TODO: INVESTIGATED: ShouldRefresh = false for all device tile entities. Sometimes block states are changed and a recreation of tile entity is to be avoided. 
+* Bugs are expected on block state changes, e.g. for fruit presser and if blocks are rotated.
 
 -----------------
 Improvements:
