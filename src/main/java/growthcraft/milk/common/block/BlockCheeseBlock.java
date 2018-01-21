@@ -55,7 +55,7 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	public BlockCheeseBlock() {
 		super(Material.CAKE);
 		this.setHardness(0.5F);
-		this.setSoundType(SoundType.CLOTH);
+		this.setSoundType(SoundType.SNOW);
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_SLICES_COUNT, 1));
 		setTileEntityType(TileEntityCheeseBlock.class);
 	}
@@ -172,16 +172,16 @@ public class BlockCheeseBlock extends GrowthcraftBlockContainer {
 	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
-		super.onBlockAdded(worldIn, pos, state);
 		setDefaultDirection(worldIn, pos, state);
+		super.onBlockAdded(worldIn, pos, state);
 //		setPropertiesFromTileEntity(worldIn, pos, state);
 	}
 	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
 	{
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 		setOrientWhenPlacing(worldIn, pos, state, placer);
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
 //		setPropertiesFromTileEntity(worldIn, pos, state);
 	}
 

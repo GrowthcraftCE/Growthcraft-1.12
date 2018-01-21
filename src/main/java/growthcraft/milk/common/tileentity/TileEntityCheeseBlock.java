@@ -151,13 +151,13 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 			}
 		}
 	}
-
+/*
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
 		// return super.shouldRefresh(world, pos, oldState, newSate);
 		return false;
 	}
-	
+*/
 	@Override
 	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
 	{
@@ -188,13 +188,14 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 			{
 				ItemUtils.addStackToPlayer(stack, player, false);
 			}
-			updateSliceCount();
+//			updateSliceCount();
+			markDirtyAndUpdate();
 			cheese.needClientUpdate |= true;
 			return true;
 		}
 		return false;
 	}
-	
+/*
 	protected void updateSliceCount() {
 		IBlockState state = world.getBlockState(pos);
 		int cheesSlices = cheese.getSlices();
@@ -203,5 +204,5 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		if( state.getValue(BlockCheeseBlock.TYPE_SLICES_COUNT) != cheesSlices ) {
 			world.setBlockState(pos, state.withProperty(BlockCheeseBlock.TYPE_SLICES_COUNT, cheesSlices), BlockFlags.UPDATE_AND_SYNC);
 		}
-	}
+	} */
 }

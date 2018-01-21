@@ -21,7 +21,7 @@ public class PREVBlockCultureJar extends BlockCellarContainer {
     
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 4, 0.0625 * 0, 0.0625 * 4,
-            0.0625 * 12, 0.0625 * 10, 0.0625 * 12);
+            0.0625 * 12, 0.0625 * 9, 0.0625 * 12);
 
     public PREVBlockCultureJar(String unlocalizedName) {
         super(Material.GLASS);
