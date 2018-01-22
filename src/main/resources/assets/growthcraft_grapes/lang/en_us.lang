@@ -3,7 +3,7 @@ item.grape.green.name=Green Grapes
 item.grape.purple.name=Purple Grapes
 item.grape.red.name=Red Grapes
 
-item.grape_seed.tooltip=Seed that grow into a grape vine
+item.grape_seed.tooltip=Seed that grows into a grape vine
 item.grape_seed.name=Grape Seeds
 item.grape_seed.green.name=Green Grape Seeds
 item.grape_seed.purple.name=Purple Grape Seeds
@@ -23,3 +23,13 @@ item.bucket.fluid.grc.grapeWine4.name=Ambrosia Bucket
 item.bucket.fluid.grc.grapeWine5.name=Port Wine Bucket
 item.bucket.fluid.grc.grapeWine6.name=Grape Wine Bucket
 item.bucket.fluid.grc.grapeWine7.name=Grape Wine Bucket
+
+# Fluids
+fluid.fluid_booze_juice=Grape Juice
+fluid.fluid_booze_wine=Grape Wine
+fluid.fluid_booze_wine_potent=Grape Wine
+fluid.fluid_booze_wine_extended=Grape Wine
+fluid.fluid_booze_ambrosia=Ambrosia
+fluid.fluid_booze_portwine=Port Wine
+fluid.fluid_booze_wine_intoxicated=Grape Wine
+fluid.fluid_booze_wine_poisoned=Grape Wine
