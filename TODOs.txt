@@ -43,14 +43,16 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
-TODO: Reintroduce interfaces for recipes
-TODO: Cheese waxing.
+TODO: Animation for Cheese Press.
+TODO: Animation for Butter churn.
 TODO: Cheese model items to be textured.
 TODO: Curds textures and models.
-TODO: Butter churn having animation.
 TODO: Language files for Cellar.
+TODO: Language files for Milk.
 TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Reintroduce interfaces for recipes
+DONE: Cheese waxing.
 DONE: Cheese block bounds adapting to slice count. Rotation Left.
 DONE: Cheese textures and models. (textures are placeholders now)
 DONE: Step sounds
