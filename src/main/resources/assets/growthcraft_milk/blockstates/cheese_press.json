@@ -19,10 +19,10 @@
     },
     "iscap" : {
       "true" : {
-        "model": "growthcraft_milk:cheese_press_presser_low"
+        "model": "growthcraft_milk:cheese_press_animated_parts"
       },
       "false" : {
-        "model": "growthcraft_milk:cheese_press_without_cap"
+        "model": "growthcraft_milk:cheese_press_static"
       }      
     }
   }
