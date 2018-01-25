@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "orient=east": {
+      "model": "growthcraft_milk:cheese_press_unpressed",
+      "y": 270
+    },
+    "orient=north": {
+      "model": "growthcraft_milk:cheese_press_unpressed",
+      "y": 180
+    },
+    "orient=west": {
+      "model": "growthcraft_milk:cheese_press_unpressed",
+      "y": 90
+    },
+    "orient=south": {
+      "model": "growthcraft_milk:cheese_press_unpressed",
+      "y": 0
+    }
+  }
+}
