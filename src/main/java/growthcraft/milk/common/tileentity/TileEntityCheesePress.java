@@ -285,6 +285,10 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 	{
 		if (IAltItemHandler.Action.RIGHT != action) return false;
 		// Items cannot be removed if the cheese press is active
+//		if( !ItemUtils.isEmpty( onHand ) )
+//			return false;
+		if( !player.isSneaking() )
+			return false;
 		if (isUnpressed())
 		{
 			final ItemStack result = invSlot.yank();

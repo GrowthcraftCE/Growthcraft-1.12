@@ -47,10 +47,10 @@ TODO: Animation for Cheese Press.
 TODO: Animation for Butter churn.
 TODO: Cheese model items to be textured.
 TODO: Curds textures and models.
-TODO: Language files for Cellar.
-TODO: Language files for Milk.
-TODO: Languages for grapewine.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Language files for Cellar.
+DONE: Language files for Milk.
+DONE: Languages for grapewine.
 DONE: Reintroduce interfaces for recipes
 DONE: Cheese waxing.
 DONE: Cheese block bounds adapting to slice count. Rotation Left.
