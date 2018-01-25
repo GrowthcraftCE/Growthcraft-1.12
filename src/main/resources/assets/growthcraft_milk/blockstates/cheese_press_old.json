@@ -17,6 +17,16 @@
         "y": 0
       }
     },
+    "animstage" : {
+      "unpressed" : {
+        "submodel": "growthcraft_milk:cheese_press_presser_high"
+      },
+      "pressing" : {
+      },
+      "pressed" : {
+        "submodel": "growthcraft_milk:cheese_press_presser_low"
+      }
+    },
     "iscap" : {
       "true" : {
         "model": "growthcraft_milk:cheese_press_presser_low"

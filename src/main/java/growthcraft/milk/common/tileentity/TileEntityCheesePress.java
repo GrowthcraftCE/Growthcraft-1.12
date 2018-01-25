@@ -36,8 +36,8 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 		{ 0 }
 	};
 
-	@SideOnly(Side.CLIENT)
-	public boolean isAnim;
+//	@SideOnly(Side.CLIENT)
+//	public boolean isAnim;
 	@SideOnly(Side.CLIENT)
 	public float animProgress;
 	@SideOnly(Side.CLIENT)
@@ -109,7 +109,8 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 	}
 	
 	public boolean isAnimating() {
-		return this.isAnim;
+		// return this.isAnim;
+		return animProgress > 0 && animProgress < 1;
 	}
 
 	@Override
@@ -177,10 +178,10 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 			this.animProgress = MathHelper.clamp(this.animProgress + step * animDir, 0.0f, 1.0f);
 		}
 		
-		if( animProgress <= 0 || animProgress >= 1 )
+/*		if( animProgress <= 0 || animProgress >= 1 )
 			isAnim = false;
 		else
-			isAnim = true;
+			isAnim = true;*/
 	}
 
 	private void commitRecipe()
@@ -257,7 +258,7 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 		final int oldScrewState = screwState;
 		this.screwState = state ? 1 : 0;
 		if (oldScrewState != screwState) {
-			isAnim = true;
+//			isAnim = true;
 			markDirtyAndUpdate();
 		}
 		return oldScrewState != screwState;

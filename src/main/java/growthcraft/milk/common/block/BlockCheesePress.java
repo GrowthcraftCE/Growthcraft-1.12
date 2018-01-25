@@ -147,22 +147,21 @@ public class BlockCheesePress extends BlockOrientable {
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, TYPE_ORIENT, STAGE_PRESS, SUBMODEL_CAP);
+	    return new BlockStateContainer(this, TYPE_ORIENT, /*STAGE_PRESS,*/ SUBMODEL_CAP);
 	}
 	
 	@Override
-//	@SideOnly(Side.CLIENT)
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		final TileEntityCheesePress cheesePress = getTileEntity(worldIn, pos);
 		state = state.withProperty(SUBMODEL_CAP, false);
-		if (cheesePress != null) {
-			if( /*cheesePress.animProgress > 0 && cheesePress.animProgress < 0*/ cheesePress.isAnimating() )
+/*		if (cheesePress != null) {
+			if( cheesePress.isAnimating() )
 				return state.withProperty(STAGE_PRESS, AnimationStage.PRESSING);
 			if( cheesePress.isPressed() )
 				return state.withProperty(STAGE_PRESS, AnimationStage.PRESSED);
 			else
 				return state.withProperty(STAGE_PRESS, AnimationStage.UNPRESSED);
-		}
+		} */
 		return state;
 	}
 

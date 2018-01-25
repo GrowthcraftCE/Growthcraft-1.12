@@ -28,12 +28,11 @@ public class RenderCheesePress extends TileEntitySpecialRenderer<TileEntityChees
 	
 	@Override
 	public void renderTileEntityAt(@Nonnull TileEntityCheesePress te, double x, double y, double z, float partialTicks, int destroyStage) {
-//		if( te.animProgress <= 0 || te.animProgress >= 1 )
-		if( !te.isAnimating() )
-			return; // No running animation, no rendering.
+//		if( !te.isAnimating() )
+//			return; // No running animation, no rendering.
 		BlockPos pos = te.getPos();
 		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
-		IBlockState state = world.getBlockState(pos).withProperty(BlockCheesePress.SUBMODEL_CAP, true).withProperty(BlockCheesePress.STAGE_PRESS, AnimationStage.PRESSING);
+		IBlockState state = world.getBlockState(pos).withProperty(BlockCheesePress.SUBMODEL_CAP, true); //.withProperty(BlockCheesePress.STAGE_PRESS, AnimationStage.PRESSING);
 		
 		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
         IBakedModel capModel = blockrendererdispatcher.getModelForState(state);
