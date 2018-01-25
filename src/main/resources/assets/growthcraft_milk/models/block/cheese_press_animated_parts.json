@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "2": "blocks/cheese_press/vice_top",
-    "3": "blocks/cheese_press/iron_frame"
+    "2": "growthcraft_milk:blocks/cheese_press/vice_top",
+    "3": "growthcraft_milk:blocks/cheese_press/iron_frame"
   },
   "elements": [
     {
@@ -73,7 +73,6 @@
           "texture": "#2"
         }
       },
-      "_loading": false,
       "type": "cube"
     },
     {
@@ -705,6 +704,7 @@
           "texture": "#3"
         }
       },
+      "_loading": false,
       "type": "cube"
     },
     {
@@ -775,6 +775,7 @@
           "texture": "#3"
         }
       },
+      "_loading": false,
       "type": "cube"
     }
   ],
