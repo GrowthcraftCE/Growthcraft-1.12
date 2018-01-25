@@ -153,6 +153,7 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 	private void updateEntityClient()
 	{
 		final float step = 1.0f / 20.0f;
+		int prevAnimDir = this.animDir;
 		if (isUnpressed())
 		{
 			this.animDir = -1;
@@ -161,6 +162,9 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 		{
 			this.animDir = 1;
 		}
+		
+//		if( prevAnimDir != this.animDir && animProgress > 0 && animProgress < 1 )
+//			animProgress = 1 - animProgress;
 
 		if (animDir > 0 && animProgress < 1.0f || animDir < 0 && animProgress > 0)
 		{
