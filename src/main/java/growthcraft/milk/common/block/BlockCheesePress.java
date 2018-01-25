@@ -2,6 +2,7 @@ package growthcraft.milk.common.block;
 
 import java.util.List;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.milk.GrowthcraftMilkConfig;
@@ -10,6 +11,9 @@ import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyEnum;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,18 +21,24 @@ import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockCheesePress extends BlockOrientable {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
+    
+    public final static PropertyEnum<AnimationStage> STAGE_PRESS = PropertyEnum.create("animstage", AnimationStage.class);
+    public final static PropertyBool SUBMODEL_CAP = PropertyBool.create("iscap");
 
 	public BlockCheesePress(String unlocalizedName) {
 		super(Material.WOOD);
@@ -129,5 +139,42 @@ public class BlockCheesePress extends BlockOrientable {
 		}
 		return 0;
 	}
+	
+	/************
+	 * PROPERTIES
+	 ************/
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, TYPE_ORIENT, STAGE_PRESS, SUBMODEL_CAP);
+	}
+	
+	@Override
+//	@SideOnly(Side.CLIENT)
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		final TileEntityCheesePress cheesePress = getTileEntity(worldIn, pos);
+		state = state.withProperty(SUBMODEL_CAP, false);
+		if (cheesePress != null) {
+			if( /*cheesePress.animProgress > 0 && cheesePress.animProgress < 0*/ cheesePress.isAnimating() )
+				return state.withProperty(STAGE_PRESS, AnimationStage.PRESSING);
+			if( cheesePress.isPressed() )
+				return state.withProperty(STAGE_PRESS, AnimationStage.PRESSED);
+			else
+				return state.withProperty(STAGE_PRESS, AnimationStage.UNPRESSED);
+		}
+		return state;
+	}
 
+	public static enum AnimationStage implements IStringSerializable {
+		UNPRESSED,
+		PRESSING,
+		PRESSED;
+
+		@Override
+		public String getName() {
+			return name().toLowerCase();
+		}
+	}
+	
 }

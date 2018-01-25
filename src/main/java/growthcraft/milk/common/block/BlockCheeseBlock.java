@@ -112,45 +112,6 @@ public class BlockCheeseBlock extends BlockOrientable {
 	{
 		return false;
 	}
-	
-/*
-	
-	@Override
-	public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
-		return true;
-	}
-	
-	protected void setDefaultDirection(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote)
-		{
-			Orient facing = Orient.fromFacing(BlockUtils.getDefaultDirection(world, pos, state));
-			world.setBlockState(pos, state.withProperty(TYPE_ORIENT, facing), BlockFlags.UPDATE_AND_SYNC);
-		}
-	}
-	
-	protected Orient setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer) {
-		Orient facing = Orient.fromFacing(EnumFacing.fromAngle(placer.rotationYaw));
-		worldIn.setBlockState(pos, state.withProperty(TYPE_ORIENT, facing), BlockFlags.UPDATE_AND_SYNC);
-		return facing;
-	}
-	
-	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-	{
-		setDefaultDirection(worldIn, pos, state);
-		super.onBlockAdded(worldIn, pos, state);
-	}
-	
-	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-	{
-		setOrientWhenPlacing(worldIn, pos, state, placer);
-		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
-	}
-	
-	*/
 
 	@Override
 	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, IBlockState state)
@@ -244,18 +205,6 @@ public class BlockCheeseBlock extends BlockOrientable {
 	    return new BlockStateContainer(this, TYPE_ORIENT, TYPE_SLICES_COUNT, TYPE_CHEESE_VARIANT);
 	}
 
-/*	@Nonnull
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-	    return this.getDefaultState()
-	    		   .withProperty(TYPE_ORIENT, Orient.values()[meta & 0x3]);
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state) {
-	    return state.getValue(TYPE_ORIENT).ordinal();
-	} */
-
 	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
@@ -285,50 +234,4 @@ public class BlockCheeseBlock extends BlockOrientable {
 		
         return state.withProperty(TYPE_CHEESE_VARIANT, variantID).withProperty(TYPE_SLICES_COUNT, numSlices);
     }
-	
-/*	public static enum Orient implements IStringSerializable {
-		NORTH(1),
-		SOUTH(3),
-		WEST(2),
-		EAST(0);
-		
-		public final int rotationCW;
-		
-		Orient(int rotationCW) {
-			this.rotationCW = rotationCW;
-		}
-		
-		public static Orient fromFacing(EnumFacing facing) {
-			switch( facing ) {
-			case NORTH:
-				return NORTH;
-			case SOUTH:
-				return SOUTH;
-			case WEST:
-				return WEST;
-			default:
-			case EAST:
-				return EAST;				
-			}
-		}
-		
-		public EnumFacing toFacing() {
-			switch( this ) {
-			case NORTH:
-				return EnumFacing.NORTH;
-			case SOUTH:
-				return EnumFacing.SOUTH;
-			case WEST:
-				return EnumFacing.WEST;
-			default:
-			case EAST:
-				return EnumFacing.EAST;				
-			}
-		}
-
-		@Override
-		public String getName() {
-			return toString().toLowerCase();
-		}
-	} */
 }

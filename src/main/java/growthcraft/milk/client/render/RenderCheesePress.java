@@ -5,6 +5,8 @@ import javax.annotation.Nonnull;
 import org.lwjgl.opengl.GL11;
 
 import growthcraft.core.api.utils.Easing;
+import growthcraft.milk.common.block.BlockCheesePress;
+import growthcraft.milk.common.block.BlockCheesePress.AnimationStage;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -26,8 +28,19 @@ public class RenderCheesePress extends TileEntitySpecialRenderer<TileEntityChees
 	
 	@Override
 	public void renderTileEntityAt(@Nonnull TileEntityCheesePress te, double x, double y, double z, float partialTicks, int destroyStage) {
-		final float eased = (float)((te.animDir < 0) ? Easing.d.cubicIn : Easing.d.cubicOut).call(te.animProgress);
+//		if( te.animProgress <= 0 || te.animProgress >= 1 )
+		if( !te.isAnimating() )
+			return; // No running animation, no rendering.
 		BlockPos pos = te.getPos();
+		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
+		IBlockState state = world.getBlockState(pos).withProperty(BlockCheesePress.SUBMODEL_CAP, true).withProperty(BlockCheesePress.STAGE_PRESS, AnimationStage.PRESSING);
+		
+		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+        IBakedModel capModel = blockrendererdispatcher.getModelForState(state);
+        if( capModel == null )
+        	return; // No model.
+
+		final float eased = (float)((te.animDir < 0) ? Easing.d.cubicIn : Easing.d.cubicOut).call(te.animProgress);
 
         Tessellator tessellator = Tessellator.getInstance();
         VertexBuffer renderer = tessellator.getBuffer();
@@ -49,17 +62,8 @@ public class RenderCheesePress extends TileEntitySpecialRenderer<TileEntityChees
         renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 
         renderTileEntityFast(te, x, y, z, partialTicks, destroyStage, renderer);
-        {
-    		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
-    		IBlockState state = world.getBlockState(pos);
-    		
-    		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
-            IBakedModel capModel = blockrendererdispatcher.getModelForState(state);
-            
-            blockrendererdispatcher.getBlockModelRenderer().renderModel(world, capModel, state, pos, renderer, false);
-        	
-        }
-        renderer.setTranslation(0, 0, 0);
+        blockrendererdispatcher.getBlockModelRenderer().renderModel(world, capModel, state, pos, renderer, false);
+//        renderer.setTranslation(0, 0, 0);
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x+0.5, y +0.5 + eased * SCALE * 2, z+0.5);

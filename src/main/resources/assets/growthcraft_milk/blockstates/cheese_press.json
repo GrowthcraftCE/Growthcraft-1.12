@@ -1,20 +1,39 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+  },
   "variants": {
-    "orient=east": {
-      "model": "growthcraft_milk:cheese_press_unpressed",
-      "y": 270
+    "orient": {
+      "east" : {
+        "y": 270
+      },
+      "north" : {
+        "y": 180
+      },
+      "west" : {
+        "y": 90
+      },
+      "south" : {
+        "y": 0
+      }
     },
-    "orient=north": {
-      "model": "growthcraft_milk:cheese_press_unpressed",
-      "y": 180
+    "animstage" : {
+      "unpressed" : {
+        "submodel": "growthcraft_milk:cheese_press_presser_high"
+      },
+      "pressing" : {
+      },
+      "pressed" : {
+        "submodel": "growthcraft_milk:cheese_press_presser_low"
+      }
     },
-    "orient=west": {
-      "model": "growthcraft_milk:cheese_press_unpressed",
-      "y": 90
-    },
-    "orient=south": {
-      "model": "growthcraft_milk:cheese_press_unpressed",
-      "y": 0
+    "iscap" : {
+      "true" : {
+        "model": "growthcraft_milk:cheese_press_presser_low"
+      },
+      "false" : {
+        "model": "growthcraft_milk:cheese_press_without_cap"
+      }      
     }
   }
 }
