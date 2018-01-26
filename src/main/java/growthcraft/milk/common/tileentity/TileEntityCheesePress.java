@@ -163,11 +163,11 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 		int prevAnimDir = this.animDir;
 		if (isUnpressed())
 		{
-			this.animDir = -1;
+			this.animDir = 1;
 		}
 		else
 		{
-			this.animDir = 1;
+			this.animDir = -1;
 		}
 		
 //		if( prevAnimDir != this.animDir && animProgress > 0 && animProgress < 1 )
