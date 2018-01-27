@@ -10,6 +10,7 @@ import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.milk.Reference;
+import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityButterChurnPlunger;
 import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import net.minecraft.block.Block;
@@ -32,9 +33,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
-    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
-            0.0625 * 7, 0.0625 * 0, 0.0625 * 7,
-            0.0625 * 9, 0.0625 * 12, 0.0625 * 9);
+    private static final AxisAlignedBB BOUNDING_BOX_UP = new AxisAlignedBB(
+            0.0625 * 7, -0.0625 * 2, 0.0625 * 7,
+            0.0625 * 9, 0.0625 * 11, 0.0625 * 9);
+    private static final AxisAlignedBB BOUNDING_BOX_DOWN = new AxisAlignedBB(
+            0.0625 * 7, -0.0625 * 2, 0.0625 * 7,
+            0.0625 * 9, 0.0625 * 7, 0.0625 * 9);
 
     public final static PropertyBool SUBMODEL_PLUNGER = PropertyBool.create("isplunger");
 	
@@ -49,14 +53,30 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 		setTileEntityType(TileEntityButterChurnPlunger.class);
 	}
 
+	private TileEntityButterChurn getMasterTileEntity(IBlockAccess world, BlockPos pos) {
+		BlockPos posBelow = pos.down();
+		IBlockState state = world.getBlockState(posBelow);
+		if( state.getBlock() != GrowthcraftMilkBlocks.churn.getBlock() )
+			return null;
+		TileEntityButterChurn te = GrowthcraftMilkBlocks.churn.getBlock().getTileEntity(world, pos.down());
+		return te;
+	}
+	
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-    	return BOUNDING_BOX;
+    	TileEntityButterChurn te = getMasterTileEntity(source, pos);
+    	if( te != null ) {
+    		if( te.getShaftState() == 0 )
+    			return BOUNDING_BOX_DOWN;
+    		else
+    			return BOUNDING_BOX_UP;
+    	}
+    	return BOUNDING_BOX_UP;
     }
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX_UP);
     }
     
     @Override

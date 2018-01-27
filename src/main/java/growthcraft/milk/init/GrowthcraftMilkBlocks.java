@@ -26,6 +26,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 import growthcraft.core.common.definition.BlockDefinition;
+import growthcraft.core.common.definition.BlockTypeDefinition;
 import growthcraft.core.common.definition.GrowthcraftBlockFluidDefinition;
 
 public class GrowthcraftMilkBlocks {
@@ -41,8 +42,8 @@ public class GrowthcraftMilkBlocks {
     public static GrowthcraftBlockFluidDefinition blockFluidSkimMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidWhey;
     public static BlockDefinition pancheon;
-    public static BlockDefinition churn;
-    public static BlockDefinition churnPlunger;
+    public static BlockTypeDefinition<BlockButterChurn> churn;
+    public static BlockTypeDefinition<BlockButterChurnPlunger> churnPlunger;
     public static BlockDefinition cheesePress;
     public static BlockDefinition agedCheeseBlock;
     public static BlockDefinition waxedCheeseBlock;
@@ -63,8 +64,8 @@ public class GrowthcraftMilkBlocks {
         blockFluidSkimMilk = GrowthcraftMilkFluids.skimMilk.getFluidBlockDefinition(); // new BlockFluidSkimMilk("fluid_skim_milk");
         blockFluidWhey = GrowthcraftMilkFluids.whey.getFluidBlockDefinition(); // new BlockFluidWhey("fluid_whey");
         pancheon = new BlockDefinition( new PREVBlockPancheon("pancheon") );
-        churn = new BlockDefinition( new BlockButterChurn("churn") );
-        churnPlunger = new BlockDefinition(new BlockButterChurnPlunger("churn_plunger") );
+        churn = new BlockTypeDefinition<BlockButterChurn>( new BlockButterChurn("churn") );
+        churnPlunger = new BlockTypeDefinition<BlockButterChurnPlunger>(new BlockButterChurnPlunger("churn_plunger") );
         cheesePress = new BlockDefinition( new BlockCheesePress("cheese_press") );
         agedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );
         waxedCheeseBlock = new BlockDefinition( new BlockCheeseBlock() );

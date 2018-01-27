@@ -29,7 +29,7 @@ public class RenderButterChurnPlunger extends RenderModel<TileEntityButterChurnP
 		final float eased = (float)((te.animDir < 0) ? Easing.d.cubicIn : Easing.d.cubicOut).call(te.animProgress);
 
         GL11.glPushMatrix();
-		GL11.glTranslated(x+0.5, y +0.5 + eased * SCALE * 4, z+0.5);
+		GL11.glTranslated(x+0.5, y +0.5 + (eased * 4 - 16) * SCALE, z+0.5);
 		GL11.glTranslated(-0.5- pos.getX(), -0.5- pos.getY(), -0.5- pos.getZ());
 		tessellator.draw();
         GL11.glPopMatrix();
