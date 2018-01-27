@@ -3,6 +3,7 @@ package growthcraft.milk.common.block;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.utils.BlockFlags;
@@ -14,6 +15,8 @@ import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -29,8 +32,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875F, 0.0F, 0.1875F, 0.8125F, 0.9375F, 0.8125F);
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+            0.0625 * 7, 0.0625 * 0, 0.0625 * 7,
+            0.0625 * 9, 0.0625 * 12, 0.0625 * 9);
 
+    public final static PropertyBool SUBMODEL_PLUNGER = PropertyBool.create("isplunger");
+	
 	public BlockButterChurnPlunger(String unlocalizedName) {
         super(Material.CLAY);
         this.setUnlocalizedName(unlocalizedName);
@@ -38,9 +45,10 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 		this.setResistance(5.0F);
 		this.setHardness(2.0F);
 		this.setSoundType(SoundType.WOOD);
+		this.setDefaultState(this.blockState.getBaseState().withProperty(SUBMODEL_PLUNGER, false));
 		setTileEntityType(TileEntityButterChurnPlunger.class);
 	}
-		
+
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	return BOUNDING_BOX;
@@ -205,5 +213,20 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 	{
 		return false;
 	}
+	
+	/************
+	 * STATES
+	 ************/
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, TYPE_ROTATION, SUBMODEL_PLUNGER);
+	}
+	
+/*	@Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+		return state.withProperty(SUBMODEL_PLUNGER, false);
+	} */
 	
 }

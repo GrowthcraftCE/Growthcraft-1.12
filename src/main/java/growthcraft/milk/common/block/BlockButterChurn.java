@@ -29,8 +29,8 @@ import net.minecraft.world.World;
 
 public class BlockButterChurn extends GrowthcraftBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
-            0.0625 * 4, 0.0625 * 0, 0.0625 * 4,
-            0.0625 * 12, 0.0625 * 16, 0.0625 * 12);
+            0.0625 * 2, 0.0625 * 0, 0.0625 * 2,
+            0.0625 * 14, 0.0625 * 16, 0.0625 * 14);
 	
 	public BlockButterChurn(String unlocalizedName) {
         super(Material.CLAY);

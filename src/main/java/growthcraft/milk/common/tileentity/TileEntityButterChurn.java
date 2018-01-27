@@ -26,7 +26,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements ITickable, IAltItemHandler
+public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements IAltItemHandler
 {
 	public static enum WorkState
 	{
@@ -44,11 +44,6 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 		{ 0 }
 	});
 
-	@SideOnly(Side.CLIENT)
-	public float animProgress;
-	@SideOnly(Side.CLIENT)
-	public int animDir;
-
 	private int shaftState;
 	private int churns;
 	private DeviceFluidSlot inputFluidSlot = new DeviceFluidSlot(this, 0);
@@ -64,6 +59,10 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 			// buttermilk
 			new FluidTank(1000)
 		};
+	}
+	
+	public int getShaftState() {
+		return shaftState;
 	}
 
 	@Override
@@ -94,28 +93,6 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	public boolean canExtractItem(int index, ItemStack stack, EnumFacing side)
 	{
 		return accessibleSlots.sideContains(side, index);
-	}
-
-	@Override
-	public void update()
-	{
-		if (world.isRemote)
-		{
-			final float step = 1.0f / 5.0f;
-			if (shaftState == 0)
-			{
-				this.animDir = -1;
-			}
-			else
-			{
-				this.animDir = 1;
-			}
-
-			if (animDir > 0 && animProgress < 1.0f || animDir < 0 && animProgress > 0)
-			{
-				this.animProgress = MathHelper.clamp(this.animProgress + step * animDir, 0.0f, 1.0f);
-			}
-		}
 	}
 
 	private IChurnRecipe getWorkingRecipe()

@@ -2,6 +2,7 @@ package growthcraft.milk.init;
 
 import growthcraft.milk.Reference;
 import growthcraft.milk.blocks.*;
+import growthcraft.milk.client.render.RenderButterChurnPlunger;
 import growthcraft.milk.client.render.RenderCheesePress;
 import growthcraft.milk.client.render.RenderCheeseVat;
 import growthcraft.milk.client.render.RenderPancheon;
@@ -123,5 +124,6 @@ public class GrowthcraftMilkBlocks {
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPancheon.class, new RenderPancheon());
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheeseVat.class, new RenderCheeseVat());
     	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCheesePress.class, new RenderCheesePress());
+    	ClientRegistry.bindTileEntitySpecialRenderer(TileEntityButterChurnPlunger.class, new RenderButterChurnPlunger());
     }
 }
