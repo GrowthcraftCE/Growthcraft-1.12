@@ -5,12 +5,12 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
 import growthcraft.core.common.block.IRotatableBlock;
 import growthcraft.milk.Reference;
 import growthcraft.milk.common.tileentity.TileEntityButterChurnPlunger;
+import growthcraft.milk.init.GrowthcraftMilkBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -161,7 +161,7 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 	
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return GrowthcraftCellarBlocks.fruitPress.getBlock() == world.getBlockState(pos.down()).getBlock();
+		return GrowthcraftMilkBlocks.churn.getBlock() == world.getBlockState(pos.down()).getBlock();
 	}
 	
 	@Override
