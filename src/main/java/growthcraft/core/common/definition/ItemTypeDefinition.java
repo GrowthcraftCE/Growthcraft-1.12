@@ -68,20 +68,30 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
     
     public <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerRenders(Class<ET> clazz) {
     	ET[] values = clazz.getEnumConstants();
+    	registerRenders(values);
+    }
+    
+    @SuppressWarnings("unchecked")
+	public <ET extends IObjectVariant & IStringSerializable> void registerRenders(ET ... variants) {
     	ResourceLocation itemResloc = getItem().getRegistryName();
     	
-    	for( ET type : values ) {
+    	for( ET type : variants ) {
     		registerRender(type.getVariantID(), itemResloc.getResourcePath() + "_" + type.getName() );
     	}
     }
     
     public <ET extends Enum<?> & IStringSerializable> void registerModelBakeryVariants(Class<ET> clazz) {
     	ET[] values = clazz.getEnumConstants();
+    	registerModelBakeryVariants(values);
+    }
+    
+    @SuppressWarnings("unchecked")
+	public <ET extends IStringSerializable> void registerModelBakeryVariants(ET ... variants) {
     	ResourceLocation itemResloc = getItem().getRegistryName();
-    	ResourceLocation reslocs[] = new ResourceLocation[values.length];
+    	ResourceLocation reslocs[] = new ResourceLocation[variants.length];
     	
     	for( int i = 0; i < reslocs.length; i ++ ) {
-    		ET type = values[i]; 
+    		ET type = variants[i]; 
     		reslocs[i] = new ResourceLocation(itemResloc.getResourceDomain(), itemResloc.getResourcePath() + "_" + type.getName() );	
     	}
     	
