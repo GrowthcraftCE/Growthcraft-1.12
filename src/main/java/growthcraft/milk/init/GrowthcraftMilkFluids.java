@@ -301,7 +301,7 @@ public class GrowthcraftMilkFluids {
 			.brewsFrom(skimMilk.asFluidStack(250), new ItemStack(Items.SUGAR), TickUtils.minutes(1), new Residue(GrowthcraftMilkItems.starterCulture.asStack(1), 1.0f));
 
 		GrowthcraftCellar.boozeBuilderFactory.create(skimMilk.getFluid())
-			.culturesTo(250, GrowthcraftMilkItems.starterCulture.asStack(), 0.7f, TickUtils.seconds(10));
+			.culturesTo(250, GrowthcraftMilkItems.starterCulture.asStack(), 0.6f, TickUtils.seconds(12));
 
 		GrowthcraftMilk.userApis.churnRecipes.addDefault(
 				cream.asFluidStack(roundToBottles(1000)),
