@@ -26,8 +26,8 @@ public class GrowthcraftCoreBlocks {
     }
 
     public static void  registerRenders() {
-    	salt_block.registerRender();
-    	rope_fence.registerRender();
-    	rope_knot.registerRender();
+    	salt_block.registerItemRender();
+    	rope_fence.registerItemRender();
+    	rope_knot.registerItemRender();
     }
 }

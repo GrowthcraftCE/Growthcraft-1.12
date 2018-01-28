@@ -31,7 +31,7 @@ public class GrowthcraftFishtrapBlocks {
 
     public static void  registerRenders() {
         // registerRender(fishtrap);
-    	fishtrap.registerRender();
+    	fishtrap.registerItemRender();
     }
     
 /*

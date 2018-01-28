@@ -28,8 +28,8 @@ public class GrowthcraftGrapesBlocks {
     }
 
     public static void  registerRenders() {
-    	grape_vine.registerRender();
-    	grape_vine_bush.registerRender();
-    	grape_vine_fruit.registerRender();
+    	grape_vine.registerItemRender();
+    	grape_vine_bush.registerItemRender();
+    	grape_vine_fruit.registerItemRender();
     }
 }

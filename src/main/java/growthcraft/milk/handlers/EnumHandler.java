@@ -58,7 +58,7 @@ public class EnumHandler {
 		}
     }
 
-    public enum IceCreamTypes implements IStringSerializable {
+    public enum IceCreamTypes implements IStringSerializable, IObjectVariant {
         PLAIN(0, "plain"),
         CHOCOLATE(1, "chocolate"),
         GRAPE(2, "grape"),
@@ -84,12 +84,13 @@ public class EnumHandler {
             return this.NAME;
         }
 
-        public int getID() {
+		@Override
+        public int getVariantID() {
             return this.ID;
         }
     }
 
-    public enum YogurtTypes implements IStringSerializable {
+    public enum YogurtTypes implements IStringSerializable, IObjectVariant {
         PLAIN(0, "plain"),
         CHOCOLATE(1, "chocolate"),
         GRAPE(2, "grape"),
@@ -115,10 +116,11 @@ public class EnumHandler {
             return this.NAME;
         }
 
-        public int getID() {
+		@Override
+        public int getVariantID() {
             return this.ID;
         }
-    }
+	}
 
     public enum WaxedCheeseTypes implements ICheeseType, IObjectVariant, IStringSerializable {
         CHEDDAR(0, "cheddar", 0xed9200),
@@ -169,7 +171,8 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemWaxedCheeseSlice,size,getVariantID());
+					// return new ItemStack(GrowthcraftMilkItems.itemWaxedCheeseSlice,size,getVariantID());
+					return GrowthcraftMilkItems.waxedCheeseSlice.asStack(size, getVariantID());
 				}
 			};
 		}
@@ -259,7 +262,8 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getVariantID());
+//					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getVariantID());
+					return GrowthcraftMilkItems.simpleCheeseSlice.asStack(size, getVariantID());
 				}
 			};
 		}
@@ -342,7 +346,8 @@ public class EnumHandler {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getVariantID());
+//					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getVariantID());
+					return GrowthcraftMilkItems.agedCheeseSlice.asStack(size, getVariantID());
 				}
 			};
 		}

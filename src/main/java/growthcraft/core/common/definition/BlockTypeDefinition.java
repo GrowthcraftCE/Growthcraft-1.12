@@ -140,13 +140,13 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	/**
 	 * @param name - block name
 	 */
-	public void registerRender()
+	public void registerItemRender()
 	{
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(getBlock()), 0, new ModelResourceLocation(
                 getBlock().getRegistryName(), "inventory"));
 	}
 	
-    public void registerRender(int meta, String fileName){
+    public void registerItemRender(int meta, String fileName){
     	String modID = getBlock().getRegistryName().getResourceDomain();
     	
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(getBlock()), meta,

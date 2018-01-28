@@ -65,15 +65,15 @@ public class GrowthcraftBambooBlocks {
     }
 
     public static void  registerRenders() {
-    	bambooPlank.registerRender();
-    	bambooSlabHalf.registerRender();
-    	bambooStairs.registerRender();
-    	bambooFence.registerRender();
-    	bambooFenceGate.registerRender();
-    	bambooLeaves.registerRender();
-    	bambooStalk.registerRender();
-    	bambooShoot.registerRender();
-    	blockBambooDoor.registerRender();
+    	bambooPlank.registerItemRender();
+    	bambooSlabHalf.registerItemRender();
+    	bambooStairs.registerItemRender();
+    	bambooFence.registerItemRender();
+    	bambooFenceGate.registerItemRender();
+    	bambooLeaves.registerItemRender();
+    	bambooStalk.registerItemRender();
+    	bambooShoot.registerItemRender();
+    	blockBambooDoor.registerItemRender();
     }
 
     public static void registerBlockColorHandlers() {

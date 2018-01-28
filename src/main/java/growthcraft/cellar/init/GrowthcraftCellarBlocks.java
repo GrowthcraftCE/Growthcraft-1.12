@@ -57,11 +57,10 @@ public class GrowthcraftCellarBlocks {
     }
 
     public static void registerRenders() {
-        brewKettle.registerRender();
-        fermentBarrel.registerRender();
-        cultureJar.registerRender();
-        fruitPress.registerRender();
-        fruitPresser.registerRender();
+        brewKettle.registerItemRender();
+        fermentBarrel.registerItemRender();
+        cultureJar.registerItemRender();
+        fruitPress.registerItemRender();
     }
     
     public static void registerSpecialRenders() {

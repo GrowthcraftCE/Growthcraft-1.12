@@ -70,16 +70,16 @@ public class GrowthcraftApplesBlocks {
     }
 
     public static void registerRenders() {
-    	blockApple.registerRender();
-    	blockAppleDoor.registerRender();
-    	blockAppleFence.registerRender();
-    	blockAppleFenceGate.registerRender();
-    	blockAppleLeaves.registerRender();
-    	blockAppleLog.registerRender();
-    	blockAppleSapling.registerRender();
-    	blockApplePlanks.registerRender();
-    	blockAppleStairs.registerRender();
-    	blockAppleSlabHalf.registerRender();
+    	blockApple.registerItemRender();
+    	blockAppleDoor.registerItemRender();
+    	blockAppleFence.registerItemRender();
+    	blockAppleFenceGate.registerItemRender();
+    	blockAppleLeaves.registerItemRender();
+    	blockAppleLog.registerItemRender();
+    	blockAppleSapling.registerItemRender();
+    	blockApplePlanks.registerItemRender();
+    	blockAppleStairs.registerItemRender();
+    	blockAppleSlabHalf.registerItemRender();
     }
 
     public static void registerBlockColorHandlers() {

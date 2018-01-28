@@ -1,23 +1,17 @@
 package growthcraft.milk.init;
 
-import growthcraft.milk.Reference;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.handlers.EnumHandler;
 import growthcraft.milk.handlers.EnumHandler.AgedCheeseTypes;
+import growthcraft.milk.handlers.EnumHandler.IceCreamTypes;
 import growthcraft.milk.handlers.EnumHandler.SimpleCheeseTypes;
 import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
+import growthcraft.milk.handlers.EnumHandler.YogurtTypes;
 import growthcraft.milk.items.*;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary;
-import scala.actors.threadpool.Arrays;
-
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 import growthcraft.core.GrowthcraftCore;
@@ -26,63 +20,64 @@ import growthcraft.core.common.definition.ItemDefinition;
 public class GrowthcraftMilkItems {
 
     public static ItemDefinition stomach;
-    public static Item thistle_seed;
+    public static ItemDefinition thistleSeed;
     public static ItemDefinition thistle;
     public static ItemDefinition cheeseCloth;
     public static ItemDefinition butter;
-    public static Item itemIceCream;
-    public static Item itemYogurt;
+    public static ItemDefinition iceCream;
+    public static ItemDefinition yogurt;
     public static ItemDefinition starterCulture;
-    public static Item itemAgedCheeseSlice;
+    public static ItemDefinition agedCheeseSlice;
     public static ItemDefinition agedCheeseBlockItem;
     public static ItemDefinition waxedCheeseBlockItem;
-    public static Item itemWaxedCheeseSlice;
-    public static Item itemSimpleCheeseSlice;
+    public static ItemDefinition waxedCheeseSlice;
+    public static ItemDefinition simpleCheeseSlice;
     public static ItemDefinition agedCheeseCurdsItem;
     public static ItemDefinition waxedCheeseCurdsItem;
     public static ItemDefinition simpleCheeseCurdsItem;
 
     public static void preInit() {
         thistle = new ItemDefinition( new ItemThistle("thistle") );
-        thistle_seed = new ItemSeedThistle("thistle_seed");
+        thistleSeed = new ItemDefinition( new ItemSeedThistle("thistle_seed") );
         stomach = new ItemDefinition(new ItemStomach("stomach") );
         cheeseCloth = new ItemDefinition( new ItemCheeseCloth("cheese_cloth") );
         starterCulture = new ItemDefinition( new ItemStarterCulture("starter_culture") );
         butter = new ItemDefinition( new ItemButter("butter", 2, 0.3F, false) );
-        itemIceCream = new ItemIceCream("ice_cream", 2, 0.3F, false);
-        itemYogurt = new ItemYogurt("yogurt", 2, 0.3F, false);
-        itemAgedCheeseSlice = new ItemAgedCheeseSlice("cheese_aged_slice", 2, 0.3F, false);
+        iceCream = new ItemDefinition( new ItemIceCream("ice_cream", 2, 0.3F, false) );
+        yogurt = new ItemDefinition( new ItemYogurt("yogurt", 2, 0.3F, false) );
+        agedCheeseSlice = new ItemDefinition( new ItemAgedCheeseSlice("cheese_aged_slice", 2, 0.3F, false) );
         agedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock(), AgedCheeseTypes.values()) );
         waxedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock(), WaxedCheeseTypes.values()) );
-        itemWaxedCheeseSlice = new ItemWaxedCheeseSlice("cheese_waxed_slice", 2, 0.3F, false);
-        itemSimpleCheeseSlice = new ItemSimpleCheeseSlice("cheese_simple_slice", 2, 0.3F, false);
+        waxedCheeseSlice = new ItemDefinition( new ItemWaxedCheeseSlice("cheese_waxed_slice", 2, 0.3F, false) );
+        simpleCheeseSlice = new ItemDefinition( new ItemSimpleCheeseSlice("cheese_simple_slice", 2, 0.3F, false) );
         agedCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseCurds.getBlock(), AgedCheeseTypes.values()) );
         waxedCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseCurds.getBlock(), WaxedCheeseTypes.values()) );
         simpleCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<SimpleCheeseTypes>(GrowthcraftMilkBlocks.simpleCheeseCurds.getBlock(), SimpleCheeseTypes.values()) );
     }
 
     public static void register() {
-        // registerItem(thistle);
     	thistle.getItem().setCreativeTab(tabGrowthcraft);
     	thistle.register();
-        registerItem(thistle_seed);
-        // registerItem(itemStomach);
+    	thistleSeed.getItem().setCreativeTab(tabGrowthcraft);
+    	thistleSeed.register();
         stomach.getItem().setCreativeTab(tabGrowthcraft);
         stomach.register();
-//       registerItem(itemCheeseCloth);
         cheeseCloth.getItem().setCreativeTab(tabGrowthcraft);
         cheeseCloth.register();
-//        registerItem(itemStarterCulture);
         starterCulture.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
         starterCulture.register();
-        // registerItem(itemButter);
         butter.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
         butter.register();
-        registerItem(itemIceCream);
-        registerItem(itemYogurt);
-        registerItem(itemAgedCheeseSlice);
-        registerItem(itemWaxedCheeseSlice);
-        registerItem(itemSimpleCheeseSlice);
+        iceCream.getItem().setCreativeTab(tabGrowthcraft);
+        iceCream.register();
+        yogurt.getItem().setCreativeTab(tabGrowthcraft);
+        yogurt.register();
+        agedCheeseSlice.getItem().setCreativeTab(tabGrowthcraft);
+        agedCheeseSlice.register();
+        waxedCheeseSlice.getItem().setCreativeTab(tabGrowthcraft);
+        waxedCheeseSlice.register();
+        simpleCheeseSlice.getItem().setCreativeTab(tabGrowthcraft);
+        simpleCheeseSlice.register();
         agedCheeseBlockItem.register(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock().getRegistryName() /*new ResourceLocation(Reference.MODID, "cheese_aged")*/);
         waxedCheeseBlockItem.register(GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock().getRegistryName());
         agedCheeseCurdsItem.register(GrowthcraftMilkBlocks.agedCheeseCurds.getBlock().getRegistryName());
@@ -103,40 +98,18 @@ public class GrowthcraftMilkItems {
 	}
 
     public static void registerRenders() {
-        // registerRender(thistle);
     	thistle.registerRender();
-        registerRender(thistle_seed);
-        // registerRender(itemStomach);
+    	thistleSeed.registerRender();
         stomach.registerRender();
-        // registerRender(itemCheeseCloth);
         cheeseCloth.registerRender();
-        // registerRender(itemStarterCulture);
         starterCulture.registerRender();
 
-//        for (int i = 0; i < EnumHandler.ButterTypes.values().length; i++) {
-//            registerRender(itemButter, i, "butter/butter_" + EnumHandler.ButterTypes.values()[i].getName());
-//        }
         butter.registerRenders(EnumHandler.ButterTypes.class);
-
-        for (int i = 0; i < EnumHandler.IceCreamTypes.values().length; i++) {
-            registerRender(itemIceCream, i, "ice_cream/ice_cream_" + EnumHandler.IceCreamTypes.values()[i].getName());
-        }
-
-        for (int i = 0; i < EnumHandler.YogurtTypes.values().length; i++) {
-            registerRender(itemYogurt, i, "yogurt/yogurt_" + EnumHandler.YogurtTypes.values()[i].getName());
-        }
-
-        for (int i = 0; i < EnumHandler.AgedCheeseTypes.values().length; i++) {
-            registerRender(itemAgedCheeseSlice, i, "cheese_slice/" + EnumHandler.AgedCheeseTypes.values()[i].getName());
-        }
-
-        for (int i = 0; i < EnumHandler.WaxedCheeseTypes.values().length; i++) {
-            registerRender(itemWaxedCheeseSlice, i, "cheese_slice/" + EnumHandler.WaxedCheeseTypes.values()[i].getName());
-        }
-
-        for (int i = 0; i < EnumHandler.SimpleCheeseTypes.values().length; i++) {
-            registerRender(itemSimpleCheeseSlice, i, "cheese_slice/" + EnumHandler.SimpleCheeseTypes.values()[i].getName());
-        }
+        iceCream.registerRenders(IceCreamTypes.class);
+        yogurt.registerRenders(YogurtTypes.class);
+        agedCheeseSlice.registerRenders(AgedCheeseTypes.class);
+        waxedCheeseSlice.registerRenders(WaxedCheeseTypes.class);
+        simpleCheeseSlice.registerRenders(SimpleCheeseTypes.class);
         
 //        agedCheeseBlockItem.registerRenders(AgedCheeseTypes.class);
     }
@@ -145,19 +118,6 @@ public class GrowthcraftMilkItems {
 		butter.registerModelBakeryVariants(EnumHandler.ButterTypes.class);
 //		agedCheeseBlockItem.registerModelBakeryVariants(AgedCheeseTypes.class);
 	}
-
-    public static void registerItem(Item item) {
-        item.setCreativeTab(tabGrowthcraft);
-        GameRegistry.register(item);
-    }
-
-    public static void  registerRender(Item item) {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(Reference.MODID, item.getUnlocalizedName().substring(5)), "inventory"));
-    }
-
-    public static void registerRender(Item item, int meta, String fileName) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    }
 
 	public static boolean canWax(WaxedCheeseTypes type, ItemStack stack) {
 		String oreName;

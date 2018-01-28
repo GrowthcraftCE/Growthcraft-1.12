@@ -3,24 +3,6 @@
     "normal": {
       "model": "growthcraft_milk:cheese_vat_empty"
     },
-    "level=0": {
-      "model": "growthcraft_milk:cheese_vat_empty"
-    },
-    "level=1": {
-      "model": "growthcraft_milk:cheese_vat_empty"
-    },
-    "level=2": {
-      "model": "growthcraft_milk:cheese_vat_empty"
-    },
-    "level=3": {
-      "model": "growthcraft_milk:cheese_vat_empty"
-    },
-    "level=4": {
-      "model": "growthcraft_milk:cheese_vat_empty"
-    },
-    "level=5": {
-      "model": "growthcraft_milk:cheese_vat_empty"
-    },
     "rotation=north": {
       "model": "growthcraft_milk:cheese_vat_empty"
     },

@@ -28,7 +28,7 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
     }
 
     protected Item getSeed() {
-        return GrowthcraftMilkItems.thistle_seed;
+        return GrowthcraftMilkItems.thistleSeed.getItem();
     }
 
     protected Item getCrop() {

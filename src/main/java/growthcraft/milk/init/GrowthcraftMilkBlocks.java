@@ -98,17 +98,16 @@ public class GrowthcraftMilkBlocks {
     }
     
     public static void registerRenders() {
-    	thistle.registerRender();
-    	cheeseVat.registerRender();
-        pancheon.registerRender();
-        churn.registerRender();
-        churnPlunger.registerRender();
-        cheesePress.registerRender();
-        agedCheeseBlock.registerRender();
-        waxedCheeseBlock.registerRender();
-        agedCheeseCurds.registerRender();
-        waxedCheeseCurds.registerRender();
-        simpleCheeseCurds.registerRender();
+    	thistle.registerItemRender();
+    	cheeseVat.registerItemRender();
+        pancheon.registerItemRender();
+        churn.registerItemRender();
+        cheesePress.registerItemRender();
+        agedCheeseBlock.registerItemRender();
+        waxedCheeseBlock.registerItemRender();
+        agedCheeseCurds.registerItemRender();
+        waxedCheeseCurds.registerItemRender();
+        simpleCheeseCurds.registerItemRender();
     }
     
     public static void registerTileEntities() {

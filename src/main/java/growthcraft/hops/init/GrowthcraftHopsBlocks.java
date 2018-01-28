@@ -22,9 +22,9 @@ public class GrowthcraftHopsBlocks {
 
     public static void  registerRenders() {
         // registerRender(block_hops);
-    	block_hops.registerRender();
+    	block_hops.registerItemRender();
         // registerRender(hops_bush);
-    	hops_bush.registerRender();
+    	hops_bush.registerItemRender();
     }
 
 /*    public static void registerBlock(Block block, boolean setCreativeTab, boolean registerItemBlock ) {
