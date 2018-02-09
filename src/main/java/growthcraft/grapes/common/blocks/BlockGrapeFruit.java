@@ -123,7 +123,7 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return GrowthcraftGrapesItems.grapes.asStack();
+		return GrowthcraftGrapesItems.grape.asStack();
 	}
 
 	@Override
@@ -138,7 +138,7 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return GrowthcraftGrapesItems.grapes.getItem();
+		return GrowthcraftGrapesItems.grape.getItem();
 	}
 
 	@Override

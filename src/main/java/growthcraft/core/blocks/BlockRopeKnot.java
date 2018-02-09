@@ -1,11 +1,14 @@
 package growthcraft.core.blocks;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Nullable;
+
 import growthcraft.core.Reference;
 import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.tileentity.TileEntityRopeKnot;
-import growthcraft.grapes.blocks.BlockGrapeVineBush;
-import growthcraft.hops.blocks.BlockHopsBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -27,10 +30,6 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.Random;
 
 public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockRope {
 

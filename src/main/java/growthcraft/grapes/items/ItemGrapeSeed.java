@@ -16,7 +16,7 @@ import java.util.List;
 public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
 
     public ItemGrapeSeed(String unlocalizedName) {
-        super(GrowthcraftGrapesBlocks.grape_vine.getBlock(), Blocks.FARMLAND);
+        super(GrowthcraftGrapesBlocks.grapeVine0.getBlock(), Blocks.FARMLAND);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }

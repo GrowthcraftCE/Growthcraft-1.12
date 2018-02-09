@@ -1,10 +1,10 @@
 package growthcraft.core.blocks;
 
+import java.util.Random;
+
 import growthcraft.core.Reference;
 import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.init.GrowthcraftCoreItems;
-import growthcraft.grapes.blocks.BlockGrapeVineBush;
-import growthcraft.hops.blocks.BlockHopsBush;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -18,8 +18,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockRopeFence extends Block implements IBlockRope {
 
