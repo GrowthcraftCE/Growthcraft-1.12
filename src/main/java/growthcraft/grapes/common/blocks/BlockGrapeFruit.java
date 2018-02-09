@@ -113,7 +113,7 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	 ************/
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return GrowthcraftGrapesBlocks.grapeLeaves.getBlock() == world.getBlock(pos.up());
+		return GrowthcraftGrapesBlocks.grapeLeaves.getBlock() == world.getBlockState(pos.up()).getBlock();
 	}
 	
 	/************
@@ -154,10 +154,10 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 		final int count = quantityDropped(rand);
 		for(int i = 0; i < count; ++i)
 		{
-			final Item item = getItemDropped(metadata, rand, fortune);
+			final Item item = getItemDropped(state, rand, fortune);
 			if (item != null)
 			{
-				ret.add(new ItemStack(item, 1, damageDropped(metadata)));
+				ret.add(new ItemStack(item, 1, damageDropped(state)));
 			}
 			if (rand.nextInt(bayanusDropRarity) == 0)
 			{
