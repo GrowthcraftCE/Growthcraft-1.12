@@ -140,7 +140,7 @@ public class BlockCheck
 	 */
 	public static boolean isRope(Block block)
 	{
-		return GrowthcraftCoreBlocks.rope_knot.equals(block);
+		return GrowthcraftCoreBlocks.rope_fence.equals(block);
 	}
 
 	/**

@@ -296,7 +296,7 @@ public abstract class BlockGrapeVineBase extends GrowthcraftBlockBase implements
 		super.updateTick(worldIn, pos, state, rand);
 		if (canUpdateGrowth(worldIn, pos))
 		{
-			final Event.Result allowGrowthResult = Event.Result.ALLOW; // TODO: AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			final Event.Result allowGrowthResult = Event.Result.DEFAULT; // TODO: AppleCore.validateGrowthTick(this, world, x, y, z, random);
 			if (Event.Result.DENY == allowGrowthResult)
 				return;
 

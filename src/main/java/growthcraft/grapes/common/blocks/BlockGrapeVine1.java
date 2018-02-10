@@ -64,7 +64,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 		if (BlockCheck.isRope(above.getBlock()))
 		{
 			incrementGrowth(world, pos, state);
-			world.setBlockState(posAbove, GrowthcraftGrapesBlocks.grapeLeaves.getDefaultState().withProperty(AGE, 0), BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockState(posAbove, GrowthcraftGrapesBlocks.grapeLeaves.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (world.isAirBlock(posAbove))
 		{
