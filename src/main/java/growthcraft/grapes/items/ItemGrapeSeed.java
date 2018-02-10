@@ -41,6 +41,19 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
         super.addInformation(stack, playerIn, tooltip, advanced);
         tooltip.add(TextFormatting.GRAY + I18n.format("item.grape_seed.tooltip"));
     }
+    
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+    for (int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
+    	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+        if ( stack.getItemDamage() == type.getVariantID() ) {
+            return  this.getUnlocalizedName() + "." + type.getName();
+        } else {
+            continue;
+        }
+    }
+    return super.getUnlocalizedName() + "." + EnumHandler.GrapeTypes.PURPLE.getName();
+}
 
     /**
      * Called when a Block is right-clicked with this Item
