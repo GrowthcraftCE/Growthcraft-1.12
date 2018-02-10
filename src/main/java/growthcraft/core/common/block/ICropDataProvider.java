@@ -1,5 +1,7 @@
 package growthcraft.core.common.block;
 
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 /**
@@ -7,5 +9,5 @@ import net.minecraft.world.IBlockAccess;
  */
 public interface ICropDataProvider
 {
-	public float getGrowthProgress(IBlockAccess world, int x, int y, int z, int meta);
+	public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state);
 }

@@ -11,6 +11,7 @@ import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -51,6 +52,10 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
     
+	@Override
+	public int getMaxAge() {
+		return 1;
+	}
 	
 	/************
 	 * TICK

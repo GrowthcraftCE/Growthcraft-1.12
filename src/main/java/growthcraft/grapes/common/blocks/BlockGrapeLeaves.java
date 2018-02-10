@@ -183,7 +183,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 			return;
 		if (!this.canBlockStay(worldIn, pos, state))
 		{
-			worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
+			worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_fence.getDefaultState());
 		}
 		else
 		{

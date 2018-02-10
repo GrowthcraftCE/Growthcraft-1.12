@@ -43,6 +43,11 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
+    
+	@Override
+	public int getMaxAge() {
+		return 1;
+	}
 
 	/************
 	 * TICK
@@ -71,11 +76,18 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 			incrementGrowth(world, pos, state);
 			world.setBlockState(posAbove, getDefaultState().withProperty(AGE, 0), BlockFlags.UPDATE_AND_SYNC);
 		}
-		else if (GrowthcraftGrapesBlocks.grapeLeaves.getBlock() == above)
+		else if (GrowthcraftGrapesBlocks.grapeLeaves.getBlock() == above.getBlock())
 		{
 			incrementGrowth(world, pos, state);
 		}
 	}
+	
+    @Override
+    protected boolean canSustainBush(IBlockState state)
+    {
+    	return state.getBlock() == Blocks.FARMLAND || state.getBlock() instanceof BlockGrapeVine1;
+    }
+
 
 	@Override
 	protected float getGrowthRate(World world, BlockPos pos)
@@ -90,11 +102,11 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	/************
 	 * CONDITIONS
 	 ************/
-	@Override
+/*	@Override
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
 		BlockPos down = pos.down();
 		return BlockCheck.canSustainPlant(world, down, EnumFacing.UP, this) ||
 			this == world.getBlockState(down).getBlock();
-	}
+	} */
 }
