@@ -46,7 +46,7 @@ public class EnumHandler {
         }
         
         @Override
-        public int getGrapeSubTypeID() {
+        public int getPlantSubTypeID() {
         	return ordinal();
         }
         

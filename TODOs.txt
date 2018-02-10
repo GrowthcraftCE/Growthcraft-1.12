@@ -43,6 +43,7 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
+TODO: Seed drops from grapes.
 TODO: Crafting Recipes for Cellar.
 TODO: Crafting Recipes for Milk.
 TODO: Crafting Recipes for Core.

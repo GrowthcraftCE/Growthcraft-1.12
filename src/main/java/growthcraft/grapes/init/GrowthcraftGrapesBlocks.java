@@ -21,17 +21,17 @@ public class GrowthcraftGrapesBlocks {
 	public static BlockTypeDefinition<BlockGrapeVine0> grapeVine0;
 	public static BlockTypeDefinition<BlockGrapeVine1> grapeVine1;
 	public static BlockTypeDefinition<BlockGrapeLeaves> grapeLeaves;
-	public static BlockDefinition grapeFruit;
+	public static BlockTypeDefinition<BlockGrapeFruit> grapeFruit;
 	
     public static void init() {
 //        grape_vine = new BlockDefinition( new BlockGrapeVine("grape_vine") );
 //        grape_vine_bush = new BlockDefinition( new BlockGrapeVineBush("grape_vine_bush") );
 //        grape_vine_fruit = new BlockDefinition( new BlockGrapeVineFruit() );
     	
-		grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0());
-		grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1());
-		grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves());
-		grapeFruit  = new BlockDefinition(new BlockGrapeFruit(GrapeTypes.values()));
+		grapeFruit  = new BlockTypeDefinition<BlockGrapeFruit>(new BlockGrapeFruit(GrapeTypes.values()));
+		grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves(grapeFruit.getBlock()));
+		grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1(grapeLeaves.getBlock()));
+		grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0(grapeVine1.getBlock()));
     	
         grapeWineFluidBlocks = null; // Is initialized in GrowthcraftGrapesFluids
     }

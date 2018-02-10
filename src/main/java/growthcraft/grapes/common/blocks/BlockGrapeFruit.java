@@ -11,10 +11,7 @@ import growthcraft.cellar.handlers.EnumHandler.EnumYeast;
 import growthcraft.core.common.block.GrowthcraftBlockBase;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
-import growthcraft.grapes.Reference;
 import growthcraft.grapes.api.definition.IGrapeType;
-import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
-import growthcraft.grapes.init.GrowthcraftGrapesItems;
 import growthcraft.grapes.utils.GrapeTypeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -28,7 +25,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -125,7 +121,7 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	 ************/
 	public boolean canBlockStay(World world, BlockPos pos)
 	{
-		return GrowthcraftGrapesBlocks.grapeLeaves.getBlock() == world.getBlockState(pos.up()).getBlock();
+		return world.getBlockState(pos.up()).getBlock() instanceof BlockGrapeLeaves;
 	}
 	
 	/************
@@ -161,7 +157,6 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
 		ItemStack stack = getFruitItemStackForBlock(state);
-//		return GrowthcraftGrapesItems.grape.getItem();
 		return !ItemUtils.isEmpty(stack)? stack.getItem() : null;
 	}
 

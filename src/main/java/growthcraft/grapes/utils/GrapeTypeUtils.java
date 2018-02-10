@@ -7,7 +7,7 @@ public class GrapeTypeUtils {
 	
 	public static IGrapeType getTypeBySubID(IGrapeType[] types, int subID) {
 		for( IGrapeType type : types ) {
-			if( type.getGrapeSubTypeID() == subID )
+			if( type.getPlantSubTypeID() == subID )
 				return type;
 		}
 		

@@ -12,14 +12,11 @@ import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
-import growthcraft.grapes.Reference;
-import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
 import growthcraft.grapes.utils.GrapeBlockCheck;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -28,7 +25,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -45,7 +41,9 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	
 	private static final PropertyInteger SUBTYPE = BlockGrapeVineBase.SUBTYPE;
 	
-	public BlockGrapeLeaves(/*String unlocalizedName*/) {
+	private final BlockGrapeFruit blockFruit;
+	
+	public BlockGrapeLeaves(BlockGrapeFruit blockFruit/*String unlocalizedName*/) {
 		super();
 //        this.setUnlocalizedName(unlocalizedName);
 //        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -54,6 +52,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		setHardness(0.2F);
 		setLightOpacity(1);
 		setSoundType(SoundType.PLANT);
+		
+		this.blockFruit = blockFruit;
     }
 	
     @Override
@@ -134,7 +134,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	private void setGrapeBlock(World world, BlockPos pos, IBlockState state)
 	{
 		int type = state.getValue(SUBTYPE);
-		world.setBlockState(pos, GrowthcraftGrapesBlocks.grapeFruit.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
+		world.setBlockState(pos, blockFruit.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 	}
 	
 	@Override

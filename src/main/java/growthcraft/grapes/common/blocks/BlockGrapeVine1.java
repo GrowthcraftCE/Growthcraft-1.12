@@ -7,14 +7,9 @@ import javax.annotation.Nullable;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
-import growthcraft.grapes.Reference;
-import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -24,9 +19,11 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
 	
-	public static final int MAX_GROWTH_HEIGHT = 5;
+	public static final int MAX_GROWTH_HEIGHT = 5-1;	// 1 for the rope
 	
-	public BlockGrapeVine1(/*String unlocalizedName*/) {
+	private final BlockGrapeLeaves blockLeaves;
+	
+	public BlockGrapeVine1(BlockGrapeLeaves blockLeaves/*String unlocalizedName*/) {
 		super();
 //        this.setUnlocalizedName(unlocalizedName);
 //        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -34,6 +31,8 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 		setTickRandomly(true);
 		setHardness(2.0F);
 		setResistance(5.0F);
+		
+		this.blockLeaves = blockLeaves;
 	}
 	
     @Override
@@ -85,13 +84,16 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 		if (BlockCheck.isRope(above.getBlock()))
 		{
 			incrementGrowth(world, pos, state);
-			world.setBlockState(posAbove, GrowthcraftGrapesBlocks.grapeLeaves.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockState(posAbove, blockLeaves.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (world.isAirBlock(posAbove))
 		{
 			if( canGrowHigher(world, pos, state) ) {
+				final IBlockState aboveAbove = world.getBlockState(posAbove.up());
+				boolean connectToLeaves = aboveAbove.getBlock() instanceof BlockGrapeLeaves;
+				
 				incrementGrowth(world, pos, state);
-				world.setBlockState(posAbove, getDefaultState().withProperty(AGE, 0).withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
+				world.setBlockState(posAbove, getDefaultState().withProperty(AGE, !connectToLeaves? 0 : getMaxAge()).withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 			}
 		}
 		else if (/*GrowthcraftGrapesBlocks.grapeLeaves.getBlock() ==*/ above.getBlock() instanceof BlockGrapeLeaves)

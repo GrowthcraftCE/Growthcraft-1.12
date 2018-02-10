@@ -55,7 +55,7 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
         	IGrapeType type = GrapeTypeUtils.getTypeByVariantID(GrapeTypes.values(), itemstack.getMetadata());
         	if( type == null )
         		return EnumActionResult.FAIL;
-        	IBlockState plantState = getPlant(worldIn, pos).withProperty(BlockGrapeVineBase.SUBTYPE, type.getGrapeSubTypeID());
+        	IBlockState plantState = getPlant(worldIn, pos).withProperty(BlockGrapeVineBase.SUBTYPE, type.getPlantSubTypeID());
 
         	worldIn.setBlockState(pos.up(), plantState);
             itemstack.shrink(1);

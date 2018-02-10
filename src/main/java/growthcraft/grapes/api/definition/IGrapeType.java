@@ -4,10 +4,10 @@ import growthcraft.core.api.definition.IItemStackFactory;
 import growthcraft.core.api.definition.IObjectVariant;
 
 public interface IGrapeType extends IItemStackFactory, IObjectVariant {
-	int getGrapeSubTypeID();
+	int getPlantSubTypeID();
 	
 	@Override
 	default int getVariantID() {
-		return getGrapeSubTypeID();
+		return getPlantSubTypeID();
 	}
 }
