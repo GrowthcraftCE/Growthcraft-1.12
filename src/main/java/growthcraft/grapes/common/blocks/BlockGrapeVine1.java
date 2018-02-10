@@ -24,10 +24,12 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
 	
-	public BlockGrapeVine1(String unlocalizedName) {
+	public static final int MAX_GROWTH_HEIGHT = 5;
+	
+	public BlockGrapeVine1(/*String unlocalizedName*/) {
 		super();
-        this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+//        this.setUnlocalizedName(unlocalizedName);
+//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineTrunkGrowthRate);
 		setTickRandomly(true);
 		setHardness(2.0F);
@@ -56,8 +58,21 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	protected boolean canUpdateGrowth(World world, BlockPos pos)
 	{
 		IBlockState state = world.getBlockState(pos);
+		IBlockState stateAbove = world.getBlockState(pos.up());
 		int age = getAge(state);
-		return age == 0 || world.isAirBlock(pos.up());
+		
+		boolean isLeavesOrRopeAbove = (stateAbove.getBlock() instanceof BlockGrapeLeaves) || BlockCheck.isRope(stateAbove.getBlock());
+		boolean mayGrowHigher = world.isAirBlock(pos.up()) && canGrowHigher(world, pos, state);
+		return (age == 0 && isLeavesOrRopeAbove) || mayGrowHigher || isLeavesOrRopeAbove;
+	}
+	
+	public boolean canGrowHigher(World world, BlockPos pos, IBlockState state) {
+		for( int i = 1; i < MAX_GROWTH_HEIGHT; i ++ ) {
+			if( !(world.getBlockState(pos.down(i)).getBlock() instanceof BlockGrapeVine1) )
+				return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -65,18 +80,21 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	{
 		final BlockPos posAbove = pos.up();
 		final IBlockState above = world.getBlockState(posAbove);
+		final int type = state.getValue(SUBTYPE);
 		/* Is there a rope block above this? */
 		if (BlockCheck.isRope(above.getBlock()))
 		{
 			incrementGrowth(world, pos, state);
-			world.setBlockState(posAbove, GrowthcraftGrapesBlocks.grapeLeaves.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+			world.setBlockState(posAbove, GrowthcraftGrapesBlocks.grapeLeaves.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (world.isAirBlock(posAbove))
 		{
-			incrementGrowth(world, pos, state);
-			world.setBlockState(posAbove, getDefaultState().withProperty(AGE, 0), BlockFlags.UPDATE_AND_SYNC);
+			if( canGrowHigher(world, pos, state) ) {
+				incrementGrowth(world, pos, state);
+				world.setBlockState(posAbove, getDefaultState().withProperty(AGE, 0).withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
+			}
 		}
-		else if (GrowthcraftGrapesBlocks.grapeLeaves.getBlock() == above.getBlock())
+		else if (/*GrowthcraftGrapesBlocks.grapeLeaves.getBlock() ==*/ above.getBlock() instanceof BlockGrapeLeaves)
 		{
 			incrementGrowth(world, pos, state);
 		}

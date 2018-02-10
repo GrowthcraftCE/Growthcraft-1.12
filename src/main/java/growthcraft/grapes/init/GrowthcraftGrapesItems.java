@@ -49,8 +49,8 @@ public class GrowthcraftGrapesItems {
     }
 
     public static void registerRenders() {
-    	grape_seed.registerRender();
-    	grape.registerRenders(EnumHandler.GrapeTypes.class);
+    	grape_seed.registerRenders(GrapeTypes.class);
+    	grape.registerRenders(GrapeTypes.class);
 		grapeWine.registerRenders(WineTypes.class);
     }
     
@@ -59,7 +59,8 @@ public class GrowthcraftGrapesItems {
 	}
 
 	public static void registerItemVariants() {
-    	GrowthcraftGrapesItems.grape.registerModelBakeryVariants(GrapeTypes.class);
-		GrowthcraftGrapesItems.grapeWine.registerModelBakeryVariants(WineTypes.class);
+		grape_seed.registerModelBakeryVariants(GrapeTypes.class);
+    	grape.registerModelBakeryVariants(GrapeTypes.class);
+		grapeWine.registerModelBakeryVariants(WineTypes.class);
 	}
 }

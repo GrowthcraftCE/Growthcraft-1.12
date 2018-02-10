@@ -3,6 +3,7 @@ package growthcraft.grapes.common.blocks;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.utils.BlockFlags;
@@ -19,6 +20,8 @@ import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,10 +43,13 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	// how far can a grape leaf grow before it requires support from a trunk
 	private final int grapeVineSupportedLength = GrowthcraftGrapesConfig.grapeVineSupportedLength;
 	
-	public BlockGrapeLeaves(String unlocalizedName) {
+	private static final PropertyInteger SUBTYPE = BlockGrapeVineBase.SUBTYPE;
+	
+	public BlockGrapeLeaves(/*String unlocalizedName*/) {
 		super();
-        this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+//        this.setUnlocalizedName(unlocalizedName);
+//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+		setDefaultState(this.getBlockState().getBaseState().withProperty(SUBTYPE, 0));
 		setTickRandomly(true);
 		setHardness(0.2F);
 		setLightOpacity(1);
@@ -125,9 +131,10 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		return false;
 	}
 	
-	private void setGrapeBlock(World world, BlockPos pos)
+	private void setGrapeBlock(World world, BlockPos pos, IBlockState state)
 	{
-		world.setBlockState(pos, GrowthcraftGrapesBlocks.grapeFruit.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+		int type = state.getValue(SUBTYPE);
+		world.setBlockState(pos, GrowthcraftGrapesBlocks.grapeFruit.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 	}
 	
 	@Override
@@ -136,7 +143,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		BlockPos posDown = pos.down();
 		if (worldIn.isAirBlock(posDown) && (rand.nextInt(this.grapeSpawnRate) == 0))
 		{
-			setGrapeBlock(worldIn, posDown);
+			setGrapeBlock(worldIn, posDown, state);
 		}
 
 		if (worldIn.rand.nextInt(this.grapeLeavesGrowthRate) == 0)
@@ -148,7 +155,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 				BlockPos posDir = pos.add(dir.getFrontOffsetX(), 0, dir.getFrontOffsetZ());
 				if (canGrowHere(worldIn, posDir))
 				{
-					worldIn.setBlockState(posDir, getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+					int type = state.getValue(SUBTYPE);
+					worldIn.setBlockState(posDir, getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 				}
 			}
 		}
@@ -161,6 +169,10 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
+		BlockPos posDown = pos.down();
+		if( worldIn.isAirBlock(posDown) )
+			return true;
+    	
     	for( int i = 0; i < 4; i ++ ) {
 			final EnumFacing dir = BlockCheck.DIR4[i];
 			BlockPos posDir = pos.add(dir.getFrontOffsetX(), 0, dir.getFrontOffsetZ());
@@ -275,5 +287,28 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	public boolean isOpaqueCube(IBlockState state)
 	{
 		return Blocks.LEAVES.isOpaqueCube(state);
+	}
+	
+	/************
+	 * STATES
+	 ************/
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, SUBTYPE);
+	}
+
+	@Nonnull
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+	    return this.getDefaultState().withProperty(SUBTYPE, meta & 0x7);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		int meta = 0;
+		meta |= state.getValue(SUBTYPE) & 0x7;
+	    return meta;
 	}
 }

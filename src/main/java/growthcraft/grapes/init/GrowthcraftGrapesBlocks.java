@@ -1,9 +1,12 @@
 package growthcraft.grapes.init;
 
+import growthcraft.grapes.Reference;
 import growthcraft.grapes.common.blocks.BlockGrapeFruit;
 import growthcraft.grapes.common.blocks.BlockGrapeLeaves;
 import growthcraft.grapes.common.blocks.BlockGrapeVine0;
 import growthcraft.grapes.common.blocks.BlockGrapeVine1;
+import growthcraft.grapes.handlers.EnumHandler.GrapeTypes;
+import net.minecraft.util.ResourceLocation;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.core.common.definition.BlockDefinition;
 import growthcraft.core.common.definition.BlockTypeDefinition;
@@ -25,10 +28,10 @@ public class GrowthcraftGrapesBlocks {
 //        grape_vine_bush = new BlockDefinition( new BlockGrapeVineBush("grape_vine_bush") );
 //        grape_vine_fruit = new BlockDefinition( new BlockGrapeVineFruit() );
     	
-		grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0("grape_vine0"));
-		grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1("grape_vine1"));
-		grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves("grape_vine_leaves"));
-		grapeFruit  = new BlockDefinition(new BlockGrapeFruit("grape_fruit"));
+		grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0());
+		grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1());
+		grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves());
+		grapeFruit  = new BlockDefinition(new BlockGrapeFruit(GrapeTypes.values()));
     	
         grapeWineFluidBlocks = null; // Is initialized in GrowthcraftGrapesFluids
     }
@@ -37,10 +40,10 @@ public class GrowthcraftGrapesBlocks {
 //    	grape_vine.register(true);
 //    	grape_vine_bush.register(true);
 //    	grape_vine_fruit.register(true);
-    	grapeVine0.register(false);
-    	grapeVine1.register(false);
-    	grapeLeaves.register(false);
-    	grapeFruit.register(false);
+    	grapeVine0.register(new ResourceLocation(Reference.MODID, "grape_vine0"), false);
+    	grapeVine1.register(new ResourceLocation(Reference.MODID, "grape_vine1"), false);
+    	grapeLeaves.register(new ResourceLocation(Reference.MODID, "grape_vine_leaves"), false);
+    	grapeFruit.register(new ResourceLocation(Reference.MODID, "grape_fruit"), false);
     }
 
     public static void  registerRenders() {

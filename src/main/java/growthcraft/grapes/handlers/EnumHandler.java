@@ -7,6 +7,7 @@ import growthcraft.cellar.common.block.BlockFluidBooze;
 import growthcraft.cellar.common.definition.BlockBoozeDefinition;
 import growthcraft.cellar.common.definition.BoozeDefinition;
 import growthcraft.core.api.definition.IItemStackFactory;
+import growthcraft.grapes.api.definition.IGrapeType;
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
 import growthcraft.grapes.init.GrowthcraftGrapesFluids;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
@@ -16,7 +17,7 @@ import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
 
-    public enum GrapeTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
+    public enum GrapeTypes implements IStringSerializable, IItemStackFactory, IObjectVariant, IGrapeType {
         PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getUnlocalizedName()),
         GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
         RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName());
@@ -42,6 +43,11 @@ public class EnumHandler {
         @Override
         public int getVariantID() {
             return this.ID;
+        }
+        
+        @Override
+        public int getGrapeSubTypeID() {
+        	return ordinal();
         }
         
         @Override

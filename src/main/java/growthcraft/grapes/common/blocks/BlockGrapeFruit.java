@@ -4,17 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.cellar.handlers.EnumHandler.EnumYeast;
 import growthcraft.core.common.block.GrowthcraftBlockBase;
+import growthcraft.core.utils.ItemUtils;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
 import growthcraft.grapes.Reference;
+import growthcraft.grapes.api.definition.IGrapeType;
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
 import growthcraft.grapes.init.GrowthcraftGrapesItems;
+import growthcraft.grapes.utils.GrapeTypeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,19 +39,25 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.1875F, 0.5F, 0.1875F, 0.8125F, 1.0F, 0.8125F); //(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
 
+	private static final PropertyInteger SUBTYPE = BlockGrapeVineBase.SUBTYPE;
+	
 	private Random rand = new Random();
 	
 	protected int bayanusDropRarity = GrowthcraftGrapesConfig.bayanusDropRarity;
 	protected int grapesDropMin = GrowthcraftGrapesConfig.grapesDropMin;
 	protected int grapesDropMax = GrowthcraftGrapesConfig.grapesDropMax;
+	
+	private final IGrapeType[] types;
 
-    public BlockGrapeFruit(String unlocalizedName) {
+    public BlockGrapeFruit(/*String unlocalizedName*/ IGrapeType[] types) {
     	super(Material.PLANTS);
-        this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+//        this.setUnlocalizedName(unlocalizedName);
+//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
+		setDefaultState(this.getBlockState().getBaseState().withProperty(SUBTYPE, 0));
 		
+		this.types = types;
     }
     
     @Override
@@ -123,7 +135,8 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	@SideOnly(Side.CLIENT)
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return GrowthcraftGrapesItems.grape.asStack();
+		return getFruitItemStackForBlock(state);
+//		return GrowthcraftGrapesItems.grape.asStack();
 	}
 
 	@Override
@@ -135,16 +148,33 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	/************
 	 * DROPS
 	 ************/
+	
+	public ItemStack getFruitItemStackForBlock(IBlockState state) {
+		int typeID = state.getValue(SUBTYPE);
+		IGrapeType grapeType = GrapeTypeUtils.getTypeBySubID(types, typeID);
+		if( grapeType != null )
+			return grapeType.asStack();
+		return ItemStack.EMPTY;
+	}
+	
 	@Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return GrowthcraftGrapesItems.grape.getItem();
+		ItemStack stack = getFruitItemStackForBlock(state);
+//		return GrowthcraftGrapesItems.grape.getItem();
+		return !ItemUtils.isEmpty(stack)? stack.getItem() : null;
 	}
 
 	@Override
 	public int quantityDropped(Random random)
 	{
 		return grapesDropMin + random.nextInt(grapesDropMax - grapesDropMin);
+	}
+	
+	@Override
+	public int damageDropped(IBlockState state) {
+		ItemStack stack = getFruitItemStackForBlock(state);
+		return !ItemUtils.isEmpty(stack)? stack.getMetadata() : 0;
 	}
 	
 	@Override
@@ -165,5 +195,28 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 			}
 		}
 		return ret;
+	}
+	
+	/************
+	 * STATES
+	 ************/
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, SUBTYPE);
+	}
+
+	@Nonnull
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+	    return this.getDefaultState().withProperty(SUBTYPE, meta & 0x7);
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+		int meta = 0;
+		meta |= state.getValue(SUBTYPE) & 0x7;
+	    return meta;
 	}
 }

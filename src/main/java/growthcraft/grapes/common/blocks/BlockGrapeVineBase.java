@@ -30,9 +30,9 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
 public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantable, ICropDataProvider, IGrowable {
-	// TODO: Derive from BlockCrops instead!
 	
 //	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 1);
+	public static final PropertyInteger SUBTYPE = PropertyInteger.create("type", 0, 7);
 	
 //	private ItemStack itemDrop;
 	private float growthRateMultiplier;
@@ -42,7 +42,7 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 //		super(Material.PLANTS);
 //		this.itemDrop = ItemStack.EMPTY;
 		this.growthRateMultiplier = 1.0f;
-		setDefaultState(this.getBlockState().getBaseState().withProperty(AGE, 0));
+		setDefaultState(this.getBlockState().getBaseState().withProperty(AGE, 0).withProperty(SUBTYPE, 0));
 	}
 	
 /*	public void setItemDrop(ItemStack itemstack)
@@ -327,17 +327,21 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, AGE);
+	    return new BlockStateContainer(this, AGE, SUBTYPE);
 	}
 
 	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-	    return this.getDefaultState().withProperty(AGE, meta & 0x1);
+	    return this.getDefaultState().withProperty(AGE, meta & 0x1)
+	    		.withProperty(SUBTYPE, (meta & 0xE) >> 1);
 	}
 
 	@Override
 	public int getMetaFromState(IBlockState state) {
-	    return state.getValue(AGE);
+		int meta = 0;
+		meta |= state.getValue(AGE) & 0x1;
+		meta |= (state.getValue(SUBTYPE) & 0xE) >> 1;
+	    return meta;
 	}
 }

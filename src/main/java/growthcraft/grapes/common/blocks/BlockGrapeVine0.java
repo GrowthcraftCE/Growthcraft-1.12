@@ -26,10 +26,10 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
 //            new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10)
     };
 	
-	public BlockGrapeVine0(String unlocalizedName) {
+	public BlockGrapeVine0(/*String unlocalizedName*/) {
 		super();
-        this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+//        this.setUnlocalizedName(unlocalizedName);
+//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineSeedlingGrowthRate);
 		setTickRandomly(true);
 		setHardness(0.0F);
@@ -77,7 +77,8 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
 		}
 		else
 		{
-			world.setBlockState(pos, GrowthcraftGrapesBlocks.grapeVine1.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
+			int type = state.getValue(SUBTYPE);
+			world.setBlockState(pos, GrowthcraftGrapesBlocks.grapeVine1.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 //			world.setBlock(x, y, z, GrowthCraftGrapes.blocks.grapeVine1.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
