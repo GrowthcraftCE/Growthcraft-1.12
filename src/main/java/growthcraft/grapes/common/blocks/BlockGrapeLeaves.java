@@ -141,7 +141,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 
 		if (worldIn.rand.nextInt(this.grapeLeavesGrowthRate) == 0)
 		{
-			if (canGrowOutwards(worldIn, pos))
+			if (canGrowOutwardsOnRope(worldIn, pos))
 			{
 				final EnumFacing dir = BlockCheck.DIR4[rand.nextInt(4)];
 
