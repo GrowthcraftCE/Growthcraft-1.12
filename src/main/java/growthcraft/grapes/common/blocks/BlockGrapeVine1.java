@@ -60,9 +60,10 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 		IBlockState stateAbove = world.getBlockState(pos.up());
 		int age = getAge(state);
 		
-		boolean isLeavesOrRopeAbove = (stateAbove.getBlock() instanceof BlockGrapeLeaves) || BlockCheck.isRope(stateAbove.getBlock());
+		boolean isRopeAbove = BlockCheck.isRope(stateAbove.getBlock());
+		boolean isLeavesOrRopeAbove = (stateAbove.getBlock() instanceof BlockGrapeLeaves) || isRopeAbove;
 		boolean mayGrowHigher = world.isAirBlock(pos.up()) && canGrowHigher(world, pos, state);
-		return (age == 0 && isLeavesOrRopeAbove) || mayGrowHigher || isLeavesOrRopeAbove;
+		return (age == 0 && isLeavesOrRopeAbove) || mayGrowHigher || isRopeAbove;
 	}
 	
 	public boolean canGrowHigher(World world, BlockPos pos, IBlockState state) {

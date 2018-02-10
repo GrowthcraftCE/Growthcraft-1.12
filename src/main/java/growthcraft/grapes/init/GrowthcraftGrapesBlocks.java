@@ -40,10 +40,10 @@ public class GrowthcraftGrapesBlocks {
 //    	grape_vine.register(true);
 //    	grape_vine_bush.register(true);
 //    	grape_vine_fruit.register(true);
-    	grapeVine0.register(new ResourceLocation(Reference.MODID, "grape_vine0"), false);
-    	grapeVine1.register(new ResourceLocation(Reference.MODID, "grape_vine1"), false);
-    	grapeLeaves.register(new ResourceLocation(Reference.MODID, "grape_vine_leaves"), false);
-    	grapeFruit.register(new ResourceLocation(Reference.MODID, "grape_fruit"), false);
+    	grapeVine0.register(new ResourceLocation(Reference.MODID, "native_grape_vine0"), false);
+    	grapeVine1.register(new ResourceLocation(Reference.MODID, "native_grape_vine1"), false);
+    	grapeLeaves.register(new ResourceLocation(Reference.MODID, "native_grape_vine_leaves"), false);
+    	grapeFruit.register(new ResourceLocation(Reference.MODID, "native_grape_fruit"), false);
     }
 
     public static void  registerRenders() {
