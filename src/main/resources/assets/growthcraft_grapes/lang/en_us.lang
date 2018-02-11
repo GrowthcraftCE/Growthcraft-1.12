@@ -13,22 +13,30 @@ tile.grape_vine.tooltip=Grows the finest grapes
 tile.grape_vine_bush.name=Grape Vine
 tile.grape_vine_fruit.name=Grape Vine
 
-# Fluid Buckets
-item.bucket.fluid.grc.grapeWine0.name=Grape Juice Bucket
-item.bucket.fluid.grc.grapeWine1.name=Grape Wine Bucket
-item.bucket.fluid.grc.grapeWine2.name=Grape Wine Bucket
-item.bucket.fluid.grc.grapeWine3.name=Grape Wine Bucket
-item.bucket.fluid.grc.grapeWine4.name=Ambrosia Bucket
-item.bucket.fluid.grc.grapeWine5.name=Port Wine Bucket
-item.bucket.fluid.grc.grapeWine6.name=Grape Wine Bucket
-item.bucket.fluid.grc.grapeWine7.name=Grape Wine Bucket
-
 # Fluids
-fluid.fluid_booze_juice=Grape Juice
-fluid.fluid_booze_wine=Grape Wine
-fluid.fluid_booze_wine_potent=Grape Wine
-fluid.fluid_booze_wine_extended=Grape Wine
-fluid.fluid_booze_ambrosia=Ambrosia
-fluid.fluid_booze_portwine=Port Wine
-fluid.fluid_booze_wine_intoxicated=Grape Wine
-fluid.fluid_booze_wine_poisoned=Grape Wine
+fluid.fluid_booze_purple_juice=Purple Grape Juice
+fluid.fluid_booze_purple_wine=Purple Grape Wine
+fluid.fluid_booze_purple_wine_potent=Purple Grape Wine
+fluid.fluid_booze_purple_wine_extended=Purple Grape Wine
+fluid.fluid_booze_purple_ambrosia=Purple Ambrosia
+fluid.fluid_booze_purple_portwine=Purple Port Wine
+fluid.fluid_booze_purple_wine_intoxicated=Purple Grape Wine
+fluid.fluid_booze_purple_wine_poisoned=Purple Grape Wine
+
+fluid.fluid_booze_red_juice=Red Grape Juice
+fluid.fluid_booze_red_wine=Red Grape Wine
+fluid.fluid_booze_red_wine_potent=Red Grape Wine
+fluid.fluid_booze_red_wine_extended=Red Grape Wine
+fluid.fluid_booze_red_ambrosia=Red Ambrosia
+fluid.fluid_booze_red_portwine=Red Port Wine
+fluid.fluid_booze_red_wine_intoxicated=Red Grape Wine
+fluid.fluid_booze_red_wine_poisoned=Red Grape Wine
+
+fluid.fluid_booze_green_juice=Green Grape Juice
+fluid.fluid_booze_green_wine=Green Grape Wine
+fluid.fluid_booze_green_wine_potent=Green Grape Wine
+fluid.fluid_booze_green_wine_extended=Green Grape Wine
+fluid.fluid_booze_green_ambrosia=Green Ambrosia
+fluid.fluid_booze_green_portwine=Green Port Wine
+fluid.fluid_booze_green_wine_intoxicated=Green Grape Wine
+fluid.fluid_booze_green_wine_poisoned=Green Grape Wine
