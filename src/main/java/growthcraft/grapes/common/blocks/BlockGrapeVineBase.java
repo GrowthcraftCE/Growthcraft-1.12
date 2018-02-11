@@ -11,6 +11,7 @@ import growthcraft.core.common.block.ICropDataProvider;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.utils.GrapeBlockCheck;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.material.Material;
@@ -29,9 +30,9 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
-public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantable, ICropDataProvider, IGrowable {
+public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable, ICropDataProvider, IGrowable {
 	
-//	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 1);
+	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 1);
 	public static final PropertyInteger SUBTYPE = PropertyInteger.create("type", 0, 7);
 	
 //	private ItemStack itemDrop;
@@ -99,9 +100,9 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 		return GrapeBlockCheck.isGrapeVine(state.getBlock());
 	}
 	
-//	public int getAge(IBlockState state) {
-//		return state.getValue(AGE);
-//	}
+	public int getAge(IBlockState state) {
+		return state.getValue(AGE);
+	}
 
 	public void incrementGrowth(World world, BlockPos pos, IBlockState state)
 	{
@@ -111,12 +112,11 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 		world.setBlockState(pos, state.withProperty(AGE, nextStage), BlockFlags.SYNC);
 	}
 	
-	@Override
 	public int getMaxAge() {
 		return 1;
 	}
 	
-    @Override
+/*    @Override
     protected Item getSeed() {
         // Only the BlockGrapeLeaves should return a seed.
         return null;
@@ -126,7 +126,7 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
     protected Item getCrop() {
         // Only the BlockGrapeLeaves should return a seed.
         return null;
-    }
+    } */
     
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
@@ -191,7 +191,7 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 	}*/
 	
 	protected float getGrowthRate(World world, BlockPos pos) {
-		return getGrowthChance(this, world, pos);
+		return BlockCrops.getGrowthChance(this, world, pos);
 	}
 	
     @Override
@@ -200,12 +200,12 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
     	return state.getBlock() == Blocks.FARMLAND;
     }
 	
-/*	public boolean canBlockStay(World world, BlockPos pos)
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	{
-		return BlockCheck.canSustainPlant(world, pos.down(), EnumFacing.UP, this);
+		return BlockCheck.canSustainPlant(worldIn, pos.down(), EnumFacing.UP, this);
 	}
 
-	@Override
+/*	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
 		if (!this.canBlockStay(worldIn, pos))
@@ -279,15 +279,12 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		// super.updateTick(worldIn, pos, state, rand);
 		if (canUpdateGrowth(worldIn, pos))
 		{
 			final Event.Result allowGrowthResult = Event.Result.DEFAULT; // TODO: AppleCore.validateGrowthTick(this, world, x, y, z, random);
 			if (Event.Result.DENY == allowGrowthResult)
 				return;
 
-//			final int meta = world.getBlockMetadata(x, y, z);
-//			final IBlockState state = worldIn.getBlockState(pos);
 			final float f = this.getGrowthRate(worldIn, pos);
 
 			final boolean continueGrowth = rand.nextInt((int)(getGrowthRateMultiplier() / f) + 1) == 0;
@@ -298,7 +295,7 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 			}
 		}
 		
-		this.checkAndDropBlock(worldIn, pos, state);
+		super.updateTick(worldIn, pos, state, rand);
 	}
 	
 	/************

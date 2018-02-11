@@ -12,6 +12,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -134,11 +135,11 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	/************
 	 * CONDITIONS
 	 ************/
-/*	@Override
-	public boolean canBlockStay(World world, BlockPos pos)
+	@Override
+	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	{
 		BlockPos down = pos.down();
-		return BlockCheck.canSustainPlant(world, down, EnumFacing.UP, this) ||
-			this == world.getBlockState(down).getBlock();
-	} */
+		return BlockCheck.canSustainPlant(worldIn, down, EnumFacing.UP, this) ||
+			this == worldIn.getBlockState(down).getBlock();
+	}
 }

@@ -7,6 +7,7 @@ DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in it
 -----------------
 To implement:
 -----------------
+TODO: Change Grape blocks from BlockCrops to BlockBush
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
 TODO: Step sound of apple fences should be changed to wood.
 TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food types.
@@ -14,6 +15,7 @@ TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food
 -----------------
 Bugs:
 -----------------
+BUG: Grape Leaves are removed, too, if a trunk has been removed.
 BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
 BUG: Collision boxes for brewing kettle walls are not correct.

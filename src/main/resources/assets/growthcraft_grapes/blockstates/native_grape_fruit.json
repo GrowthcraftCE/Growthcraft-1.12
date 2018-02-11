@@ -10,24 +10,6 @@
       },
       "1": {
         "textures": {"cross": "growthcraft_grapes:items/grape/green"}
-      },
-      "2": {
-        "textures": {"cross": "growthcraft_grapes:items/grape/red"}
-      },
-      "3": {
-        "textures": {"cross": "growthcraft_grapes:items/grape/purple"}
-      },
-      "4": {
-        "textures": {"cross": "growthcraft_grapes:items/grape/purple"}
-      },
-      "5": {
-        "textures": {"cross": "growthcraft_grapes:items/grape/purple"}
-      },
-      "6": {
-        "textures": {"cross": "growthcraft_grapes:items/grape/purple"}
-      },
-      "7": {
-        "textures": {"cross": "growthcraft_grapes:items/grape/purple"}
       }
     }    
   }

@@ -22,21 +22,17 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
 
     private static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[]{
             new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 4, 0.0625 * 10),
-            new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 14, 0.0625 * 10),
-//            new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10)
+            new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 14, 0.0625 * 10)
     };
     
     private final BlockGrapeVine1 blockVine1;
 	
-	public BlockGrapeVine0(BlockGrapeVine1 blockVine1/*String unlocalizedName*/) {
+	public BlockGrapeVine0(BlockGrapeVine1 blockVine1) {
 		super();
-//        this.setUnlocalizedName(unlocalizedName);
-//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineSeedlingGrowthRate);
 		setTickRandomly(true);
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
-//		setStepSound(soundTypeGrass);
 		
 		this.blockVine1 = blockVine1;
 	}
@@ -83,7 +79,6 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
 		{
 			int type = state.getValue(SUBTYPE);
 			world.setBlockState(pos, blockVine1.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
-//			world.setBlock(x, y, z, GrowthCraftGrapes.blocks.grapeVine1.getBlock(), 0, BlockFlags.UPDATE_AND_SYNC);
 		}
 	}
 
