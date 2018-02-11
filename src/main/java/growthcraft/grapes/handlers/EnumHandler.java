@@ -75,7 +75,25 @@ public class EnumHandler {
     	PURPLE_AMBROSIA(4, "purple_ambrosia"),
     	PURPLE_PORTWINE(5, "purple_portwine"),
     	PURPLE_WINE_INTOXICATED(6, "purple_wine_intoxicated"),
-    	PURPLE_WINE_POISONED(7, "purple_wine_poisoned");
+    	PURPLE_WINE_POISONED(7, "purple_wine_poisoned"),
+    	
+    	GREEN_JUICE(8, "green_juice"),
+    	GREEN_WINE(9, "green_wine"),
+    	GREEN_WINE_POTENT(10, "green_wine_potent"),
+    	GREEN_WINE_EXTENDED(11, "green_wine_extended"),
+    	GREEN_AMBROSIA(12, "green_ambrosia"),
+    	GREEN_PORTWINE(13, "green_portwine"),
+    	GREEN_WINE_INTOXICATED(14, "green_wine_intoxicated"),
+    	GREEN_WINE_POISONED(15, "green_wine_poisoned"),
+    	
+    	RED_JUICE(16, "red_juice"),
+    	RED_WINE(17, "red_wine"),
+    	RED_WINE_POTENT(18, "red_wine_potent"),
+    	RED_WINE_EXTENDED(19, "red_wine_extended"),
+    	RED_AMBROSIA(20, "red_ambrosia"),
+    	RED_PORTWINE(21, "red_portwine"),
+    	RED_WINE_INTOXICATED(22, "red_wine_intoxicated"),
+    	RED_WINE_POISONED(23, "red_wine_poisoned");
     	
         private int ID;
         private String NAME;
