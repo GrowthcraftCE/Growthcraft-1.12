@@ -10,6 +10,19 @@
       },
       "1": {
         "textures": {"cross": "growthcraft_grapes:items/grape/green"}
+      },
+      "2": {
+        "textures": {"cross": "growthcraft_grapes:items/grape/red"}
+      },
+      "3": {
+      },
+      "4": {
+      },
+      "5": {
+      },
+      "6": {
+      },
+      "7": {
       }
     }    
   }

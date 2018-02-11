@@ -251,7 +251,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	{
 		if( worldIn.isRemote )
 			return;
-		if (!this.canBlockStay(worldIn, pos, state))
+		if (!this.isSupported(worldIn, pos, state))
 		{
 			worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_fence.getDefaultState());
 		}
@@ -264,8 +264,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	/************
 	 * CONDITIONS
 	 ************/
-	@Override
-	public boolean canBlockStay(World world, BlockPos pos, IBlockState state)
+	public boolean isSupported(World world, BlockPos pos, IBlockState state)
 	{
 		if (this.isSupportedByTrunk(world, pos))
 		{
@@ -292,6 +291,12 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	protected boolean canSustainBush(IBlockState state) {
+		// Grape fruits are growing along ropes.
+		return true;
 	}
 
 	/************
