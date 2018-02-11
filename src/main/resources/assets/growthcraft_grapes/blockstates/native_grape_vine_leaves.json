@@ -2,6 +2,33 @@
   "multipart": [
     {
       "apply": { "model": "growthcraft_grapes:grape_vine_bush" }
+    },
+    {
+      "apply": { "model": "growthcraft:rope_fence" }
+    },
+    {
+      "when": { "north": "true" },
+      "apply": { "model": "growthcraft:rope_fence_side", "uvlock": false }
+    },
+    {
+      "when": { "east": "true" },
+      "apply": { "model": "growthcraft:rope_fence_side", "y": 90, "uvlock": false }
+    },
+    {
+      "when": { "south": "true" },
+      "apply": { "model": "growthcraft:rope_fence_side", "y": 180, "uvlock": false }
+    },
+    {
+      "when": { "west": "true" },
+      "apply": { "model": "growthcraft:rope_fence_side", "y": 270, "uvlock": false }
+    },
+    {
+      "when": { "up": "true" },
+      "apply": { "model": "growthcraft:rope_fence_side", "x": 270, "uvlock": false }
+    },
+    {
+      "when": { "down": "true" },
+      "apply": { "model": "growthcraft:rope_fence_side", "x": 90, "uvlock": false }
     }
   ]
 }

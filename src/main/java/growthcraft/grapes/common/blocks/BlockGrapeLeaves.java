@@ -7,6 +7,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.utils.BlockFlags;
+import growthcraft.core.blocks.BlockRopeFence;
+import growthcraft.core.blocks.BlockRopeKnot;
 import growthcraft.core.common.block.IBlockRope;
 import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
@@ -17,6 +19,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +45,13 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	// how far can a grape leaf grow before it requires support from a trunk
 	private final int grapeVineSupportedLength = GrowthcraftGrapesConfig.grapeVineSupportedLength;
 	
-	private static final PropertyInteger SUBTYPE = BlockGrapeVineBase.SUBTYPE;
+	public static final PropertyInteger SUBTYPE = BlockGrapeVineBase.SUBTYPE;
+    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final PropertyBool WEST = PropertyBool.create("west");
+    public static final PropertyBool UP = PropertyBool.create("up");
+    public static final PropertyBool DOWN = PropertyBool.create("down");
 	
 	private final BlockGrapeFruit blockFruit;
 	
@@ -55,6 +64,14 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		setHardness(0.2F);
 		setLightOpacity(1);
 		setSoundType(SoundType.PLANT);
+		
+        this.setDefaultState(this.blockState.getBaseState()
+                .withProperty(NORTH, Boolean.valueOf(false))
+                .withProperty(EAST, Boolean.valueOf(false))
+                .withProperty(SOUTH, Boolean.valueOf(false))
+                .withProperty(WEST, Boolean.valueOf(false))
+                .withProperty(UP, Boolean.valueOf(false))
+                .withProperty(DOWN, Boolean.valueOf(false)));
 		
 		this.blockFruit = blockFruit;
     }
@@ -296,6 +313,12 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
         return block instanceof IBlockRope;
     }
     
+    @Override
+    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot;
+    }
+    
 	/************
 	 * DROPS
 	 ************/
@@ -328,7 +351,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, SUBTYPE);
+	    return new BlockStateContainer(this, SUBTYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
 	}
 
 	@Nonnull
@@ -343,4 +366,14 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		meta |= state.getValue(SUBTYPE) & 0x7;
 	    return meta;
 	}
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
+                .withProperty(EAST, canConnectRopeTo(worldIn, pos, EnumFacing.EAST))
+                .withProperty(SOUTH, canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH))
+                .withProperty(WEST, canConnectRopeTo(worldIn, pos, EnumFacing.WEST))
+                .withProperty(UP, canConnectRopeTo(worldIn, pos, EnumFacing.UP))
+                .withProperty(DOWN, canConnectRopeTo(worldIn, pos, EnumFacing.DOWN));
+    }
 }
