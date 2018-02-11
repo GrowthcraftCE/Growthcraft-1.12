@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "fluid_booze_wine_intoxicated": [
+    "fluid_booze_purple_portwine": [
       {
         "custom": {
-          "fluid": "fluid_booze_wine_intoxicated"
+          "fluid": "fluid_booze_purple_portwine"
         }
       }
     ]

@@ -68,14 +68,14 @@ public class EnumHandler {
     }
     
     public enum WineTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
-    	PURPLE_JUICE(0, "juice"),
-    	PURPLE_WINE(1, "wine"),
-    	PURPLE_WINE_POTENT(2, "wine_potent"),
-    	PURPLE_WINE_EXTENDED(3, "wine_extended"),
-    	PURPLE_AMBROSIA(4, "ambrosia"),
-    	PURPLE_PORTWINE(5, "portwine"),
-    	PURPLE_WINE_INTOXICATED(6, "wine_intoxicated"),
-    	PURPLE_WINE_POISONED(7, "wine_poisoned");
+    	PURPLE_JUICE(0, "purple_juice"),
+    	PURPLE_WINE(1, "purple_wine"),
+    	PURPLE_WINE_POTENT(2, "purple_wine_potent"),
+    	PURPLE_WINE_EXTENDED(3, "purple_wine_extended"),
+    	PURPLE_AMBROSIA(4, "purple_ambrosia"),
+    	PURPLE_PORTWINE(5, "purple_portwine"),
+    	PURPLE_WINE_INTOXICATED(6, "purple_wine_intoxicated"),
+    	PURPLE_WINE_POISONED(7, "purple_wine_poisoned");
     	
         private int ID;
         private String NAME;
