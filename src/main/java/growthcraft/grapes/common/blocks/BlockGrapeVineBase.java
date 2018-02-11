@@ -279,7 +279,7 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 	@Override
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
-		super.updateTick(worldIn, pos, state, rand);
+		// super.updateTick(worldIn, pos, state, rand);
 		if (canUpdateGrowth(worldIn, pos))
 		{
 			final Event.Result allowGrowthResult = Event.Result.DEFAULT; // TODO: AppleCore.validateGrowthTick(this, world, x, y, z, random);
@@ -294,8 +294,11 @@ public abstract class BlockGrapeVineBase extends BlockCrops implements IPlantabl
 			if (Event.Result.ALLOW == allowGrowthResult || continueGrowth)
 			{
 				doGrowth(worldIn, pos, state);
+				return;
 			}
 		}
+		
+		this.checkAndDropBlock(worldIn, pos, state);
 	}
 	
 	/************

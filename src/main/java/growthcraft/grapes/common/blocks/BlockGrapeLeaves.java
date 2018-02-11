@@ -177,6 +177,15 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 				{
 					int type = state.getValue(SUBTYPE);
 					worldIn.setBlockState(posDir, getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
+					
+					BlockPos below = posDir.down();
+					IBlockState stateBelow = worldIn.getBlockState(below);
+					if( (stateBelow.getBlock() instanceof BlockGrapeVine1) ) {
+						BlockGrapeVine1 blockBelow = (BlockGrapeVine1)stateBelow.getBlock();
+						if( stateBelow.getValue(BlockGrapeVineBase.AGE) < blockBelow.getMaxAge() ) {
+							worldIn.setBlockState(below, stateBelow.withProperty(BlockGrapeVineBase.AGE, blockBelow.getMaxAge()), BlockFlags.UPDATE_AND_SYNC);
+						}
+					}
 				}
 			}
 		}
