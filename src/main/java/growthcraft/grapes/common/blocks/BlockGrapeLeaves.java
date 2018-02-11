@@ -14,7 +14,9 @@ import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
+import growthcraft.grapes.api.definition.IGrapeType;
 import growthcraft.grapes.utils.GrapeBlockCheck;
+import growthcraft.grapes.utils.GrapeTypeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -27,6 +29,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -54,11 +57,10 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     public static final PropertyBool DOWN = PropertyBool.create("down");
 	
 	private final BlockGrapeFruit blockFruit;
+	private final IGrapeType[] grapeTypes;
 	
-	public BlockGrapeLeaves(BlockGrapeFruit blockFruit/*String unlocalizedName*/) {
+	public BlockGrapeLeaves(IGrapeType[] grapeTypes, BlockGrapeFruit blockFruit) {
 		super();
-//        this.setUnlocalizedName(unlocalizedName);
-//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setDefaultState(this.getBlockState().getBaseState().withProperty(SUBTYPE, 0));
 		setTickRandomly(true);
 		setHardness(0.2F);
@@ -74,6 +76,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
                 .withProperty(DOWN, Boolean.valueOf(false)));
 		
 		this.blockFruit = blockFruit;
+		this.grapeTypes = grapeTypes;
     }
 	
     @Override
@@ -225,21 +228,6 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     {
         IBlockState other = blockAccess.getBlockState(pos.offset(side));
         Block block = other.getBlock();
-
-/*        if (this == Blocks.GLASS || this == Blocks.STAINED_GLASS)
-        {
-            if (blockState != iblockstate)
-            {
-                return true;
-            }
-
-            if (block == this)
-            {
-                return false;
-            }
-        }
-
-        return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);*/
         return block != this || blockState.getValue(SUBTYPE) != other.getValue(SUBTYPE);
     }
     
@@ -254,6 +242,10 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		if (!this.isSupported(worldIn, pos, state))
 		{
 			worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_fence.getDefaultState());
+			List<ItemStack> drops = super.getDrops(worldIn, pos, state, 0);
+			for( ItemStack drop : drops ) {
+				spawnAsEntity(worldIn, pos, drop);
+			}
 		}
 		else
 		{
@@ -277,8 +269,6 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 				for (int i = 1; i <= grapeVineSupportedLength; ++i)
 				{
 					BlockPos posOfs = pos.add(dir.getFrontOffsetX()*i, 0, dir.getFrontOffsetZ()*i);
-//					final int bx = x + dir.offsetX * i;
-//					final int bz = z + dir.offsetZ * i;
 					if (world.getBlockState(posOfs).getBlock() != this)
 					{
 						break;
@@ -323,7 +313,6 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     @Override
     public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        // return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
         return block instanceof IBlockRope;
     }
     
@@ -336,16 +325,31 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	/************
 	 * DROPS
 	 ************/
-	@Override
+    public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+    	List<ItemStack> drops = super.getDrops(world, pos, state, fortune);
+    	drops.add(GrowthcraftCoreItems.rope.asStack(1));    	
+    	return drops;
+    }
+    
+    @Override
 	public Item getItemDropped(IBlockState state, Random rand, int fortune)
 	{
-		return GrowthcraftCoreItems.rope.getItem();
+    	int typeID = state.getValue(SUBTYPE);
+    	IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+		return type.asSeedsStack().getItem();
 	}
+    
+    @Override
+    public int damageDropped(IBlockState state) {
+    	int typeID = state.getValue(SUBTYPE);
+    	IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+    	return type.asSeedsStack().getItemDamage();    	
+    }
 
 	@Override
 	public int quantityDropped(Random random)
 	{
-		return 1;
+		return random.nextInt(3) == 0 ? 1 : 0;
 	}
 	
 	/************

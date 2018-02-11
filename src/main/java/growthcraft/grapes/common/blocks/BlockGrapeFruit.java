@@ -44,17 +44,15 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	protected int grapesDropMin = GrowthcraftGrapesConfig.grapesDropMin;
 	protected int grapesDropMax = GrowthcraftGrapesConfig.grapesDropMax;
 	
-	private final IGrapeType[] types;
+	private final IGrapeType[] grapeTypes;
 
-    public BlockGrapeFruit(/*String unlocalizedName*/ IGrapeType[] types) {
+    public BlockGrapeFruit(IGrapeType[] grapeTypes) {
     	super(Material.PLANTS);
-//        this.setUnlocalizedName(unlocalizedName);
-//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
 		setDefaultState(this.getBlockState().getBaseState().withProperty(SUBTYPE, 0));
 		
-		this.types = types;
+		this.grapeTypes = grapeTypes;
     }
     
     @Override
@@ -64,7 +62,6 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
     
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-//        addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
 	
 	@Override
@@ -139,7 +136,6 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return getFruitItemStackForBlock(state);
-//		return GrowthcraftGrapesItems.grape.asStack();
 	}
 
 	@Override
@@ -154,9 +150,9 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	
 	public ItemStack getFruitItemStackForBlock(IBlockState state) {
 		int typeID = state.getValue(SUBTYPE);
-		IGrapeType grapeType = GrapeTypeUtils.getTypeBySubID(types, typeID);
-		if( grapeType != null )
-			return grapeType.asStack();
+		IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+		if( type != null )
+			return type.asStack();
 		return ItemStack.EMPTY;
 	}
 	

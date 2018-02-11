@@ -1,17 +1,21 @@
 package growthcraft.grapes.common.blocks;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
 import growthcraft.grapes.Reference;
+import growthcraft.grapes.api.definition.IGrapeType;
 import growthcraft.grapes.init.GrowthcraftGrapesBlocks;
+import growthcraft.grapes.utils.GrapeTypeUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -26,8 +30,9 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
     };
     
     private final BlockGrapeVine1 blockVine1;
+    private final IGrapeType[] grapeTypes;
 	
-	public BlockGrapeVine0(BlockGrapeVine1 blockVine1) {
+	public BlockGrapeVine0(IGrapeType[] grapeTypes, BlockGrapeVine1 blockVine1) {
 		super();
 		setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineSeedlingGrowthRate);
 		setTickRandomly(true);
@@ -35,6 +40,7 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
 		setSoundType(SoundType.PLANT);
 		
 		this.blockVine1 = blockVine1;
+		this.grapeTypes = grapeTypes;
 	}
 	
     @Override
@@ -49,13 +55,38 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
     
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
+//        addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
     
 	@Override
 	public int getMaxAge() {
 		return 1;
 	}
+	
+	/************
+	 * DROPS
+	 ************/
+	
+	@Override
+	public Item getItemDropped(IBlockState state, Random rand, int fortune)
+	{
+    	int typeID = state.getValue(SUBTYPE);
+    	IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+		return type.asSeedsStack().getItem();
+	}
+
+	@Override
+	public int quantityDropped(Random random)
+	{
+		return 1;
+	}
+	
+    @Override
+    public int damageDropped(IBlockState state) {
+    	int typeID = state.getValue(SUBTYPE);
+    	IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+    	return type.asSeedsStack().getItemDamage();    	
+    }
 	
 	/************
 	 * TICK

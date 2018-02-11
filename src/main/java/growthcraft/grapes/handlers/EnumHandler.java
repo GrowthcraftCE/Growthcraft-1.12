@@ -60,6 +60,11 @@ public class EnumHandler {
         public ItemStack asStack() {
         	return asStack(1);
         }
+
+		@Override
+		public ItemStack asSeedsStack(int amount) {
+			return GrowthcraftGrapesItems.grape_seed.asStack(amount, getVariantID());
+		}
     }
     
     public enum WineTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
