@@ -28,10 +28,8 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	
 	private final BlockGrapeLeaves blockLeaves;
 	
-	public BlockGrapeVine1(BlockGrapeLeaves blockLeaves/*String unlocalizedName*/) {
+	public BlockGrapeVine1(BlockGrapeLeaves blockLeaves) {
 		super();
-//        this.setUnlocalizedName(unlocalizedName);
-//        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineTrunkGrowthRate);
 		setTickRandomly(true);
 		setHardness(2.0F);
@@ -103,7 +101,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 				world.setBlockState(posAbove, getDefaultState().withProperty(AGE, !connectToLeaves? 0 : getMaxAge()).withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 			}
 		}
-		else if (/*GrowthcraftGrapesBlocks.grapeLeaves.getBlock() ==*/ above.getBlock() instanceof BlockGrapeLeaves)
+		else if (above.getBlock() instanceof BlockGrapeLeaves)
 		{
 			incrementGrowth(world, pos, state);
 		}

@@ -35,45 +35,14 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 1);
 	public static final PropertyInteger SUBTYPE = PropertyInteger.create("type", 0, 7);
 	
-//	private ItemStack itemDrop;
 	private float growthRateMultiplier;
 	
 	public BlockGrapeVineBase()
 	{
-//		super(Material.PLANTS);
-//		this.itemDrop = ItemStack.EMPTY;
 		this.growthRateMultiplier = 1.0f;
 		setDefaultState(this.getBlockState().getBaseState().withProperty(AGE, 0).withProperty(SUBTYPE, 0));
 	}
 	
-/*	public void setItemDrop(ItemStack itemstack)
-	{
-		this.itemDrop = itemstack;
-	}
-
-	public ItemStack getItemDrop()
-	{
-		return this.itemDrop;
-	}*/
-	
-//	@Override
-//    protected PropertyInteger getAgeProperty()
-//    {
-//        return AGE;
-//    }
-	
-/*	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-		return itemDrop.getItem();
-	}
-
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return itemDrop.getCount();
-	} */
-
 	public void setGrowthRateMultiplier(float rate)
 	{
 		this.growthRateMultiplier = rate;
@@ -84,11 +53,6 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 		return this.growthRateMultiplier;
 	}
 
-/*	public int getGrowthMax()
-	{
-		return 1;
-	} */
-	
 	public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state)
 	{
 		int age = getAge(state);
@@ -107,7 +71,7 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	public void incrementGrowth(World world, BlockPos pos, IBlockState state)
 	{
 		int nextStage = getAge(state) + 1;
-		if( nextStage > getMaxAge() /*!AGE.getAllowedValues().contains(nextStage)*/ )
+		if( nextStage > getMaxAge() )
 			return; // Maximal stage
 		world.setBlockState(pos, state.withProperty(AGE, nextStage), BlockFlags.SYNC);
 	}
@@ -116,79 +80,10 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 		return 1;
 	}
 	
-/*    @Override
-    protected Item getSeed() {
-        // Only the BlockGrapeLeaves should return a seed.
-        return null;
-    }
-
-    @Override
-    protected Item getCrop() {
-        // Only the BlockGrapeLeaves should return a seed.
-        return null;
-    } */
-    
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         return super.getDrops(world, pos, state, fortune);
     }
-	
-/*
-	protected float getGrowthRate(World worldIn, BlockPos posIn)
-	{		
-        float f = 1.0F;
-        BlockPos blockpos = posIn.down();
-
-        for (int i = -1; i <= 1; ++i)
-        {
-            for (int j = -1; j <= 1; ++j)
-            {
-                float f1 = 0.0F;
-                IBlockState iblockstate = worldIn.getBlockState(blockpos.add(i, 0, j));
-
-//                if (iblockstate.getBlock().canSustainPlant(iblockstate, worldIn, blockpos.add(i, 0, j), net.minecraft.util.EnumFacing.UP, this))
-                if( iblockstate.getBlock() == Blocks.FARMLAND )
-                {
-                    f1 = 1.0F;
-
-                    if (iblockstate.getBlock().isFertile(worldIn, blockpos.add(i, 0, j)))
-                    {
-                        f1 = 3.0F;
-                    }
-                }
-
-                if (i != 0 || j != 0)
-                {
-                    f1 /= 4.0F;
-                }
-
-                f += f1;
-            }
-        }
-
-        BlockPos blockpos1 = posIn.north();
-        BlockPos blockpos2 = posIn.south();
-        BlockPos blockpos3 = posIn.west();
-        BlockPos blockpos4 = posIn.east();
-		final boolean flag = this.isGrapeVine(worldIn.getBlockState(blockpos3)) || this.isGrapeVine(worldIn.getBlockState(blockpos4));
-		final boolean flag1 = this.isGrapeVine(worldIn.getBlockState(blockpos1)) || this.isGrapeVine(worldIn.getBlockState(blockpos2));
-
-        if (flag && flag1)
-        {
-            f /= 2.0F;
-        }
-        else
-        {
-    		final boolean flag2 = this.isGrapeVine(worldIn.getBlockState(blockpos3.north())) || this.isGrapeVine(worldIn.getBlockState(blockpos4.north())) || this.isGrapeVine(worldIn.getBlockState(blockpos4.south())) || this.isGrapeVine(worldIn.getBlockState(blockpos3.south()));
-
-            if (flag2)
-            {
-                f /= 2.0F;
-            }
-        }
-
-        return f;
-	}*/
 	
 	protected float getGrowthRate(World world, BlockPos pos) {
 		return BlockCrops.getGrowthChance(this, world, pos);
@@ -204,16 +99,6 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	{
 		return BlockCheck.canSustainPlant(worldIn, pos.down(), EnumFacing.UP, this);
 	}
-
-/*	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-	{
-		if (!this.canBlockStay(worldIn, pos))
-		{
-			this.dropBlockAsItem(worldIn, pos, worldIn.getBlockState(pos), 0);
-			worldIn.setBlockToAir(pos);
-		}
-	} */
 
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
