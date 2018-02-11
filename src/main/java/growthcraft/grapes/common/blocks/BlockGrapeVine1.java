@@ -7,13 +7,17 @@ import javax.annotation.Nullable;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	
@@ -31,6 +35,7 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 		setTickRandomly(true);
 		setHardness(2.0F);
 		setResistance(5.0F);
+		setSoundType(SoundType.WOOD);
 		
 		this.blockLeaves = blockLeaves;
 	}
@@ -119,6 +124,12 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 		}
 		return super.getGrowthRate(world, pos);
 	}
+	
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
+    }
 	
 	/************
 	 * CONDITIONS

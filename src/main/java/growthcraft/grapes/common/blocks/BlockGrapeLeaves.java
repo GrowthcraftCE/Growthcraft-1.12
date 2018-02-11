@@ -24,11 +24,14 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope {
 
@@ -183,6 +186,35 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     	}
     	
     	return false;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
+    }
+    
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        IBlockState other = blockAccess.getBlockState(pos.offset(side));
+        Block block = other.getBlock();
+
+/*        if (this == Blocks.GLASS || this == Blocks.STAINED_GLASS)
+        {
+            if (blockState != iblockstate)
+            {
+                return true;
+            }
+
+            if (block == this)
+            {
+                return false;
+            }
+        }
+
+        return !this.ignoreSimilarity && block == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);*/
+        return block != this || blockState.getValue(SUBTYPE) != other.getValue(SUBTYPE);
     }
     
 	/************
