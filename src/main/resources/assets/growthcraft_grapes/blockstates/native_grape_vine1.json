@@ -1,13 +1,15 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "growthcraft_grapes:grape_vine_trunk"
+    "model": "growthcraft_grapes:grape_vine_trunk0"
   },
   "variants": {
     "age": {
       "0": {
+        "model": "growthcraft_grapes:grape_vine_trunk1"
       },
       "1": {
+        "model": "growthcraft_grapes:grape_vine_trunk0"
       },
       "2": {
       },
