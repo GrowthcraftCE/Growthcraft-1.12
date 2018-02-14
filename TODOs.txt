@@ -45,7 +45,6 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
-TODO: Seed drops from grape leaves.
 TODO: Crafting Recipes for Cellar.
 TODO: Crafting Recipes for Milk.
 TODO: Crafting Recipes for Core.
@@ -53,6 +52,7 @@ TODO: Crafting Recipes for Grapes.
 TODO: Cheese model items to be textured.
 TODO: Curds textures and models.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Seed drops from grape leaves.
 DONE: Animation for Butter churn.
 DONE: Animation for Cheese Press.
 DONE: Language files for Cellar.
