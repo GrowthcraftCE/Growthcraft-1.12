@@ -49,6 +49,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	private final int grapeVineSupportedLength = GrowthcraftGrapesConfig.grapeVineSupportedLength;
 	
 	public static final PropertyInteger SUBTYPE = BlockGrapeVineBase.SUBTYPE;
+	public static final PropertyBool OPAQUEBELOW = PropertyBool.create("opaquebelow");
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
@@ -68,6 +69,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		setSoundType(SoundType.PLANT);
 		
         this.setDefaultState(this.blockState.getBaseState()
+        		.withProperty(OPAQUEBELOW, Boolean.valueOf(true))
                 .withProperty(NORTH, Boolean.valueOf(false))
                 .withProperty(EAST, Boolean.valueOf(false))
                 .withProperty(SOUTH, Boolean.valueOf(false))
@@ -369,7 +371,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, SUBTYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN);
+	    return new BlockStateContainer(this, SUBTYPE, NORTH, EAST, SOUTH, WEST, UP, DOWN, OPAQUEBELOW);
 	}
 
 	@Nonnull
@@ -387,7 +389,11 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
+    	IBlockState stateBelow = worldIn.getBlockState(pos.down());
+    	
+        return state
+        		.withProperty(OPAQUEBELOW, stateBelow.isOpaqueCube())
+        		.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
                 .withProperty(EAST, canConnectRopeTo(worldIn, pos, EnumFacing.EAST))
                 .withProperty(SOUTH, canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH))
                 .withProperty(WEST, canConnectRopeTo(worldIn, pos, EnumFacing.WEST))

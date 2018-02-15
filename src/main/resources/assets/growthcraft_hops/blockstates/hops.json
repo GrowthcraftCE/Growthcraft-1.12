@@ -1,11 +1,20 @@
 {
   "multipart": [
     {
-      "apply": { "model": "growthcraft_grapes:grape_vine_bush" }
+      "when": { "age": "0|1" },
+      "apply": { "model": "growthcraft_hops:hops_bush_stage0" }
     },
     {
-      "when": { "opaquebelow": "false" },
-      "apply": { "model": "growthcraft_grapes:grape_vine_hanging_leaves" }
+      "when": { "age": "1" },
+      "apply": { "model": "growthcraft_hops:hops_bush_stage1" }
+    },
+    {
+      "when": { "age": "2" },
+      "apply": { "model": "growthcraft_hops:hops_bush_stage2" }
+    },
+    {
+      "when": { "age": "3" },
+      "apply": { "model": "growthcraft_hops:hops_bush_stage3" }
     },
     {
       "apply": { "model": "growthcraft:rope_fence" }

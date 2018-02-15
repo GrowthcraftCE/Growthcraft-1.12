@@ -14,6 +14,7 @@ import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
 import growthcraft.core.utils.BlockCheck;
 import growthcraft.grapes.api.definition.IGrapeType;
+import growthcraft.hops.GrowthcraftHopsConfig;
 import growthcraft.hops.Reference;
 import growthcraft.hops.init.GrowthcraftHopsItems;
 import net.minecraft.block.Block;
@@ -22,6 +23,7 @@ import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -32,6 +34,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -63,6 +66,14 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 	private static final AxisAlignedBB BOUNDING_BIG = new AxisAlignedBB(0*0.0625F, 0.0F, 0*0.0625F, 16*0.0625F, 16*0.0625F, 16*0.0625F);
 
 	public static final PropertyInteger AGE = PropertyInteger.create("age", HopsStage.BINE, HopsStage.FRUIT);
+	public static final PropertyBool OPAQUEBELOW = PropertyBool.create("opaquebelow");
+    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final PropertyBool WEST = PropertyBool.create("west");
+    public static final PropertyBool UP = PropertyBool.create("up");
+    public static final PropertyBool DOWN = PropertyBool.create("down");
+    
 	private static Random rand = new Random();
 	
     public BlockHops(String unlocalizedName) {
@@ -71,7 +82,15 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     	setHardness(0.0F);
 		setSoundType(SoundType.PLANT);
-		setDefaultState(this.getBlockState().getBaseState().withProperty(AGE, 0));
+		setDefaultState(this.getBlockState().getBaseState()
+				.withProperty(AGE, 0)
+				.withProperty(OPAQUEBELOW, Boolean.valueOf(true))
+                .withProperty(NORTH, Boolean.valueOf(false))
+                .withProperty(EAST, Boolean.valueOf(false))
+                .withProperty(SOUTH, Boolean.valueOf(false))
+                .withProperty(WEST, Boolean.valueOf(false))
+                .withProperty(UP, Boolean.valueOf(false))
+                .withProperty(DOWN, Boolean.valueOf(false)));
     }
     
     @Override
@@ -246,7 +265,6 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 				incrementGrowth(worldIn, pos, state);
 			}
 		}
-
 	}	
 	
 	private float getGrowthRate(World world, BlockPos pos)
@@ -271,14 +289,44 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 			if (!worldIn.isRemote)
 			{
 				removeFruit(worldIn, pos, state);
-				dropBlockAsItem(worldIn, pos, getFruitDrop());
+				dropFruitAsItemWithChance(worldIn, getAdjacentBlockPosToPlayer(pos, playerIn), state, 1.0f, 0);
 			}
 			return true;
 		}
 		return false;
 	}
-
 	
+    private void dropFruitAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
+    {
+    	if (getAge(state) < HopsStage.FRUIT)
+    		return;
+    	
+        if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) // do not drop items while restoring blockstates, prevents item dupe
+        {
+            if (worldIn.rand.nextFloat() <= chance)
+            {
+                spawnAsEntity(worldIn, pos, getFruitDrop(fortune));
+            }
+        }
+    }
+    
+    private BlockPos getAdjacentBlockPosToPlayer(BlockPos pos, EntityPlayer playerIn) {
+    	BlockPos playerBlock = playerIn.getPosition();
+    	int offsX = 0;
+    	if( pos.getX() > playerBlock.getX() )
+    		offsX = -1;
+    	else if( pos.getX() < playerBlock.getX() )
+    		offsX = 1;
+    	
+    	int offsZ = 0;
+    	if( pos.getZ() > playerBlock.getZ() )
+    		offsZ = -1;
+    	else if( pos.getZ() < playerBlock.getZ() )
+    		offsZ = 1;
+
+    	return pos.east(offsX).south(offsZ);
+    }
+
 	/************
 	 * CONDITIONS
 	 ************/
@@ -365,7 +413,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     	drops.add(GrowthcraftCoreItems.rope.asStack(1));
     	int age = getAge(state); 
     	if( age >= HopsStage.BIG ) {
-    		drops.add(getFruitDrop());
+    		drops.add(getFruitDrop(fortune));
     	}
     	if( age == HopsStage.BINE || rand.nextInt(3) == 0 ) {
     		drops.add(GrowthcraftHopsItems.hop_seeds.asStack(1));
@@ -373,7 +421,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     	return drops;
     }
     
-    public ItemStack getFruitDrop() {
+    public ItemStack getFruitDrop(int fortune) {
     	return GrowthcraftHopsItems.hops.asStack(1 + rand.nextInt(8));
     }
     
@@ -422,7 +470,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 	@Nonnull
 	@Override
 	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, AGE);
+	    return new BlockStateContainer(this, AGE, NORTH, EAST, SOUTH, WEST, UP, DOWN, OPAQUEBELOW);
 	}
 
 	@Nonnull
@@ -437,4 +485,18 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 		meta |= state.getValue(AGE) & 0x3;
 	    return meta;
 	}
+	
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    	IBlockState stateBelow = worldIn.getBlockState(pos.down());
+    	
+        return state
+        		.withProperty(OPAQUEBELOW, stateBelow.isOpaqueCube())
+        		.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
+                .withProperty(EAST, canConnectRopeTo(worldIn, pos, EnumFacing.EAST))
+                .withProperty(SOUTH, canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH))
+                .withProperty(WEST, canConnectRopeTo(worldIn, pos, EnumFacing.WEST))
+                .withProperty(UP, canConnectRopeTo(worldIn, pos, EnumFacing.UP))
+                .withProperty(DOWN, canConnectRopeTo(worldIn, pos, EnumFacing.DOWN));
+    }
 }

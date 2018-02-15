@@ -1,0 +1,6 @@
+{
+  "parent": "growthcraft_hops:block/hops_bush_stage2",
+  "textures": {
+    "0": "growthcraft_hops:blocks/leaves_fruits"
+  }
+}

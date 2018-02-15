@@ -31,7 +31,7 @@ public class BlockRopeFence extends Block implements IBlockRope {
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
     public BlockRopeFence(String unlocalizedName) {
-        super(Material.CLOTH);
+        super(Material.CARPET);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.5F);
