@@ -1,53 +1,52 @@
 package growthcraft.hops.init;
 
+import growthcraft.cellar.common.item.ItemBoozeBottle;
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.client.utils.ItemRenderUtils;
 import growthcraft.core.common.definition.ItemDefinition;
+import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.hops.Reference;
+import growthcraft.hops.handlers.EnumHandler.HopAleTypes;
+import growthcraft.hops.handlers.EnumHandler.LagerTypes;
 import growthcraft.hops.items.ItemHops;
 import growthcraft.hops.items.ItemSeedHops;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class GrowthcraftHopsItems {
 
     public static ItemDefinition hops;
     public static ItemDefinition hop_seeds;
+	public static ItemTypeDefinition<ItemBoozeBottle> lagerBottle;
+    public static ItemTypeDefinition<ItemBoozeBottle> hopAleBottle;
 
     public static void init() {
         hops = new ItemDefinition( new ItemHops("hops") );
         hop_seeds = new ItemDefinition( new ItemSeedHops("hop_seeds") );
+        lagerBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
+        hopAleBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
     }
 
     public static void register() {
-        // registerItem(hops);
     	hops.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
     	hops.register();
-        // registerItem(hop_seeds);
     	hop_seeds.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
     	hop_seeds.register();
+    	lagerBottle.register(new ResourceLocation(Reference.MODID, "lager"));
+    	hopAleBottle.register(new ResourceLocation(Reference.MODID, "hopale"));
     }
 
     public static void registerRenders() {
-        // registerRender(hops);
     	hops.registerRender();
-        // registerRender(hop_seeds);
     	hop_seeds.registerRender();
     }
-/*
-    public static void registerItem(Item item) {
-        item.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
-        GameRegistry.register(item);
-    }
-
-    public static void  registerRender(Item item) {
-        ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(new ResourceLocation(Reference.MODID, item.getUnlocalizedName().substring(5)), "inventory"));
-
-    }
-
-    public static void registerRender(Item item, int meta, String fileName) {
-        ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(new ResourceLocation(Reference.MODID, fileName), "inventory"));
-    } */
+    
+	public static void registerItemColorHandlers() {
+		ItemRenderUtils.registerItemColorHandler(lagerBottle.getItem());
+		ItemRenderUtils.registerItemColorHandler(hopAleBottle.getItem());
+	}
+	
+	public static void registerItemVariants() {
+		lagerBottle.registerModelBakeryVariants(LagerTypes.class);
+		hopAleBottle.registerModelBakeryVariants(HopAleTypes.class);
+	}
 }

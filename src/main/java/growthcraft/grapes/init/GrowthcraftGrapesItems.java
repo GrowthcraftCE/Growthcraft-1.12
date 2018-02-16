@@ -35,6 +35,7 @@ public class GrowthcraftGrapesItems {
 		OreDictionary.registerOre("foodFruit", GrapeTypes.GREEN.asStack());
 		OreDictionary.registerOre("foodFruit", GrapeTypes.PURPLE.asStack());
 		OreDictionary.registerOre("foodFruit", GrapeTypes.RED.asStack());
+		OreDictionary.registerOre("foodGrapejuice", grapeWine.asStack(1, 0));
 	}
     
     public static void register() {
@@ -43,7 +44,6 @@ public class GrowthcraftGrapesItems {
     	grape_seed.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
     	grape_seed.register();
 		grapeWine.register(new ResourceLocation(Reference.MODID, "grapewine"));
-		OreDictionary.registerOre("foodGrapejuice", grapeWine.asStack(1, 0));
 		
 		registerOres();
     }
@@ -55,7 +55,7 @@ public class GrowthcraftGrapesItems {
     }
     
 	public static void registerItemColorHandlers() {
-		ItemRenderUtils.registerItemColorHandler(GrowthcraftGrapesItems.grapeWine.getItem());
+		ItemRenderUtils.registerItemColorHandler(grapeWine.getItem());
 	}
 
 	public static void registerItemVariants() {
