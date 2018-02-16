@@ -13,7 +13,15 @@ import net.minecraft.util.IStringSerializable;
 
 public class EnumHandler {
 	public enum HopAleTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
-		ALE_YOUNG(0, "young_ale");
+		ALE_UNHOPPED(0, "ale_unhopped"),
+		ALE_NORMAL(1, "ale_normal"),
+		ALE_POTENT(2, "ale_potent"),
+		ALE_EXTENDED(3, "ale_extended"),
+		ALE_YOUNG(4, "ale_young"),
+		ALE_HYPEREXTENDED(5, "ale_hyperextended"),
+		ALE_LAGER(6, "ale_lager"),
+		ALE_INTOXICATED(7, "ale_intoxicated"),
+		ALE_POISONED(8, "ale_poisoned");
 		
         private int ID;
         private String NAME;
@@ -60,7 +68,13 @@ public class EnumHandler {
 	}
 	
 	public enum LagerTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
-		LAGER_YOUNG(0, "young_ale");
+		LAGER_YOUNG(0, "lager_young"),
+		LAGER_NORMAL(1, "lager_normal"),
+		LAGER_POTENT(2, "lager_potent"),
+		LAGER_EXTENDED(3, "lager_extended"),
+		LAGER_HYPEREXTENDED(4, "lager_hyperextended"),
+		LAGER_INTOXICATED(5, "lager_intoxicated"),
+		LAGER_POISONED(6, "lager_poisoned");
 		
         private int ID;
         private String NAME;

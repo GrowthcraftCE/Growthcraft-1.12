@@ -51,7 +51,7 @@ public class GrowthcraftHopsFluids {
 		BoozeRegistryHelper.setBoozeFoodStats(hopAleBooze[0], 1, 0.3f);
 		BoozeRegistryHelper.setBoozeFoodStats(hopAleBooze[4], 1, 0.3f);
 	}
-	
+
 	public static void register() {
 		GrowthcraftHopsItems.hopAleBottle.getItem().setBoozes(hopAleBooze);
 		BoozeRegistryHelper.registerBooze(hopAleBooze, GrowthcraftHopsBlocks.hopAleFluidBlocks, GrowthcraftHopsItems.hopAleBottle, "hopalebooze", HopAleTypes.class);
@@ -59,7 +59,7 @@ public class GrowthcraftHopsFluids {
 		BoozeRegistryHelper.registerBooze(lagerBooze, GrowthcraftHopsBlocks.lagerFluidBlocks, GrowthcraftHopsItems.lagerBottle, "lagerbooze", LagerTypes.class);
 		registerFermentations();
 	}
-	
+
 	private static void registerLagerFermentations() {
 		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		final FluidStack[] fs = new FluidStack[lagerBooze.length];

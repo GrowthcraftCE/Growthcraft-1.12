@@ -13,8 +13,7 @@ import growthcraft.hops.items.ItemSeedHops;
 import net.minecraft.util.ResourceLocation;
 
 public class GrowthcraftHopsItems {
-
-    public static ItemDefinition hops;
+	public static ItemDefinition hops;
     public static ItemDefinition hop_seeds;
 	public static ItemTypeDefinition<ItemBoozeBottle> lagerBottle;
     public static ItemTypeDefinition<ItemBoozeBottle> hopAleBottle;
