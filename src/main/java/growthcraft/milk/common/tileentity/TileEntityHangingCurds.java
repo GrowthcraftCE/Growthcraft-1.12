@@ -62,6 +62,10 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 		}
 		return null;
 	}
+	
+	public ICheeseType getCheeseType() {
+		return cheeseCurd.getType();
+	}
 
 	public int getRenderColor()
 	{

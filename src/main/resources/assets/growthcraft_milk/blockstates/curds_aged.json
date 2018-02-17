@@ -1,0 +1,50 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "growthcraft_milk:cheese_curds"
+  },
+  "variants": {
+    "type" : {
+      "0": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/gorgonzola_curds",
+			"particle": "growthcraft_milk:blocks/cheese/gorgonzola_curds"
+		}
+      },
+      "1": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/emmentaler_curds",
+			"particle": "growthcraft_milk:blocks/cheese/emmentaler_curds"
+		}
+      },
+      "2": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/appenzeller_curds",
+			"particle": "growthcraft_milk:blocks/cheese/appenzeller_curds"
+		}
+      },
+      "3": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/asiago_curds",
+			"particle": "growthcraft_milk:blocks/cheese/asiago_curds"
+		}
+      },
+      "4": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/parmesan_curds",
+			"particle": "growthcraft_milk:blocks/cheese/parmesan_curds"
+		}
+      },
+      "5": {
+      },
+      "6": {
+      },
+      "7": {
+      },
+      "8": {
+      },
+      "9": {
+      }      
+    }
+  }
+}

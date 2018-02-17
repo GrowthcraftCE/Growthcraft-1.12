@@ -3,6 +3,7 @@ package growthcraft.milk.common.block;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.common.block.GrowthcraftBlockContainer;
@@ -12,6 +13,8 @@ import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +34,8 @@ public class BlockHangingCurds extends GrowthcraftBlockContainer {
             0.0625 * 4, 0.0625 * 0, 0.0625 * 4,
             0.0625 * 12, 0.0625 * 16, 0.0625 * 12);
 	
+	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("type", 0, BlockCheeseBlock.MAX_VARIANTS-1 );
+	
 	public BlockHangingCurds() {
 		super(Material.CAKE);
 		// make it god awful difficult to break by hand.
@@ -38,6 +43,7 @@ public class BlockHangingCurds extends GrowthcraftBlockContainer {
 		setTickRandomly(true);
 		this.setSoundType(SoundType.CLOTH);
 		setTileEntityType(TileEntityHangingCurds.class);
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_CHEESE_VARIANT, 0));
 	}
 	
     @Override
@@ -173,5 +179,35 @@ public class BlockHangingCurds extends GrowthcraftBlockContainer {
 		// TODO: Will create always initial stage block. Maybe find a better approach.
 		return state.getBlock().getMetaFromState(state);
 	}
+	
+	/************
+	 * PROPERTIES
+	 ************/	
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, TYPE_CHEESE_VARIANT);
+	}
+	
+	@Nonnull
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+	    return this.getDefaultState();
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+	    return 0;
+	}
+
+	@Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+		final TileEntityHangingCurds teHangingCurds = getTileEntity(worldIn, pos);
+		if (teHangingCurds != null)
+			return state.withProperty(TYPE_CHEESE_VARIANT, teHangingCurds.getCheeseType().getVariantID());
+		return state.withProperty(TYPE_CHEESE_VARIANT, 0);
+    }
 
 }

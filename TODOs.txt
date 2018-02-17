@@ -15,6 +15,7 @@ DONE: Change Grape blocks from BlockCrops to BlockBush
 -----------------
 Bugs:
 -----------------
+BUG: Cheese press is triggered when placing a neighbor block.
 BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
 BUG: Collision boxes for brewing kettle walls are not correct.
