@@ -49,18 +49,18 @@
     "typexstage": {
       0: {
 	    "textures": {
-          "0": "minecraft:blocks/bone_block_top",
-          "1": "minecraft:blocks/bone_block_top",
-          "2": "minecraft:blocks/bone_block_top",
-          "particle": "minecraft:blocks/wool_colored_yellow"
+          "0": "growthcraft_milk:blocks/cheese/cheddar_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/cheddar_waxed_bottom",
+          "2": "growthcraft_milk:blocks/cheese/cheddar_waxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/cheddar_waxed_top"
         }
       },
       1: {
 	    "textures": {
-          "0": "minecraft:blocks/bone_block_top",
-          "1": "minecraft:blocks/bone_block_top",
-          "2": "minecraft:blocks/bone_block_top",
-          "particle": "minecraft:blocks/wool_colored_yellow"
+          "0": "growthcraft_milk:blocks/cheese/monterey_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/monterey_waxed_bottom",
+          "2": "growthcraft_milk:blocks/cheese/monterey_waxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/monterey_waxed_top"
         }
       },
       2: {
@@ -82,20 +82,20 @@
       
       10: {
 	    "textures": {
-          "0": "minecraft:blocks/bone_block_top",
-          "1": "minecraft:blocks/bone_block_top",
-          "2": "minecraft:blocks/bone_block_top",
-          "3": "minecraft:blocks/wool_colored_yellow",
-          "particle": "minecraft:blocks/wool_colored_yellow"
+          "0": "growthcraft_milk:blocks/cheese/cheddar_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/cheddar_waxed_bottom",
+          "2": "growthcraft_milk:blocks/cheese/cheddar_waxed_side",
+          "3": "growthcraft_milk:blocks/cheese/cheddar_aged_cut",
+          "particle": "growthcraft_milk:blocks/cheese/cheddar_waxed_top"
         }
       },
       11: {
 	    "textures": {
-          "0": "minecraft:blocks/bone_block_top",
-          "1": "minecraft:blocks/bone_block_top",
-          "2": "minecraft:blocks/bone_block_top",
-          "3": "minecraft:blocks/wool_colored_blue",
-          "particle": "minecraft:blocks/wool_colored_blue"
+          "0": "growthcraft_milk:blocks/cheese/monterey_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/monterey_waxed_bottom",
+          "2": "growthcraft_milk:blocks/cheese/monterey_waxed_side",
+          "3": "growthcraft_milk:blocks/cheese/monterey_aged_cut",
+          "particle": "growthcraft_milk:blocks/cheese/monterey_waxed_top"
         }
       },
       12: {
@@ -117,18 +117,18 @@
       
       20: {
 	    "textures": {
-          "0": "minecraft:blocks/wool_colored_white",
-          "1": "minecraft:blocks/wool_colored_white",
-          "2": "minecraft:blocks/wool_colored_white",
-          "particle": "minecraft:blocks/wool_colored_white"
+          "0": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_top",
+          "1": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_bottom",
+          "2": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_top"
         }
       },
       21: {
 	    "textures": {
-          "0": "minecraft:blocks/wool_colored_white",
-          "1": "minecraft:blocks/wool_colored_white",
-          "2": "minecraft:blocks/wool_colored_white",
-          "particle": "minecraft:blocks/wool_colored_white"
+          "0": "growthcraft_milk:blocks/cheese/monterey_unwaxed_top",
+          "1": "growthcraft_milk:blocks/cheese/monterey_unwaxed_bottom",
+          "2": "growthcraft_milk:blocks/cheese/monterey_unwaxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/monterey_unwaxed_top"
         }
       },
       22: {
