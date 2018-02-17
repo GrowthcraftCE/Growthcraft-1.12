@@ -11,6 +11,7 @@ import growthcraft.hops.handlers.EnumHandler.LagerTypes;
 import growthcraft.hops.items.ItemHops;
 import growthcraft.hops.items.ItemSeedHops;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class GrowthcraftHopsItems {
 	public static ItemDefinition hops;
@@ -24,6 +25,10 @@ public class GrowthcraftHopsItems {
         lagerBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
         hopAleBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
     }
+    
+    private static void registerOres() {
+    	OreDictionary.registerOre("cropHops", hops.getItem());
+    }
 
     public static void register() {
     	hops.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
@@ -32,11 +37,15 @@ public class GrowthcraftHopsItems {
     	hop_seeds.register();
     	lagerBottle.register(new ResourceLocation(Reference.MODID, "lager"));
     	hopAleBottle.register(new ResourceLocation(Reference.MODID, "hopale"));
+    	
+    	registerOres();
     }
 
     public static void registerRenders() {
     	hops.registerRender();
     	hop_seeds.registerRender();
+    	lagerBottle.registerRenders(LagerTypes.class);
+    	hopAleBottle.registerRenders(HopAleTypes.class);
     }
     
 	public static void registerItemColorHandlers() {

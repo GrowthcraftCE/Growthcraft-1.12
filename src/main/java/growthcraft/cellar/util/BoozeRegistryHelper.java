@@ -20,7 +20,6 @@ import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.core.api.fluids.FluidDictionary;
 import growthcraft.core.common.definition.ItemTypeDefinition;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
-import growthcraft.grapes.Reference;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
@@ -34,13 +33,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class BoozeRegistryHelper {
 	private BoozeRegistryHelper() {}
 
-	public static <ET extends Enum<?> & IStringSerializable> void initializeAndRegisterBoozeFluids(BoozeDefinition[] boozes, Class<ET> boozeTypeEnum)
+	public static <ET extends Enum<?> & IStringSerializable> void initializeAndRegisterBoozeFluids(BoozeDefinition[] boozes, Class<ET> boozeTypeEnum, String basename)
 	{
 		ET[] values = boozeTypeEnum.getEnumConstants();
 		
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			String boozeName = values[i].getName();
+			if( basename != null && !basename.isEmpty() )
+				boozeName = basename + "_" + boozeName;
 			boozes[i] = new BoozeDefinition( new Booze(boozeName) );
 			boozes[i].register(true);
 			CellarRegistry.instance().booze().registerBooze(boozes[i].getFluid());
@@ -87,14 +88,14 @@ public class BoozeRegistryHelper {
 		return effects;
 	}
 	
-	public static <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerBooze(BoozeDefinition[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemTypeDefinition<ItemBoozeBottle> bottle, String basename, Class<ET> boozeTypeEnum )
+	public static <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerBooze(BoozeDefinition[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemTypeDefinition<ItemBoozeBottle> bottle, String modid, String basename, Class<ET> boozeTypeEnum )
 	{
 		ET[] values = boozeTypeEnum.getEnumConstants();
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			String boozeName = values[i].getName();
 			int bottleVariantID = values[i].getVariantID();
-			fluidBlocks[i].register(new ResourceLocation(Reference.MODID, "fluid_" + basename + "_" + boozeName ), false);
+			fluidBlocks[i].register(new ResourceLocation(modid, "fluid_" + basename + "_" + boozeName ), false);
 
 //OBSOLET	EventHandlerBucketFill.instance().register(fluidBlocks[i].getBlock(), buckets[i].getItem());
 			

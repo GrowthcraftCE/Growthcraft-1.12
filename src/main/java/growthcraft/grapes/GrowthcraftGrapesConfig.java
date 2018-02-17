@@ -11,7 +11,7 @@ public class GrowthcraftGrapesConfig {
 	public static int ambrosiaRedColor = 0x562E29;
 	public static int portWineRedColor = 0x5E262E;
 
-	public static int grapeWineGreenColor = 0xB4AE2D;
+	public static int grapeWineGreenColor = 0xD3D34A;
 	public static int ambrosiaGreenColor = 0x605E34;
 	public static int portWineGreenColor = 0x8B7923;
 

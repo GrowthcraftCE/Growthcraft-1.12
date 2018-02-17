@@ -1,8 +1,5 @@
 package growthcraft.grapes.proxy;
 
-import growthcraft.grapes.Reference;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class CommonProxy {
 
     public void init() {

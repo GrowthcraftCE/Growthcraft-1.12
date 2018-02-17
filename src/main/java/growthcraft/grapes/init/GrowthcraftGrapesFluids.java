@@ -34,7 +34,7 @@ public class GrowthcraftGrapesFluids
 	public static void init() {
 		grapeWineBooze = new BoozeDefinition[WineTypes.values().length];
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks = new BlockBoozeDefinition[grapeWineBooze.length];
-		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(grapeWineBooze, WineTypes.class);
+		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(grapeWineBooze, WineTypes.class, "");
 //		for (BoozeDefinition booze : grapeWineBooze)
 //		{
 //			booze.getFluid().setColor(GrowthcraftGrapesConfig.grapeWinePurpleColor).setDensity(1120);
@@ -89,7 +89,7 @@ public class GrowthcraftGrapesFluids
 	
 	public static void register() {
 		GrowthcraftGrapesItems.grapeWine.getItem().setBoozes(grapeWineBooze);
-		BoozeRegistryHelper.registerBooze(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks, GrowthcraftGrapesItems.grapeWine, "grapebooze", WineTypes.class);
+		BoozeRegistryHelper.registerBooze(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks, GrowthcraftGrapesItems.grapeWine, Reference.MODID, "grapebooze", WineTypes.class);
 		registerFermentations();
 	}
 	

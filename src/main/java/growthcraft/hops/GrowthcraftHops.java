@@ -1,6 +1,7 @@
 package growthcraft.hops;
 
 import growthcraft.hops.init.GrowthcraftHopsBlocks;
+import growthcraft.hops.init.GrowthcraftHopsFluids;
 import growthcraft.hops.init.GrowthcraftHopsItems;
 import growthcraft.hops.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
@@ -26,6 +27,9 @@ public class GrowthcraftHops {
 
         GrowthcraftHopsItems.init();
         GrowthcraftHopsItems.register();
+        
+        GrowthcraftHopsFluids.init();
+        GrowthcraftHopsFluids.register();
 
         proxy.preInit();
         proxy.registerTileEntities();
