@@ -4,6 +4,10 @@
     "model": "growthcraft_milk:cheese_curds"
   },
   "variants": {
+    "normal": [{ }],
+    "inventory": [{
+       "y": 0
+    }],
     "type" : {
       "0": {
 		"textures": {

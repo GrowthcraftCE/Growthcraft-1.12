@@ -126,7 +126,7 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 				if( !isDried() ) {
 					final Pair<Double, Double> p = sprand.nextCenteredD2();
 					final double px = (double)pos.getX() + 0.5 + p.left * 0.5;
-					final double py = (double)pos.getY();
+					final double py = (double)pos.getY() + 2.0/16.0;
 					final double pz = (double)pos.getZ() + 0.5 + p.right * 0.5;
 					FXHelper.dropParticle(world, px, py, pz, GrowthcraftMilkFluids.whey.getItemColor());
 				}

@@ -103,11 +103,11 @@ public class GrowthcraftMilkBlocks {
         pancheon.registerItemRender();
         churn.registerItemRender();
         cheesePress.registerItemRender();
-        agedCheeseBlock.registerItemRender();
-        waxedCheeseBlock.registerItemRender();
-        agedCheeseCurds.registerItemRender();
-        waxedCheeseCurds.registerItemRender();
-        simpleCheeseCurds.registerItemRender();
+//        agedCheeseBlock.registerItemRender();
+//        waxedCheeseBlock.registerItemRender();
+//        agedCheeseCurds.registerItemRender();
+//        waxedCheeseCurds.registerItemRender();
+//        simpleCheeseCurds.registerItemRender();
     }
     
     public static void registerTileEntities() {

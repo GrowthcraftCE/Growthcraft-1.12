@@ -151,6 +151,7 @@ public class GrowthcraftMilkItems {
         
         registerCheeseCurdsItemRenders(agedCheeseCurdsItem, AgedCheeseTypes.values());
         registerCheeseCurdsItemRenders(waxedCheeseCurdsItem, WaxedCheeseTypes.values());
+        registerCheeseCurdsItemRenders(simpleCheeseCurdsItem, SimpleCheeseTypes.values());
     }
     
 	public static void registerModelBakeryVariants() {
