@@ -1,5 +1,9 @@
 package growthcraft.milk.init;
 
+import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
+
+import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.common.definition.ItemDefinition;
 import growthcraft.milk.api.cheese.CheeseUtils;
 import growthcraft.milk.api.definition.EnumCheeseStage;
 import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
@@ -8,20 +12,26 @@ import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.handlers.EnumHandler;
 import growthcraft.milk.handlers.EnumHandler.AgedCheeseTypes;
+import growthcraft.milk.handlers.EnumHandler.ButterTypes;
 import growthcraft.milk.handlers.EnumHandler.IceCreamTypes;
 import growthcraft.milk.handlers.EnumHandler.SimpleCheeseTypes;
 import growthcraft.milk.handlers.EnumHandler.WaxedCheeseTypes;
 import growthcraft.milk.handlers.EnumHandler.YogurtTypes;
-import growthcraft.milk.items.*;
+import growthcraft.milk.items.ItemAgedCheeseSlice;
+import growthcraft.milk.items.ItemButter;
+import growthcraft.milk.items.ItemCheeseCloth;
+import growthcraft.milk.items.ItemIceCream;
+import growthcraft.milk.items.ItemSeedThistle;
+import growthcraft.milk.items.ItemSimpleCheeseSlice;
+import growthcraft.milk.items.ItemStarterCulture;
+import growthcraft.milk.items.ItemStomach;
+import growthcraft.milk.items.ItemThistle;
+import growthcraft.milk.items.ItemWaxedCheeseSlice;
+import growthcraft.milk.items.ItemYogurt;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.oredict.OreDictionary;
-import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
-
-import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.api.definition.IObjectVariant;
-import growthcraft.core.common.definition.ItemDefinition;
 
 public class GrowthcraftMilkItems {
 
@@ -95,11 +105,47 @@ public class GrowthcraftMilkItems {
     
 	private static void registerOres()
 	{
+		for (IceCreamTypes e : IceCreamTypes.values())
+		{
+			OreDictionary.registerOre("foodIceCream", e.asStack());
+		}
+
+		for (ButterTypes e : ButterTypes.values())
+		{
+			OreDictionary.registerOre("foodButter", e.asStack());
+		}
+
+		for (AgedCheeseTypes e : AgedCheeseTypes.values())
+		{
+			OreDictionary.registerOre("foodCheese", e.getCheeseItems().asStack());
+		}
+		
+		for (WaxedCheeseTypes e : WaxedCheeseTypes.values())
+		{
+			OreDictionary.registerOre("foodCheese", e.getCheeseItems().asStack());
+		}
+		
+		for (SimpleCheeseTypes e : SimpleCheeseTypes.values())
+		{
+			OreDictionary.registerOre("foodCheese", e.getCheeseItems().asStack());
+		}
+
+		OreDictionary.registerOre("foodYogurt", yogurt.asStack());
+		OreDictionary.registerOre("materialStomach", stomach.asStack());
 		OreDictionary.registerOre("rennetSource", thistle.getItem());
 		OreDictionary.registerOre("rennetSource", stomach.asStack());
+		OreDictionary.registerOre("foodOffal", stomach.asStack());
 		OreDictionary.registerOre("materialStarterCulture", starterCulture.asStack());
 		OreDictionary.registerOre("materialCheeseCloth", cheeseCloth.asStack());
+		
+		if (thistleSeed != null)
+		{
+			OreDictionary.registerOre("listAllseed", thistleSeed.asStack());
+		}
+		
+		OreDictionary.registerOre("foodMelon", Items.MELON);
 		OreDictionary.registerOre("foodFruit", Items.MELON);
+		OreDictionary.registerOre("foodChorusFruit", Items.CHORUS_FRUIT);
 		OreDictionary.registerOre("foodFruit", Items.CHORUS_FRUIT);
 	}
 	

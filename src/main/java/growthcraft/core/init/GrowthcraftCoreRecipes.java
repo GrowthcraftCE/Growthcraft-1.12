@@ -34,6 +34,8 @@ public class GrowthcraftCoreRecipes {
                 "S",
                 'S', GrowthcraftCoreBlocks.salt_block.getBlock()
         );
+        
+		GameRegistry.addRecipe(GrowthcraftCoreItems.rope.asStack(8), new Object[] {"A", 'A', Items.LEAD});
 
     }
 }

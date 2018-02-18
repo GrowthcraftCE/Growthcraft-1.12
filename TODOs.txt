@@ -15,6 +15,8 @@ DONE: Change Grape blocks from BlockCrops to BlockBush
 -----------------
 Bugs:
 -----------------
+BUG: Thistle recipe not working to get seeds.
+BUG: Ricotta bowl recipe not working.
 BUG: Cheese press is triggered when placing a neighbor block.
 BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
@@ -46,13 +48,17 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
+TODO: Add food ore dictionary: apple, grape
+TODO: Mining levels for all ported devices.
+TODO: Real curds textures and models.
 TODO: Crafting Recipes for Cellar.
 TODO: Crafting Recipes for Milk.
 TODO: Crafting Recipes for Core.
 TODO: Crafting Recipes for Grapes.
-TODO: Cheese model items to be textured.
-TODO: Curds textures and models.
+TODO: Crafting Recipes for Hops.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Cheese model items to be textured.
+DONE: Curds textures and models.
 DONE: Seed drops from grape leaves.
 DONE: Animation for Butter churn.
 DONE: Animation for Cheese Press.
@@ -77,6 +83,7 @@ DONE: Buckets für Boozes to appear in CreativeTab.
 ------------
 Refactoring:
 ------------
+TODO: Move all recipe handling for all GC modules to corresponding init classes.
 TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
 TODO: Add item handler capability to GrowthcraftTileInventoryBase
 TODO: Add fluid handler capability to GrowthcraftTileDeviceBase

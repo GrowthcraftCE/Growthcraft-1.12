@@ -20,4 +20,5 @@ public class GrowthcraftMilkConfig {
 	public static int cheeseVatWheyTime = 2400;
 	public static boolean cheesePressHandOperated = true;
 	public static boolean cheesePressRedstoneOperated = true;
+	public static int ricottaBowlCount = 4;
 }

@@ -58,7 +58,7 @@ public class EnumHandler {
 		}
     }
 
-    public enum IceCreamTypes implements IStringSerializable, IObjectVariant {
+    public enum IceCreamTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
         PLAIN(0, "plain"),
         CHOCOLATE(1, "chocolate"),
         GRAPE(2, "grape"),
@@ -88,9 +88,19 @@ public class EnumHandler {
         public int getVariantID() {
             return this.ID;
         }
+
+		@Override
+		public ItemStack asStack(int size) {
+			return GrowthcraftMilkItems.iceCream.asStack(size, getVariantID());
+		}
+
+		@Override
+		public ItemStack asStack() {
+			return asStack(1);
+		}
     }
 
-    public enum YogurtTypes implements IStringSerializable, IObjectVariant {
+    public enum YogurtTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
         PLAIN(0, "plain"),
         CHOCOLATE(1, "chocolate"),
         GRAPE(2, "grape"),
@@ -120,6 +130,16 @@ public class EnumHandler {
         public int getVariantID() {
             return this.ID;
         }
+		
+		@Override
+		public ItemStack asStack(int size) {
+			return GrowthcraftMilkItems.yogurt.asStack(size, getVariantID());
+		}
+
+		@Override
+		public ItemStack asStack() {
+			return asStack(1);
+		}
 	}
 
     public enum WaxedCheeseTypes implements ICheeseType, IObjectVariant, IStringSerializable {
