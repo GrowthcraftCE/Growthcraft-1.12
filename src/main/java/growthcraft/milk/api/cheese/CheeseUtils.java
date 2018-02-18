@@ -5,11 +5,13 @@ import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.api.definition.EnumCheeseStage;
 
 public class CheeseUtils {
+	public static final int MAX_CUTS = 1 << 2;
+	
 	public static <T extends IObjectVariant> int getItemMetaFor(T cheese, int slices, EnumCheeseStage atStage) {
 		// first 3 bits reserved for stage.
 		// second 2 bits reserved for cutting.
 		// The rest is for the variant.
-		if( slices > 4 )
+		if( slices > MAX_CUTS )
 			throw new IllegalArgumentException("Maximal 4 slices are supported.");
 		if( slices <= 0 ) {
 			slices = 1;

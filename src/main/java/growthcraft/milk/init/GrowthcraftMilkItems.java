@@ -1,5 +1,9 @@
 package growthcraft.milk.init;
 
+import growthcraft.milk.api.cheese.CheeseUtils;
+import growthcraft.milk.api.definition.EnumCheeseStage;
+import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.handlers.EnumHandler;
@@ -11,10 +15,12 @@ import growthcraft.milk.handlers.EnumHandler.YogurtTypes;
 import growthcraft.milk.items.*;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.oredict.OreDictionary;
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.api.definition.IObjectVariant;
 import growthcraft.core.common.definition.ItemDefinition;
 
 public class GrowthcraftMilkItems {
@@ -96,6 +102,28 @@ public class GrowthcraftMilkItems {
 		OreDictionary.registerOre("foodFruit", Items.MELON);
 		OreDictionary.registerOre("foodFruit", Items.CHORUS_FRUIT);
 	}
+	
+	public static <ET extends ICheeseType & IStringSerializable> void registerCheeseBlockItemRenders( ItemDefinition itemDef, ET[] types ) {
+        for( ET type : types ) {
+        	ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
+        	for( EnumCheeseStage stage : EnumCheeseStage.values() ) {
+        		if( blockStackFactory.getInitialStage() != EnumCheeseStage.UNWAXED &&
+        			stage == EnumCheeseStage.UNWAXED )
+        			continue;	// ignore unwaxed stage for non waxable items
+        		
+        		if( stage == EnumCheeseStage.CUT ) {
+        			for( int i = 1; i <= CheeseUtils.MAX_CUTS; i ++ ) {
+        				int meta = CheeseUtils.getItemMetaFor(type, i, stage);
+        				itemDef.registerRender(meta, type.getName() + "_" + stage.getName() );
+        			}
+        		}
+        		else {
+    				int meta = CheeseUtils.getItemMetaFor(type, CheeseUtils.MAX_CUTS, stage);
+    				itemDef.registerRender(meta, type.getName() + "_" + stage.getName());
+        		}
+        	}
+        }
+	}
 
     public static void registerRenders() {
     	thistle.registerRender();
@@ -111,7 +139,8 @@ public class GrowthcraftMilkItems {
         waxedCheeseSlice.registerRenders(WaxedCheeseTypes.class);
         simpleCheeseSlice.registerRenders(SimpleCheeseTypes.class);
         
-//        agedCheeseBlockItem.registerRenders(AgedCheeseTypes.class);
+        registerCheeseBlockItemRenders(agedCheeseBlockItem, AgedCheeseTypes.values());
+        registerCheeseBlockItemRenders(waxedCheeseBlockItem, WaxedCheeseTypes.values());
     }
     
 	public static void registerModelBakeryVariants() {
