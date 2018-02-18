@@ -40,7 +40,7 @@ public class PREVBlockCheeseVat extends GrowthcraftBlockContainer {
 
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 1, 0.0625 * 0, 0.0625 * 1,
-            0.0625 * 15, 0.0625 * 13, 0.0625 * 15);
+            0.0625 * 15, 0.0625 * 14, 0.0625 * 15);
 
     public PREVBlockCheeseVat(String unlocalizedName) {
         super(Material.IRON, MapColor.STONE);
