@@ -103,7 +103,7 @@ public class GrowthcraftMilkItems {
 		OreDictionary.registerOre("foodFruit", Items.CHORUS_FRUIT);
 	}
 	
-	public static <ET extends ICheeseType & IStringSerializable> void registerCheeseBlockItemRenders( ItemDefinition itemDef, ET[] types ) {
+	public static <ET extends ICheeseType & IStringSerializable> void registerCheeseWheelItemRenders( ItemDefinition itemDef, ET[] types ) {
         for( ET type : types ) {
         	ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
         	for( EnumCheeseStage stage : EnumCheeseStage.values() ) {
@@ -124,6 +124,13 @@ public class GrowthcraftMilkItems {
         	}
         }
 	}
+	
+	public static <ET extends ICheeseType & IStringSerializable> void registerCheeseCurdsItemRenders( ItemDefinition itemDef, ET[] types ) {
+        for( ET type : types ) {
+        	int meta = CheeseUtils.getItemMetaFor(type, 4, EnumCheeseStage.UNAGED);
+        	itemDef.registerRender(meta, type.getName() + "_curds");
+        }
+	}
 
     public static void registerRenders() {
     	thistle.registerRender();
@@ -139,8 +146,11 @@ public class GrowthcraftMilkItems {
         waxedCheeseSlice.registerRenders(WaxedCheeseTypes.class);
         simpleCheeseSlice.registerRenders(SimpleCheeseTypes.class);
         
-        registerCheeseBlockItemRenders(agedCheeseBlockItem, AgedCheeseTypes.values());
-        registerCheeseBlockItemRenders(waxedCheeseBlockItem, WaxedCheeseTypes.values());
+        registerCheeseWheelItemRenders(agedCheeseBlockItem, AgedCheeseTypes.values());
+        registerCheeseWheelItemRenders(waxedCheeseBlockItem, WaxedCheeseTypes.values());
+        
+        registerCheeseCurdsItemRenders(agedCheeseCurdsItem, AgedCheeseTypes.values());
+        registerCheeseCurdsItemRenders(waxedCheeseCurdsItem, WaxedCheeseTypes.values());
     }
     
 	public static void registerModelBakeryVariants() {
