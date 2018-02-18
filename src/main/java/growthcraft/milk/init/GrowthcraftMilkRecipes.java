@@ -154,11 +154,11 @@ public class GrowthcraftMilkRecipes {
 		));
 
 		// Yogurt - Grape
-		GameRegistry.addRecipe(new ShapelessOreRecipe(YogurtTypes.GRAPE.asStack(),
+		GameRegistry.addRecipe(new ShapelessOreRecipe(YogurtTypes.GRAPEPURPLE.asStack(),
 			Items.MILK_BUCKET,
 			GrowthcraftMilkItems.starterCulture.asStack(),
 			Items.BOWL,
-			"foodGrapes"
+			"foodGrapesPurple"
 		));
 
 		// Yogurt - Apple
@@ -203,12 +203,12 @@ public class GrowthcraftMilkRecipes {
 		));
 
 		// Ice Cream - Grape
-		GameRegistry.addRecipe(new ShapelessOreRecipe(IceCreamTypes.GRAPE.asStack(),
+		GameRegistry.addRecipe(new ShapelessOreRecipe(IceCreamTypes.GRAPEPURPLE.asStack(),
 			GrowthcraftMilkFluids.cream.asBucketItemStack(),
 			Items.MILK_BUCKET,
 			Items.BOWL,
 			Items.SUGAR,
-			"foodGrapes"
+			"foodGrapesPurple"
 		));
 
 		// Ice Cream - Apple

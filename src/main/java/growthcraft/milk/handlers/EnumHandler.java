@@ -61,7 +61,7 @@ public class EnumHandler {
     public enum IceCreamTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
         PLAIN(0, "plain"),
         CHOCOLATE(1, "chocolate"),
-        GRAPE(2, "grape"),
+        GRAPEPURPLE(2, "grape_purple"),
         APPLE(3, "apple"),
         HONEY(4, "honey"),
         WATERMELON(5, "watermelon");
@@ -103,7 +103,7 @@ public class EnumHandler {
     public enum YogurtTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
         PLAIN(0, "plain"),
         CHOCOLATE(1, "chocolate"),
-        GRAPE(2, "grape"),
+        GRAPEPURPLE(2, "grape_purple"),
         APPLE(3, "apple"),
         HONEY(4, "honey"),
         WATERMELON(5, "watermelon");

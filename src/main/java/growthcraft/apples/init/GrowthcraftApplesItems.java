@@ -17,6 +17,7 @@ public class GrowthcraftApplesItems {
     
 	private static void registerOres()
 	{
+		OreDictionary.registerOre("foodApple", Items.APPLE);
 		OreDictionary.registerOre("foodFruit", Items.APPLE);
 	}
 

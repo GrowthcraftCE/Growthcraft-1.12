@@ -7,6 +7,7 @@ DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in it
 -----------------
 To implement:
 -----------------
+TODO: Add green and red grape ice cream and yoghurt.
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
 TODO: Step sound of apple fences should be changed to wood.
 TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food types.
@@ -48,7 +49,6 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
-TODO: Add food ore dictionary: apple, grape
 TODO: Mining levels for all ported devices.
 TODO: Real curds textures and models.
 TODO: Crafting Recipes for Cellar.
@@ -57,6 +57,7 @@ TODO: Crafting Recipes for Core.
 TODO: Crafting Recipes for Grapes.
 TODO: Crafting Recipes for Hops.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Add food ore dictionary: apple, grape
 DONE: Cheese model items to be textured.
 DONE: Curds textures and models.
 DONE: Seed drops from grape leaves.

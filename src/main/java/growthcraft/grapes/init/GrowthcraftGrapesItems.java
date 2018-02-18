@@ -29,6 +29,9 @@ public class GrowthcraftGrapesItems {
 		OreDictionary.registerOre("foodFruit", GrapeTypes.GREEN.asStack());
 		OreDictionary.registerOre("foodFruit", GrapeTypes.PURPLE.asStack());
 		OreDictionary.registerOre("foodFruit", GrapeTypes.RED.asStack());
+		OreDictionary.registerOre("foodGrapesPurple", GrapeTypes.PURPLE.asStack());
+		OreDictionary.registerOre("foodGrapesGreen", GrapeTypes.GREEN.asStack());
+		OreDictionary.registerOre("foodGrapesRed", GrapeTypes.RED.asStack());
 		OreDictionary.registerOre("foodGrapejuice", grapeWine.asStack(1, 0));
 	}
     
