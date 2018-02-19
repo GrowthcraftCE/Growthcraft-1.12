@@ -1,15 +1,12 @@
-item.grape.tooltip=Grape
 item.grape.green.name=Green Grapes
 item.grape.purple.name=Purple Grapes
 item.grape.red.name=Red Grapes
 
-item.grape_seed.tooltip=Seed that grows into a grape vine
 item.grape_seed.green.name=Green Grape Seeds
 item.grape_seed.purple.name=Purple Grape Seeds
 item.grape_seed.red.name=Red Grape Seeds
 
 tile.grape_vine.name=Grape Vine
-tile.grape_vine.tooltip=Grows the finest grapes
 tile.grape_vine_bush.name=Grape Vine
 tile.grape_vine_fruit.name=Grape Vine
 
