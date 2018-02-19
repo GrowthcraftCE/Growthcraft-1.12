@@ -49,6 +49,7 @@ DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 wh
 -----------------
 Not ported stuff:
 -----------------
+TODO: Missing translations.
 TODO: Mining levels for all ported devices.
 TODO: Real curds textures and models.
 TODO: Crafting Recipes for Cellar.
