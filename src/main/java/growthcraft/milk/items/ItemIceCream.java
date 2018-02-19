@@ -42,10 +42,4 @@ public class ItemIceCream extends ItemFood {
         }
         return super.getUnlocalizedName() + "." + EnumHandler.IceCreamTypes.PLAIN.getName();
     }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, playerIn, tooltip, advanced);
-        tooltip.add(TextFormatting.BLUE + I18n.translateToLocal("item.ice_cream.tooltip"));
-    }
 }

@@ -37,12 +37,6 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
     }
 
     @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, playerIn, tooltip, advanced);
-        tooltip.add(TextFormatting.GRAY + I18n.format("item.grape_seed.tooltip"));
-    }
-    
-    @Override
     public String getUnlocalizedName(ItemStack stack) {
     for (int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
     	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];

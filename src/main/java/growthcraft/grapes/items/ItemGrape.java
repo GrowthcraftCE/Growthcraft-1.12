@@ -43,11 +43,4 @@ public class ItemGrape extends ItemFood {
         }
         return super.getUnlocalizedName() + "." + EnumHandler.GrapeTypes.PURPLE.getName();
     }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, playerIn, tooltip, advanced);
-        tooltip.add(TextFormatting.BLUE + I18n.translateToLocal("item.grape.tooltip"));
-    }
-
 }

@@ -38,10 +38,4 @@ public class ItemCrowbar extends Item {
         }
         return super.getUnlocalizedName() + "." + EnumHandler.CrowbarTypes.SILVER.getName();
     }
-
-    @Override
-    public void addInformation(ItemStack stack, EntityPlayer playerIn, List<String> tooltip, boolean advanced) {
-        super.addInformation(stack, playerIn, tooltip, advanced);
-        tooltip.add(TextFormatting.BLUE + I18n.translateToLocal("item.crowbar.tooltip"));
-    }
 }
