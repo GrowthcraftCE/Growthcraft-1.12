@@ -28,7 +28,7 @@ public class GrowthcraftHopsFluids {
 	public static BoozeDefinition[] hopAleBooze;
 	public static BoozeDefinition[] lagerBooze;
 	
-	public static void init() {
+	public static void preInit() {
 		lagerBooze = new BoozeDefinition[LagerTypes.values().length];
 		GrowthcraftHopsBlocks.lagerFluidBlocks = new BlockBoozeDefinition[lagerBooze.length];
 		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(lagerBooze, LagerTypes.class, "lager");

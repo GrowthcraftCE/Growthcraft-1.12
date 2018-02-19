@@ -19,7 +19,7 @@ public class GrowthcraftHopsItems {
 	public static ItemTypeDefinition<ItemBoozeBottle> lagerBottle;
     public static ItemTypeDefinition<ItemBoozeBottle> hopAleBottle;
 
-    public static void init() {
+    public static void preInit() {
         hops = new ItemDefinition( new ItemHops("hops") );
         hop_seeds = new ItemDefinition( new ItemSeedHops("hop_seeds") );
         lagerBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );

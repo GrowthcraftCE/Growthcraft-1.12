@@ -9,7 +9,7 @@ public class GrowthcraftHopsBlocks {
 	public static BlockBoozeDefinition[] lagerFluidBlocks;
     public static BlockDefinition hops;
 
-    public static void init() {
+    public static void preInit() {
     	hops = new BlockDefinition( new BlockHops("hops") );
     	
     	hopAleFluidBlocks = null; // Initialized in GrowthcraftHopsFluids

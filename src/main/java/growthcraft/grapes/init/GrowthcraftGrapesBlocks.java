@@ -23,7 +23,7 @@ public class GrowthcraftGrapesBlocks {
 	public static BlockTypeDefinition<BlockGrapeLeaves> grapeLeaves;
 	public static BlockTypeDefinition<BlockGrapeFruit> grapeFruit;
 	
-    public static void init() {
+    public static void preInit() {
 //        grape_vine = new BlockDefinition( new BlockGrapeVine("grape_vine") );
 //        grape_vine_bush = new BlockDefinition( new BlockGrapeVineBush("grape_vine_bush") );
 //        grape_vine_fruit = new BlockDefinition( new BlockGrapeVineFruit() );

@@ -18,7 +18,7 @@ public class GrowthcraftGrapesItems {
     public static ItemDefinition grape_seed;
 	public static ItemTypeDefinition<ItemBoozeBottle> grapeWine;
 
-    public static void init() {
+    public static void preInit() {
         grape = new ItemDefinition( new ItemGrape("grape", 1, 1, false) );
         grape_seed = new ItemDefinition( new ItemGrapeSeed("grape_seed") );
         grapeWine = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.api.item.IItemStackComparator;
+import growthcraft.core.utils.ItemUtils;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -44,7 +45,7 @@ public class ShapelessItemComparableRecipe implements IRecipe
 			for (int j = 0; j < 3; ++j)
 			{
 				final ItemStack actual = crafting.getStackInRowAndColumn(j, i);
-				if (actual != null)
+				if (!ItemUtils.isEmpty(actual))
 				{
 					boolean flag = false;
 					final Iterator<ItemStack> iterator = recipeList.iterator();

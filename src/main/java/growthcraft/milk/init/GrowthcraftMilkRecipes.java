@@ -248,7 +248,7 @@ public class GrowthcraftMilkRecipes {
 		
 		if (GrowthcraftMilkItems.thistleSeed != null && GrowthcraftMilkBlocks.thistle != null)
 		{
-			GameRegistry.addShapelessRecipe(GrowthcraftMilkItems.thistleSeed.asStack(2), GrowthcraftMilkBlocks.thistle.getBlock());
+			GameRegistry.addShapelessRecipe(GrowthcraftMilkItems.thistleSeed.asStack(2), GrowthcraftMilkItems.thistle.getItem());
 		}
 	}
 	

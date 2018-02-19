@@ -31,7 +31,7 @@ public class GrowthcraftGrapesFluids
 {
 	public static BoozeDefinition[] grapeWineBooze;
     
-	public static void init() {
+	public static void preInit() {
 		grapeWineBooze = new BoozeDefinition[WineTypes.values().length];
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks = new BlockBoozeDefinition[grapeWineBooze.length];
 		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(grapeWineBooze, WineTypes.class, "");

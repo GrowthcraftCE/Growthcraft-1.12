@@ -3,6 +3,7 @@ package growthcraft.hops;
 import growthcraft.hops.init.GrowthcraftHopsBlocks;
 import growthcraft.hops.init.GrowthcraftHopsFluids;
 import growthcraft.hops.init.GrowthcraftHopsItems;
+import growthcraft.hops.init.GrowthcraftHopsRecipes;
 import growthcraft.hops.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -22,13 +23,13 @@ public class GrowthcraftHops {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
 
-        GrowthcraftHopsBlocks.init();
+        GrowthcraftHopsBlocks.preInit();
         GrowthcraftHopsBlocks.register();
 
-        GrowthcraftHopsItems.init();
+        GrowthcraftHopsItems.preInit();
         GrowthcraftHopsItems.register();
         
-        GrowthcraftHopsFluids.init();
+        GrowthcraftHopsFluids.preInit();
         GrowthcraftHopsFluids.register();
 
         proxy.preInit();
@@ -38,6 +39,7 @@ public class GrowthcraftHops {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
+        GrowthcraftHopsRecipes.init();
     }
 
     @Mod.EventHandler
