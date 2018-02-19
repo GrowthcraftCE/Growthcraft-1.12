@@ -1,4 +1,3 @@
-item.crowbar.tooltip=Growthcraft Utility Tool
 item.crowbar.white.name=White Crowbar
 item.crowbar.orange.name=Orange Crowbar
 item.crowbar.magenta.name=Magenta Crowbar
@@ -16,13 +15,13 @@ item.crowbar.green.name=Green Crowbar
 item.crowbar.red.name=Red Crowbar
 item.crowbar.black.name=Black Crowbar
 item.rope.name=Rope
-item.salt.name=Salt
+item.salt.name=Rock Salt
 
 itemGroup.Growthcraft=Growthcraft
 
 tile.rope_knot.name=Rope Knot
 tile.rope_fence.name=Rope
-tile.salt_block.name=Salt Block
+tile.salt_block.name=Rock Salt Block
 
 # Effects
 effect.chance.format=%d%% Chance of
