@@ -1,13 +1,6 @@
 {
   "forge_marker": 1,
   "defaults": {
-	"textures": {
-		"0": "growthcraft_milk:blocks/cheese_block_outside_top",
-		"1": "growthcraft_milk:blocks/cheese_block_outside_bottom",
-		"2": "growthcraft_milk:blocks/cheese_block_outside_sides",
-		"3": "growthcraft_milk:blocks/cheese_inside",
-		"particle": "growthcraft_milk:blocks/cheese_block_outside_top"
-	},
 	"model": "growthcraft_milk:cheese_block_slices4"
   },
   "variants": {
@@ -50,16 +43,14 @@
       0: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/cheddar_waxed_top",
-          "1": "growthcraft_milk:blocks/cheese/cheddar_waxed_bottom",
-          "2": "growthcraft_milk:blocks/cheese/cheddar_waxed_side",
+          "1": "growthcraft_milk:blocks/cheese/cheddar_waxed_side",
           "particle": "growthcraft_milk:blocks/cheese/cheddar_waxed_top"
         }
       },
       1: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/monterey_waxed_top",
-          "1": "growthcraft_milk:blocks/cheese/monterey_waxed_bottom",
-          "2": "growthcraft_milk:blocks/cheese/monterey_waxed_side",
+          "1": "growthcraft_milk:blocks/cheese/monterey_waxed_side",
           "particle": "growthcraft_milk:blocks/cheese/monterey_waxed_top"
         }
       },
@@ -83,18 +74,14 @@
       10: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/cheddar_waxed_top",
-          "1": "growthcraft_milk:blocks/cheese/cheddar_waxed_bottom",
-          "2": "growthcraft_milk:blocks/cheese/cheddar_waxed_side",
-          "3": "growthcraft_milk:blocks/cheese/cheddar_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/cheddar_waxed_side",
           "particle": "growthcraft_milk:blocks/cheese/cheddar_waxed_top"
         }
       },
       11: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/monterey_waxed_top",
-          "1": "growthcraft_milk:blocks/cheese/monterey_waxed_bottom",
-          "2": "growthcraft_milk:blocks/cheese/monterey_waxed_side",
-          "3": "growthcraft_milk:blocks/cheese/monterey_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/monterey_waxed_side",
           "particle": "growthcraft_milk:blocks/cheese/monterey_waxed_top"
         }
       },
@@ -118,16 +105,14 @@
       20: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_top",
-          "1": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_bottom",
-          "2": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_side",
+          "1": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_side",
           "particle": "growthcraft_milk:blocks/cheese/cheddar_unwaxed_top"
         }
       },
       21: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/monterey_unwaxed_top",
-          "1": "growthcraft_milk:blocks/cheese/monterey_unwaxed_bottom",
-          "2": "growthcraft_milk:blocks/cheese/monterey_unwaxed_side",
+          "1": "growthcraft_milk:blocks/cheese/monterey_unwaxed_side",
           "particle": "growthcraft_milk:blocks/cheese/monterey_unwaxed_top"
         }
       },

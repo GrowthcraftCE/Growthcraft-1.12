@@ -1,13 +1,6 @@
 {
   "forge_marker": 1,
   "defaults": {
-	"textures": {
-		"0": "growthcraft_milk:blocks/cheese_block_outside_top",
-		"1": "growthcraft_milk:blocks/cheese_block_outside_bottom",
-		"2": "growthcraft_milk:blocks/cheese_block_outside_sides",
-		"3": "growthcraft_milk:blocks/cheese_inside",
-		"particle": "growthcraft_milk:blocks/cheese_block_outside_top"
-	},
 	"model": "growthcraft_milk:cheese_block_slices4"
   },
   "variants": {
@@ -50,40 +43,35 @@
       0: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/gorgonzola_unaged_top",
-          "1": "growthcraft_milk:blocks/cheese/gorgonzola_unaged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/gorgonzola_unaged_side",
+          "1": "growthcraft_milk:blocks/cheese/gorgonzola_unaged_side",
           "particle": "growthcraft_milk:blocks/cheese/gorgonzola_unaged_top"
         }
       },
       1: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/emmentaler_unaged_top",
-          "1": "growthcraft_milk:blocks/cheese/emmentaler_unaged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/emmentaler_unaged_side",
+          "1": "growthcraft_milk:blocks/cheese/emmentaler_unaged_side",
           "particle": "growthcraft_milk:blocks/cheese/emmentaler_unaged_top"
         }
       },
       2: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/appenzeller_unaged_top",
-          "1": "growthcraft_milk:blocks/cheese/appenzeller_unaged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/appenzeller_unaged_side",
+          "1": "growthcraft_milk:blocks/cheese/appenzeller_unaged_side",
           "particle": "growthcraft_milk:blocks/cheese/appenzeller_unaged_top"
         }
       },
       3: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/asiago_unaged_top",
-          "1": "growthcraft_milk:blocks/cheese/asiago_unaged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/asiago_unaged_side",
+          "1": "growthcraft_milk:blocks/cheese/asiago_unaged_side",
           "particle": "growthcraft_milk:blocks/cheese/asiago_unaged_top"
         }
       },
       4: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/parmesan_unaged_top",
-          "1": "growthcraft_milk:blocks/cheese/parmesan_unaged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/parmesan_unaged_side",
+          "1": "growthcraft_milk:blocks/cheese/parmesan_unaged_side",
           "particle": "growthcraft_milk:blocks/cheese/parmesan_unaged_top"
         }
       },
@@ -101,45 +89,35 @@
       10: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/gorgonzola_aged_top",
-          "1": "growthcraft_milk:blocks/cheese/gorgonzola_aged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/gorgonzola_aged_side",
-          "3": "growthcraft_milk:blocks/cheese/gorgonzola_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/gorgonzola_aged_side",
           "particle": "growthcraft_milk:blocks/cheese/gorgonzola_aged_top"
         }
       },
       11: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/emmentaler_aged_top",
-          "1": "growthcraft_milk:blocks/cheese/emmentaler_aged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/emmentaler_aged_side",
-          "3": "growthcraft_milk:blocks/cheese/emmentaler_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/emmentaler_aged_side",
           "particle": "growthcraft_milk:blocks/cheese/emmentaler_aged_top"
         }
       },
       12: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/appenzeller_aged_top",
-          "1": "growthcraft_milk:blocks/cheese/appenzeller_aged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/appenzeller_aged_side",
-          "3": "growthcraft_milk:blocks/cheese/appenzeller_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/appenzeller_aged_side",
           "particle": "growthcraft_milk:blocks/cheese/appenzeller_aged_top"
         }
       },
       13: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/asiago_aged_top",
-          "1": "growthcraft_milk:blocks/cheese/asiago_aged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/asiago_aged_side",
-          "3": "growthcraft_milk:blocks/cheese/asiago_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/asiago_aged_side",
           "particle": "growthcraft_milk:blocks/cheese/asiago_aged_top"
         }
       },
       14: {
 	    "textures": {
           "0": "growthcraft_milk:blocks/cheese/parmesan_aged_top",
-          "1": "growthcraft_milk:blocks/cheese/parmesan_aged_bottom",
-          "2": "growthcraft_milk:blocks/cheese/parmesan_aged_side",
-          "3": "growthcraft_milk:blocks/cheese/parmesan_aged_cut",
+          "1": "growthcraft_milk:blocks/cheese/parmesan_aged_side",
           "particle": "growthcraft_milk:blocks/cheese/parmesan_aged_top"
         }
       },
