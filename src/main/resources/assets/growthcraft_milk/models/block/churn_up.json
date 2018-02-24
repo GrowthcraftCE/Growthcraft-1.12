@@ -1,9 +1,9 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11. Model by Kisutora.",
 	"textures": {
-		"0": "growthcraft_milk:blocks/butter_churn",
-		"1": "growthcraft_milk:blocks/butter_churn_top",
-		"particle": "growthcraft_milk:blocks/butter_churn"
+		"0": "growthcraft_milk:blocks/butter_churn/butter_churn",
+		"1": "growthcraft_milk:blocks/butter_churn/butter_churn_top",
+		"particle": "growthcraft_milk:blocks/butter_churn/butter_churn"
 	},
 	"elements": [
 		{

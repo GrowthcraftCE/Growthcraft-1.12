@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "growthcraft_milk:blocks/butter_churn_plunge",
+		"0": "growthcraft_milk:blocks/butter_churn/butter_churn_plunge",
 		"1": "growthcraft_milk:blocks/cheese/appenzeller_curds",
 		"particle": "growthcraft_milk:blocks/cheese/appenzeller_curds"
 	},

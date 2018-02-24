@@ -2,11 +2,11 @@
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11. Model by Kisutora.",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "growthcraft_cellar:blocks/brewkettle_top",
-		"1": "growthcraft_cellar:blocks/brewkettle_base",
-		"2": "growthcraft_cellar:blocks/brewkettle_feet",
-		"3": "growthcraft_cellar:blocks/brewkettle_side",
-		"particle": "growthcraft_cellar:blocks/brewkettle_base"
+		"0": "growthcraft_cellar:blocks/brew_kettle/brewkettle_top",
+		"1": "growthcraft_cellar:blocks/brew_kettle/brewkettle_base",
+		"2": "growthcraft_cellar:blocks/brew_kettle/brewkettle_feet",
+		"3": "growthcraft_cellar:blocks/brew_kettle/brewkettle_side",
+		"particle": "growthcraft_cellar:blocks/brew_kettle/brewkettle_base"
 	},
 	"elements": [
 		{

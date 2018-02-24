@@ -63,6 +63,7 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
 	}
 	
 	protected void finish() {
+        GlStateManager.enableCull();
 		RenderHelper.enableStandardItemLighting();
 	}
 }
