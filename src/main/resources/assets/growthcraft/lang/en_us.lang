@@ -22,6 +22,7 @@ itemGroup.Growthcraft=Growthcraft
 tile.rope_knot.name=Rope Knot
 tile.rope_fence.name=Rope
 tile.salt_block.name=Rock Salt Block
+tile.salt_ore.name=Rock Salt Ore
 
 # Effects
 effect.chance.format=%d%% Chance of

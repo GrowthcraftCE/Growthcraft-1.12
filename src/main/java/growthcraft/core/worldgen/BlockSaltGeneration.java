@@ -20,7 +20,7 @@ public class BlockSaltGeneration implements IWorldGenerator {
     private WorldGenerator salt_overworld;
 
     public BlockSaltGeneration() {
-        salt_overworld = new WorldGenMinable(GrowthcraftCoreBlocks.salt_block.getBlock().getDefaultState(), 16);
+        salt_overworld = new WorldGenMinable(GrowthcraftCoreBlocks.salt_ore.getBlock().getDefaultState(), 9);
     }
 
     // runGenerator from CJMinecraft
@@ -43,7 +43,7 @@ public class BlockSaltGeneration implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.getDimension()) {
             case 0: // Overworld
-                this.runGenerator(salt_overworld, world, random, chunkX, chunkZ, 20, minHieght, maxHieght);
+                this.runGenerator(salt_overworld, world, random, chunkX, chunkZ, 5, minHieght, maxHieght);
                 break;
             case 1: // The End
                 break;
