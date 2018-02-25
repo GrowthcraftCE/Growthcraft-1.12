@@ -36,6 +36,7 @@ public class GrowthcraftCoreItems {
 		OreDictionary.registerOre("materialSalt", salt.getItem());
 		OreDictionary.registerOre("foodSalt", salt.getItem());
 		OreDictionary.registerOre("dustSalt", salt.getItem());
+		OreDictionary.registerOre("itemSalt", salt.getItem());
 		OreDictionary.registerOre("lumpSalt", salt.getItem());
     }
 

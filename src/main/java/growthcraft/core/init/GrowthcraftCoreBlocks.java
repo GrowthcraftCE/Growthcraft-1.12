@@ -5,6 +5,8 @@ import growthcraft.core.blocks.BlockRopeKnot;
 import growthcraft.core.blocks.BlockSalt;
 import growthcraft.core.blocks.BlockSaltOre;
 import growthcraft.core.common.definition.BlockDefinition;
+import net.minecraftforge.oredict.OreDictionary;
+
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
 public class GrowthcraftCoreBlocks {
@@ -20,6 +22,10 @@ public class GrowthcraftCoreBlocks {
         salt_ore = new BlockDefinition( new BlockSaltOre("salt_ore") );
         rope_knot = new BlockDefinition( new BlockRopeKnot("rope_knot") );
     }
+    
+    private static void registerOres() {
+		OreDictionary.registerOre("oreSalt", salt_ore.getBlock());
+    }
 
     public static void register() {
     	salt_block.getBlock().setCreativeTab(tabGrowthcraft);
@@ -28,9 +34,11 @@ public class GrowthcraftCoreBlocks {
     	rope_knot.register(false);
     	salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
     	salt_ore.register(true);
+    	
+    	registerOres();
     }
 
-    public static void  registerRenders() {
+    public static void registerRenders() {
     	salt_block.registerItemRender();
 //    	rope_fence.registerItemRender();
 //    	rope_knot.registerItemRender();
