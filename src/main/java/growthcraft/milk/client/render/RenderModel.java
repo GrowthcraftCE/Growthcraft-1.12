@@ -31,7 +31,10 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
 	protected boolean prepare(T te, Tessellator tessellator, double x, double y, double z, float partialTicks, int destroyStage) {
 		BlockPos pos = te.getPos();
 		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
-		IBlockState state = world.getBlockState(pos).withProperty(modelProp, true); //.withProperty(BlockCheesePress.STAGE_PRESS, AnimationStage.PRESSING);
+		IBlockState state = world.getBlockState(pos);
+		if( state.getBlock() != te.getBlockType() )
+			return false; // Preventing a crash on states.
+		state = state.withProperty(modelProp, true);
 		
 		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
         IBakedModel capModel = blockrendererdispatcher.getModelForState(state);
