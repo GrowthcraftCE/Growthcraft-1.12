@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.api.item.ItemKey;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 
 /**
  * As the name implies, this class is used in place of a List for Block keys
@@ -20,6 +21,11 @@ public class BlockKey extends HashKey
 		this.block = pBlock;
 		this.meta = pMeta;
 		generateHashCode();
+	}
+	
+	public BlockKey(@Nonnull IBlockState pBlockState)
+	{
+		this(pBlockState.getBlock(), pBlockState.getBlock().getMetaFromState(pBlockState));
 	}
 
 	public BlockKey(@Nonnull Block pBlock)

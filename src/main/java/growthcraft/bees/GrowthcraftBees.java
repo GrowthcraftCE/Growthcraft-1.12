@@ -1,12 +1,17 @@
 package growthcraft.bees;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import growthcraft.bees.init.GrowthcraftBeesItems;
 import growthcraft.bees.proxy.CommonProxy;
+import growthcraft.core.GrowthcraftGuiProvider;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftBees {
@@ -17,6 +22,12 @@ public class GrowthcraftBees {
     @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    public static final GrowthcraftGuiProvider guiProvider = new GrowthcraftGuiProvider();
+    
+    // REVISE_TEAM
+    public static Logger logger = LogManager.getLogger(Reference.MODID);
+
+    
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         GrowthcraftBeesItems.preInit();
@@ -28,7 +39,8 @@ public class GrowthcraftBees {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        proxy.init();
+    	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
+    	proxy.init();
     }
 
     @Mod.EventHandler
