@@ -283,7 +283,8 @@ public class DeviceBeeBox extends DeviceBase
 				
 				if (randomList != null)
 				{
-					final Block block = (Block)randomList.get(0);
+					final IBlockState blockState = (IBlockState)randomList.get(0);
+					final Block block = blockState.getBlock();
 					final int meta = (int)randomList.get(1);
 					final IFlowerBlockEntry entry = BeesRegistry.instance().getFlowerBlockEntry(block, meta);
 					if (entry != null)

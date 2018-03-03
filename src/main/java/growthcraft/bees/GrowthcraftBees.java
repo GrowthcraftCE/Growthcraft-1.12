@@ -3,6 +3,8 @@ package growthcraft.bees;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import growthcraft.bees.api.user.UserBeesConfig;
+import growthcraft.bees.api.user.UserFlowersConfig;
 import growthcraft.bees.init.GrowthcraftBeesBlocks;
 import growthcraft.bees.init.GrowthcraftBeesFluids;
 import growthcraft.bees.init.GrowthcraftBeesItems;
@@ -25,6 +27,8 @@ public class GrowthcraftBees {
     public static CommonProxy proxy;
 
     public static final GrowthcraftGuiProvider guiProvider = new GrowthcraftGuiProvider();
+	public static final UserBeesConfig userBeesConfig = new UserBeesConfig();
+	public static final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
     
     // REVISE_TEAM
     public static Logger logger = LogManager.getLogger(Reference.MODID);
@@ -32,7 +36,7 @@ public class GrowthcraftBees {
     
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftBeesItems.preInit();
+    	GrowthcraftBeesItems.preInit();
         GrowthcraftBeesItems.register();
         
         GrowthcraftBeesBlocks.preInit();
@@ -41,6 +45,15 @@ public class GrowthcraftBees {
         GrowthcraftBeesFluids.preInit();
         GrowthcraftBeesFluids.register();
         
+        userBeesConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/bees.json");
+        userBeesConfig.preInit();
+        userBeesConfig.register();
+        
+		userFlowersConfig.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/bees/flowers.json");
+		userFlowersConfig.preInit();
+		GrowthcraftBeesBlocks.initDefaults();
+		userFlowersConfig.register();
+
         proxy.preInit();
 
     }
@@ -48,12 +61,18 @@ public class GrowthcraftBees {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
     	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
+    	
+    	userBeesConfig.init();
+    	userFlowersConfig.init();
     	proxy.init();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-
+    	userBeesConfig.loadUserConfig();
+    	userBeesConfig.postInit();
+    	userFlowersConfig.loadUserConfig();
+    	userFlowersConfig.postInit();
     }
 
 }

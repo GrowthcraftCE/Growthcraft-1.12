@@ -37,6 +37,7 @@ public class BlockBeeBox extends GrowthcraftBlockContainer {
 		setTileEntityType(TileEntityBeeBox.class);
 		setHardness(2.5F);
 		setSoundType(SoundType.WOOD);
+        this.setTickRandomly(true);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	}

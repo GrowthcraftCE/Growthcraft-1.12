@@ -136,7 +136,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 		int count = 0;
 		for (int i = 1; i < getSizeInventory(); ++i)
 		{
-			if (getStackInSlot(i) != null)
+			if (!ItemUtils.isEmpty(getStackInSlot(i)))
 			{
 				if (slotHasHoneyComb(i, type))
 				{
@@ -228,7 +228,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 		{
 			if (n <= 0) break;
 			final ItemStack stack = getStackInSlot(i);
-			if (stack == null)
+			if (ItemUtils.isEmpty(stack))
 			{
 				setInventorySlotContents(i, GrowthcraftBeesItems.honeyCombEmpty.asStack());
 				markDirtyAndUpdate();
@@ -272,7 +272,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 		{
 			if (count <= 0) break;
 			final ItemStack stack = getStackInSlot(i);
-			if (stack != null && slotHasEmptyComb(i))
+			if (!ItemUtils.isEmpty(stack) && slotHasEmptyComb(i))
 			{
 				final ItemStack resultStack = BeesRegistry.instance().getFilledHoneyComb(stack);
 				if (resultStack != null)
