@@ -60,9 +60,9 @@ public class GrowthcraftBeesItems {
 	}
 	
 	public static void registerRenders() {
-		honeyCombEmpty.register();
-		honeyCombFilled.register();
-		honeyJar.register();
+		honeyCombEmpty.registerRender();
+		honeyCombFilled.registerRender();
+		honeyJar.registerRender();
 		bee.registerRender();
 		beesWax.registerRenders( BeesWaxTypes.class );
 	}

@@ -1,5 +1,7 @@
 package growthcraft.bees.proxy;
 
+import growthcraft.bees.init.GrowthcraftBeesBlocks;
+
 public class CommonProxy {
 
     public void init() {
@@ -14,7 +16,9 @@ public class CommonProxy {
 
     public void registerRenders() { }
 
-    public void registerTileEntities() { }
+    public void registerTileEntities() {
+    	GrowthcraftBeesBlocks.registerTileEntities();
+    }
 
     public void registerModelBakeryVariants() { }
 

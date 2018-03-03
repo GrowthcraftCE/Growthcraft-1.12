@@ -13,7 +13,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class GrowthcraftBeesFluids {
 	public static FluidDetails honey;
 	
-	public void preInit() {
+	public static void preInit() {
 		if (GrowthcraftBeesConfig.honeyEnabled) {
 			FluidHoney fluidHoney = new FluidHoney("fluid_honey");
 			ItemFoodBottleFluid foodBottleHoney = new ItemFoodBottleFluid(fluidHoney, 2, 0.2f, false);
@@ -37,6 +37,18 @@ public class GrowthcraftBeesFluids {
 	public static void register() {
 		if( honey != null ) {
 			honey.registerObjects(Reference.MODID, "honey");
+		}
+	}
+
+	public static void registerRender() {
+		if( honey != null ) {
+			honey.registerRenderer();
+		}
+	}
+
+	public static void registerItemColorHandlers() {
+		if( honey != null ) {
+			honey.registerColorHandlers();
 		}
 	}
 }

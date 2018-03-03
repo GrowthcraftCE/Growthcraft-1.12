@@ -41,7 +41,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 	@Override
 	public String getGuiID()
 	{
-		return "grcbees:bee_box";
+		return "growthcraft_bees:bee_box";
 	}
 
 	@Override

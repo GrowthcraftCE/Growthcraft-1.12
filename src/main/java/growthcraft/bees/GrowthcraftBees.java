@@ -3,6 +3,8 @@ package growthcraft.bees;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import growthcraft.bees.init.GrowthcraftBeesBlocks;
+import growthcraft.bees.init.GrowthcraftBeesFluids;
 import growthcraft.bees.init.GrowthcraftBeesItems;
 import growthcraft.bees.proxy.CommonProxy;
 import growthcraft.core.GrowthcraftGuiProvider;
@@ -32,7 +34,13 @@ public class GrowthcraftBees {
     public static void preInit(FMLPreInitializationEvent event) {
         GrowthcraftBeesItems.preInit();
         GrowthcraftBeesItems.register();
+        
+        GrowthcraftBeesBlocks.preInit();
+        GrowthcraftBeesBlocks.register();
 
+        GrowthcraftBeesFluids.preInit();
+        GrowthcraftBeesFluids.register();
+        
         proxy.preInit();
 
     }

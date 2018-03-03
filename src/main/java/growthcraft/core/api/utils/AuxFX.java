@@ -10,7 +10,7 @@ public class AuxFX
 	public static final int RECORD = 1010;
 	public static final int GHAST_CHARGE = 1015;
 	public static final int GHAST_FIREBALL = 1016;
-	public static final int GHAST_FIREBALL2 = 1017;
+	public static final int DRAGON_FIREBALL = 1017;
 	public static final int ZOMBIE_WOOD = 1019;
 	public static final int ZOMBIE_METAL = 1020;
 	public static final int ZOMBIE_WOOD_BREAK = 1021;
