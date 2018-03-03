@@ -3,8 +3,10 @@ package growthcraft.bees.common.tileentity;
 import growthcraft.bees.api.BeesRegistry;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.device.DeviceBeeBox;
+import growthcraft.bees.init.GrowthcraftBeesFluids;
 import growthcraft.bees.init.GrowthcraftBeesItems;
 import growthcraft.core.api.item.EnumDye;
+import growthcraft.core.api.utils.AuxFX;
 import growthcraft.core.common.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.common.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
@@ -375,7 +377,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 				if (time > 0)
 				{
 					setTime(time);
-					world.playAuxSFX(AuxFX.BONEMEAL, getPos(), 0);
+					world.playEvent(AuxFX.BONEMEAL, getPos(), 0);
 					ItemUtils.consumeStackOnPlayer(stack, player);
 					markDirtyAndUpdate();
 				}
@@ -385,7 +387,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 			{
 				if (GrowthcraftBeesFluids.honey != null && isHoneyEnough(2))
 				{
-					final ItemStack result = GrowthCraftBees.fluids.honey.asBottleItemStack();
+					final ItemStack result = GrowthcraftBeesFluids.honey.asBottleItemStack();
 					if (!ItemUtils.isEmpty(result))
 					{
 						ItemUtils.addStackToPlayer(result, player, world, getPos(), false);

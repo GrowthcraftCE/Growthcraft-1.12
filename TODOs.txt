@@ -85,6 +85,7 @@ DONE: Buckets für Boozes to appear in CreativeTab.
 ------------
 Refactoring:
 ------------
+TODO: Use new constructor from GrowthcraftItemBase where possible.
 TODO: Move all recipe handling for all GC modules to corresponding init classes.
 TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
 TODO: Add item handler capability to GrowthcraftTileInventoryBase

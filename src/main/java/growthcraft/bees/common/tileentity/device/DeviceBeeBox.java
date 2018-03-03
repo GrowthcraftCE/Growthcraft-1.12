@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.bees.GrowthcraftBeesConfig;
 import growthcraft.bees.api.BeesRegistry;
 import growthcraft.bees.api.IFlowerBlockEntry;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
@@ -69,9 +70,10 @@ public class DeviceBeeBox extends DeviceBase
 	// for lack of a better name, can this BeeBox do any work?
 	private boolean canDoWork()
 	{
-		if (getWorld().canLightningStrikeAt(parent.xCoord, parent.yCoord + 1, parent.zCoord))
+		BlockPos posUp = parent.getPos().up();
+		if (getWorld().isRainingAt(posUp))
 			return false;
-		return getWorld().getBlockLightValue(parent.xCoord, parent.yCoord + 1, parent.zCoord) >= 7;
+		return getWorld().getLightFromNeighbors(posUp) >= 7;
 	}
 
 	/**
