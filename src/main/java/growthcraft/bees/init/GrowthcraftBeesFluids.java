@@ -2,8 +2,10 @@ package growthcraft.bees.init;
 
 import growthcraft.bees.GrowthcraftBeesConfig;
 import growthcraft.bees.Reference;
+import growthcraft.bees.api.BeesFluidTag;
 import growthcraft.bees.common.fluids.FluidHoney;
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.utils.FluidFactory;
 import growthcraft.core.utils.FluidFactory.FluidDetails;
@@ -37,6 +39,7 @@ public class GrowthcraftBeesFluids {
 	public static void register() {
 		if( honey != null ) {
 			honey.registerObjects(Reference.MODID, "honey");
+			CoreRegistry.instance().fluidDictionary().addFluidTags(honey.getFluid(), BeesFluidTag.HONEY);
 		}
 	}
 

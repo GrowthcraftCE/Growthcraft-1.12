@@ -1,8 +1,12 @@
 package growthcraft.core;
 
+import net.minecraftforge.oredict.RecipeSorter.Category;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import growthcraft.core.api.item.recipes.ShapelessItemComparableRecipe;
+import growthcraft.core.api.item.recipes.ShapelessMultiRecipe;
 import growthcraft.core.creativetabs.TabGrowthcraft;
 import growthcraft.core.init.GrowthcraftCoreBlocks;
 import growthcraft.core.init.GrowthcraftCoreItems;
@@ -17,6 +21,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.oredict.RecipeSorter;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCore {
@@ -45,6 +50,9 @@ public class GrowthcraftCore {
         
         proxy.registerRenders();
         proxy.registerTitleEntities();
+        
+        RecipeSorter.register("minecraft:shapeless_comparator", ShapelessItemComparableRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
+        RecipeSorter.register("minecraft:shapeless_multi", ShapelessMultiRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
     }
 
     @Mod.EventHandler

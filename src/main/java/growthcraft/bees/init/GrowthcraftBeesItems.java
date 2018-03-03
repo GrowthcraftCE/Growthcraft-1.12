@@ -39,9 +39,10 @@ public class GrowthcraftBeesItems {
 		OreDictionary.registerOre("beecomb", honeyCombEmpty.getItem());
 		OreDictionary.registerOre("materialHoneycomb", honeyCombFilled.getItem());
 		OreDictionary.registerOre("beecomb", honeyCombFilled.getItem());
-		OreDictionary.registerOre("honeyDrop", honeyCombFilled.getItem());
-		OreDictionary.registerOre("dropHoney", honeyCombFilled.getItem());
-//		OreDictionary.registerOre("bucketHoney", honeyCombFilled.getItem());
+		OreDictionary.registerOre("honeyDrop", honeyJar.getItem());
+		OreDictionary.registerOre("dropHoney", honeyJar.getItem());
+		OreDictionary.registerOre("jarHoney", honeyJar.getItem());
+//		OreDictionary.registerOre("bucketHoney", honeyJar.getItem());
 	}
 
 	public static void register() {

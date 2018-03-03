@@ -8,6 +8,7 @@ import growthcraft.bees.api.user.UserFlowersConfig;
 import growthcraft.bees.init.GrowthcraftBeesBlocks;
 import growthcraft.bees.init.GrowthcraftBeesFluids;
 import growthcraft.bees.init.GrowthcraftBeesItems;
+import growthcraft.bees.init.GrowthcraftBeesRecipes;
 import growthcraft.bees.proxy.CommonProxy;
 import growthcraft.core.GrowthcraftGuiProvider;
 import net.minecraftforge.fml.common.Mod;
@@ -65,6 +66,8 @@ public class GrowthcraftBees {
     	userBeesConfig.init();
     	userFlowersConfig.init();
     	proxy.init();
+    	
+    	GrowthcraftBeesRecipes.init();
     }
 
     @Mod.EventHandler
@@ -73,6 +76,8 @@ public class GrowthcraftBees {
     	userBeesConfig.postInit();
     	userFlowersConfig.loadUserConfig();
     	userFlowersConfig.postInit();
+    	
+    	
     }
 
 }
