@@ -26,11 +26,9 @@ import net.minecraft.util.ITickable;
 
 public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements ITickable, IAltItemHandler, IInteractionObject
 {
-	public static enum HoneyCombExpect
-	{
-		ANY,
-		EMPTY,
-		FILLED;
+	@Override
+	public String getDefaultInventoryName() {
+		return "container.growthcraft_bees.beeBox";
 	}
 
 	private static final int beeBoxVersion = 3;
@@ -64,10 +62,10 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 		}
 	}
 
-	@Override
-	public String getDefaultInventoryName()
-	{
-		return "container.grc.beeBox";
+	public enum HoneyCombExpect {
+		ANY,
+		EMPTY,
+		FILLED
 	}
 
 	@Override

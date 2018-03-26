@@ -1,30 +1,16 @@
 package growthcraft.cellar.init;
 
 import growthcraft.cellar.Reference;
-import growthcraft.cellar.blocks.BlockBrewKettle;
-import growthcraft.cellar.blocks.BlockCultureJar;
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.client.render.RenderFruitPress;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.cellar.common.block.BlockFruitPress;
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.common.block.PREVBlockBrewKettle;
-import growthcraft.cellar.common.block.PREVBlockCultureJar;
-import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
-import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.cellar.common.block.*;
+import growthcraft.cellar.common.tileentity.*;
 import growthcraft.core.common.definition.BlockDefinition;
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
 
@@ -62,7 +48,8 @@ public class GrowthcraftCellarBlocks {
         cultureJar.registerItemRender();
         fruitPress.registerItemRender();
     }
-    
+
+    @SideOnly(Side.CLIENT)
     public static void registerSpecialRenders() {
         ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultureJar.class, new RenderCultureJar());

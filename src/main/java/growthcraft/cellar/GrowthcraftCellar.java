@@ -1,19 +1,11 @@
 package growthcraft.cellar;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
 import growthcraft.cellar.events.CellarEvents;
-import growthcraft.cellar.init.GrowthcraftCellarPotions;
-import growthcraft.cellar.init.GrowthcraftCellarRecipes;
-import growthcraft.cellar.init.GrowthcraftCellarYeasts;
+import growthcraft.cellar.init.*;
 import growthcraft.cellar.network.PacketPipeline;
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
-import growthcraft.cellar.init.GrowthcraftCellarHeatsources;
-import growthcraft.cellar.init.GrowthcraftCellarItems;
 import growthcraft.cellar.proxy.CommonProxy;
 import growthcraft.cellar.stats.GrowthcraftCellarAchievements;
 import growthcraft.cellar.util.CellarBoozeBuilderFactory;
@@ -27,6 +19,8 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCellar {
@@ -69,12 +63,12 @@ public class GrowthcraftCellar {
     	
     	GrowthcraftCellarHeatsources.init();
     	GrowthcraftCellarHeatsources.register();
-    	
-        GrowthcraftCellarItems.init();
-        GrowthcraftCellarItems.register();
-        
+
         GrowthcraftCellarBlocks.init();
         GrowthcraftCellarBlocks.register();
+
+        GrowthcraftCellarItems.init();
+        GrowthcraftCellarItems.register();
 
         proxy.preInit();
         proxy.registerTitleEntities();
