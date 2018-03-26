@@ -26,7 +26,7 @@ fluids.tag.wine=葡萄酒
 fluids.tag.young=低度
 
 # Items
-item.achievement_dummy.name=难以酿造？
+#item.achievement_dummy.name=难以酿造？
 item.yeast.brewers.name=酿酒酵母
 item.yeast.lager.name=窖藏啤酒酵母
 item.yeast.bayanus.name=贝酵母
