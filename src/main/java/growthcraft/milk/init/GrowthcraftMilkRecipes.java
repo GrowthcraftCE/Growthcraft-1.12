@@ -9,7 +9,7 @@ import growthcraft.core.api.item.CommonItemStackComparator;
 import growthcraft.core.api.item.EnumDye;
 import growthcraft.core.api.item.IItemStackComparator;
 import growthcraft.core.api.item.OreItemStacks;
-import growthcraft.core.common.item.crafting.ShapelessItemComparableRecipe;
+import growthcraft.core.api.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.milk.GrowthcraftMilkConfig;
 import growthcraft.milk.api.MilkRegistry;
 import growthcraft.milk.api.definition.ICheeseBlockStackFactory;

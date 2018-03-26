@@ -11,6 +11,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class GrowthcraftItemBase extends Item
 {
+	public GrowthcraftItemBase() {
+		super();
+	}
+	
+    public GrowthcraftItemBase(String modId, String unlocalizedName) {
+        this.setUnlocalizedName(unlocalizedName);
+        this.setRegistryName(modId, unlocalizedName);
+    }
+	
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})

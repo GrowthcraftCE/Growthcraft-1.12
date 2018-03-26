@@ -1,4 +1,4 @@
-package growthcraft.core.common.item.crafting;
+package growthcraft.core.api.item.recipes;
 
 import java.util.ArrayList;
 import java.util.Iterator;

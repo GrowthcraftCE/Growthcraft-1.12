@@ -36,6 +36,6 @@ public abstract class GrowthcraftBlockBase extends Block
 		IBlockState state = worldIn.getBlockState(pos);
         worldIn.markBlockRangeForRenderUpdate(pos, pos);
         worldIn.notifyBlockUpdate(pos, state, state, BlockFlags.UPDATE_AND_SYNC);
-        worldIn.scheduleBlockUpdate(pos, this, 0,0);
+//        worldIn.scheduleBlockUpdate(pos, this, 0,0);
 	}
 }
