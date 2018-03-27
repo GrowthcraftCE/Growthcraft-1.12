@@ -26,8 +26,8 @@ tile.salt_ore.name=岩盐矿石
 
 # Effects
 effect.chance.format=%d%%概率
-effect.extinguish.desc=Extinguishes Burning
-effect.ignite.desc=Sets Fire for %ds
+#effect.extinguish.desc=Extinguishes Burning
+#effect.ignite.desc=Sets Fire for %ds
 effect.list.head=适用于：
 effect.null.desc=无其他作用
 effect.random_list.head=适用于：
