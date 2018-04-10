@@ -1,8 +1,8 @@
 {
   "parent": "block/leaves",
   "textures": {
-    "all": "growthcraft_bamboo:blocks/leaves",
-    "particle": "growthcraft_bamboo:blocks/leaves"
+    "all": "growthcraft_bamboo:blocks/bamboo_leaves",
+    "particle": "growthcraft_bamboo:blocks/bamboo_leaves"
   },
   "elements": [
     {
