@@ -1,206 +1,205 @@
-﻿{
-	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11. Model by Kisutora.",
 	"textures": {
-		"3": "growthcraft_cellar:blocks/fruit_press/fruit_press_wood_bottom",
-		"4": "growthcraft_cellar:blocks/fruit_press/fruit_press_wood_side",
-		"6": "growthcraft_cellar:blocks/fruit_press/fruitpresser_0",
-		"7": "growthcraft_cellar:blocks/fruit_press/fruitpresser_1",
-		"8": "growthcraft_cellar:blocks/fruit_press/fruitpresser_2",
-		"9": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_head",
-		"particle": "growthcraft_cellar:blocks/fruit_press/fruit_press_wood_top"
+		"0": "growthcraft_cellar:blocks/fruit_press/fruit_press_bottom",
+		"1": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_bottom",
+		"2": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_head",
+		"3": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_side",
+		"4": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_inner"
 	},
 	"elements": [
 		{
-			"name": "presser_body",
-			"from": [3, 7.5, 3],
-			"to": [13, 15.5, 13],
+			"name": "support_n",
+			"from": [14, 0, 7],
+			"to": [16, 16, 9],
 			"faces": {
-				"north": {"uv": [3, 1, 13, 9], "texture": "#8"},
-				"east": {"uv": [3, 1, 13, 9], "texture": "#8"},
-				"south": {"uv": [3, 1, 13, 9], "texture": "#8"},
-				"west": {"uv": [3, 1, 13, 9], "texture": "#8"},
-				"up": {"uv": [3, 3, 13, 13], "texture": "#7"},
-				"down": {"uv": [3, 3, 13, 13], "texture": "#6"}
-			},
-			"type": "cube"
+				"north": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"up": {
+					"uv": [0, 0, 2, 2],
+					"texture": "#0",
+					"rotation": 90
+				}
+			}
 		},
 		{
-			"name": "presser_frame_lower_east_connector",
-			"from": [13, 8.75, 7.25],
-			"to": [14, 10.75, 8.75],
-			"faces": {
-				"north": {"uv": [3, 5, 5, 7], "texture": "#6"},
-				"east": {"uv": [3, 7, 4.5, 9], "texture": "#6"},
-				"south": {"uv": [11, 4, 13, 6], "texture": "#6"},
-				"west": {"uv": [3, 7, 4.5, 9], "texture": "#6"},
-				"up": {"uv": [11, 4, 13, 5.5], "texture": "#6"},
-				"down": {"uv": [11, 4, 13, 5.5], "texture": "#6"}
-			},
-			"type": "cube"
-		},
-		{
-			"name": "presser_frame_lower_west_connector",
-			"from": [2, 8.75, 7.25],
-			"to": [3, 10.75, 8.75],
-			"faces": {
-				"north": {"uv": [11, 5, 13, 7], "texture": "#6"},
-				"east": {"uv": [3, 7, 4.5, 9], "texture": "#6"},
-				"south": {"uv": [3, 4, 5, 6], "texture": "#6"},
-				"west": {"uv": [3, 7, 4.5, 9], "texture": "#6"},
-				"up": {"uv": [3, 4, 5, 5.5], "texture": "#6"},
-				"down": {"uv": [3, 4, 5, 5.5], "texture": "#6"}
-			},
-			"type": "cube"
-		},
-		{
-			"name": "presser_frame_upper_east",
-			"from": [0.010000000000000009, 0, 7],
+			"name": "support_s",
+			"from": [0, 0, 7],
 			"to": [2, 16, 9],
 			"faces": {
-				"north": {
-					"uv": [14, 0, 15.99, 16],
-					"texture": "#4"
-				},
-				"east": {"uv": [1, 0, 3, 16], "texture": "#4"},
-				"south": {"uv": [0, 0, 1.99, 16], "texture": "#4"},
-				"west": {"uv": [13, 0, 15, 16], "texture": "#4"},
-				"up": {"uv": [1, 1, 2.99, 3], "texture": "#3"},
-				"down": {
-					"uv": [1, 1, 2.98984375, 3],
-					"texture": "#3"
-				}
-			},
-			"type": "cube"
-		},
-		{
-			"name": "presser_frame_upper_east_connector",
-			"from": [13, 12.5, 7.25],
-			"to": [14, 14.5, 8.75],
-			"faces": {
-				"north": {"uv": [3, 10, 5, 12], "texture": "#6"},
-				"east": {"uv": [11, 7, 13, 9], "texture": "#6"},
-				"south": {"uv": [11, 10, 13, 12], "texture": "#6"},
-				"west": {"uv": [3, 7, 4.5, 9], "texture": "#6"},
-				"up": {"uv": [11, 4, 13, 5.5], "texture": "#6"},
-				"down": {"uv": [11, 4, 13, 5.5], "texture": "#6"}
-			},
-			"type": "cube"
-		},
-		{
-			"name": "presser_frame_upper_west",
-			"from": [13.99, 0, 7],
-			"to": [15.98, 16, 9],
-			"faces": {
-				"north": {
-					"uv": [0, 0, 1.9900000000000002, 16],
-					"texture": "#4"
-				},
-				"east": {"uv": [13, 0, 15, 16], "texture": "#4"},
-				"south": {
-					"uv": [14, 0, 15.99, 16],
-					"texture": "#4"
-				},
-				"west": {"uv": [13, 0, 15, 16], "texture": "#4"},
+				"north": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"east": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"south": {"uv": [14, 0, 16, 16], "texture": "#0"},
+				"west": {"uv": [14, 0, 16, 16], "texture": "#0"},
 				"up": {
-					"uv": [1, 1, 2.98984375, 3],
-					"texture": "#3"
-				},
-				"down": {
-					"uv": [1, 1, 2.98984375, 3],
-					"texture": "#3"
+					"uv": [0, 0, 2, 2],
+					"texture": "#0",
+					"rotation": 90
 				}
-			},
-			"type": "cube"
+			}
 		},
 		{
-			"name": "presser_frame_upper_west_connector",
-			"from": [2, 12.5, 7.25],
-			"to": [3, 14.5, 8.75],
+			"name": "support_filler",
+			"from": [2, 11, 7],
+			"to": [3, 13, 9],
 			"faces": {
-				"north": {"uv": [11, 5, 13, 7], "texture": "#6"},
-				"east": {"uv": [7, 7, 8.5, 9], "texture": "#6"},
-				"south": {"uv": [3, 4, 5, 6], "texture": "#6"},
-				"west": {"uv": [7, 7, 8.5, 9], "texture": "#6"},
-				"up": {"uv": [3, 4, 5, 5.5], "texture": "#6"},
-				"down": {"uv": [3, 4, 5, 5.5], "texture": "#6"}
-			},
-			"type": "cube"
-		},
-		{
-			"name": "presser_piston_head",
-			"from": [3.5, -3.5, 3.5],
-			"to": [12.5, -0.5, 12.5],
-			"faces": {
-				"north": {"uv": [0, 11, 10, 14], "texture": "#9"},
-				"east": {"uv": [0, 11, 10, 14], "texture": "#9"},
-				"south": {"uv": [0, 11, 10, 14], "texture": "#9"},
-				"west": {"uv": [0, 11, 10, 14], "texture": "#9"},
-				"up": {"uv": [0, 0, 10, 10], "texture": "#9"},
-				"down": {"uv": [0, 0, 10, 10], "texture": "#9"}
-			},
-			"type": "cube"
-		},
-		{
-			"name": "presser_piston_arm",
-			"from": [6.5, -0.5, 6.5],
-			"to": [9.5, 7.75, 9.5],
-			"faces": {
-				"north": {
-					"uv": [0, 11, 9.25, 14],
-					"texture": "#9",
-					"rotation": 90
-				},
-				"east": {
-					"uv": [0, 11, 9.25, 14],
-					"texture": "#9",
-					"rotation": 90
-				},
-				"south": {
-					"uv": [0, 11, 9.25, 14],
-					"texture": "#9",
-					"rotation": 90
-				},
-				"west": {
-					"uv": [0, 11, 9.25, 14],
-					"texture": "#9",
-					"rotation": 90
-				},
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
 				"up": {
-					"uv": [0, 11, 9.25, 14],
-					"texture": "#9",
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
 					"rotation": 90
 				},
 				"down": {
-					"uv": [0, 11, 9.25, 14],
-					"texture": "#9",
-					"rotation": 90
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 270
 				}
-			},
-			"type": "cube"
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [2, 7, 7],
+			"to": [3, 9, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 90
+				},
+				"down": {
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 270
+				}
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [13, 11, 7],
+			"to": [14, 13, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 90
+				},
+				"down": {
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 270
+				}
+			}
+		},
+		{
+			"name": "support_filler",
+			"from": [13, 7, 7],
+			"to": [14, 9, 9],
+			"faces": {
+				"north": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"south": {"uv": [0, 14, 1, 16], "texture": "#0"},
+				"up": {
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 90
+				},
+				"down": {
+					"uv": [0, 14, 2, 15],
+					"texture": "#0",
+					"rotation": 270
+				}
+			}
+		},
+		{
+			"name": "piston_head",
+			"from": [3, -3, 3],
+			"to": [13, 0, 13],
+			"faces": {
+				"north": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"east": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"south": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"west": {"uv": [0, 11, 10, 14], "texture": "#2"},
+				"up": {
+					"uv": [0, 0, 10, 10],
+					"texture": "#2",
+					"rotation": 90
+				},
+				"down": {
+					"uv": [0, 0, 10, 10],
+					"texture": "#2",
+					"rotation": 270
+				}
+			}
+		},
+		{
+			"name": "piston_base",
+			"from": [3, 7, 3],
+			"to": [13, 14, 13],
+			"faces": {
+				"north": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"east": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"south": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"west": {"uv": [3, 1, 13, 8], "texture": "#3"},
+				"up": {
+					"uv": [3, 3, 13, 13],
+					"texture": "#1",
+					"rotation": 90
+				},
+				"down": {
+					"uv": [3, 3, 13, 13],
+					"texture": "#4",
+					"rotation": 270
+				}
+			}
+		},
+		{
+			"name": "piston_extended",
+			"from": [6.5, 0, 6.5],
+			"to": [9.5, 7, 9.5],
+			"faces": {
+				"north": {"uv": [12, 0, 15, 7], "texture": "#2"},
+				"east": {"uv": [12, 0, 15, 7], "texture": "#2"},
+				"south": {"uv": [12, 0, 15, 7], "texture": "#2"},
+				"west": {"uv": [12, 0, 15, 7], "texture": "#2"}
+			}
 		}
 	],
 	"display": {
-		"thirdperson_righthand": {
-			"scale": [0.5, 0.5, 0.5],
-			"rotation": [67, 0, 0],
-			"translation": [0, 0, -4]
-		},
-		"thirdperson_lefthand": {
-			"scale": [0.5, 0.5, 0.5],
-			"rotation": [67, 0, 0],
-			"translation": [0, 0, -4]
-		},
-		"firstperson_righthand": {"scale": [0.5, 0.5, 0.5]},
-		"firstperson_lefthand": {"scale": [0.5, 0.5, 0.5]},
-		"ground": {"scale": [0.5, 0.5, 0.5]},
-		"fixed": {
-			"scale": [1, 1, 1],
-			"translation": [0, 0, 4]
-		},
 		"gui": {
-			"scale": [0.625, 0.625, 0.625],
 			"rotation": [30, 225, 0],
-			"translation": [0, 0, 0]
+			"translation": [0, 0, 0],
+			"scale": [0.625, 0.625, 0.625]
+		},
+		"ground": {
+			"rotation": [0, 0, 0],
+			"translation": [0, 3, 0],
+			"scale": [0.25, 0.25, 0.25]
+		},
+		"fixed": {
+			"rotation": [0, 0, 0],
+			"translation": [0, 0, 0],
+			"scale": [0.5, 0.5, 0.5]
+		},
+		"thirdperson_righthand": {
+			"rotation": [75, 45, 0],
+			"translation": [0, 2.5, 0],
+			"scale": [0.375, 0.375, 0.375]
+		},
+		"firstperson_righthand": {
+			"rotation": [0, 45, 0],
+			"translation": [0, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"firstperson_lefthand": {
+			"rotation": [0, 225, 0],
+			"translation": [0, 0, 0],
+			"scale": [0.4, 0.4, 0.4]
 		}
 	}
 }
