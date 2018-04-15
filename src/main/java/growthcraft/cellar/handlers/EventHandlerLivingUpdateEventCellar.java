@@ -1,4 +1,4 @@
-package growthcraft.cellar.events;
+package growthcraft.cellar.handlers;
 
 import growthcraft.cellar.init.GrowthcraftCellarPotions;
 import net.minecraft.entity.EntityLivingBase;

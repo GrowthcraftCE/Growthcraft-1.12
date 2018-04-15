@@ -7,15 +7,18 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.Utils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.nbt.INBTItemSerializable;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.item.IItemTileBlock;
 import growthcraft.core.common.tileentity.feature.IAltItemHandler;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
-import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import growthcraft.core.events.EventTankDrained;
+import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -39,6 +42,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -444,21 +448,26 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return ret;
 	}
 
-	protected boolean playerFillTank(World world, BlockPos pos, ILegacyFluidHandler fh, ItemStack is, EntityPlayer player)
+	protected boolean playerFillTank(World world, BlockPos pos, IGrowthcraftTankOperable fh, ItemStack is, EntityPlayer player)
 	{
-		return Utils.playerFillTank(world, pos, fh, is, player);
+		return GrowthcraftFluidUtils.playerFillTank(world, pos, fh, is, player);
 	}
 
-	protected boolean playerDrainTank(World world, BlockPos pos, ILegacyFluidHandler fh, ItemStack is, EntityPlayer player)
+	protected boolean playerDrainTank(World world, BlockPos pos, IGrowthcraftTankOperable fh, ItemStack is, EntityPlayer player)
 	{
-		final FluidStack fs = Utils.playerDrainTank(world, pos, fh, is, player);
-		return fs != null && fs.amount > 0;
+		final FluidStack fs = GrowthcraftFluidUtils.playerDrainTank(world, pos, fh, is, player);
+		if (fs != null && fs.amount > 0)
+		{
+			MinecraftForge.EVENT_BUS.post(new EventTankDrained(player, world, pos, fs));
+			return true;
+		}
+		return false;
 	}
 
 	private boolean handleIFluidHandler(World world, BlockPos pos, EntityPlayer player, IBlockState state)
 	{
 		final TileEntity te = world.getTileEntity(pos);
-		if (te instanceof ILegacyFluidHandler)
+		if (te instanceof IGrowthcraftTankOperable)
 		{
 			if (world.isRemote)
 			{
@@ -466,7 +475,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 			}
 			else
 			{
-				final ILegacyFluidHandler fh = (ILegacyFluidHandler)te;
+				final IGrowthcraftTankOperable fh = (IGrowthcraftTankOperable)te;
 				final ItemStack is = player.inventory.getCurrentItem();
 
 				boolean needUpdate = false;

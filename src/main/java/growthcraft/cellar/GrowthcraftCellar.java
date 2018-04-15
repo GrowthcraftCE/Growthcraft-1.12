@@ -3,7 +3,6 @@ package growthcraft.cellar;
 import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
-import growthcraft.cellar.events.CellarEvents;
 import growthcraft.cellar.init.*;
 import growthcraft.cellar.network.PacketPipeline;
 import growthcraft.cellar.proxy.CommonProxy;
@@ -98,7 +97,7 @@ public class GrowthcraftCellar {
     	userApis.loadConfigs();
     	packetPipeline.postInitialise();
     	userApis.postInit();
-    	CellarEvents.registerEvents();
+    	GrowthcraftCellarEvents.registerEvents();
     	CellarRegistry.onPostInit();
     }
     

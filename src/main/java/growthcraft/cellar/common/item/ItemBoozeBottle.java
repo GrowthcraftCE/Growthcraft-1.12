@@ -15,6 +15,7 @@ import growthcraft.core.common.definition.FluidTypeDefinition;
 import growthcraft.core.common.item.GrowthcraftItemFoodBase;
 import growthcraft.core.common.item.ItemFoodBottleFluid;
 import growthcraft.core.lib.GrowthcraftCoreState;
+import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -30,6 +31,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -65,11 +67,18 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidItem
 		return (i < 0 || i >= boozes.length) ? boozes[0] : boozes[i];
 	}
 
-	@Override
-	public Booze getFluid(ItemStack stack)
-	{
+	public Booze getFluid(ItemStack stack) {
 		if (stack == null) return null;
 		return getFluidByIndex(stack.getItemDamage());
+	}
+	
+	@Override
+	public FluidStack getFluidStack(ItemStack stack)
+	{
+		Booze fluid = getFluid(stack);
+		if( fluid == null )
+			return null;
+		return new FluidStack(fluid, FluidContainerRegistry.BOTTLE_VOLUME);
 	}
 
 	public BoozeEntry getBoozeEntry(ItemStack stack)

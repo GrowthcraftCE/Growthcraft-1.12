@@ -8,7 +8,7 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
-public interface ILegacyFluidHandler {
+public interface IGrowthcraftTankOperable {
 	
 //	default FluidTankInfo[] getTankInfo() {
 //		return getTankInfo(EnumFacing.NORTH);

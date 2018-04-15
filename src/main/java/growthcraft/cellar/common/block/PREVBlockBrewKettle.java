@@ -9,7 +9,8 @@ import growthcraft.cellar.GrowthcraftCellarConfig;
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.Utils;
-import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
+import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -126,12 +127,12 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 		}
 	}
 	
-	@Override
-	protected boolean playerDrainTank(World world, BlockPos pos, ILegacyFluidHandler fh, ItemStack is, EntityPlayer player)
-	{
-		final FluidStack fs = Utils.playerDrainTank(world, pos, fh, is, player);
-		return fs != null && fs.amount > 0;
-	}
+//	@Override
+//	protected boolean playerDrainTank(World world, BlockPos pos, ILegacyFluidHandler fh, ItemStack is, EntityPlayer player)
+//	{
+//		final FluidStack fs = GrowthcraftFluidUtils.playerDrainTank(world, pos, fh, is, player);
+//		return fs != null && fs.amount > 0;
+//	}
 
 	@Override
 	public int quantityDropped(Random random)

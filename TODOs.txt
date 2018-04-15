@@ -86,9 +86,13 @@ DONE: Buckets für Boozes to appear in CreativeTab.
 ------------
 Refactoring:
 ------------
+TODO: Remove all custom event busses, like CELLAR_BUS, MILK_BUS a.s.o.
 TODO: Use new constructor from GrowthcraftItemBase where possible.
 TODO: Move all recipe handling for all GC modules to corresponding init classes.
-TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
 TODO: Add item handler capability to GrowthcraftTileInventoryBase
-TODO: Add fluid handler capability to GrowthcraftTileDeviceBase
+TODO: Automatically register all fluid containers with specific capabilities.
+
+TODO: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
+DONE: Add fluid handler capability to GrowthcraftTileDeviceBase
+DONE: Revisit Fluid handling of: PREVBlockBrewKettle, BlockFermentBarrel, GrowthcraftBlockContainer
 DONE: Add Grapewine name enum.
