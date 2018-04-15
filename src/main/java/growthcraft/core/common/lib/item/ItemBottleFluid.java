@@ -14,7 +14,7 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * Generic fluid bottle for growthcraft fluids
  */
-public class ItemBottleFluid extends GrowthcraftItemBase implements IFluidItem, IItemColored
+public class ItemBottleFluid extends GrowthcraftItemBase implements IFluidContainerItem, IItemColored
 {
 	private Fluid fluid;
 	// Used to override the fluid color

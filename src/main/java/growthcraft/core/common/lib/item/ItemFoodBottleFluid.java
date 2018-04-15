@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.common.lib.handlers.FluidHandlerContainerItemWrapper;
-import growthcraft.core.common.lib.item.IFluidItem;
+import growthcraft.core.common.lib.item.IFluidContainerItem;
 import growthcraft.core.common.lib.legacy.FluidContainerRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -18,7 +18,7 @@ import net.minecraftforge.fluids.FluidStack;
 /**
  * Generic fluid bottle for growthcraft fluids that are edible
  */
-public class ItemFoodBottleFluid extends GrowthcraftItemFoodBase implements IFluidItem, IItemColored
+public class ItemFoodBottleFluid extends GrowthcraftItemFoodBase implements IFluidContainerItem, IItemColored
 {
 	private Fluid defaultFluid;
 	// Used to override the fluid color
