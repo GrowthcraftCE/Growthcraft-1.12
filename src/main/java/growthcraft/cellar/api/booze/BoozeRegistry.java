@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.core.api.fluids.FluidTag;
-import growthcraft.core.api.fluids.FluidUtils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -36,7 +36,7 @@ public class BoozeRegistry {
 	
 	private void ensureFluidIsValid(Fluid fluid)
 	{
-		if (!FluidUtils.doesFluidExist(fluid))
+		if (!GrowthcraftFluidUtils.doesFluidExist(fluid))
 		{
 			throw new IllegalArgumentException("[Growthcraft|Cellar] The fluid being registered as a Booze is not registered to the FluidRegistry.");
 		}

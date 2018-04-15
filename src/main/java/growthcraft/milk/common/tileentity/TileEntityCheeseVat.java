@@ -9,7 +9,7 @@ import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.core.api.definition.IMultiFluidStacks;
 import growthcraft.core.api.definition.IMultiItemStacks;
 import growthcraft.core.api.fluids.FluidTest;
-import growthcraft.core.api.fluids.FluidUtils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.item.ItemTest;
 import growthcraft.core.api.nbt.NBTTagStringList;
 import growthcraft.core.api.stream.StreamUtils;
@@ -267,7 +267,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 		if (!checkOnly)
 		{
 			decrStackSize(slot, 1);
-			primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthcraftMilkFluids.curds.getFluid()));
+			primaryFluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(milkStack, GrowthcraftMilkFluids.curds.getFluid()));
 			rennetFluidSlot.clear();
 			wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.cheeseVatMilkToCurdsWheyAmount), true);
 			GrowthcraftMilk.MILK_BUS.post(new EventCheeseVatMadeCurds(this));
@@ -283,7 +283,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 			if (!checkOnly)
 			{
 				final Fluid fluid = SimpleCheeseTypes.RICOTTA.getFluids().getFluid(); // GrowthcraftMilkFluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
-				primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
+				primaryFluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
 				wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.cheeseVatWheyToRicottaWheyAmount), true);
 				GrowthcraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
 			}

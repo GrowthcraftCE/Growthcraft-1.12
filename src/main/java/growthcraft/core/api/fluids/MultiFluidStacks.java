@@ -86,7 +86,7 @@ public class MultiFluidStacks implements IMultiFluidStacks
 	{
 		if (fluidContainers == null)
 		{
-			fluidContainers = FluidUtils.getFluidContainers(getFluidStacks());
+			fluidContainers = GrowthcraftFluidUtils.getFluidContainers(getFluidStacks());
 		}
 
 		return fluidContainers;

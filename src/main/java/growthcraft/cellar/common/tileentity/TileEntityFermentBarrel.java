@@ -8,7 +8,7 @@ import growthcraft.cellar.api.processing.fermenting.IFermentationRecipe;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.core.api.definition.IMultiItemStacks;
 import growthcraft.core.api.fluids.FluidTest;
-import growthcraft.core.api.fluids.FluidUtils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.nbt.INBTItemSerializable;
 import growthcraft.core.api.nbt.NBTHelper;
 import growthcraft.core.common.inventory.GrowthcraftInternalInventory;
@@ -187,7 +187,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 				final FluidStack outputFluidStack = recipe.getOutputFluidStack();
 				if (outputFluidStack != null)
 				{
-					getFluidTank(0).setFluid(FluidUtils.exchangeFluid(getFluidStack(0), outputFluidStack.getFluid()));
+					getFluidTank(0).setFluid(GrowthcraftFluidUtils.exchangeFluid(getFluidStack(0), outputFluidStack.getFluid()));
 				}
 				final IMultiItemStacks fermenter = recipe.getFermentingItemStack();
 				if (fermenter != null && !fermenter.isEmpty())

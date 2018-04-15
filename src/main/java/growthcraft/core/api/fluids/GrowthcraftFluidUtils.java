@@ -23,11 +23,11 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
-public class FluidUtils
+public class GrowthcraftFluidUtils
 {
 	private static Map<Fluid, List<FluidContainerData>> fluidData;
 	
-	private FluidUtils() {}
+	private GrowthcraftFluidUtils() {}
 	
 	public static Map<Fluid, List<FluidContainerData>> getFluidData()
 	{
