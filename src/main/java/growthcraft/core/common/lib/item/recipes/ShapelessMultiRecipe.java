@@ -8,11 +8,11 @@ import java.util.Map;
 
 import growthcraft.core.common.lib.definition.IMultiFluidStacks;
 import growthcraft.core.common.lib.definition.IMultiItemStacks;
+import growthcraft.core.common.lib.item.ItemUtils;
 import growthcraft.core.common.lib.item.MultiItemStacks;
+import growthcraft.core.common.lib.item.MultiStacksUtil;
 import growthcraft.core.common.lib.item.OreItemStacks;
 import growthcraft.core.common.lib.legacy.FluidContainerRegistry;
-import growthcraft.core.common.lib.utils.ItemUtils;
-import growthcraft.core.common.lib.utils.MultiStacksUtil;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;

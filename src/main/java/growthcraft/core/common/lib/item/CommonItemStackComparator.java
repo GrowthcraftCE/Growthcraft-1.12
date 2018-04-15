@@ -2,7 +2,6 @@ package growthcraft.core.common.lib.item;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.common.lib.utils.ItemUtils;
 import net.minecraft.item.ItemStack;
 
 public class CommonItemStackComparator implements IItemStackComparator

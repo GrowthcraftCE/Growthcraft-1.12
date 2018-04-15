@@ -1,9 +1,10 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.block;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.common.lib.item.ItemKey;
+import growthcraft.core.common.lib.utils.HashKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 

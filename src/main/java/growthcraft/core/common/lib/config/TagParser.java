@@ -1,4 +1,4 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.config;
 
 /**
  * Used to parse config csvs

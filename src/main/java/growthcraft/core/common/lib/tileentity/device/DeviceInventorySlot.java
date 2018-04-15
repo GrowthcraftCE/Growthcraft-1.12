@@ -2,7 +2,7 @@ package growthcraft.core.common.lib.tileentity.device;
 
 import growthcraft.core.common.lib.definition.IMultiItemStacks;
 import growthcraft.core.common.lib.inventory.InventoryProcessor;
-import growthcraft.core.common.lib.utils.ItemUtils;
+import growthcraft.core.common.lib.item.ItemUtils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 

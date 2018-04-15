@@ -5,7 +5,6 @@ import java.util.List;
 
 import growthcraft.core.client.lib.GrowthcraftCoreState;
 import growthcraft.core.common.lib.effect.IEffect;
-import growthcraft.core.common.lib.utils.ItemUtils;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -96,7 +95,6 @@ public class GrowthcraftItemFoodBase extends ItemFood
 			this.onFoodEaten(stack, worldIn, player);
 		}
 
-//		return result.getCount() <= 0 ? null : result;
 		return stack;
 	}
 

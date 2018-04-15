@@ -1,11 +1,10 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.item;
 
 import java.util.Random;
 
 import javax.annotation.Nonnull;
 
 import growthcraft.core.common.lib.definition.IMultiItemStacks;
-import growthcraft.core.common.lib.item.ItemTest;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

@@ -2,7 +2,7 @@ package growthcraft.core.common.lib.io.stream;
 
 import java.io.UnsupportedEncodingException;
 
-import growthcraft.core.common.lib.utils.ConstID;
+import growthcraft.core.common.lib.io.ConstID;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;

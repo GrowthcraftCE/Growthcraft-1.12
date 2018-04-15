@@ -1,5 +1,6 @@
 package growthcraft.core.common.lib.utils;
 
+import growthcraft.core.common.lib.config.TagParser;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 

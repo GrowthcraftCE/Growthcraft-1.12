@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.common.lib.CoreRegistry;
 import growthcraft.core.common.lib.effect.IEffect;
-import growthcraft.core.common.lib.utils.ConstID;
+import growthcraft.core.common.lib.io.ConstID;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTPrimitive;
@@ -221,7 +221,7 @@ public class NBTHelper
 		else
 		{
 			final NBTType actual = NBTType.byId(base.getId());
-			throw UnexpectedNBTTagType.createFor(NBTType.INT_ARRAY, actual);
+			throw UnexpectedNBTTagTypeException.createFor(NBTType.INT_ARRAY, actual);
 		}
 	}
 }

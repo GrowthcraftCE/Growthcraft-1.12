@@ -7,8 +7,8 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import growthcraft.core.client.lib.gui.widget.WidgetManager;
+import growthcraft.core.common.lib.fluids.UnitFormatter;
 import growthcraft.core.common.lib.utils.Rectangle;
-import growthcraft.core.common.lib.utils.UnitFormatter;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;

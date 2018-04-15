@@ -1,4 +1,4 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.client.lib.utils;
 
 import growthcraft.core.client.lib.particle.ParticleDrop;
 import net.minecraft.client.particle.Particle;

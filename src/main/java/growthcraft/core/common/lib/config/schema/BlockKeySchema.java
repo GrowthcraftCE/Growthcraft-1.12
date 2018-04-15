@@ -1,6 +1,6 @@
 package growthcraft.core.common.lib.config.schema;
 
-import growthcraft.core.common.lib.utils.BlockKey;
+import growthcraft.core.common.lib.block.BlockKey;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;

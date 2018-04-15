@@ -2,9 +2,9 @@ package growthcraft.core.common.lib.tileentity.device;
 
 import java.util.Random;
 
+import growthcraft.core.common.lib.block.BlockFlags;
 import growthcraft.core.common.lib.io.nbt.INBTSerializableContext;
 import growthcraft.core.common.lib.io.stream.IStreamable;
-import growthcraft.core.common.lib.utils.BlockFlags;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;

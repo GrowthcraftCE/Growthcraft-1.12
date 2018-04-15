@@ -6,7 +6,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.common.lib.definition.IMultiItemStacks;
-import growthcraft.core.common.lib.utils.ItemUtils;
 import net.minecraft.item.ItemStack;
 
 public class ItemTest

@@ -1,4 +1,4 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.fluids;
 
 import java.util.Collection;
 
@@ -8,7 +8,6 @@ import com.google.common.base.Joiner;
 
 import growthcraft.core.GrowthcraftConfiguration;
 import growthcraft.core.common.lib.CoreRegistry;
-import growthcraft.core.common.lib.fluids.FluidTag;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;

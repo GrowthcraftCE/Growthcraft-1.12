@@ -2,7 +2,6 @@ package growthcraft.core.common.lib.block;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.common.lib.utils.BlockFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;

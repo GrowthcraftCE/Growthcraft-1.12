@@ -1,4 +1,4 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.fluids;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -13,6 +13,8 @@ import growthcraft.core.common.lib.item.IItemColored;
 import growthcraft.core.common.lib.item.ItemBottleFluid;
 import growthcraft.core.common.lib.item.ItemFoodBottleFluid;
 import growthcraft.core.common.lib.legacy.FluidContainerRegistry;
+import growthcraft.core.common.lib.utils.NumUtils;
+import growthcraft.core.common.lib.utils.ObjectUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.IItemColor;
@@ -27,6 +29,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 /**
  * A simple factory for creating generic fluid bottles, blocks etc..
@@ -40,7 +44,6 @@ public class FluidFactory
 		private ItemTypeDefinition<ItemBottleFluid> bottle;
 		private ItemTypeDefinition<ItemFoodBottleFluid> foodBottle;
 		private ItemStack bucketStack;
-//		public ItemTypeDefinition<ItemBucketFluid> bucket;
 		private int itemColor = 0xFFFFFF;
 
 		public Fluid getFluid()
@@ -139,57 +142,29 @@ public class FluidFactory
 			return foodBottle;
 		}
 		
-/*		public FluidDetails setFluidBlockDefinition(GrowthcraftBlockFluidDefinition block) {
-			this.block = block;
-			return this;
-		}
-		
-		public FluidDetails setBottle( ItemTypeDefinition<ItemBottleFluid> bottle ) {
-			this.bottle = bottle;
-			return this;
-		}
-		
-		public FluidDetails setFoodBottle( ItemTypeDefinition<ItemFoodBottleFluid> foodBottle ) {
-			this.foodBottle = foodBottle;
-			return this;
-		} */
-
 		public FluidDetails registerObjects(String modID, String basename)
 		{
 			if (block != null)
 			{
-//				block.getBlock().setBlockName(modID + ".BlockFluid" + basename);
 				block.register(new ResourceLocation(modID, "fluid_" + basename));
 			}
 			if (bottle != null)
 			{
-//				bottle.getItem().setUnlocalizedName(modID + "bottlefluid_" + basename);
 				bottle.register(new ResourceLocation(modID, "bottlefluid_" + basename));
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}
 			if (foodBottle != null)
 			{
-//				foodBottle.getItem().setUnlocalizedName(modID + ".FoodBottleFluid" + basename);
 				foodBottle.register(new ResourceLocation(modID, "bottlefluid_" + basename));
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, foodBottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}
-/*			if (bucket != null)
-			{
-				bucket.getItem().setUnlocalizedName(prefix + ".BucketFluid" + basename);
-				bucket.register(prefix + ".BucketFluid" + basename);
-				final FluidStack boozeStack = fluid.asFluidStack(FluidContainerRegistry.BUCKET_VOLUME);
-				FluidContainerRegistry.registerFluidContainer(boozeStack, bucket.asStack(), FluidContainerRegistry.EMPTY_BUCKET);
-			}
-			if (block != null && bucket != null)
-			{
-//OBSOLET		EventHandlerBucketFill.instance().register(block.getBlock(), bucket.getItem());
-			} */
 
 			return this;
 		}
 		
+		@SideOnly(Side.CLIENT)
 		public FluidDetails registerColorHandlers() {
 			if (bottle != null) {
 				ItemRenderUtils.registerItemColorHandler(bottle.getItem());
@@ -215,7 +190,6 @@ public class FluidFactory
 			if (block != null) block.getBlock().setCreativeTab(tab);
 			if (bottle != null) bottle.getItem().setCreativeTab(tab);
 			if (foodBottle != null) foodBottle.getItem().setCreativeTab(tab);
-//			if (bucket != null) bucket.getItem().setCreativeTab(tab);
 			return this;
 		}
 
@@ -224,7 +198,6 @@ public class FluidFactory
 			this.itemColor = color;
 			if (bottle != null) bottle.getItem().setColor(color);
 			if (foodBottle != null) foodBottle.getItem().setColor(color);
-//			if (bucket != null) bucket.getItem().setColor(color);
 			return this;
 		}
 
@@ -257,8 +230,6 @@ public class FluidFactory
 		private final int defaultFeatures; 
 		
 		private Class<? extends GrowthcraftBlockFluid> fluidBlockClazz = null;
-//		private Class<? extends ItemBottleFluid> bottleClazz = null;
-//		private Class<? extends ItemBottleFluid> foodBottleClazz = null;
 
 		public FluidDetailsBuilder(Fluid fluid) {
 			this( fluid, FEATURE_ALL_NON_EDIBLE );
@@ -316,7 +287,6 @@ public class FluidFactory
 	
 			if (details.bucketStack == null && NumUtils.isFlagged(defaultFeatures, FEATURE_BUCKET))
 				details.bucketStack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid);
-	//			details.bucket = new ItemTypeDefinition<ItemBucketFluid>(new ItemBucketFluid(details.block != null ? details.block.getBlock() : null, fluid, null));
 
 			details.refreshItemColor();
 			details.refreshBlockColor();

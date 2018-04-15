@@ -5,12 +5,12 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.core.common.lib.block.BlockFlags;
 import growthcraft.core.common.lib.io.nbt.IAltNBTSerializable;
 import growthcraft.core.common.lib.io.stream.IStreamable;
 import growthcraft.core.common.lib.tileentity.event.TileEventFunction;
 import growthcraft.core.common.lib.tileentity.event.TileEventHandler;
 import growthcraft.core.common.lib.tileentity.event.TileEventHandlerMap;
-import growthcraft.core.common.lib.utils.BlockFlags;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import net.minecraft.block.state.IBlockState;

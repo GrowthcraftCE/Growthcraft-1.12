@@ -7,7 +7,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.common.lib.item.IItemStackComparator;
-import growthcraft.core.common.lib.utils.ItemUtils;
+import growthcraft.core.common.lib.item.ItemUtils;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;

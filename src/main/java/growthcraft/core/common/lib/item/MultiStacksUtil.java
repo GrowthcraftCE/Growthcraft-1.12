@@ -1,4 +1,4 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.item;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,6 @@ import growthcraft.core.common.lib.definition.IMultiFluidStacks;
 import growthcraft.core.common.lib.definition.IMultiItemStacks;
 import growthcraft.core.common.lib.fluids.MultiFluidStacks;
 import growthcraft.core.common.lib.fluids.TaggedFluidStacks;
-import growthcraft.core.common.lib.item.MultiItemStacks;
-import growthcraft.core.common.lib.item.OreItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 

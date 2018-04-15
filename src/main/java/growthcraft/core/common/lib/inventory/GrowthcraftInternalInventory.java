@@ -3,7 +3,7 @@ package growthcraft.core.common.lib.inventory;
 import growthcraft.core.common.lib.io.nbt.INBTSerializableContext;
 import growthcraft.core.common.lib.io.nbt.NBTHelper;
 import growthcraft.core.common.lib.io.nbt.NBTType;
-import growthcraft.core.common.lib.utils.ItemUtils;
+import growthcraft.core.common.lib.item.ItemUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;

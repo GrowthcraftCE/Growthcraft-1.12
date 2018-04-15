@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.common.lib.definition.IMultiItemStacks;
 import growthcraft.core.common.lib.item.ItemTest;
-import growthcraft.core.common.lib.utils.ItemUtils;
+import growthcraft.core.common.lib.item.ItemUtils;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

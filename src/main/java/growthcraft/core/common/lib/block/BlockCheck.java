@@ -1,10 +1,9 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.block;
 
 import java.util.Random;
 
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.init.GrowthcraftCoreBlocks;
-import growthcraft.core.common.lib.block.IBlockRope;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

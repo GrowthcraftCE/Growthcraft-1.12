@@ -1,8 +1,9 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.io.nbt;
 
 import java.util.List;
 
-import growthcraft.core.common.lib.io.nbt.NBTType;
+import growthcraft.core.common.lib.fluids.UnitFormatter;
+import growthcraft.core.common.lib.io.ConstID;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;

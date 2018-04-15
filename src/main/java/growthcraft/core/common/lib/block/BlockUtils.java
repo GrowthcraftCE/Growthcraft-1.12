@@ -1,4 +1,4 @@
-package growthcraft.core.common.lib.utils;
+package growthcraft.core.common.lib.block;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
