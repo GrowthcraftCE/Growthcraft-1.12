@@ -10,7 +10,7 @@ import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.Utils;
 import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
-import growthcraft.core.common.block.IGrowthcraftTankOperable;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

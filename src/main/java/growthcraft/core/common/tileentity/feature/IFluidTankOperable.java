@@ -1,4 +1,4 @@
-package growthcraft.core.common.block;
+package growthcraft.core.common.tileentity.feature;
 
 import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import net.minecraft.util.EnumFacing;
@@ -7,7 +7,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
-public interface IGrowthcraftTankOperable {
+public interface IFluidTankOperable {
 	
 	default FluidTankInfo[] getTankInfo(EnumFacing from) {
 		return GrowthcraftFluidUtils.convertTankPropsToInfo(getTankProperties(from));

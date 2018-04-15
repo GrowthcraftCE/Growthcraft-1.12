@@ -5,11 +5,11 @@ import java.io.IOException;
 import javax.annotation.Nullable;
 
 import growthcraft.core.api.fluids.FluidTest;
-import growthcraft.core.common.block.IGrowthcraftTankOperable;
 import growthcraft.core.common.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.handlers.FluidHandlerBlockWrapper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,7 +25,7 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
  */
-public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IGrowthcraftTankOperable, IFluidTanks
+public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks
 {
 	private FluidTanks tanks;
 

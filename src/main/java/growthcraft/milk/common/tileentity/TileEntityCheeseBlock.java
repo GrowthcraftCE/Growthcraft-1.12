@@ -7,7 +7,7 @@ import growthcraft.core.api.nbt.INBTItemSerializable;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.tileentity.GrowthcraftTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.api.definition.ICheeseBlockStackFactory;
 import growthcraft.milk.common.block.BlockCheeseBlock;
@@ -23,7 +23,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IAltItemHandler, INBTItemSerializable
+public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IItemOperable, INBTItemSerializable
 {
 	private Cheese cheese = new Cheese();
 
@@ -161,9 +161,9 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 */
 	
 	@Override
-	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if( cheese.tryWaxing(onHand) ) {
 			if( !player.capabilities.isCreativeMode ) {
 				if( onHand.getCount() > 1 ) {
@@ -180,9 +180,9 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	}
 
 	@Override
-	public boolean tryTakeItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
 			final ItemStack stack = cheese.yankSlices(1, true);

@@ -9,7 +9,7 @@ import growthcraft.core.common.inventory.GrowthcraftTileDeviceBase;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.api.MilkRegistry;
 import growthcraft.milk.api.processing.churn.IChurnRecipe;
@@ -26,7 +26,7 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements IAltItemHandler
+public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements IItemOperable
 {
 	public static enum WorkState
 	{
@@ -218,7 +218,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	 * @return false
 	 */
 	@Override
-	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack stack)
 	{
 		return false;
 	}
@@ -231,9 +231,9 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	 * @return true, the item was removed, false otherwise
 	 */
 	@Override
-	public boolean tryTakeItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		final ItemStack stack = outputInventorySlot.yank();
 		if (!ItemUtils.isEmpty(stack))
 		{

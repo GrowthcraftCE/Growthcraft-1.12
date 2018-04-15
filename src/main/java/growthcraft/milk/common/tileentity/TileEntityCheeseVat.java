@@ -19,7 +19,7 @@ import growthcraft.core.common.inventory.GrowthcraftTileDeviceBase;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.feature.ITileNamedFluidTanks;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
@@ -52,7 +52,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements ITickable, IAltItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
+public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements ITickable, IItemOperable, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
 {
 	public static enum FluidTankType
 	{
@@ -571,9 +571,9 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	}
 
 	@Override
-	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack stack)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (!ItemTest.isValid(stack)) return false;
 		final Item item = stack.getItem();
@@ -597,9 +597,9 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	}
 
 	@Override
-	public boolean tryTakeItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (ItemUtils.isEmpty(onHand))
 		{

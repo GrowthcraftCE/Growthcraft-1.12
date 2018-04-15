@@ -13,8 +13,9 @@ import growthcraft.core.api.nbt.INBTItemSerializable;
 import growthcraft.core.api.utils.BlockFlags;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.item.IItemTileBlock;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.events.EventTankDrained;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.Block;
@@ -466,7 +467,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 	private boolean handleIFluidHandler(World world, BlockPos pos, EntityPlayer player, IBlockState state)
 	{
 		final TileEntity te = world.getTileEntity(pos);
-		if (te instanceof IGrowthcraftTankOperable)
+		if (te instanceof IFluidTankOperable)
 		{
 			if (world.isRemote)
 			{
@@ -502,10 +503,10 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return false;
 	}
 
-	protected boolean handleOnUseItem(IAltItemHandler.Action action, World world, BlockPos pos, EntityPlayer player)
+	protected boolean handleOnUseItem(IItemOperable.Action action, World world, BlockPos pos, EntityPlayer player)
 	{
 		final TileEntity te = world.getTileEntity(pos);
-		if (te instanceof IAltItemHandler)
+		if (te instanceof IItemOperable)
 		{
 			if (world.isRemote)
 			{
@@ -513,7 +514,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 			}
 			else
 			{
-				final IAltItemHandler ih = (IAltItemHandler)te;
+				final IItemOperable ih = (IItemOperable)te;
 				final ItemStack is = player.inventory.getCurrentItem();
 
 				boolean needUpdate = false;
@@ -543,9 +544,9 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		if (!world.isRemote)
 		{
 			final TileEntity te = world.getTileEntity(pos);
-			if (te instanceof IAltItemHandler)
+			if (te instanceof IItemOperable)
 			{
-				if (handleOnUseItem(IAltItemHandler.Action.LEFT, world, pos, player))
+				if (handleOnUseItem(IItemOperable.Action.LEFT, world, pos, player))
 				{
 					return;
 				}
@@ -559,7 +560,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 	{
 		if (tryWrenchItem(playerIn, worldIn, pos)) return true;
 		if (handleIFluidHandler(worldIn, pos, playerIn, state)) return true;
-		if (handleOnUseItem(IAltItemHandler.Action.RIGHT, worldIn, pos, playerIn)) return true;
+		if (handleOnUseItem(IItemOperable.Action.RIGHT, worldIn, pos, playerIn)) return true;
 		return false;
 	}
 

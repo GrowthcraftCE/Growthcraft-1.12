@@ -8,9 +8,9 @@ import growthcraft.core.api.utils.Pair;
 import growthcraft.core.api.utils.PulseStepper;
 import growthcraft.core.api.utils.SpatialRandom;
 import growthcraft.core.api.utils.TickUtils;
-import growthcraft.core.common.block.IGrowthcraftTankOperable;
 import growthcraft.core.common.tileentity.GrowthcraftTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.struct.CheeseCurd;
@@ -102,7 +102,7 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 					// When a pancheon is present, try filling it with Whey
 					if (pancheonTile != null)
 					{
-						final IGrowthcraftTankOperable fh = pancheonTile.getPancheonFluidHandler();
+						final IFluidTankOperable fh = pancheonTile.getPancheonFluidHandler();
 						final FluidStack stack = GrowthcraftMilkFluids.whey.asFluidStack(100);
 						if (fh.canFill(EnumFacing.UP, stack.getFluid()))
 						{

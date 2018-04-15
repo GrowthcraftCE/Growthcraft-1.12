@@ -1,6 +1,6 @@
 package growthcraft.core.handlers;
 
-import growthcraft.core.common.block.IGrowthcraftTankOperable;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;
@@ -9,9 +9,9 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 public class FluidHandlerBlockWrapper implements IFluidHandler {
 	
 	private final EnumFacing direction;
-	private final IGrowthcraftTankOperable fh;
+	private final IFluidTankOperable fh;
 	
-	public FluidHandlerBlockWrapper(IGrowthcraftTankOperable fh, EnumFacing direction) {
+	public FluidHandlerBlockWrapper(IFluidTankOperable fh, EnumFacing direction) {
 		this.direction = direction;
 		this.fh = fh;
 	}

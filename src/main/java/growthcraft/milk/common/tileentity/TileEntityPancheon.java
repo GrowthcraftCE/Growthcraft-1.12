@@ -1,8 +1,8 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.core.api.fluids.FluidTest;
-import growthcraft.core.common.block.IGrowthcraftTankOperable;
 import growthcraft.core.common.inventory.GrowthcraftTileDeviceBase;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
 import net.minecraft.util.EnumFacing;
@@ -121,7 +121,7 @@ public class TileEntityPancheon extends GrowthcraftTileDeviceBase implements ITi
 	}
 
 	@Override
-	public IGrowthcraftTankOperable getPancheonFluidHandler() {
+	public IFluidTankOperable getPancheonFluidHandler() {
 		return this;
 	}
 }

@@ -8,7 +8,7 @@ import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.core.Utils;
 import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.utils.BlockFlags;
-import growthcraft.core.common.block.IGrowthcraftTankOperable;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.events.EventTankDrained;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

@@ -7,7 +7,7 @@ import growthcraft.core.common.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.common.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.common.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.core.utils.ItemUtils;
 import growthcraft.milk.GrowthcraftMilk;
@@ -25,7 +25,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implements ITickable, IAltItemHandler, ITileProgressiveDevice
+public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implements ITickable, IItemOperable, ITileProgressiveDevice
 {
 	private static int[][] accessibleSlots = {
 		{ 0 },
@@ -275,9 +275,9 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 	}
 
 	@Override
-	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack stack)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (ItemTest.isValid(stack))
 		{
 			// Items cannot be added if the user slot already has an item AND
@@ -300,9 +300,9 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 	}
 
 	@Override
-	public boolean tryTakeItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		// Items cannot be removed if the cheese press is active
 //		if( !ItemUtils.isEmpty( onHand ) )
 //			return false;
