@@ -5,7 +5,8 @@
 		"1": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_bottom",
 		"2": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_head",
 		"3": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_side",
-		"4": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_inner"
+		"4": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_inner",
+		"particle": "growthcraft_cellar:blocks/fruit_press/fruit_press_piston_head"
 	},
 	"elements": [
 		{
@@ -18,7 +19,7 @@
 				"south": {"uv": [14, 0, 16, 16], "texture": "#0"},
 				"west": {"uv": [14, 0, 16, 16], "texture": "#0"},
 				"up": {
-					"uv": [0, 0, 2, 2],
+					"uv": [0, 14, 2, 16],
 					"texture": "#0",
 					"rotation": 90
 				}
@@ -34,7 +35,7 @@
 				"south": {"uv": [14, 0, 16, 16], "texture": "#0"},
 				"west": {"uv": [14, 0, 16, 16], "texture": "#0"},
 				"up": {
-					"uv": [0, 0, 2, 2],
+					"uv": [0, 14, 2, 16],
 					"texture": "#0",
 					"rotation": 90
 				}
