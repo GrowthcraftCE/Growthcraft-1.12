@@ -1,32 +1,19 @@
-package growthcraft.core.lib.legacy;
+package growthcraft.core.common.block;
 
 import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public interface IGrowthcraftTankOperable {
 	
-//	default FluidTankInfo[] getTankInfo() {
-//		return getTankInfo(EnumFacing.NORTH);
-//	}
-
 	default FluidTankInfo[] getTankInfo(EnumFacing from) {
 		return GrowthcraftFluidUtils.convertTankPropsToInfo(getTankProperties(from));
 	}
 	
 	IFluidTankProperties[] getTankProperties(EnumFacing from);
-	
-//	default IFluidTankProperties[] getTankProperties() {
-//		return getTankProperties(EnumFacing.NORTH);
-//	}
-	
-//	default boolean canFill(Fluid fluid) {
-//		return canFill(EnumFacing.NORTH, fluid);
-//	}
 	
 	default boolean canFill(EnumFacing from, Fluid fluid) {
 		for( IFluidTankProperties props: getTankProperties(from) ) {
@@ -38,10 +25,7 @@ public interface IGrowthcraftTankOperable {
 		return false;
 	}
 
-//	default boolean canDrain(Fluid fluid) {
-//		return canDrain(EnumFacing.NORTH, fluid);
-//	}
-	
+
 	default boolean canDrain(EnumFacing from, Fluid fluid) {
 		for( IFluidTankProperties props: getTankProperties(from) ) {
 			if( !props.canDrain() )
@@ -54,20 +38,7 @@ public interface IGrowthcraftTankOperable {
 
 	int fill(EnumFacing dir, FluidStack stack, boolean shouldFill);
 	
-//	default int fill(FluidStack stack, boolean shouldFill) {
-//		return fill(EnumFacing.NORTH, stack, shouldFill);
-//	}
-
 	FluidStack drain(EnumFacing dir, int amount, boolean shouldDrain);
 	
-//	default FluidStack drain(int amount, boolean shouldDrain) {
-//		return drain(EnumFacing.NORTH, amount, shouldDrain);
-//	}
-
 	FluidStack drain(EnumFacing dir, FluidStack stack, boolean shouldDrain);
-	
-//	default FluidStack drain(FluidStack stack, boolean shouldDrain) {
-//		return drain(EnumFacing.NORTH, stack, shouldDrain);
-//	}
-
 }

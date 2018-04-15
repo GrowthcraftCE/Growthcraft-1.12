@@ -1,6 +1,6 @@
 package growthcraft.milk.common.tileentity;
 
-import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
+import growthcraft.core.common.block.IGrowthcraftTankOperable;
 
 /**
  * Implement this interface in any TileEntity you wish to treat as a Pancheon

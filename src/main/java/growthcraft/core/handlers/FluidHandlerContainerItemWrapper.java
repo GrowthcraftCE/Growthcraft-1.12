@@ -5,13 +5,11 @@ import javax.annotation.Nullable;
 
 import growthcraft.cellar.common.item.IFluidItem;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.FluidTankProperties;
@@ -29,6 +27,10 @@ public class FluidHandlerContainerItemWrapper implements IFluidHandlerItem, ICap
     
     @Nullable
     public FluidStack getFluidStack() {
+    	FluidStack fluidStack = FluidContainerRegistry.getFluidForFilledItem(container);
+    	if( fluidStack != null )
+    		return fluidStack;
+
     	Item item = container.getItem();
     	if( item instanceof IFluidItem ) {
     		return ((IFluidItem)item).getFluidStack(container);
@@ -86,7 +88,7 @@ public class FluidHandlerContainerItemWrapper implements IFluidHandlerItem, ICap
 			return null;
 		
 		fluidStack = fluidStack.copy();
-		fluidStack.amount = maxDrain;
+		fluidStack.amount = Math.min(maxDrain, fluidStack.amount);
 		return drain(fluidStack, doDrain);
 	}
 

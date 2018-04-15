@@ -1,9 +1,9 @@
 package growthcraft.milk.common.tileentity;
 
 import growthcraft.core.api.fluids.FluidTest;
+import growthcraft.core.common.block.IGrowthcraftTankOperable;
 import growthcraft.core.common.inventory.GrowthcraftTileDeviceBase;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
-import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
 import growthcraft.milk.common.tileentity.device.Pancheon;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;

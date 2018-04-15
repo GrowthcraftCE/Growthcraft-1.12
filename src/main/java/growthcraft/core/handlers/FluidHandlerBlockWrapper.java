@@ -1,6 +1,6 @@
 package growthcraft.core.handlers;
 
-import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
+import growthcraft.core.common.block.IGrowthcraftTankOperable;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.IFluidHandler;

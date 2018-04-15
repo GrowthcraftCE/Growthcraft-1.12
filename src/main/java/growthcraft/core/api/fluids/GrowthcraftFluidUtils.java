@@ -9,40 +9,31 @@ import java.util.Map;
 
 import growthcraft.core.Utils;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
-import growthcraft.core.lib.legacy.IFluidContainerItem;
-import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
 import growthcraft.core.lib.legacy.FluidContainerRegistry.FluidContainerData;
 import growthcraft.core.utils.ItemUtils;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeModContainer;
-import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidActionResult;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.UniversalBucket;
+import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public class GrowthcraftFluidUtils
 {
-	// How much fluid is drained from a container or tank with any given
-	// action
-	public static final int DRAIN_CAP = FluidContainerRegistry.BUCKET_VOLUME;
-
 	private static Map<Fluid, List<FluidContainerData>> fluidData;
 	
 	private GrowthcraftFluidUtils() {}
 	
 	/////////
-	// Fluid registry helpers
+	// Fluid container registry helpers
 	/////////
 	
 	public static Map<Fluid, List<FluidContainerData>> getFluidData()
@@ -98,6 +89,10 @@ public class GrowthcraftFluidUtils
 		return fluidContainers;
 	}
 	
+	/////////
+	// Fluid registry helpers
+	/////////
+	
 	public static List<Fluid> getFluidsByNames(List<String> names)
 	{
 		final List<Fluid> fluids = new ArrayList<Fluid>();
@@ -134,121 +129,31 @@ public class GrowthcraftFluidUtils
 	// Fluid interactions
 	/////////
 	
-	public static FluidStack drainFluidBlock(World world, BlockPos pos, boolean doDrain)
-	{
-		final Block block = world.getBlockState(pos).getBlock();
-		if (block instanceof BlockFluidBase)
-		{
-			final BlockFluidBase bfb = (BlockFluidBase)block;
-			return bfb.drain(world, pos, doDrain);
-		}
-		else if (block == Blocks.LAVA)
-		{
-			if (doDrain) world.setBlockToAir(pos);
-			return new FluidStack(FluidRegistry.LAVA, FluidContainerRegistry.BUCKET_VOLUME);
-		}
-		else if (block == Blocks.WATER)
-		{
-			if (doDrain) world.setBlockToAir(pos);
-			return new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME);
-		}
-		return null;
-	}
-	
-	public static boolean playerFillTank(World world, BlockPos pos, IGrowthcraftTankOperable tank, ItemStack held, EntityPlayer player)
+	public static boolean playerFillTank(World world, BlockPos pos, IFluidHandler tank, ItemStack held, EntityPlayer player)
 	{
 		if (ItemUtils.isEmpty(held)) return false;
-
-		final EnumFacing direction = EnumFacing.NORTH;	// Doesn't matter for MC 1.11.2 or newer.
-
-		if (held.getItem() instanceof IFluidContainerItem)
-		{
-			final IFluidContainerItem container = (IFluidContainerItem)held.getItem();
-
-			final FluidStack willDrain = container.drain(held, DRAIN_CAP, false);
-			if (willDrain == null || willDrain.amount <= 0) return false;
-
-			final int used = tank.fill(direction, willDrain, false);
-			if (used <= 0) return false;
-
-			if (!world.isRemote)
-			{
-				tank.fill(direction, willDrain, true);
-				container.drain(held, used, true);
-			}
-		}
-		else
-		{
-			final FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
-			if (heldContents == null) return false;
-
-			final int used = tank.fill(direction, heldContents, false);
-			if (used <= 0) return false;
-
-			if (!world.isRemote)
-			{
-				tank.fill(direction, heldContents, true);
-				final ItemStack containerItem = FluidContainerRegistry.drainFluidContainer(held);
-
-				if (!player.inventory.addItemStackToInventory(containerItem))
-				{
-					if (containerItem == null)
-					{
-						// WARN about invalid container item
-					}
-					else
-					{
-						world.spawnEntity(new EntityItem(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, containerItem));
-					}
-				}
-				else if (player instanceof EntityPlayerMP)
-				{
-					((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
-				}
-
-				if (!player.capabilities.isCreativeMode)
-				{
-					held.shrink(1);
-					if (held.isEmpty())
-					{
-						player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
-					}
-				}
-			}
-		}
-		return true;
-	}
-
-	public static FluidStack playerDrainTank(World world, BlockPos pos, IGrowthcraftTankOperable tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
-	{
-		if (ItemUtils.isEmpty(held)) return null;
-
-		final EnumFacing direction = EnumFacing.NORTH;	// Doesn't matter for MC 1.11.2 or newer.
 		
-		final FluidStack available = tank.drain(direction, DRAIN_CAP, false);
-		if (available == null) return null;
+		FluidActionResult fac = FluidUtil.tryEmptyContainer(held, tank, Integer.MAX_VALUE, player, false);
+		if( FluidActionResult.FAILURE.equals( fac ) )
+			return false;
 
-		if (held.getItem() instanceof IFluidContainerItem)
+		if (!world.isRemote)
 		{
-			final IFluidContainerItem container = (IFluidContainerItem)held.getItem();
-
-			final int filled = container.fill(held, available, false);
-			if (filled <= 0) return null;
-
-			tank.drain(direction, filled, true);
-			container.fill(held, available, true);
-		}
-		else
-		{
-			FluidStack heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
-			final ItemStack filled = FluidContainerRegistry.fillFluidContainer(available, held);
-			heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
-
-			if (heldContents == null) return null;
-
-			if (!player.inventory.addItemStackToInventory(filled))
+			fac = FluidUtil.tryEmptyContainer(held, tank, Integer.MAX_VALUE, player, true);
+			if( FluidActionResult.FAILURE.equals( fac ) )
+				return false;
+			final ItemStack containerItem = fac.getResult();
+			
+			if (!player.inventory.addItemStackToInventory(containerItem))
 			{
-				world.spawnEntity(new EntityItem(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, filled));
+				if (containerItem == null)
+				{
+					// WARN about invalid container item
+				}
+				else
+				{
+					world.spawnEntity(new EntityItem(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, containerItem));
+				}
 			}
 			else if (player instanceof EntityPlayerMP)
 			{
@@ -263,19 +168,74 @@ public class GrowthcraftFluidUtils
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
 				}
 			}
+		}
+		return true;
+	}
 
+	public static FluidStack playerDrainTank(World world, BlockPos pos, IFluidHandler tank, ItemStack held, EntityPlayer player, boolean expbool, int amount, float exp)
+	{
+		if (ItemUtils.isEmpty(held)) return null;
+
+		final FluidStack available = tank.drain(Integer.MAX_VALUE, false);
+		if (available == null)
+			return null;
+
+		FluidActionResult fac = FluidUtil.tryFillContainer(held, tank, Integer.MAX_VALUE, player, false);
+		if( FluidActionResult.FAILURE.equals(fac) ) {
+			// Happens with bottles without fluid handlers. Using FluidContainerRegistry in this case.
+			if( FluidContainerRegistry.fillFluidContainer(available, held) == null )
+				return null;
+		}
+
+		if (!world.isRemote)
+		{
+			ItemStack filled;
+			FluidStack heldContents;
+			fac = FluidUtil.tryFillContainer(held, tank, Integer.MAX_VALUE, player, true);
+			if( FluidActionResult.FAILURE.equals(fac) ) {
+				filled = FluidContainerRegistry.fillFluidContainer(available, held);
+				heldContents = FluidContainerRegistry.getFluidForFilledItem(filled);
+				if (heldContents == null)
+					return null;
+				tank.drain(heldContents.amount, true);
+			}
+			else
+			{
+				filled = fac.getResult();
+				heldContents = FluidUtil.getFluidContained(filled);
+			}
+			
+			if (!player.inventory.addItemStackToInventory(filled))
+			{
+				world.spawnEntity(new EntityItem(world, (double)pos.getX() + 0.5D, (double)pos.getY() + 1.5D, (double)pos.getZ() + 0.5D, filled));
+			}
+			else if (player instanceof EntityPlayerMP)
+			{
+				((EntityPlayerMP)player).sendContainerToPlayer(player.inventoryContainer);
+			}
+	
+			if (!player.capabilities.isCreativeMode)
+			{
+				held.shrink(1);
+				if (held.isEmpty())
+				{
+					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+				}
+			}
+	
 			if (expbool)
 			{
-				Utils.spawnExp(amount * heldContents.amount / tank.getTankInfo(direction)[0].capacity, exp, player);
+				// NOTE: Assuming first tank is drained.
+				Utils.spawnExp(amount * heldContents.amount / tank.getTankProperties()[0].getCapacity(), exp, player);
 			}
-			tank.drain(direction, heldContents.amount, true);
 		}
+
 		return available;
 	}
 
-	public static FluidStack playerDrainTank(World world, BlockPos pos, IGrowthcraftTankOperable tank, ItemStack held, EntityPlayer player)
+	public static FluidStack playerDrainTank(World world, BlockPos pos, IFluidHandler fh, ItemStack held, EntityPlayer player)
 	{
-		return playerDrainTank(world, pos, tank, held, player, false, 0, 0);
+		return playerDrainTank(world, pos, fh, held, player, false, 0, 0);
 	}
 
 	/////////

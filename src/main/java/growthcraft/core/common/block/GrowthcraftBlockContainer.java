@@ -7,9 +7,7 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.Utils;
 import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.nbt.INBTItemSerializable;
 import growthcraft.core.api.utils.BlockFlags;
@@ -18,7 +16,6 @@ import growthcraft.core.common.item.IItemTileBlock;
 import growthcraft.core.common.tileentity.feature.IAltItemHandler;
 import growthcraft.core.common.tileentity.feature.ICustomDisplayName;
 import growthcraft.core.events.EventTankDrained;
-import growthcraft.core.lib.legacy.IGrowthcraftTankOperable;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -45,6 +42,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
+import net.minecraftforge.fluids.capability.IFluidHandler;
 
 public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider
 {
@@ -448,14 +447,14 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return ret;
 	}
 
-	protected boolean playerFillTank(World world, BlockPos pos, IGrowthcraftTankOperable fh, ItemStack is, EntityPlayer player)
+	protected boolean playerFillTank(World world, BlockPos pos, IFluidHandler tank, ItemStack is, EntityPlayer player)
 	{
-		return GrowthcraftFluidUtils.playerFillTank(world, pos, fh, is, player);
+		return GrowthcraftFluidUtils.playerFillTank(world, pos, tank, is, player);
 	}
 
-	protected boolean playerDrainTank(World world, BlockPos pos, IGrowthcraftTankOperable fh, ItemStack is, EntityPlayer player)
+	protected boolean playerDrainTank(World world, BlockPos pos, IFluidHandler tank, ItemStack is, EntityPlayer player)
 	{
-		final FluidStack fs = GrowthcraftFluidUtils.playerDrainTank(world, pos, fh, is, player);
+		final FluidStack fs = GrowthcraftFluidUtils.playerDrainTank(world, pos, tank, is, player);
 		if (fs != null && fs.amount > 0)
 		{
 			MinecraftForge.EVENT_BUS.post(new EventTankDrained(player, world, pos, fs));
@@ -475,27 +474,28 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 			}
 			else
 			{
-				final IGrowthcraftTankOperable fh = (IGrowthcraftTankOperable)te;
-				final ItemStack is = player.inventory.getCurrentItem();
+				final IFluidHandler fh = te.getCapability(CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY, null);
+				if( fh != null ) {
+					final ItemStack is = player.inventory.getCurrentItem();
 
-				boolean needUpdate = false;
-
-				if (!player.isSneaking())
-				{
-					// While not sneaking, draining is given priority
-					if (playerDrainTank(world, pos, fh, is, player) ||
-						playerFillTank(world, pos, fh, is, player)) needUpdate = true;
-				}
-				else
-				{
-					// Otherwise filling is given priority
-					if (playerFillTank(world, pos, fh, is, player) ||
-						playerDrainTank(world, pos, fh, is, player)) needUpdate = true;
-				}
-				if (needUpdate)
-				{
-					markBlockForUpdate(world, pos);
-					return true;
+					boolean needUpdate = false;
+					if (!player.isSneaking())
+					{
+						// While not sneaking, draining is given priority
+						if (playerDrainTank(world, pos, fh, is, player) ||
+							playerFillTank(world, pos, fh, is, player)) needUpdate = true;
+					}
+					else
+					{
+						// Otherwise filling is given priority
+						if (playerFillTank(world, pos, fh, is, player) ||
+							playerDrainTank(world, pos, fh, is, player)) needUpdate = true;
+					}
+					if (needUpdate)
+					{
+						markBlockForUpdate(world, pos);
+						return true;
+					}
 				}
 			}
 		}
