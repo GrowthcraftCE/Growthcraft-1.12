@@ -1,27 +1,25 @@
 package growthcraft.core;
 
-import net.minecraftforge.oredict.RecipeSorter.Category;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import growthcraft.core.api.item.recipes.ShapelessItemComparableRecipe;
-import growthcraft.core.api.item.recipes.ShapelessMultiRecipe;
-import growthcraft.core.creativetabs.TabGrowthcraft;
-import growthcraft.core.init.GrowthcraftCoreBlocks;
-import growthcraft.core.init.GrowthcraftCoreItems;
-import growthcraft.core.init.GrowthcraftCoreRecipes;
-import growthcraft.core.proxy.CommonProxy;
+import growthcraft.core.common.CommonProxy;
+import growthcraft.core.common.creativetabs.TabGrowthcraft;
+import growthcraft.core.common.init.GrowthcraftCoreBlocks;
+import growthcraft.core.common.init.GrowthcraftCoreItems;
+import growthcraft.core.common.init.GrowthcraftCoreRecipes;
+import growthcraft.core.common.lib.item.recipes.ShapelessItemComparableRecipe;
+import growthcraft.core.common.lib.item.recipes.ShapelessMultiRecipe;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCore {

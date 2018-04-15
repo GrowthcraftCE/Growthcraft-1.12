@@ -13,7 +13,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import growthcraft.core.lib.legacy.FluidContainerRegistry;
+import growthcraft.core.common.lib.legacy.FluidContainerRegistry;
 
 public class GrowthcraftCoreConfig {
 
