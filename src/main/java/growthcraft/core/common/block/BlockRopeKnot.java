@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.Reference;
 import growthcraft.core.common.init.GrowthcraftCoreItems;
-import growthcraft.core.common.lib.block.IBlockRope;
+import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;

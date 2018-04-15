@@ -4,7 +4,7 @@ import growthcraft.core.common.block.BlockRopeFence;
 import growthcraft.core.common.block.BlockRopeKnot;
 import growthcraft.core.common.block.BlockSalt;
 import growthcraft.core.common.block.BlockSaltOre;
-import growthcraft.core.common.lib.definition.BlockDefinition;
+import growthcraft.core.shared.definition.BlockDefinition;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;

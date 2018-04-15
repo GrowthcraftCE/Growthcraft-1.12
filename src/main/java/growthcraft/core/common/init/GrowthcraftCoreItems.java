@@ -4,7 +4,7 @@ import growthcraft.core.common.handlers.EnumHandler;
 import growthcraft.core.common.item.ItemCrowbar;
 import growthcraft.core.common.item.ItemRope;
 import growthcraft.core.common.item.ItemSalt;
-import growthcraft.core.common.lib.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemDefinition;
 import net.minecraftforge.oredict.OreDictionary;
 
 import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;

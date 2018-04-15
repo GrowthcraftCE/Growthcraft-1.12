@@ -4,7 +4,7 @@ import java.util.Random;
 
 import growthcraft.core.Reference;
 import growthcraft.core.common.init.GrowthcraftCoreItems;
-import growthcraft.core.common.lib.block.IBlockRope;
+import growthcraft.core.shared.block.IBlockRope;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;

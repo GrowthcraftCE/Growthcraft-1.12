@@ -2,8 +2,8 @@ package growthcraft.core.common.item;
 
 import growthcraft.core.Reference;
 import growthcraft.core.common.init.GrowthcraftCoreBlocks;
-import growthcraft.core.common.lib.utils.GrowthcraftLogger;
 import growthcraft.core.common.tileentity.TileEntityRopeKnot;
+import growthcraft.core.common.utils.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.entity.player.EntityPlayer;

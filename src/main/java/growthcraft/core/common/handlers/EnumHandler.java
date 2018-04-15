@@ -1,8 +1,8 @@
 package growthcraft.core.common.handlers;
 
 import growthcraft.core.common.init.GrowthcraftCoreItems;
-import growthcraft.core.common.lib.definition.IItemStackFactory;
-import growthcraft.core.common.lib.definition.IObjectVariant;
+import growthcraft.core.shared.definition.IItemStackFactory;
+import growthcraft.core.shared.definition.IObjectVariant;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;

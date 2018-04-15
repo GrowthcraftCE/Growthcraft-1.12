@@ -7,7 +7,7 @@ import java.io.File;
 
 import org.apache.logging.log4j.Level;
 
-import growthcraft.core.common.lib.utils.GrowthcraftLogger;
+import growthcraft.core.common.utils.GrowthcraftLogger;
 
 public class GrowthcraftConfiguration extends Configuration {
 	// REVISE_TEAM 0: Reused pattern from GrowthcraftBambooConfig, correct?
