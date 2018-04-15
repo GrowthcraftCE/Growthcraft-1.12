@@ -4,8 +4,8 @@ import java.util.Random;
 
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.block.BlockFruitPresser.Orient;
+import growthcraft.cellar.common.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.shared.block.BlockFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;

@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.booze;
 
-import growthcraft.cellar.api.CellarRegistry;
-import growthcraft.cellar.api.booze.BoozeTag;
+import growthcraft.cellar.common.lib.CellarRegistry;
+import growthcraft.cellar.common.lib.booze.BoozeTag;
 
 public class GrowthcraftModifierFunctions {
 	// REVISE_ME 0

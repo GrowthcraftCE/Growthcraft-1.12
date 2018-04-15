@@ -1,14 +1,14 @@
 package growthcraft.cellar;
 
-import growthcraft.cellar.api.CellarRegistry;
 import growthcraft.cellar.client.gui.GuiHandler;
+import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
-import growthcraft.cellar.init.*;
-import growthcraft.cellar.network.PacketPipeline;
-import growthcraft.cellar.proxy.CommonProxy;
-import growthcraft.cellar.stats.GrowthcraftCellarAchievements;
-import growthcraft.cellar.util.CellarBoozeBuilderFactory;
-import growthcraft.cellar.util.UserApis;
+import growthcraft.cellar.common.init.*;
+import growthcraft.cellar.common.lib.CellarRegistry;
+import growthcraft.cellar.common.lib.network.PacketPipeline;
+import growthcraft.cellar.common.stats.GrowthcraftCellarAchievements;
+import growthcraft.cellar.common.util.CellarBoozeBuilderFactory;
+import growthcraft.cellar.common.util.UserApis;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;

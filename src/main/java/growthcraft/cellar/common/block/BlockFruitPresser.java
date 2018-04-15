@@ -8,8 +8,8 @@ import javax.annotation.Nullable;
 
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.block.BlockFruitPresser.Orient;
+import growthcraft.cellar.common.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
-import growthcraft.cellar.init.GrowthcraftCellarBlocks;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.core.shared.block.IWrenchable;

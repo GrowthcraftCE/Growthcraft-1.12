@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.booze;
 
-import growthcraft.cellar.api.booze.IModifierFunction;
+import growthcraft.cellar.common.lib.booze.IModifierFunction;
 
 public class AbstractModifierFunction implements IModifierFunction
 {

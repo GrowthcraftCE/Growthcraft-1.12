@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.tileentity.component;
 
-import growthcraft.cellar.api.CellarRegistry;
-import growthcraft.cellar.api.processing.heatsource.IHeatSourceBlock;
+import growthcraft.cellar.common.lib.CellarRegistry;
+import growthcraft.cellar.common.lib.processing.heatsource.IHeatSourceBlock;
 import growthcraft.core.shared.block.BlockCheck;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;

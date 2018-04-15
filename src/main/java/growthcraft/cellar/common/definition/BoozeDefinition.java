@@ -2,7 +2,7 @@ package growthcraft.cellar.common.definition;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.api.booze.Booze;
+import growthcraft.cellar.common.lib.booze.Booze;
 import growthcraft.core.shared.definition.FluidTypeDefinition;
 
 public class BoozeDefinition extends FluidTypeDefinition<Booze> {
