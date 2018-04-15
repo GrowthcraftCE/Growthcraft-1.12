@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.item;
+package growthcraft.core.common.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

@@ -6,7 +6,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Joiner;
 
-import growthcraft.cellar.api.booze.BoozeTag;
 import growthcraft.core.GrowthcraftConfiguration;
 import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.api.fluids.FluidTag;
@@ -60,7 +59,7 @@ public class UnitFormatter
 			String str = "";
 			for (FluidTag tag : tags)
 			{
-				if (GrowthcraftConfiguration.hidePoisonedBooze && tag == BoozeTag.POISONED) continue;
+				if (GrowthcraftConfiguration.hidePoisonedBooze && tag.getName().equals("poisoned")) continue;	// REVISE_ME
 				str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();
 			}
 			modifierString = str;

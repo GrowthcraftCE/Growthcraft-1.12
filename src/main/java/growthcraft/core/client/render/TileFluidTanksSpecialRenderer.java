@@ -2,7 +2,6 @@ package growthcraft.core.client.render;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
 import growthcraft.core.client.utils.RenderUtil;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
 import growthcraft.core.utils.BBox;

@@ -3,7 +3,7 @@ package growthcraft.core.common.item;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.common.item.IFluidItem;
+import growthcraft.core.common.item.IFluidItem;
 import growthcraft.core.handlers.FluidHandlerContainerItemWrapper;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import net.minecraft.init.Items;

@@ -4,8 +4,6 @@ import java.lang.reflect.Array;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.api.booze.Booze;
-import growthcraft.cellar.common.definition.BoozeDefinition;
 import net.minecraftforge.fluids.Fluid;
 
 public class FluidDefinition extends FluidTypeDefinition<Fluid>

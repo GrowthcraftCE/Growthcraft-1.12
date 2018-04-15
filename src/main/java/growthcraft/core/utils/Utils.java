@@ -1,4 +1,4 @@
-package growthcraft.core;
+package growthcraft.core.utils;
 
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;

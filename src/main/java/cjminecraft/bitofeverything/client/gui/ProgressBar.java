@@ -11,7 +11,8 @@ import net.minecraft.util.ResourceLocation;
  * @author CJMinecraft
  */
 public class ProgressBar extends Gui {
-
+	// REMOVEME
+	
     private ResourceLocation texture;
     private ProgressBarDirection direction;
     private int positionX, positionY;

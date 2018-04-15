@@ -1,4 +1,4 @@
-package growthcraft.core;
+package growthcraft.core.api.client;
 
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

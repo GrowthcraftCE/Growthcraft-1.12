@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import growthcraft.core.Utils;
 import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import growthcraft.core.lib.legacy.FluidContainerRegistry.FluidContainerData;
 import growthcraft.core.utils.ItemUtils;
+import growthcraft.core.utils.Utils;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
