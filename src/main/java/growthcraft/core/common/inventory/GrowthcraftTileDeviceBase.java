@@ -37,6 +37,7 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
 
 	protected void markFluidDirty()
 	{
+		markDirty();
 	}
 
 	protected FluidTank[] createTanks()
