@@ -4,6 +4,8 @@ import growthcraft.apples.Reference;
 import growthcraft.apples.worldgen.WorldGenAppleTree;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -27,8 +29,10 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     );
 
     public BlockAppleSapling(String unlocalizedName) {
+    	super(Material.PLANTS);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+        this.setSoundType(SoundType.PLANT);
     }
 
     @Override

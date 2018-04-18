@@ -49,10 +49,12 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 		super(Material.PISTON);
 		this.isBlockContainer = true;
 		setTileEntityType(TileEntityFruitPresser.class);
-		setHardness(0.5F);
+		setHardness(2.0F);
+		this.setResistance(5.0F);
 		setSoundType(SoundType.STONE);	// Formerly soundTypePiston
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+		this.setHarvestLevel("axe", 0);
 	}
 	
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)

@@ -43,7 +43,7 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
     public final static PropertyBool SUBMODEL_PLUNGER = PropertyBool.create("isplunger");
 	
 	public BlockButterChurnPlunger(String unlocalizedName) {
-        super(Material.CLAY);
+        super(Material.WOOD);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		this.setResistance(5.0F);
