@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.booze;
+package growthcraft.cellar.common.lib.booze.modifier;
 
 import growthcraft.cellar.common.lib.booze.IModifierFunction;
 

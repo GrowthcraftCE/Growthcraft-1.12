@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.lib.network;
 
-import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -27,9 +27,9 @@ public class PacketSwitchTankButton extends AbstractPacketButton
 		final World world = player.world;
 		final TileEntity te = world.getTileEntity(coord);
 
-		if (te instanceof PREVTileEntityBrewKettle)
+		if (te instanceof TileEntityBrewKettle)
 		{
-			((PREVTileEntityBrewKettle)te).switchTanks();
+			((TileEntityBrewKettle)te).switchTanks();
 		}
 	}
 }

@@ -2,9 +2,9 @@ package growthcraft.cellar;
 
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.CommonProxy;
-import growthcraft.cellar.common.booze.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.init.*;
 import growthcraft.cellar.common.lib.CellarRegistry;
+import growthcraft.cellar.common.lib.booze.modifier.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.lib.network.PacketPipeline;
 import growthcraft.cellar.common.stats.GrowthcraftCellarAchievements;
 import growthcraft.cellar.common.util.CellarBoozeBuilderFactory;

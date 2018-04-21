@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.cellar.GrowthcraftCellarConfig;
 import growthcraft.cellar.Reference;
-import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -27,7 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
-public class PREVBlockBrewKettle extends BlockCellarContainer {
+public class BlockBrewKettle extends BlockCellarContainer {
 	// INITIALIZE
 
 	private static final AxisAlignedBB AABB_CONTENTS = new AxisAlignedBB(2/16.0, 4/16.0, 2/16.0, 12/16.0, 10/16.0, 12/16.0);
@@ -52,10 +52,10 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 2, 0.0625 * 16, 0.0625 * 16);
 
-    public PREVBlockBrewKettle(String unlocalizedName) {
+    public BlockBrewKettle(String unlocalizedName) {
         super(Material.IRON);
         setSoundType(SoundType.METAL);
-        setTileEntityType(PREVTileEntityBrewKettle.class);
+        setTileEntityType(TileEntityBrewKettle.class);
         this.setHardness(2.0F);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -66,7 +66,7 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 	{
 		if (GrowthcraftCellarConfig.brewKettleFillsWithRain)
 		{
-			final PREVTileEntityBrewKettle te = getTileEntity(world, pos);
+			final TileEntityBrewKettle te = getTileEntity(world, pos);
 			if (te != null)
 			{
 				te.fill(EnumFacing.UP, new FluidStack(FluidRegistry.WATER, GrowthcraftCellarConfig.brewKettleRainFillPerUnit), true);
@@ -80,7 +80,7 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 	{
 		if (!worldIn.isRemote)
 		{
-			final PREVTileEntityBrewKettle te = getTileEntity(worldIn, pos);
+			final TileEntityBrewKettle te = getTileEntity(worldIn, pos);
 			if (te != null)
 			{
 				if (GrowthcraftCellarConfig.dropItemsInBrewKettle)
@@ -184,7 +184,7 @@ public class PREVBlockBrewKettle extends BlockCellarContainer {
 	@Override
 	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
 	{
-		final PREVTileEntityBrewKettle te = getTileEntity(world, pos);
+		final TileEntityBrewKettle te = getTileEntity(world, pos);
 		if (te != null)
 		{
 			return te.getFluidAmountScaled(15, 1);

@@ -5,10 +5,10 @@ import java.util.List;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.GrowthcraftCellarConfig;
 import growthcraft.cellar.Reference;
-import growthcraft.cellar.common.inventory.PREVContainerBrewKettle;
+import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.lib.network.PacketClearTankButtonWByte;
 import growthcraft.cellar.common.lib.network.PacketSwitchTankButton;
-import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.core.shared.client.gui.widget.GuiButtonDiscard;
 import growthcraft.core.shared.client.gui.widget.GuiButtonSwitch;
 import growthcraft.core.shared.client.gui.widget.WidgetDeviceProgressIcon;
@@ -19,7 +19,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class PREVGuiBrewKettle extends GuiCellar<PREVContainerBrewKettle, PREVTileEntityBrewKettle>
+public class PREVGuiBrewKettle extends GuiCellar<ContainerBrewKettle, TileEntityBrewKettle>
 {
 	public static final ResourceLocation BREW_KETTLE_TEXTURE = new ResourceLocation(Reference.MODID, "textures/guis/brew_kettle_gui.png");
 	
@@ -27,9 +27,9 @@ public class PREVGuiBrewKettle extends GuiCellar<PREVContainerBrewKettle, PREVTi
 	private GuiButtonDiscard button1;
 	private GuiButtonSwitch button2;
 
-	public PREVGuiBrewKettle(InventoryPlayer inv, PREVTileEntityBrewKettle brewKettle)
+	public PREVGuiBrewKettle(InventoryPlayer inv, TileEntityBrewKettle brewKettle)
 	{
-		super(BREW_KETTLE_TEXTURE, new PREVContainerBrewKettle(inv, brewKettle), brewKettle);
+		super(BREW_KETTLE_TEXTURE, new ContainerBrewKettle(inv, brewKettle), brewKettle);
 	}
 
 	@Override

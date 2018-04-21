@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import growthcraft.cellar.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.fluids.CellarTank;
-import growthcraft.cellar.common.inventory.PREVContainerBrewKettle;
+import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
@@ -23,7 +23,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice
+public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice
 {
 	public static enum BrewKettleDataID
 	{
@@ -90,7 +90,7 @@ public class PREVTileEntityBrewKettle extends TileEntityCellarDevice implements 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
 	{
-		return new PREVContainerBrewKettle(playerInventory, this);
+		return new ContainerBrewKettle(playerInventory, this);
 	}
 
 	@Override

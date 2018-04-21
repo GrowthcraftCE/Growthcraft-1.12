@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.definition;
+package growthcraft.cellar.common.lib.definition;
 
 import javax.annotation.Nonnull;
 

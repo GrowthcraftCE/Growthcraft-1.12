@@ -2,12 +2,12 @@ package growthcraft.cellar.common.inventory;
 
 import growthcraft.cellar.common.inventory.slot.SlotBrewKettleResidue;
 import growthcraft.cellar.common.inventory.slot.SlotInputBrewing;
-import growthcraft.cellar.common.tileentity.PREVTileEntityBrewKettle;
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import net.minecraft.entity.player.InventoryPlayer;
 
-public class PREVContainerBrewKettle extends CellarContainer
+public class ContainerBrewKettle extends CellarContainer
 {
-	public PREVContainerBrewKettle(InventoryPlayer player, PREVTileEntityBrewKettle brewKettle)
+	public ContainerBrewKettle(InventoryPlayer player, TileEntityBrewKettle brewKettle)
 	{
 		super(brewKettle);
 		// Slot Indexes:

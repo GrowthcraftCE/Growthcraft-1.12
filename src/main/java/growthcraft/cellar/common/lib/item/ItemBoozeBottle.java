@@ -4,10 +4,10 @@ import java.util.List;
 
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.Reference;
-import growthcraft.cellar.common.definition.BoozeDefinition;
 import growthcraft.cellar.common.lib.CellarRegistry;
 import growthcraft.cellar.common.lib.booze.Booze;
 import growthcraft.cellar.common.lib.booze.BoozeEntry;
+import growthcraft.cellar.common.lib.definition.BoozeDefinition;
 import growthcraft.cellar.common.util.BoozeUtils;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.definition.FluidDefinition;

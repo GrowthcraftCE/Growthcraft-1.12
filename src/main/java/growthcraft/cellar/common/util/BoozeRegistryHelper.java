@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import growthcraft.cellar.common.block.BlockFluidBooze;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.BoozeDefinition;
 import growthcraft.cellar.common.lib.CellarRegistry;
 import growthcraft.cellar.common.lib.booze.Booze;
 import growthcraft.cellar.common.lib.booze.BoozeEffect;
 import growthcraft.cellar.common.lib.booze.BoozeEntry;
 import growthcraft.cellar.common.lib.booze.BoozeRegistry;
 import growthcraft.cellar.common.lib.booze.BoozeTag;
+import growthcraft.cellar.common.lib.definition.BlockBoozeDefinition;
+import growthcraft.cellar.common.lib.definition.BoozeDefinition;
 import growthcraft.cellar.common.lib.item.ItemBoozeBottle;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.GrowthcraftCoreConfig;

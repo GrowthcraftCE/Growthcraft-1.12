@@ -23,9 +23,9 @@ public class GrowthcraftCellarBlocks {
     public static BlockDefinition fruitPresser;
 
     public static void init() {
-        brewKettle = new BlockDefinition(new PREVBlockBrewKettle("brew_kettle"));
+        brewKettle = new BlockDefinition(new BlockBrewKettle("brew_kettle"));
         fermentBarrel = new BlockDefinition(new BlockFermentBarrel("ferment_barrel"));
-        cultureJar = new BlockDefinition(new PREVBlockCultureJar("culture_jar"));
+        cultureJar = new BlockDefinition(new BlockCultureJar("culture_jar"));
         fruitPress = new BlockDefinition(new BlockFruitPress("fruit_press"));
         fruitPresser = new BlockDefinition(new BlockFruitPresser("fruit_presser"));
     }
@@ -51,13 +51,13 @@ public class GrowthcraftCellarBlocks {
 
     @SideOnly(Side.CLIENT)
     public static void registerSpecialRenders() {
-        ClientRegistry.bindTileEntitySpecialRenderer(PREVTileEntityBrewKettle.class, new RenderBrewKettle());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBrewKettle.class, new RenderBrewKettle());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultureJar.class, new RenderCultureJar());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFruitPress.class, new RenderFruitPress());
     }
     
     public static void registerTileEntities() {
-      GameRegistry.registerTileEntity(PREVTileEntityBrewKettle.class, Reference.MODID + ":brew_kettle");
+      GameRegistry.registerTileEntity(TileEntityBrewKettle.class, Reference.MODID + ":brew_kettle");
       GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, Reference.MODID + ":ferment_barrel");
       GameRegistry.registerTileEntity(TileEntityCultureJar.class, Reference.MODID + ":culture_jar");
       GameRegistry.registerTileEntity(TileEntityFruitPress.class, Reference.MODID + ":fruit_press");

@@ -17,13 +17,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class PREVBlockCultureJar extends BlockCellarContainer {
+public class BlockCultureJar extends BlockCellarContainer {
     
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 4, 0.0625 * 0, 0.0625 * 4,
             0.0625 * 12, 0.0625 * 9, 0.0625 * 12);
 
-    public PREVBlockCultureJar(String unlocalizedName) {
+    public BlockCultureJar(String unlocalizedName) {
         super(Material.GLASS);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
