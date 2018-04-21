@@ -1,6 +1,6 @@
 package growthcraft.core.common.creativetabs;
 
-import growthcraft.core.common.init.GrowthcraftCoreItems;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 

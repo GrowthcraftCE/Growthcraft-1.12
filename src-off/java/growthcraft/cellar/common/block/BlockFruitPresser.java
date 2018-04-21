@@ -6,10 +6,9 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.Reference;
-import growthcraft.cellar.common.block.BlockFruitPresser.Orient;
 import growthcraft.cellar.common.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.core.shared.block.IWrenchable;

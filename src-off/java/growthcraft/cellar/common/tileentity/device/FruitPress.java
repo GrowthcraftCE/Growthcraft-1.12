@@ -2,9 +2,9 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
-import growthcraft.cellar.common.lib.CellarRegistry;
-import growthcraft.cellar.common.lib.processing.common.Residue;
-import growthcraft.cellar.common.lib.processing.pressing.IPressingRecipe;
+import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.cellar.shared.processing.pressing.IPressingRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;

@@ -10,7 +10,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
 
-import growthcraft.core.common.init.GrowthcraftCoreBlocks;
+import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 
 public class BlockSaltGeneration implements IWorldGenerator {
 

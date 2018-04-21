@@ -46,6 +46,7 @@ public class GrowthcraftGrapesItems {
     	grape_seed.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
     	grape_seed.register();
 		grapeWine.register(new ResourceLocation(Reference.MODID, "grapewine"));
+		grapeWine.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
 		
 		registerOres();
 		registerLoot();

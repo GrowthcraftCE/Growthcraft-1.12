@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.common.lib.processing.heatsource.user.UserHeatSourceEntry;
+import growthcraft.cellar.shared.processing.heatsource.user.UserHeatSourceEntry;
 import net.minecraft.init.Blocks;
 
 public class GrowthcraftCellarHeatsources {

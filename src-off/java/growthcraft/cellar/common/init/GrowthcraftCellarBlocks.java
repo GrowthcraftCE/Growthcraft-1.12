@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.init;
 
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.client.render.RenderFruitPress;

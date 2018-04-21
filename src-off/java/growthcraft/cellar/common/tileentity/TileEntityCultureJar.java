@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerCultureJar;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;

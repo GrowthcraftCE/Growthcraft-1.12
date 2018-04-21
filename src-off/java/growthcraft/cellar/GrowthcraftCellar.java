@@ -3,12 +3,14 @@ package growthcraft.cellar;
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.init.*;
-import growthcraft.cellar.common.lib.CellarRegistry;
-import growthcraft.cellar.common.lib.booze.modifier.GrowthcraftModifierFunctions;
+import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.booze.modifier.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.lib.network.PacketPipeline;
-import growthcraft.cellar.common.lib.util.CellarBoozeBuilderFactory;
-import growthcraft.cellar.common.lib.util.UserApis;
+import growthcraft.cellar.shared.booze.CellarBoozeBuilderFactory;
+import growthcraft.cellar.shared.config.UserApis;
 import growthcraft.cellar.common.stats.GrowthcraftCellarAchievements;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -21,17 +23,17 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCellar {
-    // REVISE_TEAM
-	
+    static final String CLIENT_PROXY_CLASS = "growthcraft.cellar.client.ClientProxy";
+    static final String SERVER_PROXY_CLASS = "growthcraft.cellar.common.CommonProxy";
+    
 	@Mod.Instance(Reference.MODID)
     public static GrowthcraftCellar instance;
 
-    @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
+    @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
     
     public static CellarBoozeBuilderFactory boozeBuilderFactory;
@@ -40,7 +42,7 @@ public class GrowthcraftCellar {
     @SideOnly(Side.CLIENT)
     public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
-    public static Logger logger = LogManager.getLogger(Reference.MODID);
+    public static Logger logger = GrowthcraftLogger.getLogger(Reference.MODID);
 
 	public static EventBus CELLAR_BUS = new EventBus();
 	

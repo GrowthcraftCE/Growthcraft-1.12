@@ -1,14 +1,10 @@
 package growthcraft.cellar.common.item;
 
-import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
-
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
 public class ItemChievDummy extends Item {
-	// REVISE_ME 0
-	
     public ItemChievDummy(String unlocalizedName) {
     	this.setCreativeTab(null);
 		this.setMaxStackSize(1);

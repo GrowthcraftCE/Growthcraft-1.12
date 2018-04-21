@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.init;
 
-import growthcraft.cellar.Reference;
-import growthcraft.cellar.common.lib.booze.effect.EffectTipsy;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.booze.effect.EffectTipsy;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.stats.CellarAchievement;
 import net.minecraft.potion.Potion;

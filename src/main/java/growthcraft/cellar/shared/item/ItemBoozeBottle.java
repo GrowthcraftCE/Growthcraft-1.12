@@ -7,7 +7,6 @@ import growthcraft.cellar.shared.fluids.Booze;
 import growthcraft.cellar.shared.booze.BoozeEntry;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.booze.BoozeUtils;
-import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.definition.FluidDefinition;
 import growthcraft.core.shared.item.IFluidContainerItem;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
@@ -43,7 +42,6 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 		this.setHasSubtypes(true);
 		this.setMaxDamage(0);
 //		this.setContainerItem(Items.GLASS_BOTTLE);
-		this.setCreativeTab(GrowthcraftCore.tabGrowthcraft);
 	}
 	
 	public ItemBoozeBottle setBoozes(BoozeDefinition[] boozeAry) {
@@ -160,8 +158,6 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 	public String getUnlocalizedName(ItemStack stack)
 	{
 		Booze booze = getFluid(stack);
-//		int meta = stack.getItemDamage();
-//		return super.getUnlocalizedName() + "_" + meta;
 		return super.getUnlocalizedName() + "_" + booze.getName().substring(12);  // skipping "fluid_booze_" part
 	}
 

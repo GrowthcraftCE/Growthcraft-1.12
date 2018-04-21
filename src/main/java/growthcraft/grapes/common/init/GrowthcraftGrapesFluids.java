@@ -1,21 +1,19 @@
 package growthcraft.grapes.common.init;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
-import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
 import growthcraft.cellar.shared.booze.BoozeUtils;
-import growthcraft.core.GrowthcraftCoreConfig;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.effect.EffectAddPotionEffect;
 import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
 import growthcraft.core.shared.utils.TickUtils;
-import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
 import growthcraft.grapes.Reference;
 import growthcraft.grapes.common.handlers.EnumHandler.GrapeTypes;
@@ -23,9 +21,7 @@ import growthcraft.grapes.common.handlers.EnumHandler.WineTypes;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class GrowthcraftGrapesFluids
 {

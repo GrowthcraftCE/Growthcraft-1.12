@@ -21,7 +21,7 @@ import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandler;

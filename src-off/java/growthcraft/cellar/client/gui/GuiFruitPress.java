@@ -5,8 +5,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.util.List;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.lib.network.PacketClearTankButton;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;

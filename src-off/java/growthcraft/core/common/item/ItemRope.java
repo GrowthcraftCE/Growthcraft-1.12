@@ -1,7 +1,7 @@
 package growthcraft.core.common.item;
 
 import growthcraft.core.shared.Reference;
-import growthcraft.core.common.init.GrowthcraftCoreBlocks;
+import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import growthcraft.core.shared.GrowthcraftLogger;
 import net.minecraft.block.Block;

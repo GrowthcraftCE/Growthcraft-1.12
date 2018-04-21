@@ -1,20 +1,19 @@
 package growthcraft.core.client;
 
-import growthcraft.core.common.handlers.EnumHandler;
-import growthcraft.core.common.init.GrowthcraftCoreBlocks;
-import growthcraft.core.common.init.GrowthcraftCoreItems;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import growthcraft.core.common.CommonProxy;
+import growthcraft.core.common.Init;
 
 public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenders() {
-        GrowthcraftCoreItems.registerRenders();
-        GrowthcraftCoreBlocks.registerRenders();
+        Init.registerItemRenders();
+        Init.registerBlockRenders();
     }
 
     @Override
     public void registerModelBakeryVariants() {
-    	GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(EnumHandler.CrowbarTypes.class);
+    	GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(GrowthcraftCoreItems.CrowbarTypes.class);
     }
 
     @Override

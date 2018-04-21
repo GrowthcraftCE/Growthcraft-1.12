@@ -2,7 +2,7 @@ package growthcraft.cellar.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;

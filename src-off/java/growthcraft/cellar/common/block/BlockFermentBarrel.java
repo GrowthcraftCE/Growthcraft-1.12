@@ -2,7 +2,7 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

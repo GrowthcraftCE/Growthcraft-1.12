@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;

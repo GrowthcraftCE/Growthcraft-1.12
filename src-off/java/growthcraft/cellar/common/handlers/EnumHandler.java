@@ -1,4 +1,4 @@
-package growthcraft.cellar.shared.handlers;
+package growthcraft.cellar.common.handlers;
 
 import growthcraft.cellar.common.init.GrowthcraftCellarItems;
 import growthcraft.core.shared.definition.IItemStackFactory;

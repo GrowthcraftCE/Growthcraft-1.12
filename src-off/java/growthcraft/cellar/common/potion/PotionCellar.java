@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.potion;
 
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;

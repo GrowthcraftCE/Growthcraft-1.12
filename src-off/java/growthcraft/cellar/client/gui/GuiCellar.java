@@ -3,7 +3,7 @@ package growthcraft.cellar.client.gui;
 import java.util.List;
 
 import growthcraft.cellar.common.inventory.CellarContainer;
-import growthcraft.cellar.common.lib.CellarRegistry;
+import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiContainer;
 import net.minecraft.client.resources.I18n;

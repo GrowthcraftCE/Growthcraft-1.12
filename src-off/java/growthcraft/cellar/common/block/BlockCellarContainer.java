@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.block;
 
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.core.shared.tileentity.feature.IInteractionObject;
 import net.minecraft.block.material.Material;

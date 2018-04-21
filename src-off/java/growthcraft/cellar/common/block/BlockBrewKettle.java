@@ -5,8 +5,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.block.SoundType;

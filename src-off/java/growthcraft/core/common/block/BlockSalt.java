@@ -1,7 +1,7 @@
 package growthcraft.core.common.block;
 
 import growthcraft.core.shared.Reference;
-import growthcraft.core.common.init.GrowthcraftCoreItems;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

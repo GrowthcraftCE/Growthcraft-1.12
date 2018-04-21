@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.init;
 
-import growthcraft.cellar.common.lib.booze.BoozeEffect;
-import growthcraft.cellar.common.lib.booze.effect.EffectTipsy;
+import growthcraft.cellar.shared.booze.BoozeEffect;
+import growthcraft.cellar.shared.booze.effect.EffectTipsy;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.effect.EffectRegistry;
 

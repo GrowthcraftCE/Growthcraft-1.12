@@ -7,7 +7,7 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.shared.handlers.EnumHandler.EnumYeast;
+import growthcraft.cellar.common.handlers.EnumHandler.EnumYeast;
 import growthcraft.core.shared.block.GrowthcraftBlockBase;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.grapes.GrowthcraftGrapesConfig;

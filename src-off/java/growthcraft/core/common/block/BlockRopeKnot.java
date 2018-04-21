@@ -6,8 +6,8 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.Reference;
-import growthcraft.core.common.init.GrowthcraftCoreItems;
 import growthcraft.core.shared.block.IBlockRope;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;

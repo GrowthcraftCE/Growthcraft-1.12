@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

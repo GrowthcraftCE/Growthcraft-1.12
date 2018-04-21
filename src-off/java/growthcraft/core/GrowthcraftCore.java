@@ -4,11 +4,11 @@ import org.apache.logging.log4j.Logger;
 
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.Reference;
+import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import growthcraft.core.common.CommonProxy;
+import growthcraft.core.common.Init;
 import growthcraft.core.common.creativetabs.TabGrowthcraft;
-import growthcraft.core.common.init.GrowthcraftCoreBlocks;
-import growthcraft.core.common.init.GrowthcraftCoreItems;
-import growthcraft.core.common.init.GrowthcraftCoreRecipes;
 import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import net.minecraft.creativetab.CreativeTabs;
@@ -39,10 +39,11 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftCoreBlocks.preInit();
-        GrowthcraftCoreBlocks.register();
-        GrowthcraftCoreItems.preInit();
-        GrowthcraftCoreItems.register();
+        Init.preInitBlocks();
+        Init.registerBlocks();
+        
+        Init.preInitItems();
+        Init.registerItems();
         
         proxy.registerRenders();
         proxy.registerTitleEntities();
@@ -56,7 +57,7 @@ public class GrowthcraftCore {
         proxy.init();
         proxy.registerSpecialRenders();
         proxy.registerModelBakeryVariants();
-        GrowthcraftCoreRecipes.registerRecipes();
+        Init.registerRecipes();
     }
 
     @Mod.EventHandler

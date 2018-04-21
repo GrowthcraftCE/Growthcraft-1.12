@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.init;
 
 import growthcraft.cellar.common.handlers.EnumHandler.EnumYeast;
-import growthcraft.cellar.common.lib.CellarRegistry;
+import growthcraft.cellar.shared.CellarRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

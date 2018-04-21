@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import growthcraft.cellar.common.lib.CellarRegistry;
-import growthcraft.cellar.common.lib.booze.BoozeTag;
-import growthcraft.cellar.common.lib.processing.yeast.YeastRegistry;
+import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.item.WeightedItemStack;

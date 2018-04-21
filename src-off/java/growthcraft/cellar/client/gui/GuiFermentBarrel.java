@@ -6,10 +6,10 @@ import java.util.List;
 import org.lwjgl.opengl.GL11;
 
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
-import growthcraft.cellar.common.lib.booze.BoozeTag;
+import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.common.lib.network.PacketClearTankButton;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.core.shared.CoreRegistry;

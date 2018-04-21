@@ -7,11 +7,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.core.blocks.BlockRopeFence;
-import growthcraft.core.blocks.BlockRopeKnot;
 import growthcraft.core.shared.block.IBlockRope;
-import growthcraft.core.init.GrowthcraftCoreBlocks;
-import growthcraft.core.init.GrowthcraftCoreItems;
+import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.grapes.GrowthcraftGrapesConfig;
 import growthcraft.grapes.api.definition.IGrapeType;
@@ -322,7 +320,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
     	// TODO: Check if this method is correct! Remove explicit dependencies of BlockRopeFence and BlockRopeKnot!
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot;
+        return block == GrowthcraftCoreBlocks.rope_fence.getBlock() || block == GrowthcraftCoreBlocks.rope_knot.getBlock();
     }
     
 	/************

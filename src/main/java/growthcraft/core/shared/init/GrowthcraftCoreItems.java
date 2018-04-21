@@ -1,13 +1,17 @@
-package growthcraft.core.common.handlers;
+package growthcraft.core.shared.init;
 
-import growthcraft.core.common.init.GrowthcraftCoreItems;
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;
+import growthcraft.core.shared.definition.ItemDefinition;
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-public class EnumHandler {
+public class GrowthcraftCoreItems {
+
+    public static ItemDefinition crowbar;
+    public static ItemDefinition salt;
+    public static ItemDefinition rope;
 
     public enum CrowbarTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
         WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getUnlocalizedName()),
@@ -61,4 +65,5 @@ public class EnumHandler {
         	return asStack(1);
         }
     }
+    
 }

@@ -2,10 +2,10 @@ package growthcraft.cellar.common.tileentity;
 
 import java.io.IOException;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
-import growthcraft.cellar.common.lib.CellarRegistry;
-import growthcraft.cellar.common.lib.processing.fermenting.IFermentationRecipe;
+import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.FluidTest;
