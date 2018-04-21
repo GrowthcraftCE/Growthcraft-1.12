@@ -28,6 +28,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 		super(Material.WOOD);
 		setTileEntityType(TileEntityFruitPress.class);
 		setHardness(2.0F);
+		this.setResistance(5.0F);
 		setSoundType(SoundType.WOOD);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
