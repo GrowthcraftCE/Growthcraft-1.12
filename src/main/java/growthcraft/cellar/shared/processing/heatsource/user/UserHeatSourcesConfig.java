@@ -3,9 +3,10 @@ package growthcraft.cellar.shared.processing.heatsource.user;
 import java.io.BufferedReader;
 import java.util.Map;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.item.ItemKey;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
@@ -49,7 +50,7 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 		{
 			if (entry.states == null || entry.states.size() == 0)
 			{
-				GrowthcraftCellar.logger.warn("Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id='%s' block='%s'", entry.mod_id, entry.block_name);
+				GrowthcraftLogger.getLogger(Reference.MODID).warn("Block contains invalid states, we will assume a wildcard, but you should probably set this. mod_id='%s' block='%s'", entry.mod_id, entry.block_name);
 				CellarRegistry.instance().heatSource().addHeatSource(block, ItemKey.WILDCARD_VALUE);
 			}
 			else
@@ -64,7 +65,7 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 		}
 		else
 		{
-			GrowthcraftCellar.logger.error("Block could not be found, and will not be added as heat source. mod_id='%s' block='%s'", entry.mod_id, entry.block_name);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Block could not be found, and will not be added as heat source. mod_id='%s' block='%s'", entry.mod_id, entry.block_name);
 		}
 	}
 
@@ -75,12 +76,12 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				GrowthcraftCellar.logger.debug("Registering %d heat sources.", entries.data.size());
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Registering %d heat sources.", entries.data.size());
 				for (UserHeatSourceEntry entry : entries.data) addHeatSource(entry);
 			}
 			else
 			{
-				GrowthcraftCellar.logger.error("Config data is invalid");
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Config data is invalid");
 			}
 		}
 	}

@@ -1,4 +1,4 @@
-package growthcraft.core;
+package growthcraft.core.shared;
 
 public class Reference {
     public static final String MODID = "growthcraft";

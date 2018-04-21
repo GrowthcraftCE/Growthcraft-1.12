@@ -1,4 +1,4 @@
-package growthcraft.cellar;
+package growthcraft.cellar.shared.config;
 
 public class GrowthcraftCellarConfig {
 	// OPEN

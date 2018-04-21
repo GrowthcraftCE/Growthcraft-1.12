@@ -4,7 +4,8 @@ import java.util.HashMap;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.ItemKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -34,7 +35,7 @@ public class HeatSourceRegistry
 		}
 		final HeatMap map = heatSources.get(block);
 		map.put(meta, heat);
-		GrowthcraftCellar.logger.debug("Added new HeatSource block=%s", block);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Added new HeatSource block=%s", block);
 	}
 
 	public void addHeatSource(@Nonnull Block block, int meta, float heat)

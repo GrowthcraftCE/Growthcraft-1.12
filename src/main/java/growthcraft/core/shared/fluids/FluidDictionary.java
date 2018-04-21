@@ -11,7 +11,8 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -27,14 +28,14 @@ public class FluidDictionary
 	{
 		if (!fluidToTagsMap.containsKey(fluid))
 		{
-			GrowthcraftCore.logger.debug("Initializing new HashSet for fluid {%s}", fluid);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Initializing new HashSet for fluid {%s}", fluid);
 			fluidToTagsMap.put(fluid, new HashSet<FluidTag>());
 		}
 
 		final Set<FluidTag> tagSet = fluidToTagsMap.get(fluid);
 		for (FluidTag tag : tags)
 		{
-			GrowthcraftCore.logger.debug("Adding tag '%s' to fluid {%s}", tag, fluid);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding tag '%s' to fluid {%s}", tag, fluid);
 			tagSet.add(tag);
 			if (!tagToFluidsMap.containsKey(tag))
 			{

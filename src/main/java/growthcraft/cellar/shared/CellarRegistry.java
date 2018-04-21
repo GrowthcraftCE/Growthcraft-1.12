@@ -1,8 +1,6 @@
 package growthcraft.cellar.shared;
 
-import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.common.init.GrowthcraftCellarEffects;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.booze.BoozeEntry;
 import growthcraft.cellar.shared.booze.BoozeRegistry;
 import growthcraft.cellar.shared.processing.brewing.BrewingRegistry;
@@ -14,9 +12,8 @@ import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
 
 public class CellarRegistry {
 	// REVISE_ME 0
-	// OPEN_ADHOC
 	
-	private static final CellarRegistry INSTANCE = new CellarRegistry().initialize();
+	private static final CellarRegistry INSTANCE = new CellarRegistry();
 
 	private final BoozeRegistry boozeRegistry = new BoozeRegistry();
 	private final BrewingRegistry brewingRegistry = new BrewingRegistry();
@@ -34,11 +31,11 @@ public class CellarRegistry {
 		return INSTANCE;
 	}
 	
-	private CellarRegistry initialize()
-	{
-		GrowthcraftCellarEffects.init();
-		return this;
-	}
+//	private CellarRegistry initialize()
+//	{
+//		GrowthcraftCellarEffects.init();
+//		return this;
+//	}
 	
 	/**
 	 * @return instance of the BoozeRegistry

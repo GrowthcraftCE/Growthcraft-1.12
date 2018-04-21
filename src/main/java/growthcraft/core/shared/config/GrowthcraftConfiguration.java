@@ -1,4 +1,4 @@
-package growthcraft.core;
+package growthcraft.core.shared.config;
 
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -7,7 +7,8 @@ import java.io.File;
 
 import org.apache.logging.log4j.Level;
 
-import growthcraft.core.common.utils.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
+import growthcraft.core.shared.GrowthcraftLogger;
 
 public class GrowthcraftConfiguration extends Configuration {
 	// REVISE_TEAM 0: Reused pattern from GrowthcraftBambooConfig, correct?
@@ -41,7 +42,7 @@ public class GrowthcraftConfiguration extends Configuration {
             initDebugConfig();
             initBoozeConfig();
         } catch (Exception e) {
-            GrowthcraftLogger.getLogger().log(Level.ERROR, "Unable to load configuration files for Growthcraft Bamboo!", e);
+            GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Bamboo!", e);
         } finally {
             if ( configuration.hasChanged() ) {
                 configuration.save();

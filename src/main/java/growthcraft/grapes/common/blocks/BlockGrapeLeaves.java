@@ -320,6 +320,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     
     @Override
     public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    	// TODO: Check if this method is correct! Remove explicit dependencies of BlockRopeFence and BlockRopeKnot!
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         return block instanceof BlockRopeFence || block instanceof BlockRopeKnot;
     }

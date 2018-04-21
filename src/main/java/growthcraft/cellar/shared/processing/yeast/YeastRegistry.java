@@ -8,7 +8,8 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.ItemKey;
 import growthcraft.core.shared.item.WeightedItemStack;
 import net.minecraft.item.ItemStack;
@@ -45,13 +46,13 @@ public class YeastRegistry
 		addYeast(yeast);
 		if (!biomeTypeToYeast.containsKey(type))
 		{
-			GrowthcraftCellar.logger.debug("Initializing biome type to yeast set for %s", type);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Initializing biome type to yeast set for %s", type);
 			biomeTypeToYeast.put(type, new HashSet<WeightedItemStack>());
 		}
 		final ItemKey yeastKey = stackToKey(yeast);
 		if (!yeastToBiomeType.containsKey(yeastKey))
 		{
-			GrowthcraftCellar.logger.debug("Initializing yeast to biome type set for %s", yeast);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Initializing yeast to biome type set for %s", yeast);
 			yeastToBiomeType.put(yeastKey, new HashSet<BiomeDictionary.Type>());
 		}
 		biomeTypeToYeast.get(type).add(new WeightedItemStack(weight, yeast));
@@ -64,13 +65,13 @@ public class YeastRegistry
 		final ItemKey yeastKey = stackToKey(yeast);
 		if (!yeastToBiomeName.containsKey(yeastKey))
 		{
-			GrowthcraftCellar.logger.debug("Initializing yeast to biome name set for %s", yeast);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Initializing yeast to biome name set for %s", yeast);
 			yeastToBiomeName.put(yeastKey, new HashSet<String>());
 		}
 		yeastToBiomeName.get(yeastKey).add(name);
 		if (!biomeNameToYeast.containsKey(name))
 		{
-			GrowthcraftCellar.logger.debug("Initializing biome name to yeast set for %s", name);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Initializing biome name to yeast set for %s", name);
 			biomeNameToYeast.put(name, new HashSet<WeightedItemStack>());
 		}
 		biomeNameToYeast.get(name).add(new WeightedItemStack(weight, yeast));

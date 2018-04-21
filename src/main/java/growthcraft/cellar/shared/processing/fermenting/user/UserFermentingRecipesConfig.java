@@ -4,13 +4,14 @@ import java.io.BufferedReader;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.config.schema.FluidStackSchema;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
 import growthcraft.core.shared.config.schema.MultiFluidStackSchema;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraftforge.fluids.FluidStack;
@@ -30,11 +31,11 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		if (recipe != null)
 		{
 			defaultRecipes.data.add(recipe);
-			GrowthcraftCellar.logger.debug("Adding default user fermenting recipe {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding default user fermenting recipe {%s}", recipe);
 		}
 		else
 		{
-			GrowthcraftCellar.logger.error("We have a problem here, someone tossed a null user recipe at us!");
+			GrowthcraftLogger.getLogger(Reference.MODID).error("We have a problem here, someone tossed a null user recipe at us!");
 			throw new IllegalArgumentException("Oh no you didn't, FIX DAT.");
 		}
 	}
@@ -73,29 +74,29 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 	{
 		if (recipe == null)
 		{
-			GrowthcraftCellar.logger.error("Recipe is invalid!");
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Recipe is invalid!");
 			return;
 		}
 
 		if (recipe.item == null || !recipe.item.isValid())
 		{
-			GrowthcraftCellar.logger.error("Recipe item is invalid! {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Recipe item is invalid! {%s}", recipe);
 			return;
 		}
 
 		if (recipe.input_fluid == null || !recipe.input_fluid.isValid())
 		{
-			GrowthcraftCellar.logger.error("Recipe input_fluid is invalid! {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Recipe input_fluid is invalid! {%s}", recipe);
 			return;
 		}
 
 		if (recipe.output_fluid == null || !recipe.output_fluid.isValid())
 		{
-			GrowthcraftCellar.logger.error("Recipe output_fluid is invalid! {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Recipe output_fluid is invalid! {%s}", recipe);
 			return;
 		}
 
-		GrowthcraftCellar.logger.debug("Adding Fermenting Recipe {%s}", recipe);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding Fermenting Recipe {%s}", recipe);
 		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			for (IMultiFluidStacks inputFluid : recipe.input_fluid.getMultiFluidStacks())
@@ -117,12 +118,12 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				GrowthcraftCellar.logger.debug("Registering %d fermenting recipes.", recipes.data.size());
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Registering %d fermenting recipes.", recipes.data.size());
 				for (UserFermentingRecipe recipe : recipes.data) addRecipe(recipe);
 			}
 			else
 			{
-				GrowthcraftCellar.logger.error("Fermenting Recipes data is invalid!");
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Fermenting Recipes data is invalid!");
 			}
 		}
 	}

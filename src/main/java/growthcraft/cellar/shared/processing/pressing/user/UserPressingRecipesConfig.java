@@ -2,13 +2,14 @@ package growthcraft.cellar.shared.processing.pressing.user;
 
 import java.io.BufferedReader;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.config.schema.ResidueSchema;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.config.schema.FluidStackSchema;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -61,26 +62,26 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 	{
 		if (recipe == null)
 		{
-			GrowthcraftCellar.logger.error("NULL RECIPE");
+			GrowthcraftLogger.getLogger(Reference.MODID).error("NULL RECIPE");
 			return;
 		}
 
 		if (recipe.item == null || recipe.item.isInvalid())
 		{
-			GrowthcraftCellar.logger.error("Item is invalid for recipe {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Item is invalid for recipe {%s}", recipe);
 			return;
 		}
 
 		if (recipe.fluid == null)
 		{
-			GrowthcraftCellar.logger.error("No result fluid for recipe {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("No result fluid for recipe {%s}", recipe);
 			return;
 		}
 
 		final FluidStack fluidStack = recipe.fluid.asFluidStack();
 		if (fluidStack == null)
 		{
-			GrowthcraftCellar.logger.error("Invalid fluid for recipe {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Invalid fluid for recipe {%s}", recipe);
 			return;
 		}
 
@@ -90,12 +91,12 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 			residue = recipe.residue.asResidue();
 			if (residue == null)
 			{
-				GrowthcraftCellar.logger.error("Not a valid residue found for {%s}", recipe);
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Not a valid residue found for {%s}", recipe);
 				return;
 			}
 		}
 
-		GrowthcraftCellar.logger.debug("Adding pressing recipe {%s}", recipe);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding pressing recipe {%s}", recipe);
 		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
 		{
 			CellarRegistry.instance().pressing().addRecipe(item, fluidStack, recipe.time, residue);
@@ -109,12 +110,12 @@ public class UserPressingRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				GrowthcraftCellar.logger.debug("Adding %d user pressing recipes.", recipes.data.size());
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding %d user pressing recipes.", recipes.data.size());
 				for (UserPressingRecipe recipe : recipes.data) addPressingRecipe(recipe);
 			}
 			else
 			{
-				GrowthcraftCellar.logger.error("Recipe data is invalid!");
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Recipe data is invalid!");
 			}
 		}
 	}

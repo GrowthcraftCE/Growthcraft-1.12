@@ -5,7 +5,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.MultiFluidStacks;
@@ -130,11 +131,11 @@ public class MultiStacksUtil
 			final List<ItemStack> stacks = oreItemStack.getItemStacks();
 			if (stacks.isEmpty())
 			{
-				GrowthcraftCore.logger.error("Ore stack '%s' was empty!", oreItemStack.getName());
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Ore stack '%s' was empty!", oreItemStack.getName());
 			}
 			else
 			{
-				GrowthcraftCore.logger.debug("Expanded OreItemStack '%s' to %s", oreItemStack.getName(), stacks);
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Expanded OreItemStack '%s' to %s", oreItemStack.getName(), stacks);
 				list.addAll(stacks);
 			}
 		}
@@ -161,11 +162,11 @@ public class MultiStacksUtil
 			final List<FluidStack> stacks = taggedFluidStack.getFluidStacks();
 			if (stacks.isEmpty())
 			{
-				GrowthcraftCore.logger.error("Tagged Fluid stack (tags: %s) was empty!", taggedFluidStack.getTags());
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Tagged Fluid stack (tags: %s) was empty!", taggedFluidStack.getTags());
 			}
 			else
 			{
-				GrowthcraftCore.logger.debug("Expanded TaggedFluidStacks(tags: %s) to [%s]", taggedFluidStack.getTags(), stacks);
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Expanded TaggedFluidStacks(tags: %s) to [%s]", taggedFluidStack.getTags(), stacks);
 				list.addAll(stacks);
 			}
 		}

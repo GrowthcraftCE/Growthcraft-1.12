@@ -7,7 +7,8 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.events.EventTankDrained;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.shared.inventory.InventoryProcessor;
@@ -189,7 +190,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		final List<ItemStack> drops = new ArrayList<ItemStack>();
 		if (shouldDropTileStack(world, pos, state, 0))
 		{
-			GrowthcraftCore.logger.info("Dropping Tile As ItemStack");
+			GrowthcraftLogger.getLogger(Reference.MODID).info("Dropping Tile As ItemStack");
 			getTileItemStackDrops(drops, world, pos, state, 0);
 			for (ItemStack stack : drops)
 			{
@@ -198,10 +199,10 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 			final TileEntity te = getTileEntity(world, pos);
 			if (te instanceof IInventory)
 			{
-				GrowthcraftCore.logger.info("Clearing Inventory");
+				GrowthcraftLogger.getLogger(Reference.MODID).info("Clearing Inventory");
 				InventoryProcessor.instance().clearSlots((IInventory)te);
 			}
-			GrowthcraftCore.logger.info("Setting Block To Air");
+			GrowthcraftLogger.getLogger(Reference.MODID).info("Setting Block To Air");
 			world.setBlockToAir(pos);
 		}
 		else
@@ -272,7 +273,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		}
 		else
 		{
-			GrowthcraftCore.logger.error("Cannot get tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Cannot get tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
 		}
 		return null;
 	}
@@ -287,7 +288,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		}
 		else
 		{
-			GrowthcraftCore.logger.error("Cannot set tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Cannot set tile tag compound for a non IItemTileBlock: stack=%s block=%s", stack, this);
 		}
 	}
 
@@ -311,7 +312,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 			}
 			else
 			{
-				GrowthcraftCore.logger.error("Cannot restore tile from stack, the TileEntity does not support INBTItemSerializable: stack=%s block=%s tile=%s", stack, this, te);
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Cannot restore tile from stack, the TileEntity does not support INBTItemSerializable: stack=%s block=%s tile=%s", stack, this, te);
 			}
 		}
 	}

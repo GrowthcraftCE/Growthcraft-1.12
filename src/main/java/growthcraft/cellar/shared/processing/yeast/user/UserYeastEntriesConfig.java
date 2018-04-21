@@ -3,9 +3,10 @@ package growthcraft.cellar.shared.processing.yeast.user;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import growthcraft.core.shared.utils.BiomeUtils;
 import net.minecraft.item.ItemStack;
@@ -84,13 +85,13 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 	{
 		if (entry == null)
 		{
-			GrowthcraftCellar.logger.error("Yeast entry was invalid.");
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Yeast entry was invalid.");
 			return;
 		}
 
 		if (entry.item == null || entry.item.isInvalid())
 		{
-			GrowthcraftCellar.logger.error("Yeast item was invalid {%s}", entry);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Yeast item was invalid {%s}", entry);
 			return;
 		}
 
@@ -104,11 +105,11 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 					{
 						final BiomeDictionary.Type biomeType = BiomeUtils.fetchBiomeType(biome);
 						CellarRegistry.instance().yeast().addYeastToBiomeType(itemstack, entry.weight, biomeType);
-						GrowthcraftCellar.logger.debug("Added user yeast {%s} to biome type '%s'", itemstack, biome);
+						GrowthcraftLogger.getLogger(Reference.MODID).debug("Added user yeast {%s} to biome type '%s'", itemstack, biome);
 					}
 					catch (BiomeUtils.BiomeTypeNotFound ex)
 					{
-						GrowthcraftCellar.logger.error("A biome type '%s' for entry {%s} could not be found.", biome, entry);
+						GrowthcraftLogger.getLogger(Reference.MODID).error("A biome type '%s' for entry {%s} could not be found.", biome, entry);
 					}
 				}
 			}
@@ -118,7 +119,7 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 				for (String biomeName : entry.biome_names)
 				{
 					CellarRegistry.instance().yeast().addYeastToBiomeByName(itemstack, entry.weight, biomeName);
-					GrowthcraftCellar.logger.debug("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
+					GrowthcraftLogger.getLogger(Reference.MODID).debug("Added user yeast {%s} to biome '%s'", itemstack, biomeName);
 				}
 			}
 		}
@@ -131,12 +132,12 @@ public class UserYeastEntriesConfig extends AbstractUserJSONConfig
 		{
 			if (entries.data != null)
 			{
-				GrowthcraftCellar.logger.debug("Adding %d yeast entries.", entries.data.size());
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding %d yeast entries.", entries.data.size());
 				for (UserYeastEntry entry : entries.data) addYeastEntry(entry);
 			}
 			else
 			{
-				GrowthcraftCellar.logger.error("Invalid yeast entries data");
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Invalid yeast entries data");
 			}
 		}
 	}

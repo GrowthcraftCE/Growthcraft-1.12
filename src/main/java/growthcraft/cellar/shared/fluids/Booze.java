@@ -2,7 +2,7 @@ package growthcraft.cellar.shared.fluids;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.cellar.Reference;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.fluids.GrowthcraftFluid;
 import net.minecraft.util.ResourceLocation;
 

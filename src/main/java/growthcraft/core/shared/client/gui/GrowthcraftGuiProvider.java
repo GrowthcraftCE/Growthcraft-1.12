@@ -6,7 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.tileentity.feature.IInteractionObject;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -47,7 +48,7 @@ public class GrowthcraftGuiProvider implements IGuiHandler {
 	{
 		if (guiMap.containsKey(name))
 		{
-			GrowthcraftCore.logger.warn("Overwriting Existing Gui mapping: %s with `%s`", name, guiClass);
+			GrowthcraftLogger.getLogger(Reference.MODID).warn("Overwriting Existing Gui mapping: %s with `%s`", name, guiClass);
 		}
 		guiMap.put(name, guiClass);
 	}
@@ -117,7 +118,7 @@ public class GrowthcraftGuiProvider implements IGuiHandler {
 		}
 		else
 		{
-			GrowthcraftCore.logger.error("Container requested for TE but TE was not a IInteractionObject tile_entity=%s id=%d", te, ID);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Container requested for TE but TE was not a IInteractionObject tile_entity=%s id=%d", te, ID);
 		}
 		return null;
 	}
@@ -138,7 +139,7 @@ public class GrowthcraftGuiProvider implements IGuiHandler {
 			}
 			else
 			{
-				GrowthcraftCore.logger.error("Missing GUI Class for %s", guiId);
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Missing GUI Class for %s", guiId);
 			}
 		}
 		return null;

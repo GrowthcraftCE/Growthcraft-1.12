@@ -1,6 +1,8 @@
 package growthcraft.grapes.common.handlers;
 
 import growthcraft.core.shared.definition.IObjectVariant;
+import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
+import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.definition.IObjectBooze;
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.grapes.api.definition.IGrapeType;

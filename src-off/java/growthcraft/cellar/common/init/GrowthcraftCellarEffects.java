@@ -7,11 +7,9 @@ import growthcraft.core.shared.effect.EffectRegistry;
 
 public class GrowthcraftCellarEffects
 {
-	// REVISE_ME 0
-	
 	private GrowthcraftCellarEffects() {}
 
-	public static void init()
+	public static void preInit()
 	{
 		final EffectRegistry reg = CoreRegistry.instance().getEffectsRegistry();
 		reg.register("booze_effect", BoozeEffect.class);

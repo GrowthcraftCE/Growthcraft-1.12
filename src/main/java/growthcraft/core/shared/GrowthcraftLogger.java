@@ -1,6 +1,5 @@
-package growthcraft.core.common.utils;
+package growthcraft.core.shared;
 
-import growthcraft.core.Reference;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.apache.logging.log4j.LogManager;
@@ -10,16 +9,16 @@ public class GrowthcraftLogger {
 
     private static Logger logger;
 
-    public static Logger getLogger() {
+    public static Logger getLogger(String modID) {
         if ( logger == null ) {
-            logger = LogManager.getLogger(Reference.MODID);
+            logger = LogManager.getLogger(modID);
         }
         return logger;
     }
 
-    public static void debugDumpLog(World worldIn, BlockPos pos) {
+    public static void debugDumpLog(String modID, World worldIn, BlockPos pos) {
         if ( logger == null ) {
-            logger = LogManager.getLogger(Reference.MODID);
+            logger = LogManager.getLogger(modID);
         }
 
         boolean isRemote = worldIn.isRemote;

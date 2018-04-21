@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Joiner;
 
-import growthcraft.core.GrowthcraftConfiguration;
+import growthcraft.core.shared.config.GrowthcraftConfiguration;
 import growthcraft.core.shared.CoreRegistry;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;

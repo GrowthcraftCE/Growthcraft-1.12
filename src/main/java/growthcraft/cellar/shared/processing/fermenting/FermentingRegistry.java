@@ -6,7 +6,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -17,7 +18,7 @@ public class FermentingRegistry
 
 	private void onRecipeAdded(@Nonnull IFermentationRecipe recipe)
 	{
-		GrowthcraftCellar.logger.debug("Added Fermentation recipe={%s}", recipe);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Added Fermentation recipe={%s}", recipe);
 	}
 
 	public void addRecipe(@Nonnull IFermentationRecipe recipe)

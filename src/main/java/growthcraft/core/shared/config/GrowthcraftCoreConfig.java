@@ -1,4 +1,4 @@
-package growthcraft.core;
+package growthcraft.core.shared.config;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.common.MinecraftForge;
@@ -13,9 +13,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 
 public class GrowthcraftCoreConfig {
+	// TODO: Keep either this class or GrowthcraftConfiguration
 
     private static Configuration config = null;
 

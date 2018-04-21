@@ -10,7 +10,8 @@ import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
 
 public abstract class AbstractUserJSONConfig {
@@ -34,7 +35,7 @@ public abstract class AbstractUserJSONConfig {
 	{
 		try
 		{
-			GrowthcraftCore.logger.debug("Creating default json-config %s", file);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Creating default json-config %s", file);
 			if (file.getParentFile() != null)
 				file.getParentFile().mkdirs();
 
@@ -42,7 +43,7 @@ public abstract class AbstractUserJSONConfig {
 			{
 				if (!file.createNewFile())
 				{
-					GrowthcraftCore.logger.error("Could not create default config %s", file);
+					GrowthcraftLogger.getLogger(Reference.MODID).error("Could not create default config %s", file);
 					return;
 				}
 			}
@@ -72,8 +73,8 @@ public abstract class AbstractUserJSONConfig {
 	{
 		this.targetConfigFile = new File(dir, filename);
 		this.targetDefaultConfigFile = new File(dir, filename + ".default");
-		GrowthcraftCore.logger.debug("Config file `%s` was set for `%s`", targetConfigFile, this);
-		GrowthcraftCore.logger.debug("DEFAULT Config file `%s` was set for `%s`", targetDefaultConfigFile, this);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Config file `%s` was set for `%s`", targetConfigFile, this);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("DEFAULT Config file `%s` was set for `%s`", targetDefaultConfigFile, this);
 		return this;
 	}
 	
@@ -86,7 +87,7 @@ public abstract class AbstractUserJSONConfig {
 
 			if (!targetConfigFile.createNewFile())
 			{
-				GrowthcraftCore.logger.error("Could not create config file `%s`", targetConfigFile);
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Could not create config file `%s`", targetConfigFile);
 				return;
 			}
 
@@ -96,7 +97,7 @@ public abstract class AbstractUserJSONConfig {
 			}
 			else
 			{
-				GrowthcraftCore.logger.error("Could not copy default config file `%s` to `%s`", targetDefaultConfigFile, targetConfigFile);
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Could not copy default config file `%s` to `%s`", targetDefaultConfigFile, targetConfigFile);
 			}
 		}
 	}
@@ -108,7 +109,7 @@ public abstract class AbstractUserJSONConfig {
 
 		try
 		{
-			GrowthcraftCore.logger.debug("Loading json-config %s", file);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Loading json-config %s", file);
 
 			prepareUserConfig();
 			if (file.canRead())
@@ -119,7 +120,7 @@ public abstract class AbstractUserJSONConfig {
 			}
 			else
 			{
-				GrowthcraftCore.logger.error("Could not read config file %s", file);
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Could not read config file %s", file);
 			}
 		}
 		catch (IOException e)
@@ -158,10 +159,10 @@ public abstract class AbstractUserJSONConfig {
 		//catch (IllegalStateException e)
 		catch (Exception e)
 		{
-			GrowthcraftCore.logger.error("JSON Config '%s' contains errors", targetConfigFile);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("JSON Config '%s' contains errors", targetConfigFile);
 			e.printStackTrace();
 		}
-		GrowthcraftCore.logger.warn("Falling back to default config file");
+		GrowthcraftLogger.getLogger(Reference.MODID).warn("Falling back to default config file");
 		readUserConfigFile(targetDefaultConfigFile);
 	}
 

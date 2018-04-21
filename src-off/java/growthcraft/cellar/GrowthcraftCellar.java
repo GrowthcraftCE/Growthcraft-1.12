@@ -48,6 +48,8 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+    	GrowthcraftCellarEffects.preInit();
+    	
 		userApis.getUserBrewingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
 		userApis.getUserCultureRecipes()
