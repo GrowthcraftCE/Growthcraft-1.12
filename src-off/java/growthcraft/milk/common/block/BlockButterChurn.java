@@ -33,13 +33,14 @@ public class BlockButterChurn extends GrowthcraftBlockContainer {
             0.0625 * 14, 0.0625 * 16, 0.0625 * 14);
 	
 	public BlockButterChurn(String unlocalizedName) {
-        super(Material.CLAY);
+        super(Material.WOOD);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 		this.setResistance(5.0F);
 		this.setHardness(2.0F);
 		this.setSoundType(SoundType.WOOD);
 		setTileEntityType(TileEntityButterChurn.class);
+		
 	}
 	
     @Override

@@ -4,6 +4,7 @@ import growthcraft.bamboo.Reference;
 import growthcraft.bamboo.worldgen.WorldGenBambooTree;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
@@ -29,6 +30,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     public BlockBambooShoot(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+        this.setSoundType(SoundType.PLANT);
     }
 
     @Override
