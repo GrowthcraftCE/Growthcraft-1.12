@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
-public interface IAltItemHandler
+public interface IItemOperable
 {
 	public static enum Action
 	{

@@ -9,7 +9,7 @@ import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.core.api.definition.IMultiFluidStacks;
 import growthcraft.core.api.definition.IMultiItemStacks;
 import growthcraft.core.api.fluids.FluidTest;
-import growthcraft.core.api.fluids.FluidUtils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.item.ItemTest;
 import growthcraft.core.api.nbt.NBTTagStringList;
 import growthcraft.core.api.stream.StreamUtils;
@@ -19,7 +19,7 @@ import growthcraft.core.common.inventory.GrowthcraftTileDeviceBase;
 import growthcraft.core.common.inventory.InventoryProcessor;
 import growthcraft.core.common.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.common.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.common.tileentity.feature.ITileNamedFluidTanks;
 import growthcraft.core.common.tileentity.feature.ITileProgressiveDevice;
@@ -52,7 +52,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements ITickable, IAltItemHandler, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
+public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements ITickable, IItemOperable, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
 {
 	public static enum FluidTankType
 	{
@@ -267,7 +267,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 		if (!checkOnly)
 		{
 			decrStackSize(slot, 1);
-			primaryFluidSlot.set(FluidUtils.exchangeFluid(milkStack, GrowthcraftMilkFluids.curds.getFluid()));
+			primaryFluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(milkStack, GrowthcraftMilkFluids.curds.getFluid()));
 			rennetFluidSlot.clear();
 			wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.cheeseVatMilkToCurdsWheyAmount), true);
 			GrowthcraftMilk.MILK_BUS.post(new EventCheeseVatMadeCurds(this));
@@ -283,7 +283,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 			if (!checkOnly)
 			{
 				final Fluid fluid = SimpleCheeseTypes.RICOTTA.getFluids().getFluid(); // GrowthcraftMilkFluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
-				primaryFluidSlot.set(FluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
+				primaryFluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
 				wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.cheeseVatWheyToRicottaWheyAmount), true);
 				GrowthcraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
 			}
@@ -571,9 +571,9 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	}
 
 	@Override
-	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack stack)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (!ItemTest.isValid(stack)) return false;
 		final Item item = stack.getItem();
@@ -597,9 +597,9 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	}
 
 	@Override
-	public boolean tryTakeItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (!isIdle()) return false;
 		if (ItemUtils.isEmpty(onHand))
 		{

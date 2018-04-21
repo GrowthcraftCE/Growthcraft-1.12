@@ -5,10 +5,11 @@ import java.util.Random;
 import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.events.EventBarrelDrained;
 import growthcraft.core.Utils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.utils.BlockFlags;
-import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
+import growthcraft.core.events.EventTankDrained;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -46,17 +47,17 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 		return true;
 	}
 
-	@Override
-	protected boolean playerDrainTank(World world, BlockPos pos, ILegacyFluidHandler tank, ItemStack held, EntityPlayer player)
-	{
-		final FluidStack available = Utils.playerDrainTank(world, pos, tank, held, player);
-		if (available != null && available.amount > 0)
-		{
-			GrowthcraftCellar.CELLAR_BUS.post(new EventBarrelDrained(player, world, pos, available));
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	protected boolean playerDrainTank(World world, BlockPos pos, ILegacyFluidHandler tank, ItemStack held, EntityPlayer player)
+//	{
+//		final FluidStack available = GrowthcraftFluidUtils.playerDrainTank(world, pos, tank, held, player);
+//		if (available != null && available.amount > 0)
+//		{
+//			GrowthcraftCellar.CELLAR_BUS.post(new EventTankDrained(player, world, pos, available));
+//			return true;
+//		}
+//		return false;
+//	}
 	
 	@Override
 	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)

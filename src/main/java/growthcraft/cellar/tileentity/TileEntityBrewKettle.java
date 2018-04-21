@@ -30,7 +30,8 @@ import net.minecraftforge.items.wrapper.CombinedInvWrapper;
 import javax.annotation.Nullable;
 
 public class TileEntityBrewKettle extends TileEntity implements ICapabilityProvider, ITickable {
-
+	// REMOVEME
+	
     private boolean heated;
     private int brewTime;
     private int maxBrewTime;

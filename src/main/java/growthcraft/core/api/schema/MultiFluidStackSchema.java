@@ -12,7 +12,7 @@ import growthcraft.core.api.CoreRegistry;
 import growthcraft.core.api.definition.IMultiFluidStacks;
 import growthcraft.core.api.fluids.FluidTag;
 import growthcraft.core.api.fluids.FluidTest;
-import growthcraft.core.api.fluids.FluidUtils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.fluids.MultiFluidStacks;
 import growthcraft.core.api.fluids.TaggedFluidStacks;
 import growthcraft.core.api.utils.StringUtils;
@@ -213,6 +213,6 @@ public class MultiFluidStackSchema implements ICommentable, IValidatable, IMulti
 	@Override
 	public List<ItemStack> getItemStacks()
 	{
-		return FluidUtils.getFluidContainers(getFluidStacks());
+		return GrowthcraftFluidUtils.getFluidContainers(getFluidStacks());
 	}
 }

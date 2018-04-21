@@ -10,6 +10,7 @@ import growthcraft.core.api.utils.SpatialRandom;
 import growthcraft.core.api.utils.TickUtils;
 import growthcraft.core.common.tileentity.GrowthcraftTileBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
 import growthcraft.milk.api.definition.ICheeseType;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.struct.CheeseCurd;
@@ -101,10 +102,11 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
 					// When a pancheon is present, try filling it with Whey
 					if (pancheonTile != null)
 					{
+						final IFluidTankOperable fh = pancheonTile.getPancheonFluidHandler();
 						final FluidStack stack = GrowthcraftMilkFluids.whey.asFluidStack(100);
-						if (pancheonTile.canFill(EnumFacing.UP, stack.getFluid()))
+						if (fh.canFill(EnumFacing.UP, stack.getFluid()))
 						{
-							pancheonTile.fill(EnumFacing.UP, stack, true);
+							fh.fill(EnumFacing.UP, stack, true);
 						}
 					}
 					// regardless of a pancheon being present, the curd SHOULD drip

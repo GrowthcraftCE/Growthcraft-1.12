@@ -65,7 +65,6 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-
     }
 
 }

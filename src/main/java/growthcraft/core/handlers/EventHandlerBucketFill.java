@@ -1,4 +1,4 @@
-package growthcraft.core.eventhandler;
+package growthcraft.core.handlers;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,9 +1,16 @@
 package growthcraft.core.common.item;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.cellar.common.item.IFluidItem;
+import growthcraft.core.handlers.FluidHandlerContainerItemWrapper;
+import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * Generic fluid bottle for growthcraft fluids
@@ -14,11 +21,6 @@ public class ItemBottleFluid extends GrowthcraftItemBase implements IFluidItem, 
 	// Used to override the fluid color
 	private int color = -1;
 
-/*	@SideOnly(Side.CLIENT)
-	private IIcon bottle;
-	@SideOnly(Side.CLIENT)
-	private IIcon contents; */
-
 	public ItemBottleFluid(Fluid flu)
 	{
 		super();
@@ -27,9 +29,9 @@ public class ItemBottleFluid extends GrowthcraftItemBase implements IFluidItem, 
 	}
 
 	@Override
-	public Fluid getFluid(ItemStack stack)
+	public FluidStack getFluidStack(ItemStack stack)
 	{
-		return fluid;
+		return new FluidStack(fluid, FluidContainerRegistry.BOTTLE_VOLUME);
 	}
 
 	public ItemBottleFluid setColor(int c)
@@ -42,37 +44,12 @@ public class ItemBottleFluid extends GrowthcraftItemBase implements IFluidItem, 
 	public int getColor(ItemStack stack)
 	{
 		if (color != -1) return color;
-		return getFluid(stack).getColor();
+		return fluid.getColor();
 	}
-
-/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.bottle = reg.registerIcon("minecraft:potion_bottle_empty");
-		this.contents = reg.registerIcon("minecraft:potion_overlay");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int _damage, int pass)
-	{
-		return pass == 0 ? this.contents : this.bottle;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int pass)
-	{
-		return pass == 0 ? getColor(stack) : 0xFFFFFF;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses()
-	{
-		return true;
-	}
-	*/
+	
+    @Override
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, NBTTagCompound nbt)
+    {
+        return new FluidHandlerContainerItemWrapper(stack);
+    }
 }

@@ -2,25 +2,30 @@ package growthcraft.core.common.inventory;
 
 import java.io.IOException;
 
+import javax.annotation.Nullable;
+
 import growthcraft.core.api.fluids.FluidTest;
 import growthcraft.core.common.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.common.tileentity.device.FluidTanks;
 import growthcraft.core.common.tileentity.device.IFluidTanks;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.lib.legacy.ILegacyFluidHandler;
+import growthcraft.core.common.tileentity.feature.IFluidTankOperable;
+import growthcraft.core.handlers.FluidHandlerBlockWrapper;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
  */
-public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements ILegacyFluidHandler, IFluidTanks
+public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks
 {
 	private FluidTanks tanks;
 
@@ -32,6 +37,7 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
 
 	protected void markFluidDirty()
 	{
+		markDirty();
 	}
 
 	protected FluidTank[] createTanks()
@@ -203,6 +209,23 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
 		markFluidDirty();
 	}
 
+    @SuppressWarnings("unchecked")
+	@Nullable
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+
+        if (capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+
+            if (facing == null) {
+                facing = EnumFacing.UP;
+            }
+
+            return (T)new FluidHandlerBlockWrapper(this, facing);
+        }
+        
+        return super.getCapability(capability, facing);
+    }
+	
 	protected void readTanksFromNBT(NBTTagCompound nbt)
 	{
 		if (tanks != null)

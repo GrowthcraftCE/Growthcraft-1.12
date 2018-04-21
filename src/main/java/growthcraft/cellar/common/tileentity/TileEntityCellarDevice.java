@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
-import growthcraft.core.api.fluids.FluidUtils;
+import growthcraft.core.api.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.api.fluids.InternalFluidIDHandler;
 import growthcraft.core.common.inventory.GrowthcraftTileDeviceBase;
 import growthcraft.core.common.tileentity.feature.IGuiNetworkSync;
@@ -26,7 +26,7 @@ public abstract class TileEntityCellarDevice extends GrowthcraftTileDeviceBase i
 				// Fluid ID
 				case 0:
 				{
-					final FluidStack result = FluidUtils.replaceFluidStack(fluidIds.getFluidByInternalID(v), getFluidStack(tankIndex));
+					final FluidStack result = GrowthcraftFluidUtils.replaceFluidStack(fluidIds.getFluidByInternalID(v), getFluidStack(tankIndex));
 					if (result != null) getFluidTank(tankIndex).setFluid(result);
 				} break;
 				// Fluid amounts CAN exceed a 16bit integer, in order to handle the capacity, the value is split across 2 data points, by high and low bytes
@@ -34,13 +34,13 @@ public abstract class TileEntityCellarDevice extends GrowthcraftTileDeviceBase i
 				case 1:
 				{
 					final int t = getFluidAmount(tankIndex);
-					setFluidStack(tankIndex, FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF0000) | v));
+					setFluidStack(tankIndex, GrowthcraftFluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF0000) | v));
 				} break;
 				// Fluid Amount (HIGH Bytes)
 				case 2:
 				{
 					final int t = getFluidAmount(tankIndex);
-					getFluidTank(tankIndex).setFluid(FluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF) | (v << 16)));
+					getFluidTank(tankIndex).setFluid(GrowthcraftFluidUtils.updateFluidStackAmount(getFluidStack(tankIndex), (t & 0xFFFF) | (v << 16)));
 				} break;
 				default:
 					break;

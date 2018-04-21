@@ -18,6 +18,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraftforge.common.capabilities.Capability;
 
 /**
  * Extend this base class if you just need a Base tile with the event system.
@@ -35,10 +37,6 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
 		IBlockState curState = getWorld().getBlockState(pos);
         world.markBlockRangeForRenderUpdate(pos, pos);
         world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
-//        world.scheduleBlockUpdate(pos, blockType, 0,0);
-//		world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
-
-//		world.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public void markDirtyAndUpdate()
@@ -46,6 +44,13 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
 		markDirty();
 		markForUpdate();
 	}
+	
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        if( this.getCapability(capability, facing) != null )
+        	return true;
+        return super.hasCapability(capability, facing);
+    }
 
 	protected List<TileEventFunction> getHandlersFor(@Nonnull TileEventHandler.EventType event)
 	{

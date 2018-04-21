@@ -1,13 +1,19 @@
 package growthcraft.core.common.item;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.cellar.common.item.IFluidItem;
+import growthcraft.core.handlers.FluidHandlerContainerItemWrapper;
+import growthcraft.core.lib.legacy.FluidContainerRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * Generic fluid bottle for growthcraft fluids that are edible
@@ -17,11 +23,6 @@ public class ItemFoodBottleFluid extends GrowthcraftItemFoodBase implements IFlu
 	private Fluid defaultFluid;
 	// Used to override the fluid color
 	private int color = -1;
-
-/*	@SideOnly(Side.CLIENT)
-	private IIcon bottle;
-	@SideOnly(Side.CLIENT)
-	private IIcon contents; */
 
 	public ItemFoodBottleFluid(@Nullable Fluid defaultFluid, int healAmount, float saturation, boolean isWolfFavouriteFood)
 	{
@@ -49,9 +50,9 @@ public class ItemFoodBottleFluid extends GrowthcraftItemFoodBase implements IFlu
 	}
 
 	@Override
-	public Fluid getFluid(ItemStack stack)
+	public FluidStack getFluidStack(ItemStack stack)
 	{
-		return defaultFluid;
+		return new FluidStack(defaultFluid, FluidContainerRegistry.BOTTLE_VOLUME);
 	}
 
 	public ItemFoodBottleFluid setColor(int c)
@@ -64,37 +65,12 @@ public class ItemFoodBottleFluid extends GrowthcraftItemFoodBase implements IFlu
 	public int getColor(ItemStack stack)
 	{
 		if (color != -1) return color;
-		return getFluid(stack).getColor();
+		return defaultFluid.getColor();
 	}
 	
-/*
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister reg)
-	{
-		this.bottle = reg.registerIcon("minecraft:potion_bottle_empty");
-		this.contents = reg.registerIcon("minecraft:potion_overlay");
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public IIcon getIconFromDamageForRenderPass(int _damage, int pass)
-	{
-		return pass == 0 ? this.contents : this.bottle;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public int getColorFromItemStack(ItemStack stack, int pass)
-	{
-		return pass == 0 ? getColor(stack) : 0xFFFFFF;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public boolean requiresMultipleRenderPasses()
-	{
-		return true;
-	}
-	*/
+    @Override
+    public ICapabilityProvider initCapabilities(@Nonnull ItemStack stack, NBTTagCompound nbt)
+    {
+        return new FluidHandlerContainerItemWrapper(stack);
+    }
 }

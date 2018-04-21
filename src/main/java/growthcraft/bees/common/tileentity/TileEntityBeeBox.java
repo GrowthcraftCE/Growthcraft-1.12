@@ -10,7 +10,7 @@ import growthcraft.core.api.utils.AuxFX;
 import growthcraft.core.common.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.common.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.common.tileentity.event.TileEventHandler;
-import growthcraft.core.common.tileentity.feature.IAltItemHandler;
+import growthcraft.core.common.tileentity.feature.IItemOperable;
 import growthcraft.core.common.tileentity.feature.IInteractionObject;
 import growthcraft.core.utils.ItemUtils;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 
-public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements ITickable, IAltItemHandler, IInteractionObject
+public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements ITickable, IItemOperable, IInteractionObject
 {
 	@Override
 	public String getDefaultInventoryName() {
@@ -345,9 +345,9 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 	}
 
 	@Override
-	public boolean tryPlaceItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack stack)
+	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack stack)
 	{
-		if (IAltItemHandler.Action.RIGHT != action) return false;
+		if (IItemOperable.Action.RIGHT != action) return false;
 		if (!ItemUtils.isEmpty(stack))
 		{
 			final Item item = stack.getItem();
@@ -414,7 +414,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 	}
 
 	@Override
-	public boolean tryTakeItem(IAltItemHandler.Action action, EntityPlayer player, ItemStack onHand)
+	public boolean tryTakeItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
 		return false;
 	}
