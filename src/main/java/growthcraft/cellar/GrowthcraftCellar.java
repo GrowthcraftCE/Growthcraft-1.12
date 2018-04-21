@@ -18,6 +18,9 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.EventBus;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,6 +37,7 @@ public class GrowthcraftCellar {
     public static CellarBoozeBuilderFactory boozeBuilderFactory;
     public static UserApis userApis = new UserApis();
     
+    @SideOnly(Side.CLIENT)
     public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
     public static Logger logger = LogManager.getLogger(Reference.MODID);
