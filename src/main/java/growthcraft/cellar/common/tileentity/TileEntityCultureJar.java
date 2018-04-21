@@ -3,11 +3,11 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.inventory.ContainerCultureJar;
 import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
+import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;

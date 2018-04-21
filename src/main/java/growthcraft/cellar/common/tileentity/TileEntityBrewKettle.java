@@ -3,9 +3,9 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.GrowthcraftCellarConfig;
-import growthcraft.cellar.common.fluids.CellarTank;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
+import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.ITileHeatedDevice;

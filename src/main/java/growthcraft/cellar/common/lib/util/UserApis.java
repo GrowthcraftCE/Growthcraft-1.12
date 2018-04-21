@@ -1,4 +1,4 @@
-package growthcraft.cellar.common.util;
+package growthcraft.cellar.common.lib.util;
 
 import growthcraft.cellar.common.lib.processing.brewing.user.UserBrewingRecipesConfig;
 import growthcraft.cellar.common.lib.processing.culturing.user.UserCultureRecipesConfig;

@@ -8,7 +8,7 @@ import growthcraft.cellar.common.lib.CellarRegistry;
 import growthcraft.cellar.common.lib.booze.Booze;
 import growthcraft.cellar.common.lib.booze.BoozeEntry;
 import growthcraft.cellar.common.lib.definition.BoozeDefinition;
-import growthcraft.cellar.common.util.BoozeUtils;
+import growthcraft.cellar.common.lib.util.BoozeUtils;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.definition.FluidDefinition;
 import growthcraft.core.shared.definition.FluidTypeDefinition;
