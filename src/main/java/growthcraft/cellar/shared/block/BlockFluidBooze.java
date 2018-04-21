@@ -1,6 +1,6 @@
 package growthcraft.cellar.shared.block;
 
-import growthcraft.cellar.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.block.GrowthcraftBlockFluid;
 import growthcraft.core.shared.block.Materials;
 import net.minecraft.block.material.Material;

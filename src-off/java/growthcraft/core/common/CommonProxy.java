@@ -1,6 +1,6 @@
 package growthcraft.core.common;
 
-import growthcraft.core.Reference;
+import growthcraft.core.shared.Reference;
 import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import growthcraft.core.common.worldgen.BlockSaltGeneration;
 import net.minecraftforge.fml.common.registry.GameRegistry;

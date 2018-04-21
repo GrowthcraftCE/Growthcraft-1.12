@@ -7,8 +7,9 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.booze.modifier.IModifierFunction;
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.fluids.FluidTag;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import net.minecraftforge.fluids.Fluid;
@@ -106,7 +107,7 @@ public class BoozeRegistry {
 
 		if (!isFluidBooze(fluid))
 		{
-			GrowthcraftCellar.logger.debug("Registering booze %s", fluid.getName());
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Registering booze %s", fluid.getName());
 			registerBooze(fluid, new BoozeEntry(fluid));
 		}
 		else

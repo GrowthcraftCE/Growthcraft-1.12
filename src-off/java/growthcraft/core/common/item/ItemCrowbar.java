@@ -1,16 +1,11 @@
 package growthcraft.core.common.item;
 
-import growthcraft.core.Reference;
+import growthcraft.core.shared.Reference;
 import growthcraft.core.common.handlers.EnumHandler;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
-
-import java.util.List;
 
 public class ItemCrowbar extends Item {
 

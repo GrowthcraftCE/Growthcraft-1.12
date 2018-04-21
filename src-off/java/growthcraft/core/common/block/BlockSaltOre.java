@@ -2,7 +2,7 @@ package growthcraft.core.common.block;
 
 import java.util.Random;
 
-import growthcraft.core.Reference;
+import growthcraft.core.shared.Reference;
 import growthcraft.core.common.init.GrowthcraftCoreItems;
 import net.minecraft.block.BlockOre;
 import net.minecraft.block.SoundType;

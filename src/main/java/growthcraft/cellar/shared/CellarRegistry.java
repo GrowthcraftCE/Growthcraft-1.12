@@ -9,6 +9,7 @@ import growthcraft.cellar.shared.processing.fermenting.FermentingRegistry;
 import growthcraft.cellar.shared.processing.heatsource.HeatSourceRegistry;
 import growthcraft.cellar.shared.processing.pressing.PressingRegistry;
 import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
+import growthcraft.core.shared.GrowthcraftLogger;
 
 public class CellarRegistry {
 	// REVISE_ME 0
@@ -96,7 +97,7 @@ public class CellarRegistry {
 	public static void onPostInit() {
 		if (!GrowthcraftCellarConfig.boozeEffectsEnabled)
 		{
-			GrowthcraftCellar.logger.debug("Stripping ALL booze effects except tipsy");
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Stripping ALL booze effects except tipsy");
 			for (BoozeEntry entry : CellarRegistry.instance().booze().getBoozeEntries())
 			{
 				entry.getEffect().clearEffects();

@@ -2,8 +2,6 @@ package growthcraft.cellar.shared.item;
 
 import java.util.List;
 
-import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.Reference;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.fluids.Booze;
 import growthcraft.cellar.shared.booze.BoozeEntry;
@@ -11,8 +9,6 @@ import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.booze.BoozeUtils;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.definition.FluidDefinition;
-import growthcraft.core.shared.definition.FluidTypeDefinition;
-import growthcraft.core.shared.item.GrowthcraftItemFoodBase;
 import growthcraft.core.shared.item.IFluidContainerItem;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
 import growthcraft.core.shared.client.GrowthcraftCoreState;
@@ -21,7 +17,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

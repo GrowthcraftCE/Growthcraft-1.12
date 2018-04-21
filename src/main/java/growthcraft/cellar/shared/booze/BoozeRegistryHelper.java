@@ -13,8 +13,7 @@ import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
-import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.GrowthcraftCoreConfig;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.fluids.FluidDictionary;
@@ -102,7 +101,7 @@ public class BoozeRegistryHelper {
 			final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, boozes[i].getFluid());
 			
 			final FluidStack fluidStack = boozes[i].asFluidStack( GrowthcraftCoreConfig.bottleCapacity );
-			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, bottleVariantID), GrowthcraftCore.EMPTY_BOTTLE);
+			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, bottleVariantID), FluidContainerRegistry.EMPTY_BOTTLE);
 
 			GameRegistry.addShapelessRecipe(bottle.asStack(3, bottleVariantID), bucket, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
 		}
