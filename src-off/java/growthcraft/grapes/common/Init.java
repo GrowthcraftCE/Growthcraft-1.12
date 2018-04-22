@@ -1,5 +1,8 @@
 package growthcraft.grapes.common;
 
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
+
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
 import growthcraft.cellar.shared.booze.BoozeTag;
@@ -11,7 +14,7 @@ import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
-import growthcraft.core.shared.definition.BlockTypeDefinition;
+import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.core.shared.effect.EffectAddPotionEffect;
@@ -41,9 +44,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
-
 public class Init {
 	private Init() {}
 	
@@ -53,10 +53,10 @@ public class Init {
 	
     public static void preInitBlocks() {
     	
-		GrowthcraftGrapesBlocks.grapeFruit  = new BlockTypeDefinition<BlockGrapeFruit>(new BlockGrapeFruit(GrapeTypes.values()));
-		GrowthcraftGrapesBlocks.grapeLeaves = new BlockTypeDefinition<BlockGrapeLeaves>(new BlockGrapeLeaves(GrapeTypes.values(), GrowthcraftGrapesBlocks.grapeFruit.getBlock()));
-		GrowthcraftGrapesBlocks.grapeVine1  = new BlockTypeDefinition<BlockGrapeVine1>(new BlockGrapeVine1(GrowthcraftGrapesBlocks.grapeLeaves.getBlock()));
-		GrowthcraftGrapesBlocks.grapeVine0  = new BlockTypeDefinition<BlockGrapeVine0>(new BlockGrapeVine0(GrapeTypes.values(), GrowthcraftGrapesBlocks.grapeVine1.getBlock()));
+		GrowthcraftGrapesBlocks.grapeFruit  = new BlockDefinition(new BlockGrapeFruit(GrapeTypes.values()));
+		GrowthcraftGrapesBlocks.grapeLeaves = new BlockDefinition(new BlockGrapeLeaves(GrapeTypes.values(), (BlockGrapeFruit)GrowthcraftGrapesBlocks.grapeFruit.getBlock()));
+		GrowthcraftGrapesBlocks.grapeVine1  = new BlockDefinition(new BlockGrapeVine1((BlockGrapeLeaves)GrowthcraftGrapesBlocks.grapeLeaves.getBlock()));
+		GrowthcraftGrapesBlocks.grapeVine0  = new BlockDefinition(new BlockGrapeVine0(GrapeTypes.values(), (BlockGrapeVine1)GrowthcraftGrapesBlocks.grapeVine1.getBlock()));
     	
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks = null; // Is initialized in GrowthcraftGrapesFluids
     }
