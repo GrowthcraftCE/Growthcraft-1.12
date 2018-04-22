@@ -1,10 +1,9 @@
 package growthcraft.bees.shared.init;
 
-import growthcraft.bees.common.block.BlockBeeBox;
-import growthcraft.core.shared.definition.BlockTypeDefinition;
+import growthcraft.core.shared.definition.BlockDefinition;
 
 public class GrowthcraftBeesBlocks {
 	private GrowthcraftBeesBlocks() {}
 	
-	public static BlockTypeDefinition<? extends BlockBeeBox> beeBox;
+	public static BlockDefinition beeBox;
 }

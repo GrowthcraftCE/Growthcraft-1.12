@@ -21,11 +21,11 @@ import growthcraft.bees.shared.init.GrowthcraftBeesFluids;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.GrowthcraftCoreApis;
-import growthcraft.core.shared.definition.BlockTypeDefinition;
+import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.fluids.FluidFactory;
-import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetailsBuilder;
+import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
@@ -47,7 +47,7 @@ public class Init {
 	////////
 	
 	public static void preInitBlocks() {
-		GrowthcraftBeesBlocks.beeBox = new BlockTypeDefinition<BlockBeeBox>(new BlockBeeBox("beebox"));
+		GrowthcraftBeesBlocks.beeBox = new BlockDefinition(new BlockBeeBox("beebox"));
 	}
 	
 	public static void registerBlocks() {
