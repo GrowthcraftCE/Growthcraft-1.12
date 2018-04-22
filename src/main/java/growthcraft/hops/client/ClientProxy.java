@@ -1,7 +1,7 @@
-package growthcraft.hops.proxy;
+package growthcraft.hops.client;
 
-import growthcraft.hops.init.GrowthcraftHopsFluids;
-import growthcraft.hops.init.GrowthcraftHopsItems;
+import growthcraft.hops.common.CommonProxy;
+import growthcraft.hops.common.Init;
 
 public class ClientProxy extends CommonProxy {
 
@@ -12,20 +12,20 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-    	GrowthcraftHopsItems.registerItemColorHandlers();
+    	Init.registerItemColorHandlers();
         registerModelBakeryVariants();
         registerSpecialRenders();
     }
 
     @Override
     public void registerRenders() {
-        GrowthcraftHopsItems.registerRenders();
-        GrowthcraftHopsFluids.registerRenders();
+        Init.registerItemRenders();
+        Init.registerFluidRenders();
     }
 
     @Override
     public void registerModelBakeryVariants() {
-    	GrowthcraftHopsItems.registerItemVariants();
+    	Init.registerItemVariants();
     }
 
     @Override

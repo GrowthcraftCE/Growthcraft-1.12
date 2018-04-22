@@ -1,10 +1,8 @@
 package growthcraft.hops;
 
-import growthcraft.hops.init.GrowthcraftHopsBlocks;
-import growthcraft.hops.init.GrowthcraftHopsFluids;
-import growthcraft.hops.init.GrowthcraftHopsItems;
-import growthcraft.hops.init.GrowthcraftHopsRecipes;
-import growthcraft.hops.proxy.CommonProxy;
+import growthcraft.hops.common.CommonProxy;
+import growthcraft.hops.common.Init;
+import growthcraft.hops.shared.Reference;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -13,24 +11,26 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftHops {
+    static final String CLIENT_PROXY_CLASS = "growthcraft.hops.client.ClientProxy";
+    static final String SERVER_PROXY_CLASS = "growthcraft.hops.common.CommonProxy";
 
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftHops instance;
 
-    @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
+    @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
 
-        GrowthcraftHopsBlocks.preInit();
-        GrowthcraftHopsBlocks.register();
+        Init.preInitBlocks();
+        Init.registerBlocks();
 
-        GrowthcraftHopsItems.preInit();
-        GrowthcraftHopsItems.register();
+        Init.preInitItems();
+        Init.registerItems();
         
-        GrowthcraftHopsFluids.preInit();
-        GrowthcraftHopsFluids.register();
+        Init.preInitFluids();
+        Init.registerFluids();
 
         proxy.preInit();
         proxy.registerTileEntities();
@@ -39,7 +39,7 @@ public class GrowthcraftHops {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
-        GrowthcraftHopsRecipes.init();
+        Init.registerRecipes();
     }
 
     @Mod.EventHandler

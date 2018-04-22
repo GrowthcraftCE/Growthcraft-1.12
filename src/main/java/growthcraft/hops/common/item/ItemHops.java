@@ -1,6 +1,6 @@
-package growthcraft.hops.items;
+package growthcraft.hops.common.item;
 
-import growthcraft.hops.Reference;
+import growthcraft.hops.shared.Reference;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 

@@ -1,4 +1,4 @@
-package growthcraft.hops;
+package growthcraft.hops.shared.config;
 
 public class GrowthcraftHopsConfig {
 

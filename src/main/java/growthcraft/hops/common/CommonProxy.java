@@ -1,6 +1,6 @@
-package growthcraft.hops.proxy;
+package growthcraft.hops.common;
 
-import growthcraft.hops.Reference;
+import growthcraft.hops.shared.Reference;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {

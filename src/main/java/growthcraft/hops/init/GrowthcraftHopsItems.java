@@ -1,17 +1,22 @@
-package growthcraft.hops.handlers;
+package growthcraft.hops.init;
 
-import growthcraft.cellar.api.definition.IObjectBooze;
-import growthcraft.cellar.common.definition.BlockBoozeDefinition;
-import growthcraft.cellar.common.definition.BoozeDefinition;
-import growthcraft.core.api.definition.IItemStackFactory;
-import growthcraft.core.api.definition.IObjectVariant;
-import growthcraft.hops.init.GrowthcraftHopsBlocks;
-import growthcraft.hops.init.GrowthcraftHopsFluids;
-import growthcraft.hops.init.GrowthcraftHopsItems;
+import growthcraft.cellar.shared.item.ItemBoozeBottle;
+import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
+import growthcraft.cellar.shared.definition.BoozeDefinition;
+import growthcraft.cellar.shared.definition.IObjectBooze;
+import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
+import growthcraft.core.shared.definition.IItemStackFactory;
+import growthcraft.core.shared.definition.IObjectVariant;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-public class EnumHandler {
+public class GrowthcraftHopsItems {
+	public static ItemDefinition hops;
+    public static ItemDefinition hop_seeds;
+	public static ItemTypeDefinition<ItemBoozeBottle> lagerBottle;
+    public static ItemTypeDefinition<ItemBoozeBottle> hopAleBottle;
+
 	public enum HopAleTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
 		ALE_UNHOPPED(0, "unhopped"),
 		ALE_NORMAL(1, "normal"),
@@ -119,5 +124,4 @@ public class EnumHandler {
 			return GrowthcraftHopsBlocks.lagerFluidBlocks[ordinal()];
 		}
 	}
-
 }
