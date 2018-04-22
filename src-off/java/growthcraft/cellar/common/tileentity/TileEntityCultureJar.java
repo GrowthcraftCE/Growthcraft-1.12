@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerCultureJar;
-import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
+import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;

@@ -3,7 +3,7 @@ package growthcraft.cellar.common.tileentity.device;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.culturing.ICultureRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
+import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;

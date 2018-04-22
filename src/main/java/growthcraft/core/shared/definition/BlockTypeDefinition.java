@@ -11,6 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
@@ -139,12 +141,14 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	/**
 	 * @param name - block name
 	 */
+	@SideOnly(Side.CLIENT)
 	public void registerItemRender()
 	{
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(getBlock()), 0, new ModelResourceLocation(
                 getBlock().getRegistryName(), "inventory"));
 	}
 	
+	@SideOnly(Side.CLIENT)
     public void registerItemRender(int meta, String fileName){
     	String modID = getBlock().getRegistryName().getResourceDomain();
     	

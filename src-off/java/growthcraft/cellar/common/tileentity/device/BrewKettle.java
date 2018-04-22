@@ -1,12 +1,11 @@
 package growthcraft.cellar.common.tileentity.device;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.events.EventBrewed;
 import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-import growthcraft.cellar.common.tileentity.component.TileHeatingComponent;
+import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
