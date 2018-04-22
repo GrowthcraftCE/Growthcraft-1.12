@@ -1,36 +1,31 @@
 package growthcraft.milk.client;
 
 import growthcraft.milk.common.CommonProxy;
-import growthcraft.milk.common.tileentity.TileEntityPancheon;
-import growthcraft.milk.shared.Reference;
-import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
-import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import growthcraft.milk.common.Init;
 
 public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
     	super.init();
-    	GrowthcraftMilkFluids.registerColorHandlers();
+    	Init.registerFluidColorHandlers();
     }
 
     @Override
     public void registerRenders() {
-        GrowthcraftMilkBlocks.registerRenders();
-        GrowthcraftMilkFluids.registerRenders();
-        GrowthcraftMilkItems.registerRenders();
+        Init.registerBlockRenders();
+        Init.registerFluidRenders();
+        Init.registerItemRenders();
     }
 
     @Override
     public void registerModelBakeryVariants() {
-    	GrowthcraftMilkItems.registerModelBakeryVariants();
+    	Init.registerModelBakeryVariants();
     }
 
     @Override
     public void registerSpecialRenders() {
-    	GrowthcraftMilkBlocks.registerSpecialRenders();
+    	Init.registerBlockSpecialRenders();
     }
 
 }

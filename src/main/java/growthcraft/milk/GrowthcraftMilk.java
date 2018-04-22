@@ -4,15 +4,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import growthcraft.milk.common.CommonProxy;
+import growthcraft.milk.common.Init;
 import growthcraft.milk.common.handlers.EntityDropsHandler;
 import growthcraft.milk.shared.GrowthcraftMilkUserApis;
 import growthcraft.milk.shared.Reference;
-import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
-import growthcraft.milk.shared.init.GrowthcraftMilkCheeses;
-import growthcraft.milk.shared.init.GrowthcraftMilkEffects;
-import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems;
-import growthcraft.milk.shared.init.GrowthcraftMilkRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -52,16 +47,16 @@ public class GrowthcraftMilk {
     	
     	userApis.setConfigDirectory(event.getModConfigurationDirectory());
     	
-        GrowthcraftMilkFluids.preInit();
-        GrowthcraftMilkBlocks.preInit();
-        GrowthcraftMilkItems.preInit();
-        GrowthcraftMilkEffects.preInit();
-    	GrowthcraftMilkCheeses.perInit();
+        Init.preInitFluids();
+        Init.preInitBlocks();
+        Init.preInitItems();
+        Init.preInitEffects();
+    	Init.perInitCheese();
         userApis.preInit();
 
-        GrowthcraftMilkFluids.register();
-        GrowthcraftMilkBlocks.register();
-        GrowthcraftMilkItems.register();
+        Init.registerFluids();
+        Init.registerBlocks();
+        Init.registerItems();
         userApis.register();
         
         proxy.preInit();
@@ -70,8 +65,8 @@ public class GrowthcraftMilk {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
-        GrowthcraftMilkFluids.init();
-        GrowthcraftMilkRecipes.init();
+        Init.initFluids();
+        Init.initRecipes();
         userApis.init();
         userApis.loadConfigs();
     }

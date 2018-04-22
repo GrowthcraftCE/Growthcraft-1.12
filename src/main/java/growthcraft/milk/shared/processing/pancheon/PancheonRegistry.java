@@ -6,7 +6,8 @@ import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.milk.shared.Reference;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -19,11 +20,11 @@ public class PancheonRegistry
 		final Fluid fluid = recipe.getInputFluid().getFluid();
 		if (recipes.containsKey(fluid))
 		{
-			GrowthcraftMilk.logger.warn("Overwriting existing pancheon recipe for {%s} with {%s}", recipe.getInputFluid(), recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).warn("Overwriting existing pancheon recipe for {%s} with {%s}", recipe.getInputFluid(), recipe);
 		}
 		else
 		{
-			GrowthcraftMilk.logger.debug("Adding new pancheon recipe {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding new pancheon recipe {%s}", recipe);
 		}
 		recipes.put(fluid, recipe);
 	}

@@ -1,14 +1,12 @@
 package growthcraft.grapes.common.items;
 
 import growthcraft.grapes.common.blocks.BlockGrapeVineBase;
-import growthcraft.grapes.common.handlers.EnumHandler;
-import growthcraft.grapes.common.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.common.utils.GrapeTypeUtils;
 import growthcraft.grapes.shared.Reference;
 import growthcraft.grapes.shared.definition.IGrapeType;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesBlocks;
+import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.GrapeTypes;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -21,11 +19,8 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IPlantable;
-
-import java.util.List;
 
 public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
 
@@ -38,15 +33,15 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-    for (int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-    	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+    for (int i = 0; i < GrapeTypes.values().length; i++ ) {
+    	GrapeTypes type = GrapeTypes.values()[i];
         if ( stack.getItemDamage() == type.getVariantID() ) {
             return  this.getUnlocalizedName() + "." + type.getName();
         } else {
             continue;
         }
     }
-    return super.getUnlocalizedName() + "." + EnumHandler.GrapeTypes.PURPLE.getName();
+    return super.getUnlocalizedName() + "." + GrapeTypes.PURPLE.getName();
 }
 
     /**
@@ -76,8 +71,8 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
 
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for ( int i = 0; i < EnumHandler.GrapeTypes.values().length; i++ ) {
-        	EnumHandler.GrapeTypes type = EnumHandler.GrapeTypes.values()[i];
+        for ( int i = 0; i < GrapeTypes.values().length; i++ ) {
+        	GrapeTypes type = GrapeTypes.values()[i];
             subItems.add(new ItemStack(itemIn, 1, type.getVariantID()));
         }
     }

@@ -2,12 +2,12 @@ package growthcraft.milk.common.tileentity.struct;
 
 import growthcraft.core.shared.io.stream.IStreamable;
 import growthcraft.milk.GrowthcraftMilk;
-import growthcraft.milk.common.handlers.EnumHandler;
 import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.cheese.CheeseIO;
 import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
 import growthcraft.milk.shared.definition.EnumCheeseStage;
 import growthcraft.milk.shared.definition.ICheeseType;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems.WaxedCheeseTypes;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -22,7 +22,7 @@ public class Cheese implements IStreamable
 	private int slicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
 	private int slices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
 	private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
-	private ICheeseType cheese = EnumHandler.WaxedCheeseTypes.CHEDDAR;
+	private ICheeseType cheese = WaxedCheeseTypes.CHEDDAR;
 	private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
 	
 	public Cheese() {

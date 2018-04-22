@@ -6,8 +6,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.ItemTest;
-import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.shared.Reference;
 import net.minecraft.item.ItemStack;
 
 public class CheesePressRegistry
@@ -16,7 +17,7 @@ public class CheesePressRegistry
 
 	public void addRecipe(@Nonnull ICheesePressRecipe recipe)
 	{
-		GrowthcraftMilk.logger.debug("Adding new cheese press recipe {%s}", recipe);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding new cheese press recipe {%s}", recipe);
 		recipes.add(recipe);
 	}
 

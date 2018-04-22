@@ -2,17 +2,17 @@ package growthcraft.milk.common.tileentity.struct;
 
 import growthcraft.core.shared.io.nbt.INBTSerializableContext;
 import growthcraft.core.shared.io.stream.IStreamable;
-import growthcraft.milk.common.handlers.EnumHandler;
 import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.cheese.CheeseIO;
 import growthcraft.milk.shared.definition.ICheeseType;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems.WaxedCheeseTypes;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class CheeseCurd implements INBTSerializableContext, IStreamable
 {
 	public boolean needClientUpdate;
-	private ICheeseType cheese = EnumHandler.WaxedCheeseTypes.CHEDDAR;
+	private ICheeseType cheese = WaxedCheeseTypes.CHEDDAR;
 	private int age;
 	private int ageMax = 1200;
 	private boolean dried;

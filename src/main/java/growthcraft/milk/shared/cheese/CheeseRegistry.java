@@ -7,7 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
-import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.definition.ICheeseFluidStackFactory;
 import growthcraft.milk.shared.definition.ICheeseType;
 import net.minecraft.util.ResourceLocation;
@@ -30,7 +31,7 @@ public class CheeseRegistry {
 	
 	public void registerCheese(@Nonnull ResourceLocation name, @Nonnull ICheeseType type) {
 		if( cheeseNameToId.containsKey(name) ) {
-			GrowthcraftMilk.logger.warn("There is already a cheese with name " + name + " existing.");
+			GrowthcraftLogger.getLogger(Reference.MODID).warn("There is already a cheese with name " + name + " existing.");
 			return;
 		}
 		

@@ -6,11 +6,12 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.item.ItemTest;
-import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.shared.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -22,7 +23,7 @@ public class CheeseVatRegistry
 	public void addRecipe(ICheeseVatRecipe recipe)
 	{
 		recipes.add(recipe);
-		GrowthcraftMilk.logger.debug("Added Cheese Vat recipe {%s}", recipe);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Added Cheese Vat recipe {%s}", recipe);
 	}
 
 	public void addRecipe(@Nonnull List<FluidStack> outputFluids, @Nonnull List<ItemStack> outputItems, @Nonnull List<IMultiFluidStacks> inputFluids, @Nonnull List<IMultiItemStacks> inputItems)

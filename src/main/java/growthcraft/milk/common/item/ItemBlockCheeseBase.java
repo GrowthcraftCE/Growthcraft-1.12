@@ -1,8 +1,8 @@
 package growthcraft.milk.common.item;
 
 import growthcraft.core.shared.definition.IObjectVariant;
-import growthcraft.milk.common.handlers.EnumHandler;
 import growthcraft.milk.shared.definition.ICheeseType;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems.WaxedCheeseTypes;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 
@@ -28,7 +28,7 @@ public class ItemBlockCheeseBase<T extends ICheeseType & IObjectVariant> extends
 		}
 		
 		// Otherwise return a fallback case cheese
-		return (T)EnumHandler.WaxedCheeseTypes.CHEDDAR;
+		return (T)WaxedCheeseTypes.CHEDDAR;
 	}
 	
 	public T[] getAllVariants() {

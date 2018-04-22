@@ -8,9 +8,10 @@ import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.fluids.FluidKey;
 import growthcraft.core.shared.fluids.FluidTest;
-import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.shared.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -26,11 +27,11 @@ public class ChurnRegistry
 		final Fluid fluid = fluidStack.getFluid();
 		if (recipes.containsKey(fluid))
 		{
-			GrowthcraftMilk.logger.warn("Overwriting existing churn recipe for {%s} with {%s}", fluidStack, recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).warn("Overwriting existing churn recipe for {%s} with {%s}", fluidStack, recipe);
 		}
 		else
 		{
-			GrowthcraftMilk.logger.debug("Adding new churn recipe {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding new churn recipe {%s}", recipe);
 		}
 		fluidIngredients.add(new FluidKey(fluidStack));
 		recipes.put(fluid, recipe);

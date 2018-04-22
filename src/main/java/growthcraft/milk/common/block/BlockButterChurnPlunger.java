@@ -58,7 +58,7 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 		IBlockState state = world.getBlockState(posBelow);
 		if( state.getBlock() != GrowthcraftMilkBlocks.churn.getBlock() )
 			return null;
-		TileEntityButterChurn te = GrowthcraftMilkBlocks.churn.getBlock().getTileEntity(world, pos.down());
+		TileEntityButterChurn te = ((BlockButterChurn)GrowthcraftMilkBlocks.churn.getBlock()).getTileEntity(world, pos.down());
 		return te;
 	}
 	

@@ -2,11 +2,12 @@ package growthcraft.milk.shared.processing.churn.user;
 
 import java.io.BufferedReader;
 
+import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import growthcraft.core.shared.config.schema.FluidStackSchema;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
-import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.shared.MilkRegistry;
+import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.processing.churn.IChurnRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -52,19 +53,19 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig
 	{
 		if (recipe == null)
 		{
-			GrowthcraftMilk.logger.error("Invalid recipe");
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Invalid recipe");
 			return;
 		}
 
 		if (recipe.input_fluid == null || recipe.input_fluid.isInvalid())
 		{
-			GrowthcraftMilk.logger.error("Invalid input_fluid {%s}", recipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).error("Invalid input_fluid {%s}", recipe);
 			return;
 		}
 
 		for (IChurnRecipe churnRecipe : recipe.toChurnRecipes())
 		{
-			GrowthcraftMilk.logger.debug("Adding user churn recipe {%s}", churnRecipe);
+			GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding user churn recipe {%s}", churnRecipe);
 			MilkRegistry.instance().churn().addRecipe(churnRecipe);
 		}
 	}
@@ -76,12 +77,12 @@ public class UserChurnRecipesConfig extends AbstractUserJSONConfig
 		{
 			if (recipes.data != null)
 			{
-				GrowthcraftMilk.logger.debug("Adding %d user brewing recipes.", recipes.data.size());
+				GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding %d user brewing recipes.", recipes.data.size());
 				for (UserChurnRecipe recipe : recipes.data) addChurnRecipe(recipe);
 			}
 			else
 			{
-				GrowthcraftMilk.logger.error("Recipes data is invalid!");
+				GrowthcraftLogger.getLogger(Reference.MODID).error("Recipes data is invalid!");
 			}
 		}
 	}

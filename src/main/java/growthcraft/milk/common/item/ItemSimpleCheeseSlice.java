@@ -1,18 +1,13 @@
 package growthcraft.milk.common.item;
 
-import growthcraft.milk.common.handlers.EnumHandler;
 import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems.SimpleCheeseTypes;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
-
-import java.util.List;
 
 public class ItemSimpleCheeseSlice extends ItemFood {
 
@@ -26,20 +21,20 @@ public class ItemSimpleCheeseSlice extends ItemFood {
 
     @Override
     public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
-        for (int i = 0; i < EnumHandler.SimpleCheeseTypes.values().length; i++) {
+        for (int i = 0; i < SimpleCheeseTypes.values().length; i++) {
             subItems.add(new ItemStack(itemIn, 1, i));
         }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        for (int i = 0; i < EnumHandler.SimpleCheeseTypes.values().length; i++) {
+        for (int i = 0; i < SimpleCheeseTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + EnumHandler.SimpleCheeseTypes.values()[i].getName();
+                return this.getUnlocalizedName() + "." + SimpleCheeseTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + EnumHandler.SimpleCheeseTypes.RICOTTA.getName();
+        return super.getUnlocalizedName() + "." + SimpleCheeseTypes.RICOTTA.getName();
     }
 }
