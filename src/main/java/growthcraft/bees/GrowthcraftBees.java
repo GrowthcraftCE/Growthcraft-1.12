@@ -1,8 +1,5 @@
 package growthcraft.bees;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import growthcraft.bees.common.CommonProxy;
 import growthcraft.bees.common.Init;
 import growthcraft.bees.common.lib.config.user.UserBeesConfig;

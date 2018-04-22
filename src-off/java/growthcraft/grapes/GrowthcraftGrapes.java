@@ -9,7 +9,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
+     dependencies = "required-after:"+growthcraft.cellar.shared.Reference.MODID)
 public class GrowthcraftGrapes {
     static final String CLIENT_PROXY_CLASS = "growthcraft.grapes.client.ClientProxy";
     static final String SERVER_PROXY_CLASS = "growthcraft.grapes.common.CommonProxy";
