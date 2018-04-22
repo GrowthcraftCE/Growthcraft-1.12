@@ -54,7 +54,7 @@
   "credits": "",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": ["mod_MinecraftForge", "growthcraft_cellar"],
+  "dependencies": ["mod_MinecraftForge", "growthcraft", "growthcraft_cellar"],
   "parent": "growthcraft"
 },
  {
@@ -69,7 +69,7 @@
    "credits": "",
    "logoFile": "",
    "screenshots": [],
-   "dependencies": ["mod_MinecraftForge", "growthcraft"],
+   "dependencies": ["mod_MinecraftForge", "growthcraft", "growthcraft_cellar"],
    "parent": "growthcraft"
  },
    {
@@ -84,7 +84,7 @@
      "credits": "1.7.10 (Sunconure)",
      "logoFile": "",
      "screenshots": [],
-     "dependencies": ["mod_MinecraftForge", "growthcraft"],
+     "dependencies": ["mod_MinecraftForge", "growthcraft", "growthcraft_cellar"],
      "parent": "growthcraft"
    },
    {

@@ -24,7 +24,8 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
+     dependencies = "required-after:"+growthcraft.core.shared.Reference.MODID)
 public class GrowthcraftCellar {
     static final String CLIENT_PROXY_CLASS = "growthcraft.cellar.client.ClientProxy";
     static final String SERVER_PROXY_CLASS = "growthcraft.cellar.common.CommonProxy";

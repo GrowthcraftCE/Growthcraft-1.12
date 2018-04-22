@@ -89,8 +89,10 @@ Refactoring:
 TODO: Remove all custom event busses, like CELLAR_BUS, MILK_BUS a.s.o.
 TODO: Use new constructor from GrowthcraftItemBase where possible.
 TODO: Move all recipe handling for all GC modules to corresponding init classes.
-TODO: Automatically register all fluid containers with specific capabilities.
+TODO: Core postInit Task: Automatically register all fluid containers to FluidContainerRegistry from all mods with Fluid container capabilities.
 TODO: Add item handler capability to GrowthcraftTileInventoryBase
+TODO: Unified User Apis coding pattern
+TODO: Unified Fluid registry coding pattern
 DONE: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
 DONE: Add fluid handler capability to GrowthcraftTileDeviceBase
 DONE: Revisit Fluid handling of: PREVBlockBrewKettle, BlockFermentBarrel, GrowthcraftBlockContainer
