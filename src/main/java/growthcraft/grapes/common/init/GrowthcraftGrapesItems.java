@@ -1,17 +1,18 @@
 package growthcraft.grapes.common.init;
 
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
-import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
-import growthcraft.grapes.Reference;
 import growthcraft.grapes.common.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.common.handlers.EnumHandler.WineTypes;
 import growthcraft.grapes.common.items.ItemGrape;
 import growthcraft.grapes.common.items.ItemGrapeSeed;
+import growthcraft.grapes.shared.Reference;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class GrowthcraftGrapesItems {
     public static ItemDefinition grape;
@@ -41,12 +42,12 @@ public class GrowthcraftGrapesItems {
 	}
     
     public static void register() {
-    	grape.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+    	grape.getItem().setCreativeTab(tabGrowthcraft);
     	grape.register();
-    	grape_seed.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+    	grape_seed.getItem().setCreativeTab(tabGrowthcraft);
     	grape_seed.register();
 		grapeWine.register(new ResourceLocation(Reference.MODID, "grapewine"));
-		grapeWine.getItem().setCreativeTab(GrowthcraftCore.tabGrowthcraft);
+		grapeWine.getItem().setCreativeTab(tabGrowthcraft);
 		
 		registerOres();
 		registerLoot();

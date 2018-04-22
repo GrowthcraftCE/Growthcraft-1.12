@@ -7,12 +7,12 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import growthcraft.cellar.common.handlers.EnumHandler.EnumYeast;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems.EnumYeast;
 import growthcraft.core.shared.block.GrowthcraftBlockBase;
 import growthcraft.core.shared.item.ItemUtils;
-import growthcraft.grapes.GrowthcraftGrapesConfig;
-import growthcraft.grapes.api.definition.IGrapeType;
-import growthcraft.grapes.utils.GrapeTypeUtils;
+import growthcraft.grapes.common.utils.GrapeTypeUtils;
+import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
+import growthcraft.grapes.shared.definition.IGrapeType;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

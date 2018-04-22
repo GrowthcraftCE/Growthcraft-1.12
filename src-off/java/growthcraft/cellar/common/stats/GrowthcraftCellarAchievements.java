@@ -3,7 +3,7 @@ package growthcraft.cellar.common.stats;
 import java.util.EnumMap;
 import java.util.Map;
 
-import growthcraft.cellar.common.init.GrowthcraftCellarItems;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -24,7 +24,7 @@ public class GrowthcraftCellarAchievements {
 		return INSTANCE;
 	}
 	
-	public void init() {
+	public void preInit() {
 		// OPEN_ADHOC
 		
 		achievements.put(CellarAchievement.GET_DRUNK,

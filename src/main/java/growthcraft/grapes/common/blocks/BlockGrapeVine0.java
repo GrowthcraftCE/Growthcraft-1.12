@@ -6,9 +6,9 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.grapes.GrowthcraftGrapesConfig;
-import growthcraft.grapes.api.definition.IGrapeType;
-import growthcraft.grapes.utils.GrapeTypeUtils;
+import growthcraft.grapes.common.utils.GrapeTypeUtils;
+import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
+import growthcraft.grapes.shared.definition.IGrapeType;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

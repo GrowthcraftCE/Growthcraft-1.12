@@ -1,7 +1,7 @@
 package growthcraft.cellar.common.item;
 
 import growthcraft.cellar.shared.Reference;
-import growthcraft.cellar.common.handlers.EnumHandler.EnumYeast;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems.EnumYeast;
 import growthcraft.core.shared.item.GrowthcraftItemBase;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

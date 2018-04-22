@@ -1,7 +1,7 @@
 package growthcraft.grapes.common.items;
 
-import growthcraft.grapes.Reference;
 import growthcraft.grapes.common.handlers.EnumHandler;
+import growthcraft.grapes.shared.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

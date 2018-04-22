@@ -3,6 +3,7 @@ package growthcraft.cellar.shared.booze.effect;
 import java.util.List;
 import java.util.Random;
 
+import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import growthcraft.core.shared.IAchievement;
 import growthcraft.core.shared.effect.AbstractEffect;
 import net.minecraft.client.resources.I18n;
@@ -19,9 +20,6 @@ import net.minecraft.world.World;
 
 public class EffectTipsy extends AbstractEffect
 {
-	// REVISE_ME 0
-	
-	public static Potion potionTipsy;
 	public static IAchievement achievement;
 	private boolean hasTipsyEffect;
 	private float tipsyChance;
@@ -69,9 +67,9 @@ public class EffectTipsy extends AbstractEffect
 
 			int amplifier = 0;
 			int time = 1200;
-			if (entitylb.isPotionActive(potionTipsy))
+			if (entitylb.isPotionActive(GrowthcraftCellarPotions.potionTipsy))
 			{
-				amplifier = entitylb.getActivePotionEffect(potionTipsy).getAmplifier() + 1;
+				amplifier = entitylb.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getAmplifier() + 1;
 				if (amplifier > 4)
 				{
 					amplifier = 4;
@@ -88,7 +86,7 @@ public class EffectTipsy extends AbstractEffect
 					break;
 			}
 
-			entitylb.addPotionEffect(new PotionEffect(potionTipsy, time, amplifier));
+			entitylb.addPotionEffect(new PotionEffect(GrowthcraftCellarPotions.potionTipsy, time, amplifier));
 
 			if (entitylb instanceof EntityPlayer)
 			{

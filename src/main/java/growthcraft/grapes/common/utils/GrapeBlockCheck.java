@@ -1,4 +1,4 @@
-package growthcraft.grapes.utils;
+package growthcraft.grapes.common.utils;
 
 import growthcraft.grapes.common.init.GrowthcraftGrapesBlocks;
 import net.minecraft.block.Block;

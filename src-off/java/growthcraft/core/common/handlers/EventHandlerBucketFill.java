@@ -6,6 +6,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -77,7 +79,7 @@ public class EventHandlerBucketFill
 	public void addEntry(@Nonnull IBucketEntry entry)
 	{
 		buckets.add(entry);
-		GrowthcraftCore.logger.debug("Added new Bucket Entry {%s}", entry);
+		GrowthcraftLogger.getLogger(Reference.MODID).debug("Added new Bucket Entry {%s}", entry);
 	}
 
 	public EventHandlerBucketFill register(Block block, ItemStack stack)

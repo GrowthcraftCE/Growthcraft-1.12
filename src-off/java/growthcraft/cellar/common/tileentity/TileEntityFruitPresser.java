@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
-import growthcraft.cellar.common.init.GrowthcraftCellarBlocks;
+import growthcraft.cellar.shared.init.GrowthcraftCellarBlocks;
 import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import io.netty.buffer.ByteBuf;

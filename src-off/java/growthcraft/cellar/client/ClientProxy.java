@@ -1,14 +1,14 @@
 package growthcraft.cellar.client;
 
 import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.client.gui.GuiBrewKettle;
 import growthcraft.cellar.client.gui.GuiCultureJar;
 import growthcraft.cellar.client.gui.GuiFermentBarrel;
 import growthcraft.cellar.client.gui.GuiFruitPress;
-import growthcraft.cellar.client.gui.GuiBrewKettle;
 import growthcraft.cellar.common.CommonProxy;
-import growthcraft.cellar.common.handlers.EnumHandler.EnumYeast;
-import growthcraft.cellar.common.init.GrowthcraftCellarBlocks;
-import growthcraft.cellar.common.init.GrowthcraftCellarItems;
+import growthcraft.cellar.common.Init;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems.EnumYeast;
 
 public class ClientProxy extends CommonProxy {
     @Override
@@ -31,8 +31,8 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerRenders() {
     	super.registerRenders();
-    	GrowthcraftCellarItems.registerRenders();
-    	GrowthcraftCellarBlocks.registerRenders();
+    	Init.registerItemRenders();
+    	Init.registerBlockRenders();
     }
 
     @Override
@@ -43,6 +43,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerSpecialRenders() {
     	super.registerSpecialRenders();
-    	GrowthcraftCellarBlocks.registerSpecialRenders();
+    	Init.registerBlockSpecialRenders();
     }
 }

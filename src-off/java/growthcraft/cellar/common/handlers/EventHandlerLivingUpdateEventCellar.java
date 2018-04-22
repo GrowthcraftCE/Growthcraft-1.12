@@ -1,6 +1,6 @@
 package growthcraft.cellar.common.handlers;
 
-import growthcraft.cellar.common.init.GrowthcraftCellarPotions;
+import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;

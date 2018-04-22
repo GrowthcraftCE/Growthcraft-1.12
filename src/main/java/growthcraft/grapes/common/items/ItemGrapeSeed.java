@@ -1,12 +1,12 @@
 package growthcraft.grapes.common.items;
 
-import growthcraft.grapes.Reference;
-import growthcraft.grapes.api.definition.IGrapeType;
 import growthcraft.grapes.common.blocks.BlockGrapeVineBase;
 import growthcraft.grapes.common.handlers.EnumHandler;
 import growthcraft.grapes.common.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.common.init.GrowthcraftGrapesBlocks;
-import growthcraft.grapes.utils.GrapeTypeUtils;
+import growthcraft.grapes.common.utils.GrapeTypeUtils;
+import growthcraft.grapes.shared.Reference;
+import growthcraft.grapes.shared.definition.IGrapeType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.creativetab.CreativeTabs;

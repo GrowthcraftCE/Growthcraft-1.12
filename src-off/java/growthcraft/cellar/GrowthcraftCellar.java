@@ -2,28 +2,27 @@ package growthcraft.cellar;
 
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.CommonProxy;
-import growthcraft.cellar.common.init.*;
+import growthcraft.cellar.common.Init;
+import growthcraft.cellar.common.handlers.EventHandlerLivingUpdateEventCellar;
 import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.modifier.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.lib.network.PacketPipeline;
 import growthcraft.cellar.shared.booze.CellarBoozeBuilderFactory;
 import growthcraft.cellar.shared.config.UserApis;
 import growthcraft.cellar.common.stats.GrowthcraftCellarAchievements;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.eventhandler.EventBus;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCellar {
@@ -36,76 +35,71 @@ public class GrowthcraftCellar {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
     
-    public static CellarBoozeBuilderFactory boozeBuilderFactory;
-    public static UserApis userApis = new UserApis();
-    
     @SideOnly(Side.CLIENT)
     public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
-    public static Logger logger = GrowthcraftLogger.getLogger(Reference.MODID);
-
-	public static EventBus CELLAR_BUS = new EventBus();
-	
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-    	GrowthcraftCellarEffects.preInit();
+    	Init.preInitEffects();
     	
-		userApis.getUserBrewingRecipes()
+    	GrowthcraftCellarApis.userApis = new UserApis();
+		GrowthcraftCellarApis.userApis.getUserBrewingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/brewing.json");
-		userApis.getUserCultureRecipes()
+		GrowthcraftCellarApis.userApis.getUserCultureRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/culturing.json");
-		userApis.getUserFermentingRecipes()
+		GrowthcraftCellarApis.userApis.getUserFermentingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/fermenting.json");
-		userApis.getUserHeatSources()
+		GrowthcraftCellarApis.userApis.getUserHeatSources()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/heatsources.json");
-		userApis.getUserPressingRecipes()
+		GrowthcraftCellarApis.userApis.getUserPressingRecipes()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/pressing.json");
-		userApis.getUserYeastEntries()
+		GrowthcraftCellarApis.userApis.getUserYeastEntries()
 			.setConfigFile(event.getModConfigurationDirectory(), "growthcraft/cellar/yeast.json");
     	
+    	GrowthcraftCellarApis.boozeBuilderFactory = new CellarBoozeBuilderFactory(GrowthcraftCellarApis.userApis);
+
     	GrowthcraftModifierFunctions.registerBoozeModifierFunctions();
-    	boozeBuilderFactory = new CellarBoozeBuilderFactory(userApis);
     	
-    	GrowthcraftCellarHeatsources.init();
-    	GrowthcraftCellarHeatsources.register();
+    	Init.preInitHeatSources();
+    	Init.registerHeatSources();
 
-        GrowthcraftCellarBlocks.init();
-        GrowthcraftCellarBlocks.register();
+        Init.preInitBlocks();
+        Init.registerBlocks();
 
-        GrowthcraftCellarItems.init();
-        GrowthcraftCellarItems.register();
+        Init.preInitItems();
+        Init.registerItems();
 
         proxy.preInit();
         proxy.registerTitleEntities();
-        GrowthcraftCellarAchievements.instance().init();
-        GrowthcraftCellarPotions.registerPotions();
+        GrowthcraftCellarAchievements.instance().preInit();
+        Init.registerPotions();
         
-        userApis.preInit();
-        userApis.register();
+        GrowthcraftCellarApis.userApis.preInit();
+        GrowthcraftCellarApis.userApis.register();
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-    	GrowthcraftCellarYeasts.init();
-    	GrowthcraftCellarYeasts.register();
+    	Init.initYeasts();
+    	Init.registerYeasts();
     	packetPipeline.initialise();
     	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
-        GrowthcraftCellarRecipes.registerCraftingRecipes();
+        Init.registerRecipes();
         proxy.init();
         
-        userApis.init();
+        GrowthcraftCellarApis.userApis.init();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
     	// ... Any custom event buses
     	
-    	userApis.loadConfigs();
+    	GrowthcraftCellarApis.userApis.loadConfigs();
     	packetPipeline.postInitialise();
-    	userApis.postInit();
-    	GrowthcraftCellarEvents.registerEvents();
+    	GrowthcraftCellarApis.userApis.postInit();
+		MinecraftForge.EVENT_BUS.register(new EventHandlerLivingUpdateEventCellar());
     	CellarRegistry.onPostInit();
     }
     

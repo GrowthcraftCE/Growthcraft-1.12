@@ -1,6 +1,6 @@
 package growthcraft.core.common;
 
-import static growthcraft.core.GrowthcraftCore.tabGrowthcraft;
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 import growthcraft.core.common.block.BlockRopeFence;
 import growthcraft.core.common.block.BlockRopeKnot;

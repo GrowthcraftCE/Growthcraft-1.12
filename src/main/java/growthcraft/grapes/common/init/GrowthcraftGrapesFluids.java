@@ -1,11 +1,11 @@
 package growthcraft.grapes.common.init;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
+import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
 import growthcraft.cellar.shared.booze.BoozeUtils;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
@@ -14,10 +14,10 @@ import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
 import growthcraft.core.shared.utils.TickUtils;
-import growthcraft.grapes.GrowthcraftGrapesConfig;
-import growthcraft.grapes.Reference;
 import growthcraft.grapes.common.handlers.EnumHandler.GrapeTypes;
 import growthcraft.grapes.common.handlers.EnumHandler.WineTypes;
+import growthcraft.grapes.shared.Reference;
+import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
@@ -97,21 +97,21 @@ public class GrowthcraftGrapesFluids
 			fs[i] = grapeWineBooze[i].asFluidStack();
 		}
 		
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_JUICE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_JUICE.ordinal()].getFluid())
 			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				GrapeTypes.PURPLE.asStack(),
 				TickUtils.seconds(2),
 				40,
 				Residue.newDefault(0.3F));
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_JUICE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_JUICE.ordinal()].getFluid())
 			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				GrapeTypes.RED.asStack(),
 				TickUtils.seconds(2),
 				40,
 				Residue.newDefault(0.3F));
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_JUICE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_JUICE.ordinal()].getFluid())
 			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				GrapeTypes.GREEN.asStack(),
@@ -120,21 +120,21 @@ public class GrowthcraftGrapesFluids
 				Residue.newDefault(0.3F));
 
 		// Brewers Yeast, Nether Wart
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED)
 			.fermentsFrom(fs[WineTypes.PURPLE_JUICE.ordinal()], new OreItemStacks("yeastBrewers"), fermentTime)
 			.fermentsFrom(fs[WineTypes.PURPLE_JUICE.ordinal()], new ItemStack(Items.NETHER_WART), (int)(fermentTime * 0.66))
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED)
 			.fermentsFrom(fs[WineTypes.RED_JUICE.ordinal()], new OreItemStacks("yeastBrewers"), fermentTime)
 			.fermentsFrom(fs[WineTypes.RED_JUICE.ordinal()], new ItemStack(Items.NETHER_WART), (int)(fermentTime * 0.66))
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED)
 			.fermentsFrom(fs[WineTypes.GREEN_JUICE.ordinal()], new OreItemStacks("yeastBrewers"), fermentTime)
 			.fermentsFrom(fs[WineTypes.GREEN_JUICE.ordinal()], new ItemStack(Items.NETHER_WART), (int)(fermentTime * 0.66))
@@ -143,21 +143,21 @@ public class GrowthcraftGrapesFluids
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 
 		// Glowstone Dust
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POTENT.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POTENT.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.07f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_POTENT.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_POTENT.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[WineTypes.RED_WINE.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 			.fermentsFrom(fs[WineTypes.RED_WINE_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.07f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_POTENT.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_POTENT.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
@@ -166,21 +166,21 @@ public class GrowthcraftGrapesFluids
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 
 		// Redstone Dust
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_EXTENDED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_EXTENDED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_EXTENDED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_EXTENDED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[WineTypes.RED_WINE.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 			.fermentsFrom(fs[WineTypes.RED_WINE_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_EXTENDED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_EXTENDED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
@@ -189,7 +189,7 @@ public class GrowthcraftGrapesFluids
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 
 		// Ambrosia - Ethereal Yeast
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_AMBROSIA.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_AMBROSIA.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
@@ -197,7 +197,7 @@ public class GrowthcraftGrapesFluids
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.053f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.HEALTH_BOOST, TickUtils.minutes(3), 0)
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_AMBROSIA.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_AMBROSIA.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[WineTypes.RED_WINE_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
 			.fermentsFrom(fs[WineTypes.RED_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
@@ -205,7 +205,7 @@ public class GrowthcraftGrapesFluids
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.053f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.HEALTH_BOOST, TickUtils.minutes(3), 0)
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_AMBROSIA.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_AMBROSIA.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
@@ -215,7 +215,7 @@ public class GrowthcraftGrapesFluids
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 		
 		// Port Wine - Bayanus Yeast
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_PORTWINE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_PORTWINE.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()].getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
@@ -225,7 +225,7 @@ public class GrowthcraftGrapesFluids
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.20f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 2);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_PORTWINE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_PORTWINE.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[WineTypes.RED_WINE.ordinal()].getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
@@ -235,7 +235,7 @@ public class GrowthcraftGrapesFluids
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.20f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 2);		
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_PORTWINE.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_PORTWINE.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[WineTypes.GREEN_WINE.ordinal()].getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
@@ -247,7 +247,7 @@ public class GrowthcraftGrapesFluids
 				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 2);		
 
 		// Intoxicated Wine
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_INTOXICATED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_INTOXICATED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
@@ -256,7 +256,7 @@ public class GrowthcraftGrapesFluids
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.RESISTANCE, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.WEAKNESS, TickUtils.minutes(3), 2))));
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_INTOXICATED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_INTOXICATED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[WineTypes.RED_WINE_POTENT.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
 			.fermentsFrom(fs[WineTypes.RED_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
@@ -265,7 +265,7 @@ public class GrowthcraftGrapesFluids
 				.addEffect(new EffectWeightedRandomList()
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.RESISTANCE, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.WEAKNESS, TickUtils.minutes(3), 2))));
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_INTOXICATED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_INTOXICATED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
@@ -275,7 +275,7 @@ public class GrowthcraftGrapesFluids
 					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.RESISTANCE, TickUtils.minutes(3), 2)))
 					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.WEAKNESS, TickUtils.minutes(3), 2))));
 		
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POISONED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
@@ -287,7 +287,7 @@ public class GrowthcraftGrapesFluids
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0)
 				.toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_POISONED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 			.fermentsFrom(fs[WineTypes.RED_WINE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
 			.fermentsFrom(fs[WineTypes.RED_WINE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
@@ -299,7 +299,7 @@ public class GrowthcraftGrapesFluids
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0)
 				.toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
-		GrowthcraftCellar.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_POISONED.ordinal()].getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)

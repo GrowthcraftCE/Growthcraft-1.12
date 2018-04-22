@@ -1,12 +1,17 @@
-package growthcraft.cellar.common.handlers;
+package growthcraft.cellar.shared.init;
 
-import growthcraft.cellar.common.init.GrowthcraftCellarItems;
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;
+import growthcraft.core.shared.definition.ItemDefinition;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
-public class EnumHandler {
+public class GrowthcraftCellarItems {
+	private GrowthcraftCellarItems() {}
+	
+	public static ItemDefinition chievItemDummy;
+	public static ItemDefinition yeast;
+	
 	public enum EnumYeast implements IStringSerializable, IItemStackFactory, IObjectVariant
 	{
 		BREWERS,
@@ -27,7 +32,7 @@ public class EnumHandler {
 		@Override
 		public ItemStack asStack(int size)
 		{
-			return GrowthcraftCellarItems.yeast.asStack(size, ordinal());
+			return yeast.asStack(size, ordinal());
 		}
 
 		/**

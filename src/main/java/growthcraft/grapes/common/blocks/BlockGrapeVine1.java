@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.BlockFlags;
+import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
 import growthcraft.core.shared.block.BlockCheck;
-import growthcraft.grapes.GrowthcraftGrapesConfig;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;

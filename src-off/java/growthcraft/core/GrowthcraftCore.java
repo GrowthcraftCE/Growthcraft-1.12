@@ -1,17 +1,12 @@
 package growthcraft.core;
 
-import org.apache.logging.log4j.Logger;
-
-import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.GrowthcraftCoreApis;
 import growthcraft.core.shared.Reference;
-import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
-import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.Init;
 import growthcraft.core.common.creativetabs.TabGrowthcraft;
 import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -26,19 +21,16 @@ public class GrowthcraftCore {
 	public static final String CLIENT_PROXY_CLASS = "growthcraft.core.client.ClientProxy";
 	public static final String SERVER_PROXY_CLASS = "growthcraft.core.common.CommonProxy";
 	
-    public static final CreativeTabs tabGrowthcraft = new TabGrowthcraft();
-
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftCore instance;
 
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
     
-    // REVISE_TEAM
-    public static Logger logger = GrowthcraftLogger.getLogger(Reference.MODID);
-
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+    	GrowthcraftCoreApis.tabGrowthcraft = new TabGrowthcraft();
+    	
         Init.preInitBlocks();
         Init.registerBlocks();
         

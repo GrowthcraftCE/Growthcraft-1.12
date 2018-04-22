@@ -13,6 +13,7 @@ import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewKettle extends DeviceBase
@@ -150,7 +151,7 @@ public class BrewKettle extends DeviceBase
 		outputFluidSlot.fill(recipe.asFluidStack(), true);
 		brewingSlot.consume(recipe.getInputItemStack());
 		markForUpdate();
-		GrowthcraftCellar.CELLAR_BUS.post(new EventBrewed(parent, recipe));
+		MinecraftForge.EVENT_BUS.post(new EventBrewed(parent, recipe));
 	}
 
 	public void update()

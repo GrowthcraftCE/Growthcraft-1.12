@@ -1,4 +1,4 @@
-package growthcraft.grapes;
+package growthcraft.grapes.shared.config;
 
 public class GrowthcraftGrapesConfig {
 	// OPEN_ADHOC

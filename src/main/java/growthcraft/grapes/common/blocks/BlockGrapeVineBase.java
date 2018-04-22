@@ -7,8 +7,8 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.ICropDataProvider;
+import growthcraft.grapes.common.utils.GrapeBlockCheck;
 import growthcraft.core.shared.block.BlockCheck;
-import growthcraft.grapes.utils.GrapeBlockCheck;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;

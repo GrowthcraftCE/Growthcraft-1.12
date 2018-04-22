@@ -2,7 +2,6 @@ package growthcraft.core.shared.block;
 
 import java.util.Random;
 
-import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

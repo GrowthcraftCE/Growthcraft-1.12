@@ -1,4 +1,4 @@
-package growthcraft.grapes.api.definition;
+package growthcraft.grapes.shared.definition;
 
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;

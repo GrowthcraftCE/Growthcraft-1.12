@@ -1,7 +1,5 @@
 package growthcraft.cellar.common;
 
-import growthcraft.cellar.common.init.GrowthcraftCellarBlocks;
-
 public class CommonProxy {
 
     public void preInit() {
@@ -20,7 +18,7 @@ public class CommonProxy {
     }
 
     public void registerTitleEntities() {
-    	GrowthcraftCellarBlocks.registerTileEntities();
+    	Init.registerTileEntities();
     }
 
 }
