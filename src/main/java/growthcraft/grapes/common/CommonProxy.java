@@ -1,6 +1,7 @@
 package growthcraft.grapes.common;
 
 public class CommonProxy {
+	// REVISE_TEAM
 
     public void init() {
         registerModelBakeryVariants();
@@ -15,7 +16,6 @@ public class CommonProxy {
     public void registerRenders() { }
 
     public void registerTileEntities() {
-//        GameRegistry.registerTileEntity(TileEntityGrapeVineFruit.class, Reference.MODID + ":grape_vine_fruit");
     }
 
     public void registerModelBakeryVariants() { }

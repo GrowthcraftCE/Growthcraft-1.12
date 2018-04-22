@@ -1,27 +1,25 @@
 package growthcraft.grapes.client;
 
 import growthcraft.grapes.common.CommonProxy;
-import growthcraft.grapes.common.init.GrowthcraftGrapesFluids;
-import growthcraft.grapes.common.init.GrowthcraftGrapesItems;
-import net.minecraftforge.fml.client.registry.ClientRegistry;
+import growthcraft.grapes.common.Init;
 
 public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
     	super.init();
-    	GrowthcraftGrapesItems.registerItemColorHandlers();
+    	Init.registerItemColorHandlers();
     }
 
     @Override
     public void registerRenders() {
-        GrowthcraftGrapesItems.registerRenders();
-        GrowthcraftGrapesFluids.registerRenders();
+        Init.registerItemRenders();
+        Init.registerFluidRenders();
     }
 
     @Override
     public void registerModelBakeryVariants() {
-        GrowthcraftGrapesItems.registerItemVariants();
+        Init.registerItemVariants();
     }
 
     @Override

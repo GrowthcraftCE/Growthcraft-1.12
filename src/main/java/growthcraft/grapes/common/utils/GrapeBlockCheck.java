@@ -1,6 +1,6 @@
 package growthcraft.grapes.common.utils;
 
-import growthcraft.grapes.common.init.GrowthcraftGrapesBlocks;
+import growthcraft.grapes.shared.init.GrowthcraftGrapesBlocks;
 import net.minecraft.block.Block;
 
 public class GrapeBlockCheck

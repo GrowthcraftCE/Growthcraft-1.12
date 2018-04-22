@@ -10,6 +10,8 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
@@ -52,11 +54,13 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 		GameRegistry.register(getItem());
 	}
 	
+	@SideOnly(Side.CLIENT)
     public void registerRender() {
         ModelLoader.setCustomModelResourceLocation(getItem(), 0,
                 new ModelResourceLocation(getItem().getRegistryName(), "inventory"));
     }
 
+	@SideOnly(Side.CLIENT)
     public void registerRender(int meta, String fileName) {
     	String modID = getItem().getRegistryName().getResourceDomain();
     	
@@ -64,11 +68,13 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
                 new ModelResourceLocation(new ResourceLocation(modID, fileName), "inventory"));
     }
     
+	@SideOnly(Side.CLIENT)
     public <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerRenders(Class<ET> clazz) {
     	ET[] values = clazz.getEnumConstants();
     	registerRenders(values);
     }
     
+	@SideOnly(Side.CLIENT)
     @SuppressWarnings("unchecked")
 	public <ET extends IObjectVariant & IStringSerializable> void registerRenders(ET ... variants) {
     	ResourceLocation itemResloc = getItem().getRegistryName();
@@ -78,11 +84,13 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
     	}
     }
     
+	@SideOnly(Side.CLIENT)
     public <ET extends Enum<?> & IStringSerializable> void registerModelBakeryVariants(Class<ET> clazz) {
     	ET[] values = clazz.getEnumConstants();
     	registerModelBakeryVariants(values);
     }
     
+	@SideOnly(Side.CLIENT)
     @SuppressWarnings("unchecked")
 	public <ET extends IStringSerializable> void registerModelBakeryVariants(ET ... variants) {
     	ResourceLocation itemResloc = getItem().getRegistryName();
