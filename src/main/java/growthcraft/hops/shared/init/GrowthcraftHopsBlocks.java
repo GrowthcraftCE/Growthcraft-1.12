@@ -1,4 +1,4 @@
-package growthcraft.hops.init;
+package growthcraft.hops.shared.init;
 
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.core.shared.definition.BlockDefinition;

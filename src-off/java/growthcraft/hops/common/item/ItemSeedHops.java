@@ -1,8 +1,8 @@
 package growthcraft.hops.common.item;
 
 import growthcraft.core.shared.block.BlockCheck;
-import growthcraft.hops.init.GrowthcraftHopsBlocks;
 import growthcraft.hops.shared.Reference;
+import growthcraft.hops.shared.init.GrowthcraftHopsBlocks;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
