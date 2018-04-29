@@ -9,6 +9,7 @@ import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,6 +19,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -81,6 +84,15 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
+    	proxy.postInit();
     }
+    
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void registerModels(ModelRegistryEvent event)
+	{
+        Init.registerItemRenders();
+        Init.registerBlockRenders();
+	}
 
 }

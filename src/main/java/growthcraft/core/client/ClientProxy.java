@@ -7,12 +7,6 @@ import growthcraft.core.common.Init;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void preInit() {
-		super.preInit();
-        registerRenders();
-	}
-	
-	@Override
 	public void init() {
 		super.init();
         registerSpecialRenders();
@@ -24,11 +18,6 @@ public class ClientProxy extends CommonProxy {
     	registerModelBakeryVariants();
     }
 	
-    public void registerRenders() {
-        Init.registerItemRenders();
-        Init.registerBlockRenders();
-    }
-
     public void registerModelBakeryVariants() {
     	GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(GrowthcraftCoreItems.CrowbarTypes.class);
     }

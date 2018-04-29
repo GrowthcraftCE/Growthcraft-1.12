@@ -14,6 +14,10 @@ public class CommonProxy {
     public void init() {
         GameRegistry.registerWorldGenerator(new BlockSaltGeneration(), 0);
     }
+    
+	public void postInit() {
+
+	}
 
     public void registerTitleEntities() {
         GameRegistry.registerTileEntity(TileEntityRopeKnot.class, Reference.MODID + ":rope_knot");
@@ -22,4 +26,6 @@ public class CommonProxy {
     public void postRegisterItems() {
     	
     }
+
+
 }
