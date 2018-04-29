@@ -40,6 +40,7 @@ public class FluidFactory
 		private GrowthcraftBlockFluidDefinition block;
 		private ItemTypeDefinition<ItemBottleFluid> bottle;
 		private ItemTypeDefinition<ItemFoodBottleFluid> foodBottle;
+		private boolean hasBucket = false;
 		private ItemStack bucketStack;
 		private int itemColor = 0xFFFFFF;
 
@@ -164,6 +165,13 @@ public class FluidFactory
 				FluidContainerRegistry.registerFluidContainer(fluidStack, foodBottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}
 			
+			if( hasBucket )
+			{
+				fluid.registerBucketItem();
+				if (bucketStack == null )
+					bucketStack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid.getFluid());
+			}
+			
 			return this;
 		}
 		
@@ -270,7 +278,7 @@ public class FluidFactory
 			if( !FluidRegistry.isFluidRegistered(fluid) )
 				details.fluid.register();
 			if( NumUtils.isFlagged(defaultFeatures, FEATURE_BUCKET) )
-				details.fluid.registerBucketItem();
+				details.hasBucket = true;
 			
 			if( details.block == null && fluidBlockClazz != null ) {
 				try {
@@ -289,9 +297,6 @@ public class FluidFactory
 			
 			if (details.foodBottle == null && NumUtils.isFlagged(defaultFeatures, FEATURE_FOOD_BOTTLE))
 				details.foodBottle = new ItemTypeDefinition<ItemFoodBottleFluid>(new ItemFoodBottleFluid(fluid));
-	
-			if (details.bucketStack == null && NumUtils.isFlagged(defaultFeatures, FEATURE_BUCKET))
-				details.bucketStack = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, fluid);
 
 			details.refreshItemColor();
 			details.refreshBlockColor();

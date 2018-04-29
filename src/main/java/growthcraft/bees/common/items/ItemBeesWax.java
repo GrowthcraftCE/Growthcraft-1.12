@@ -17,9 +17,9 @@ public class ItemBeesWax extends GrowthcraftItemBase {
     }
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for ( int i = 0; i < BeesWaxTypes.values().length; i++ ) {
-            subItems.add(new ItemStack(itemIn, 1, i));
+            subItems.add(new ItemStack(this, 1, i));
         }
     }
 

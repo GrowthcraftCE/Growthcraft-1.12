@@ -1,25 +1,24 @@
 package growthcraft.bees.common;
 
 public class CommonProxy {
+	// REVISE_TEAM
 
     public void init() {
-        registerModelBakeryVariants();
-        registerSpecialRenders();
     }
 
     public void preInit() {
-        registerRenders();
         registerTileEntities();
     }
 
-    public void registerRenders() { }
-
+	public void postInit() {
+		
+	}
+	
     public void registerTileEntities() {
     	Init.registerTileEntities();
     }
 
-    public void registerModelBakeryVariants() { }
-
-    public void registerSpecialRenders() { }
+	public void postRegisterItems() {
+	}
 
 }

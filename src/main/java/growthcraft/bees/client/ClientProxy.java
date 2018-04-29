@@ -11,25 +11,25 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init() {
+		super.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, GrowthcraftBees.guiProvider);
 		
 		GrowthcraftBees.guiProvider.register("growthcraft_bees:bee_box", GuiBeeBox.class);
 		Init.registerFluidColorHandlers();
+		registerSpecialRenders();
 	}
 	
-    @Override
-    public void registerRenders() {
-    	Init.registerItemRenders();
-    	Init.registerBlockRender();
-    	Init.registerFluidRender();
+	@Override
+    public void postRegisterItems() {
+    	super.postRegisterItems();
+    	registerModelBakeryVariants();
     }
-
-    @Override
+	
     public void registerModelBakeryVariants() {
     	Init.registerItemVariants();
     }
 
-    @Override
     public void registerSpecialRenders() {
+
     }
 }
