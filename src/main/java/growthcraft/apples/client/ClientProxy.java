@@ -9,32 +9,27 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit() {
+    	super.preInit();
         Init.setCustomBlockStateMappers();
-        registerRenders();
     }
 
-    @Override
-    public void init() {
-        Init.registerBlockColorHandlers();
-
-        registerModelBakeryVariants();
+	@Override
+	public void init() {
+		super.init();
+		Init.registerBlockColorHandlers();
         registerSpecialRenders();
+	}
+	
+	@Override
+    public void postRegisterItems() {
+    	super.postRegisterItems();
+    	registerModelBakeryVariants();
     }
-
-    @Override
-    public void registerRenders() {
-        Init.registerBlockRenders();
-        Init.registerItemRenders();
-    }
-
-    @Override
+	
     public void registerModelBakeryVariants() {
-        // Not needed at this time.
     }
 
-    @Override
     public void registerSpecialRenders() {
-        // Not needed at this time.
     }
 
 }

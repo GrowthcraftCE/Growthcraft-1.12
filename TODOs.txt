@@ -105,4 +105,5 @@ TODO: Port recipes.
 TODO: Add cellar Advancements.
 TODO: Handle alpha for tile entity rendering.
 TODO: Reenable Bucket to bottle filling for boozes. 
+TODO: BUG: Crowbar is displayed in the slot for erasing items at Creative GUI.
 DONE: BUG: Right shift+clicking an item in inventory doesn't redraw GUI. 

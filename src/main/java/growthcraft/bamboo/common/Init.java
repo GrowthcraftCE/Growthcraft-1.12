@@ -35,12 +35,14 @@ import net.minecraft.block.BlockSlab;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class Init {
 	private Init() {}
@@ -51,7 +53,7 @@ public class Init {
 	// Blocks
 	////////
 	
-    public static void initBlocks() {
+    public static void preInitBlocks() {
     	GrowthcraftBambooBlocks.bambooPlank = new BlockDefinition( new BlockBambooPlank() );
     	GrowthcraftBambooBlocks.bambooSlabHalf = new BlockTypeDefinition<BlockSlab>( new BlockBambooSlabHalf("bamboo_slab_half") );
     	GrowthcraftBambooBlocks.bambooSlabDouble = new BlockTypeDefinition<BlockSlab>( new BlockBambooSlabDouble("bamboo_slab_double" ) );
@@ -64,25 +66,39 @@ public class Init {
     	GrowthcraftBambooBlocks.blockBambooDoor = new BlockDefinition( new BlockBambooDoor("bamboo_door") );
     }
 
-    public static void registerBlocks() {
+    public static void registerBlocks(IForgeRegistry<Block> registry) {
     	GrowthcraftBambooBlocks.bambooPlank.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooPlank.register(true);
+    	GrowthcraftBambooBlocks.bambooPlank.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooSlabHalf.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooSlabHalf.register(new ItemSlab(GrowthcraftBambooBlocks.bambooSlabHalf.getBlock(), GrowthcraftBambooBlocks.bambooSlabHalf.getBlock(), GrowthcraftBambooBlocks.bambooSlabDouble.getBlock()));
-    	GrowthcraftBambooBlocks.bambooSlabDouble.register(false);
+    	GrowthcraftBambooBlocks.bambooSlabHalf.registerBlock(registry);
+    	GrowthcraftBambooBlocks.bambooSlabDouble.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooStairs.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooStairs.register(true);
+    	GrowthcraftBambooBlocks.bambooStairs.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooFence.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooFence.register(true);
+    	GrowthcraftBambooBlocks.bambooFence.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooFenceGate.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooFenceGate.register(true);
+    	GrowthcraftBambooBlocks.bambooFenceGate.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooLeaves.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooLeaves.register(true);
+    	GrowthcraftBambooBlocks.bambooLeaves.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooStalk.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooStalk.register(true);
+    	GrowthcraftBambooBlocks.bambooStalk.registerBlock(registry);
     	GrowthcraftBambooBlocks.bambooShoot.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooBlocks.bambooShoot.register(true);
-    	GrowthcraftBambooBlocks.blockBambooDoor.register(false);
+    	GrowthcraftBambooBlocks.bambooShoot.registerBlock(registry);
+    	GrowthcraftBambooBlocks.blockBambooDoor.registerBlock(registry);
+    }
+    
+    public static void registerBlockItems(IForgeRegistry<Item> registry) {
+    	GrowthcraftBambooBlocks.bambooPlank.registerBlockItem(registry);
+    	GrowthcraftBambooBlocks.bambooSlabHalf.registerBlockItem(registry,
+    			new ItemSlab(GrowthcraftBambooBlocks.bambooSlabHalf.getBlock(),
+    					     GrowthcraftBambooBlocks.bambooSlabHalf.getBlock(),
+    					     GrowthcraftBambooBlocks.bambooSlabDouble.getBlock()));
+    	GrowthcraftBambooBlocks.bambooStairs.registerBlockItem(registry);
+    	GrowthcraftBambooBlocks.bambooFence.registerBlockItem(registry);
+    	GrowthcraftBambooBlocks.bambooFenceGate.registerBlockItem(registry);
+    	GrowthcraftBambooBlocks.bambooLeaves.registerBlockItem(registry);
+    	GrowthcraftBambooBlocks.bambooStalk.registerBlockItem(registry);
+    	GrowthcraftBambooBlocks.bambooShoot.registerBlockItem(registry);
     }
 
     public static void registerBlockRenders() {
@@ -119,19 +135,19 @@ public class Init {
 	// Items
 	////////
 	
-    public static void initItems() {
+    public static void preInitItems() {
     	GrowthcraftBambooItems.bambooStick = new ItemDefinition( new ItemBambooStick("bamboo_stick") );
     	GrowthcraftBambooItems.bambooCoal = new ItemDefinition( new ItemBambooCoal("bamboo_coal") );
     	GrowthcraftBambooItems.itemBambooDoor = new ItemDefinition( new ItemBambooDoor("bamboo_door_item", GrowthcraftBambooBlocks.blockBambooDoor.getBlock()) );
     }
 
-    public static void registerItems() {
+    public static void registerItems(IForgeRegistry<Item> registry) {
     	GrowthcraftBambooItems.bambooStick.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooItems.bambooStick.register();
+    	GrowthcraftBambooItems.bambooStick.registerItem(registry);
     	GrowthcraftBambooItems.bambooCoal.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooItems.bambooCoal.register();
+    	GrowthcraftBambooItems.bambooCoal.registerItem(registry);
     	GrowthcraftBambooItems.itemBambooDoor.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftBambooItems.itemBambooDoor.register();
+    	GrowthcraftBambooItems.itemBambooDoor.registerItem(registry);
     }
 
     public static void registerItemRenders() {
