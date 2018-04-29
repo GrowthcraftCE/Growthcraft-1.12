@@ -101,4 +101,6 @@ DONE: Add Grapewine name enum.
 ------------
 Porting to 1.12.2:
 ------------
+TODO: Port recipes.
+TODO: Add cellar Advancements.
 TODO: Reenable Bucket to bottle filling for boozes. 
