@@ -7,17 +7,19 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
+	public void preInit() {
+        registerTitleEntities();
+	}
+	
     public void init() {
         GameRegistry.registerWorldGenerator(new BlockSaltGeneration(), 0);
     }
 
-    public void registerRenders() { }
-
-    public void registerModelBakeryVariants() { }
-
-    public void registerSpecialRenders() {}
-
     public void registerTitleEntities() {
         GameRegistry.registerTileEntity(TileEntityRopeKnot.class, Reference.MODID + ":rope_knot");
+    }
+    
+    public void postRegisterItems() {
+    	
     }
 }

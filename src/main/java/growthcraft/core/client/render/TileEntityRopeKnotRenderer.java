@@ -13,8 +13,10 @@ import net.minecraftforge.items.IItemHandler;
 public class TileEntityRopeKnotRenderer extends TileEntitySpecialRenderer<TileEntityRopeKnot> {
 
     @Override
-    public void renderTileEntityAt(TileEntityRopeKnot te, double x, double y, double z, float partialTicks, int destroyStage) {
-        super.renderTileEntityAt(te, x, y, z, partialTicks, destroyStage);
+    public void render(TileEntityRopeKnot te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        super.render(te, x, y, z, partialTicks, destroyStage, alpha);
+        
+        // TODO: Handle alpha!
 
         GlStateManager.pushMatrix();
         {

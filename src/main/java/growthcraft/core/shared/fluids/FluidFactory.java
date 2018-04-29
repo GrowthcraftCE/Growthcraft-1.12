@@ -153,13 +153,13 @@ public class FluidFactory
 		{
 			if (bottle != null)
 			{
-				bottle.register(registry, new ResourceLocation(modID, "bottlefluid_" + basename));
+				bottle.registerItem(registry, new ResourceLocation(modID, "bottlefluid_" + basename));
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}
 			if (foodBottle != null)
 			{
-				foodBottle.register(registry, new ResourceLocation(modID, "bottlefluid_" + basename));
+				foodBottle.registerItem(registry, new ResourceLocation(modID, "bottlefluid_" + basename));
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, foodBottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}

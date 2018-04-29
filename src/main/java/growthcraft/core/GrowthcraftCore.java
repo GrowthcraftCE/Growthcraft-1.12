@@ -7,13 +7,20 @@ import growthcraft.core.common.Init;
 import growthcraft.core.common.creativetabs.TabGrowthcraft;
 import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftCore {
@@ -27,28 +34,48 @@ public class GrowthcraftCore {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
     
+	@Mod.EventHandler
+	public void construct(FMLConstructionEvent event)
+	{
+		GrowthcraftCoreApis.tabGrowthcraft = new TabGrowthcraft();
+		MinecraftForge.EVENT_BUS.register(this);
+	}
+    
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	GrowthcraftCoreApis.tabGrowthcraft = new TabGrowthcraft();
-    	
         Init.preInitBlocks();
-        Init.registerBlocks();
-        
         Init.preInitItems();
-        Init.registerItems();
         
-        proxy.registerRenders();
-        proxy.registerTitleEntities();
+        proxy.preInit();
         
         RecipeSorter.register("minecraft:shapeless_comparator", ShapelessItemComparableRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
         RecipeSorter.register("minecraft:shapeless_multi", ShapelessMultiRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
     }
+    
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event)
+	{
+		IForgeRegistry<Block> registry = event.getRegistry();
+
+        Init.registerBlocks(registry);
+	}
+
+	@SubscribeEvent
+	public void registerItems(RegistryEvent.Register<Item> event)
+	{
+		IForgeRegistry<Item> registry = event.getRegistry();
+		
+        Init.registerBlockItems(registry);
+        Init.registerItems(registry);
+        
+        proxy.postRegisterItems();
+        
+        Init.registerBlockOres();
+	}
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         proxy.init();
-        proxy.registerSpecialRenders();
-        proxy.registerModelBakeryVariants();
         Init.registerRecipes();
     }
 

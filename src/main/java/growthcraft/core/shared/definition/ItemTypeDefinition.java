@@ -43,14 +43,14 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	/**
 	 * @param name - item name
 	 */
-	public void register(IForgeRegistry<Item> registry, ResourceLocation name)
+	public void registerItem(IForgeRegistry<Item> registry, ResourceLocation name)
 	{
 		getItem().setUnlocalizedName(name.getResourcePath());
 		getItem().setRegistryName(name);
-		register(registry);
+		registerItem(registry);
 	}
 	
-	public void register(IForgeRegistry<Item> registry)
+	public void registerItem(IForgeRegistry<Item> registry)
 	{
 		registry.register(getItem());
 	}

@@ -5,18 +5,34 @@ import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.Init;
 
 public class ClientProxy extends CommonProxy {
-    @Override
+
+	@Override
+	public void preInit() {
+		super.preInit();
+        registerRenders();
+	}
+	
+	@Override
+	public void init() {
+		super.init();
+        registerSpecialRenders();
+	}
+	
+	@Override
+    public void postRegisterItems() {
+    	super.postRegisterItems();
+    	registerModelBakeryVariants();
+    }
+	
     public void registerRenders() {
         Init.registerItemRenders();
         Init.registerBlockRenders();
     }
 
-    @Override
     public void registerModelBakeryVariants() {
     	GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(GrowthcraftCoreItems.CrowbarTypes.class);
     }
 
-    @Override
     public void registerSpecialRenders() {
         // TileEntitySpecialRenderer for RopeKnot to display the fence post that it was tied around.
         // Still needs work.
