@@ -19,6 +19,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
@@ -77,9 +78,10 @@ public class BlockCheesePress extends BlockOrientable {
     
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+		ItemStack held = playerIn.getHeldItem(hand);
 		if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ))
 			return true;
-		if (GrowthcraftMilkConfig.cheesePressHandOperated)
+		if (GrowthcraftMilkConfig.cheesePressHandOperated && held.isEmpty() )
 		{
 			if (!playerIn.isSneaking())
 			{
@@ -88,7 +90,7 @@ public class BlockCheesePress extends BlockOrientable {
 				{
 					if (cheesePress.toggle())
 					{
-//						world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
+//							world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
 						worldIn.playSound((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
 					}
 					return true;

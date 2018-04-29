@@ -133,16 +133,35 @@ public class GrowthcraftFluidUtils
 	{
 		if (ItemUtils.isEmpty(held)) return false;
 		
-		FluidActionResult fac = FluidUtil.tryEmptyContainer(held, tank, Integer.MAX_VALUE, player, false);
-		if( FluidActionResult.FAILURE.equals( fac ) )
-			return false;
-
-		if (!world.isRemote)
-		{
-			fac = FluidUtil.tryEmptyContainer(held, tank, Integer.MAX_VALUE, player, true);
+		FluidStack heldContents = FluidUtil.getFluidContained(held);
+		FluidActionResult fac = null;
+		
+		if( heldContents == null ) {
+			heldContents = FluidContainerRegistry.getFluidForFilledItem(held);
+			if (heldContents == null)
+				return false;
+			if( tank.fill(heldContents, false) <= 0 )
+				return false;
+		}
+		else {
+			fac = FluidUtil.tryEmptyContainer(held, tank, Integer.MAX_VALUE, player, false);
 			if( FluidActionResult.FAILURE.equals( fac ) )
 				return false;
-			final ItemStack containerItem = fac.getResult();
+		}
+			
+		if (!world.isRemote)
+		{
+			ItemStack containerItem = null;
+			if( fac != null ) {
+				fac = FluidUtil.tryEmptyContainer(held, tank, Integer.MAX_VALUE, player, true);
+				if( FluidActionResult.FAILURE.equals( fac ) )
+					return false;
+				containerItem = fac.getResult();
+			}
+			else {
+				tank.fill(heldContents, true);
+				containerItem = FluidContainerRegistry.drainFluidContainer(held);
+			}
 			
 			if (!player.inventory.addItemStackToInventory(containerItem))
 			{
