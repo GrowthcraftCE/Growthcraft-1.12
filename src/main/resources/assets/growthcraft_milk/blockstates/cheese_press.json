@@ -1,0 +1,29 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+  },
+  "variants": {
+    "orient": {
+      "east" : {
+        "y": 270
+      },
+      "north" : {
+        "y": 180
+      },
+      "west" : {
+        "y": 90
+      },
+      "south" : {
+        "y": 0
+      }
+    },
+    "iscap" : {
+      "true" : {
+        "model": "growthcraft_milk:cheese_press_animated_parts"
+      },
+      "false" : {
+        "model": "growthcraft_milk:cheese_press_static"
+      }      
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/fence_post",
+  "textures": {
+    "texture": "growthcraft_apples:blocks/apple_planks"
+  }
+}

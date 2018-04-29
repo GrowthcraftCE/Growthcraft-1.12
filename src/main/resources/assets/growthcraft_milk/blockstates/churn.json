@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "rotation=north": {
+      "model": "growthcraft_milk:churn_up"
+    },
+    "rotation=south": {
+      "model": "growthcraft_milk:churn_up"
+    },
+    "rotation=east": {
+      "model": "growthcraft_milk:churn_up"
+    },
+    "rotation=west": {
+      "model": "growthcraft_milk:churn_up"
+    },
+    "rotation=up": {
+      "model": "growthcraft_milk:churn_up"
+    },
+    "rotation=down": {
+      "model": "growthcraft_milk:churn_up"
+    }
+  }
+}

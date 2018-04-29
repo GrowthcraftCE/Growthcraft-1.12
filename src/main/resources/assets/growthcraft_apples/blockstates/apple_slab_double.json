@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=top": { "model": "growthcraft_apples:apple_planks" },
+    "half=bottom": { "model": "growthcraft_apples:apple_planks" }
+  }
+}

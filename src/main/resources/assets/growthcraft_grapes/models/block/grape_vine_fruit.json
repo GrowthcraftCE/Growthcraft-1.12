@@ -1,0 +1,59 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"ambientocclusion": false,
+    "textures": {
+        "particle": "#cross"
+    },
+	"elements": [
+		{
+			"name": "cube",
+			"from": [5.800000000000001, 4, 6.000000000000002],
+			"to": [17, 16, 6.000000000000002],
+			"shade": false,
+			"faces": {
+				"north": {
+					"uv": [0, 0, 16, 16],
+					"texture": "#cross",
+					"tintindex": 0
+				},
+				"south": {
+					"uv": [0, 0, 16, 16],
+					"texture": "#cross",
+					"tintindex": 0
+				}
+			},
+			"rotation": {
+				"origin": [13.5, 12, 9.5],
+				"axis": "y",
+				"angle": 45,
+				"rescale": true
+			},
+			"type": "cube"
+		},
+		{
+			"name": "cube",
+			"from": [9, 4, -2.200000000000001],
+			"to": [9, 16, 8.999999999999998],
+			"shade": false,
+			"faces": {
+				"east": {
+					"uv": [0, 0, 16, 16],
+					"texture": "#cross",
+					"tintindex": 0
+				},
+				"west": {
+					"uv": [0, 0, 16, 16],
+					"texture": "#cross",
+					"tintindex": 0
+				}
+			},
+			"rotation": {
+				"origin": [13.5, 12, 4.499999999999999],
+				"axis": "y",
+				"angle": 45,
+				"rescale": true
+			},
+			"type": "cube"
+		}
+	]
+}

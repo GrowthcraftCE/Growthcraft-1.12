@@ -1,0 +1,10 @@
+package structure organization:
+	growthcraft.[Module].[side].[functionality].*
+	
+Substructure [side]:
+	api = anything which is exported to other mods based on growthcraft
+	shared.common = any common code which is used by growthcraft modules dependent on actual module
+	shared.client = any client code which is used by growthcraft modules dependent on actual module
+	common = any common code which is used only by actual module
+	client = any client code which is used only by actual module
+	

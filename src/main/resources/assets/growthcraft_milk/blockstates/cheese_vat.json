@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "normal": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    },
+    "rotation=north": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    },
+    "rotation=south": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    },
+    "rotation=east": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    },
+    "rotation=west": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    },
+    "rotation=up": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    },
+    "rotation=down": {
+      "model": "growthcraft_milk:cheese_vat_empty"
+    }
+  }
+}

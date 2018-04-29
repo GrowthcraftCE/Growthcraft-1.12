@@ -1,0 +1,29 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+  },
+  "variants": {
+    "rotation" : {
+      "north" : {
+      },
+      "south" : {
+      },
+      "east" : {
+      },
+      "west" : {
+      },
+      "up" : {
+      },
+      "down" : {
+      }      
+    },
+    "isplunger" : {
+      "true" : {
+        "model": "growthcraft_milk:churn_down"
+      },
+      "false" : {
+        "model": "growthcraft:dummy"
+      }      
+    }
+  }
+}

@@ -1,0 +1,99 @@
+-----------------
+To discuss:
+-----------------
+DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in item meta.
+=> DECISSION: Using 4 cheese stages. [Discord:general, 14.01.2017]
+
+-----------------
+To implement:
+-----------------
+TODO: Add green and red grape ice cream and yoghurt.
+TODO: Rope bounding boxes are not reacting according neighbor blocks.
+TODO: Step sound of apple fences should be changed to wood.
+TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food types.
+DONE: Change Grape blocks from BlockCrops to BlockBush
+
+-----------------
+Bugs:
+-----------------
+BUG: Bee box has a spamming block update.
+BUG: Cheese press is triggered when placing a neighbor block.
+BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
+BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
+BUG: Collision boxes for brewing kettle walls are not correct.
+BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
+BUG: Fix string formatting with arguments when logging.
+DONE: Thistle recipe not working to get seeds.
+DONE: Ricotta bowl recipe not working.
+DONE: Grape Leaves are removed, too, if a trunk has been removed.
+DONE: Cheese rotation needs to be fixed.
+DONE: BUG: Tipsy Effect not saved when game is saved.
+DONE: BUG: No Tipsy Effect icon. 
+NOTABUG: BUG: Booze color is too dark.
+
+-----------------
+Potential Bugs:
+-----------------
+TODO: INVESTIGATED: ShouldRefresh = false for all device tile entities. Sometimes block states are changed and a recreation of tile entity is to be avoided. 
+* Bugs are expected on block state changes, e.g. for fruit presser and if blocks are rotated.
+
+-----------------
+Improvements:
+-----------------
+TODO: Heat blocks to react on meta and supporting neighborChanged events for tiles. For heat blocks which can be turned on/off.
+TODO: Only accepted items are consumed, thrown into brewing kettle 
+TODO: isItemValid for culture jar and fermenting barrel containers
+DONE: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
+DONE: Fruit Press fluid render.
+DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 
+
+-----------------
+Not ported stuff:
+-----------------
+TODO: Missing translations.
+TODO: Mining levels for all ported devices.
+TODO: Real curds textures and models.
+TODO: Crafting Recipes for Cellar.
+TODO: Crafting Recipes for Milk.
+TODO: Crafting Recipes for Core.
+TODO: Crafting Recipes for Grapes.
+TODO: Crafting Recipes for Hops.
+TODO: Booze Fluid behavior like bubbles etc.
+DONE: Add food ore dictionary: apple, grape
+DONE: Cheese model items to be textured.
+DONE: Curds textures and models.
+DONE: Seed drops from grape leaves.
+DONE: Animation for Butter churn.
+DONE: Animation for Cheese Press.
+DONE: Language files for Cellar.
+DONE: Language files for Milk.
+DONE: Languages for grapewine.
+DONE: Reintroduce interfaces for recipes
+DONE: Cheese waxing.
+DONE: Cheese block bounds adapting to slice count. Rotation Left.
+DONE: Cheese textures and models. (textures are placeholders now)
+DONE: Step sounds
+DONE: Item model jsons for all cellar devices.
+DONE: Add yeasts
+DONE: Textures and models of Ferment Barrel.
+DONE: Textures and models of Fruit Press.
+DONE: Textures and models for Butter Churn.
+DUPLICATED: Render for Butter Churn.
+DONE: Culture Jar fluid render.
+DONE: Brew Kettle fluid render.
+DONE: Buckets für Boozes to appear in CreativeTab.
+
+------------
+Refactoring:
+------------
+TODO: Remove all custom event busses, like CELLAR_BUS, MILK_BUS a.s.o.
+TODO: Use new constructor from GrowthcraftItemBase where possible.
+TODO: Move all recipe handling for all GC modules to corresponding init classes.
+TODO: Core postInit Task: Automatically register all fluid containers to FluidContainerRegistry from all mods with Fluid container capabilities.
+TODO: Add item handler capability to GrowthcraftTileInventoryBase
+TODO: Unified User Apis coding pattern
+TODO: Unified Fluid registry coding pattern
+DONE: Add Fluid tank capatibility to booze bottle to be compatible with newer fluid handling 
+DONE: Add fluid handler capability to GrowthcraftTileDeviceBase
+DONE: Revisit Fluid handling of: PREVBlockBrewKettle, BlockFermentBarrel, GrowthcraftBlockContainer
+DONE: Add Grapewine name enum.

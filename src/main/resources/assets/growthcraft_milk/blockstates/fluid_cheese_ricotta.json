@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "fluid_cheese_ricotta": [
+      {
+        "custom": {
+          "fluid": "fluid_cheese_ricotta"
+        }
+      }
+    ]
+  }
+}

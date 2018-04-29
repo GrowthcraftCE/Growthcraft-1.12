@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "growthcraft_apples:blocks/apple_log_top",
+    "side": "growthcraft_apples:blocks/apple_log"
+  }
+}

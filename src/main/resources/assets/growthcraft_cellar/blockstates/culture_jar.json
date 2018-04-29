@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "normal": {
+      "model": "growthcraft_cellar:culture_jar"
+    },
+    "rotation=north": {
+      "model": "growthcraft_cellar:culture_jar"
+    },
+    "rotation=south": {
+      "model": "growthcraft_cellar:culture_jar"
+    },
+    "rotation=east": {
+      "model": "growthcraft_cellar:culture_jar"
+    },
+    "rotation=west": {
+      "model": "growthcraft_cellar:culture_jar"
+    },
+    "rotation=up": {
+      "model": "growthcraft_cellar:culture_jar"
+    },
+    "rotation=down": {
+      "model": "growthcraft_cellar:culture_jar"
+    }
+  }
+}

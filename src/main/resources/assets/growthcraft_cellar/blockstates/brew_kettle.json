@@ -1,0 +1,31 @@
+{
+  "variants": {
+    "normal": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "heated=true": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "heated=false": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "rotation=north": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "rotation=south": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "rotation=east": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "rotation=west": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "rotation=up": {
+      "model": "growthcraft_cellar:brew_kettle"
+    },
+    "rotation=down": {
+      "model": "growthcraft_cellar:brew_kettle"
+    }
+  }
+}
