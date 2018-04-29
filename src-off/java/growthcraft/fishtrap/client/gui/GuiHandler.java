@@ -1,7 +1,7 @@
 package growthcraft.fishtrap.client.gui;
 
-import growthcraft.fishtrap.container.ContainerFishtrap;
-import growthcraft.fishtrap.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.common.container.ContainerFishtrap;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

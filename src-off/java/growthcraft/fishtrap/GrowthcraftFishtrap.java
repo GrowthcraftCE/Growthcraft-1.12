@@ -1,29 +1,30 @@
 package growthcraft.fishtrap;
 
-import growthcraft.fishtrap.client.gui.GuiHandler;
-import growthcraft.fishtrap.handlers.RecipeHandler;
-import growthcraft.fishtrap.init.GrowthcraftFishtrapBlocks;
-import growthcraft.fishtrap.proxy.CommonProxy;
+import growthcraft.fishtrap.common.CommonProxy;
+import growthcraft.fishtrap.common.Init;
+import growthcraft.fishtrap.shared.Reference;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
+	dependencies = "required-after:"+growthcraft.core.shared.Reference.MODID)
 public class GrowthcraftFishtrap {
-
+	private static final String CLIENT_PROXY_CLASS = "growthcraft.fishtrap.client.ClientProxy";
+	private static final String SERVER_PROXY_CLASS = "growthcraft.fishtrap.common.CommonProxy";
+	
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftFishtrap instance;
 
-    @SidedProxy(serverSide = Reference.SERVER_PROXY_CLASS, clientSide = Reference.CLIENT_PROXY_CLASS)
+    @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftFishtrapBlocks.init();
-        GrowthcraftFishtrapBlocks.register();
+        Init.initBlocks();
+        Init.registerBlocks();
         proxy.registerRenders();
         proxy.registerTitleEntities();
     }
@@ -32,9 +33,7 @@ public class GrowthcraftFishtrap {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
 
-        RecipeHandler.registerCraftingRecipes();
-
-        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, new GuiHandler());
+        Init.registerRecipes();
     }
 
     @Mod.EventHandler

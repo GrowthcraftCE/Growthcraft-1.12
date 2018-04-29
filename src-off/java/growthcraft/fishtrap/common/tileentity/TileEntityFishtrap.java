@@ -1,6 +1,6 @@
-package growthcraft.fishtrap.tileentity;
+package growthcraft.fishtrap.common.tileentity;
 
-import growthcraft.core.utils.GrowthcraftPlaySound;
+import growthcraft.fishtrap.common.utils.GrowthcraftPlaySound;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.state.IBlockState;

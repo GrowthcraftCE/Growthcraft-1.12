@@ -1,7 +1,7 @@
-package growthcraft.fishtrap.proxy;
+package growthcraft.fishtrap.common;
 
-import growthcraft.fishtrap.Reference;
-import growthcraft.fishtrap.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.shared.Reference;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {

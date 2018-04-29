@@ -1,8 +1,8 @@
 package growthcraft.fishtrap.client.gui;
 
-import growthcraft.fishtrap.Reference;
-import growthcraft.fishtrap.container.ContainerFishtrap;
-import growthcraft.fishtrap.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.common.container.ContainerFishtrap;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.shared.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

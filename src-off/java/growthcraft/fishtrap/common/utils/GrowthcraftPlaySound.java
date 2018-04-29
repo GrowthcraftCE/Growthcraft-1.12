@@ -1,4 +1,4 @@
-package growthcraft.core.common.utils;
+package growthcraft.fishtrap.common.utils;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.SoundCategory;

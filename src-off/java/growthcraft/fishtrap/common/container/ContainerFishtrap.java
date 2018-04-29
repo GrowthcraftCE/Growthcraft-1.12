@@ -1,6 +1,6 @@
-package growthcraft.fishtrap.container;
+package growthcraft.fishtrap.common.container;
 
-import growthcraft.fishtrap.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;

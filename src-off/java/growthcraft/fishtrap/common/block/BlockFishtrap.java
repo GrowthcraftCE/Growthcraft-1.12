@@ -1,8 +1,8 @@
-package growthcraft.fishtrap.blocks;
+package growthcraft.fishtrap.common.block;
 
-import growthcraft.fishtrap.Reference;
 import growthcraft.fishtrap.client.gui.GuiHandler;
-import growthcraft.fishtrap.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
@@ -90,8 +90,15 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
-            playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        	openGUI(worldIn, pos, state, playerIn);
         }
         return true;
+    }
+
+    @SideOnly(Side.CLIENT)
+    private void openGUI(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn) {
+        if (worldIn.isRemote)
+        	return;
+        playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
     }
 }
