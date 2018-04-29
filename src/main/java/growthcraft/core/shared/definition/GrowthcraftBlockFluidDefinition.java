@@ -3,9 +3,11 @@ package growthcraft.core.shared.definition;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.shared.block.GrowthcraftBlockFluid;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class GrowthcraftBlockFluidDefinition extends BlockTypeDefinition<GrowthcraftBlockFluid>
 {
@@ -14,9 +16,9 @@ public class GrowthcraftBlockFluidDefinition extends BlockTypeDefinition<Growthc
 		super(fluid);
 	}
 
-	public void register(ResourceLocation name)
+	public void register(IForgeRegistry<Block> registry, ResourceLocation name)
 	{
-		super.register(name, null /*ItemGrcBlockFluid.class*/);
+		super.registerBlock(registry, name);
 	}
 
 	public static GrowthcraftBlockFluidDefinition create(Fluid fluid, Material mat)

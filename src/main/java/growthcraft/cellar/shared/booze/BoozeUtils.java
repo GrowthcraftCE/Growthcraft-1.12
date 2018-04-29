@@ -2,12 +2,15 @@ package growthcraft.cellar.shared.booze;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.BoozeEffect;
 import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.config.description.Describer;
 import growthcraft.core.shared.fluids.UnitFormatter;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -38,33 +41,30 @@ public class BoozeUtils
 		}
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void addInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool)
+	public static void addInformation(Fluid booze, ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		if (booze == null) return;
 		final String s = UnitFormatter.fluidModifier(booze);
-		if (s != null) list.add(s);
-		Describer.getDescription((List<String>)list, booze);
+		if (s != null) tooltip.add(s);
+		Describer.getDescription(tooltip, booze);
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void addEffectInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool)
+	public static void addEffectInformation(Fluid booze, ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		if (booze == null) return;
 		final BoozeEffect effect = CellarRegistry.instance().booze().getEffect(booze);
 		if (effect != null)
 		{
-			effect.getDescription((List<String>)list);
+			effect.getDescription(tooltip);
 		}
 	}
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public static void addBottleInformation(Fluid booze, ItemStack stack, EntityPlayer player, List list, boolean bool, boolean showDetailed)
+	public static void addBottleInformation(Fluid booze, ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn, boolean showDetailed)
 	{
 		if (booze == null) return;
-		addInformation(booze, stack, player, list, bool);
+		addInformation(booze, stack, worldIn, tooltip, flagIn);
 		if (showDetailed)
-			addEffectInformation(booze, stack, player, list, bool);
+			addEffectInformation(booze, stack, worldIn, tooltip, flagIn);
 	}
 
 	public static boolean hasEffect(Fluid booze)

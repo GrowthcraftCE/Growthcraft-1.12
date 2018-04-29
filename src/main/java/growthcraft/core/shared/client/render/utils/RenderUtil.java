@@ -3,10 +3,10 @@ package growthcraft.core.shared.client.render.utils;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -58,7 +58,7 @@ public final class RenderUtil {
 	  /** Renders block with offset x/y/z from x1/y1/z1 to x2/y2/z2 inside the block local coordinates, so from 0-1 */
 	  public static void renderFluidCuboid(FluidStack fluid, BlockPos pos, double x, double y, double z, double x1, double y1, double z1, double x2, double y2, double z2, int color) {
 	    Tessellator tessellator = Tessellator.getInstance();
-	    VertexBuffer renderer = tessellator.getBuffer();
+	    BufferBuilder renderer = tessellator.getBuffer();
 	    renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 	    mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 	    //RenderUtil.setColorRGBA(color);
@@ -93,7 +93,7 @@ public final class RenderUtil {
 	      return;
 	    }
 	    Tessellator tessellator = Tessellator.getInstance();
-	    VertexBuffer renderer = tessellator.getBuffer();
+	    BufferBuilder renderer = tessellator.getBuffer();
 	    renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 	    mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 	    int color = fluid.getFluid().getColor(fluid);
@@ -186,7 +186,7 @@ public final class RenderUtil {
 	    post();
 	  }
 
-	  public static void putTexturedCuboid(VertexBuffer renderer, ResourceLocation location, double x1, double y1, double z1, double x2, double y2, double z2,
+	  public static void putTexturedCuboid(BufferBuilder renderer, ResourceLocation location, double x1, double y1, double z1, double x2, double y2, double z2,
 	                                       int color, int brightness) {
 	    boolean flowing = false;
 	    TextureAtlasSprite sprite = mc.getTextureMapBlocks().getTextureExtry(location.toString());
@@ -198,7 +198,7 @@ public final class RenderUtil {
 	    putTexturedQuad(renderer, sprite, x1, y1, z1, x2-x1, y2-y1, z2-z1, EnumFacing.UP, color, brightness, flowing);
 	  }
 
-	  public static void putTexturedQuad(VertexBuffer renderer, TextureAtlasSprite sprite, double x, double y, double z, double w, double h, double d, EnumFacing face,
+	  public static void putTexturedQuad(BufferBuilder renderer, TextureAtlasSprite sprite, double x, double y, double z, double w, double h, double d, EnumFacing face,
 	                                     int color, int brightness, boolean flowing) {
 	    int l1 = brightness >> 0x10 & 0xFFFF;
 	    int l2 = brightness & 0xFFFF;
@@ -212,7 +212,7 @@ public final class RenderUtil {
 	  }
 
 	  // x and x+w has to be within [0,1], same for y/h and z/d
-	  public static void putTexturedQuad(VertexBuffer renderer, TextureAtlasSprite sprite, double x, double y, double z, double w, double h, double d, EnumFacing face,
+	  public static void putTexturedQuad(BufferBuilder renderer, TextureAtlasSprite sprite, double x, double y, double z, double w, double h, double d, EnumFacing face,
 	                                     int r, int g, int b, int a, int light1, int light2, boolean flowing) {
 	    // safety
 	    if(sprite == null) {
@@ -357,7 +357,7 @@ public final class RenderUtil {
 	    GlStateManager.color(r, g, b, a);
 	  }
 
-	  public static void setBrightness(VertexBuffer renderer, int brightness) {
+	  public static void setBrightness(BufferBuilder renderer, int brightness) {
 	    renderer.putBrightness4(brightness, brightness, brightness, brightness);
 	  }
 

@@ -12,6 +12,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
@@ -42,16 +43,16 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 	/**
 	 * @param name - item name
 	 */
-	public void register(ResourceLocation name)
+	public void register(IForgeRegistry<Item> registry, ResourceLocation name)
 	{
 		getItem().setUnlocalizedName(name.getResourcePath());
 		getItem().setRegistryName(name);
-		GameRegistry.register(getItem());
+		register(registry);
 	}
 	
-	public void register()
+	public void register(IForgeRegistry<Item> registry)
 	{
-		GameRegistry.register(getItem());
+		registry.register(getItem());
 	}
 	
 	@SideOnly(Side.CLIENT)

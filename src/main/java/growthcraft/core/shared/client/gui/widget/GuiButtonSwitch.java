@@ -25,7 +25,7 @@ public class GuiButtonSwitch extends GuiButton
 	}
 
 	@Override
-	public void drawButton(Minecraft mc, int w, int h)
+	public void drawButton(Minecraft mc, int w, int h, float partialTicks)
 	{
 		if (this.visible)
 		{

@@ -13,6 +13,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> implements ISubItemStackFactory
 {
@@ -96,7 +97,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 	 * @param name - block name
 	 * @param itemBlock - item class to register to
 	 */
-	public void register(ResourceLocation name, ItemBlock itemBlock)
+/*	public void register(ResourceLocation name, ItemBlock itemBlock)
 	{
 		getBlock().setUnlocalizedName(name.getResourcePath());
 		getBlock().setRegistryName(name);
@@ -105,37 +106,45 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 			register(itemBlock);
 		else
 			register(null);
-	}
+	} */
 	
 	/**
 	 * @param itemBlock - item class to register to
 	 */
-	public void register(ItemBlock itemBlock)
+	public void registerBlock(IForgeRegistry<Block> registry)
 	{
-        GameRegistry.register(getBlock());
-        if( itemBlock != null )
-        	GameRegistry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
+		registry.register(getBlock());
+	}
+	
+	public void registerBlockItem(IForgeRegistry<Item> registry, ItemBlock itemBlock)
+	{
+       	registry.register(itemBlock.setRegistryName(getBlock().getRegistryName()));
+	}
+	
+	public void registerBlockItem(IForgeRegistry<Item> registry)
+	{
+		registerBlockItem(registry, new ItemBlock(getBlock()));
 	}
 	
 	/**
 	 * @param name - block name
 	 * @param itemBlock - item class to register to
 	 */
-	public void register(ResourceLocation name, boolean registerItemBlock)
+	public void registerBlock(IForgeRegistry<Block> registry, ResourceLocation name)
 	{
 		getBlock().setUnlocalizedName(name.getResourcePath());
 		getBlock().setRegistryName(name);
         
-        register(registerItemBlock);
+        registerBlock(registry);
 	}
 
-	public void register(boolean registerItemBlock)
+/*	public void register(boolean registerItemBlock)
 	{
 		if( registerItemBlock )
 			register(new ItemBlock(getBlock()));
 		else
 			register(null);
-	}
+	}*/
 
 	
 	/**

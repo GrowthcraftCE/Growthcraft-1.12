@@ -17,6 +17,7 @@ import growthcraft.core.shared.utils.ObjectUtils;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeModContainer;
@@ -26,6 +27,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.registries.IForgeRegistry;
 
 /**
  * A simple factory for creating generic fluid bottles, blocks etc..
@@ -137,25 +139,31 @@ public class FluidFactory
 			return foodBottle;
 		}
 		
-		public FluidDetails registerObjects(String modID, String basename)
+		public FluidDetails registerBlocks(IForgeRegistry<Block> registry, String modID, String basename)
 		{
 			if (block != null)
 			{
-				block.register(new ResourceLocation(modID, "fluid_" + basename));
+				block.register(registry, new ResourceLocation(modID, "fluid_" + basename));
 			}
+
+			return this;
+		}
+		
+		public FluidDetails registerItems(IForgeRegistry<Item> registry, String modID, String basename)
+		{
 			if (bottle != null)
 			{
-				bottle.register(new ResourceLocation(modID, "bottlefluid_" + basename));
+				bottle.register(registry, new ResourceLocation(modID, "bottlefluid_" + basename));
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}
 			if (foodBottle != null)
 			{
-				foodBottle.register(new ResourceLocation(modID, "bottlefluid_" + basename));
+				foodBottle.register(registry, new ResourceLocation(modID, "bottlefluid_" + basename));
 				final FluidStack fluidStack = fluid.asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
 				FluidContainerRegistry.registerFluidContainer(fluidStack, foodBottle.asStack(1), new ItemStack(Items.GLASS_BOTTLE, 1));
 			}
-
+			
 			return this;
 		}
 		

@@ -97,3 +97,8 @@ DONE: Add Fluid tank capatibility to booze bottle to be compatible with newer fl
 DONE: Add fluid handler capability to GrowthcraftTileDeviceBase
 DONE: Revisit Fluid handling of: PREVBlockBrewKettle, BlockFermentBarrel, GrowthcraftBlockContainer
 DONE: Add Grapewine name enum.
+
+------------
+Porting to 1.12.2:
+------------
+TODO: Reenable Bucket to bottle filling for boozes. 

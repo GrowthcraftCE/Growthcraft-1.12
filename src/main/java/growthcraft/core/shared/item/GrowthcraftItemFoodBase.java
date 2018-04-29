@@ -3,9 +3,12 @@ package growthcraft.core.shared.item;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import growthcraft.core.shared.client.GrowthcraftCoreState;
 import growthcraft.core.shared.effect.IEffect;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -101,10 +104,10 @@ public class GrowthcraftItemFoodBase extends ItemFood
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean showAdvanced)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
-		super.addInformation(stack, player, list, showAdvanced);
-		GrowthcraftItemBase.addDescription(this, stack, player, list, showAdvanced);
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		GrowthcraftItemBase.addDescription(this, stack, worldIn, tooltip, flagIn);
 		if (effect != null)
 		{
 			final List<String> tempList = new ArrayList<String>();
@@ -113,11 +116,11 @@ public class GrowthcraftItemFoodBase extends ItemFood
 			{
 				if (GrowthcraftCoreState.showDetailedInformation())
 				{
-					list.addAll((List)tempList);
+					tooltip.addAll((List)tempList);
 				}
 				else
 				{
-					list.add(TextFormatting.GRAY +
+					tooltip.add(TextFormatting.GRAY +
 							I18n.format("grc.tooltip.detailed_information",
 								TextFormatting.WHITE + GrowthcraftCoreState.detailedKey + TextFormatting.GRAY));
 				}

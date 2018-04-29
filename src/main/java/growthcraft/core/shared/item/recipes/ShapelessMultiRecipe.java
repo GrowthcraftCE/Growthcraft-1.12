@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ShapelessMultiRecipe implements IRecipe
+public class ShapelessMultiRecipe extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 	private ItemStack output;
 	private ArrayList<IMultiItemStacks> input = new ArrayList<IMultiItemStacks>();
@@ -76,15 +76,6 @@ public class ShapelessMultiRecipe implements IRecipe
 				throw new RuntimeException(ret);
 			}
 		}
-	}
-
-	/**
-	 * Returns the size of the recipe area
-	 */
-	@Override
-	public int getRecipeSize()
-	{
-		return input.size();
 	}
 
 	@Override
@@ -216,5 +207,11 @@ public class ShapelessMultiRecipe implements IRecipe
         }
 
         return nonnulllist;
+	}
+
+	@Override
+	public boolean canFit(int width, int height) {
+		// TODO: Check if working!
+		return width * height >= (this.input.size() + this.fluids.size());
 	}
 }

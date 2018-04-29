@@ -2,6 +2,8 @@ package growthcraft.cellar.shared.item;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.fluids.Booze;
 import growthcraft.cellar.shared.booze.BoozeEntry;
@@ -13,6 +15,7 @@ import growthcraft.core.shared.item.ItemFoodBottleFluid;
 import growthcraft.core.shared.client.GrowthcraftCoreState;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -134,14 +137,14 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
-		super.addInformation(stack, player, list, bool);
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 		final boolean showDetailed = GrowthcraftCoreState.showDetailedInformation();
-		BoozeUtils.addBottleInformation(getFluid(stack), stack, player, list, bool, showDetailed);
+		BoozeUtils.addBottleInformation(getFluid(stack), stack, worldIn, tooltip, flagIn, showDetailed);
 		if (!showDetailed)
 		{
-			list.add(TextFormatting.GRAY +
+			tooltip.add(TextFormatting.GRAY +
 					I18n.format("grc.tooltip.detailed_information",
 						TextFormatting.WHITE + GrowthcraftCoreState.detailedKey + TextFormatting.GRAY));
 		}
@@ -195,11 +198,11 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void getSubItems(Item item, CreativeTabs tab, NonNullList<ItemStack> list)
+	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
 		for (int i = 0; i < getFluidArray().length; i++)
 		{
-			list.add(new ItemStack(item, 1, i));
+			list.add(new ItemStack(this, 1, i));
 		}
 	}
 }

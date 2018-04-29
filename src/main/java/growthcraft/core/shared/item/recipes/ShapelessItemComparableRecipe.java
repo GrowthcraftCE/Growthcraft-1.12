@@ -12,9 +12,10 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
-public class ShapelessItemComparableRecipe implements IRecipe
+public class ShapelessItemComparableRecipe extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 	public final List<ItemStack> recipeItems;
 	private final ItemStack recipeOutput;
@@ -78,15 +79,6 @@ public class ShapelessItemComparableRecipe implements IRecipe
 		return this.recipeOutput.copy();
 	}
 
-	/**
-	 * Returns the size of the recipe area
-	 */
-	@Override
-	public int getRecipeSize()
-	{
-		return this.recipeItems.size();
-	}
-
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
         NonNullList<ItemStack> nonnulllist = NonNullList.<ItemStack>withSize(inv.getSizeInventory(), ItemStack.EMPTY);
@@ -98,5 +90,10 @@ public class ShapelessItemComparableRecipe implements IRecipe
         }
 
         return nonnulllist;
+	}
+
+	@Override
+	public boolean canFit(int width, int height) {
+		return width * height >= this.recipeItems.size();
 	}
 }
