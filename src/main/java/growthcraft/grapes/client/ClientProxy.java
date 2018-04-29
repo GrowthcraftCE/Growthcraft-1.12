@@ -9,20 +9,19 @@ public class ClientProxy extends CommonProxy {
     public void init() {
     	super.init();
     	Init.registerItemColorHandlers();
+        registerSpecialRenders();
     }
 
     @Override
-    public void registerRenders() {
-        Init.registerItemRenders();
-        Init.registerFluidRenders();
-    }
+	public void postRegisterItems() {
+    	super.postRegisterItems();
+    	registerModelBakeryVariants();
+	}
 
-    @Override
     public void registerModelBakeryVariants() {
         Init.registerItemVariants();
     }
 
-    @Override
     public void registerSpecialRenders() {
         // TileEntitySpecialRenderer for showing the type of grape that is stored.
 //        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGrapeVineFruit.class, new RendererGrapeVineFruit());

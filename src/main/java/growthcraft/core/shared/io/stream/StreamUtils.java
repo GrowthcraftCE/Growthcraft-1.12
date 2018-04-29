@@ -26,10 +26,12 @@ public class StreamUtils
 	public static String readStringASCII(ByteBuf stream)
 	{
 		final int len = stream.readInt();
-		final byte[] bytes = stream.readBytes(len).array();
+		final byte[] bytes = new byte[len];
 		try {
+			stream.readBytes(bytes);
 			return new String(bytes, "US-ASCII");
-		} catch (UnsupportedEncodingException e) {
+		}
+		catch (UnsupportedEncodingException e) {
 			// Should never happen!
 			return new String(bytes);
 		}

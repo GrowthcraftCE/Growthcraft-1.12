@@ -268,7 +268,9 @@ public class FluidFactory
 
 			details.fluid = new FluidDefinition(fluid);
 			if( !FluidRegistry.isFluidRegistered(fluid) )
-				details.fluid.register(NumUtils.isFlagged(defaultFeatures, FEATURE_BUCKET));
+				details.fluid.register();
+			if( NumUtils.isFlagged(defaultFeatures, FEATURE_BUCKET) )
+				details.fluid.registerBucketItem();
 			
 			if( details.block == null && fluidBlockClazz != null ) {
 				try {

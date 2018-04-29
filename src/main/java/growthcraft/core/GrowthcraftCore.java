@@ -72,8 +72,6 @@ public class GrowthcraftCore {
         Init.registerItems(registry);
         
         proxy.postRegisterItems();
-        
-        Init.registerBlockOres();
 	}
 
     @Mod.EventHandler
@@ -85,6 +83,7 @@ public class GrowthcraftCore {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     	proxy.postInit();
+    	Init.registerBlockOres();
     }
     
 	@SideOnly(Side.CLIENT)

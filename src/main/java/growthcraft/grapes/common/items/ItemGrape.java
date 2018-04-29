@@ -19,10 +19,10 @@ public class ItemGrape extends ItemFood {
     }
 
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems) {
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
         for ( int i = 0; i < GrapeTypes.values().length; i++ ) {
         	GrapeTypes type = GrapeTypes.values()[i];
-            subItems.add(new ItemStack(itemIn, 1, type.getVariantID()));
+            subItems.add(new ItemStack(this, 1, type.getVariantID()));
         }
     }
 

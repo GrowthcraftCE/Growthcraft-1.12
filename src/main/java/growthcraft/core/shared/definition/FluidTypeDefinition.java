@@ -45,12 +45,13 @@ public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
 		return getFluid() == other;
 	}
 
-	public void register(boolean bAddBucket)
+	public void register()
 	{
 		FluidRegistry.registerFluid(fluid);
-		if( bAddBucket ) {
-			FluidContainerRegistry.addBucketForFluid(fluid);
-		}
+	}
+	
+	public void registerBucketItem() {
+		FluidContainerRegistry.addBucketForFluid(fluid);
 	}
 	
 	public void registerRenderer() {

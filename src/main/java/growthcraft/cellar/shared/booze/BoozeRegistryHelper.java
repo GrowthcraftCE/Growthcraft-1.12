@@ -21,6 +21,7 @@ import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -44,7 +45,7 @@ public class BoozeRegistryHelper {
 			if( basename != null && !basename.isEmpty() )
 				boozeName = basename + "_" + boozeName;
 			boozes[i] = new BoozeDefinition( new Booze(boozeName) );
-			boozes[i].register(true);
+			boozes[i].register();
 			CellarRegistry.instance().booze().registerBooze(boozes[i].getFluid());
 		}
 	}
@@ -89,23 +90,32 @@ public class BoozeRegistryHelper {
 		return effects;
 	}
 	
-	public static <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerBooze(IForgeRegistry<Block> registry, BoozeDefinition[] boozes, BlockBoozeDefinition[] fluidBlocks, ItemTypeDefinition<ItemBoozeBottle> bottle, String modid, String basename, Class<ET> boozeTypeEnum )
+	public static <ET extends Enum<?> & IObjectVariant & IStringSerializable> void registerBoozeBlocks(IForgeRegistry<Block> registry, BoozeDefinition[] boozes, BlockBoozeDefinition[] fluidBlocks, String modid, String basename, Class<ET> boozeTypeEnum )
 	{
 		ET[] values = boozeTypeEnum.getEnumConstants();
 		for (int i = 0; i < boozes.length; ++i)
 		{
 			String boozeName = values[i].getName();
-			int bottleVariantID = values[i].getVariantID();
 			fluidBlocks[i].registerBlock(registry, new ResourceLocation(modid, "fluid_" + basename + "_" + boozeName ));
-
+		}
+	}
+	
+	public static <ET extends Enum<?> & IObjectVariant & IStringSerializable> void initBoozeContainers(BoozeDefinition[] boozes, ItemTypeDefinition<ItemBoozeBottle> bottle, String modid, String basename, Class<ET> boozeTypeEnum )
+	{
+		ET[] values = boozeTypeEnum.getEnumConstants();
+		for (int i = 0; i < boozes.length; ++i)
+		{
+			boozes[i].registerBucketItem();
 			final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, boozes[i].getFluid());
 			
+			int bottleVariantID = values[i].getVariantID();
 			final FluidStack fluidStack = boozes[i].asFluidStack( GrowthcraftCoreConfig.bottleCapacity );
 			FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, bottleVariantID), FluidContainerRegistry.EMPTY_BOTTLE);
 
 //OFF			GameRegistry.addShapelessRecipe(bottle.asStack(3, bottleVariantID), bucket, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
 		}
 	}
+
 	
 	public static void registerBoozeRenderers(BoozeDefinition[] boozes, BlockBoozeDefinition[] fluidBlocks) {
 		for (int i = 0; i < boozes.length; ++i)
