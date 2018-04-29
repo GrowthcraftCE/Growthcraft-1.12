@@ -6,23 +6,9 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.core.shared.utils.Easing;
 import growthcraft.milk.common.block.BlockCheesePress;
-import growthcraft.milk.common.block.BlockCheesePress.AnimationStage;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockRendererDispatcher;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.MinecraftForgeClient;
 
 public class RenderCheesePress extends RenderModel<TileEntityCheesePress> {
 	double SCALE = 1.0 / 16.0;
@@ -32,11 +18,11 @@ public class RenderCheesePress extends RenderModel<TileEntityCheesePress> {
 	}
 	
 	@Override
-	public void renderTileEntityAt(@Nonnull TileEntityCheesePress te, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void render(@Nonnull TileEntityCheesePress te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 //		if( !te.isAnimating() )
 //			return; // No running animation, no rendering.
         Tessellator tessellator = Tessellator.getInstance();
-        if( !prepare(te, tessellator, x, y, z, partialTicks, destroyStage) )
+        if( !prepare(te, tessellator, x, y, z, partialTicks, destroyStage, alpha) )
         	return;
 
 		BlockPos pos = te.getPos();

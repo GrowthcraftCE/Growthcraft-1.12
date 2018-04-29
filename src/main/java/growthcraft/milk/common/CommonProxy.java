@@ -3,18 +3,19 @@ package growthcraft.milk.common;
 public class CommonProxy {
 
     public void init() {
-        registerModelBakeryVariants();
-        registerSpecialRenders();
     }
 
     public void preInit() {
-        registerRenders();
         registerTileEntities();
     }
+
+	public void postInit() {
+		
+	}
 	
-    public void registerRenders() { }
-    public void registerModelBakeryVariants() { }
-    public void registerSpecialRenders() { }
+	public void postRegisterItems() {
+	}
+    
     public void registerTileEntities() {
     	Init.registerTileEntities();
     }

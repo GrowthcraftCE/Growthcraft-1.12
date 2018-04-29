@@ -2,6 +2,8 @@ package growthcraft.milk.common.item;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import growthcraft.core.shared.item.IItemTileBlock;
@@ -11,12 +13,14 @@ import growthcraft.milk.shared.definition.ICheeseCurdStackFactory;
 import growthcraft.milk.shared.definition.ICheeseType;
 import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -87,12 +91,12 @@ public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> exten
 	@Override
 	@SideOnly(Side.CLIENT)
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	public void addInformation(ItemStack stack, EntityPlayer player, List<String> list, boolean bool)
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		final NBTTagCompound nbt = getTileTagCompound(stack);
 		if (nbt.hasKey("dried") && nbt.getBoolean("dried"))
 		{
-			list.add(I18n.format("grcmilk.hanging_curds.dried"));
+			tooltip.add(I18n.format("grcmilk.hanging_curds.dried"));
 		}
 		else
 		{
@@ -101,11 +105,11 @@ public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> exten
 			{
 				final int ageMax = nbt.getInteger("age_max");
 				final int t = age * 100 / (ageMax > 0 ? ageMax : 1200);
-				list.add(I18n.format("grcmilk.hanging_curds.drying.prefix") +
+				tooltip.add(I18n.format("grcmilk.hanging_curds.drying.prefix") +
 					I18n.format("grcmilk.hanging_curds.drying.progress.format", t));
 			}
 		}
-		super.addInformation(stack, player, list, bool);
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 
 	public static NBTTagCompound openNBT(ItemStack stack)
@@ -124,7 +128,7 @@ public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> exten
 	
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
     	for( T type : getAllVariants() ) {
     		ICheeseCurdStackFactory curdStackFactory = type.getCurdBlocks();

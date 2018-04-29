@@ -114,7 +114,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 	
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(Item itemIn, CreativeTabs tab, NonNullList<ItemStack> subItems)
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
     	for( T type : getAllVariants() ) {
     		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();

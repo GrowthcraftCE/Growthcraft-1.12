@@ -6,10 +6,10 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -28,7 +28,7 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
 		this.modelProp = modelProp;
 	}
 	
-	protected boolean prepare(T te, Tessellator tessellator, double x, double y, double z, float partialTicks, int destroyStage) {
+	protected boolean prepare(T te, Tessellator tessellator, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		BlockPos pos = te.getPos();
 		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
 		IBlockState state = world.getBlockState(pos);
@@ -41,7 +41,7 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
         if( capModel == null )
         	return false; // No model.
 		
-        VertexBuffer renderer = tessellator.getBuffer();
+        BufferBuilder renderer = tessellator.getBuffer();
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         RenderHelper.disableStandardItemLighting();
         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -59,7 +59,7 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
 
         renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.BLOCK);
 
-        renderTileEntityFast(te, x, y, z, partialTicks, destroyStage, renderer);
+        renderTileEntityFast(te, x, y, z, partialTicks, destroyStage, alpha, renderer);
         blockrendererdispatcher.getBlockModelRenderer().renderModel(world, capModel, state, pos, renderer, false);
 //        renderer.setTranslation(0, 0, 0);
         return true;

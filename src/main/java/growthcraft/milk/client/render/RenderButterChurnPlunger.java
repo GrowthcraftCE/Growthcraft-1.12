@@ -18,11 +18,11 @@ public class RenderButterChurnPlunger extends RenderModel<TileEntityButterChurnP
 	}
 	
 	@Override
-	public void renderTileEntityAt(@Nonnull TileEntityButterChurnPlunger te, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void render(@Nonnull TileEntityButterChurnPlunger te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 //		if( !te.isAnimating() )
 //			return; // No running animation, no rendering.
         Tessellator tessellator = Tessellator.getInstance();
-        if( !prepare(te, tessellator, x, y, z, partialTicks, destroyStage) )
+        if( !prepare(te, tessellator, x, y, z, partialTicks, destroyStage, alpha) )
         	return;
 
 		BlockPos pos = te.getPos();

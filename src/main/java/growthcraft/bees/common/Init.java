@@ -138,8 +138,6 @@ public class Init {
 					.setFoodBottle(foodBottleHoney).build()
 						.setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft); //.setItemColor(0xFFAC01);
 			GrowthcraftBeesFluids.honey.refreshItemColor();
-			
-			CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftBeesFluids.honey.getFluid(), BeesFluidTag.HONEY);
 		}
 	}
 	
@@ -156,6 +154,7 @@ public class Init {
 	public static void registerFluidBlocks(IForgeRegistry<Block> registry) {
 		if( GrowthcraftBeesFluids.honey != null ) {
 			GrowthcraftBeesFluids.honey.registerBlocks(registry, Reference.MODID, "honey");
+			CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftBeesFluids.honey.getFluid(), BeesFluidTag.HONEY);
 		}	
 	}
 	

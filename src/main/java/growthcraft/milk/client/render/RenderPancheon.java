@@ -14,7 +14,7 @@ public class RenderPancheon extends TileFluidTanksSpecialRenderer<TileEntityPanc
 	}
 	
 	@Override
-	public void renderTileEntityAt(@Nonnull TileEntityPancheon te, double x, double y, double z, float partialTicks, int destroyStage) {
+	public void render(@Nonnull TileEntityPancheon te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
 		renderStackedFluid(te, x, y, z, 1000);
 	}
 }

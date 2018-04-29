@@ -104,4 +104,5 @@ Porting to 1.12.2:
 TODO: BUG: Right shift+clicking an item in inventory doesn't redraw GUI. 
 TODO: Port recipes.
 TODO: Add cellar Advancements.
+TODO: Handle alpha for tile entity rendering.
 TODO: Reenable Bucket to bottle filling for boozes. 
