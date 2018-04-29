@@ -106,10 +106,10 @@ public class GrowthcraftContainer extends Container
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int index)
 	{
-		if (Platform.isClient())
-		{
-			return ItemStack.EMPTY;
-		}
+//		if (Platform.isClient())
+//		{
+//			return ItemStack.EMPTY;
+//		}
 
 		final Slot s = getSlot(index);
 		ItemStack itemstack = ItemStack.EMPTY;
