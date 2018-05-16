@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "apples",
+    "ingredients": [
+        {
+            "item": "minecraft:apple"
+        },
+        {
+            "item": "minecraft:sapling",
+            "data": 0
+        },
+        {
+            "item": "minecraft:wooden_sword"
+        }
+    ],
+    "result": {
+        "item": "growthcraft_apples:apple_sapling"
+    }
+}

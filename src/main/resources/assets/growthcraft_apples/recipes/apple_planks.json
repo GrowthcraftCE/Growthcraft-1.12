@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "apples",
+    "pattern": [
+        "W"
+    ],
+    "key": {
+        "W": {
+            "item": "growthcraft_apples:apple_log"
+        }
+    },
+    "result": {
+        "item": "growthcraft_apples:apple_planks",
+        "count": 4
+    }
+}

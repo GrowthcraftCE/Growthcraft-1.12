@@ -1,0 +1,17 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "group": "apples",
+    "pattern": [
+        "PPP"
+    ],
+    "key": {
+        "P": {
+            "item": "growthcraft_apples:apple_planks"
+        }
+    },
+    "result": {
+        "item": "growthcraft_apples:apple_slab_half",
+        "data": 0,
+        "count": 6
+    }
+}
