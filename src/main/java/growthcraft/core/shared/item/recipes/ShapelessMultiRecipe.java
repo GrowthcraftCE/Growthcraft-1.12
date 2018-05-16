@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.item.ItemUtils;
@@ -28,19 +30,21 @@ public class ShapelessMultiRecipe extends net.minecraftforge.registries.IForgeRe
 	private ItemStack output;
 	private ArrayList<IMultiItemStacks> input = new ArrayList<IMultiItemStacks>();
 	private ArrayList<IMultiFluidStacks> fluids = new ArrayList<IMultiFluidStacks>();
+	private final String group;
 
-	public ShapelessMultiRecipe(Block result, Object... recipe)
+	public ShapelessMultiRecipe(String group, Block result, Object... recipe)
 	{
-		this(new ItemStack(result), recipe);
+		this(group, new ItemStack(result), recipe);
 	}
 
-	public ShapelessMultiRecipe(Item result, Object... recipe)
+	public ShapelessMultiRecipe(String group, Item result, Object... recipe)
 	{
-		this(new ItemStack(result), recipe);
+		this(group, new ItemStack(result), recipe);
 	}
 
-	public ShapelessMultiRecipe(ItemStack result, Object... recipe)
+	public ShapelessMultiRecipe(String group, ItemStack result, Object... recipe)
 	{
+		this.group = group;
 		output = result.copy();
 		for (Object in : recipe)
 		{
@@ -214,4 +218,11 @@ public class ShapelessMultiRecipe extends net.minecraftforge.registries.IForgeRe
 		// TODO: Check if working!
 		return width * height >= (this.input.size() + this.fluids.size());
 	}
+	
+    @Override
+    @Nonnull
+    public String getGroup()
+    {
+        return this.group;
+    }
 }

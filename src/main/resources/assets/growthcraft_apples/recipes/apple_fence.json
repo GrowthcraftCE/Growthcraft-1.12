@@ -1,6 +1,6 @@
 {
     "type": "minecraft:crafting_shaped",
-    "group": "apples",
+    "group": "growthcraft_apples:apples",
     "pattern": [
         "PSP",
         "PSP"

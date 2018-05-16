@@ -1,6 +1,6 @@
 {
     "type": "minecraft:crafting_shapeless",
-    "group": "apples",
+    "group": "growthcraft_apples:apples",
     "ingredients": [
         {
             "item": "minecraft:apple"

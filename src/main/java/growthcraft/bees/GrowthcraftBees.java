@@ -8,6 +8,7 @@ import growthcraft.bees.shared.Reference;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -114,6 +115,14 @@ public class GrowthcraftBees {
         Init.registerItemRenders();
         Init.registerBlockRender();
 		Init.registerFluidRender();
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void registerCraftingRecipes(RegistryEvent.Register<IRecipe> event)
+	{
+		IForgeRegistry<IRecipe> registry = event.getRegistry();
+		Init.registerCraftingRecipes(registry);
 	}
 	
 }

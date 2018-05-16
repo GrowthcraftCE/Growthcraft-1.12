@@ -34,6 +34,11 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -41,6 +46,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
+import scala.actors.threadpool.Arrays;
 
 public class Init {
 	private Init() {}
@@ -195,25 +201,63 @@ public class Init {
 	////////
 
 	public static void registerRecipes() {
-		registerCraftingRecipes();
 	}
 	
-	private static void registerCraftingRecipes() {
+	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
+		ResourceLocation group = new ResourceLocation(Reference.MODID, "bees");
+		
+		// TODO: Use factory instead for these:
+		
+		// Honey extraction
+		final ItemStack honeyStack = GrowthcraftBeesItems.honeyCombFilled.asStack();
+		registry.register(new ShapelessRecipes(group.toString(), GrowthcraftBeesItems.honeyJar.asStack(),
+				NonNullList.from( Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromItem(Items.FLOWER_POT)))
+					.setRegistryName(toRegName("honey_comb_filled")));
+
+		// Transfer recipes
+		/// To Honey Jar from `jarHoney`
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+				GrowthcraftBeesItems.honeyJar.asStack(),
+				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
+				Items.FLOWER_POT).setRegistryName(toRegName("honey_fluid_to_jar_1")));
+
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+			GrowthcraftBeesItems.honeyJar.asStack(),
+			Blocks.FLOWER_POT,
+			new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, "honey")
+				).setRegistryName(toRegName("honey_fluid_to_jar_2")));
+
+		registry.register(new ShapelessOreRecipe(group,
+			GrowthcraftBeesItems.honeyJar.asStack(),
+			Blocks.FLOWER_POT,
+			"jarHoney"
+				).setRegistryName(toRegName("honey_ore_to_jar")));
+		
+		/// To Honey Bucket from `bucketHoney`
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+			GrowthcraftBeesFluids.honey.asBucketItemStack(),
+			Items.BUCKET,
+			new TaggedFluidStacks(1000, "honey")
+				).setRegistryName(toRegName("honey_fluid_to_bucket")));
+
+		registry.register(new ShapelessOreRecipe(group,
+			GrowthcraftBeesFluids.honey.asBucketItemStack(),
+			"jarHoney",
+			Items.BUCKET
+				).setRegistryName(toRegName("honey_ore_to_bucket")));
+		
 		// TODO: RECIPE_REGISTER!
 		
 /*		// Devices
 		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthcraftBeesBlocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
 
-		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-				GrowthcraftBeesItems.honeyJar.asStack(),
-				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
-				Items.FLOWER_POT));
-		
-		// Honey extraction
-		final ItemStack honeyStack = GrowthcraftBeesItems.honeyCombFilled.asStack();
-		GameRegistry.addShapelessRecipe(GrowthcraftBeesItems.honeyJar.asStack(),
-			honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, honeyStack, Items.FLOWER_POT);
-		
 		// Bees wax
 		final ItemStack emptyComb = GrowthcraftBeesItems.honeyCombEmpty.asStack();
 		GameRegistry.addShapelessRecipe(BeesWaxTypes.NORMAL.asStack(),
@@ -227,31 +271,10 @@ public class Init {
 		GameRegistry.addRecipe(new ShapelessOreRecipe(BeesWaxTypes.RED.asStack(),
 			BeesWaxTypes.NORMAL.asStack(), "dyeRed"));
 
-		// Transfer recipes
-		/// To Honey Jar from `jarHoney`
-		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-			GrowthcraftBeesItems.honeyJar.asStack(),
-			Blocks.FLOWER_POT,
-			new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, "honey")
-		));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(
-			GrowthcraftBeesItems.honeyJar.asStack(),
-			Blocks.FLOWER_POT,
-			"jarHoney"
-		));
-		
-		/// To Honey Bucket from `bucketHoney`
-		GameRegistry.addRecipe(new ShapelessMultiRecipe(
-			GrowthcraftBeesFluids.honey.asBucketItemStack(),
-			Items.BUCKET,
-			new TaggedFluidStacks(1000, "honey")
-		));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(
-			GrowthcraftBeesFluids.honey.asBucketItemStack(),
-			"jarHoney",
-			Items.BUCKET
-		));*/
+*/
+	}
+	
+	private static ResourceLocation toRegName(String name) {
+		return new ResourceLocation(Reference.MODID, name);
 	}
 }
