@@ -27,6 +27,7 @@ import growthcraft.core.shared.item.CommonItemStackComparator;
 import growthcraft.core.shared.item.IItemStackComparator;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
 import growthcraft.core.shared.item.OreItemStacks;
+import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.milk.GrowthcraftMilk;
@@ -293,6 +294,10 @@ public class Init {
 		OreDictionary.registerOre("foodOffal", GrowthcraftMilkItems.stomach.asStack());
 		OreDictionary.registerOre("materialStarterCulture", GrowthcraftMilkItems.starterCulture.asStack());
 		OreDictionary.registerOre("materialCheeseCloth", GrowthcraftMilkItems.cheeseCloth.asStack());
+		
+		OreDictionary.registerOre("listAllsugar", Items.SUGAR);	// From Pam's Harvestcraft
+		OreDictionary.registerOre("foodCocoa", new ItemStack(Items.DYE, 1, 3));
+		OreDictionary.getOres("foodCocoapowder").forEach(stack -> OreDictionary.registerOre("foodCocoa", stack));
 		
 		if (GrowthcraftMilkItems.thistleSeed != null)
 		{
@@ -756,19 +761,20 @@ public class Init {
 	
 	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
 		// TODO: Use recipe factory instead factory 
-		
-		// TODO: RECIPE_REGISTER!
-		
-/*		final int ricottaBowlCount = GrowthcraftMilkConfig.ricottaBowlCount;
+		final int ricottaBowlCount = GrowthcraftMilkConfig.ricottaBowlCount;
 		final List<ItemStack> ricottaBowlRecipe = new ArrayList<ItemStack>();
 		ricottaBowlRecipe.add(SimpleCheeseTypes.RICOTTA.getCurdBlocks().asStack());
 		for (int i = 0; i < ricottaBowlCount; ++i)
 		{
 			ricottaBowlRecipe.add(new ItemStack(Items.BOWL, 1));
 		}
-		GameRegistry.addRecipe(new ShapelessItemComparableRecipe(new DriedCurdComparator(),
+		registry.register(new ShapelessItemComparableRecipe("", new DriedCurdComparator(),
 			SimpleCheeseTypes.RICOTTA.getCheeseItems().asStack(ricottaBowlCount), ricottaBowlRecipe
-		));
+		).setRegistryName(toRegName("ricotta")));
+		
+		// TODO: RECIPE_REGISTER!
+		
+/*		
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(GrowthcraftMilkBlocks.cheeseVat.asStack(),
 			GrowthcraftCellarBlocks.brewKettle.asStack()
@@ -923,6 +929,10 @@ public class Init {
 				MilkRegistry.instance().cheesePress().addRecipe(new DriedCurdsCheesePressRecipe(curdsFactory.asStack(), blockFactory.asStackForStage(4, blockFactory.getInitialStage()), 200));
 			}
 		}
+	}
+	
+	private static ResourceLocation toRegName(String name) {
+		return new ResourceLocation(Reference.MODID, name);
 	}
 	
 	private static void registerCheesePressRecipes()

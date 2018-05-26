@@ -1,6 +1,6 @@
 {
     "type": "forge:ore_shapeless",
-    "group": "yoghurt",
+    "group": "ice_cream",
     "ingredients": [
       {
         "item": "minecraft:milk_bucket"
@@ -10,7 +10,11 @@
       },
       {
         "type": "forge:ore_dict",
-        "ore": "materialStarterCulture"
+        "ore": "listAllsugar"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "bottleCream"
       },
       {
         "type": "forge:ore_dict",
@@ -18,7 +22,7 @@
       }
     ],
     "result": {
-      "item": "growthcraft_milk:yogurt",
+      "item": "growthcraft_milk:ice_cream",
       "data": 1
     }
 }
