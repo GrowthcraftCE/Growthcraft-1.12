@@ -130,6 +130,9 @@ public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> exten
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
+		if( !this.isInCreativeTab(tab) )
+			return;
+
     	for( T type : getAllVariants() ) {
     		ICheeseCurdStackFactory curdStackFactory = type.getCurdBlocks();
     		ItemStack stack = curdStackFactory.asStack();
