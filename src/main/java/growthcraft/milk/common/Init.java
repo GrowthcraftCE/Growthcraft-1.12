@@ -107,6 +107,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
@@ -753,7 +754,9 @@ public class Init {
 		}
 	}
 	
-	private static void registerCraftingRecipes() {
+	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
+		// TODO: Use recipe factory instead factory 
+		
 		// TODO: RECIPE_REGISTER!
 		
 /*		final int ricottaBowlCount = GrowthcraftMilkConfig.ricottaBowlCount;
@@ -932,7 +935,6 @@ public class Init {
 	public static void initRecipes() {
 		registerCheeseVatRecipes();
 		registerCheesePressRecipes();
-		registerCraftingRecipes();
 	}
 	
 	//

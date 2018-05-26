@@ -114,3 +114,4 @@ DONE: BUG: Right shift+clicking an item in inventory doesn't redraw GUI.
 Mod Integration: Pam's Harvestcraft
 ------------
 TODO: Add recipes with HC honey combs
+TODO: Add grape wines from HC grapes

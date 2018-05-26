@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "sss",
+    "s s",
+    "sss"
+  ],
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:cheese_cloth",
+    "count": 4
+  }
+}

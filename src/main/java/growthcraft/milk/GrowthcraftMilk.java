@@ -10,6 +10,7 @@ import growthcraft.milk.shared.GrowthcraftMilkUserApis;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -122,5 +123,14 @@ public class GrowthcraftMilk {
         Init.registerBlockRenders();
 		Init.registerFluidRenders();
 	}
+	
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void registerCraftingRecipes(RegistryEvent.Register<IRecipe> event)
+	{
+		IForgeRegistry<IRecipe> registry = event.getRegistry();
+		Init.registerCraftingRecipes(registry);
+	}
+	
 
 }
