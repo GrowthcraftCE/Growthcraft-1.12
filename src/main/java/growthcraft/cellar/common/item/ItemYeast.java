@@ -30,6 +30,8 @@ public class ItemYeast extends GrowthcraftItemBase {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
 	{
+		if( !this.isInCreativeTab(tab) )
+			return;
 		for (EnumYeast ytype : EnumYeast.values())
 		{
 			subItems.add(ytype.asStack());

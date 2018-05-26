@@ -17,6 +17,8 @@ public class ItemCrowbar extends Item {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+		if( !this.isInCreativeTab(tab) )
+			return;
         for ( int i = 0; i < CrowbarTypes.values().length; i++ ) {
             subItems.add(new ItemStack(this, 1, i));
         }

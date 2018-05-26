@@ -200,6 +200,8 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> list)
 	{
+		if( !this.isInCreativeTab(tab) )
+			return;
 		for (int i = 0; i < getFluidArray().length; i++)
 		{
 			list.add(new ItemStack(this, 1, i));

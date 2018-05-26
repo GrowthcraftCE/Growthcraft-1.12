@@ -116,6 +116,9 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
     {
+		if( !this.isInCreativeTab(tab) )
+			return;
+
     	for( T type : getAllVariants() ) {
     		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
     		ItemStack stack = blockStackFactory.asStackForStage(4, blockStackFactory.getInitialStage());
