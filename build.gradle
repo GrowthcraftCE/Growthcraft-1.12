@@ -31,14 +31,22 @@ plugins {
 }*/
 
 repositories {
+	mavenLocal()
     maven {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
+    }
+	maven { // CraftTweaker
+        name 'jared maven'
+        url "http://maven.blamejared.com/"
     }
     maven { // TOP
         name 'tterrag maven'
         url "http://maven.tterrag.com/"
     }
+	maven { // HWYLA
+		url "http://tehnut.info/maven"
+	}
     maven { // compatlayer
         name 'K-4u maven'
         url "http://maven.k-4u.nl/"
@@ -54,6 +62,14 @@ repositories {
     maven {
         name = "CoFH Maven"
         url = "http://maven.covers1624.net"
+    }
+	maven {
+        name "AppleCore"
+		url "http://www.ryanliptak.com/maven/"
+	}
+    maven {
+        name "IC2 Forestry"
+        url "http://maven.ic2.player.to/"
     }
 }
 
@@ -130,16 +146,9 @@ def commonManifest = {
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
-//    deobfCompile "slimeknights.mantle:Mantle:${config.minecraft_version_short}-${config.mantle_version}"
+    deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
+    deobfCompile "com.mangoose.rustic:rustic:1.0.5"
 
-    // compile against the JEI API
-//    deobfCompile "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}:api"
-    // at runtime, use the full JEI jar
-//    runtime "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}"
-
-//    deobfCompile "mcp.mobius.waila:Hwyla:${config.hwyla_version}"
-//    deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:${config.probe_version}"
-//    deobfCompile "cofh:RedstoneFlux:${config.redstoneflux_version}:universal"
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
 
@@ -195,7 +204,7 @@ task sourcesJar(type: Jar) {
 // Create API library jar
 task libJar(type: Jar) {
     from(sourceSets.main.java) {
-        include "tconstruct/library/**/*"
+        include "growthcraft/*/api/**/*"
     }
     classifier = 'lib'
 }

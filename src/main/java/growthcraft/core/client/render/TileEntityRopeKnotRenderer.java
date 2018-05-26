@@ -39,7 +39,7 @@ public class TileEntityRopeKnotRenderer extends TileEntitySpecialRenderer<TileEn
             //Block block = Block.getBlockFromItem(stack.getItem());
             //String model = Minecraft.getMinecraft().getBlockRendererDispatcher().getBlockModelShapes().getTexture(block.getDefaultState()).getIconName();
 
-            Minecraft.getMinecraft().getRenderManager().doRenderEntity(ITEM, x, y, z, 0F, 0F, false);
+            Minecraft.getMinecraft().getRenderManager().renderEntity(ITEM, x, y, z, 0F, 0F, false);
         }
         GlStateManager.popMatrix();
 

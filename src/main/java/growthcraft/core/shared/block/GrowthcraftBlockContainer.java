@@ -56,13 +56,13 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 	public GrowthcraftBlockContainer(@Nonnull Material material)
 	{
 		super(material);
-		this.isBlockContainer = true;
+		this.hasTileEntity = true;
 	}
 	
 
 	public GrowthcraftBlockContainer(@Nonnull Material material, @Nonnull MapColor mapColor) {
 		super(material, mapColor);
-		this.isBlockContainer = true;
+		this.hasTileEntity = true;
 	}
 
 
