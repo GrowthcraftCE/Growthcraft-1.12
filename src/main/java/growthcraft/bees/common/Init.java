@@ -29,6 +29,7 @@ import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
+import growthcraft.core.shared.utils.LootUtils;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -39,6 +40,14 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootEntry;
+import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -276,5 +285,18 @@ public class Init {
 	
 	private static ResourceLocation toRegName(String name) {
 		return new ResourceLocation(Reference.MODID, name);
+	}
+	
+	////////
+	// Loot
+	////////
+
+	public static void lootLoad(LootTableLoadEvent evt) {
+		boolean isVillageBlacksmith = evt.getName().toString().equals("minecraft:chests/village_blacksmith");
+		
+	    if (isVillageBlacksmith) {
+	    	LootPool pool = LootUtils.getOrCreateLootPool(evt.getTable(), "growthcraft");
+	    	LootUtils.addLootEntry(pool, GrowthcraftBeesItems.bee.getItem(), 1, 2, 10);
+	    }
 	}
 }

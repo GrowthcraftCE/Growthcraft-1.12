@@ -21,6 +21,7 @@ import growthcraft.core.shared.effect.EffectAddPotionEffect;
 import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
+import growthcraft.core.shared.utils.LootUtils;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.grapes.common.blocks.BlockGrapeFruit;
 import growthcraft.grapes.common.blocks.BlockGrapeLeaves;
@@ -40,6 +41,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -428,5 +431,20 @@ public class Init {
 		GameRegistry.addShapelessRecipe(GrapeTypes.GREEN.asSeedsStack(1), GrapeTypes.GREEN.asStack(1) );
 		GameRegistry.addShapelessRecipe(GrapeTypes.RED.asSeedsStack(1), GrapeTypes.RED.asStack(1) );
 		*/
+	}
+	
+	// Loot
+	////////
+
+	public static void lootLoad(LootTableLoadEvent evt) {
+		boolean isSimpleDungeon = evt.getName().toString().equals("minecraft:chests/simple_dungeon");
+		boolean isMineshaft = evt.getName().toString().equals("minecraft:chests/abandoned_mineshaft");
+		
+	    if (isMineshaft || isSimpleDungeon) {
+	    	LootPool pool = LootUtils.getOrCreateLootPool(evt.getTable(), "growthcraft");
+	    	LootUtils.addLootEntry(pool, GrowthcraftGrapesItems.GrapeTypes.PURPLE.asSeedsStack(1), 1, 5, isSimpleDungeon ? 3 : 10);
+	    	LootUtils.addLootEntry(pool, GrowthcraftGrapesItems.GrapeTypes.RED.asSeedsStack(1), 1, 5, isSimpleDungeon ? 2 : 5);
+	    	LootUtils.addLootEntry(pool, GrowthcraftGrapesItems.GrapeTypes.GREEN.asSeedsStack(1), 1, 5, isSimpleDungeon ? 1 : 3);
+	    }
 	}
 }

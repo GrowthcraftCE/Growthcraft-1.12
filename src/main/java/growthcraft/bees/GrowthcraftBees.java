@@ -5,12 +5,21 @@ import growthcraft.bees.common.Init;
 import growthcraft.bees.common.lib.config.user.UserBeesConfig;
 import growthcraft.bees.common.lib.config.user.UserFlowersConfig;
 import growthcraft.bees.shared.Reference;
+import growthcraft.bees.shared.init.GrowthcraftBeesItems;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.world.storage.loot.LootEntry;
+import net.minecraft.world.storage.loot.LootEntryItem;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.LootTable;
+import net.minecraft.world.storage.loot.RandomValueRange;
+import net.minecraft.world.storage.loot.conditions.LootCondition;
+import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -125,4 +134,8 @@ public class GrowthcraftBees {
 		Init.registerCraftingRecipes(registry);
 	}
 	
+	@SubscribeEvent
+	public void lootLoad(LootTableLoadEvent evt) {
+		Init.lootLoad(evt);
+	}
 }
