@@ -104,6 +104,13 @@ Porting to 1.12.2:
 TODO: Port recipes.
 TODO: Add cellar Advancements.
 TODO: Handle alpha for tile entity rendering.
-TODO: Reenable Bucket to bottle filling for boozes. 
+TODO: Reenable Bucket to bottle filling for boozes.
+TODO: BUG: Recipes using custom classes are displayed as empty.
+TODO: BUG: Honey jar recipe with bucket is broken.
 TODO: BUG: Crowbar is displayed in the slot for erasing items at Creative GUI.
 DONE: BUG: Right shift+clicking an item in inventory doesn't redraw GUI. 
+
+------------
+Mod Integration: Pam's Harvestcraft
+------------
+TODO: Add recipes with HC honey combs

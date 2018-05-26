@@ -90,7 +90,7 @@ public class Init {
 	
 	public static void registerItemOres() {
 		OreDictionary.registerOre("materialWax", GrowthcraftBeesItems.beesWax.getItem());
-		OreDictionary.registerOre("materialPressedwax", GrowthcraftBeesItems.beesWax.getItem());
+//		OreDictionary.registerOre("materialPressedwax", GrowthcraftBeesItems.beesWax.getItem());
 		OreDictionary.registerOre("materialBeeswax", GrowthcraftBeesItems.beesWax.getItem());
 		OreDictionary.registerOre("materialBeeswaxBlack", BeesWaxTypes.BLACK.asStack());
 		OreDictionary.registerOre("materialBeeswaxRed", BeesWaxTypes.RED.asStack());

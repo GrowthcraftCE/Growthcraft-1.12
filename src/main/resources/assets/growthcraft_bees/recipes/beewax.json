@@ -1,0 +1,46 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "beewax",
+    "ingredients": [
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        },
+        {
+            "item": "growthcraft_bees:honey_comb_empty",
+            "data": 0
+        }
+    ],
+    "result": {
+        "item": "growthcraft_bees:bees_wax",
+        "data": 0
+    }
+}

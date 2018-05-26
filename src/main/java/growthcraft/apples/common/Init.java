@@ -58,6 +58,11 @@ public class Init {
     	GrowthcraftApplesBlocks.blockAppleSlabDouble = new BlockTypeDefinition<BlockSlab>( new BlockAppleSlabDouble("apple_slab_double") );
     	GrowthcraftApplesBlocks.blockAppleStairs = new BlockDefinition( new BlockAppleStairs("apple_stairs", GrowthcraftApplesBlocks.blockApplePlanks.getDefaultState()) );
     }
+    
+	public static void registerBlockOres()
+	{
+		OreDictionary.registerOre("plankWood", GrowthcraftApplesBlocks.blockApplePlanks.getItem());
+	}
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
     	GrowthcraftApplesBlocks.blockApple.registerBlock(registry);

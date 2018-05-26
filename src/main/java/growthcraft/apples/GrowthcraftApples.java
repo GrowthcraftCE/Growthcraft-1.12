@@ -49,6 +49,7 @@ public class GrowthcraftApples {
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
     	proxy.postInit();
+    	Init.registerBlockOres();
     	Init.registerItemOres();
     }
     
