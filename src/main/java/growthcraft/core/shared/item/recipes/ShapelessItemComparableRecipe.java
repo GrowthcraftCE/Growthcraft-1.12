@@ -20,9 +20,11 @@ public class ShapelessItemComparableRecipe extends net.minecraftforge.registries
 	public final List<ItemStack> recipeItems;
 	private final ItemStack recipeOutput;
 	private final IItemStackComparator comparator;
+	private final String group;
 
-	public ShapelessItemComparableRecipe(@Nonnull IItemStackComparator pComparator, ItemStack result, List<ItemStack> list)
+	public ShapelessItemComparableRecipe(String group, @Nonnull IItemStackComparator pComparator, ItemStack result, List<ItemStack> list)
 	{
+		this.group = group;
 		this.comparator = pComparator;
 		this.recipeOutput = result;
 		this.recipeItems = list;
@@ -96,4 +98,11 @@ public class ShapelessItemComparableRecipe extends net.minecraftforge.registries
 	public boolean canFit(int width, int height) {
 		return width * height >= this.recipeItems.size();
 	}
+	
+    @Override
+    @Nonnull
+    public String getGroup()
+    {
+        return this.group;
+    }
 }
