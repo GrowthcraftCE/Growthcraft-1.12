@@ -146,7 +146,7 @@ def commonManifest = {
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
-    deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
+    // deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
     deobfCompile "com.mangoose.rustic:rustic:1.0.5"
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'

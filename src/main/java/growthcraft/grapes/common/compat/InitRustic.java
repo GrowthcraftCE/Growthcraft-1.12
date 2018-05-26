@@ -4,15 +4,20 @@ import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBo
 
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.booze.BoozeUtils;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.definition.FluidDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.effect.EffectAddPotionEffect;
+import growthcraft.core.shared.effect.EffectWeightedRandomList;
+import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.WineTypes;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Loader;
@@ -56,7 +61,7 @@ public class InitRustic {
 	}	
 
 	private static void registerFermentations() {
-		final int costRatio = 6;	// paying higher press output by a slower booze production. Approx (250 / 40)  
+		final int costRatio = 6;	// paying for higher press output by a slower booze production. Approx (250 / 40)  
 		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		FluidStack rusticGrapeJuiceStack = rusticGrapeJuice.asFluidStack();
 		FluidStack rusticGrapeWineStack = rusticGrapeWine.asFluidStack();
@@ -73,41 +78,27 @@ public class InitRustic {
 		
 		// Brewers Yeast, Nether Wart
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()].getFluid())
-//			.tags(BoozeTag.WINE, BoozeTag.FERMENTED)
 			.fermentsFrom(rusticGrapeJuiceStack, new OreItemStacks("yeastBrewers"), fermentTime * costRatio)
 			.fermentsFrom(rusticGrapeJuiceStack, new ItemStack(Items.NETHER_WART), (int)(fermentTime * costRatio * 0.66));
-//			.getEffect()
-//				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
-//				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 		
 		// Glowstone Dust
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POTENT.ordinal()].getFluid())
-//			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POTENT)
 			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("dustGlowstone"), fermentTime * costRatio);
-//			.fermentsFrom(fs[WineTypes.PURPLE_WINE_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
-//			.getEffect()
-//				.setTipsy(BoozeUtils.alcoholToTipsy(0.07f), TickUtils.seconds(90))
-//				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 		
 		// Redstone Dust
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_EXTENDED.ordinal()].getFluid())
-//			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
 			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("dustRedstone"), fermentTime * costRatio);
-//			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
-//			.getEffect()
-//				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
-//				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
 		
 		// Port Wine - Bayanus Yeast
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_PORTWINE.ordinal()].getFluid())
-//			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.FORTIFIED)
 			.brewsFrom(
 				new FluidStack(rusticGrapeWine.getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
 				GrowthcraftGrapesConfig.portWineBrewingTime * costRatio,
 				Residue.newDefault(0.3F));
-//			.getEffect()
-//				.setTipsy(BoozeUtils.alcoholToTipsy(0.20f), TickUtils.seconds(90))
-//				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 2);
+
+		// Intoxicated Wine
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POISONED.ordinal()].getFluid())
+			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("yeastPoison"), fermentTime * costRatio);
 	}
 }
