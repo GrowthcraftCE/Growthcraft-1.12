@@ -261,6 +261,14 @@ public class GrowthcraftFluidUtils
 	// Fluidstack utils
 	/////////
 	
+	public static FluidStack removeStackTags(FluidStack stack) {
+		if( stack == null )
+			return null;
+		if( stack.tag == null ) 
+			return stack;
+		return new FluidStack(stack.getFluid(), stack.amount);
+	}
+	
 	public static FluidStack exchangeFluid(FluidStack stack, Fluid newFluid)
 	{
 		return new FluidStack(newFluid, stack.amount);
@@ -308,5 +316,21 @@ public class GrowthcraftFluidUtils
 			infos[i] = new FluidTankInfo(prop.getContents(), prop.getCapacity());
 		}
 		return infos;
+	}
+
+	public static FluidStack replaceFluidStackTags(FluidStack from, FluidStack tagsFrom) {
+		if( from == null )
+			return null;
+		if( tagsFrom == null )
+			return from;
+		
+		if( tagsFrom.tag == null ) {
+			if( from.tag != null )
+				return new FluidStack(from.getFluid(), from.amount);
+			else
+				return from;
+		}
+		
+		return new FluidStack(from.getFluid(), from.amount, tagsFrom.tag);
 	}
 }

@@ -7,6 +7,7 @@ import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.definition.IMultiItemStacks;
+import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
@@ -100,9 +101,9 @@ public class BrewKettle extends DeviceBase
 
 	private IBrewingRecipe findRecipe()
 	{
-		return CellarRegistry.instance().brewing().findRecipe(inputFluidSlot.get(), brewingSlot.get());
+		return CellarRegistry.instance().brewing().findRecipe(GrowthcraftFluidUtils.removeStackTags(inputFluidSlot.get()), brewingSlot.get());
 	}
-
+	
 	public IBrewingRecipe getWorkingRecipe()
 	{
 		if (!isHeated()) return null;
@@ -146,7 +147,7 @@ public class BrewKettle extends DeviceBase
 	private void brewItem(IBrewingRecipe recipe)
 	{
 		produceGrain(recipe);
-		inputFluidSlot.consume(recipe.getInputFluidStack(), true);
+		inputFluidSlot.consume(GrowthcraftFluidUtils.replaceFluidStackTags(recipe.getInputFluidStack(), inputFluidSlot.get()), true);
 		outputFluidSlot.fill(recipe.asFluidStack(), true);
 		brewingSlot.consume(recipe.getInputItemStack());
 		markForUpdate();

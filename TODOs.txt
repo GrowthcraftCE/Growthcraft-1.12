@@ -119,4 +119,7 @@ TODO: Add grape wines from HC grapes
 ------------
 Mod Integration: Rustic
 ------------
+TODO: Balance booze fluids in/out at fermentation barrel and brew kettle  
+TODO: Add support for fluid stack tags. Currently tags are removed/replaces at fermentation barrel and brew kettle.
 TODO: Retrieve crushing and fermenting recipes from an API, if available.
+DONE: Balance fruit press for grapes. GC grapes produce 40 and Rustic grapes produce 250

@@ -112,7 +112,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 
 	private IFermentationRecipe loadRecipe()
 	{
-		return CellarRegistry.instance().fermenting().findRecipe(getFluidStack(0), getStackInSlot(0));
+		return CellarRegistry.instance().fermenting().findRecipe(GrowthcraftFluidUtils.removeStackTags(getFluidStack(0)), getStackInSlot(0));
 	}
 
 	private IFermentationRecipe refreshRecipe()

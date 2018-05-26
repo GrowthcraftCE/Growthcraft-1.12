@@ -3,6 +3,7 @@ package growthcraft.grapes.common.compat;
 import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
 
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
+import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.definition.FluidDefinition;
@@ -55,23 +56,26 @@ public class InitRustic {
 	}	
 
 	private static void registerFermentations() {
+		final int costRatio = 6;	// paying higher press output by a slower booze production. Approx (250 / 40)  
 		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		FluidStack rusticGrapeJuiceStack = rusticGrapeJuice.asFluidStack();
 		FluidStack rusticGrapeWineStack = rusticGrapeWine.asFluidStack();
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(rusticGrapeJuice/*grapeWineBooze[WineTypes.PURPLE_JUICE.ordinal()]*/.getFluid())
-//			.tags(BoozeTag.YOUNG)
+			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
 				rusticGrape.asStack(),
 				TickUtils.seconds(2),
-				40,
+				250,
 				Residue.newDefault(0.3F));
+		GrowthcraftCellarApis.boozeBuilderFactory.create(rusticGrapeWine.getFluid())
+			.tags(BoozeTag.WINE, BoozeTag.FERMENTED);
 		
 		// Brewers Yeast, Nether Wart
-		GrowthcraftCellarApis.boozeBuilderFactory.create(rusticGrapeWine/*grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()]*/.getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()].getFluid())
 //			.tags(BoozeTag.WINE, BoozeTag.FERMENTED)
-			.fermentsFrom(rusticGrapeJuiceStack, new OreItemStacks("yeastBrewers"), fermentTime)
-			.fermentsFrom(rusticGrapeJuiceStack, new ItemStack(Items.NETHER_WART), (int)(fermentTime * 0.66));
+			.fermentsFrom(rusticGrapeJuiceStack, new OreItemStacks("yeastBrewers"), fermentTime * costRatio)
+			.fermentsFrom(rusticGrapeJuiceStack, new ItemStack(Items.NETHER_WART), (int)(fermentTime * costRatio * 0.66));
 //			.getEffect()
 //				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
 //				.addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
@@ -79,7 +83,7 @@ public class InitRustic {
 		// Glowstone Dust
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POTENT.ordinal()].getFluid())
 //			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POTENT)
-			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("dustGlowstone"), fermentTime);
+			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("dustGlowstone"), fermentTime * costRatio);
 //			.fermentsFrom(fs[WineTypes.PURPLE_WINE_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 //			.getEffect()
 //				.setTipsy(BoozeUtils.alcoholToTipsy(0.07f), TickUtils.seconds(90))
@@ -88,7 +92,7 @@ public class InitRustic {
 		// Redstone Dust
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_EXTENDED.ordinal()].getFluid())
 //			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("dustRedstone"), fermentTime);
+			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("dustRedstone"), fermentTime * costRatio);
 //			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 //			.getEffect()
 //				.setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
@@ -100,7 +104,7 @@ public class InitRustic {
 			.brewsFrom(
 				new FluidStack(rusticGrapeWine.getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
-				GrowthcraftGrapesConfig.portWineBrewingTime,
+				GrowthcraftGrapesConfig.portWineBrewingTime * costRatio,
 				Residue.newDefault(0.3F));
 //			.getEffect()
 //				.setTipsy(BoozeUtils.alcoholToTipsy(0.20f), TickUtils.seconds(90))
