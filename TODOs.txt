@@ -115,3 +115,8 @@ Mod Integration: Pam's Harvestcraft
 ------------
 TODO: Add recipes with HC honey combs
 TODO: Add grape wines from HC grapes
+
+------------
+Mod Integration: Rustic
+------------
+TODO: Retrieve crushing and fermenting recipes from an API, if available.
