@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.shared.config.description.Describer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -53,7 +53,7 @@ public class EffectRandomList extends AbstractEffectList
 		if (effects.size() > 0)
 		{
 			final List<String> tempList = new ArrayList<String>();
-			list.add(I18n.format("effect.random_list.head"));
+			list.add(I18n.translateToLocal("effect.random_list.head"));
 			for (IEffect effect : effects)
 			{
 				tempList.clear();

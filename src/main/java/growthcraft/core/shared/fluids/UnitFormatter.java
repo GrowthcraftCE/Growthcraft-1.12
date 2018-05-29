@@ -8,8 +8,8 @@ import com.google.common.base.Joiner;
 
 import growthcraft.core.shared.config.GrowthcraftConfiguration;
 import growthcraft.core.shared.CoreRegistry;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
@@ -37,7 +37,7 @@ public class UnitFormatter
 
 	public static String fluidBucketName(Fluid fluid)
 	{
-		return I18n.format("item.bucket." + fluid.getUnlocalizedName() + ".name");
+		return I18n.translateToLocal("item.bucket." + fluid.getUnlocalizedName() + ".name");
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class UnitFormatter
 	public static String fluidModifier(Fluid fluid)
 	{
 		final String modifierSrc = fluid.getUnlocalizedName() + ".modifier";
-		String modifierString = I18n.format(modifierSrc);
+		String modifierString = I18n.translateToLocal(modifierSrc);
 
 		// if there is not a modifier defined, create one by joining the tag names
 		if (modifierSrc.equals(modifierString))
@@ -83,12 +83,12 @@ public class UnitFormatter
 
 			if (modifier != null)
 			{
-				return I18n.format("grc.format.booze.name",
+				return I18n.translateToLocalFormatted("grc.format.booze.name",
 					TextFormatting.WHITE + fluidStack.getLocalizedName(), modifier);
 			}
 			else
 			{
-				return I18n.format("grc.format.fluid.name",
+				return I18n.translateToLocalFormatted("grc.format.fluid.name",
 						TextFormatting.WHITE + fluidStack.getLocalizedName());
 			}
 		}
@@ -114,7 +114,7 @@ public class UnitFormatter
 	 */
 	public static String noItem()
 	{
-		return TextFormatting.GRAY + I18n.format("format.itemslot.empty");
+		return TextFormatting.GRAY + I18n.translateToLocal("format.itemslot.empty");
 	}
 
 	/**
@@ -122,7 +122,7 @@ public class UnitFormatter
 	 */
 	public static String invalidItem()
 	{
-		return TextFormatting.RED + I18n.format("format.itemslot.invalid");
+		return TextFormatting.RED + I18n.translateToLocal("format.itemslot.invalid");
 	}
 
 	/**
@@ -130,7 +130,7 @@ public class UnitFormatter
 	 */
 	public static String noFluid()
 	{
-		return TextFormatting.GRAY + I18n.format("grc.format.tank.empty");
+		return TextFormatting.GRAY + I18n.translateToLocal("grc.format.tank.empty");
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class UnitFormatter
 	 */
 	public static String invalidFluid()
 	{
-		return TextFormatting.RED + I18n.format("format.invalid_fluid");
+		return TextFormatting.RED + I18n.translateToLocal("format.invalid_fluid");
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class UnitFormatter
 	 */
 	public static String booleanAsState(boolean b)
 	{
-		return I18n.format("format.state." + b);
+		return I18n.translateToLocal("format.state." + b);
 	}
 
 	/**
@@ -156,6 +156,6 @@ public class UnitFormatter
 	 */
 	public static String booleanAsValue(boolean b)
 	{
-		return I18n.format("format.value." + b);
+		return I18n.translateToLocal("format.value." + b);
 	}
 }

@@ -5,8 +5,8 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import growthcraft.core.shared.config.description.IDescribable;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.Fluid;
 
 /**
@@ -56,7 +56,7 @@ public class GrowthcraftFluid extends Fluid implements IDescribable
 	public void getDescription(@Nonnull List<String> list)
 	{
 		final String unloc = getUnlocalizedName() + ".desc";
-		final String result = I18n.format(unloc);
+		final String result = I18n.translateToLocal(unloc);
 		if (!unloc.equals(result))
 		{
 			list.add(result);

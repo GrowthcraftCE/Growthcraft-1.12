@@ -8,12 +8,12 @@ import java.util.Set;
 
 import growthcraft.core.shared.effect.IEffect;
 import growthcraft.core.shared.io.nbt.NBTHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -70,7 +70,7 @@ public class EffectMilk implements IEffect
 
 	public void getDescription(List<String> list)
 	{
-		list.add(I18n.format("grc.effect.milk"));
+		list.add(I18n.translateToLocal("grc.effect.milk"));
 	}
 
 	/**

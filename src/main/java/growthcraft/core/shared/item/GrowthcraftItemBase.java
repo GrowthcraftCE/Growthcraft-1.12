@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -39,7 +39,7 @@ public class GrowthcraftItemBase extends Item
 	public static void addDescription(Item item, ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		final String src = item.getUnlocalizedNameInefficiently(stack) + ".desc";
-		final String tr = ("" + I18n.format(src)).trim();
+		final String tr = ("" + I18n.translateToLocal(src)).trim();
 		if (!src.equals(tr)) tooltip.add(tr);
 	}
 }

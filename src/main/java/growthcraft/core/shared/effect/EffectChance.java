@@ -6,9 +6,9 @@ import java.util.Random;
 
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.config.description.Describer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -74,7 +74,7 @@ public class EffectChance extends AbstractEffect
 			effect.getDescription(tempList);
 			if (tempList.size() > 0)
 			{
-				final String str = I18n.format("effect.chance.format", (int)(chance * 100));
+				final String str = I18n.translateToLocalFormatted("effect.chance.format", (int)(chance * 100));
 				Describer.compactDescription(str, list, tempList);
 			}
 		}

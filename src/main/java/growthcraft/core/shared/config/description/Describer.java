@@ -2,10 +2,10 @@ package growthcraft.core.shared.config.description;
 
 import java.util.List;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 
 /**
  * A nice way to add descriptions to a list if the Object is an IDescribable
@@ -28,7 +28,7 @@ public class Describer
 	{
 		if (pe == null) return;
 
-		String s = I18n.format(pe.getEffectName()).trim();
+		String s = I18n.translateToLocal(pe.getEffectName()).trim();
 		final Potion potion = pe.getPotion();
 		if (potion != null)
 		{
@@ -38,7 +38,7 @@ public class Describer
 
 		if (pe.getAmplifier() > 0)
 		{
-			s += " " + I18n.format("potion.potency." + pe.getAmplifier()).trim();
+			s += " " + I18n.translateToLocal("potion.potency." + pe.getAmplifier()).trim();
 		}
 
 		if (pe.getDuration() > 20)

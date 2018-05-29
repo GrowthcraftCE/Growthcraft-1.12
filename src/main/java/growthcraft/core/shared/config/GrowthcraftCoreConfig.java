@@ -1,6 +1,6 @@
 package growthcraft.core.shared.config;
 
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
@@ -63,7 +63,7 @@ public class GrowthcraftCoreConfig {
 
         Property propertyLogLevel = config.get(CATEGORY_NAME_LOGGING, "log_level", "info");
         propertyLogLevel.setLanguageKey("gui.config.logging.log_level");
-        propertyLogLevel.setComment(I18n.format("gui.config.logging.log_level.comment"));
+        propertyLogLevel.setComment(I18n.translateToLocal("gui.config.logging.log_level.comment"));
 
         List<String> propteryOrderBlocks = new ArrayList<String>();
         propteryOrderBlocks.add(propertyLogLevel.getName());

@@ -9,10 +9,10 @@ import javax.annotation.Nonnull;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.config.description.Describer;
 import growthcraft.core.shared.io.nbt.NBTHelper;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.WeightedRandom;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -244,7 +244,7 @@ public class EffectWeightedRandomList extends AbstractEffect
 			if (tempList.size() > 0)
 			{
 				final float chance = totalWeight > 0 ? (float)effect.itemWeight / (float)totalWeight : 0f;
-				final String head = I18n.format("effect.weighted_random_list.format", (int)(chance * 100f));
+				final String head = I18n.translateToLocalFormatted("effect.weighted_random_list.format", (int)(chance * 100f));
 				Describer.compactDescription(head, list, tempList);
 			}
 		}

@@ -45,7 +45,7 @@ public class GrowthcraftBees {
     public static CommonProxy proxy;
 
     @SideOnly(Side.CLIENT)
-    public static final GrowthcraftGuiProvider guiProvider = new GrowthcraftGuiProvider();
+    public static GrowthcraftGuiProvider guiProvider;
     
 	public static final UserBeesConfig userBeesConfig = new UserBeesConfig();
 	public static final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();

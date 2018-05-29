@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.shared.config.description.Describer;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -46,7 +46,7 @@ public class EffectList extends AbstractEffectList
 
 	protected void addDescriptionHead(List<String> list)
 	{
-		list.add(I18n.format("effect.list.head"));
+		list.add(I18n.translateToLocal("effect.list.head"));
 	}
 
 	/**

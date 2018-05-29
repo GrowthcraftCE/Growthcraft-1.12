@@ -5,6 +5,7 @@ import growthcraft.bees.client.gui.GuiBeeBox;
 import growthcraft.bees.common.CommonProxy;
 import growthcraft.bees.common.Init;
 import growthcraft.bees.shared.Reference;
+import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ClientProxy extends CommonProxy {
@@ -12,6 +13,7 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init() {
 		super.init();
+		GrowthcraftBees.guiProvider = new GrowthcraftGuiProvider();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, GrowthcraftBees.guiProvider);
 		
 		GrowthcraftBees.guiProvider.register("growthcraft_bees:bee_box", GuiBeeBox.class);

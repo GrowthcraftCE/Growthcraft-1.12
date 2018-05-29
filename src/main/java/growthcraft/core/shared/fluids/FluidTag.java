@@ -2,7 +2,7 @@ package growthcraft.core.shared.fluids;
 
 import javax.annotation.Nonnull;
 
-import net.minecraft.client.resources.I18n;
+import net.minecraft.util.text.translation.I18n;
 
 public class FluidTag {
 	// REVISE_ME 0
@@ -26,7 +26,7 @@ public class FluidTag {
 
 	public String getLocalizedName()
 	{
-		return I18n.format(getUnlocalizedName());
+		return I18n.translateToLocal(getUnlocalizedName());
 	}
 
 	public String toString()

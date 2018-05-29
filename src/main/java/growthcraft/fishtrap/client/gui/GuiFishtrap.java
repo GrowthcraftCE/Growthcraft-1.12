@@ -8,7 +8,10 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class GuiFishtrap extends GuiContainer {
 
     private static final ResourceLocation FISHTRAP_TEXTURE = new ResourceLocation(Reference.MODID, "textures/guis/container/fishtrap_gui.png");

@@ -4,10 +4,10 @@ import java.util.List;
 
 import growthcraft.core.shared.fluids.UnitFormatter;
 import growthcraft.core.shared.io.ConstID;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.FluidStack;
 
 public class TagFormatterFluidHandler {
@@ -28,7 +28,7 @@ public class TagFormatterFluidHandler {
 
 			if (name != null && name.length() > 0)
 			{
-				content += I18n.format(name) + " ";
+				content += I18n.translateToLocal(name) + " ";
 			}
 			else
 			{
@@ -36,7 +36,7 @@ public class TagFormatterFluidHandler {
 				{
 					// If the FluidHandler has multiple tanks, then prefix them as such,
 					// otherwise, display their content like normal
-					content += TextFormatting.GRAY + I18n.format("format.tank_id", tankTag.getInteger("tank_id") + 1) + " ";
+					content += TextFormatting.GRAY + I18n.translateToLocalFormatted("format.tank_id", tankTag.getInteger("tank_id") + 1) + " ";
 				}
 			}
 
@@ -47,7 +47,7 @@ public class TagFormatterFluidHandler {
 				final String fluidName = UnitFormatter.fluidNameForContainer(fluidStack);
 				content = content +
 					UnitFormatter.fractionNum(fluidStack.amount, tankTag.getInteger("capacity")) +
-					TextFormatting.GRAY + " " + I18n.format("format.tank.content_suffix", fluidName);
+					TextFormatting.GRAY + " " + I18n.translateToLocalFormatted("format.tank.content_suffix", fluidName);
 			}
 			else
 			{

@@ -44,7 +44,7 @@ public class GrowthcraftCellar {
     public static CommonProxy proxy;
     
     @SideOnly(Side.CLIENT)
-    public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
+    public static GrowthcraftGuiProvider guiProvider;
     
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
@@ -89,7 +89,6 @@ public class GrowthcraftCellar {
     	Init.initYeasts();
     	Init.registerYeasts();
     	packetPipeline.initialise();
-    	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
         Init.registerRecipes();
         proxy.init();
         

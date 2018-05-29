@@ -3,12 +3,12 @@ package growthcraft.core.shared.effect;
 import java.util.List;
 import java.util.Random;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 
 /**
@@ -61,8 +61,8 @@ public class EffectRemovePotionEffect extends AbstractEffect
 	protected void getActualDescription(List<String> list)
 	{
 		final PotionEffect pe = new PotionEffect(getPotion(), 1000, 0);
-		final String potionName = I18n.format(pe.getEffectName()).trim();
-		list.add(I18n.format("effect.remove_potion_effect.format", potionName));
+		final String potionName = I18n.translateToLocal(pe.getEffectName()).trim();
+		list.add(I18n.translateToLocalFormatted("effect.remove_potion_effect.format", potionName));
 	}
 
 	@Override

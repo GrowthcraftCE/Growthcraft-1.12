@@ -5,28 +5,27 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import growthcraft.cellar.shared.CellarRegistry;
-import growthcraft.cellar.shared.fluids.Booze;
 import growthcraft.cellar.shared.booze.BoozeEntry;
-import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.booze.BoozeUtils;
+import growthcraft.cellar.shared.definition.BoozeDefinition;
+import growthcraft.cellar.shared.fluids.Booze;
+import growthcraft.core.shared.client.GrowthcraftCoreState;
 import growthcraft.core.shared.definition.FluidDefinition;
 import growthcraft.core.shared.item.IFluidContainerItem;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
-import growthcraft.core.shared.client.GrowthcraftCoreState;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -145,7 +144,7 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 		if (!showDetailed)
 		{
 			tooltip.add(TextFormatting.GRAY +
-					I18n.format("grc.tooltip.detailed_information",
+					I18n.translateToLocalFormatted("grc.tooltip.detailed_information",
 						TextFormatting.WHITE + GrowthcraftCoreState.detailedKey + TextFormatting.GRAY));
 		}
 	}
@@ -190,7 +189,7 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 		final Fluid booze = getFluid(stack);
 		if (booze != null)
 		{
-			return I18n.format(booze.getUnlocalizedName());
+			return I18n.translateToLocal(booze.getUnlocalizedName());
 		}
 		return super.getItemStackDisplayName(stack);
 	}

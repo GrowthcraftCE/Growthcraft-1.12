@@ -11,6 +11,8 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
 {
@@ -54,6 +56,7 @@ public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
 		FluidContainerRegistry.addBucketForFluid(fluid);
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public void registerRenderer() {
         Item item = Item.getItemFromBlock(fluid.getBlock());
 
