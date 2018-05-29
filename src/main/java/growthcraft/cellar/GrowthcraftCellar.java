@@ -10,8 +10,8 @@ import growthcraft.cellar.shared.booze.modifier.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.lib.network.PacketPipeline;
 import growthcraft.cellar.shared.booze.CellarBoozeBuilderFactory;
 import growthcraft.cellar.shared.config.UserApis;
+import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
@@ -43,8 +43,7 @@ public class GrowthcraftCellar {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
     
-    @SideOnly(Side.CLIENT)
-    public static GrowthcraftGuiProvider guiProvider;
+    public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
     
 	public static final PacketPipeline packetPipeline = new PacketPipeline();
 
@@ -89,6 +88,8 @@ public class GrowthcraftCellar {
     	Init.initYeasts();
     	Init.registerYeasts();
     	packetPipeline.initialise();
+    	NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
+    	
         Init.registerRecipes();
         proxy.init();
         

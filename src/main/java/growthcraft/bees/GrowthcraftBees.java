@@ -6,7 +6,7 @@ import growthcraft.bees.common.lib.config.user.UserBeesConfig;
 import growthcraft.bees.common.lib.config.user.UserFlowersConfig;
 import growthcraft.bees.shared.Reference;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems;
-import growthcraft.core.shared.client.gui.GrowthcraftGuiProvider;
+import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -28,6 +28,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -44,8 +45,7 @@ public class GrowthcraftBees {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
-    @SideOnly(Side.CLIENT)
-    public static GrowthcraftGuiProvider guiProvider;
+    public static GrowthcraftGuiProvider guiProvider = new GrowthcraftGuiProvider();
     
 	public static final UserBeesConfig userBeesConfig = new UserBeesConfig();
 	public static final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
@@ -74,6 +74,7 @@ public class GrowthcraftBees {
     public static void init(FMLInitializationEvent event) {
     	userBeesConfig.init();
     	userFlowersConfig.init();
+		NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
     	proxy.init();
     	
     	Init.registerRecipes();
