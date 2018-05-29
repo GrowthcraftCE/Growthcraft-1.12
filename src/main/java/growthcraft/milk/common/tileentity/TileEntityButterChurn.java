@@ -162,7 +162,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	@Override
 	protected FluidStack doDrain(EnumFacing dir, int amount, boolean doDrain)
 	{
-		if (dir == EnumFacing.UP) return null;
+//		if (dir == EnumFacing.UP) return null;
 		return getActiveFluidSlot().consume(amount, doDrain);
 	}
 
@@ -175,7 +175,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	@Override
 	protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain)
 	{
-		if (dir == EnumFacing.UP) return null;
+//		if (dir == EnumFacing.UP) return null;
 		final DeviceFluidSlot fluidSlot = getActiveFluidSlot();
 		if (FluidTest.areStacksEqual(fluidSlot.get(), stack))
 		{
@@ -195,7 +195,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 	@Override
 	protected int doFill(EnumFacing dir, FluidStack stack, boolean doFill)
 	{
-		if (dir == EnumFacing.UP) return 0;
+//		if (dir == EnumFacing.UP) return 0;
 		int result = 0;
 
 		if (MilkRegistry.instance().churn().isFluidIngredient(stack))
