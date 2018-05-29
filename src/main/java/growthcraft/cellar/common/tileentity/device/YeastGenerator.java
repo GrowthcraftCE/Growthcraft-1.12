@@ -118,7 +118,7 @@ public class YeastGenerator extends DeviceProgressive
 			final YeastRegistry reg = CellarRegistry.instance().yeast();
 
 			{
-				final Collection<WeightedItemStack> yl = reg.getYeastListForBiomeName(biome.getBiomeName());
+				final Collection<WeightedItemStack> yl = reg.getYeastListForBiomeName(biome.biomeName);
 				if (yl != null)
 				{
 					tempItemSet.addAll(yl);

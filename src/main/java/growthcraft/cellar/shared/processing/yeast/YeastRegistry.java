@@ -106,7 +106,7 @@ public class YeastRegistry
 		final Set<String> biomeNames = getBiomeNamesForYeast(yeast);
 		if (biomeNames != null)
 		{
-			if (biomeNames.contains(biome.getBiomeName())) return true;
+			if (biomeNames.contains(biome.biomeName)) return true;
 		}
 
 		final Set<BiomeDictionary.Type> yeastBiomeList = getBiomeTypesForYeast(yeast);
