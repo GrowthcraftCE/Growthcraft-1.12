@@ -39,12 +39,12 @@ apply plugin: 'com.matthewprenger.cursegradle'
 apply plugin: "checkstyle"
 
 repositories {
-	mavenLocal()
+    mavenLocal()
     maven {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
     }
-	maven { // CraftTweaker
+    maven { // CraftTweaker
         name 'jared maven'
         url "http://maven.blamejared.com/"
     }
@@ -52,46 +52,46 @@ repositories {
         name 'tterrag maven'
         url "http://maven.tterrag.com/"
     }
-	maven { // HWYLA
-		url "http://tehnut.info/maven"
-	}
+    maven { // HWYLA
+        url "http://tehnut.info/maven"
+    }
     maven { // compatlayer
         name 'K-4u maven'
         url "http://maven.k-4u.nl/"
     }
     maven {
         url = "https://minecraft.curseforge.com/api/maven/"
-    }	
+    }
     maven {
         name 'forge'
         url 'http://files.minecraftforge.net/maven'
     }
     maven {
-         name "Tehnut Maven FS"
-         url "http://tehnut.info/maven"
+        name "Tehnut Maven FS"
+        url "http://tehnut.info/maven"
     }
     maven {
         name = "CoFH Maven"
         url = "http://maven.covers1624.net"
     }
-	maven {
+    maven {
         name "AppleCore"
-		url "http://www.ryanliptak.com/maven/"
-	}
+        url "http://www.ryanliptak.com/maven/"
+    }
     maven {
         name "IC2 Forestry"
         url "http://maven.ic2.player.to/"
     }
-	maven {
-		// location of the maven that hosts JEI files
-		name = "Progwml6 maven"
-		url = "http://dvs1.progwml6.com/files/maven"
-	}
-	maven {
-		// location of a maven mirror for JEI files, as a fallback
-		name = "ModMaven"
-		url = "modmaven.k-4u.nl"	
-	}	
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "http://dvs1.progwml6.com/files/maven"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "modmaven.k-4u.nl"
+    }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
@@ -101,7 +101,7 @@ apply plugin: 'maven-publish'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-group= "growthcraft"
+group = "growthcraft"
 archivesBaseName = "growthcraft"
 
 // External properties
@@ -127,7 +127,7 @@ task buildInfo {
         } else {
             ext.revision = "GITBORK"
         }
-    } catch(all) {
+    } catch (all) {
         ext.revision = "gitgud"
     }
 
@@ -156,12 +156,12 @@ minecraft {
 }
 
 def commonManifest = {
-	attributes (
+    attributes(
 //		"FMLCorePlugin": 'slimeknights.tconstruct.library.asm.TConstructLoadingPlugin',
 //		"FMLCorePluginContainsFMLMod": 'true',
 //		"ForceLoadAsMod": 'true',
-		"FMLAT": 'growthcraft_at.cfg'
-	)
+            "FMLAT": 'growthcraft_at.cfg'
+    )
 }
 
 dependencies {
@@ -171,9 +171,9 @@ dependencies {
     compile "rustic:Rustic:1.0.5"
     compile "thaumcraft:Thaumcraft:1.12.2:6.1.BETA15"
     runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
-    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"	
+    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"
     deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
-    compile "baubles:Baubles:1.12:1.5.2"	
+    compile "baubles:Baubles:1.12:1.5.2"
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
@@ -187,29 +187,29 @@ sourceSets {
 }
 
 processResources
-{
-    // this will ensure that this task is redone when the versions change.
-    inputs.property "version", project.version
-    inputs.property "MCversion", project.minecraft.version
+        {
+            // this will ensure that this task is redone when the versions change.
+            inputs.property "version", project.version
+            inputs.property "MCversion", project.minecraft.version
 
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'MCversion':project.minecraft.version
-    }
-        
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-    }
-}
+            // replace stuff in mcmod.info, nothing else
+            from(sourceSets.main.resources.srcDirs) {
+                include 'mcmod.info'
+
+                // replace version and mcversion
+                expand 'version': project.version, 'MCversion': project.minecraft.version
+            }
+
+            // copy everything else, thats not the mcmod.info
+            from(sourceSets.main.resources.srcDirs) {
+                exclude 'mcmod.info'
+            }
+        }
 
 // Add Access Transformers Manifest
 jar {
     manifest commonManifest
-    
+
     finalizedBy reobfJar
 }
 
@@ -225,7 +225,6 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
     classifier = 'sources'
 }
-
 
 // Create API library jar
 task libJar(type: Jar) {
@@ -244,7 +243,7 @@ artifacts {
 // verify the properties exist.. or initialize.
 if (!project.hasProperty("keystore_location")) // keystore location
     ext.keystore_location = "."
-    
+
 if (!project.hasProperty("keystore_user_alias")) // keystore user alias
     ext.keystore_user_alias = ""
 if (!project.hasProperty("sftp_username"))
@@ -254,32 +253,32 @@ if (!project.hasProperty("sftp_key"))
 if (!project.hasProperty("keystore_user_password")) // keystore user pass
     ext.keystore_user_password = ""
 if (System.getenv().KSK_PW != null)
-	ext.keystore_user_password =System.getenv().KSK_PW
+    ext.keystore_user_password = System.getenv().KSK_PW
 
 
-task("uploadJars", dependsOn:"build") {
-    
+task("uploadJars", dependsOn: "build") {
+
     description = "uploads JARs"
 
     if (project.hasProperty("local_maven") || project.hasProperty("sftp_maven")) {
-	    apply plugin: 'maven'
+        apply plugin: 'maven'
         uploadArchives {
             repositories {
-		    	if(project.hasProperty("local_maven"))
-			    {
+                if (project.hasProperty("local_maven")) {
                     mavenDeployer {
                         repository(url: "file://${local_maven}")
-				    }
+                    }
                 }
-				if(project.hasProperty("sftp_maven")) {
+                if (project.hasProperty("sftp_maven")) {
                     repositories.mavenDeployer {
-					    configuration = configurations.deployerJars
-                        repository(url: "sftp://${sftp_maven}"){
-						authentication(userName: "${sftp_username}",privateKey: "${sftp_key}")}
-				    }
+                        configuration = configurations.deployerJars
+                        repository(url: "sftp://${sftp_maven}") {
+                            authentication(userName: "${sftp_username}", privateKey: "${sftp_key}")
+                        }
+                    }
                 }
             }
-        }    
+        }
     }
 }
 
@@ -318,4 +317,4 @@ publishing {
             maven { url DEPLOY_DIR }
         }
     }
-	}
+}
