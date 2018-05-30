@@ -155,6 +155,8 @@ dependencies {
     compile "thaumcraft:Thaumcraft:1.12.2:6.1.BETA15"
     runtime "mezz.jei:jei_${mc_version}:${jei_version}"
     deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"	
+    deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
+    compile "baubles:Baubles:1.12:1.5.2"	
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
