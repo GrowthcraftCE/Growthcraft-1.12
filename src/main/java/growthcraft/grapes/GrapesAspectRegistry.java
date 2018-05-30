@@ -1,6 +1,7 @@
 package growthcraft.grapes;
 
 import growthcraft.grapes.common.items.ItemGrape;
+import growthcraft.grapes.shared.init.GrowthcraftGrapesItems;
 import net.minecraft.item.ItemStack;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -11,7 +12,7 @@ import thaumcraft.api.aspects.AspectList;
  */
 public class GrapesAspectRegistry {
 
-	//public static void register() {
-	//	ThaumcraftApi.registerObjectTag(new ItemStack(ItemGrape), new AspectList().add(Aspect.PLANT, 4).add(Aspect.DESIRE, 4));
-	//}
+	public static void register() {
+	//	ThaumcraftApi.registerObjectTag(new ItemStack(GrowthcraftGrapesItems.GrapeTypes.asStack()), new AspectList().add(Aspect.PLANT, 4).add(Aspect.DESIRE, 4));
+	}
 }
