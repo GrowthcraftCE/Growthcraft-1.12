@@ -98,7 +98,7 @@ group= "growthcraft"
 archivesBaseName = "growthcraft"
 
 // External properties
-ext.configFile = file "build.properties"
+ext.configFile = file "gradle.properties"
 configFile.withReader {
     // Load config.  It shall from now be referenced as simply config or project.config
     def prop = new Properties()
@@ -163,8 +163,8 @@ dependencies {
     // deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
     deobfCompile "com.mangoose.rustic:rustic:1.0.5"
     compile "thaumcraft:Thaumcraft:1.12.2:6.1.BETA15"
-    runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-    deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"	
+    runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
+    deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"	
     deobfCompile "mcp.mobius.waila:Hwyla:${hwyla_version}"
     compile "baubles:Baubles:1.12:1.5.2"	
 
