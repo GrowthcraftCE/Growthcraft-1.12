@@ -9,8 +9,6 @@
 
 buildscript {
     repositories {
-        mavenCentral()
-		mavenLocal()
         jcenter()
         maven {
             name = "forge"
@@ -21,19 +19,24 @@ buildscript {
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
         maven {
+            name = "gradle"
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
             name = "CurseForge"
             url = "https://minecraft.curseforge.com/api/maven/"
-        }		
+        }
     }
+
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-		classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.7'
+        classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.7'
     }
 }
-/*
-plugins {
-    id "net.minecraftforge.gradle.forge" version "2.0.1"
-}*/
+
+apply plugin: 'net.minecraftforge.gradle.forge'
+apply plugin: 'com.matthewprenger.cursegradle'
+apply plugin: "checkstyle"
 
 repositories {
 	mavenLocal()
@@ -56,6 +59,9 @@ repositories {
         name 'K-4u maven'
         url "http://maven.k-4u.nl/"
     }
+    maven {
+        url = "https://minecraft.curseforge.com/api/maven/"
+    }	
     maven {
         name 'forge'
         url 'http://files.minecraftforge.net/maven'
@@ -162,7 +168,7 @@ dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     // deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
-    compile "com.mangoose.rustic:rustic:1.0.5"
+    compile "rustic:Rustic:1.0.5"
     compile "thaumcraft:Thaumcraft:1.12.2:6.1.BETA15"
     runtime "mezz.jei:jei_${minecraft_version}:${jei_version}"
     deobfProvided "mezz.jei:jei_${minecraft_version}:${jei_version}:api"	
@@ -312,4 +318,4 @@ publishing {
             maven { url DEPLOY_DIR }
         }
     }
-}
+	}
