@@ -2,6 +2,7 @@ package growthcraft.grapes;
 
 import growthcraft.grapes.common.CommonProxy;
 import growthcraft.grapes.common.Init;
+import growthcraft.grapes.common.compat.GrapesAspectRegistry;
 import growthcraft.grapes.common.compat.InitRustic;
 import growthcraft.grapes.shared.Reference;
 import net.minecraft.block.Block;
