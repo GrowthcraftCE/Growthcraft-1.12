@@ -13,6 +13,6 @@ import thaumcraft.api.aspects.AspectList;
 public class GrapesAspectRegistry {
 
 	public static void register() {
-	//	ThaumcraftApi.registerObjectTag(new ItemStack(GrowthcraftGrapesItems.GrapeTypes.asStack()), new AspectList().add(Aspect.PLANT, 4).add(Aspect.DESIRE, 4));
+		ThaumcraftApi.registerObjectTag((GrowthcraftGrapesItems.GrapeTypes.PURPLE.asStack()), new AspectList().add(Aspect.PLANT, 4).add(Aspect.DESIRE, 4));
 	}
 }
