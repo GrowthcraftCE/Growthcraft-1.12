@@ -1,8 +1,10 @@
 package growthcraft.grapes;
 
+import growthcraft.core.shared.compat.Compat;
+import growthcraft.core.shared.compat.InitRustic;
 import growthcraft.grapes.common.CommonProxy;
 import growthcraft.grapes.common.Init;
-import growthcraft.grapes.common.compat.InitRustic;
+import growthcraft.grapes.common.compat.rustic.Recipes;
 import growthcraft.grapes.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -22,8 +24,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
-     dependencies = "required-after:"+growthcraft.cellar.shared.Reference.MODID+";"+
-		            "after:rustic")
+     dependencies = "required-after:"+growthcraft.cellar.shared.Reference.MODID)
 public class GrowthcraftGrapes {
     static final String CLIENT_PROXY_CLASS = "growthcraft.grapes.client.ClientProxy";
     static final String SERVER_PROXY_CLASS = "growthcraft.grapes.common.CommonProxy";
@@ -38,11 +39,7 @@ public class GrowthcraftGrapes {
     public static void preInit(FMLPreInitializationEvent event) {
         Init.preInitBlocks();
         Init.preInitItems();
-        if( InitRustic.isModAvailable() )
-        	InitRustic.preInitItems();
     	Init.preInitFluids();
-        if( InitRustic.isModAvailable() )
-        	InitRustic.preInitFluids();
 
     	proxy.preInit();
     }
@@ -51,8 +48,8 @@ public class GrowthcraftGrapes {
     public static void init(FMLInitializationEvent event) {
     	proxy.init();
     	Init.initBoozes();
-    	if( InitRustic.isModAvailable() )
-    		InitRustic.initBoozes();
+    	if( Compat.isModAvailable_Rustic() )
+    		Recipes.initBoozes();
     	Init.initRecipes();
     	Init.registerRecipes();
     }

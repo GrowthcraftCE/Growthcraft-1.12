@@ -11,6 +11,7 @@ import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.GrowthcraftCoreApis;
+import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
@@ -111,6 +112,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -235,6 +237,7 @@ public class Init {
     	GrowthcraftMilkItems.thistle.registerItem(registry);
     	GrowthcraftMilkItems.thistleSeed.getItem().setCreativeTab(tabGrowthcraft);
     	GrowthcraftMilkItems.thistleSeed.registerItem(registry);
+    	MinecraftForge.addGrassSeed(GrowthcraftMilkItems.thistleSeed.asStack(), 1);
     	GrowthcraftMilkItems.stomach.getItem().setCreativeTab(tabGrowthcraft);
     	GrowthcraftMilkItems.stomach.registerItem(registry);
     	GrowthcraftMilkItems.cheeseCloth.getItem().setCreativeTab(tabGrowthcraft);
@@ -425,19 +428,6 @@ public class Init {
 	}
 	
     
-	public static List<Fluid> getMilkFluids()
-	{
-		final List<Fluid> milks = new ArrayList<Fluid>();
-		if (GrowthcraftMilkFluids.milk != null)
-			milks.add(GrowthcraftMilkFluids.milk.getFluid());
-//		if (ForestryFluids.MILK.exists()) milks.add(ForestryFluids.MILK.getFluid());
-		// Automagy Milk
-		final Fluid fluidmilk = FluidRegistry.getFluid("fluidmilk");
-		if (fluidmilk != null)
-			milks.add(fluidmilk);
-		return milks;
-	}
-    
 	public static int roundToBottles(int fluidAmount) {
 		int numBottles = fluidAmount / GrowthcraftCoreConfig.bottleCapacity;
 		return numBottles * GrowthcraftCoreConfig.bottleCapacity;
@@ -566,7 +556,7 @@ public class Init {
     public static void initFluids() {
 		int restCapRounded = roundToBottles(FluidContainerRegistry.BUCKET_VOLUME - 2*GrowthcraftCoreConfig.bottleCapacity);
     	
-    	final List<Fluid> milks = getMilkFluids();
+    	final List<Fluid> milks = Compat.getMilkFluids();
 		for (Fluid f : milks)
 		{
 			CoreRegistry.instance().fluidDictionary().addFluidTags(f, MilkFluidTags.MILK);

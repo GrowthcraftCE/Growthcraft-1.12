@@ -2,6 +2,9 @@ package growthcraft.core;
 
 import growthcraft.core.shared.GrowthcraftCoreApis;
 import growthcraft.core.shared.Reference;
+import growthcraft.core.shared.compat.Compat;
+import growthcraft.core.shared.compat.InitForestry;
+import growthcraft.core.shared.compat.InitRustic;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.Init;
 import growthcraft.core.common.creativetabs.TabGrowthcraft;
@@ -25,7 +28,9 @@ import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
+     dependencies = "after:rustic;"+
+                    "after:forestry")
 public class GrowthcraftCore {
 
 	public static final String CLIENT_PROXY_CLASS = "growthcraft.core.client.ClientProxy";
@@ -48,6 +53,14 @@ public class GrowthcraftCore {
     public void preInit(FMLPreInitializationEvent event) {
         Init.preInitBlocks();
         Init.preInitItems();
+        
+        if( Compat.isModAvailable_Rustic() ) {
+        	InitRustic.preInitBlocks();
+        	InitRustic.preInitItems();
+        	InitRustic.preInitFluids();
+        }
+        if( Compat.isModAvailable_Forestry() )
+        	InitForestry.preInitFluids();
         
         proxy.preInit();
         
@@ -84,6 +97,8 @@ public class GrowthcraftCore {
     public void postInit(FMLPostInitializationEvent event) {
     	proxy.postInit();
     	Init.registerBlockOres();
+    	if( Compat.isModAvailable_Rustic() )
+    		InitRustic.registerBlockOres();
     }
     
 	@SideOnly(Side.CLIENT)
