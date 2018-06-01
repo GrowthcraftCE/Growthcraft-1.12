@@ -1,60 +1,27 @@
-package growthcraft.grapes.common.compat;
+package growthcraft.grapes.common.compat.rustic;
 
 import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
 
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeTag;
-import growthcraft.cellar.shared.booze.BoozeUtils;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.processing.common.Residue;
-import growthcraft.core.shared.definition.FluidDefinition;
-import growthcraft.core.shared.definition.ItemDefinition;
-import growthcraft.core.shared.effect.EffectAddPotionEffect;
-import growthcraft.core.shared.effect.EffectWeightedRandomList;
-import growthcraft.core.shared.effect.SimplePotionEffectFactory;
+import growthcraft.core.shared.compat.rustic.RusticModFluids;
+import growthcraft.core.shared.compat.rustic.RusticModItems;
 import growthcraft.core.shared.item.OreItemStacks;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.WineTypes;
 import net.minecraft.init.Items;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.Loader;
-import rustic.common.blocks.fluids.ModFluids;
-import rustic.common.items.ModItems;
 
-public class InitRustic {
-    public static ItemDefinition rusticGrape;
-    public static FluidDefinition rusticGrapeJuice;
-    public static FluidDefinition rusticGrapeWine;
+public class Recipes {
+	private Recipes() {}
 	
-	// TODO: Read crushing and fermenting recipes
-    
 	////////////
-    // Common
+	// Fermentations
 	////////////
-
-    public static boolean isModAvailable() {
-    	return Loader.isModLoaded("rustic");
-    }
-    
-	////////////
-    // Items
-	////////////
-    
-    public static void preInitItems() {
-    	rusticGrape = new ItemDefinition(ModItems.GRAPES);
-    }
-    
-	////////////
-	// Fluids
-	////////////
-
-	public static void preInitFluids() {
-		rusticGrapeJuice = new FluidDefinition(ModFluids.GRAPE_JUICE);
-		rusticGrapeWine = new FluidDefinition(ModFluids.WINE);
-	}
 	
 	public static void initBoozes() {
 		registerFermentations();
@@ -63,17 +30,17 @@ public class InitRustic {
 	private static void registerFermentations() {
 		final int costRatio = 6;	// paying for higher press output by a slower booze production. Approx (250 / 40)  
 		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
-		FluidStack rusticGrapeJuiceStack = rusticGrapeJuice.asFluidStack();
-		FluidStack rusticGrapeWineStack = rusticGrapeWine.asFluidStack();
+		FluidStack rusticGrapeJuiceStack = RusticModFluids.rusticGrapeJuice.asFluidStack();
+		FluidStack rusticGrapeWineStack = RusticModFluids.rusticGrapeWine.asFluidStack();
 		
-		GrowthcraftCellarApis.boozeBuilderFactory.create(rusticGrapeJuice/*grapeWineBooze[WineTypes.PURPLE_JUICE.ordinal()]*/.getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(RusticModFluids.rusticGrapeJuice.getFluid())
 			.tags(BoozeTag.YOUNG)
 			.pressesFrom(
-				rusticGrape.asStack(),
+					RusticModItems.rusticGrape.asStack(),
 				TickUtils.seconds(2),
 				250,
 				Residue.newDefault(0.3F));
-		GrowthcraftCellarApis.boozeBuilderFactory.create(rusticGrapeWine.getFluid())
+		GrowthcraftCellarApis.boozeBuilderFactory.create(RusticModFluids.rusticGrapeWine.getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED);
 		
 		// Brewers Yeast, Nether Wart
@@ -92,7 +59,7 @@ public class InitRustic {
 		// Port Wine - Bayanus Yeast
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_PORTWINE.ordinal()].getFluid())
 			.brewsFrom(
-				new FluidStack(rusticGrapeWine.getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
+				new FluidStack(RusticModFluids.rusticGrapeWine.getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
 				GrowthcraftGrapesConfig.portWineBrewingTime * costRatio,
 				Residue.newDefault(0.3F));
