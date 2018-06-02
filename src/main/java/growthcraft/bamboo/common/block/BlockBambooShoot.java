@@ -65,6 +65,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
 
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(STAGE, Integer.valueOf((meta & 8) >> 3));

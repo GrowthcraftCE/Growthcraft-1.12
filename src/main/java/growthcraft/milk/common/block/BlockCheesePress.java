@@ -48,6 +48,7 @@ public class BlockCheesePress extends BlockOrientable {
 		this.setResistance(5.0F);
 		this.setHardness(2.0F);
 		this.setSoundType(SoundType.WOOD);
+		this.setHarvestLevel("axe", 1);
 		setTileEntityType(TileEntityCheesePress.class);
 	}
 
