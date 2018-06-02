@@ -75,7 +75,8 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	public int getMaxAge() {
 		return 1;
 	}
-	
+
+	@SuppressWarnings("deprecation")
     @Override
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
         return super.getDrops(world, pos, state, fortune);
@@ -108,6 +109,7 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
@@ -211,6 +213,7 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	    return new BlockStateContainer(this, AGE, SUBTYPE);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta) {

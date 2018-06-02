@@ -93,7 +93,8 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 		
 		super.onBlockHarvested(world, pos, state, player);
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -106,6 +107,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	/************
 	 * CONDITIONS
 	 ************/
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
@@ -129,6 +131,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	 * STUFF
 	 ************/
 
+	//Fixme: More broken java docs.
 	/**
 	 * @param world - world block is in
 	 * @param x - x coord
@@ -172,6 +175,7 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	 * RENDERS
 	 ************/
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
@@ -180,12 +184,14 @@ public class BlockFruitPress extends BlockOrientedCellarContainer {
 	/************
 	 * COMPARATOR
 	 ************/
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
 	{

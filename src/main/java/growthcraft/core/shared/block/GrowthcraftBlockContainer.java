@@ -66,6 +66,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 	}
 
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean eventReceived(IBlockState state, World worldIn, BlockPos pos, int id, int param)
 	{
@@ -80,6 +81,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 	    return new BlockStateContainer(this, TYPE_ROTATION);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Nonnull
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
@@ -433,6 +435,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
 	{

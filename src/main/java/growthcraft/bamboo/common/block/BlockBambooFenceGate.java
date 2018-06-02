@@ -48,12 +48,14 @@ public class BlockBambooFenceGate extends BlockHorizontal {
 
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         state = this.getActualState(state, source, pos);
         return ((Boolean)state.getValue(IN_WALL)).booleanValue() ? (((EnumFacing)state.getValue(FACING)).getAxis() == EnumFacing.Axis.X ? AABB_HITBOX_XAXIS_INWALL : AABB_HITBOX_ZAXIS_INWALL) : (((EnumFacing)state.getValue(FACING)).getAxis() == EnumFacing.Axis.X ? AABB_HITBOX_XAXIS : AABB_HITBOX_ZAXIS);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         EnumFacing.Axis enumfacing$axis = ((EnumFacing)state.getValue(FACING)).getAxis();
@@ -66,11 +68,13 @@ public class BlockBambooFenceGate extends BlockHorizontal {
         return state;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState withRotation(IBlockState state, Rotation rot) {
         return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
     }
 
+    @SuppressWarnings("deprecation")
     public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
     {
         return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
@@ -81,6 +85,7 @@ public class BlockBambooFenceGate extends BlockHorizontal {
         return worldIn.getBlockState(pos.down()).getMaterial().isSolid() ? super.canPlaceBlockAt(worldIn, pos) : false;
     }
 
+    @SuppressWarnings("deprecation")
     @Nullable
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos)
     {
@@ -90,11 +95,13 @@ public class BlockBambooFenceGate extends BlockHorizontal {
     /**
      * Used to determine ambient occlusion and culling when rebuilding chunks for render
      */
+    @SuppressWarnings("deprecation")
     public boolean isOpaqueCube(IBlockState state)
     {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     public boolean isFullCube(IBlockState state)
     {
         return false;
@@ -112,6 +119,7 @@ public class BlockBambooFenceGate extends BlockHorizontal {
      * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
      * IBlockstate
      */
+    @SuppressWarnings("deprecation")
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         boolean flag = worldIn.isBlockPowered(pos);
@@ -150,6 +158,7 @@ public class BlockBambooFenceGate extends BlockHorizontal {
      * change. Cases may include when redstone power is updated, cactus blocks popping off due to a neighboring solid
      * block, etc.
      */
+    @SuppressWarnings("deprecation")
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         if (!worldIn.isRemote)
@@ -168,6 +177,7 @@ public class BlockBambooFenceGate extends BlockHorizontal {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -177,6 +187,7 @@ public class BlockBambooFenceGate extends BlockHorizontal {
     /**
      * Convert the given metadata into a BlockState for this Block
      */
+    @SuppressWarnings("deprecation")
     public IBlockState getStateFromMeta(int meta)
     {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta)).withProperty(OPEN, Boolean.valueOf((meta & 4) != 0)).withProperty(POWERED, Boolean.valueOf((meta & 8) != 0));

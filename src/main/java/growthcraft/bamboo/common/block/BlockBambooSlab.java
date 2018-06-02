@@ -57,6 +57,7 @@ public abstract class BlockBambooSlab extends BlockSlab {
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         if(!this.isDouble()) {

@@ -62,6 +62,7 @@ public class BlockApple extends BlockBush implements IGrowable {
         return state.getValue(AGE);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(AGE, meta);

@@ -35,7 +35,7 @@ public class GrowthcraftItemBase extends Item
 	}
 
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"unchecked", "rawtypes"})
+	@SuppressWarnings({"unchecked", "rawtypes", "deprecation"})
 	public static void addDescription(Item item, ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		final String src = item.getUnlocalizedNameInefficiently(stack) + ".desc";

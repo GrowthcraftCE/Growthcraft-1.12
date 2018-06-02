@@ -47,7 +47,8 @@ public class BlockButterChurn extends GrowthcraftBlockContainer {
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDING_BOX;
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
@@ -76,16 +77,19 @@ public class BlockButterChurn extends GrowthcraftBlockContainer {
 	}
 
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
@@ -153,7 +157,8 @@ public class BlockButterChurn extends GrowthcraftBlockContainer {
 		
 		super.onBlockHarvested(world, pos, state, player);
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{

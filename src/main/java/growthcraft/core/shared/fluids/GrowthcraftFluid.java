@@ -52,6 +52,7 @@ public class GrowthcraftFluid extends Fluid implements IDescribable
 	 *
 	 * @param list - list to add description to
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void getDescription(@Nonnull List<String> list)
 	{

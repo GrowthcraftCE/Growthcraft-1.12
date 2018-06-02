@@ -44,6 +44,7 @@ public class BlockRopeFence extends Block implements IBlockRope {
                 .withProperty(DOWN, Boolean.valueOf(false)));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return KNOT_BOUNDING_BOX;
@@ -68,11 +69,13 @@ public class BlockRopeFence extends Block implements IBlockRope {
         return 0;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
@@ -97,6 +100,7 @@ public class BlockRopeFence extends Block implements IBlockRope {
         return BlockRopeFence.class.isInstance(block);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
@@ -112,6 +116,7 @@ public class BlockRopeFence extends Block implements IBlockRope {
         return new BlockStateContainer(this, NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState();

@@ -68,6 +68,7 @@ public class EffectMilk implements IEffect
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void getDescription(List<String> list)
 	{
 		list.add(I18n.translateToLocal("grc.effect.milk"));

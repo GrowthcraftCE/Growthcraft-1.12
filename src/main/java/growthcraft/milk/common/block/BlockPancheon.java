@@ -27,29 +27,35 @@ public class BlockPancheon extends GrowthcraftBlockContainer {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.6F);
+        this.setHarvestLevel("pickaxe", 1);
         setTileEntityType(TileEntityPancheon.class);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDING_BOX;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;

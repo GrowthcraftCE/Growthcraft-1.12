@@ -46,11 +46,13 @@ public class BlockBambooLeaves extends Block implements IShearable {
         return Arrays.asList(GrowthcraftBambooBlocks.bambooLeaves.getItemAsStack(1) /*new ItemStack(Item.getItemFromBlock(GrowthcraftBambooBlocks.bambooLeaves), 1)*/ );
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;

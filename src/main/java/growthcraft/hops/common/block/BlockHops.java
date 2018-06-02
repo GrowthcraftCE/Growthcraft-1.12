@@ -102,7 +102,8 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     		return BOUNDING_BIG;
     	}
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
     	// TODO: Add ropes.
@@ -118,6 +119,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
@@ -127,7 +129,8 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     public boolean isFullCube(IBlockState state) {
         return false;
     }
-    
+
+	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -382,6 +385,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
 	public ItemStack getItem(World world, BlockPos pos, IBlockState state)
 	{
 //		final int meta = world.getBlockMetadata(x, y, z);
@@ -404,6 +408,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 	/************
 	 * DROPS
 	 ************/
+	@SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     	List<ItemStack> drops = new java.util.ArrayList<ItemStack>();
 
@@ -472,6 +477,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 
 	@Nonnull
 	@Override
+	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState().withProperty(AGE, meta & 0x3);
 	}
@@ -484,6 +490,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 	}
 	
     @Override
+    @SuppressWarnings("deprecation")
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     	IBlockState stateBelow = worldIn.getBlockState(pos.down());
     	

@@ -24,6 +24,7 @@ public class Describer
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void getPotionEffectDescription(List<String> list, PotionEffect pe)
 	{
 		if (pe == null) return;

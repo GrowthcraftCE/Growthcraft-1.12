@@ -24,6 +24,7 @@ public class FluidTag {
 		return "fluids.tag." + getName();
 	}
 
+	@SuppressWarnings("deprecation")
 	public String getLocalizedName()
 	{
 		return I18n.translateToLocal(getUnlocalizedName());

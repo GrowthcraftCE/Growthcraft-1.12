@@ -47,6 +47,7 @@ public class EffectRandomList extends AbstractEffectList
 	 *
 	 * @param list - list to add description lines to
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void getActualDescription(List<String> list)
 	{

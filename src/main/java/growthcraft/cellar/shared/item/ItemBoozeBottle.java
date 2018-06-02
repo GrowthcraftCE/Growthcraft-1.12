@@ -135,7 +135,7 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 
 	@Override
 	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		super.addInformation(stack, worldIn, tooltip, flagIn);
@@ -183,6 +183,7 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public String getItemStackDisplayName(ItemStack stack)
 	{

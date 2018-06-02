@@ -45,6 +45,7 @@ public class EffectIgnite extends AbstractEffect
 		entity.extinguish();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void getActualDescription(List<String> list)
 	{

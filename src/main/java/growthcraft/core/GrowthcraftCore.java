@@ -50,6 +50,7 @@ public class GrowthcraftCore {
 	}
     
     @Mod.EventHandler
+    @SuppressWarnings("deprecation")
     public void preInit(FMLPreInitializationEvent event) {
         Init.preInitBlocks();
         Init.preInitItems();
@@ -63,7 +64,7 @@ public class GrowthcraftCore {
         	InitForestry.preInitFluids();
         
         proxy.preInit();
-        
+
         RecipeSorter.register("minecraft:shapeless_comparator", ShapelessItemComparableRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
         RecipeSorter.register("minecraft:shapeless_multi", ShapelessMultiRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
     }

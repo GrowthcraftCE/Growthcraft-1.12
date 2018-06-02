@@ -161,7 +161,8 @@ public class BeesRegistry
 	{
 		addFlower(flower, ItemKey.WILDCARD_VALUE);
 	}
-	
+
+	//FIXME: okay this java doc probably needs some fixing.
 	/**
 	 * Adds a custom flower the mod.
 	 * NOTE: This is meta-sensitive.

@@ -18,6 +18,7 @@ public class EffectNull extends AbstractEffect
 	@Override
 	public void apply(World world, Entity entity, Random random, Object data) {}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void getActualDescription(List<String> list)
 	{

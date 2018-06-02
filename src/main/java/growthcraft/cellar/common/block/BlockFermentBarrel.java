@@ -70,7 +70,8 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 	/************
 	 * RENDERS
 	 ************/
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
@@ -79,12 +80,14 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 	/************
 	 * COMPARATOR
 	 ************/
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
 	{

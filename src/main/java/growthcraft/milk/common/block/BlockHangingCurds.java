@@ -45,27 +45,32 @@ public class BlockHangingCurds extends GrowthcraftBlockContainer {
 		setTileEntityType(TileEntityHangingCurds.class);
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_CHEESE_VARIANT, 0));
 	}
-	
+
+	@SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDING_BOX;
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
@@ -150,7 +155,8 @@ public class BlockHangingCurds extends GrowthcraftBlockContainer {
 	{
 		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos);
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		if (!this.canBlockStay(worldIn, pos))
@@ -201,6 +207,7 @@ public class BlockHangingCurds extends GrowthcraftBlockContainer {
 	    return 0;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

@@ -48,7 +48,8 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
             return BOUNDING_BOXES[1];
         }
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
     }
