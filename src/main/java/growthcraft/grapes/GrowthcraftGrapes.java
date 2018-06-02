@@ -53,7 +53,7 @@ public class GrowthcraftGrapes {
 			Recipes.initBoozes();
 		Init.initRecipes();
 		Init.registerRecipes();
-		if (Loader.isModLoaded("thaumcraft")) {
+		if (Compat.isModAvailable_Thaumcraft()) {
 			GrapesAspectRegistry.register();
 		}
 	}

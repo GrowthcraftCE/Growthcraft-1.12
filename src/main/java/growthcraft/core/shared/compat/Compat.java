@@ -14,16 +14,25 @@ import net.minecraftforge.fml.common.Loader;
 public class Compat {
 	private Compat() {} 
 	
+	public static final String MODID_FORESTRY = "forestry";
+	public static final String MODID_RUSTIC = "rustic";
+	public static final String MODID_THAUMCRAFT = "thaumcraft";
+	
+	
 	////////////
     // Common
 	////////////
 
     public static boolean isModAvailable_Rustic() {
-    	return Loader.isModLoaded("rustic");
+    	return Loader.isModLoaded(MODID_RUSTIC);
     }
     
     public static boolean isModAvailable_Forestry() {
-    	return Loader.isModLoaded("forestry");
+    	return Loader.isModLoaded(MODID_FORESTRY);
+    }
+    
+    public static boolean isModAvailable_Thaumcraft() {
+    	return Loader.isModLoaded(MODID_THAUMCRAFT);
     }
     
     ////////////
