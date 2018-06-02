@@ -61,7 +61,8 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 		TileEntityButterChurn te = ((BlockButterChurn)GrowthcraftMilkBlocks.churn.getBlock()).getTileEntity(world, pos.down());
 		return te;
 	}
-	
+
+	@SuppressWarnings("deprecation")
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
     	TileEntityButterChurn te = getMasterTileEntity(source, pos);
@@ -74,16 +75,19 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
     	return BOUNDING_BOX_UP;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX_UP);
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
@@ -168,7 +172,8 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 			this.updatePressState(worldIn, pos);
 		} */
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
 	{
@@ -191,7 +196,8 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 	{
 		return GrowthcraftMilkBlocks.churn.getBlock() == world.getBlockState(pos.down()).getBlock();
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
 	{
@@ -228,6 +234,7 @@ public class BlockButterChurnPlunger extends GrowthcraftBlockContainer {
 	 * RENDERS
 	 ************/
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean isOpaqueCube(IBlockState state)
 	{

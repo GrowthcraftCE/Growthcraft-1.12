@@ -58,7 +58,8 @@ public class BlockCheeseBlock extends BlockOrientable {
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_SLICES_COUNT, 1));
 		setTileEntityType(TileEntityCheeseBlock.class);
 	}
-	
+
+	@SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		final TileEntityCheeseBlock te = getTileEntity(source, pos);
@@ -80,22 +81,26 @@ public class BlockCheeseBlock extends BlockOrientable {
     	
         return BOUNDING_BOX_FULL;
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
@@ -205,6 +210,7 @@ public class BlockCheeseBlock extends BlockOrientable {
 	    return new BlockStateContainer(this, TYPE_ORIENT, TYPE_SLICES_COUNT, TYPE_CHEESE_VARIANT);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {

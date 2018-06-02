@@ -51,26 +51,31 @@ public class BlockCheesePress extends BlockOrientable {
 		setTileEntityType(TileEntityCheesePress.class);
 	}
 
+	@SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
     	return BOUNDING_BOX;
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
@@ -113,7 +118,8 @@ public class BlockCheesePress extends BlockOrientable {
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
 		super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
@@ -124,13 +130,15 @@ public class BlockCheesePress extends BlockOrientable {
 			}
 		}
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
 	{
@@ -151,7 +159,8 @@ public class BlockCheesePress extends BlockOrientable {
 	protected BlockStateContainer createBlockState() {
 	    return new BlockStateContainer(this, TYPE_ORIENT, /*STAGE_PRESS,*/ SUBMODEL_CAP);
 	}
-	
+
+	@SuppressWarnings("deprecation")
 	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 		final TileEntityCheesePress cheesePress = getTileEntity(worldIn, pos);

@@ -83,7 +83,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDING_BOX;
     }
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
@@ -222,7 +223,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     {
         return BlockRenderLayer.CUTOUT;
     }
-    
+
+	@SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -326,6 +328,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	/************
 	 * DROPS
 	 ************/
+	@SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     	List<ItemStack> drops = super.getDrops(world, pos, state, fortune);
     	drops.add(GrowthcraftCoreItems.rope.asStack(1));    	
@@ -375,6 +378,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 
 	@Nonnull
 	@Override
+	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState().withProperty(SUBTYPE, meta & 0x7);
 	}
@@ -387,6 +391,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	}
 
     @Override
+    @SuppressWarnings("deprecation")
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
     	IBlockState stateBelow = worldIn.getBlockState(pos.down());
     	

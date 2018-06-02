@@ -139,6 +139,7 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 	 ************/
 	@Override
 	@SideOnly(Side.CLIENT)
+	@SuppressWarnings("deprecation")
 	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
 	{
 		return getFruitItemStackForBlock(state);
@@ -213,6 +214,7 @@ public class BlockGrapeFruit extends GrowthcraftBlockBase {
 
 	@Nonnull
 	@Override
+	@SuppressWarnings("deprecation")
 	public IBlockState getStateFromMeta(int meta) {
 	    return this.getDefaultState().withProperty(SUBTYPE, meta & 0x7);
 	}
