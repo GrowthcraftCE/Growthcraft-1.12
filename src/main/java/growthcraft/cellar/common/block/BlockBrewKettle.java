@@ -138,17 +138,20 @@ public class BlockBrewKettle extends BlockCellarContainer {
 	/************
 	 * RENDERS
 	 ************/
-    
+
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
@@ -158,6 +161,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
 	 * BOXES
 	 ************/
 
+	@SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BASE);
@@ -167,6 +171,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
     }
 
+	@SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return AABB_FULL_BLOCK;
@@ -175,12 +180,14 @@ public class BlockBrewKettle extends BlockCellarContainer {
 	/************
 	 * COMPARATOR
 	 ************/
+	@SuppressWarnings("deprecation")
 	@Override
 	public boolean hasComparatorInputOverride(IBlockState state)
 	{
 		return true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public int getComparatorInputOverride(IBlockState state, World world, BlockPos pos)
 	{

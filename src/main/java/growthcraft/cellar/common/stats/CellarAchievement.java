@@ -3,6 +3,7 @@ package growthcraft.cellar.common.stats;
 import growthcraft.core.shared.IAchievement;
 import net.minecraft.entity.player.EntityPlayer;
 
+//Todo: Replace with advancements. Achievements are no more on 1.12.
 public enum CellarAchievement implements IAchievement
 {
 	// OPEN_ADHOC
