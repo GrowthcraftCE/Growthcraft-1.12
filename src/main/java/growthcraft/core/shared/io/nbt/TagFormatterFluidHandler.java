@@ -15,6 +15,7 @@ public class TagFormatterFluidHandler {
 	
 	public static final TagFormatterFluidHandler INSTANCE = new TagFormatterFluidHandler();
 
+	@SuppressWarnings("deprecation")
 	public List<String> format(List<String> list, NBTTagCompound tag)
 	{
 		final int tankCount = tag.getInteger("tank_count");

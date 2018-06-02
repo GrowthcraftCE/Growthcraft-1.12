@@ -29,8 +29,7 @@ public class GrowthcraftCoreItems {
         BROWN(EnumDyeColor.BROWN.getMetadata(), EnumDyeColor.BROWN.getUnlocalizedName()),
         GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
         RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName()),
-        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName())
-        ;
+        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName());
 
         private int ID;
         private String NAME;

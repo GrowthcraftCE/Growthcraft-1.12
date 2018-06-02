@@ -16,7 +16,8 @@ public class CommonProxy {
 	public void postInit() {
 		
 	}
-	
+
+	@SuppressWarnings("deprecation")
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityFishtrap.class, Reference.MODID + ":fishtrap");
     }

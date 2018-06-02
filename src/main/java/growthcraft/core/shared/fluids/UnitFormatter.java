@@ -35,6 +35,7 @@ public class UnitFormatter
 		return fraction("" + TextFormatting.WHITE + a, "" + TextFormatting.WHITE + b);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static String fluidBucketName(Fluid fluid)
 	{
 		return I18n.translateToLocal("item.bucket." + fluid.getUnlocalizedName() + ".name");
@@ -45,6 +46,7 @@ public class UnitFormatter
 	 * @return localized format of the boolean
 	 */
 	@Nullable
+	@SuppressWarnings("deprecation")
 	public static String fluidModifier(Fluid fluid)
 	{
 		final String modifierSrc = fluid.getUnlocalizedName() + ".modifier";
@@ -73,6 +75,7 @@ public class UnitFormatter
 		return fluidModifier(fluid.getFluid());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Nullable
 	public static String fluidName(FluidStack fluidStack)
 	{
@@ -112,6 +115,7 @@ public class UnitFormatter
 	/**
 	 * @return localized format of the boolean
 	 */
+	@SuppressWarnings("deprecation")
 	public static String noItem()
 	{
 		return TextFormatting.GRAY + I18n.translateToLocal("format.itemslot.empty");
@@ -120,6 +124,7 @@ public class UnitFormatter
 	/**
 	 * @return localized format of the boolean
 	 */
+	@SuppressWarnings("deprecation")
 	public static String invalidItem()
 	{
 		return TextFormatting.RED + I18n.translateToLocal("format.itemslot.invalid");
@@ -128,6 +133,7 @@ public class UnitFormatter
 	/**
 	 * @return localized format of the boolean
 	 */
+	@SuppressWarnings("deprecation")
 	public static String noFluid()
 	{
 		return TextFormatting.GRAY + I18n.translateToLocal("grc.format.tank.empty");
@@ -136,6 +142,7 @@ public class UnitFormatter
 	/**
 	 * @return localized format of the boolean
 	 */
+	@SuppressWarnings("deprecation")
 	public static String invalidFluid()
 	{
 		return TextFormatting.RED + I18n.translateToLocal("format.invalid_fluid");
@@ -145,6 +152,7 @@ public class UnitFormatter
 	 * @param b - boolean to format
 	 * @return localized format of the boolean
 	 */
+	@SuppressWarnings("deprecation")
 	public static String booleanAsState(boolean b)
 	{
 		return I18n.translateToLocal("format.state." + b);
@@ -154,6 +162,7 @@ public class UnitFormatter
 	 * @param b - boolean to format
 	 * @return localized format of the boolean
 	 */
+	@SuppressWarnings("deprecation")
 	public static String booleanAsValue(boolean b)
 	{
 		return I18n.translateToLocal("format.value." + b);
