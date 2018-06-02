@@ -99,6 +99,7 @@ public class Init {
 
     private static void registerCraftingRecipes() {
     	// TODO: RECIPE_REGISTER!
+	    // TODO: Recipes are done via JSON now. You could try and just do a bunch of json-based recipes, if you haven't already.
 
 //        Item ironIngot = Items.IRON_INGOT;
 //

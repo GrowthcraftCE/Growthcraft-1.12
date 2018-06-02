@@ -72,21 +72,25 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
         this.wasActivated = false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return KNOT_BOUNDING_BOX;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, COLLISION_BOX);
@@ -161,6 +165,7 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
         return block instanceof BlockRopeFence || block instanceof BlockRopeKnot;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
@@ -176,6 +181,7 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
         return new BlockStateContainer(this, NORTH, EAST, SOUTH, WEST, UP, DOWN);
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState();

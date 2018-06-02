@@ -76,6 +76,7 @@ public class DeviceBeeBox extends DeviceBase
 		return getWorld().getLightFromNeighbors(posUp) >= 7;
 	}
 
+	//Fixme: Why are these javadocs broken?
 	/**
 	 * Is the provided block a flower?
 	 *

@@ -19,6 +19,7 @@ public class CommonProxy {
 
 	}
 
+	@SuppressWarnings("deprecation")
     public void registerTitleEntities() {
         GameRegistry.registerTileEntity(TileEntityRopeKnot.class, Reference.MODID + ":rope_knot");
     }

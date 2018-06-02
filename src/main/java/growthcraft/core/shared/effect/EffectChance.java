@@ -65,6 +65,7 @@ public class EffectChance extends AbstractEffect
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void getActualDescription(List<String> list)
 	{
