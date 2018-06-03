@@ -1,8 +1,6 @@
-package growthcraft.core.shared.compat;
+package growthcraft.core.shared.compat.rustic;
 
-import growthcraft.core.shared.compat.rustic.RusticModBlocks;
-import growthcraft.core.shared.compat.rustic.RusticModFluids;
-import growthcraft.core.shared.compat.rustic.RusticModItems;
+import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.FluidDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
@@ -20,7 +18,7 @@ public class InitRustic {
 	////////////
 	
 	public static void preInitBlocks() {
-		RusticModBlocks.windThistle = new BlockDefinition(Block.getBlockFromName("rustic:wind_thistle"));
+		RusticModBlocks.windThistle = new BlockDefinition(Block.getBlockFromName( Compat.MODID_RUSTIC + ":wind_thistle"));
 	}
 	
 	public static void registerBlockOres() {
@@ -32,7 +30,7 @@ public class InitRustic {
 	////////////
     
     public static void preInitItems() {
-    	RusticModItems.rusticGrape = new ItemDefinition(Item.getByNameOrId("rustic:grapes"));
+    	RusticModItems.rusticGrape = new ItemDefinition(Item.getByNameOrId(Compat.MODID_RUSTIC + ":grapes"));
     }
     
 	////////////

@@ -1,6 +1,5 @@
-package growthcraft.core.shared.compat;
+package growthcraft.core.shared.compat.forestry;
 
-import growthcraft.core.shared.compat.forestry.ForestryModFluids;
 import growthcraft.core.shared.definition.FluidDefinition;
 import net.minecraftforge.fluids.FluidRegistry;
 

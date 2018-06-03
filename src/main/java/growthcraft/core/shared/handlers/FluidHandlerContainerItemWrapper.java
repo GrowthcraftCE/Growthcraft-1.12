@@ -74,7 +74,10 @@ public class FluidHandlerContainerItemWrapper implements IFluidHandlerItem, ICap
 		if( fluidStack.isFluidEqual(resource) ) {
 			if( doDrain )
 			{
-				container = FluidContainerRegistry.drainFluidContainer(container);
+				ItemStack newContainer = FluidContainerRegistry.drainFluidContainer(container);
+				if( newContainer == null )
+					return null;
+				container = newContainer;
 			}
 			return fluidStack;
 		}
