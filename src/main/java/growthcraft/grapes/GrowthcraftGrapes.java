@@ -43,6 +43,9 @@ public class GrowthcraftGrapes {
 		Init.preInitFluids();
 
 		proxy.preInit();
+		if (Compat.isModAvailable_Thaumcraft()) {
+			GrapesAspectRegistry.register();
+		}
 	}
 
 	@Mod.EventHandler
@@ -53,9 +56,6 @@ public class GrowthcraftGrapes {
 			Recipes.initBoozes();
 		Init.initRecipes();
 		Init.registerRecipes();
-		if (Compat.isModAvailable_Thaumcraft()) {
-			GrapesAspectRegistry.register();
-		}
 	}
 
 	@Mod.EventHandler
