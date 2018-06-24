@@ -3,6 +3,7 @@ package growthcraft.cellar;
 import growthcraft.cellar.client.gui.GuiHandler;
 import growthcraft.cellar.common.CommonProxy;
 import growthcraft.cellar.common.Init;
+import growthcraft.cellar.common.compat.thaumcraft.CellarAspectRegistry;
 import growthcraft.cellar.common.handlers.EventHandlerLivingUpdateEventCellar;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
@@ -10,6 +11,7 @@ import growthcraft.cellar.shared.booze.modifier.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.lib.network.PacketPipeline;
 import growthcraft.cellar.shared.booze.CellarBoozeBuilderFactory;
 import growthcraft.cellar.shared.config.UserApis;
+import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
 import growthcraft.cellar.shared.Reference;
 import net.minecraft.block.Block;
@@ -94,6 +96,10 @@ public class GrowthcraftCellar {
         proxy.init();
         
         GrowthcraftCellarApis.userApis.init();
+        
+		if (Compat.isModAvailable_Thaumcraft()) {
+			CellarAspectRegistry.register();
+		}
     }
 
     @Mod.EventHandler
