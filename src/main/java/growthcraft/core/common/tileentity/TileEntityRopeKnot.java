@@ -8,6 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -87,7 +88,10 @@ public class TileEntityRopeKnot extends TileEntity implements ICapabilityProvide
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return (T)this.handlerInventory;
+    	if ( capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+    		return (T)this.handlerInventory;
+    	}
+    	return super.getCapability(capability, facing);
     }
 
     @Override
