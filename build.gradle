@@ -36,7 +36,7 @@ buildscript {
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle'
-apply plugin: "checkstyle"
+//apply plugin: "checkstyle"
 
 repositories {
     mavenLocal()
