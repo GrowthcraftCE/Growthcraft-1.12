@@ -1,18 +1,18 @@
 package growthcraft.fishtrap.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.fishtrap.common.block.BlockFishtrap;
+import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
+import growthcraft.fishtrap.shared.Reference;
 import growthcraft.fishtrap.shared.init.GrowthcraftFishtrapBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
 	private Init() {}
@@ -39,8 +39,12 @@ public class Init {
     public static void registerBlockRenders() {
     	GrowthcraftFishtrapBlocks.fishtrap.registerItemRender();
     }
-	
-	//////////
+
+    public static void registerTileEntities() {
+        GameRegistry.registerTileEntity(TileEntityFishtrap.class, Reference.MODID + ":fishtrap");
+    }
+
+        //////////
 	// Items
 	//////////
 

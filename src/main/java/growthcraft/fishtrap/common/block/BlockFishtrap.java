@@ -1,14 +1,12 @@
 package growthcraft.fishtrap.common.block;
 
+import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.fishtrap.client.gui.GuiHandler;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
 import growthcraft.fishtrap.shared.Reference;
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.Item;
@@ -19,21 +17,19 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Random;
 
-public class BlockFishtrap extends Block implements ITileEntityProvider {
+public class BlockFishtrap extends GrowthcraftBlockContainer {
 
     public BlockFishtrap(String unlocalizedName) {
         super(Material.WOOD);
+        this.setTileEntityType(TileEntityFishtrap.class);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(1.0F);
@@ -58,7 +54,6 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
         return false;
     }
 
-    @Nullable
     @Override
     public TileEntity createTileEntity(World world, IBlockState state) {
         return new TileEntityFishtrap();
@@ -67,12 +62,6 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return Item.getItemFromBlock(this);
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityFishtrap();
     }
 
     @Override
@@ -89,16 +78,21 @@ public class BlockFishtrap extends Block implements ITileEntityProvider {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (!worldIn.isRemote) {
-        	openGUI(worldIn, pos, state, playerIn);
+        if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ))
+            return true;
+
+        if (worldIn.isRemote)
+        {
+            return true;
         }
-        return true;
+        else
+        {
+            final TileEntityFishtrap te = getTileEntity(worldIn, pos);
+            if ( te != null ) {
+                playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
+            }
+            return false;
+        }
     }
 
-    @SideOnly(Side.CLIENT)
-    private void openGUI(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn) {
-        if (worldIn.isRemote)
-        	return;
-        playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
-    }
 }
