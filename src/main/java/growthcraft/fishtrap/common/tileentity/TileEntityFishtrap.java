@@ -1,15 +1,20 @@
 package growthcraft.fishtrap.common.tileentity;
 
+import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
+import growthcraft.core.shared.tileentity.feature.IInteractionObject;
+import growthcraft.fishtrap.common.container.ContainerFishtrap;
 import growthcraft.fishtrap.common.utils.GrowthcraftPlaySound;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
@@ -31,7 +36,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabilityProvider {
+public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements ITickable, ICapabilityProvider, IInteractionObject {
 
     private int cooldown;
     private int randomMaxCooldown;
@@ -111,22 +116,6 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             if(handler.getStackInSlot(slot).getCount() == handler.getSlotLimit(slot)) filledSlots++;
         }
         return filledSlots == handler.getSlots();
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        this.cooldown = compound.getInteger("Cooldown");
-        this.handlerOutput.deserializeNBT(compound.getCompoundTag("InventoryOutput"));
-        this.handlerInput.deserializeNBT(compound.getCompoundTag("InventoryInput"));
-        super.readFromNBT(compound);
-    }
-
-    @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setInteger("Cooldown", this.cooldown);
-        compound.setTag("InventoryOutput", this.handlerOutput.serializeNBT());
-        compound.setTag("InventoryInput", this.handlerInput.serializeNBT());
-        return super.writeToNBT(compound);
     }
 
     @Override
@@ -253,4 +242,13 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         return this.getCapability(capability, facing) != null;
     }
 
+    @Override
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
+        return new ContainerFishtrap(playerInventory, this);
+    }
+
+    @Override
+    public String getGuiID() {
+        return "growthcraft_fishtrap:fishtrap";
+    }
 }

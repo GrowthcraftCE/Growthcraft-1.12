@@ -1,5 +1,7 @@
 package growthcraft.fishtrap;
 
+import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
+import growthcraft.fishtrap.client.gui.GuiHandler;
 import growthcraft.fishtrap.common.CommonProxy;
 import growthcraft.fishtrap.common.Init;
 import growthcraft.fishtrap.shared.Reference;
@@ -15,6 +17,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -31,6 +34,8 @@ public class GrowthcraftFishtrap {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+	public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         Init.initBlocks();
@@ -39,6 +44,9 @@ public class GrowthcraftFishtrap {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
+
+		NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
+
         proxy.init();
 
         Init.registerRecipes();
