@@ -39,10 +39,10 @@ container.growthcraft.brewKettle=Brew Kettle
 container.grc.CultureJar=Culture Jar
 container.grc.fermentBarrel=Fermentation Barrel
 container.grc.fruitPress=Fruit Press
+gui.grc.discard=Discard
 
 # Tile Entities
 tile.brew_kettle.name=Brew Kettle
 tile.culture_jar.name=Culture Jar
 tile.ferment_barrel.name=Fermentation Barrel
 tile.fruit_press.name=Fruit Press
-

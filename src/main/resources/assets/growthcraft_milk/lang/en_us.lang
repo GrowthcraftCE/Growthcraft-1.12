@@ -86,7 +86,9 @@ tile.curds_aged.parmesan.name=Parmesan Curds
 tile.curds_simple.ricotta.name=Ricotta Curds
 
 tile.curds_waxed.cheddar.name=Cheddar Curds
+tile.curds_waxed.cheddar.dried.name=Cheddar Curds (Dried)
 tile.curds_waxed.monterey.name=Monterey Curds
+tile.curds_waxed.monterey.dried.name=Monterey Curds (Dried)
 
 tile.cheese_press.name=Cheese Press
 tile.cheese_vat.name=Cheese Vat
