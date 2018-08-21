@@ -1,20 +1,15 @@
 package growthcraft.cellar.client.gui;
 
-import java.util.Collection;
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
-import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
-import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.common.lib.network.PacketClearTankButton;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.CoreRegistry;
-import growthcraft.core.shared.fluids.FluidTag;
 import growthcraft.core.shared.client.gui.widget.GuiButtonDiscard;
+import growthcraft.core.shared.fluids.FluidTag;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,8 +18,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
+
+import java.util.Collection;
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEntityFermentBarrel>
@@ -146,10 +145,11 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
 		switch (handle)
 		{
 			case "progress_indicator":
-				tooltip.add(I18n.format("gui.grc.progress.format",
-					TextFormatting.GRAY + I18n.format("gui.grccellar.ferment_barrel.progress_name"),
-					"" + TextFormatting.WHITE + tileEntity.getTime(),
-					"" + TextFormatting.GRAY + tileEntity.getTimeMax()));
+				tooltip.add(
+						I18n.format(
+								I18n.format(TextFormatting.WHITE + String.valueOf(tileEntity.getDeviceProgressScaled(100)) )
+						) + "%"
+				);
 				break;
 			case "fluidtank.primary":
 				if (tileEntity.isFluidTankFilled(0))
