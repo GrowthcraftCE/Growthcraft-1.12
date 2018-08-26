@@ -12,6 +12,7 @@ achievement.getDrunk.desc=Acquire Tipsy V.
 # Modifiers
 fluids.tag.chilled=Lagered
 fluids.tag.cider=Cider
+fluids.tag.cream=Cream
 fluids.tag.deadly=Deadly
 fluids.tag.extended=Extended
 fluids.tag.fermented=Fermented
@@ -33,9 +34,9 @@ item.yeast.bayanus.name=Bayanus Yeast
 item.yeast.ethereal.name=Ethereal Yeast
 item.yeast.origin.name=Origin Yeast
 
-
 # Gui
-container.brew_kettle=Brew Kettle
+container.growthcraft.brewKettle=Brew Kettle
+container.grc.CultureJar=Culture Jar
 container.grc.fermentBarrel=Fermentation Barrel
 container.grc.fruitPress=Fruit Press
 
