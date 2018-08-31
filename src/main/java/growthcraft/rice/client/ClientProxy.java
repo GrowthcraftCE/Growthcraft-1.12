@@ -1,6 +1,7 @@
 package growthcraft.rice.client;
 
 import growthcraft.rice.common.CommonProxy;
+import growthcraft.rice.common.Init;
 
 public class ClientProxy extends CommonProxy {
 
@@ -21,7 +22,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void registerModelBakeryVariants() {
-        //Init.registerItemVariants();
+        Init.registerItemVariants();
     }
 
     public void registerSpecialRenders() {
