@@ -76,7 +76,7 @@ public class Init {
 
     public static void registerItems(IForgeRegistry<Item> registry) {
 
-        GrowthcraftRiceItems.sakeBottle.registerItem(registry, new ResourceLocation(Reference.MODID, "sake"));
+        GrowthcraftRiceItems.sakeBottle.registerItem(registry, new ResourceLocation(Reference.MODID, "sakebottle"));
         GrowthcraftRiceItems.sakeBottle.getItem().setCreativeTab(tabGrowthcraft);
         GrowthcraftRiceItems.sakeBottle.getItem().setBoozes(sakeBooze);
 
