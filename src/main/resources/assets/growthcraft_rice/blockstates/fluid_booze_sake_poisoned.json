@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "fluid_booze_sake_extended": [
+    "fluid_booze_sake_poisoned": [
       {
         "custom": {
-          "fluid": "fluid_booze_sake_extended"
+          "fluid": "fluid_booze_sake_poisoned"
         }
       }
     ]

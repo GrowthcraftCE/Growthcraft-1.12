@@ -18,14 +18,15 @@ public class GrowthcraftRiceItems {
     public GrowthcraftRiceItems() {}
 
     public static ItemDefinition rice;
-    public static ItemDefinition riceBall;
+    public static ItemDefinition rice_cooked;
+    public static ItemDefinition rice_ball;
     public static ItemTypeDefinition<ItemBoozeBottle> sakeBottle;
 
     public enum SakeTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
         SAKE_MASH(0, "sake_mash"),
-        SAKE_POTENT(1, "sake_potent"),
-        SAKE_EXTENDED(2, "sake_extended"),
-        SAKE_YOUNG(3, "sake_young"),
+        SAKE_FERMENTED(1, "sake_fermented"),
+        SAKE_POTENT(2, "sake_potent"),
+        SAKE_EXTENDED(3, "sake_extended"),
         SAKE_HYPEREXTENDED(4, "sake_hyperextended"),
         SAKE_INTOXICATED(5,"sake_intoxicated"),
         SAKE_POISONED(6, "sake_poisoned");
@@ -75,5 +76,6 @@ public class GrowthcraftRiceItems {
             return GrowthcraftRiceBlocks.sakeFluidBlocks[ordinal()];
         }
     }
+
 
 }

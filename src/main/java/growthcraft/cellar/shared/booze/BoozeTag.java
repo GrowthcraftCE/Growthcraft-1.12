@@ -34,6 +34,8 @@ public class BoozeTag {
 	public static final FluidTag WINE = CoreRegistry.instance().fluidTags().createTag("wine");
 	// the booze is some form of cider
 	public static final FluidTag CIDER = CoreRegistry.instance().fluidTags().createTag("cider");
+	// the booze is some form of sake
+	public static final FluidTag SAKE = CoreRegistry.instance().fluidTags().createTag("sake");
 
 	private BoozeTag() {}
 

@@ -2,6 +2,7 @@ package growthcraft.rice;
 
 import growthcraft.rice.common.CommonProxy;
 import growthcraft.rice.common.Init;
+import growthcraft.rice.shared.GrowthcraftRiceUserApi;
 import growthcraft.rice.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -19,8 +20,10 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION, dependencies = "required-after:"+growthcraft.cellar.shared.Reference.MODID)
+@Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION)
 public class GrowthcraftRice {
     static final String CLIENT_PROXY_CLASS = "growthcraft.rice.client.ClientProxy";
     static final String SERVER_PROXY_CLASS = "growthcraft.rice.common.CommonProxy";
@@ -31,19 +34,26 @@ public class GrowthcraftRice {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    public static Logger logger = LogManager.getLogger(Reference.MODID);
+
+    // TODO: Implement configuration options.
+    public static final GrowthcraftRiceUserApi userApis = new GrowthcraftRiceUserApi();
+
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        userApis.setConfigDirectory(event.getModConfigurationDirectory());
+
         Init.preInitBlocks();
         Init.preInitItems();
         Init.preInitFluids();
 
         proxy.preInit();
+        proxy.registerTileEntities();
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
         proxy.init();
-
         Init.initBoozes();
         // TODO: Rustic Compat
         Init.initRecipes();
