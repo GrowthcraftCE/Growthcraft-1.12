@@ -28,13 +28,13 @@ public class BrewingRegistry
 		addRecipe(new BrewingRecipe(sourceFluid, MultiStacksUtil.toMultiItemStacks(raw), resultFluid, requiresLid, time, residue));
 	}
 
-	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
+	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack, boolean requiresLid)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
 		for (IBrewingRecipe recipe : recipes)
 		{
-			if (recipe.matchesRecipe(fluidstack, itemstack)) return recipe;
+			if (recipe.matchesRecipe(fluidstack, itemstack, requiresLid)) return recipe;
 		}
 		return null;
 	}
@@ -67,9 +67,9 @@ public class BrewingRegistry
 		return result;
 	}
 
-	public boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
+	public boolean isBrewingRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack, boolean requiresLid)
 	{
-		return findRecipe(fluidstack, itemstack) != null;
+		return findRecipe(fluidstack, itemstack, requiresLid) != null;
 	}
 
 	public boolean isItemBrewingIngredient(@Nullable ItemStack itemstack)

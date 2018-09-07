@@ -35,8 +35,10 @@ public class BrewingRecipe extends ProcessingRecipe implements IBrewingRecipe {
 	}
 
 	@Override
-	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack) {
+	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack, boolean requiresLid) {
 		if (fluidStack != null && itemStack != null) {
+			if( this.requiresLid != requiresLid )
+				return false;
 			if (!FluidTest.hasEnough(inputFluidStack, fluidStack))
 				return false;
 			if (!ItemTest.hasEnough(inputItemStack, itemStack))

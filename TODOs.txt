@@ -7,6 +7,7 @@ DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in it
 -----------------
 To implement:
 -----------------
+TODO: Brew kettle bounding boxes changes if lid is on.
 TODO: Add green and red grape ice cream and yoghurt.
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
 TODO: Step sound of apple fences should be changed to wood.

@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.core.shared.item.ItemUtils;
@@ -28,8 +29,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BlockBrewKettle extends BlockCellarContainer {
-	// INITIALIZE
-
 	private static final AxisAlignedBB AABB_CONTENTS = new AxisAlignedBB(2/16.0, 4/16.0, 2/16.0, 12/16.0, 10/16.0, 12/16.0);
 	
     private static final AxisAlignedBB AABB_FULL_BLOCK = new AxisAlignedBB(
@@ -51,6 +50,9 @@ public class BlockBrewKettle extends BlockCellarContainer {
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 2, 0.0625 * 16, 0.0625 * 16);
+    private static final AxisAlignedBB AABB_LID = new AxisAlignedBB(
+            0.0625 * 2, 0.0625 * 14, 0.0625 * 2,
+            0.0625 * 2, 0.0625 * 16, 0.0625 * 2);
 
     public BlockBrewKettle(String unlocalizedName) {
         super(Material.IRON);
@@ -69,7 +71,8 @@ public class BlockBrewKettle extends BlockCellarContainer {
 			final TileEntityBrewKettle te = getTileEntity(world, pos);
 			if (te != null)
 			{
-				te.fill(EnumFacing.UP, new FluidStack(FluidRegistry.WATER, GrowthcraftCellarConfig.brewKettleRainFillPerUnit), true);
+				if( !te.hasLid() )
+					te.fill(EnumFacing.UP, new FluidStack(FluidRegistry.WATER, GrowthcraftCellarConfig.brewKettleRainFillPerUnit), true);
 			}
 		}
 		super.fillWithRain(world, pos);
@@ -81,16 +84,18 @@ public class BlockBrewKettle extends BlockCellarContainer {
 		if (!worldIn.isRemote)
 		{
 			final TileEntityBrewKettle te = getTileEntity(worldIn, pos);
-			if (te != null)
+			if (te != null && !te.hasLid())
 			{
 				if (GrowthcraftCellarConfig.dropItemsInBrewKettle)
 				{
 					if (entityIn instanceof EntityItem)
 					{
 						final EntityItem item = (EntityItem)entityIn;
-						if (!ItemUtils.isEmpty(te.tryMergeItemIntoMainSlot(item.getItem())))
-						{
-							worldIn.playSound((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
+						if( !GrowthcraftCellarItems.brewKettleLid.equals(item.getItem().getItem()) ) {
+							if (!ItemUtils.isEmpty(te.tryMergeItemIntoMainSlot(item.getItem())))
+							{
+								worldIn.playSound((double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
+							}
 						}
 					}
 				}
@@ -169,6 +174,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
+        // TODO: Add collision box when lid is on top
     }
 
 	@SuppressWarnings("deprecation")

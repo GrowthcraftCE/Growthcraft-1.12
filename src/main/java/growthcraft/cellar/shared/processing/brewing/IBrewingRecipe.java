@@ -10,7 +10,7 @@ import net.minecraftforge.fluids.FluidStack;
 public interface IBrewingRecipe extends IProcessingRecipe  {
 	IMultiItemStacks getInputItemStack();
 	FluidStack getInputFluidStack();
-	boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack);
+	boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack, boolean requiresLid);
 	boolean matchesIngredient(@Nullable FluidStack fluidStack);
 	boolean matchesIngredient(@Nullable ItemStack stack);
 	boolean isItemIngredient(@Nullable ItemStack stack);

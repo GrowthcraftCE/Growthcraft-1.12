@@ -2,6 +2,7 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.events.EventBrewed;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
@@ -23,15 +24,17 @@ public class BrewKettle extends DeviceBase
 	private double timeMax;
 	private DeviceInventorySlot brewingSlot;
 	private DeviceInventorySlot residueSlot;
+	private DeviceInventorySlot lidSlot;
 	private DeviceFluidSlot inputFluidSlot;
 	private DeviceFluidSlot outputFluidSlot;
 	private TileHeatingComponent heatComponent;
 
-	public BrewKettle(TileEntityCellarDevice te, int brewSlotId, int residueSlotId, int inputFluidSlotId, int outputFluidSlotId)
+	public BrewKettle(TileEntityCellarDevice te, int brewSlotId, int residueSlotId, int lidSlotId, int inputFluidSlotId, int outputFluidSlotId)
 	{
 		super(te);
 		this.brewingSlot = new DeviceInventorySlot(te, brewSlotId);
 		this.residueSlot = new DeviceInventorySlot(te, residueSlotId);
+		this.lidSlot = new DeviceInventorySlot(te, lidSlotId);
 		this.inputFluidSlot = new DeviceFluidSlot(te, inputFluidSlotId);
 		this.outputFluidSlot = new DeviceFluidSlot(te, outputFluidSlotId);
 		this.heatComponent = new TileHeatingComponent(te, 0.5f);
@@ -101,7 +104,8 @@ public class BrewKettle extends DeviceBase
 
 	private IBrewingRecipe findRecipe()
 	{
-		return CellarRegistry.instance().brewing().findRecipe(GrowthcraftFluidUtils.removeStackTags(inputFluidSlot.get()), brewingSlot.get());
+		boolean hasLid = GrowthcraftCellarItems.brewKettleLid.equals(lidSlot.get().getItem());
+		return CellarRegistry.instance().brewing().findRecipe(GrowthcraftFluidUtils.removeStackTags(inputFluidSlot.get()), brewingSlot.get(), hasLid);
 	}
 	
 	public IBrewingRecipe getWorkingRecipe()

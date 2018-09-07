@@ -3,11 +3,15 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
+import growthcraft.core.shared.item.ItemUtils;
+import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
+import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import io.netty.buffer.ByteBuf;
@@ -15,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -23,7 +28,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice
+public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice, IItemOperable
 {
 	public static enum BrewKettleDataID
 	{
@@ -48,8 +53,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 
 	private static final int[] rawSlotIDs = new int[] {0, 1, 2};
 	private static final int[] residueSlotIDs = new int[] {0};
+	private DeviceInventorySlot invSlotForLid = new DeviceInventorySlot(this, 2);
 
-	private BrewKettle brewKettle = new BrewKettle(this, 0, 1, 0, 1);
+	private BrewKettle brewKettle = new BrewKettle(this, 0, 1, 2, 0, 1);
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -228,18 +234,24 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	@Override
 	protected int doFill(EnumFacing from, FluidStack resource, boolean shouldFill)
 	{
+		if( hasLid() )
+			return 0;
 		return fillFluidTank(0, resource, shouldFill);
 	}
 
 	@Override
 	protected FluidStack doDrain(EnumFacing from, int maxDrain, boolean shouldDrain)
 	{
+		if( hasLid() )
+			return null;
 		return drainFluidTank(1, maxDrain, shouldDrain);
 	}
 
 	@Override
 	protected FluidStack doDrain(EnumFacing from, FluidStack stack, boolean shouldDrain)
 	{
+		if( hasLid() )
+			return null;
 		if (stack == null || !stack.isFluidEqual(getFluidStack(1)))
 		{
 			return null;
@@ -264,5 +276,40 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		this.getFluidTank(0).fill(f1, true);
 		this.getFluidTank(1).fill(f0, true);
 		markForUpdate();
+	}
+
+	public boolean hasLid() {
+		return GrowthcraftCellarItems.brewKettleLid.equals(getStackInSlot(2).getItem());
+	}
+
+	@Override
+	public boolean tryPlaceItem(Action action, EntityPlayer player, ItemStack stack) {
+		if (IItemOperable.Action.RIGHT != action) return false;
+		if (!ItemUtils.isEmpty(stack))
+		{
+			final Item item = stack.getItem();
+			if( GrowthcraftCellarItems.brewKettleLid.equals(item) ) {
+				if( invSlotForLid.isEmpty() ) {
+					final ItemStack result = ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
+					invSlotForLid.set(result);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean tryTakeItem(Action action, EntityPlayer player, ItemStack stack) {
+		if (IItemOperable.Action.RIGHT != action) return false;
+		if( !player.isSneaking() )
+			return false;
+		final ItemStack result = invSlotForLid.yank();
+		if (!ItemUtils.isEmpty(result))
+		{
+			ItemUtils.spawnItemStackAtTile(result, this, world.rand);
+			return true;
+		}
+		return false;
 	}
 }
