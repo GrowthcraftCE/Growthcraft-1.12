@@ -61,6 +61,7 @@ public class Recipes {
 			.brewsFrom(
 				new FluidStack(RusticModFluids.rusticGrapeWine.getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
+				false,
 				GrowthcraftGrapesConfig.portWineBrewingTime * costRatio,
 				Residue.newDefault(0.3F));
 

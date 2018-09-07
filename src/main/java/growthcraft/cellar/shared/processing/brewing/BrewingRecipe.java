@@ -14,12 +14,14 @@ import net.minecraftforge.fluids.FluidStack;
 public class BrewingRecipe extends ProcessingRecipe implements IBrewingRecipe {
 	private IMultiItemStacks inputItemStack;
 	private FluidStack inputFluidStack;
+	private boolean requiresLid;
 
 	public BrewingRecipe(@Nonnull FluidStack pInputFluid, @Nonnull IMultiItemStacks pInputItem,
-			@Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue) {
+			@Nonnull FluidStack pOutputFluid, boolean requiresLid, int pTime, @Nullable Residue pResidue) {
 		super(pOutputFluid, pTime, pResidue);
 		this.inputItemStack = pInputItem;
 		this.inputFluidStack = pInputFluid;
+		this.requiresLid = requiresLid;
 	}
 
 	@Override

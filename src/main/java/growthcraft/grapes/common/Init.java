@@ -319,6 +319,7 @@ public class Init {
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[WineTypes.PURPLE_WINE.ordinal()].getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
+				false,
 				GrowthcraftGrapesConfig.portWineBrewingTime,
 				Residue.newDefault(0.3F))
 			.getEffect()
@@ -329,6 +330,7 @@ public class Init {
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[WineTypes.RED_WINE.ordinal()].getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
+				false,
 				GrowthcraftGrapesConfig.portWineBrewingTime,
 				Residue.newDefault(0.3F))
 			.getEffect()
@@ -339,6 +341,7 @@ public class Init {
 			.brewsFrom(
 				new FluidStack(grapeWineBooze[WineTypes.GREEN_WINE.ordinal()].getFluid(), GrowthcraftGrapesConfig.portWineBrewingYield),
 				new OreItemStacks("yeastBayanus"),
+				false,
 				GrowthcraftGrapesConfig.portWineBrewingTime,
 				Residue.newDefault(0.3F))
 			.getEffect()

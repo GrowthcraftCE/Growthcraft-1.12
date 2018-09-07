@@ -593,10 +593,10 @@ public class Init {
 		CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftMilkFluids.whey.getFluid(), MilkFluidTags.WHEY);
 
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.rennet.getFluid())
-			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), new OreItemStacks("rennetSource"), TickUtils.minutes(1), null);
+			.brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), new OreItemStacks("rennetSource"), false, TickUtils.minutes(1), null);
 
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.pasteurizedMilk.getFluid())
-			.brewsFrom(GrowthcraftMilkFluids.skimMilk.asFluidStack(250), new ItemStack(Items.SUGAR), TickUtils.minutes(1), new Residue(GrowthcraftMilkItems.starterCulture.asStack(1), 1.0f));
+			.brewsFrom(GrowthcraftMilkFluids.skimMilk.asFluidStack(250), new ItemStack(Items.SUGAR), false, TickUtils.minutes(1), new Residue(GrowthcraftMilkItems.starterCulture.asStack(1), 1.0f));
 
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.skimMilk.getFluid())
 			.culturesTo(250, GrowthcraftMilkItems.starterCulture.asStack(), 0.6f, TickUtils.seconds(12));

@@ -40,16 +40,16 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, boolean requiresLid, int time, @Nullable Residue residue)
 	{
-		CellarRegistry.instance().brewing().addRecipe(new FluidStack(fluid, result.amount), stack, result, time, residue);
+		CellarRegistry.instance().brewing().addRecipe(new FluidStack(fluid, result.amount), stack, result, requiresLid, time, residue);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, boolean requiresLid, int time, @Nullable Residue residue)
 	{
-		CellarRegistry.instance().brewing().addRecipe(src, stack, new FluidStack(fluid, src.amount), time, residue);
+		CellarRegistry.instance().brewing().addRecipe(src, stack, new FluidStack(fluid, src.amount), requiresLid, time, residue);
 		return this;
 	}
 

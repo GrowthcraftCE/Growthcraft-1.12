@@ -27,16 +27,16 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsTo(@Nonnull FluidStack result, @Nonnull Object stack, boolean requiresLid, int time, @Nullable Residue residue)
 	{
-		this.userApis.getUserBrewingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, residue, time);
+		this.userApis.getUserBrewingRecipes().addDefault(stack, new FluidStack(fluid, result.amount), result, requiresLid, residue, time);
 		return this;
 	}
 
 	@Override
-	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, int time, @Nullable Residue residue)
+	public ICellarBoozeBuilder brewsFrom(@Nonnull FluidStack src, @Nonnull Object stack, boolean requiresLid, int time, @Nullable Residue residue)
 	{
-		this.userApis.getUserBrewingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), residue, time);
+		this.userApis.getUserBrewingRecipes().addDefault(stack, src, new FluidStack(fluid, src.amount), requiresLid, residue, time);
 		return this;
 	}
 

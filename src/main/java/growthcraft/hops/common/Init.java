@@ -169,12 +169,13 @@ public class Init {
 		}
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_YOUNG.ordinal()].getFluid())
-		.tags(BoozeTag.YOUNG, BoozeTag.CHILLED)
-		.brewsFrom(
-			new FluidStack(GrowthcraftHopsFluids.hopAleBooze[HopAleTypes.ALE_YOUNG.ordinal()].getFluid(), 40),
-			new OreItemStacks("yeastLager"),
-			TickUtils.minutes(1),
-			Residue.newDefault(0.0F));
+			.tags(BoozeTag.YOUNG, BoozeTag.CHILLED)
+			.brewsFrom(
+				new FluidStack(GrowthcraftHopsFluids.hopAleBooze[HopAleTypes.ALE_YOUNG.ordinal()].getFluid(), 40),
+				new OreItemStacks("yeastLager"),
+				false,
+				TickUtils.minutes(1),
+				Residue.newDefault(0.0F));
 
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_NORMAL.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED)
@@ -252,6 +253,7 @@ public class Init {
 			.brewsFrom(
 				new FluidStack(FluidRegistry.WATER, 40),
 				new OreItemStacks("cropWheat"),
+				false,
 				TickUtils.minutes(1),
 				Residue.newDefault(0.3F));
 
@@ -260,6 +262,7 @@ public class Init {
 			.brewsFrom(
 				new FluidStack(GrowthcraftHopsFluids.hopAleBooze[HopAleTypes.ALE_YOUNG.ordinal()].getFluid(), 40),
 				new OreItemStacks("cropHops"),
+				false,
 				TickUtils.minutes(1),
 				Residue.newDefault(0.0F));
 

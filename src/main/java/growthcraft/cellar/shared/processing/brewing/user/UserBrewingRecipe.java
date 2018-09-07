@@ -12,14 +12,16 @@ public class UserBrewingRecipe implements ICommentable
 	public FluidStackSchema input_fluid;
 	public FluidStackSchema output_fluid;
 	public ResidueSchema residue;
+	public boolean requiresLid;
 	public int time;
 
-	public UserBrewingRecipe(ItemKeySchema itm, FluidStackSchema inp, FluidStackSchema out, ResidueSchema res, int tm)
+	public UserBrewingRecipe(ItemKeySchema itm, FluidStackSchema inp, FluidStackSchema out, boolean requiresLid, ResidueSchema res, int tm)
 	{
 		this.item = itm;
 		this.input_fluid = inp;
 		this.output_fluid = out;
 		this.residue = res;
+		this.requiresLid = requiresLid;
 		this.time = tm;
 	}
 
@@ -28,7 +30,7 @@ public class UserBrewingRecipe implements ICommentable
 	@Override
 	public String toString()
 	{
-		return String.format("UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s`)", item, input_fluid, time, output_fluid, residue);
+		return String.format("UserBrewingRecipe(`%s` + `%s` / %d = `%s` & `%s` # `%s`)", item, input_fluid, time, output_fluid, residue, requiresLid?"Lid":"NoLid");
 	}
 
 	@Override

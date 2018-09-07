@@ -23,9 +23,9 @@ public class BrewingRegistry
 		GrowthcraftLogger.getLogger(Reference.MODID).debug("Added Brewing Recipe recipe={%s}", recipe);
 	}
 
-	public void addRecipe(@Nonnull FluidStack sourceFluid, @Nonnull Object raw, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
+	public void addRecipe(@Nonnull FluidStack sourceFluid, @Nonnull Object raw, @Nonnull FluidStack resultFluid, boolean requiresLid, int time, @Nullable Residue residue)
 	{
-		addRecipe(new BrewingRecipe(sourceFluid, MultiStacksUtil.toMultiItemStacks(raw), resultFluid, time, residue));
+		addRecipe(new BrewingRecipe(sourceFluid, MultiStacksUtil.toMultiItemStacks(raw), resultFluid, requiresLid, time, residue));
 	}
 
 	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack)
