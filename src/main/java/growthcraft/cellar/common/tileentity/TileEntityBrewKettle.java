@@ -28,7 +28,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice, IItemOperable
+public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice // , IItemOperable
 {
 	public static enum BrewKettleDataID
 	{
@@ -281,7 +281,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	public boolean hasLid() {
 		return GrowthcraftCellarItems.brewKettleLid.equals(getStackInSlot(2).getItem());
 	}
-
+/*
 	@Override
 	public boolean tryPlaceItem(Action action, EntityPlayer player, ItemStack stack) {
 		if (IItemOperable.Action.RIGHT != action) return false;
@@ -314,4 +314,5 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		}
 		return false;
 	}
+	*/
 }
