@@ -73,20 +73,31 @@ tile.cheese_aged.appenzeller.unaged.name=Appenzeller Cheese
 tile.cheese_aged.asiago.unaged.name=Asiago Cheese
 tile.cheese_aged.parmesan.unaged.name=Parmesan Cheese
 
-tile.cheese_waxed.cheddar.unaged.name=Cheddar Cheese
+tile.cheese_waxed.cheddar.aged.name=Cheddar Cheese (Aged)
+tile.cheese_waxed.cheddar.unaged.name=Cheddar Cheese (Unaged)
 tile.cheese_waxed.cheddar.unwaxed.name=Cheddar Cheese
+
+tile.cheese_waxed.monterey.aged.name=Monterey Cheese (Aged)
+tile.cheese_waxed.monterey.unaged.name=Monterey Cheese (Unaged)
 tile.cheese_waxed.monterey.unwaxed.name=Monterey Cheese
 
 tile.curds_aged.gorgonzola.name=Gorgonzola Curds
+tile.curds_aged.gorgonzola.dried.name=Gorgonzola Curds (Dried)
 tile.curds_aged.emmentaler.name=Emmentaler Curds
+tile.curds_aged.emmentaler.dried.name=Emmentaler Curds (Dried)
 tile.curds_aged.appenzeller.name=Appenzeller Curds
+tile.curds_aged.appenzeller.dried.name=Appenzeller Curds (Dried)
 tile.curds_aged.asiago.name=Asiago Curds
+tile.curds_aged.asiago.dried.name=Asiago Curds (Dried)
 tile.curds_aged.parmesan.name=Parmesan Curds
+tile.curds_aged.parmesan.dried.name=Parmesan Curds (Dried)
 
 tile.curds_simple.ricotta.name=Ricotta Curds
 
 tile.curds_waxed.cheddar.name=Cheddar Curds
+tile.curds_waxed.cheddar.dried.name=Cheddar Curds (Dried)
 tile.curds_waxed.monterey.name=Monterey Curds
+tile.curds_waxed.monterey.dried.name=Monterey Curds (Dried)
 
 tile.cheese_press.name=Cheese Press
 tile.cheese_vat.name=Cheese Vat
