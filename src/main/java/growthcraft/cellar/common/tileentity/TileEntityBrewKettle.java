@@ -46,7 +46,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		}
 	}
 
-	private static final int[] rawSlotIDs = new int[] {0, 1};
+	private static final int[] rawSlotIDs = new int[] {0, 1, 2};
 	private static final int[] residueSlotIDs = new int[] {0};
 
 	private BrewKettle brewKettle = new BrewKettle(this, 0, 1, 0, 1);
@@ -64,7 +64,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	@Override
 	public GrowthcraftInternalInventory createInventory()
 	{
-		return new GrowthcraftInternalInventory(this, 2);
+		return new GrowthcraftInternalInventory(this, 3);
 	}
 
 	@Override
@@ -142,6 +142,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	{
 		// 0 = raw
 		// 1 = residue
+		// 2 = lid
 		return side == EnumFacing.DOWN ? rawSlotIDs : residueSlotIDs;
 	}
 

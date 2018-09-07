@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.inventory;
 
+import growthcraft.cellar.common.inventory.slot.SlotBrewKettleLid;
 import growthcraft.cellar.common.inventory.slot.SlotBrewKettleResidue;
 import growthcraft.cellar.common.inventory.slot.SlotInputBrewing;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
@@ -18,6 +19,7 @@ public class ContainerBrewKettle extends CellarContainer
 
 		addSlotToContainer(new SlotInputBrewing(brewKettle, 0, 80, 35));
 		addSlotToContainer(new SlotBrewKettleResidue(brewKettle, 1, 141, 17));
+		addSlotToContainer(new SlotBrewKettleLid(brewKettle, 2, 19, 17));
 
 		bindPlayerInventory(player, 8, 84);
 	}

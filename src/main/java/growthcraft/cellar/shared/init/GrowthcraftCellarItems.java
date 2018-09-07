@@ -11,6 +11,7 @@ public class GrowthcraftCellarItems {
 	
 	public static ItemDefinition chievItemDummy;
 	public static ItemDefinition yeast;
+	public static ItemDefinition brewKettleLid;
 	
 	public enum EnumYeast implements IStringSerializable, IItemStackFactory, IObjectVariant
 	{
