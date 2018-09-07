@@ -23,13 +23,15 @@ public class GrowthcraftRiceItems {
     public static ItemTypeDefinition<ItemBoozeBottle> sakeBottle;
 
     public enum SakeTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
-        SAKE_MASH(0, "sake_mash"),
-        SAKE_FERMENTED(1, "sake_fermented"),
-        SAKE_POTENT(2, "sake_potent"),
-        SAKE_EXTENDED(3, "sake_extended"),
-        SAKE_HYPEREXTENDED(4, "sake_hyperextended"),
-        SAKE_INTOXICATED(5,"sake_intoxicated"),
-        SAKE_POISONED(6, "sake_poisoned");
+        SAKE_WATER(0, "sake_water"),
+        SAKE_MASH(1, "sake_mash"),
+        SAKE_FERMENTED(2, "sake_fermented"),
+        SAKE_POTENT(3, "sake_potent"),
+        SAKE_EXTENDED(4, "sake_extended"),
+        SAKE_HYPEREXTENDED(5, "sake_hyperextended"),
+        SAKE_POTENT_EXTENDED(6, "sake_potent_extended"),
+        SAKE_POTENT_HYPEREXTENDED(7, "sake_potent_hyperextended"),
+        SAKE_POISONED(8, "sake_poisoned");
 
         private int ID;
         private String NAME;
