@@ -196,6 +196,7 @@ public class Init {
             .brewsFrom(
                 new FluidStack(FluidRegistry.WATER, 200),
                 GrowthcraftRiceItems.rice.asStack(),
+                true,
                 TickUtils.minutes(1),
                 new Residue(GrowthcraftRiceItems.rice_cooked.asStack(), 1.0F));
 
@@ -206,11 +207,13 @@ public class Init {
             .brewsFrom(
                 new FluidStack(GrowthcraftRiceFluids.sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid(), 250),
                 new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
+                false,
                 TickUtils.minutes(1),
                 Residue.newDefault(0.0F))
             .brewsFrom(
                 new FluidStack(GrowthcraftRiceFluids.sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid(), 250),
                 new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
+                false,
                 TickUtils.minutes(1),
                 Residue.newDefault(0.0F));
 
