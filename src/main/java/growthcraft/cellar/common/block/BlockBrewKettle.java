@@ -3,6 +3,7 @@ package growthcraft.cellar.common.block;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
@@ -12,6 +13,8 @@ import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -30,6 +33,8 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BlockBrewKettle extends BlockCellarContainer {
 	private static final AxisAlignedBB AABB_CONTENTS = new AxisAlignedBB(2/16.0, 4/16.0, 2/16.0, 12/16.0, 10/16.0, 12/16.0);
+	
+	private static final PropertyBool TYPE_LID = PropertyBool.create("haslid");
 	
     private static final AxisAlignedBB AABB_FULL_BLOCK = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
@@ -60,6 +65,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
         setTileEntityType(TileEntityBrewKettle.class);
         this.setHardness(2.0F);
         this.setUnlocalizedName(unlocalizedName);
+        this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_LID, false));
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 
@@ -174,7 +180,8 @@ public class BlockBrewKettle extends BlockCellarContainer {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
-        // TODO: Add collision box when lid is on top
+        if( state.getValue(TYPE_LID).booleanValue() )
+        	addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LID);
     }
 
 	@SuppressWarnings("deprecation")
@@ -182,7 +189,43 @@ public class BlockBrewKettle extends BlockCellarContainer {
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return AABB_FULL_BLOCK;
     }
+	
+	/************
+	 * STATES
+	 ************/
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, TYPE_LID);
+	}
 
+	@SuppressWarnings("deprecation")
+	@Nonnull
+	@Override
+	public IBlockState getStateFromMeta(int meta) {
+	    return this.getDefaultState();
+	}
+
+	@Override
+	public int getMetaFromState(IBlockState state) {
+	    return 0;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+		final TileEntityBrewKettle te = getTileEntity(worldIn, pos);
+		if (te != null)
+		{
+			if( te.hasLid() )
+				return state.withProperty(TYPE_LID, true);
+		}
+		
+		return state;
+    }
+	
 	/************
 	 * COMPARATOR
 	 ************/

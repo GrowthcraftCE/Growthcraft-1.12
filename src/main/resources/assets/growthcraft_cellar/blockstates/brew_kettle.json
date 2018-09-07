@@ -1,31 +1,19 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+	"model": "growthcraft_cellar:brew_kettle"
+  },
   "variants": {
-    "normal": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "heated=true": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "heated=false": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "rotation=north": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "rotation=south": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "rotation=east": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "rotation=west": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "rotation=up": {
-      "model": "growthcraft_cellar:brew_kettle"
-    },
-    "rotation=down": {
-      "model": "growthcraft_cellar:brew_kettle"
+    "normal": [{ }],
+    "inventory": [{
+       "y": 0
+    }],
+    "haslid" : {
+       "false" : {
+       },
+       "true" : {
+         "submodel": "growthcraft_cellar:brew_kettle_lidon"
+       }
     }
   }
 }

@@ -292,6 +292,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 				if( invSlotForLid.isEmpty() ) {
 					final ItemStack result = ItemUtils.decrPlayerCurrentInventorySlot(player, 1);
 					invSlotForLid.set(result);
+					markDirtyAndUpdate();
 					return true;
 				}
 			}
@@ -308,6 +309,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		if (!ItemUtils.isEmpty(result))
 		{
 			ItemUtils.spawnItemStackAtTile(result, this, world.rand);
+			markDirtyAndUpdate();
 			return true;
 		}
 		return false;
