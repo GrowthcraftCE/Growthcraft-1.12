@@ -7,6 +7,7 @@ import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
@@ -14,7 +15,12 @@ import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
+import growthcraft.core.shared.utils.Pair;
+import growthcraft.core.shared.utils.PulseStepper;
+import growthcraft.core.shared.utils.SpatialRandom;
+import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
 import io.netty.buffer.ByteBuf;
+import io.netty.util.internal.MathUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -27,6 +33,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice // , IItemOperable
 {
@@ -56,6 +64,12 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	private DeviceInventorySlot invSlotForLid = new DeviceInventorySlot(this, 2);
 
 	private BrewKettle brewKettle = new BrewKettle(this, 0, 1, 2, 0, 1);
+	
+	@SideOnly(Side.CLIENT)
+	private PulseStepper animPulsar = new PulseStepper(10, 0);
+	@SideOnly(Side.CLIENT)
+	private SpatialRandom sprand = new SpatialRandom();
+
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -118,6 +132,36 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		{
 			brewKettle.update();
 		}
+		else {
+			if (animPulsar.update() == PulseStepper.State.PULSE)
+			{
+				if( hasFluid() && isHeated() && hasLid() ) {
+					Pair<Double, Double> p = sprand.nextCenteredD2();
+					
+					// Normalize by 2-Norm (used for velocity)
+					double horDist = Math.sqrt(p.left*p.left+p.right*p.right);
+					if( Math.abs(horDist) >= 0.00001 ) {
+						p = new Pair<Double, Double>(p.left/horDist, p.right/horDist);
+					}
+					else {
+						p = new Pair<Double, Double>(1.0, 0.0);
+					}
+					
+					// Normalize by max-Norm (used for position)
+					double maxHorDist = Math.max(Math.abs(p.left), Math.abs(p.right));
+					Pair<Double, Double> pMax = new Pair<Double, Double>(p.left/maxHorDist, p.right/maxHorDist);
+					
+					double vel = (0.125 + 0.1 * world.rand.nextDouble()) * 0.0625;
+					double px = (double)pos.getX() + 0.5 + pMax.left * 0.5;
+					double py = (double)pos.getY() + 1.0;
+					double pz = (double)pos.getZ() + 0.5 + pMax.right * 0.5;
+					double vx = p.left * vel;
+					double vy = vel;
+					double vz = p.right * vel;
+					FXHelper.emitSmoke(world, px, py, pz, vx, vy, vz);
+				}
+			}
+		}
 	}
 
 	@Override
@@ -141,6 +185,10 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	public boolean canBrew()
 	{
 		return brewKettle.canBrew();
+	}
+	
+	public boolean hasFluid() {
+		return brewKettle.hasFluid();
 	}
 
 	@Override
