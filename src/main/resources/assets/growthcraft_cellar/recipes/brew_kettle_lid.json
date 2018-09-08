@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " B ",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "ingotNugget"
+    }
+  },
+  "result": {
+    "item": "growthcraft_cellar:brew_kettle_lid"
+  }
+}
