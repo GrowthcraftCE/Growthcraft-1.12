@@ -27,4 +27,9 @@ public class FXHelper
 	public static void emitSmoke(World world, double px, double py, double pz, double speedX, double speedY, double speedZ) {
 		world.spawnParticle(EnumParticleTypes.SMOKE_NORMAL, px, py, pz, speedX, speedY, speedZ);
 	}
+
+	@SideOnly(Side.CLIENT)
+	public static void emitSmokeBig(World world, double px, double py, double pz, double speedX, double speedY, double speedZ) {
+		world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px, py, pz, speedX, speedY, speedZ);
+	}
 }
