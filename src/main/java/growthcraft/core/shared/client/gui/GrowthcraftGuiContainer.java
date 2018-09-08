@@ -230,6 +230,7 @@ public abstract class GrowthcraftGuiContainer<C extends Container, T extends Til
 	protected void drawTooltips(int mx, int my)
 	{
 		tooltipManager.draw(mx, my);
+		this.renderHoveredToolTip(mx, my);
 	}
 
 	@Override
