@@ -133,7 +133,8 @@ public class Init {
     public static void preInitBlocks() {
     	GrowthcraftMilkBlocks.thistle = new BlockDefinition( new BlockThistle("thistle") );
     	GrowthcraftMilkBlocks.cheeseVat = new BlockDefinition( new BlockCheeseVat("cheese_vat") );
-    	GrowthcraftMilkBlocks.blockFluidMilk = GrowthcraftMilkFluids.milk.getFluidBlockDefinition();
+    	if (GrowthcraftMilkFluids.milk != null)
+    		GrowthcraftMilkBlocks.blockFluidMilk = GrowthcraftMilkFluids.milk.getFluidBlockDefinition();
     	GrowthcraftMilkBlocks.blockFluidRennet = GrowthcraftMilkFluids.rennet.getFluidBlockDefinition();
     	GrowthcraftMilkBlocks.blockFluidButterMilk = GrowthcraftMilkFluids.butterMilk.getFluidBlockDefinition();
     	GrowthcraftMilkBlocks.blockFluidCream = GrowthcraftMilkFluids.cream.getFluidBlockDefinition();
