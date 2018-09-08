@@ -1,17 +1,17 @@
 {
   "type": "forge:ore_shaped",
   "pattern": [
-    " B ",
-    "AAA"
+    " i ",
+    "III"
   ],
   "key": {
-    "A": {
+    "I": {
       "type": "forge:ore_dict",
       "ore": "ingotIron"
     },
-    "B": {
+    "i": {
       "type": "forge:ore_dict",
-      "ore": "ingotNugget"
+      "ore": "nuggetIron"
     }
   },
   "result": {
