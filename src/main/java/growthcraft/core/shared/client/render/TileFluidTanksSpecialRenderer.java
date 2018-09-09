@@ -12,11 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class TileFluidTanksSpecialRenderer<T extends TileEntity & IFluidTanks> extends TileEntitySpecialRenderer<T> {
 	private final BBox fluidBBox;
-//	private final Mode mode;
 
-	public TileFluidTanksSpecialRenderer(BBox fluidBBox /*, Mode mode */) {
+	public TileFluidTanksSpecialRenderer(BBox fluidBBox) {
 		this.fluidBBox = fluidBBox;
-//		this.mode = mode;
 	}
 	
 	private double roundToPixel(double fluidHeight) {
@@ -24,6 +22,9 @@ public class TileFluidTanksSpecialRenderer<T extends TileEntity & IFluidTanks> e
 	}
 	
 	public void renderMaxFluid(@Nonnull T te, double x, double y, double z) {
+		// NOTE: Synch with FluidRenderUtils.getActualFluidBBoxForMax()
+		// TODO: Refactorize me later!
+		
 		int slotToRender = -1;
 		double fluidHeight = -1.0;
 		int numTanks = te.getTankCount();
@@ -69,9 +70,6 @@ public class TileFluidTanksSpecialRenderer<T extends TileEntity & IFluidTanks> e
 				continue;
 			FluidStack fluidStack = te.getFluidStack(i);
 
-//			int cap = te.getFluidTank(i).getCapacity();
-//			double scap = (double)cap * s;
-//			double h = roundToPixel( fluidBBox.h() * scap * (double)fluidStack.amount / (double)cap );
 			double h = roundToPixel( fluidBBox.h() * s * (double)fluidStack.amount );
 			if( h <= 0 )
 				continue;
@@ -82,17 +80,4 @@ public class TileFluidTanksSpecialRenderer<T extends TileEntity & IFluidTanks> e
 			y0 += h;
 		}
 	}
-	
-/*	@Override
-	public void renderTileEntityAt(@Nonnull T te, double x, double y, double z, float partialTicks, int destroyStage) {
-		if( mode == Mode.RENDER_MAXFLUID )
-			renderMaxFluid(te, x, y, z, partialTicks, destroyStage);
-		else
-			renderStackedFluid(te, x, y, z, partialTicks, destroyStage);
-	}
-	
-	public static enum Mode {
-		RENDER_MAXFLUID,
-		RENDER_STACKED
-	} */
 }

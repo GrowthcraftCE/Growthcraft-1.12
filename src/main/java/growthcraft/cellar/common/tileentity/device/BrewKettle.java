@@ -101,6 +101,10 @@ public class BrewKettle extends DeviceBase
 	{
 		return getHeatMultiplier() > 0;
 	}
+	
+	public boolean hasFluid() {
+		return inputFluidSlot.hasContent() || outputFluidSlot.hasContent();
+	}
 
 	private IBrewingRecipe findRecipe()
 	{

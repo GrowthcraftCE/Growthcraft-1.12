@@ -7,10 +7,10 @@ import growthcraft.core.shared.client.render.TileFluidTanksSpecialRenderer;
 import growthcraft.core.shared.utils.BBox;
 
 public class RenderFruitPress extends TileFluidTanksSpecialRenderer<TileEntityFruitPress> {
-	private static final BBox fluidBBox = BBox.newCube(3, 4, 3, 10, 10, 10).scale(1.0/16.0);
+	public static final BBox BBOX_FLUID = BBox.newCube(3, 4, 3, 10, 10, 10).scale(1.0/16.0);
 	
 	public RenderFruitPress() {
-		super(fluidBBox);
+		super(BBOX_FLUID);
 	}
 
 	@Override

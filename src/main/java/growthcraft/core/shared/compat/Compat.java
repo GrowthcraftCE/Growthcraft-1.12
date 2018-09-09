@@ -1,7 +1,10 @@
 package growthcraft.core.shared.compat;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import growthcraft.core.shared.compat.forestry.ForestryModFluids;
 import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
@@ -41,16 +44,22 @@ public class Compat {
     
 	public static List<Fluid> getMilkFluids()
 	{
-		final List<Fluid> milks = new ArrayList<Fluid>();
+		final Set<Fluid> milks = new HashSet<Fluid>();
 		if (GrowthcraftMilkFluids.milk != null)
 			milks.add(GrowthcraftMilkFluids.milk.getFluid());
-		if (ForestryModFluids.milk != null && !milks.contains(ForestryModFluids.milk.getFluid()) )
+		if (ForestryModFluids.milk != null )
 			milks.add(ForestryModFluids.milk.getFluid());
 		
 		// Automagy Milk
 		final Fluid fluidmilk = FluidRegistry.getFluid("fluidmilk");
-		if (fluidmilk != null && !milks.contains(fluidmilk))
+		if (fluidmilk != null)
 			milks.add(fluidmilk);
-		return milks;
+		
+		// Other milk
+		final Fluid milk = FluidRegistry.getFluid("milk");
+		if (milk != null)
+			milks.add(milk);
+		
+		return milks.stream().collect(Collectors.toList());
 	}
 }

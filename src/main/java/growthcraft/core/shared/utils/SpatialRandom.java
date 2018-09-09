@@ -30,4 +30,9 @@ public class SpatialRandom
 	{
 		return new Triplet<Double, Double, Double>(random.nextDouble(), random.nextDouble(), random.nextDouble());
 	}
+	
+	public Triplet<Double, Double, Double> nextCenteredD3()
+	{
+		return new Triplet<Double, Double, Double>(random.nextDouble() - 0.5, random.nextDouble() - 0.5, random.nextDouble() - 0.5);
+	}
 }

@@ -7,10 +7,10 @@ import growthcraft.core.shared.client.render.TileFluidTanksSpecialRenderer;
 import growthcraft.core.shared.utils.BBox;
 
 public class RenderCultureJar extends TileFluidTanksSpecialRenderer<TileEntityCultureJar> {
-	private static final BBox fluidBBox = BBox.newCube(6, 1, 6, 4, 4, 4).scale(1.0/16.0);
+	public static final BBox BBOX_FLUID = BBox.newCube(6, 1, 6, 4, 4, 4).scale(1.0/16.0);
 
 	public RenderCultureJar() {
-		super(fluidBBox /*, Mode.RENDER_MAXFLUID */);
+		super(BBOX_FLUID /*, Mode.RENDER_MAXFLUID */);
 	}
 	
 	@Override

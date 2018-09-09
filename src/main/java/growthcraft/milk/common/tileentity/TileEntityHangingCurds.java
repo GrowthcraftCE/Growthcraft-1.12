@@ -29,12 +29,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITickable, INBTItemSerializable
 {
 	// SpatialRandom instance
+	@SideOnly(Side.CLIENT)
 	private SpatialRandom sprand = new SpatialRandom();
+	
 	// Pulsar instance
 	private PulseStepper wheyPulsar = new PulseStepper(TickUtils.seconds(15), 10);
 
 	// the following variables are responsible for step tracking
 	/// This pulse stepper is used to control the 'drip' animation
+	@SideOnly(Side.CLIENT)
 	private PulseStepper animPulsar = new PulseStepper(10, 4);
 
 	/// The server will increment this value whenever it does a drip step

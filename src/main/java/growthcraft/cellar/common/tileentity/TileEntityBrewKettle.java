@@ -4,9 +4,13 @@ import java.io.IOException;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
+import growthcraft.cellar.client.particle.BrewKettleLidSteamEmitter;
+import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.core.shared.client.particle.params.FluidTanksParams;
+import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
@@ -14,7 +18,13 @@ import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
+import growthcraft.core.shared.utils.Pair;
+import growthcraft.core.shared.utils.PulseStepper;
+import growthcraft.core.shared.utils.SpatialRandom;
+import growthcraft.core.shared.utils.Triplet;
+import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
 import io.netty.buffer.ByteBuf;
+import io.netty.util.internal.MathUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -27,6 +37,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice // , IItemOperable
 {
@@ -56,6 +68,13 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	private DeviceInventorySlot invSlotForLid = new DeviceInventorySlot(this, 2);
 
 	private BrewKettle brewKettle = new BrewKettle(this, 0, 1, 2, 0, 1);
+	
+	@SideOnly(Side.CLIENT)
+	private BrewKettleLidSteamEmitter lidSteamEmitter = new BrewKettleLidSteamEmitter();
+	@SideOnly(Side.CLIENT)
+	private SpatialRandom sprand = new SpatialRandom();
+	@SideOnly(Side.CLIENT)
+	private boolean animLastLid = false;	// NOTE: Only use it inside update() on the client side. 
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -118,6 +137,55 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 		{
 			brewKettle.update();
 		}
+		else {
+			if( hasFluid() && isHeated() ) {
+				if( hasLid() ) {
+					lidSteamEmitter.update(world, pos);
+					animLastLid = true;
+				}
+				else {
+					if( animLastLid ) {
+						// Emit a huge amount of smoke at once when removing the lid
+						for( int i = 0; i < 10; i ++ ) {
+							if( world.rand.nextInt(10) < 3)
+								continue;
+							Pair<Double, Double> pPos = sprand.nextCenteredD2();
+							Pair<Double, Double> pVel = sprand.nextCenteredD2();
+							
+							double px = (double)pos.getX() + 0.5 + pPos.left * (14.0 / 16.0);
+							double py = (double)pos.getY() + 15.0/16.0;
+							double pz = (double)pos.getZ() + 0.5 + pPos.right * (14.0 / 16.0);
+							double vx = pVel.left * 0.0625;
+							double vy = 0.0625;
+							double vz = pVel.right * 0.0625;
+							FXHelper.emitSmokeBig(world, px, py, pz, vx, vy, vz);
+						}
+					}
+					
+					// Make bubbles
+					if( world.rand.nextInt(10) < 3 ) {
+						Triplet<Double, Double, Double> pPos = sprand.nextCenteredD3();
+						
+						double px = (double)pos.getX() + 0.5 + pPos.left * (12.0 / 16.0);
+						double py = (double)pos.getY() + 0.5; // 35 + (pPos.center + 0.5) * 0.0625;
+						double pz = (double)pos.getZ() + 0.5 + pPos.right * (12.0 / 16.0);
+						double vx = 0;
+						double vy = 0.125;
+						double vz = 0;
+						FluidTanksParams params = new FluidTanksParams(RenderBrewKettle.BBOX_FLUID
+																		  .grow(-1*0.0625, -0*0.0625, -1*0.0625)
+																		  .translate(0, 0*0.0625, 0),
+																	   this);
+						FXHelper.emitKettleBubbles(world, px, py, pz, vx, vy, vz, params);
+					}
+					
+					animLastLid = false;
+				}
+			}
+			else {
+				animLastLid = false;
+			}
+		}
 	}
 
 	@Override
@@ -141,6 +209,10 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 	public boolean canBrew()
 	{
 		return brewKettle.canBrew();
+	}
+	
+	public boolean hasFluid() {
+		return brewKettle.hasFluid();
 	}
 
 	@Override
