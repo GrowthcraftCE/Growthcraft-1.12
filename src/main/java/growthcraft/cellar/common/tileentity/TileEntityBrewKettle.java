@@ -161,6 +161,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 					animLastLid = false;
 				}
 			}
+			else {
+				animLastLid = false;
+			}
 		}
 	}
 
