@@ -49,7 +49,7 @@ public class BrewKettleLidSteamEmitter {
 				double vx = p.left * vel;
 				double vy = vel;
 				double vz = p.right * vel;
-				FXHelper.emitSmoke(world, px, py, pz, vx, vy, vz);
+				FXHelper.emitSteam(world, px, py, pz, vx, vy, vz);
 			}
 		}
 	}

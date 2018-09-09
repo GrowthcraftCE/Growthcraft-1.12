@@ -158,7 +158,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 							double vx = pVel.left * 0.0625;
 							double vy = 0.0625;
 							double vz = pVel.right * 0.0625;
-							FXHelper.emitSmokeBig(world, px, py, pz, vx, vy, vz);
+							FXHelper.emitSteamBig(world, px, py, pz, vx, vy, vz);
 						}
 					}
 					
