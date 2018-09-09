@@ -163,7 +163,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 					}
 					
 					// Make bubbles
-					if( world.rand.nextInt(10) < 6 ) {
+					if( world.rand.nextInt(10) < 3 ) {
 						Triplet<Double, Double, Double> pPos = sprand.nextCenteredD3();
 						
 						double px = (double)pos.getX() + 0.5 + pPos.left * (12.0 / 16.0);
@@ -173,7 +173,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 						double vy = 0.125;
 						double vz = 0;
 						FluidTanksParams params = new FluidTanksParams(RenderBrewKettle.BBOX_FLUID
-																		  .grow(-3*0.0625, -0*0.0625, -3*0.0625)
+																		  .grow(-1*0.0625, -0*0.0625, -1*0.0625)
 																		  .translate(0, 0*0.0625, 0),
 																	   this);
 						FXHelper.emitKettleBubbles(world, px, py, pz, vx, vy, vz, params);

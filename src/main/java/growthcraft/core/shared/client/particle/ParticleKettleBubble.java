@@ -53,9 +53,27 @@ public class ParticleKettleBubble extends Particle {
 //    	this.posY < originPos.getY()+4*0.0625 || this.posY > originPos.getY()+1-3*0.0625 ||
 //    	this.posZ < originPos.getZ()+2*0.0625 || this.posZ > originPos.getZ()+1-3*0.0625 )
         BBox localFluidBBox = FluidRenderUtils.getActualFluidBBoxForMax(params.getFluidBBox(), params.getTanks());
-        if( this.posX < originPos.getX() + localFluidBBox.x0() || this.posX > originPos.getX() + localFluidBBox.x1() ||
-        	this.posY < originPos.getY() + localFluidBBox.y0() || this.posY > originPos.getY() + localFluidBBox.y1() ||
-        	this.posZ < originPos.getZ() + localFluidBBox.z0() || this.posZ > originPos.getZ() + localFluidBBox.z1() )
+        Double correctPosX = null;
+        Double correctPosY = null;
+        Double correctPosZ = null;
+        if( this.posX < originPos.getX() + localFluidBBox.x0() )
+        	correctPosX = originPos.getX() + localFluidBBox.x0();
+        if( this.posX > originPos.getX() + localFluidBBox.x1() )
+        	correctPosX = originPos.getX() + localFluidBBox.x1();
+        if( this.posY < originPos.getY() + localFluidBBox.y0() )
+        	correctPosY = originPos.getY() + localFluidBBox.y0();
+        if( this.posZ < originPos.getZ() + localFluidBBox.z0() )
+        	correctPosZ = originPos.getZ() + localFluidBBox.z0();
+        if( this.posZ > originPos.getZ() + localFluidBBox.z1() )
+        	correctPosZ = originPos.getZ() + localFluidBBox.z1();
+        
+        if( correctPosX != null || correctPosY != null || correctPosZ != null ) {
+        	this.setPosition(correctPosX != null?correctPosX:posX,
+        					 correctPosY != null?correctPosY:posY,
+        					 correctPosZ != null?correctPosZ:posZ);
+        }
+       
+        if( this.posY > originPos.getY() + localFluidBBox.y1() )
         {
             this.setExpired();
         }
