@@ -19,6 +19,7 @@ import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.core.shared.utils.Pair;
 import growthcraft.core.shared.utils.PulseStepper;
 import growthcraft.core.shared.utils.SpatialRandom;
+import growthcraft.core.shared.utils.Triplet;
 import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
 import io.netty.buffer.ByteBuf;
 import io.netty.util.internal.MathUtil;
@@ -149,15 +150,29 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 							Pair<Double, Double> pPos = sprand.nextCenteredD2();
 							Pair<Double, Double> pVel = sprand.nextCenteredD2();
 							
-							double px = (double)pos.getX() + 0.5 + pPos.left * 0.5;
+							double px = (double)pos.getX() + 0.5 + pPos.left * (14.0 / 16.0);
 							double py = (double)pos.getY() + 15.0/16.0;
-							double pz = (double)pos.getZ() + 0.5 + pPos.right * 0.5;
+							double pz = (double)pos.getZ() + 0.5 + pPos.right * (14.0 / 16.0);
 							double vx = pVel.left * 0.0625;
 							double vy = 0.0625;
 							double vz = pVel.right * 0.0625;
 							FXHelper.emitSmokeBig(world, px, py, pz, vx, vy, vz);
 						}
 					}
+					
+					// Make bubbles
+					if( world.rand.nextInt(10) < 6 ) {
+						Triplet<Double, Double, Double> pPos = sprand.nextCenteredD3();
+						
+						double px = (double)pos.getX() + 0.5 + pPos.left * (14.0 / 16.0);
+						double py = (double)pos.getY() + 0.5; // 35 + (pPos.center + 0.5) * 0.0625;
+						double pz = (double)pos.getZ() + 0.5 + pPos.right * (14.0 / 16.0);
+						double vx = 0;
+						double vy = 0.125;
+						double vz = 0;
+						FXHelper.emitKettleBubbles(world, px, py, pz, vx, vy, vz);
+					}
+					
 					animLastLid = false;
 				}
 			}
