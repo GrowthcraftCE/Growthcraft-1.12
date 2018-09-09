@@ -5,9 +5,11 @@ import java.io.IOException;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.client.particle.BrewKettleLidSteamEmitter;
+import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.core.shared.client.particle.params.FluidTanksParams;
 import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemUtils;
@@ -164,13 +166,17 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 					if( world.rand.nextInt(10) < 6 ) {
 						Triplet<Double, Double, Double> pPos = sprand.nextCenteredD3();
 						
-						double px = (double)pos.getX() + 0.5 + pPos.left * (14.0 / 16.0);
+						double px = (double)pos.getX() + 0.5 + pPos.left * (12.0 / 16.0);
 						double py = (double)pos.getY() + 0.5; // 35 + (pPos.center + 0.5) * 0.0625;
-						double pz = (double)pos.getZ() + 0.5 + pPos.right * (14.0 / 16.0);
+						double pz = (double)pos.getZ() + 0.5 + pPos.right * (12.0 / 16.0);
 						double vx = 0;
 						double vy = 0.125;
 						double vz = 0;
-						FXHelper.emitKettleBubbles(world, px, py, pz, vx, vy, vz);
+						FluidTanksParams params = new FluidTanksParams(RenderBrewKettle.BBOX_FLUID
+																		  .grow(-3*0.0625, -0*0.0625, -3*0.0625)
+																		  .translate(0, 0*0.0625, 0),
+																	   this);
+						FXHelper.emitKettleBubbles(world, px, py, pz, vx, vy, vz, params);
 					}
 					
 					animLastLid = false;

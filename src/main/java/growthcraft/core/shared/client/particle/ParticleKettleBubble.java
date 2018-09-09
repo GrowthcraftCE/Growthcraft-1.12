@@ -1,5 +1,8 @@
 package growthcraft.core.shared.client.particle;
 
+import growthcraft.cellar.client.utils.FluidRenderUtils;
+import growthcraft.core.shared.client.particle.params.FluidTanksParams;
+import growthcraft.core.shared.utils.BBox;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -8,9 +11,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class ParticleKettleBubble extends Particle {
-	private BlockPos originPos;
+	private final BlockPos originPos;
+	private final FluidTanksParams params;
 	
-    public ParticleKettleBubble(World worldIn, double xCoordIn, double yCoordIn, double zCoordIn, double xSpeedIn, double ySpeedIn, double zSpeedIn)
+    public ParticleKettleBubble(World worldIn,
+    							double xCoordIn, double yCoordIn, double zCoordIn,
+    							double xSpeedIn, double ySpeedIn, double zSpeedIn,
+    							FluidTanksParams params)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         this.particleRed = 1.0F;
@@ -25,6 +32,7 @@ public class ParticleKettleBubble extends Particle {
         this.particleMaxAge = (int)(8.0D / (Math.random() * 0.8D + 0.2D));
         
         this.originPos = new BlockPos(this.posX, this.posY, this.posZ);
+        this.params = params;
     }
 
     public void onUpdate()
@@ -40,9 +48,14 @@ public class ParticleKettleBubble extends Particle {
 
         // if (this.world.getBlockState(new BlockPos(this.posX, this.posY, this.posZ)).getMaterial() != Material.WATER)
         //if( !new BlockPos(this.posX, this.posY, this.posZ).equals(originPos) )
-        if( this.posX < originPos.getX()+2*0.0625 || this.posX > originPos.getX()+1-3*0.0625 ||
-        	this.posY < originPos.getY()+4*0.0625 || this.posY > originPos.getY()+1-3*0.0625 ||
-        	this.posZ < originPos.getZ()+2*0.0625 || this.posZ > originPos.getZ()+1-3*0.0625 )
+        
+//      if( this.posX < originPos.getX()+2*0.0625 || this.posX > originPos.getX()+1-3*0.0625 ||
+//    	this.posY < originPos.getY()+4*0.0625 || this.posY > originPos.getY()+1-3*0.0625 ||
+//    	this.posZ < originPos.getZ()+2*0.0625 || this.posZ > originPos.getZ()+1-3*0.0625 )
+        BBox localFluidBBox = FluidRenderUtils.getActualFluidBBoxForMax(params.getFluidBBox(), params.getTanks());
+        if( this.posX < originPos.getX() + localFluidBBox.x0() || this.posX > originPos.getX() + localFluidBBox.x1() ||
+        	this.posY < originPos.getY() + localFluidBBox.y0() || this.posY > originPos.getY() + localFluidBBox.y1() ||
+        	this.posZ < originPos.getZ() + localFluidBBox.z0() || this.posZ > originPos.getZ() + localFluidBBox.z1() )
         {
             this.setExpired();
         }

@@ -2,6 +2,7 @@ package growthcraft.core.shared.client.utils;
 
 import growthcraft.core.shared.client.particle.ParticleDrop;
 import growthcraft.core.shared.client.particle.ParticleKettleBubble;
+import growthcraft.core.shared.client.particle.params.FluidTanksParams;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.util.EnumParticleTypes;
@@ -32,8 +33,8 @@ public class FXHelper
 		world.spawnParticle(EnumParticleTypes.SMOKE_LARGE, px, py, pz, speedX, speedY, speedZ);
 	}
 	
-	public static void emitKettleBubbles(World world, double px, double py, double pz, double speedX, double speedY, double speedZ) {
-		final Particle fx = new ParticleKettleBubble(world, px, py, pz, speedX, speedY, speedZ);
+	public static void emitKettleBubbles(World world, double px, double py, double pz, double speedX, double speedY, double speedZ, FluidTanksParams params) {
+		final Particle fx = new ParticleKettleBubble(world, px, py, pz, speedX, speedY, speedZ, params);
 		FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
 	}
 }

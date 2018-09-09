@@ -6,6 +6,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 public class BBox
 {
 	public double[] boundsData;
+	public static final double EPSILON = 0.000001; 
 
 	public BBox()
 	{
@@ -43,19 +44,31 @@ public class BBox
 	 */
 	public BBox translate(double x, double y, double z)
 	{
-		BoundUtils.translateBounds(boundsData, x, y, z, boundsData);
-		return this;
+		BBox newBBox = new BBox();
+		BoundUtils.translateBounds(newBBox.boundsData, x, y, z, boundsData);
+		return newBBox;
+	}
+	
+	public BBox grow(double gx, double gy, double gz)
+	{
+		double x0 = boundsData[0] - gx;
+		double y0 = boundsData[1] - gy;
+		double z0 = boundsData[2] - gz;
+		double x1 = boundsData[3] + gx;
+		double y1 = boundsData[4] + gy;
+		double z1 = boundsData[5] + gz;
+		return new BBox(x0, y0, z0, x1, y1, z1);
 	}
 
 	public BBox scale(double px0, double py0, double pz0, double px1, double py1, double pz1)
 	{
-		boundsData[0] *= px0;
-		boundsData[1] *= py0;
-		boundsData[2] *= pz0;
-		boundsData[3] *= px1;
-		boundsData[4] *= py1;
-		boundsData[5] *= pz1;
-		return this;
+		double x0 = boundsData[0] * px0;
+		double y0 = boundsData[1] * py0;
+		double z0 = boundsData[2] * pz0;
+		double x1 = boundsData[3] * px1;
+		double y1 = boundsData[4] * py1;
+		double z1 = boundsData[5] * pz1;
+		return new BBox(x0, y0, z0, x1, y1, z1);
 	}
 
 	public BBox scale(double x, double y, double z)
@@ -78,6 +91,10 @@ public class BBox
 	public double w() { return x1() - x0(); }
 	public double h() { return y1() - y0(); }
 	public double l() { return z1() - z0(); }
+	
+	public boolean isEmpty() {
+		return x0()+EPSILON>=x1() || y0()+EPSILON>=y1() || z0()+EPSILON>=z1();
+	}
 
 	public boolean contains(double px, double py, double pz)
 	{
