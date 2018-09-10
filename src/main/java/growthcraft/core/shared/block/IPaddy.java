@@ -1,17 +1,18 @@
 package growthcraft.core.shared.block;
 
-import net.minecraft.block.Block;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 import javax.annotation.Nonnull;
 
 public interface IPaddy {
-    @Nonnull public Block getFluidBlock();
-    @Nonnull
-    public Fluid getFillingFluid();
+    @Nonnull public FluidStack getFluidStack();
+    @Nonnull public Fluid getFillingFluid();
+
     public int getMaxPaddyMeta(IBlockAccess world, int x, int y, int z);
     public boolean isFilledWithFluid(IBlockAccess world, int x, int y, int z, int meta);
-    public boolean canConnectPaddyTo(IBlockAccess world, int x, int y, int z, int meta);
+    public boolean canConnectPaddyTo(IBlockAccess world, BlockPos pos, int meta);
     public boolean isBelowFillingFluid(IBlockAccess world, int x, int y, int z);
 }

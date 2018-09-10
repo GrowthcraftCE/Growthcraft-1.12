@@ -16,6 +16,7 @@ import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.rice.common.block.BlockPaddy;
 import growthcraft.rice.common.block.BlockRiceCrop;
+import growthcraft.rice.common.item.ItemCultivator;
 import growthcraft.rice.common.item.ItemFoodRice;
 import growthcraft.rice.common.item.ItemRice;
 import growthcraft.rice.common.item.ItemRiceBall;
@@ -80,6 +81,7 @@ public class Init {
     ////////////
 
     public static void preInitItems() {
+        GrowthcraftRiceItems.cultivator = new ItemDefinition( new ItemCultivator("cultivator"));
         GrowthcraftRiceItems.rice = new ItemDefinition( new ItemRice("rice"));
         GrowthcraftRiceItems.rice_ball = new ItemDefinition( new ItemRiceBall("rice_ball"));
         GrowthcraftRiceItems.rice_cooked = new ItemDefinition( new ItemFoodRice("rice_cooked"));
@@ -94,6 +96,9 @@ public class Init {
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
+
+        GrowthcraftRiceItems.cultivator.registerItem(registry);
+        GrowthcraftRiceItems.cultivator.getItem().setCreativeTab(tabGrowthcraft);
 
         GrowthcraftRiceItems.sakeBottle.registerItem(registry, new ResourceLocation(Reference.MODID, "sakebottle"));
         GrowthcraftRiceItems.sakeBottle.getItem().setCreativeTab(tabGrowthcraft);
@@ -112,6 +117,7 @@ public class Init {
 
     @SideOnly(Side.CLIENT)
     public static void registerItemRenders() {
+        GrowthcraftRiceItems.cultivator.registerRender();
         GrowthcraftRiceItems.sakeBottle.registerRenders(SakeTypes.class);
         GrowthcraftRiceItems.rice_cooked.registerRender();
         GrowthcraftRiceItems.rice.registerRender();

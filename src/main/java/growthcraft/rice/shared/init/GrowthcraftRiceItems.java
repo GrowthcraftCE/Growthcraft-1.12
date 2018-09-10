@@ -17,6 +17,7 @@ public class GrowthcraftRiceItems {
 
     public GrowthcraftRiceItems() {}
 
+    public static ItemTypeDefinition cultivator;
     public static ItemDefinition rice;
     public static ItemDefinition rice_cooked;
     public static ItemDefinition rice_ball;

@@ -120,6 +120,14 @@ public class BlockCheck
 	}
 
 	/**
+	 * Determines if block is a Rice Paddy block.
+	 *
+	 * @param block
+	 * @return true if the block is a rice paddy block, false otherwise
+	 */
+	public static boolean isBlockPaddy(Block block) { return block instanceof BlockPaddyBase; }
+
+	/**
 	 * Determines if block is a rope block
 	 *
 	 * @param block - the block to check
