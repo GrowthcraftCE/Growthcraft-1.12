@@ -1,7 +1,23 @@
 {
-  "variants":
+  "multipart": [
     {
-      "east=false,is_filled=false,north=false,south=false,west=false": { "model": "growthcraft:place_holder_block" }
+      "apply": { "model": "growthcraft_rice:ricepaddy_base" }
+    },
+    {
+      "when": { "north": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "uvlock": false }
+    },
+    {
+      "when": { "east": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 90, "uvlock": false }
+    },
+    {
+      "when": { "south": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 180, "uvlock": false }
+    },
+    {
+      "when": { "west": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 270, "uvlock": false }
     }
-
+  ]
 }

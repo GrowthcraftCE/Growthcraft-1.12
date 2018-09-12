@@ -1,5 +1,6 @@
 package growthcraft.core.shared.block;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -21,7 +22,7 @@ import javax.annotation.Nonnull;
  * BlockPaddyBase
  *
  * The BlockPaddyBase is designed to be mainly used for the BlockPaddy, which is a Rice Paddy for growing rice. There
- * could be other uses for flooding a field of FARMLAND for gorwing crops.
+ * could be other uses for flooding a field of FARMLAND for growing crops.
  *
  * A paddy is designed to be created by activating a FARMLAND block with a Growthcraft Cultivator and then adding a
  * Fluid of choice to the paddy block. Typically we would only add water to a paddy block, but you never know what the
@@ -30,7 +31,7 @@ import javax.annotation.Nonnull;
  * Ideally you should be able to place a FluidStack into a BlockPaddy that will in-turn "flood" the neighbor blocks.
  *
  */
-public class BlockPaddyBase extends GrowthcraftBlockBase implements IPaddy {
+public class BlockPaddyBase extends GrowthcraftBlockBase {
 
     // FluidTank to store the fluid that will hydrate the paddy.
     private FluidTank fluidTank0;
@@ -57,9 +58,26 @@ public class BlockPaddyBase extends GrowthcraftBlockBase implements IPaddy {
         fluidTank0 = new FluidTank(1000);
     }
 
+    public boolean fillFluidTank(FluidStack fluidStack) {
+        if ( fluidTank0.canFillFluidType(fluidStack) ) {
+            fluidTank0.fill(fluidStack, true);
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[]{ IS_FILLED, NORTH, EAST, SOUTH, WEST });
+    }
+
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        return state.withProperty(IS_FILLED, this.isFilledWithFluid(worldIn, pos))
+                .withProperty(NORTH, canConnectPaddyTo(worldIn, pos, EnumFacing.NORTH))
+                .withProperty(EAST, canConnectPaddyTo(worldIn, pos, EnumFacing.EAST))
+                .withProperty(SOUTH, canConnectPaddyTo(worldIn, pos, EnumFacing.SOUTH))
+                .withProperty(WEST, canConnectPaddyTo(worldIn,pos,EnumFacing.WEST));
     }
 
     /**
@@ -68,40 +86,28 @@ public class BlockPaddyBase extends GrowthcraftBlockBase implements IPaddy {
      * @return
      */
     @Nonnull
-    @Override
     public FluidStack getFluidStack() {
         return this.fluidTank0.getFluid();
     }
 
-
     @Nonnull
-    @Override
     public Fluid getFillingFluid() {
-
-        // TODO: return the fluid that was used to fill the paddy.
-
-        return null;
+        return this.fluidTank0.getFluid().getFluid();
     }
 
-    @Override
     public int getMaxPaddyMeta(IBlockAccess world, int x, int y, int z) {
-
         return 0;
     }
 
     /**
-     * Determins if this block is filled with a fluid or not.
+     * Determine if this block's fluid tank has a fluid in it.
      *
      * @param world
-     * @param x
-     * @param y
-     * @param z
-     * @param meta
+     * @param pos
      * @return
      */
-    @Override
-    public boolean isFilledWithFluid(IBlockAccess world, int x, int y, int z, int meta) {
-        return this.getDefaultState().getValue(IS_FILLED);
+    public boolean isFilledWithFluid(IBlockAccess world, BlockPos pos) {
+        return this.fluidTank0.getFluidAmount() > 0;
     }
 
     /**
@@ -109,35 +115,36 @@ public class BlockPaddyBase extends GrowthcraftBlockBase implements IPaddy {
      *
      * @param world
      * @param pos BlockPos if the block the check.
-     * @param meta
+     * @param facing Facing side of this block to be checked.
      * @return Returns true if the passed block is an instance of BlockPaddyBase
      */
-    public boolean canConnectPaddyTo(IBlockAccess world, BlockPos pos, int meta) {
-        IBlockState state = world.getBlockState(pos);
-        return BlockCheck.isBlockPaddy(state.getBlock());
+    public boolean canConnectPaddyTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        return BlockCheck.isBlockPaddy(block);
     }
 
-    @Override
-    public boolean isBelowFillingFluid(IBlockAccess world, int x, int y, int z) {
-        return false;
-    }
-
+    /**
+     * Default onBlockActivation.
+     *
+     * @param worldIn
+     * @param pos
+     * @param state
+     * @param playerIn
+     * @param hand
+     * @param facing
+     * @param hitX
+     * @param hitY
+     * @param hitZ
+     * @return
+     */
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-
-        // TODO: If activated with Water Bucket, we need to fill the paddy.
-
-        // TODO: If activated with a Rice Seed and the paddy is flooded, then we need to plant the rice.
-
     }
 
     @Override
     public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        super.onNeighborChange(world, pos, neighbor);
-
         // TODO: If neighbor is a RicePaddy, then we need to connect the textures.
-
     }
 
     @SuppressWarnings("deprecation")
