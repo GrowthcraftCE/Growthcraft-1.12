@@ -4,12 +4,13 @@ import java.io.IOException;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
-import growthcraft.cellar.client.particle.BrewKettleLidSteamEmitter;
+import growthcraft.cellar.client.particle.emitter.BrewKettleLidSteamEmitter;
+import growthcraft.cellar.client.particle.params.FluidTanksParams;
 import growthcraft.cellar.client.render.RenderBrewKettle;
+import growthcraft.cellar.client.utils.FXHelperCellar;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
-import growthcraft.core.shared.client.particle.params.FluidTanksParams;
 import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemUtils;
@@ -176,7 +177,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 																		  .grow(-1*0.0625, -0*0.0625, -1*0.0625)
 																		  .translate(0, 0*0.0625, 0),
 																	   this);
-						FXHelper.emitKettleBubbles(world, px, py, pz, vx, vy, vz, params);
+						FXHelperCellar.emitKettleBubbles(world, px, py, pz, vx, vy, vz, params);
 					}
 					
 					animLastLid = false;

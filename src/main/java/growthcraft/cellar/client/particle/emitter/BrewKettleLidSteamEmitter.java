@@ -1,4 +1,4 @@
-package growthcraft.cellar.client.particle;
+package growthcraft.cellar.client.particle.emitter;
 
 import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.utils.Pair;

@@ -1,7 +1,7 @@
-package growthcraft.core.shared.client.particle;
+package growthcraft.cellar.client.particle;
 
+import growthcraft.cellar.client.particle.params.FluidTanksParams;
 import growthcraft.cellar.client.utils.FluidRenderUtils;
-import growthcraft.core.shared.client.particle.params.FluidTanksParams;
 import growthcraft.core.shared.utils.BBox;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
@@ -20,6 +20,7 @@ public class ParticleKettleBubble extends Particle {
     							FluidTanksParams params)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
+//        params.getTanks().getFluid(0);
         this.particleRed = 1.0F;
         this.particleGreen = 1.0F;
         this.particleBlue = 1.0F;
@@ -46,13 +47,7 @@ public class ParticleKettleBubble extends Particle {
         this.motionY *= 0.8500000238418579D;
         this.motionZ *= 0.8500000238418579D;
 
-        // if (this.world.getBlockState(new BlockPos(this.posX, this.posY, this.posZ)).getMaterial() != Material.WATER)
-        //if( !new BlockPos(this.posX, this.posY, this.posZ).equals(originPos) )
-        
-//      if( this.posX < originPos.getX()+2*0.0625 || this.posX > originPos.getX()+1-3*0.0625 ||
-//    	this.posY < originPos.getY()+4*0.0625 || this.posY > originPos.getY()+1-3*0.0625 ||
-//    	this.posZ < originPos.getZ()+2*0.0625 || this.posZ > originPos.getZ()+1-3*0.0625 )
-        BBox localFluidBBox = FluidRenderUtils.getActualFluidBBoxForMax(params.getFluidBBox(), params.getTanks());
+        BBox localFluidBBox = FluidRenderUtils.getActualFluidBBoxForMax(params.getFluidBBox(), params.getTanks()).getFluidBBox();
         Double correctPosX = null;
         Double correctPosY = null;
         Double correctPosZ = null;

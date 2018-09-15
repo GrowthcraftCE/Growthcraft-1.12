@@ -1,12 +1,9 @@
 package growthcraft.core.shared.client.utils;
 
 import growthcraft.core.shared.client.particle.ParticleDrop;
-import growthcraft.core.shared.client.particle.ParticleKettleBubble;
 import growthcraft.core.shared.client.particle.ParticleSteamLarge;
 import growthcraft.core.shared.client.particle.ParticleSteamNormal;
-import growthcraft.core.shared.client.particle.params.FluidTanksParams;
 import net.minecraft.client.particle.Particle;
-import net.minecraft.client.particle.ParticleSmokeNormal;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -42,11 +39,6 @@ public class FXHelper
 	
 	public static void emitSteamBig(World world, double px, double py, double pz, double speedX, double speedY, double speedZ) {
 		final Particle fx = new ParticleSteamLarge(world, px, py, pz, speedX, speedY, speedZ);
-		FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
-	}
-	
-	public static void emitKettleBubbles(World world, double px, double py, double pz, double speedX, double speedY, double speedZ, FluidTanksParams params) {
-		final Particle fx = new ParticleKettleBubble(world, px, py, pz, speedX, speedY, speedZ, params);
 		FMLClientHandler.instance().getClient().effectRenderer.addEffect(fx);
 	}
 }

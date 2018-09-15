@@ -2,6 +2,7 @@ package growthcraft.core.shared.client.render;
 
 import javax.annotation.Nonnull;
 
+import growthcraft.cellar.client.utils.FluidRenderUtils;
 import growthcraft.core.shared.client.render.utils.RenderUtil;
 import growthcraft.core.shared.fluids.IFluidTanks;
 import growthcraft.core.shared.utils.BBox;
@@ -22,33 +23,13 @@ public class TileFluidTanksSpecialRenderer<T extends TileEntity & IFluidTanks> e
 	}
 	
 	public void renderMaxFluid(@Nonnull T te, double x, double y, double z) {
-		// NOTE: Synch with FluidRenderUtils.getActualFluidBBoxForMax()
-		// TODO: Refactorize me later!
-		
-		int slotToRender = -1;
-		double fluidHeight = -1.0;
-		int numTanks = te.getTankCount();
-		for( int i = 0; i < numTanks; i ++ ) {
-			if( !te.isFluidTankFilled(i) )
-				continue;
-			float f = (float)te.getFluidAmount(i) / (float)te.getFluidTank(i).getCapacity();
-			if( fluidHeight < f ) {
-				slotToRender = i;
-				fluidHeight = f;
-			}
+		FluidRenderUtils.RenderedFluid rf = FluidRenderUtils.getActualFluidBBoxForMax(fluidBBox, te);
+		if( !rf.isNone() ) {
+			BBox renderedBBox = rf.getFluidBBox();
+			RenderUtil.renderFluidCuboid(rf.getFluidStack(), te.getPos(), x, y, z,
+					renderedBBox.x0(), renderedBBox.y0(), renderedBBox.z0(),
+					renderedBBox.x1(), renderedBBox.y1(), renderedBBox.z1());
 		}
-		
-		fluidHeight *= fluidBBox.h();
-		fluidHeight = roundToPixel(fluidHeight);
-		
-		if( slotToRender == -1 || fluidHeight <= 0 )
-			return;
-		
-		FluidStack fluidStack = te.getFluidStack(slotToRender);
-		
-		RenderUtil.renderFluidCuboid(fluidStack, te.getPos(), x, y, z,
-									 fluidBBox.x0(), fluidBBox.y0(), fluidBBox.z0(),
-									 fluidBBox.x1(), fluidBBox.y0()+fluidHeight, fluidBBox.z1());
 	}
 	
 	public int getDefaultTotalCapacity(@Nonnull T te) {

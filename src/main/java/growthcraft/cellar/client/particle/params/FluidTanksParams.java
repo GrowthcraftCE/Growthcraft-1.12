@@ -1,4 +1,4 @@
-package growthcraft.core.shared.client.particle.params;
+package growthcraft.cellar.client.particle.params;
 
 import growthcraft.core.shared.fluids.IFluidTanks;
 import growthcraft.core.shared.utils.BBox;
