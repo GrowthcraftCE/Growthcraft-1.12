@@ -3,9 +3,12 @@ package growthcraft.cellar.client.particle;
 import growthcraft.cellar.client.particle.params.FluidTanksParams;
 import growthcraft.cellar.client.utils.FluidRenderUtils;
 import growthcraft.core.shared.utils.BBox;
+import growthcraft.core.shared.utils.ColorUtils;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -20,10 +23,23 @@ public class ParticleKettleBubble extends Particle {
     							FluidTanksParams params)
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
-//        params.getTanks().getFluid(0);
+        
+//      params.getTanks().getFluid(0);
         this.particleRed = 1.0F;
         this.particleGreen = 1.0F;
         this.particleBlue = 1.0F;
+
+        FluidStack stack = FluidRenderUtils.getActualFluidBBoxForMax(params.getFluidBBox(), params.getTanks()).getFluidStack();
+        if( stack != null ) {
+        	Fluid fluid = stack.getFluid();
+        	if( fluid != null ) {
+        		float argb[] = ColorUtils.getARGB(fluid.getColor());
+                this.particleRed = argb[1];
+                this.particleGreen = argb[2];
+                this.particleBlue = argb[3];
+        	}
+        }        
+        
         this.setParticleTextureIndex(32);
         this.setSize(0.02F, 0.02F);
         this.particleScale *= this.rand.nextFloat() * 0.3F + 0.2F;

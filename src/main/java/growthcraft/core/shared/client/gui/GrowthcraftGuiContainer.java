@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import growthcraft.core.shared.client.gui.widget.WidgetManager;
 import growthcraft.core.shared.fluids.UnitFormatter;
+import growthcraft.core.shared.utils.ColorUtils;
 import growthcraft.core.shared.utils.Rectangle;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -130,10 +131,11 @@ public abstract class GrowthcraftGuiContainer<C extends Container, T extends Til
 				try {
 		            mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-		            final float r = (float)(color >> 16 & 255) / 255.0F;
-					final float g = (float)(color >> 8 & 255) / 255.0F;
-					final float b = (float)(color & 255) / 255.0F;
-					GL11.glColor4f(r, g, b, 1.0f);
+		            final float argb[] = ColorUtils.getARGB(color);
+//		            final float r = (float)(color >> 16 & 255) / 255.0F;
+//					final float g = (float)(color >> 8 & 255) / 255.0F;
+//					final float b = (float)(color & 255) / 255.0F;
+					GL11.glColor4f(argb[1], argb[2], argb[3], 1.0f);
 		            drawTexturedModalRect(x + guiLeft, y + guiTop + (height - amount), fluidTexture, width, amount);
 					GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 				}
