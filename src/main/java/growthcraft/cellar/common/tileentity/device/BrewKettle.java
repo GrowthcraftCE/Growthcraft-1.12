@@ -19,7 +19,7 @@ import net.minecraftforge.fluids.FluidStack;
 
 public class BrewKettle extends DeviceBase
 {
-	// TODO: Create same recipe refresh mechanism as for barrels. Is more performant, if recipe check is avoided on each TileEntity update.
+	// TODO: Create same recipe caching mechanism as for barrels. Is more performant, if recipe check is avoided on each TileEntity update.
 	
 	private float grain;
 	private double time;

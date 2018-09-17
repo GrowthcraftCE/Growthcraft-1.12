@@ -187,7 +187,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 				fermentBarrel.setTime(v);
 				break;
 			case TIME_MAX:
-				fermentBarrel.setTimeMaxDefault(v);
+				fermentBarrel.setTimeMax(v);
 				break;
 			default:
 				// should warn about invalid Data ID

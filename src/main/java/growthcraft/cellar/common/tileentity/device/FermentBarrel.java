@@ -23,7 +23,6 @@ public class FermentBarrel extends DeviceBase {
 
 	protected int time;
 	private boolean recheckRecipe = true;
-//	private boolean lidOn = true;
 	private IFermentationRecipe activeRecipe;
 	
 	private DeviceInventorySlot fermentSlot;
@@ -104,26 +103,11 @@ public class FermentBarrel extends DeviceBase {
 
 	public int getTimeMax()
 	{
-		// if this is the server, just return the recipe time
-		// clients will have their timemax synced from the server in the gui
-		if (!this.getTileEntity().getWorld().isRemote)
-		{
-			// TODO: Shouldn't be called here set timemax according to recipe in update()
-			final IFermentationRecipe result = getWorkingRecipe();
-			if (result != null)
-			{
-				return result.getTime();
-			}
-		}
 		return this.timemax;
 	}
 	
-	public void setTimeMaxDefault(int timeMax) {
+	public void setTimeMax(int timeMax) {
 		this.timemax = timeMax;
-	}
-	
-	public int getTimeMaxDefault() {
-		return this.timemax;
 	}
 
 	private boolean canFerment()
@@ -181,6 +165,10 @@ public class FermentBarrel extends DeviceBase {
 			this.recheckRecipe = false;
 			refreshRecipe();
 		}
+		
+		final IFermentationRecipe recipe = getWorkingRecipe();
+		if (recipe != null)
+			this.timemax = recipe.getTime();
 
 		if (canFerment())
 		{
