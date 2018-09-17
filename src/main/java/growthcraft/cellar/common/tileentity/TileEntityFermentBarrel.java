@@ -6,6 +6,7 @@ import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
+import growthcraft.cellar.common.tileentity.device.FermentBarrel;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.FluidTest;
@@ -30,7 +31,7 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityFermentBarrel extends TileEntityCellarDevice implements ITickable, ITileProgressiveDevice, INBTItemSerializable
+public class TileEntityFermentBarrel extends TileEntityCellarDevice implements IInventory, ITickable, ITileProgressiveDevice, INBTItemSerializable
 {
 	public static enum FermentBarrelDataID
 	{
@@ -53,14 +54,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 
 	// Constants
 	private static final int[] accessableSlotIds = new int[] {0};
-
-	// Other Vars.
-	protected int time;
-	private int timemax = GrowthcraftCellarConfig.fermentTime;
-	private boolean shouldUseCachedRecipe = GrowthcraftCellarConfig.fermentBarrelUseCachedRecipe;
-	private boolean recheckRecipe = true;
-	private boolean lidOn = true;
-	private IFermentationRecipe activeRecipe;
+	private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0, 0);
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -92,132 +86,36 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		return new ContainerFermentBarrel(playerInventory, this);
 	}
 
-	protected void markForRecipeRecheck()
-	{
-		this.recheckRecipe = true;
+	public int getTime() {
+		return fermentBarrel.getTime();
 	}
-
-	/**
-	 * @return time was reset, false otherwise
-	 */
-	protected boolean resetTime()
-	{
-		if (time != 0)
-		{
-			this.time = 0;
-			return true;
-		}
-		return false;
-	}
-
-	private IFermentationRecipe loadRecipe()
-	{
-		return CellarRegistry.instance().fermenting().findRecipe(GrowthcraftFluidUtils.removeStackTags(getFluidStack(0)), getStackInSlot(0));
-	}
-
-	private IFermentationRecipe refreshRecipe()
-	{
-		final IFermentationRecipe recipe = loadRecipe();
-		if (recipe != null && recipe != activeRecipe)
-		{
-			if (activeRecipe != null)
-			{
-				resetTime();
-			}
-			this.activeRecipe = recipe;
-			markDirty();
-		}
-		else
-		{
-			if (activeRecipe != null)
-			{
-				this.activeRecipe = null;
-				resetTime();
-				markDirty();
-			}
-		}
-		return activeRecipe;
-	}
-
-	private IFermentationRecipe getWorkingRecipe()
-	{
-		if (shouldUseCachedRecipe)
-		{
-			if (activeRecipe == null) refreshRecipe();
-			return activeRecipe;
-		}
-		return loadRecipe();
-	}
-
-	public int getTime()
-	{
-		return this.time;
-	}
-
-	public int getTimeMax()
-	{
-		// if this is the server, just return the recipe time
-		// clients will have their timemax synced from the server in the gui
-		if (!world.isRemote)
-		{
-			final IFermentationRecipe result = getWorkingRecipe();
-			if (result != null)
-			{
-				return result.getTime();
-			}
-		}
-		return this.timemax;
-	}
-
-	private boolean canFerment()
-	{
-		if (getStackInSlot(0) == null) return false;
-		if (isFluidTankEmpty(0)) return false;
-		return getWorkingRecipe() != null;
-	}
-
-	public void fermentItem()
-	{
-		final ItemStack fermentItem = getStackInSlot(0);
-		if (fermentItem != null)
-		{
-			final IFermentationRecipe recipe = getWorkingRecipe();
-			if (recipe != null)
-			{
-				final FluidStack outputFluidStack = recipe.getOutputFluidStack();
-				if (outputFluidStack != null)
-				{
-					getFluidTank(0).setFluid(GrowthcraftFluidUtils.exchangeFluid(getFluidStack(0), outputFluidStack.getFluid()));
-				}
-				final IMultiItemStacks fermenter = recipe.getFermentingItemStack();
-				if (fermenter != null && !fermenter.isEmpty())
-				{
-					decrStackSize(0, fermenter.getStackSize());
-				}
-			}
-		}
+	
+	public int getTimeMax() {
+		return fermentBarrel.getTimeMax();
 	}
 
 	@Override
 	public float getDeviceProgress()
 	{
-		final int tmx = getTimeMax();
-		if (tmx > 0)
-		{
-			return (float)time / (float)tmx;
-		}
-		return 0.0f;
+		return fermentBarrel.getProgress();
+//		final int tmx = getTimeMax();
+//		if (tmx > 0)
+//		{
+//			return (float)time / (float)tmx;
+//		}
+//		return 0.0f;
 	}
 
 	@Override
 	public int getDeviceProgressScaled(int scale)
 	{
-		final int tmx = getTimeMax();
-		if (tmx > 0)
-		{
-			return this.time * scale / tmx;
-		}
-		return 0;
+		return fermentBarrel.getProgressScaled(scale);
+//		final int tmx = getTimeMax();
+//		if (tmx > 0)
+//		{
+//			return this.time * scale / tmx;
+//		}
+//		return 0;
 	}
 
 	@Override
@@ -225,31 +123,32 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	{
 		if (!world.isRemote)
 		{
-			if (recheckRecipe)
-			{
-				this.recheckRecipe = false;
-				refreshRecipe();
-			}
-
-			if (canFerment())
-			{
-				this.time++;
-
-				if (time >= getTimeMax())
-				{
-					resetTime();
-					fermentItem();
-					markDirty();
-				}
-			}
-			else
-			{
-				if (time != 0)
-				{
-					resetTime();
-					markDirty();
-				}
-			}
+			fermentBarrel.update();
+//			if (recheckRecipe)
+//			{
+//				this.recheckRecipe = false;
+//				refreshRecipe();
+//			}
+//
+//			if (canFerment())
+//			{
+//				this.time++;
+//
+//				if (time >= getTimeMax())
+//				{
+//					resetTime();
+//					fermentItem();
+//					markDirty();
+//				}
+//			}
+//			else
+//			{
+//				if (time != 0)
+//				{
+//					resetTime();
+//					markDirty();
+//				}
+//			}
 		}
 	}
 
@@ -289,45 +188,47 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		}
 	}
 
-	private void readFermentTimeFromNBT(NBTTagCompound nbt)
-	{
-		this.time = NBTHelper.getInteger(nbt, "time");
-	}
+//	private void readFermentTimeFromNBT(NBTTagCompound nbt)
+//	{
+//		this.time = NBTHelper.getInteger(nbt, "time");
+//	}
+	
 
 	@Override
 	public void readFromNBTForItem(NBTTagCompound nbt)
 	{
 		super.readFromNBTForItem(nbt);
-		readFermentTimeFromNBT(nbt);
-		if (nbt.hasKey("lid_on"))
-		{
-			this.lidOn = nbt.getBoolean("lid_on");
-		}
+		fermentBarrel.readFromNBT(nbt, "ferment_barrel");
+		
+//		if (nbt.hasKey("lid_on"))
+//		{
+//			this.lidOn = nbt.getBoolean("lid_on");
+//		}
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
 	public void readFromNBT_FermentBarrel(NBTTagCompound nbt)
 	{
-		readFermentTimeFromNBT(nbt);
+		fermentBarrel.readFromNBT(nbt, "ferment_barrel");
 	}
 
-	private void writeFermentTimeToNBT(NBTTagCompound nbt)
-	{
-		nbt.setInteger("time", time);
-	}
+//	private void writeFermentTimeToNBT(NBTTagCompound nbt)
+//	{
+//		nbt.setInteger("time", fermentBarrel.getTime());
+//	}
 
 	@Override
 	public void writeToNBTForItem(NBTTagCompound nbt)
 	{
 		super.writeToNBTForItem(nbt);
-		writeFermentTimeToNBT(nbt);
-		nbt.setBoolean("lid_on", lidOn);
+		fermentBarrel.writeToNBT(nbt, "ferment_barrel");
+//		nbt.setBoolean("lid_on", lidOn);
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
 	public void writeToNBT_FermentBarrel(NBTTagCompound nbt)
 	{
-		writeFermentTimeToNBT(nbt);
+		fermentBarrel.writeToNBT(nbt, "ferment_barrel");
 	}
 
 	@Override
@@ -337,10 +238,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		switch (FermentBarrelDataID.getByaOrdinal(id))
 		{
 			case TIME:
-				this.time = v;
+				fermentBarrel.setTime(v);
 				break;
 			case TIME_MAX:
-				this.timemax = v;
+				fermentBarrel.setTimeMaxDefault(v);
 				break;
 			default:
 				// should warn about invalid Data ID
@@ -352,25 +253,25 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	public void sendGUINetworkData(Container container, IContainerListener iCrafting)
 	{
 		super.sendGUINetworkData(container, iCrafting);
-		iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME.ordinal(), time);
-		iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME_MAX.ordinal(), getTimeMax());
+		iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME.ordinal(), fermentBarrel.getTime());
+		iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME_MAX.ordinal(), fermentBarrel.getTimeMax());	// Not fermentBarrel.getTimeMaxDefault() !
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
 	public boolean readFromStream_FermentBarrel(ByteBuf stream) throws IOException
 	{
-		this.time = stream.readInt();
-		this.timemax = stream.readInt();
+		fermentBarrel.readFromStream(stream);
 		return false;
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
 	public boolean writeToStream_FermentBarrel(ByteBuf stream) throws IOException
 	{
-		stream.writeInt(time);
-		stream.writeInt(getTimeMax());
+		fermentBarrel.writeToStream(stream);
 		return false;
 	}
+	
+	// Fluid Stuff
 
 	@Override
 	public boolean canFill(EnumFacing from, Fluid fluid)
@@ -412,13 +313,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	protected void markFluidDirty()
 	{
 		super.markFluidDirty();
-		markForRecipeRecheck();
+		fermentBarrel.markForRecipeRecheck();
 	}
 
 	@Override
 	public void onInventoryChanged(IInventory inv, int index)
 	{
 		super.onInventoryChanged(inv, index);
-		markForRecipeRecheck();
+		fermentBarrel.markForRecipeRecheck();
 	}
 }
