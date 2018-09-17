@@ -98,24 +98,12 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	public float getDeviceProgress()
 	{
 		return fermentBarrel.getProgress();
-//		final int tmx = getTimeMax();
-//		if (tmx > 0)
-//		{
-//			return (float)time / (float)tmx;
-//		}
-//		return 0.0f;
 	}
 
 	@Override
 	public int getDeviceProgressScaled(int scale)
 	{
 		return fermentBarrel.getProgressScaled(scale);
-//		final int tmx = getTimeMax();
-//		if (tmx > 0)
-//		{
-//			return this.time * scale / tmx;
-//		}
-//		return 0;
 	}
 
 	@Override
@@ -124,31 +112,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		if (!world.isRemote)
 		{
 			fermentBarrel.update();
-//			if (recheckRecipe)
-//			{
-//				this.recheckRecipe = false;
-//				refreshRecipe();
-//			}
-//
-//			if (canFerment())
-//			{
-//				this.time++;
-//
-//				if (time >= getTimeMax())
-//				{
-//					resetTime();
-//					fermentItem();
-//					markDirty();
-//				}
-//			}
-//			else
-//			{
-//				if (time != 0)
-//				{
-//					resetTime();
-//					markDirty();
-//				}
-//			}
 		}
 	}
 
@@ -188,22 +151,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		}
 	}
 
-//	private void readFermentTimeFromNBT(NBTTagCompound nbt)
-//	{
-//		this.time = NBTHelper.getInteger(nbt, "time");
-//	}
-	
-
 	@Override
 	public void readFromNBTForItem(NBTTagCompound nbt)
 	{
 		super.readFromNBTForItem(nbt);
 		fermentBarrel.readFromNBT(nbt, "ferment_barrel");
-		
-//		if (nbt.hasKey("lid_on"))
-//		{
-//			this.lidOn = nbt.getBoolean("lid_on");
-//		}
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
@@ -212,17 +164,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 		fermentBarrel.readFromNBT(nbt, "ferment_barrel");
 	}
 
-//	private void writeFermentTimeToNBT(NBTTagCompound nbt)
-//	{
-//		nbt.setInteger("time", fermentBarrel.getTime());
-//	}
-
 	@Override
 	public void writeToNBTForItem(NBTTagCompound nbt)
 	{
 		super.writeToNBTForItem(nbt);
 		fermentBarrel.writeToNBT(nbt, "ferment_barrel");
-//		nbt.setBoolean("lid_on", lidOn);
 	}
 
 	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)

@@ -214,14 +214,6 @@ public class FermentBarrel extends DeviceBase {
 		// NOTE: Initialize newer fields here if any!
 	}
 	
-//	public void readFromNBTForItem(NBTTagCompound nbt) {
-//		setTime(NBTHelper.getInteger(nbt, "time"));
-//	}
-	
-//	public void writeToNBTForItem(NBTTagCompound nbt) {
-//		nbt.setInteger("time", getTime());
-//	}
-	
 	@Override
 	public void readFromNBT(NBTTagCompound data) {
 		this.time = NBTHelper.getInteger(data, "time");
