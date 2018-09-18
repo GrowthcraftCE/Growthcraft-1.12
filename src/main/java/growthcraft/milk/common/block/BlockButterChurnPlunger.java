@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.GrowthcraftOrientedBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.common.tileentity.TileEntityButterChurnPlunger;
@@ -33,7 +33,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockButterChurnPlunger extends GrowthcraftOrientedBlockContainer {
+public class BlockButterChurnPlunger extends GrowthcraftRotatableBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX_UP = new AxisAlignedBB(
             0.0625 * 7, -0.0625 * 2, 0.0625 * 7,
             0.0625 * 9, 0.0625 * 11, 0.0625 * 9);

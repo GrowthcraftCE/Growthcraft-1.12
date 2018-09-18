@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.GrowthcraftOrientedBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.core.shared.block.BlockUtils;
 import net.minecraft.block.material.Material;

@@ -14,16 +14,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class GrowthcraftOrientedBlockContainer extends GrowthcraftBlockContainer implements IRotatableBlock {
+public class GrowthcraftRotatableBlockContainer extends GrowthcraftBlockContainer implements IRotatableBlock {
 
 	public final static PropertyEnum<EnumFacing> TYPE_ROTATION = PropertyEnum.create("rotation", EnumFacing.class);
 	
-	GrowthcraftOrientedBlockContainer(Material material, MapColor mapColor) {
+	GrowthcraftRotatableBlockContainer(Material material, MapColor mapColor) {
 		super(material, mapColor);
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_ROTATION, EnumFacing.NORTH));
 	}
 
-	public GrowthcraftOrientedBlockContainer(Material material) {
+	public GrowthcraftRotatableBlockContainer(Material material) {
 		super(material);
 		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_ROTATION, EnumFacing.NORTH));
 	}

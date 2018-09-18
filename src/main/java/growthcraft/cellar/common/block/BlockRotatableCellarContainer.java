@@ -3,7 +3,7 @@ package growthcraft.cellar.common.block;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.BlockUtils;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.GrowthcraftOrientedBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,9 +14,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockOrientedCellarContainer extends GrowthcraftOrientedBlockContainer {
+public abstract class BlockRotatableCellarContainer extends GrowthcraftRotatableBlockContainer {
 
-	public BlockOrientedCellarContainer(Material material) {
+	public BlockRotatableCellarContainer(Material material) {
 		super(material);
 	}
 	

@@ -9,7 +9,7 @@ import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.shared.Reference;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.GrowthcraftOrientedBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.core.shared.block.BlockUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -29,7 +29,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBeeBox extends GrowthcraftOrientedBlockContainer {
+public class BlockBeeBox extends GrowthcraftRotatableBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
