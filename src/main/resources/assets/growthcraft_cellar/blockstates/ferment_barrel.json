@@ -1,53 +1,124 @@
 {
-  "forge_marker": 1,
-  "variants": {
-    "hastap=false,rotation=up" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_none",
-      "x": 90
-    },
-    "hastap=false,rotation=down" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_none",
-      "x": 270
-    },
-    "hastap=false,rotation=east" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_none",
-      "y": 90
-    },
-    "hastap=false,rotation=west" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_none",
-      "y": 270
-    },
-    "hastap=false,rotation=south" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_none",
-      "y": 180
-    },
-    "hastap=false,rotation=north" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_none",
-      "x": 0
-    },
-    "hastap=true,rotation=up" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_side",
-      "x": 90
-    },
-    "hastap=true,rotation=down" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_side",
-      "x": 270
-    },
-    "hastap=true,rotation=east" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_top",
-      "y": 90
-    },
-    "hastap=true,rotation=west" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_top",
-      "y": 270
-    },
-    "hastap=true,rotation=south" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_top",
-      "y": 180
-    },
-    "hastap=true,rotation=north" : {
-      "model": "growthcraft_cellar:ferment_barrel_tap_top",
-      "x": 0
+  "multipart": [ {
+      "when": {
+        "brotation" : "hor_west|hor_east"
+      },
+      "apply" : {
+        "model" : "growthcraft_cellar:ferment_barrel",
+        "y" : 90
+      }
+    }, {
+      "when": {
+        "brotation" : "hor_north|hor_south"
+      },
+      "apply" : {
+        "model" : "growthcraft_cellar:ferment_barrel",
+        "y" : 0
+      }
+    }, {
+      "when": {
+        "brotation" : "ver_east|ver_west|ver_north|ver_south"
+      },
+      "apply" : {
+        "model" : "growthcraft_cellar:ferment_barrel",
+        "x" : 90
+      }
+    }, {
+      "when": { 
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "hor_east"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_hor",
+        "y": 270
+      }
+    }, {
+      "when": { 
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "hor_west"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_hor",
+        "y": 90
+      }
+    }, {
+      "when": {
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "hor_south"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_hor",
+        "y": 0
+      }
+    }, {
+      "when": {
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "hor_north"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_hor",
+        "y": 180
+      }
+    }, {
+      "when": { 
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "ver_east"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_ver",
+        "y": 270
+      }
+    }, {
+      "when": { 
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "ver_west"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_ver",
+        "y": 90
+      }
+    }, {
+      "when": {
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "ver_south"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_ver",
+        "y": 0
+      }
+    }, {
+      "when": {
+        "OR": [ {
+            "hastap" : "true",
+            "brotation" : "ver_north"
+          }
+        ]
+      },
+      "apply" : {
+        "model": "growthcraft_cellar:ferment_barrel_tap_ver",
+        "y": 180
+      }
     }
-  }
+  ]
 }

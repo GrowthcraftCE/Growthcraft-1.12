@@ -105,8 +105,6 @@ public class BlockFermentBarrel extends BlockCellarContainer implements IRotatab
 		{
 			if( te.hasTap() )
 				return state.withProperty(TYPE_TAP, true);
-//			else
-//				return state.withProperty(TYPE_TAP, false);
 		}
 		
 		return state;
