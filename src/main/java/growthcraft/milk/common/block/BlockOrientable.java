@@ -54,6 +54,19 @@ public class BlockOrientable extends GrowthcraftBlockContainer implements IRotat
 		world.setBlockState(pos, state.withProperty(TYPE_ORIENT, orient), BlockFlags.UPDATE_AND_SYNC);		
 	}
 	
+	@Override
+	public boolean rotateBlock(World world, BlockPos pos, EnumFacing side)
+	{
+		if (isRotatable(world, pos, side))
+		{
+			IBlockState state = world.getBlockState(pos);
+			doRotateBlock(world, pos, state, side);
+			markBlockForUpdate(world, pos);
+			return true;
+		}
+		return false;
+	}
+	
 	protected void setDefaultDirection(World world, BlockPos pos, IBlockState state)
 	{
 		if (!world.isRemote)
