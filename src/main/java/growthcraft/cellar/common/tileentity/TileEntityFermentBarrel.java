@@ -3,6 +3,7 @@ package growthcraft.cellar.common.tileentity;
 import java.io.IOException;
 
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.common.inventory.ContainerFermentBarrel;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
@@ -54,7 +55,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 
 	// Constants
 	private static final int[] accessableSlotIds = new int[] {0};
-	private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0, 0);
+	private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0, 1, 0);
 
 	@Override
 	protected FluidTank[] createTanks()
@@ -128,7 +129,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	}
 
 	@Override
-	public boolean canInsertItem(int slot, ItemStack stack, EnumFacing side)	{
+	public boolean canInsertItem(int slot, ItemStack stack, EnumFacing side) {
 		return InventoryProcessor.instance().canInsertItem(this, stack, slot);
 	}
 
@@ -267,5 +268,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	{
 		super.onInventoryChanged(inv, index);
 		fermentBarrel.markForRecipeRecheck();
+		if( index == 1 ) {
+			// Changing tap has a visual feedback 
+			this.markDirtyAndUpdate();
+		}
+	}
+
+	public boolean hasTap() {
+		return GrowthcraftCellarItems.barrelTap.equals(getStackInSlot(1).getItem());
 	}
 }

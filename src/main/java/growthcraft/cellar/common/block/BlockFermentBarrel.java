@@ -2,10 +2,14 @@ package growthcraft.cellar.common.block;
 
 import java.util.Random;
 
+import javax.annotation.Nonnull;
+
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -15,6 +19,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockFermentBarrel extends BlockOrientedCellarContainer {
+	
+	private static final PropertyBool TYPE_TAP = PropertyBool.create("hastap");
 
 	public BlockFermentBarrel(String unlocalizedName) {
 		super(Material.WOOD);
@@ -66,6 +72,32 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 	public int damageDropped(IBlockState state) {
 	    return 0;
 	}
+	
+	/************
+	 * STATES
+	 ************/
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, TYPE_TAP, TYPE_ROTATION);
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+		final TileEntityFermentBarrel te = getTileEntity(worldIn, pos);
+		if (te != null)
+		{
+			if( te.hasTap() )
+				return state.withProperty(TYPE_TAP, true);
+			else
+				return state.withProperty(TYPE_TAP, false);
+		}
+		
+		return state;
+    }
 	
 	/************
 	 * RENDERS

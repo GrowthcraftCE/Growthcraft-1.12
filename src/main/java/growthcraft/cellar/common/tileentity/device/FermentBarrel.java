@@ -26,11 +26,13 @@ public class FermentBarrel extends DeviceBase {
 	private IFermentationRecipe activeRecipe;
 	
 	private DeviceInventorySlot fermentSlot;
+	private DeviceInventorySlot tapSlot;
 	private DeviceFluidSlot fluidSlot;
 
-	public FermentBarrel(TileEntityFermentBarrel te, int fermentSlotId, int fluidSlotId) {
+	public FermentBarrel(TileEntityFermentBarrel te, int fermentSlotId, int tapSlotId, int fluidSlotId) {
 		super(te);
 		this.fermentSlot = new DeviceInventorySlot(te, fermentSlotId);
+		this.tapSlot = new DeviceInventorySlot(te, tapSlotId);
 		this.fluidSlot = new DeviceFluidSlot(te, fluidSlotId);
 	}
 
