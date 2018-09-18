@@ -72,7 +72,6 @@ public class FermentingRegistry
 
 	public boolean canFerment(@Nullable FluidStack fluid)
 	{
-		final List<IFermentationRecipe> result = new ArrayList<IFermentationRecipe>();
 		if (fluid != null)
 		{
 			for (IFermentationRecipe recipe : recipes)
@@ -80,6 +79,18 @@ public class FermentingRegistry
 				if (recipe.matchesIngredient(fluid))
 					return true;
 			}
+		}
+		return false;
+	}
+	
+	public boolean isItemFermentationIngredient(@Nullable ItemStack itemstack)
+	{
+		if (itemstack == null) return false;
+
+		for (IFermentationRecipe recipe : recipes)
+		{
+			if (recipe.isItemIngredient(itemstack))
+				return true;
 		}
 		return false;
 	}

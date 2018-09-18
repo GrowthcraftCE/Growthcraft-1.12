@@ -44,7 +44,8 @@ Improvements:
 -----------------
 TODO: Heat blocks to react on meta and supporting neighborChanged events for tiles. For heat blocks which can be turned on/off.
 TODO: Only accepted items are consumed, thrown into brewing kettle 
-TODO: isItemValid for culture jar and fermenting barrel containers
+TODO: isItemValid for culture jar container
+DONE: isItemValid for fermenting barrel container
 DONE: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
 DONE: Fruit Press fluid render.
 DONE: 1000 is dividable by Booze bottle capacity to avoid fluid residues of 1 when emtying a container. 

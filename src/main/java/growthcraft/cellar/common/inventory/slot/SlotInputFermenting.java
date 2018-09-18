@@ -1,5 +1,7 @@
 package growthcraft.cellar.common.inventory.slot;
 
+import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.inventory.slot.SlotInput;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -16,6 +18,6 @@ public class SlotInputFermenting extends SlotInput
 	{
 		if( SlotInputBarrelTap.isValidBarrelTap(stack) )
 			return false;
-		return true;
+		return CellarRegistry.instance().fermenting().isItemFermentationIngredient(stack);
 	}
 }
