@@ -14,6 +14,8 @@ public class SlotInputFermenting extends SlotInput
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
+		if( SlotInputBarrelTap.isValidBarrelTap(stack) )
+			return false;
 		return true;
 	}
 }

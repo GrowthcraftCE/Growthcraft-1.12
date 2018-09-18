@@ -14,6 +14,10 @@ public class SlotInputBarrelTap extends SlotInput {
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
+		return isValidBarrelTap(stack);
+	}
+	
+	public static boolean isValidBarrelTap(ItemStack stack) {
 		return GrowthcraftCellarItems.barrelTap.getItem().equals(stack.getItem());
 	}
 }
