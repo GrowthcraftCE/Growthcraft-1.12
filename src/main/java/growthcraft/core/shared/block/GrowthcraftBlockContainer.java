@@ -46,10 +46,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase implements IDroppableBlock, IRotatableBlock, IWrenchable, ITileEntityProvider
+public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase implements IDroppableBlock, IWrenchable, ITileEntityProvider
 {
-	public final static PropertyEnum<EnumFacing> TYPE_ROTATION = PropertyEnum.create("rotation", EnumFacing.class);
-	
 	protected Random rand = new Random();
 	protected Class<? extends TileEntity> tileEntityType;
 
@@ -75,114 +73,15 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		return te != null ? te.receiveClientEvent(id, param) : false;
 	}
 
-	@Nonnull
-	@Override
-	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, TYPE_ROTATION);
-	}
-
-	@SuppressWarnings("deprecation")
-	@Nonnull
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-	    return this.getDefaultState().withProperty(TYPE_ROTATION, EnumFacing.getFront(meta));
-	}
-
-	@Override
-	public int getMetaFromState(IBlockState state) {
-	    return state.getValue(TYPE_ROTATION).getIndex();
-	}
-
 	@Override
 	public int damageDropped(IBlockState state) {
+		// TODO: Change it! Depends on how item handles the integer number
 	    return getMetaFromState(state);
 	}
 	
 	protected void setTileEntityType(Class<? extends TileEntity> klass)
 	{
 		this.tileEntityType = klass;
-	}
-
-	/* IRotatableBlock */
-	@Override
-	public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
-		return false;
-	}
-
-	public void doRotateBlock(World world, BlockPos pos, IBlockState state, EnumFacing side)
-	{
-		final EnumFacing current = state.getValue(TYPE_ROTATION);
-		EnumFacing newDirection = current;
-		if (current == side)
-		{
-			switch (current)
-			{
-				case UP:
-					newDirection = EnumFacing.NORTH;
-					break;
-				case DOWN:
-					newDirection = EnumFacing.SOUTH;
-					break;
-				case NORTH:
-				case EAST:
-					newDirection = EnumFacing.UP;
-					break;
-				case SOUTH:
-				case WEST:
-					newDirection = EnumFacing.DOWN;
-					break;
-				default:
-					// some invalid state
-					break;
-			}
-		}
-		else
-		{
-			switch (current)
-			{
-				case UP:
-					newDirection = EnumFacing.DOWN;
-					break;
-				case DOWN:
-					newDirection = EnumFacing.UP;
-					break;
-				case WEST:
-					newDirection = EnumFacing.SOUTH;
-					break;
-				case EAST:
-					newDirection = EnumFacing.NORTH;
-					break;
-				case NORTH:
-					newDirection = EnumFacing.WEST;
-					break;
-				case SOUTH:
-					newDirection = EnumFacing.EAST;
-					break;
-				default:
-					// yet another invalid state
-					break;
-			}
-		}
-		if (newDirection != current)
-		{
-			IBlockState newState = state.withProperty(TYPE_ROTATION, newDirection);
-			world.setBlockState(pos, newState, BlockFlags.SYNC);
-//			world.setBlockMetadataWithNotify(pos, newDirection.ordinal(), BlockFlags.UPDATE_AND_SYNC);
-		}
-	}
-
-	@Override
-	public boolean rotateBlock(World world, BlockPos pos, EnumFacing side)
-	{
-		if (isRotatable(world, pos, side))
-		{
-			IBlockState state = world.getBlockState(pos);
-			doRotateBlock(world, pos, state, side);
-			markBlockForUpdate(world, pos);
-			return true;
-		}
-		return false;
 	}
 
 	protected void fellBlockFromWrench(World world, BlockPos pos)
@@ -232,25 +131,6 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		if (player == null) return false;
 		final ItemStack is = player.inventory.getCurrentItem();
 		return wrenchBlock(world, pos, player, is);
-	}
-
-	protected void placeBlockByEntityDirection(World world, BlockPos pos, EntityLivingBase entity, ItemStack stack)
-	{
-		if (isRotatable(world, pos, null))
-		{
-/*			final int l = MathHelper.floor((double)(entity.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
-			int meta = 2;
-
-			if (l == 0) meta = 1;
-			else if (l == 1) meta = 2;
-			else if (l == 2) meta = 0;
-			else if (l == 3) meta = 3;
-			world.setBlockMetadataWithNotify(pos, meta, BlockFlags.SYNC);*/
-			IBlockState state = world.getBlockState(pos);
-			IBlockState newState = state.withProperty(TYPE_ROTATION, EnumFacing.fromAngle(entity.rotationYaw) );
-			world.setBlockState(pos, newState, BlockFlags.SYNC);
-		}
 	}
 
 	protected void setupCustomDisplayName(World world, BlockPos pos, ItemStack stack)
@@ -558,13 +438,17 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
 		super.onBlockClicked(world, pos, player);
 	}
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
+	public final boolean grcOnBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (tryWrenchItem(playerIn, worldIn, pos)) return true;
 		if (handleIFluidHandler(worldIn, pos, playerIn, state)) return true;
 		if (handleOnUseItem(IItemOperable.Action.RIGHT, worldIn, pos, playerIn)) return true;
 		return false;
+	}
+	
+	@Override
+	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+	{
+		return grcOnBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
 	}
 
 	@SuppressWarnings("unchecked")

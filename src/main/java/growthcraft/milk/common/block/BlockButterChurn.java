@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftOrientedBlockContainer;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
@@ -27,7 +28,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockButterChurn extends GrowthcraftBlockContainer {
+public class BlockButterChurn extends GrowthcraftOrientedBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 2, 0.0625 * 0, 0.0625 * 2,
             0.0625 * 14, 0.0625 * 16, 0.0625 * 14);

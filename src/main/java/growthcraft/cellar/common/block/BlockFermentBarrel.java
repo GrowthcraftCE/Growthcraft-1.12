@@ -13,6 +13,7 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -27,6 +28,7 @@ public class BlockFermentBarrel extends BlockOrientedCellarContainer {
 		setTileEntityType(TileEntityFermentBarrel.class);
 		setHardness(2.5F);
 		setSoundType(SoundType.WOOD);
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_TAP, false).withProperty(TYPE_ROTATION, EnumFacing.NORTH));
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
 	}

@@ -131,7 +131,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 	}
 
 	private void updateOrientWithPress(World world, BlockPos pos, IBlockState state) {
-		EnumFacing facing = world.getBlockState(pos.down()).getValue(TYPE_ROTATION);
+		EnumFacing facing = world.getBlockState(pos.down()).getValue(BlockOrientedCellarContainer.TYPE_ROTATION);
 		Orient orient = Orient.fromFacing(facing);
 		world.setBlockState(pos, state.withProperty(TYPE_ORIENT, orient), BlockFlags.UPDATE_AND_SYNC);
 	}
