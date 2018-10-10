@@ -1,5 +1,7 @@
 package growthcraft.core.shared.block;
 
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.rice.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -7,16 +9,20 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTank;
 
-import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.Random;
 
 /**
  * BlockPaddyBase
@@ -33,81 +39,69 @@ import javax.annotation.Nonnull;
  */
 public class BlockPaddyBase extends GrowthcraftBlockBase {
 
-    // FluidTank to store the fluid that will hydrate the paddy.
-    private FluidTank fluidTank0;
-
-    public static final PropertyBool IS_FILLED = PropertyBool.create("is_filled");
+    public static final PropertyBool MOISTURE = PropertyBool.create("moisture");
+    public static final PropertyBool IS_RADIOACTIVE = PropertyBool.create("is_radioactive");
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
+
+    private Fluid fluidSource;
 
     public BlockPaddyBase(Material material) {
         super(material);
         this.setTickRandomly(true);
         this.setDefaultState(
             this.blockState.getBaseState()
-                    .withProperty(IS_FILLED, false)
+                    .withProperty(MOISTURE, false)
+                    .withProperty(IS_RADIOACTIVE, false)
                     .withProperty(NORTH, false)
                     .withProperty(EAST, false)
                     .withProperty(SOUTH, false)
                     .withProperty(WEST, false)
         );
 
-        // TODO: Add FluidTank capacity to User Config.
-        fluidTank0 = new FluidTank(1000);
     }
 
-    public boolean fillFluidTank(FluidStack fluidStack) {
-        if ( fluidTank0.canFillFluidType(fluidStack) ) {
-            fluidTank0.fill(fluidStack, true);
-            return true;
-        }
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isFullBlock(IBlockState state) {
+        return false;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isFullCube(IBlockState state) {
         return false;
     }
 
     @Override
+    public BlockRenderLayer getBlockLayer() {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
+
+    @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{ IS_FILLED, NORTH, EAST, SOUTH, WEST });
+        return new BlockStateContainer(this, new IProperty[]{ MOISTURE, IS_RADIOACTIVE, NORTH, EAST, SOUTH, WEST });
     }
 
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(IS_FILLED, this.isFilledWithFluid(worldIn, pos))
+        return state.withProperty(MOISTURE, state.getValue(MOISTURE))
+                .withProperty(MOISTURE, state.getValue(IS_RADIOACTIVE))
                 .withProperty(NORTH, canConnectPaddyTo(worldIn, pos, EnumFacing.NORTH))
                 .withProperty(EAST, canConnectPaddyTo(worldIn, pos, EnumFacing.EAST))
                 .withProperty(SOUTH, canConnectPaddyTo(worldIn, pos, EnumFacing.SOUTH))
                 .withProperty(WEST, canConnectPaddyTo(worldIn,pos,EnumFacing.WEST));
     }
 
-    /**
-     * Retrieve the fluid that is currently stored in the RicePaddy.
-     *
-     * @return
-     */
-    @Nonnull
-    public FluidStack getFluidStack() {
-        return this.fluidTank0.getFluid();
-    }
-
-    @Nonnull
-    public Fluid getFillingFluid() {
-        return this.fluidTank0.getFluid().getFluid();
-    }
-
     public int getMaxPaddyMeta(IBlockAccess world, int x, int y, int z) {
         return 0;
-    }
-
-    /**
-     * Determine if this block's fluid tank has a fluid in it.
-     *
-     * @param world
-     * @param pos
-     * @return
-     */
-    public boolean isFilledWithFluid(IBlockAccess world, BlockPos pos) {
-        return this.fluidTank0.getFluidAmount() > 0;
     }
 
     /**
@@ -157,4 +151,127 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
     public int getMetaFromState(IBlockState state) {
         return 0;
     }
+
+    /**
+     * Determine if the block above is a crop or not.
+     *
+     * @param worldIn
+     * @param pos
+     * @return
+     */
+    public boolean hasCrops(World worldIn, BlockPos pos) {
+        Block block = worldIn.getBlockState(pos.up()).getBlock();
+        return block instanceof IPlantable && this.canSustainPlant(worldIn.getBlockState(pos), worldIn, pos, EnumFacing.UP, (IPlantable)block);
+    }
+
+    /**
+     * On each tick update, we need to determine if we still have a fluid source.
+     *
+     * @param worldIn
+     * @param pos
+     * @param state
+     * @param rand
+     */
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        // Get the some current state values so that we do not have to recalculate some of them.
+        boolean isConnectedNorth = (boolean)state.getValue(NORTH);
+        boolean isConnectedEast = (boolean)state.getValue(EAST);
+        boolean isConnectedSouth = (boolean)state.getValue(SOUTH);
+        boolean isConnectedWest = (boolean)state.getValue(WEST);
+
+        if (this.hasRadioactiveSource(worldIn, pos)) {
+            worldIn.setBlockState(pos, state.withProperty(MOISTURE, true)
+                    .withProperty(IS_RADIOACTIVE, true)
+                    .withProperty(NORTH, isConnectedNorth)
+                    .withProperty(EAST, isConnectedEast)
+                    .withProperty(SOUTH, isConnectedSouth)
+                    .withProperty(WEST, isConnectedWest), 3
+            );
+        } else if ( this.hasFluidSource(worldIn, pos) ) {
+            worldIn.setBlockState(pos, state.withProperty(MOISTURE, true)
+                    .withProperty(IS_RADIOACTIVE, false)
+                    .withProperty(NORTH, isConnectedNorth)
+                    .withProperty(EAST, isConnectedEast)
+                    .withProperty(SOUTH, isConnectedSouth)
+                    .withProperty(WEST, isConnectedWest), 3
+            );
+        } else {
+            worldIn.setBlockState(pos, state.withProperty(MOISTURE, false)
+                    .withProperty(IS_RADIOACTIVE, false)
+                    .withProperty(NORTH, isConnectedNorth)
+                    .withProperty(EAST, isConnectedEast)
+                    .withProperty(SOUTH, isConnectedSouth)
+                    .withProperty(WEST, isConnectedWest), 3
+            );
+        }
+    }
+
+    /**
+     * Determine is this RicePaddy has a valid fluid source near by.
+     *
+     * @param worldIn
+     * @param pos
+     * @return
+     */
+    public boolean hasFluidSource(World worldIn, BlockPos pos) {
+        Iterator var3 = BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4)).iterator();
+
+        BlockPos.MutableBlockPos blockpos$mutableblockpos;
+        blockpos$mutableblockpos = (BlockPos.MutableBlockPos)var3.next();
+
+        boolean hasFluid = false;
+
+        while (var3.hasNext()) {
+            IBlockState state = worldIn.getBlockState(pos);
+
+            if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()) != null ) {
+                if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()).getName() == "water") {
+                    GrowthcraftLogger.getLogger(Reference.MODID).info("Found a water block!");
+                    this.fluidSource = FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock());
+                    hasFluid = true;
+                }
+            }
+            blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
+        }
+        return hasFluid;
+    }
+
+    public boolean hasRadioactiveSource(World worldIn, BlockPos pos) {
+        Iterator var3 = BlockPos.getAllInBoxMutable(pos.add(-4, 0, -4), pos.add(4, 1, 4)).iterator();
+
+        BlockPos.MutableBlockPos blockpos$mutableblockpos;
+        blockpos$mutableblockpos = (BlockPos.MutableBlockPos)var3.next();
+
+        boolean hasRadioactive = false;
+
+        while (var3.hasNext()) {
+            IBlockState state = worldIn.getBlockState(pos);
+
+            if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()) != null ) {
+                if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()).getName() == "yellorium") {
+                    GrowthcraftLogger.getLogger(Reference.MODID).info("Found a yellorium block!");
+                    this.fluidSource = FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock());
+                    hasRadioactive = true;
+                }
+            }
+            blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
+        }
+        return hasRadioactive;
+    }
+    /**
+     * Determine what is the fluid that this rice paddy is using as a source.
+     *
+     * @param worldIn World
+     * @param pos BlockPos to check for a fluid source.
+     * @return Source FluidStack that is hydrating this rice paddy.
+     */
+    @Nullable
+    public FluidStack getFluidSource(World worldIn, BlockPos pos) {
+        if ( hasFluidSource(worldIn, pos) ) {
+            return new FluidStack(fluidSource, 1000);
+        }
+        return null;
+    }
+
 }
