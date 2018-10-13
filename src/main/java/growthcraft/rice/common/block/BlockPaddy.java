@@ -26,49 +26,14 @@ public class BlockPaddy extends BlockPaddyBase {
     }
 
     @Override
-    public void fillWithRain(World worldIn, BlockPos pos) {
-        super.fillWithRain(worldIn, pos);
-    }
-
-    @Override
     public int quantityDropped(Random random) {
         return 1;
     }
 
-    /**
-     * Override the default onBlockActivation.
-     *
-     * @param worldIn
-     * @param pos
-     * @param state
-     * @param playerIn
-     * @param hand
-     * @param facing
-     * @param hitX
-     * @param hitY
-     * @param hitZ
-     * @return
-     */
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        /*
-        if( !worldIn.isRemote ) {
-            ItemStack itemStack = playerIn.getHeldItem(hand);
-            Item item = itemStack.getItem();
-            if(item == Items.WATER_BUCKET) {
-                if(this.fillFluidTank(FluidRegistry.getFluidStack("water", 1000))) {
-                    playerIn.getHeldItem(hand).shrink(1);
-                    playerIn.addItemStackToInventory(new ItemStack(Items.BUCKET, 1));
-                    worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(IS_FILLED, true));
-                    // TODO: make a splashing sound.
-                    return true;
-                }
+        // If player is holding itemRice
 
-            }
-        }
-        */
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
-
-
 }

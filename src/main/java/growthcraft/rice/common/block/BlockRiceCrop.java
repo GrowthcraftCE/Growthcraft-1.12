@@ -53,6 +53,7 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable, 
 
     @Override
     public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
+
         return false;
     }
 

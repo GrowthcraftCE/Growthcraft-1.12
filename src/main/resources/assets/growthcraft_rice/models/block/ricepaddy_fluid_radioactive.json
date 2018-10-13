@@ -1,13 +1,13 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
-    "0": "blocks/water_overlay",
+    "0": "growthcraft_rice:blocks/radioactive_overlay",
     "particle": "growthcraft_rice:blocks/radioactive_overlay"
   },
   "elements": [
     {
-      "from": [0.0001, 15.5, 0.0001],
-      "to": [16.0001, 15.5, 16.0001],
+      "from": [0, 15.1, 0],
+      "to": [16, 15.1, 16],
       "faces": {
         "north": {"uv": [0, 0, 16, 0.0001], "texture": "#missing"},
         "east": {"uv": [0, 0, 16, 0.0001], "texture": "#missing"},

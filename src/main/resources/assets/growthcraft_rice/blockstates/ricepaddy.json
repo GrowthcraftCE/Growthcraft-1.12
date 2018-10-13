@@ -20,11 +20,11 @@
       "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 270, "uvlock": false }
     },
     {
-      "when": { "is_radioactive": "true" },
+      "when": { "is_radioactive": "true", "moisture": "true" },
       "apply": { "model": "growthcraft_rice:ricepaddy_fluid_radioactive", "uvlock": false }
     },
     {
-      "when": { "moisture": "true" },
+      "when": { "is_radioactive": "false", "moisture": "true" },
       "apply": { "model": "growthcraft_rice:ricepaddy_fluid_water", "uvlock": false }
     }
   ]
