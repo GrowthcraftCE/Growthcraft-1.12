@@ -11,4 +11,5 @@ item.rice_cooked.name=Cooked Rice
 item.rice.name=Rice
 item.rice_ball.name=Onigiri
 
-
+tile.ricepaddy.name=Rice Paddy
+tile.ricecrop.name=Rice

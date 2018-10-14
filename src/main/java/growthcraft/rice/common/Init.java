@@ -61,15 +61,20 @@ public class Init {
     public static void registerBlocks(IForgeRegistry<Block> registry) {
         GrowthcraftRiceBlocks.ricePaddy.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftRiceBlocks.ricePaddy.registerBlock(registry);
+
+        GrowthcraftRiceBlocks.riceCrop.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftRiceBlocks.riceCrop.registerBlock(registry);
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
         GrowthcraftRiceBlocks.ricePaddy.registerBlockItem(registry);
+        GrowthcraftRiceBlocks.riceCrop.registerBlockItem(registry);
     }
 
     @SideOnly(Side.CLIENT)
     public static void registerBlockRenders() {
         GrowthcraftRiceBlocks.ricePaddy.registerItemRender();
+        GrowthcraftRiceBlocks.riceCrop.registerItemRender();
     }
 
     public static void  registerTileEntities() {
