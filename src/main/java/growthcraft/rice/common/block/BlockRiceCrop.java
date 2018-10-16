@@ -1,6 +1,5 @@
 package growthcraft.rice.common.block;
 
-import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.BlockPaddyBase;
 import growthcraft.core.shared.block.IPaddyCrop;
@@ -18,6 +17,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -32,8 +32,11 @@ import java.util.List;
 import java.util.Random;
 
 import static growthcraft.core.shared.block.BlockPaddyBase.IS_RADIOACTIVE;
+import static growthcraft.core.shared.block.BlockPaddyBase.MOISTURE;
 
 public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, IPaddyCrop {
+
+    // TODO: Add bounding boxes based on the height of the crop.
 
     public static class RiceStage
     {
@@ -65,14 +68,6 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         super.addInformation(stack, player, tooltip, advanced);
     }
 
-    protected Item getSeed() {
-        return GrowthcraftRiceItems.rice.getItem();
-    }
-
-    protected Item getCrop() {
-        return GrowthcraftRiceItems.rice.getItem();
-    }
-
     @Override
     public boolean isFlammable(IBlockAccess world, BlockPos pos, EnumFacing face) {
         return false;
@@ -95,15 +90,12 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         if( worldIn.isRemote )
             return;
 
-        if (!this.canGrow(worldIn, pos, state, true))
-        {
-            List<ItemStack> drops = super.getDrops(worldIn, pos, state, 0);
-            for( ItemStack drop : drops ) {
-                spawnAsEntity(worldIn, pos, drop);
-            }
-        } else {
+        if ( !canBlockStay(worldIn, pos, state) ){
+            worldIn.setBlockToAir(pos);
+        } else if (this.canGrow(worldIn, pos, state, true) ) {
             grow(worldIn, rand, pos, state);
         }
+
     }
 
     public int getAge(IBlockState state) {
@@ -111,7 +103,7 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
     }
 
     public boolean isMature(IBlockAccess worldIn, BlockPos pos, IBlockState state) {
-        return getAge(state) >= RiceStage.MATURE;
+        return getAge(state) == RiceStage.MATURE;
     }
 
     public float getGrowthProgress(IBlockAccess worldIn, BlockPos pos, IBlockState state) {
@@ -119,8 +111,8 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
     }
 
     @Override
-    public boolean canGrow(World world, BlockPos blockPos, IBlockState iBlockState, boolean b) {
-        return  (canBlockStay(world, blockPos, iBlockState) && getAge(iBlockState) < RiceStage.MATURE );
+    public boolean canGrow(World world, BlockPos blockPos, IBlockState state, boolean b) {
+        return  (canBlockStay(world, blockPos, state) && getAge(state) < RiceStage.MATURE );
     }
 
     @Override
@@ -135,18 +127,21 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         IBlockState downBlockState = world.getBlockState(posDown);
 
         if (downBlockState.getValue(IS_RADIOACTIVE)) {
-            GrowthcraftLogger.getLogger(Reference.MODID).info("Block is radioactive.");
             growWithBoneMeal(world, random, pos, state);
-        } else {
+        } else if (downBlockState.getValue(MOISTURE)) {
             int nextAge = getAge(state) + 1;
             if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
                 world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
             }
+        } else {
+            // Do nothing as the RicePaddy isn't flooded.
         }
     }
 
-    public void growWithBoneMeal(World world, Random random, BlockPos pos, IBlockState state) {
-        int nextAge = getAge(state) + 1;
+    private void growWithBoneMeal(World world, Random random, BlockPos pos, IBlockState state) {
+        int nextAge = getAge(state) + 2;
+
+        if ( nextAge > RiceStage.MATURE ) nextAge = RiceStage.MATURE;
 
         if( nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0 ) {
             world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
@@ -155,24 +150,26 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
     }
 
     @SideOnly(Side.CLIENT)
-    public static void spawnBoneMealParticles(World worldIn, BlockPos pos, int amount) {
+    private static void spawnBoneMealParticles(World worldIn, BlockPos pos, int amount) {
+        // TODO: Troubleshoot as to why the particles are not actually spawning, might be a client proxy issue.
+
         if (amount == 0) {
             amount = 15;
         }
 
         IBlockState iblockstate = worldIn.getBlockState(pos);
+
         int i;
         double d0;
         double d1;
         double d2;
+
         if (iblockstate.getMaterial() != Material.AIR) {
             for(i = 0; i < amount; ++i) {
                 d0 = rand.nextGaussian() * 0.02D;
                 d1 = rand.nextGaussian() * 0.02D;
                 d2 = rand.nextGaussian() * 0.02D;
                 worldIn.spawnParticle(EnumParticleTypes.VILLAGER_HAPPY, (double)((float)pos.getX() + rand.nextFloat()), (double)pos.getY() + (double)rand.nextFloat() * iblockstate.getBoundingBox(worldIn, pos).maxY, (double)((float)pos.getZ() + rand.nextFloat()), d0, d1, d2, new int[0]);
-                GrowthcraftLogger.getLogger(Reference.MODID).info("Spawn particles ...");
-
             }
         } else {
             for(i = 0; i < amount; ++i) {
@@ -186,28 +183,65 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
     }
 
     /**
-     * BlockRiceCrops can only be in the world if the block below them are an instance of BlockPaddyBase.
+     * BlockRiceCrops can only be in the world if the block below them are an instance of BlockPaddyBase and it has MOISTURE
      */
     @Override
     public boolean canBlockStay(World world, BlockPos pos, IBlockState state) {
         BlockPos dwn = pos.down();
         IBlockState dwnState = world.getBlockState(dwn);
-       return dwnState.getBlock() instanceof BlockPaddyBase;
+        return dwnState.getBlock() instanceof BlockPaddyBase;
     }
 
     /************
      * IPLANTABLE
      ************/
     @Override
-    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
-    {
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
         return EnumPlantType.Crop;
     }
 
     @Override
-    public IBlockState getPlant(IBlockAccess world, BlockPos pos)
-    {
+    public IBlockState getPlant(IBlockAccess world, BlockPos pos) {
         return getDefaultState();
+    }
+
+    /************
+     * DROPS
+     ***********/
+
+    @Override
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+
+        BlockPos posDown = pos.down();
+        IBlockState downBlockState = world.getBlockState(posDown);
+
+        Random rand = world instanceof World ? ((World)world).rand : new Random();
+        int count = 1;
+
+        if ( state.getValue(AGE) >= 4 && downBlockState.getValue(IS_RADIOACTIVE)) {
+            count = 3 + rand.nextInt(3) + (fortune > 0 ? rand.nextInt(fortune + 1) : 0);
+        } else if ( state.getValue(AGE) >= 4 ) {
+            count = 2 + rand.nextInt(3) + (fortune > 0 ? rand.nextInt(fortune + 1) : 0);
+        }
+
+        for(int i = 0; i < count; ++i) {
+            drops.add(new ItemStack(GrowthcraftRiceItems.rice.getItem()));
+        }
+    }
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        return super.getItemDropped(state, rand, fortune);
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 0;
+    }
+
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(GrowthcraftRiceItems.rice.getItem());
     }
 
     /************
