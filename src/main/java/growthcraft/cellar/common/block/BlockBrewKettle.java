@@ -6,20 +6,22 @@ import java.util.Random;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
+import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
-import growthcraft.cellar.shared.Reference;
-import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
@@ -30,6 +32,12 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockBrewKettle extends BlockCellarContainer {
 	private static final AxisAlignedBB AABB_CONTENTS = new AxisAlignedBB(2/16.0, 4/16.0, 2/16.0, 12/16.0, 10/16.0, 12/16.0);
@@ -246,5 +254,11 @@ public class BlockBrewKettle extends BlockCellarContainer {
 			return te.getFluidAmountScaled(15, 1);
 		}
 		return 0;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
+		super.addInformation(stack, player, tooltip, advanced);
 	}
 }

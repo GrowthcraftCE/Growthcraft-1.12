@@ -21,8 +21,10 @@ fluids.tag.hopped=Hopped
 fluids.tag.hyper_extended=Hyper-extended
 fluids.tag.intoxicated=Intoxicated
 fluids.tag.magical=Magical
+fluids.tag.mash=Mash
 fluids.tag.poisoned=Poisoned
 fluids.tag.potent=Potent
+fluids.tag.sake=Sake
 fluids.tag.wine=Wine
 fluids.tag.young=Young
 
@@ -40,10 +42,12 @@ container.growthcraft.brewKettle=Brew Kettle
 container.grc.CultureJar=Culture Jar
 container.grc.fermentBarrel=Fermentation Barrel
 container.grc.fruitPress=Fruit Press
+gui.grc.discard=Discard
+gui.grc.cantferment=Cannot Ferment
+gui.grc.switch=Switch Tanks
 
 # Tile Entities
 tile.brew_kettle.name=Brew Kettle
 tile.culture_jar.name=Culture Jar
 tile.ferment_barrel.name=Fermentation Barrel
 tile.fruit_press.name=Fruit Press
-

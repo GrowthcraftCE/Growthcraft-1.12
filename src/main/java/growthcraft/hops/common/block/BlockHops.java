@@ -1,25 +1,15 @@
 package growthcraft.hops.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.block.ICropDataProvider;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
-import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.hops.shared.Reference;
 import growthcraft.hops.shared.config.GrowthcraftHopsConfig;
 import growthcraft.hops.shared.init.GrowthcraftHopsItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
@@ -42,6 +32,11 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICropDataProvider, IGrowable {
 	

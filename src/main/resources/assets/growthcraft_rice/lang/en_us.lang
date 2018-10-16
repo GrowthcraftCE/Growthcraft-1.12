@@ -1,0 +1,15 @@
+fluid.fluid_booze_sake_water=Rice Water
+fluid.fluid_booze_sake_mash=Sake Mash
+fluid.fluid_booze_sake_fermented=Sake Fermented
+fluid.fluid_booze_sake_potent=Sake Mash Potent
+fluid.fluid_booze_sake_extended=Sake Extemded
+fluid.fluid_booze_sake_hyperextended=Sake Hyper-Extended
+fluid.fluid_booze_sake_intoxicated=Sake Intoxicated
+fluid.fluid_booze_sake_poisoned=Sake Poisoned
+
+item.rice_cooked.name=Cooked Rice
+item.rice.name=Rice
+item.rice_ball.name=Onigiri
+
+tile.ricepaddy.name=Rice Paddy
+tile.ricecrop.name=Rice

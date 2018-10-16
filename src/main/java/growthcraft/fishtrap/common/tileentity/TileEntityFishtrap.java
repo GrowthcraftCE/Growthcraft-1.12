@@ -201,13 +201,6 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
         this.readFromNBT(tag);
     }
 
-    @Override
-    public NBTTagCompound getTileData() {
-        NBTTagCompound compound = new NBTTagCompound();
-        this.writeToNBT(compound);
-        return compound;
-    }
-
     @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {

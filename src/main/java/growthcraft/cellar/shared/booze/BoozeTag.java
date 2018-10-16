@@ -5,7 +5,9 @@ import growthcraft.core.shared.fluids.FluidTag;
 
 public class BoozeTag {
 	// REVISE_ME 0
-	
+
+	// the booze is mash which is not fermented
+	public static final FluidTag MASH = CoreRegistry.instance().fluidTags().createTag("mash");
 	// the booze is young and probably has no effects
 	public static final FluidTag YOUNG = CoreRegistry.instance().fluidTags().createTag("young");
 	// the booze is fermented
@@ -34,6 +36,8 @@ public class BoozeTag {
 	public static final FluidTag WINE = CoreRegistry.instance().fluidTags().createTag("wine");
 	// the booze is some form of cider
 	public static final FluidTag CIDER = CoreRegistry.instance().fluidTags().createTag("cider");
+	// the booze is some form of sake
+	public static final FluidTag SAKE = CoreRegistry.instance().fluidTags().createTag("sake");
 
 	private BoozeTag() {}
 
