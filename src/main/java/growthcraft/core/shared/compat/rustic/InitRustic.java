@@ -40,6 +40,9 @@ public class InitRustic {
 	public static void preInitFluids() {
 		RusticModFluids.rusticGrapeJuice = new FluidDefinition(FluidRegistry.getFluid("grapejuice"));
 		RusticModFluids.rusticGrapeWine = new FluidDefinition(FluidRegistry.getFluid("wine"));
+		
+		RusticModFluids.rusticAppleJuice = new FluidDefinition(FluidRegistry.getFluid("applejuice"));
+		RusticModFluids.rusticAppleCider = new FluidDefinition(FluidRegistry.getFluid("cider"));
 	}
 	
 }

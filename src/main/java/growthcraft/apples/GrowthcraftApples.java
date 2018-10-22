@@ -2,7 +2,9 @@ package growthcraft.apples;
 
 import growthcraft.apples.common.CommonProxy;
 import growthcraft.apples.common.Init;
+import growthcraft.apples.common.compat.rustic.RusticApplesRecipes;
 import growthcraft.apples.shared.Reference;
+import growthcraft.core.shared.compat.Compat;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -45,6 +47,8 @@ public class GrowthcraftApples {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         Init.initBoozes();
+        if (Compat.isModAvailable_Rustic())
+        	RusticApplesRecipes.initBoozes();
         Init.registerRecipes();
     }
 
