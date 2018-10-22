@@ -36,14 +36,16 @@ public class GrowthcraftApples {
         // Register the blocks
     	Init.preInitBlocks();
         Init.preInitItems();
+        Init.preInitFluids();
         
         proxy.preInit();
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        Init.registerRecipes();
         proxy.init();
+        Init.initBoozes();
+        Init.registerRecipes();
     }
 
     @Mod.EventHandler
@@ -65,6 +67,7 @@ public class GrowthcraftApples {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
+        Init.registerFluidBlocks(registry);
 	}
 
 	@SubscribeEvent
@@ -84,6 +87,7 @@ public class GrowthcraftApples {
 	{
         Init.registerItemRenders();
         Init.registerBlockRenders();
+        Init.registerFluidRenders();
 	}
 	
 	

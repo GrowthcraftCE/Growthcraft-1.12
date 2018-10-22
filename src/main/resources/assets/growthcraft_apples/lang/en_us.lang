@@ -10,3 +10,11 @@ tile.apple_sapling.name=Apple Sapling
 tile.apple_slab_half.name=Apple Wood Slab
 tile.apple_stairs.name=Apple Wood Stairs
 
+# Fluids
+fluid.fluid_booze_apple_juice=Apple Juice
+fluid.fluid_booze_apple_cider_fermented=Apple Cider
+fluid.fluid_booze_apple_cider_potent=Apple Cider
+fluid.fluid_booze_apple_cider_extended=Apple Cider
+fluid.fluid_booze_apple_cider_ethereal=Silken Nectar
+fluid.fluid_booze_apple_cider_intoxicated=Apple Cider
+fluid.fluid_booze_apple_cider_poisoned=Apple Cider

@@ -17,6 +17,7 @@ public class ClientProxy extends CommonProxy {
 	public void init() {
 		super.init();
 		Init.registerBlockColorHandlers();
+		Init.registerItemColorHandlers();
         registerSpecialRenders();
 	}
 	
@@ -27,6 +28,7 @@ public class ClientProxy extends CommonProxy {
     }
 	
     public void registerModelBakeryVariants() {
+    	Init.registerItemVariants();
     }
 
     public void registerSpecialRenders() {

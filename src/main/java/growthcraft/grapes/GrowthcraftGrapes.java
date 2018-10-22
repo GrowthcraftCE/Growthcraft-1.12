@@ -3,7 +3,7 @@ package growthcraft.grapes;
 import growthcraft.core.shared.compat.Compat;
 import growthcraft.grapes.common.CommonProxy;
 import growthcraft.grapes.common.Init;
-import growthcraft.grapes.common.compat.rustic.Recipes;
+import growthcraft.grapes.common.compat.rustic.RusticRecipes;
 import growthcraft.grapes.common.compat.thaumcraft.GrapesAspectRegistry;
 import growthcraft.grapes.shared.Reference;
 import net.minecraft.block.Block;
@@ -50,7 +50,7 @@ public class GrowthcraftGrapes {
 		proxy.init();
 		Init.initBoozes();
 		if (Compat.isModAvailable_Rustic())
-			Recipes.initBoozes();
+			RusticRecipes.initBoozes();
 		Init.initRecipes();
 		Init.registerRecipes();
 		if (Compat.isModAvailable_Thaumcraft()) {

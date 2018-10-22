@@ -16,8 +16,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class Recipes {
-	private Recipes() {}
+public class RusticRecipes {
+	private RusticRecipes() {}
 	
 	////////////
 	// Fermentations

@@ -170,6 +170,7 @@ public class Init {
 	public static void registerFluidBlocks(IForgeRegistry<Block> registry) {
 		GrowthcraftGrapesBlocks.grapeWineFluidBlocks = new BlockBoozeDefinition[grapeWineBooze.length];
 		BoozeRegistryHelper.initializeBooze(grapeWineBooze, GrowthcraftGrapesBlocks.grapeWineFluidBlocks);
+		// TODO: Refactor me: Food stats need to be initialized in preInitFluids.
 		BoozeRegistryHelper.setBoozeFoodStats(grapeWineBooze, 1, -0.3f);
 		BoozeRegistryHelper.setBoozeFoodStats(grapeWineBooze[WineTypes.PURPLE_JUICE.ordinal()], 1, 0.3f);
 		BoozeRegistryHelper.setBoozeFoodStats(grapeWineBooze[WineTypes.RED_JUICE.ordinal()], 1, 0.3f);
