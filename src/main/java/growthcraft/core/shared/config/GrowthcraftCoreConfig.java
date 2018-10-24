@@ -18,16 +18,26 @@ import java.util.List;
 public class GrowthcraftCoreConfig {
 	// TODO: Keep either this class or GrowthcraftConfiguration
 
+    // TODO: Need to make a super class so that sub-modules can extend.
+
     private static Configuration config = null;
 
-    public static final String CATEGORY_NAME_LOGGING = "logging";
-    public static final String CATEGORY_NAME_WORLDGEN = "worldgen";
     public static final String CATEGORY_NAME_GENERAL = "general";
+    public static boolean hidePoisonedBooze = true;
 
+
+    public static final String CATEGORY_NAME_LOGGING = "logging";
     public static String loggingLevel;
-	public static boolean hidePoisonedBooze = true;
-	public static boolean worldgenBlockSaltOre = true;
+
+    public static final String CATEGORY_NAME_WORLDGEN = "worldgen";
+	public static boolean blockSaltOreWorldGen = true;
+    public static int blockSaltOreMinHeight = 10;
+    public static int blockSaltOreMaxHeight = 64;
+    public static int blockSaltOreChanceToSpawn = 5;
+
+
 	public static int bottleCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
+
 
     public static void preInit() {
         File configFile = new File(Loader.instance().getConfigDir(), "growthcraft/growthcraft-core.cfg");
@@ -72,17 +82,32 @@ public class GrowthcraftCoreConfig {
         config.setCategoryPropertyOrder(CATEGORY_NAME_LOGGING, propertyOrderLoggingBlocks);
 
         /* Configuration: World Generation */
-        Property propertyWorldGEnBlocksaltOre = config.get(CATEGORY_NAME_WORLDGEN, "worldgenBlockSaltOre", true);
+        Property propertyWorldGEnBlocksaltOre = config.get(CATEGORY_NAME_WORLDGEN, "blockSaltOreWorldGen", true);
         propertyWorldGEnBlocksaltOre.setLanguageKey("config.worldgen.worldgenBlockSaltOre");
         propertyWorldGEnBlocksaltOre.setComment(I18n.translateToLocal("config.worldgen.worldgenBlockSaltOre.comment"));
 
+        Property propertyBlockSaltOreMinHeight = config.get(CATEGORY_NAME_WORLDGEN, "blockSaltOreMinHeight", 10);
+        propertyBlockSaltOreMinHeight.setLanguageKey("config.worldgen.blockSaltOreMinHeight");
+        propertyBlockSaltOreMinHeight.setComment(I18n.translateToLocal("config.worldgen.blockSaltOreMinHeight.comment"));
+
+        Property propertyBlockSaltOreMaxHeight = config.get(CATEGORY_NAME_WORLDGEN, "blockSaltOreMaxHeight", 64);
+        propertyBlockSaltOreMaxHeight.setLanguageKey("config.worldgen.blockSaltOreMaxHeight");
+        propertyBlockSaltOreMaxHeight.setComment(I18n.translateToLocal("config.worldgen.blockSaltOreMaxHeight.comment"));
+
+        Property propertyBlockSaltOreChanceToSpawn = config.get(CATEGORY_NAME_WORLDGEN, "blockSaltOreChanceToSpawn", 5);
+        propertyBlockSaltOreChanceToSpawn.setLanguageKey("config.worldgen.blockSaltOreChanceToSpawn");
+        propertyBlockSaltOreChanceToSpawn.setComment(I18n.translateToLocal("config.worldgen.blockSaltOreChanceToSpawn.comment"));
+
         List<String> propertyOrderWorldGenBlocks = new ArrayList<String>();
         propertyOrderWorldGenBlocks.add(propertyWorldGEnBlocksaltOre.getName());
+        propertyOrderWorldGenBlocks.add(propertyBlockSaltOreMinHeight.getName());
+        propertyOrderWorldGenBlocks.add(propertyBlockSaltOreMaxHeight.getName());
+        propertyOrderWorldGenBlocks.add(propertyBlockSaltOreChanceToSpawn.getName());
 
         config.setCategoryPropertyOrder(CATEGORY_NAME_WORLDGEN, propertyOrderWorldGenBlocks);
 
         /* Configuration: General / Everything Else */
-        Property propertyHidePoisonedBooze = config.get(CATEGORY_NAME_GENERAL, "worldgenBlockSaltOre", true);
+        Property propertyHidePoisonedBooze = config.get(CATEGORY_NAME_GENERAL, "hidePoisonedBooze", true);
         propertyHidePoisonedBooze.setLanguageKey("config.general.hidePoisonedBooze");
         propertyHidePoisonedBooze.setComment(I18n.translateToLocal("config.general.hidePoisonedBooze.comment"));
 
@@ -93,6 +118,13 @@ public class GrowthcraftCoreConfig {
 
         if ( readFieldsFromConfig ) {
             loggingLevel = propertyLogLevel.getString();
+
+            blockSaltOreWorldGen = propertyWorldGEnBlocksaltOre.getBoolean();
+            blockSaltOreMinHeight = propertyBlockSaltOreMinHeight.getInt();
+            blockSaltOreMaxHeight = propertyBlockSaltOreMaxHeight.getInt();
+            blockSaltOreChanceToSpawn = propertyBlockSaltOreChanceToSpawn.getInt();
+
+            hidePoisonedBooze = propertyHidePoisonedBooze.getBoolean();
         }
 
         propertyLogLevel.set(loggingLevel);

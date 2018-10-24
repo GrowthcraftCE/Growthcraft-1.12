@@ -63,3 +63,6 @@ format.tank.content_suffix=mB of %s
 config.logging.log_level.comment=Set the log level.
 config.worldgen.worldgenBlockSaltOre.comment=Set to false if you want to disable Salt Ore world generation.
 config.general.hidePoisonedBooze.comment=Set to false if you want to diable Poisoned Booze.
+config.worldgen.blockSaltOreMinHeight.comment=Set the min height that Salt Ore will generate at. [ Default = 10 ]
+config.worldgen.blockSaltOreMaxHeight.comment=Set the max height that Salt Ore will generate at. [ Default = 64 ]
+config.worldgen.blockSaltOreChanceToSpawn.comment=Set the chance for Salt Ore world generatation. [ Default = 5 ]
