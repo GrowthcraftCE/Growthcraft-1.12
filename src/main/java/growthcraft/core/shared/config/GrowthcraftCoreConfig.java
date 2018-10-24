@@ -1,5 +1,7 @@
 package growthcraft.core.shared.config;
 
+import growthcraft.core.shared.Reference;
+import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -13,20 +15,18 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import growthcraft.core.shared.Reference;
-import growthcraft.core.shared.legacy.FluidContainerRegistry;
-
 public class GrowthcraftCoreConfig {
 	// TODO: Keep either this class or GrowthcraftConfiguration
 
     private static Configuration config = null;
 
     public static final String CATEGORY_NAME_LOGGING = "logging";
+    public static final String CATEGORY_NAME_WORLDGEN = "worldgen";
+    public static final String CATEGORY_NAME_GENERAL = "general";
 
     public static String loggingLevel;
-
 	public static boolean hidePoisonedBooze = true;
-
+	public static boolean worldgenBlockSaltOre = true;
 	public static int bottleCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
 
     public static void preInit() {
@@ -61,13 +61,35 @@ public class GrowthcraftCoreConfig {
             config.load();
         }
 
+        /* Configuration: Logging Settings */
         Property propertyLogLevel = config.get(CATEGORY_NAME_LOGGING, "log_level", "info");
-        propertyLogLevel.setLanguageKey("gui.config.logging.log_level");
-        propertyLogLevel.setComment(I18n.translateToLocal("gui.config.logging.log_level.comment"));
+        propertyLogLevel.setLanguageKey("config.logging.log_level");
+        propertyLogLevel.setComment(I18n.translateToLocal("config.logging.log_level.comment"));
 
-        List<String> propteryOrderBlocks = new ArrayList<String>();
-        propteryOrderBlocks.add(propertyLogLevel.getName());
-        config.setCategoryPropertyOrder(CATEGORY_NAME_LOGGING, propteryOrderBlocks);
+        List<String> propertyOrderLoggingBlocks = new ArrayList<String>();
+        propertyOrderLoggingBlocks.add(propertyLogLevel.getName());
+
+        config.setCategoryPropertyOrder(CATEGORY_NAME_LOGGING, propertyOrderLoggingBlocks);
+
+        /* Configuration: World Generation */
+        Property propertyWorldGEnBlocksaltOre = config.get(CATEGORY_NAME_WORLDGEN, "worldgenBlockSaltOre", true);
+        propertyWorldGEnBlocksaltOre.setLanguageKey("config.worldgen.worldgenBlockSaltOre");
+        propertyWorldGEnBlocksaltOre.setComment(I18n.translateToLocal("config.worldgen.worldgenBlockSaltOre.comment"));
+
+        List<String> propertyOrderWorldGenBlocks = new ArrayList<String>();
+        propertyOrderWorldGenBlocks.add(propertyWorldGEnBlocksaltOre.getName());
+
+        config.setCategoryPropertyOrder(CATEGORY_NAME_WORLDGEN, propertyOrderWorldGenBlocks);
+
+        /* Configuration: General / Everything Else */
+        Property propertyHidePoisonedBooze = config.get(CATEGORY_NAME_GENERAL, "worldgenBlockSaltOre", true);
+        propertyHidePoisonedBooze.setLanguageKey("config.general.hidePoisonedBooze");
+        propertyHidePoisonedBooze.setComment(I18n.translateToLocal("config.general.hidePoisonedBooze.comment"));
+
+        List<String> propertyOrderGeneralBlocks = new ArrayList<String>();
+        propertyOrderGeneralBlocks.add(propertyHidePoisonedBooze.getName());
+
+        config.setCategoryPropertyOrder(CATEGORY_NAME_GENERAL, propertyOrderGeneralBlocks);
 
         if ( readFieldsFromConfig ) {
             loggingLevel = propertyLogLevel.getString();
@@ -85,7 +107,7 @@ public class GrowthcraftCoreConfig {
             if(event.getModID().equals(Reference.MODID)) {
                 syncFromGui();
             }
-
         }
     }
+
 }

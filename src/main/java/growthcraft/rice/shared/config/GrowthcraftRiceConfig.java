@@ -14,7 +14,7 @@ public class GrowthcraftRiceConfig extends Configuration {
 
     // Categories
     private static final String CATEGORY_GENERAL = "general";
-    private static final String CATEGORY_CELLAR = "growthcraft-cellar";
+    private static final String CATEGORY_CELLAR = "growthcraft-cellar-interop";
 
 
     private GrowthcraftRiceConfig() { }
@@ -44,7 +44,7 @@ public class GrowthcraftRiceConfig extends Configuration {
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();
-        configuration = new Configuration(new File(directory.getPath(), "growthcraft/rice/general.cfg"));
+        configuration = new Configuration(new File(directory.getPath(), "growthcraft/growthcraft-rice.cfg"));
         readConfig();
     }
 
