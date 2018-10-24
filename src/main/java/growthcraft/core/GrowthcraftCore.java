@@ -8,6 +8,7 @@ import growthcraft.core.shared.compat.rustic.InitRustic;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.Init;
 import growthcraft.core.common.creativetabs.TabGrowthcraft;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import net.minecraft.block.Block;
@@ -52,6 +53,8 @@ public class GrowthcraftCore {
     @Mod.EventHandler
     @SuppressWarnings("deprecation")
     public void preInit(FMLPreInitializationEvent event) {
+		GrowthcraftCoreConfig.preInit();
+
         Init.preInitBlocks();
         Init.preInitItems();
         

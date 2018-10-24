@@ -4,7 +4,7 @@ import growthcraft.core.shared.legacy.FluidContainerRegistry;
 
 public class GrowthcraftMilkConfig {
 	private GrowthcraftMilkConfig() { }
-	
+
 	public static boolean milkEnabled = true;
 	public static boolean fantasyMilkEffects = true;
 	public static int cheeseMaxAge = 1200;

@@ -1,22 +1,20 @@
 package growthcraft.milk.shared;
 
-import java.io.File;
-
 import growthcraft.milk.shared.processing.churn.user.UserChurnRecipesConfig;
+
+import java.io.File;
 
 public class GrowthcraftMilkUserApis
 {
 	public final UserChurnRecipesConfig churnRecipes;
 
-	public GrowthcraftMilkUserApis()
-	{
+	public GrowthcraftMilkUserApis() {
 		super();
 		this.churnRecipes = new UserChurnRecipesConfig();
 //		add(churnRecipes);
 	}
 
-	public void setConfigDirectory(File dir)
-	{
+	public void setConfigDirectory(File dir) {
 		churnRecipes.setConfigFile(dir, "growthcraft/milk/churn_recipes.json");
 	}
 	
@@ -36,8 +34,7 @@ public class GrowthcraftMilkUserApis
 		this.churnRecipes.postInit();
 	}
 
-	public void loadConfigs()
-	{
+	public void loadConfigs() {
 /*		for (IModule module : this)
 		{
 			if (module instanceof AbstractUserJSONConfig)

@@ -4,6 +4,7 @@ import growthcraft.rice.common.CommonProxy;
 import growthcraft.rice.common.Init;
 import growthcraft.rice.shared.GrowthcraftRiceUserApi;
 import growthcraft.rice.shared.Reference;
+import growthcraft.rice.shared.config.GrowthcraftRiceConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -43,9 +44,14 @@ public class GrowthcraftRice {
     public static void preInit(FMLPreInitializationEvent event) {
         userApis.setConfigDirectory(event.getModConfigurationDirectory());
 
+        GrowthcraftRiceConfig.preInit(event);
+
         Init.preInitBlocks();
         Init.preInitItems();
         Init.preInitFluids();
+
+        userApis.preInit();
+        userApis.register();
 
         proxy.preInit();
         proxy.registerTileEntities();
@@ -55,15 +61,24 @@ public class GrowthcraftRice {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         Init.initBoozes();
-        // TODO: Rustic Compat
+
         Init.initRecipes();
         Init.registerRecipes();
+
+        userApis.init();
+        userApis.loadConfigs();
+
+        // TODO: Rustic Compat
+
         // TODO: Thaumcraft Compat
+
     }
 
     @Mod.EventHandler
     public static void  postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
+        userApis.postInit();
+
         Init.registerItemOres();
     }
 
