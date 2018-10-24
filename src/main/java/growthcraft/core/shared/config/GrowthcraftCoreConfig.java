@@ -131,6 +131,7 @@ public class GrowthcraftCoreConfig {
 
         if(config.hasChanged())
             config.save();
+
     }
 
     public static class ConfigEventHandler {
