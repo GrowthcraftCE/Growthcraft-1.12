@@ -13,7 +13,7 @@ public class CommonProxy {
 	}
 	
     public void init() {
-        if (GrowthcraftCoreConfig.worldgenBlockSaltOre) {
+        if (GrowthcraftCoreConfig.blockSaltOreWorldGen) {
             GameRegistry.registerWorldGenerator(new BlockSaltGeneration(), 0);
         }
     }
