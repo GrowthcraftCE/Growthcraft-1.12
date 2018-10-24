@@ -10,6 +10,7 @@ fluid.fluid_booze_sake_poisoned=Sake Poisoned
 item.rice_cooked.name=Cooked Rice
 item.rice.name=Rice
 item.rice_ball.name=Onigiri
+item.cultivator.name=Cultivator
 
 tile.ricepaddy.name=Rice Paddy
 tile.ricecrop.name=Rice

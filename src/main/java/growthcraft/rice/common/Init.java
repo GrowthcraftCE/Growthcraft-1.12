@@ -208,7 +208,7 @@ public class Init {
                 new FluidStack(FluidRegistry.WATER, 200),
                 GrowthcraftRiceItems.rice.asStack(),
                 true,
-                TickUtils.minutes(1),
+                TickUtils.minutes(GrowthcraftRiceConfig.brewTime),
                 new Residue(GrowthcraftRiceItems.rice_cooked.asStack(), 1.0F));
 
         // TODO: Implement Moto Sake Mash made from Sake Yeast.

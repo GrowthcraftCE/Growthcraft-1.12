@@ -11,4 +11,16 @@ public class GrowthcraftRiceUserApi {
     public void setConfigDirectory(File dir) {
 
     }
+
+    public void preInit() {}
+
+    public void register() {}
+
+    public void init() {}
+
+    public void postInit() {}
+
+    public void loadConfigs() {
+
+    }
 }

@@ -30,12 +30,17 @@ public class ItemCultivator extends ItemHoe {
 
         if ( state.getBlock() instanceof BlockFarmland) {
             worldIn.setBlockState(pos, GrowthcraftRiceBlocks.ricePaddy.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
-
-            // TODO: ITemCultivator needs to take damage on use.
             itemstack.damageItem(1, player);
+            // Check for secondary output
+            checkSecondaryOutput(player, worldIn, pos);
+
             return EnumActionResult.PASS;
         }
 
         return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    }
+
+    private void checkSecondaryOutput(EntityPlayer player, World worldIn, BlockPos pos) {
+
     }
 }
