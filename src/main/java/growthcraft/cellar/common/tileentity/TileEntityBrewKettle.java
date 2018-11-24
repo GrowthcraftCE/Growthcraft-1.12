@@ -70,11 +70,11 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
 
 	private BrewKettle brewKettle = new BrewKettle(this, 0, 1, 2, 0, 1);
 	
-	@SideOnly(Side.CLIENT)
+	// Crash: @SideOnly(Side.CLIENT)
 	private BrewKettleLidSteamEmitter lidSteamEmitter = new BrewKettleLidSteamEmitter();
-	@SideOnly(Side.CLIENT)
+	// Crash: @SideOnly(Side.CLIENT)
 	private SpatialRandom sprand = new SpatialRandom();
-	@SideOnly(Side.CLIENT)
+	// Crash: @SideOnly(Side.CLIENT)
 	private boolean animLastLid = false;	// NOTE: Only use it inside update() on the client side. 
 
 	@Override
