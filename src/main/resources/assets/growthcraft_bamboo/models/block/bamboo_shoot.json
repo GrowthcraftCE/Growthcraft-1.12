@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "growthcraft_bamboo:blocks/bamboo_shoot"
+  }
+}

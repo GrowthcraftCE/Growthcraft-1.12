@@ -1,0 +1,24 @@
+{
+    "type": "forge:ore_shapeless",
+    "group": "yoghurt",
+    "ingredients": [
+      {
+        "item": "minecraft:milk_bucket"
+      },
+      {
+        "item": "minecraft:bowl"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "materialStarterCulture"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "foodGrapesPurple"
+      }
+    ],
+    "result": {
+      "item": "growthcraft_milk:yogurt",
+      "data": 2
+    }
+}

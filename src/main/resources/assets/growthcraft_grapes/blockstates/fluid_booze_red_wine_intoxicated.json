@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "fluid_booze_red_wine_intoxicated": [
+      {
+        "custom": {
+          "fluid": "fluid_booze_red_wine_intoxicated"
+        }
+      }
+    ]
+  }
+}

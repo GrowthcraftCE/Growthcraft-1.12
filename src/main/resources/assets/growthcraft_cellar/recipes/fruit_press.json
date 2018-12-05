@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ABA",
+    "CCC",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "B": {
+      "item": "minecraft:piston"
+    },
+    "C": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    }
+  },
+  "result": {
+    "item": "growthcraft_cellar:fruit_press"
+  }
+}

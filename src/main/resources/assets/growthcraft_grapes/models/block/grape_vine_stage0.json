@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "growthcraft_grapes:blocks/grape_vine_stage0"
+  }
+}

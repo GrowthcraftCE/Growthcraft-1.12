@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "growthcraft_milk:items/ice_cream/ice_cream_honey"
+  }
+}

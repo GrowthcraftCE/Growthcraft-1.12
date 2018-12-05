@@ -1,0 +1,19 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+	"model": "growthcraft_cellar:brew_kettle"
+  },
+  "variants": {
+    "normal": [{ }],
+    "inventory": [{
+       "y": 0
+    }],
+    "haslid" : {
+       "false" : {
+       },
+       "true" : {
+         "submodel": "growthcraft_cellar:brew_kettle_lidon"
+       }
+    }
+  }
+}

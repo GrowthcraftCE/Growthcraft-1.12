@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "fluid_pasteurized_milk": [
+      {
+        "custom": {
+          "fluid": "fluid_pasteurized_milk"
+        }
+      }
+    ]
+  }
+}

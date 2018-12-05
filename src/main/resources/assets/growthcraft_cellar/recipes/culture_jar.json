@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "BAB",
+    "B B",
+    "BBB"
+  ],
+  "key": {
+    "A": {
+      "type": "forge:ore_dict",
+      "ore": "plankWood"
+    },
+    "B": {
+      "type": "forge:ore_dict",
+      "ore": "paneGlass"
+    }
+  },
+  "result": {
+    "item": "growthcraft_cellar:culture_jar"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "beebox",
+  "pattern": [
+    " # ",
+    "# #",
+    "###"
+  ],
+  "key": {
+    "#": {
+        "type": "forge:ore_dict",
+        "ore": "plankWood"
+    }
+  },
+  "result": {
+    "item": "growthcraft_bees:beebox"
+  }
+}

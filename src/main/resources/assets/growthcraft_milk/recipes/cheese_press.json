@@ -1,0 +1,24 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "iii",
+    "iCi",
+    "ppp"
+  ],
+  "key": {
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "ingotIron"
+    },
+    "p": {
+      "type": "forge:ore_dict",
+      "ore": "slabWood"
+    },
+    "C": {
+      "item": "minecraft:chest"
+    }
+  },
+  "result": {
+    "item": "growthcraft_milk:cheese_press"
+  }
+}

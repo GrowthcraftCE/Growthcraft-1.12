@@ -1,0 +1,35 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+  	"model": "growthcraft_grapes:grape_vine_fruit"
+  },
+  "variants": {
+    "type": {
+      "0": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/purple"
+        }
+      },
+      "1": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/green"
+        }
+      },
+      "2": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/red"
+        }
+      },
+      "3": {
+      },
+      "4": {
+      },
+      "5": {
+      },
+      "6": {
+      },
+      "7": {
+      }
+    }    
+  }
+}

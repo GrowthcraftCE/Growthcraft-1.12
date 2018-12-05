@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "fluid_cheese_appenzeller": [
+      {
+        "custom": {
+          "fluid": "fluid_cheese_appenzeller"
+        }
+      }
+    ]
+  }
+}

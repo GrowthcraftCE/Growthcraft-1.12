@@ -1,0 +1,20 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "0": "growthcraft_hops:blocks/leaves_opaque"
+  },
+  "elements": [
+    {
+      "from": [ 0, 0, 0 ],
+      "to": [ 16, 16, 16 ],
+      "faces": {
+        "down":  { "texture": "#0", "cullface": "down" },
+        "up":    { "texture": "#0", "cullface": "up" },
+        "north": { "texture": "#0", "cullface": "north" },
+        "south": { "texture": "#0", "cullface": "south" },
+        "west":  { "texture": "#0", "cullface": "west" },
+        "east":  { "texture": "#0", "cullface": "east" }
+      }
+    }
+  ]
+}

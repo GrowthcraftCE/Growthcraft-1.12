@@ -1,0 +1,49 @@
+{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"textures": {
+    	"0": "growthcraft_grapes:blocks/leaves_half",
+    	"particle": "growthcraft_grapes:blocks/leaves_opaque"
+	},
+	"elements": [
+		{
+			"name": "cube",
+			"from": [12, -8, 0],
+			"to": [12, 0, 16],
+			"faces": {
+				"east": {"uv": [0, 0, 16, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 8], "texture": "#0"}
+			},
+			"type": "cube"
+		},
+		{
+			"name": "cube",
+			"from": [4, -8, 0],
+			"to": [4, 0, 16],
+			"faces": {
+				"east": {"uv": [0, 0, 16, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 16, 8], "texture": "#0"}
+			},
+			"type": "cube"
+		},
+		{
+			"name": "cube",
+			"from": [0, -8, 12],
+			"to": [16, 0, 12],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 8], "texture": "#0"}
+			},
+			"type": "cube"
+		},
+		{
+			"name": "cube",
+			"from": [0, -8, 4],
+			"to": [16, 0, 4],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 8], "texture": "#0"},
+				"south": {"uv": [0, 0, 16, 8], "texture": "#0"}
+			},
+			"type": "cube"
+		}
+	]
+}

@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "group": "beewax",
+    "ingredients": [
+        {
+            "item": "growthcraft_bees:bees_wax",
+            "data": 0
+        },
+        {
+        	"item": "minecraft:dye",
+        	"data": 1
+        }
+    ],
+    "result": {
+        "item": "growthcraft_bees:bees_wax",
+        "data": 1
+    }
+}

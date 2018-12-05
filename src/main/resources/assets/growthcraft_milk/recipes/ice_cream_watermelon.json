@@ -1,0 +1,28 @@
+{
+    "type": "forge:ore_shapeless",
+    "group": "ice_cream",
+    "ingredients": [
+      {
+        "item": "minecraft:milk_bucket"
+      },
+      {
+        "item": "minecraft:bowl"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "listAllsugar"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "bottleCream"
+      },
+      {
+        "type": "forge:ore_dict",
+        "ore": "foodMelon"
+      }
+    ],
+    "result": {
+      "item": "growthcraft_milk:ice_cream",
+      "data": 5
+    }
+}
