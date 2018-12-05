@@ -1,15 +1,9 @@
 package growthcraft.bees.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
 import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.fluids.FluidHoney;
-import growthcraft.bees.common.items.ItemBee;
-import growthcraft.bees.common.items.ItemBeesWax;
-import growthcraft.bees.common.items.ItemHoneyCombEmpty;
-import growthcraft.bees.common.items.ItemHoneyCombFilled;
-import growthcraft.bees.common.items.ItemHoneyJar;
+import growthcraft.bees.common.items.*;
 import growthcraft.bees.common.lib.config.BeesFluidTag;
 import growthcraft.bees.common.lib.config.BeesRegistry;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
@@ -40,22 +34,16 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootEntry;
-import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
-import scala.actors.threadpool.Arrays;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
 	private Init() {}
@@ -160,9 +148,7 @@ public class Init {
 		if (GrowthcraftBeesFluids.honey != null)
 		{
 			OreDictionary.registerOre("bottleHoney", GrowthcraftBeesFluids.honey.asBottleItemStack());
-//			OreDictionary.registerOre("bucketHoney", honey.asBucketItemStack());
 			OreDictionary.registerOre("honeyDrop", GrowthcraftBeesFluids.honey.asBucketItemStack());
-			OreDictionary.registerOre("dropHoney", GrowthcraftBeesFluids.honey.asBucketItemStack());
 		}
 	}
 	
