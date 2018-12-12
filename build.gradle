@@ -148,8 +148,8 @@ if (System.getenv().ARTIFACT_VERSION != null) {
 version = "${config.minecraft_version}-${artifact_version}"
 
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
-    mappings = config.mappings
+    version = project.property('minecraft_version') + "-" + project.property('forge_version')
+    mappings = project.property('mappings')
     runDir = "run"
     replace '${version}', project.version
     useDepAts = true
