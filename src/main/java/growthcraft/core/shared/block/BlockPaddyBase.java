@@ -139,13 +139,13 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
         Iterator var3 = BlockPos.getAllInBoxMutable(pos.add(-(maxFieldRange), 0, -(maxFieldRange)), pos.add(maxFieldRange, 1, maxFieldRange)).iterator();
 
         BlockPos.MutableBlockPos blockpos$mutableblockpos;
-        blockpos$mutableblockpos = (BlockPos.MutableBlockPos)var3.next();
 
         while (var3.hasNext()) {
+            blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
+
             if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()) != null
                     && FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()).getName() == "water")
                 return true;
-            blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
         }
         return false;
     }
@@ -157,14 +157,14 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
         Iterator var3 = BlockPos.getAllInBoxMutable(pos.add(-(maxFieldRange), 0, -(maxFieldRange)), pos.add(maxFieldRange, 1, maxFieldRange)).iterator();
 
         BlockPos.MutableBlockPos blockpos$mutableblockpos;
-        blockpos$mutableblockpos = (BlockPos.MutableBlockPos)var3.next();
 
         while (var3.hasNext()) {
+            blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
+
             // TODO: Implement CONFIG for radioactive fluid names.
             if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()) != null
                 && FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()).getName() == "yellorium")
                 return true;
-            blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
         }
 
         return false;
