@@ -7,6 +7,9 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Level;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GrowthcraftRiceConfig extends Configuration {
 
@@ -42,6 +45,16 @@ public class GrowthcraftRiceConfig extends Configuration {
     public static int sakeIntoxicatedColor = 0xE9EFF7;
     public static int sakePoisonedColor = 0xE9EFF7;
 
+    // Loot tables
+    public static int CULTIVATOR_HARVEST_TABLE_CHANCE = 10;
+    public static List<String> CULTIVATOR_HARVEST_TABLE = new ArrayList<String>() {{
+        add("growthcraft_rice:rice");
+    }};
+
+    public static List<String> ADD_GRASS_DROPS = new ArrayList<String>() {{
+       add("growthcraft_rice:rice");
+    }};
+
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();
         configuration = new Configuration(new File(directory.getPath(), "growthcraft/growthcraft-rice.cfg"));
@@ -63,9 +76,44 @@ public class GrowthcraftRiceConfig extends Configuration {
     }
 
     private static void initGeneralConfig() {
-        fermentTime = configuration.getInt("fermentTime", CATEGORY_GENERAL, fermentTime, 100, 48000, "General fermentation time for Growthcraft Rice Booze.");
-        enableDiscardButton = configuration.getBoolean("enableDiscardButton", CATEGORY_GENERAL, enableDiscardButton, "Allow users to be able to dump the fluid in the fermentor.");
-        brewTime = configuration.getInt("brewTime", CATEGORY_CELLAR, brewTime, 1, 10, "Time in minutes for cooking rice in the brew kettle.");
+        fermentTime = configuration.getInt(
+                "fermentTime",
+                CATEGORY_GENERAL,
+                fermentTime,
+                100,4000,
+                "General fermentation time for Growthcraft Rice Booze.");
+
+        enableDiscardButton = configuration.getBoolean(
+                "enableDiscardButton",
+                CATEGORY_GENERAL,
+                enableDiscardButton,
+                "Allow users to be able to dump the fluid in the fermentor.");
+
+        brewTime = configuration.getInt(
+                "brewTime",
+                CATEGORY_CELLAR,
+                brewTime,
+                1, 10,
+                "Time in minutes for cooking rice in the brew kettle.");
+
+        CULTIVATOR_HARVEST_TABLE = Arrays.asList(configuration.getStringList(
+                "cultivator_harvest_table",
+                CATEGORY_GENERAL,
+                CULTIVATOR_HARVEST_TABLE.toArray(new String[0]) ,
+                "Add the item's registry name on a new line for each item you want the culivator to drop when it cultivates."));
+
+        CULTIVATOR_HARVEST_TABLE_CHANCE = configuration.getInt(
+                "cultivator_harvest_table_chance",
+                CATEGORY_GENERAL,
+                CULTIVATOR_HARVEST_TABLE_CHANCE, 1, 100,
+                "1 in X chances something will drop while using the cultivator. Larger the int the more likely it will drop.");
+
+        ADD_GRASS_DROPS = Arrays.asList(configuration.getStringList(
+                "add_grass_drops",
+                CATEGORY_GENERAL,
+                ADD_GRASS_DROPS.toArray(new String[0]),
+                "Add a new with the registry name of the item you want to add to the grassSeed drop table."));
+
     }
 
     private static void initDebugConfig() {
