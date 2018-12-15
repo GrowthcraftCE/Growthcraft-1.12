@@ -33,6 +33,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -114,6 +115,8 @@ public class Init {
 
         GrowthcraftRiceItems.rice.registerItem(registry);
         GrowthcraftRiceItems.rice.getItem().setCreativeTab(tabGrowthcraft);
+        MinecraftForge.addGrassSeed(GrowthcraftRiceItems.rice.asStack(), 1);
+
 
         GrowthcraftRiceItems.rice_ball.registerItem(registry);
         GrowthcraftRiceItems.rice_ball.getItem().setCreativeTab(tabGrowthcraft);

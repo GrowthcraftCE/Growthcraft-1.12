@@ -3,6 +3,7 @@ package growthcraft.rice.common.item;
 import growthcraft.core.shared.block.BlockPaddyBase;
 import growthcraft.rice.shared.Reference;
 import growthcraft.rice.shared.init.GrowthcraftRiceBlocks;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemSeeds;
@@ -25,12 +26,11 @@ public class ItemRice extends ItemSeeds {
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
 
-        net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
-        String blockBelowName = state.getBlock().getUnlocalizedName();
+        IBlockState state = worldIn.getBlockState(pos);
+        IBlockState stateBlockAbove = worldIn.getBlockState(pos.up());
 
-        if ( facing == EnumFacing.UP && state.getBlock() instanceof BlockPaddyBase) {
+        if ( facing == EnumFacing.UP && state.getBlock() instanceof BlockPaddyBase && stateBlockAbove.getBlock() instanceof BlockAir) {
             IBlockState plantState = getPlant(worldIn, pos);
-
             worldIn.setBlockState(pos.up(), plantState);
             itemstack.shrink(1);
 
