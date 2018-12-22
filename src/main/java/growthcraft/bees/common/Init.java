@@ -285,12 +285,12 @@ public class Init {
 				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid())
-			.tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED, BeesFluidTag.MEAD)
+			.tags(BoozeTag.FERMENTED, BoozeTag.MAGICAL, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
 			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
-				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 2);
 
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_INTOXICATED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED, BeesFluidTag.MEAD)
@@ -306,11 +306,11 @@ public class Init {
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);

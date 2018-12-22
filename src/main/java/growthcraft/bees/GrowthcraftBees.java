@@ -76,6 +76,7 @@ public class GrowthcraftBees {
     	userFlowersConfig.init();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
     	proxy.init();
+    	Init.initBoozes();
     	
     	Init.registerRecipes();
     }
