@@ -16,6 +16,7 @@ public class ClientProxy extends CommonProxy {
 		
 		GrowthcraftBees.guiProvider.register("growthcraft_bees:bee_box", GuiBeeBox.class);
 		Init.registerFluidColorHandlers();
+		Init.registerItemColorHandlers();
 		registerSpecialRenders();
 	}
 	
