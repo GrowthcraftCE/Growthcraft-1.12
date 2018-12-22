@@ -16,3 +16,16 @@ item.honey_jar.name=Honey Jar
 container.growthcraft_bees.beeBox=Bee Box
 
 tile.beebox.name=Bee Box
+
+# Fluid Tags
+fluids.tag.mead=Mead
+fluids.tag.honey=Honey
+
+# Fluids
+fluid.fluid_booze_mead_young=Mead Must
+fluid.fluid_booze_mead_fermented=Mead
+fluid.fluid_booze_mead_potent=Potent Mead
+fluid.fluid_booze_mead_extended=Extended Mead
+fluid.fluid_booze_mead_ethereal=Magical Mead
+fluid.fluid_booze_mead_intoxicated=Intoxicated Mead
+fluid.fluid_booze_mead_poisoned=Mead

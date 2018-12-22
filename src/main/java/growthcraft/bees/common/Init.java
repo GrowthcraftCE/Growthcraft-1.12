@@ -259,9 +259,9 @@ public class Init {
 		}
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_YOUNG.ordinal()].getFluid())
-			.tags(BoozeTag.YOUNG, BeesFluidTag.MEAD);
+			.tags(BeesFluidTag.MEAD, BoozeTag.YOUNG);
 		
-		final TaggedFluidStacks youngMead = new TaggedFluidStacks(1, "young", "mead");
+		final TaggedFluidStacks youngMead = new TaggedFluidStacks(1, BoozeTag.YOUNG.getName(), BeesFluidTag.MEAD.getName());
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_FERMENTED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BeesFluidTag.MEAD)
