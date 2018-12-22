@@ -13,6 +13,7 @@ import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -124,6 +125,12 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     public boolean isFullCube(IBlockState state) {
         return false;
     }
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
@@ -399,6 +406,13 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         return block instanceof IBlockRope;
 	}
+	
+    @Override
+    public boolean canRopeBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    	// TODO: Check if this method is correct! Remove explicit dependencies of BlockRopeFence and BlockRopeKnot!
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        return block == GrowthcraftCoreBlocks.rope_fence.getBlock() || block == GrowthcraftCoreBlocks.rope_knot.getBlock();
+    }
 	
 	/************
 	 * DROPS
