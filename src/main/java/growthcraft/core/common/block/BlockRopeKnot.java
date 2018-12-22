@@ -14,6 +14,7 @@ import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -83,7 +84,7 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
-
+    
     @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
@@ -160,7 +161,7 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
     }
 
     @Override
-    public boolean canBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    public boolean canRopeBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         return block instanceof BlockRopeFence || block instanceof BlockRopeKnot;
     }
