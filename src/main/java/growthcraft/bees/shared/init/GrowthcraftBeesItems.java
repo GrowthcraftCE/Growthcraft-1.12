@@ -22,7 +22,7 @@ public class GrowthcraftBeesItems {
 	public static ItemDefinition bee;
 	public static ItemDefinition beesWax;
 	
-	public static ItemTypeDefinition<ItemBoozeBottle> mead;
+	public static ItemTypeDefinition<ItemBoozeBottle> honeyMeadBottle;
 
     public enum BeesWaxTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
         NORMAL(0, "normal"),
@@ -98,7 +98,7 @@ public class GrowthcraftBeesItems {
         
         @Override
         public ItemStack asStack(int amount) {
-        	return GrowthcraftBeesItems.mead.asStack(amount, getVariantID());
+        	return GrowthcraftBeesItems.honeyMeadBottle.asStack(amount, getVariantID());
         }
         
         @Override

@@ -53,8 +53,11 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootPool;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -104,7 +107,7 @@ public class Init {
 		GrowthcraftBeesItems.honeyJar = new ItemDefinition(new ItemHoneyJar("honey_jar"));
 		GrowthcraftBeesItems.bee = new ItemDefinition( new ItemBee("bee") );
 		GrowthcraftBeesItems.beesWax = new ItemDefinition( new ItemBeesWax("bees_wax") );
-		GrowthcraftBeesItems.mead = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
+		GrowthcraftBeesItems.honeyMeadBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
 	}
 	
 	public static void registerItemOres() {
@@ -135,9 +138,9 @@ public class Init {
 		GrowthcraftBeesItems.bee.registerItem(registry);
 		GrowthcraftBeesItems.beesWax.getItem().setCreativeTab(tabGrowthcraft);
 		GrowthcraftBeesItems.beesWax.registerItem(registry);
-		GrowthcraftBeesItems.mead.registerItem(registry, new ResourceLocation(Reference.MODID, "mead"));
-		GrowthcraftBeesItems.mead.getItem().setCreativeTab(tabGrowthcraft);
-		GrowthcraftBeesItems.mead.getItem().setBoozes(meadBooze);
+		GrowthcraftBeesItems.honeyMeadBottle.registerItem(registry, new ResourceLocation(Reference.MODID, "mead"));
+		GrowthcraftBeesItems.honeyMeadBottle.getItem().setCreativeTab(tabGrowthcraft);
+		GrowthcraftBeesItems.honeyMeadBottle.getItem().setBoozes(meadBooze);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -147,18 +150,18 @@ public class Init {
 		GrowthcraftBeesItems.honeyJar.registerRender();
 		GrowthcraftBeesItems.bee.registerRender();
 		GrowthcraftBeesItems.beesWax.registerRenders( BeesWaxTypes.class );
-		GrowthcraftBeesItems.mead.registerRenders( MeadTypes.class );
+		GrowthcraftBeesItems.honeyMeadBottle.registerRenders( MeadTypes.class );
 	}
 	
     @SideOnly(Side.CLIENT)
 	public static void registerItemColorHandlers() {
-    	ItemRenderUtils.registerItemColorHandler(GrowthcraftBeesItems.mead.getItem());
+    	ItemRenderUtils.registerItemColorHandler(GrowthcraftBeesItems.honeyMeadBottle.getItem());
     }
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerItemVariants() {
 		GrowthcraftBeesItems.beesWax.registerModelBakeryVariants( BeesWaxTypes.class );
-		GrowthcraftBeesItems.mead.registerModelBakeryVariants( MeadTypes.class );
+		GrowthcraftBeesItems.honeyMeadBottle.registerModelBakeryVariants( MeadTypes.class );
 	}
 	
 	////////
@@ -196,7 +199,7 @@ public class Init {
 	
 	public static void initBoozes() {
 		BoozeRegistryHelper.initBoozeContainers(meadBooze,
-												GrowthcraftBeesItems.mead,
+												GrowthcraftBeesItems.honeyMeadBottle,
 												Reference.MODID,
 												"mead",
 												MeadTypes.class);
@@ -338,7 +341,46 @@ public class Init {
 	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
 		ResourceLocation group = new ResourceLocation(Reference.MODID, "bees");
 		
+    	final UniversalBucket universalBucket = ForgeModContainer.getInstance().universalBucket;
+    	final ItemStack meadBucket = UniversalBucket.getFilledBucket(universalBucket, meadBooze[0].getFluid());
+		final ItemStack meadBottle = GrowthcraftBeesItems.honeyMeadBottle.asStack();
+		final ItemStack meadBottle4 = GrowthcraftBeesItems.honeyMeadBottle.asStack(4);
+		
 		// TODO: Use factory instead for these:
+		
+		// Create mead booze
+/* FIXME and give me a can of whoopass. I'm dump and don't want to work, because I'm trying to be funny and to annoy the devs		
+ 		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBucket,
+				Items.BUCKET,
+				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
+				new FluidStack(FluidRegistry.WATER, 1000))
+					.setRegistryName(toRegName("mead_fluid_to_bucket_1")));
+		
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBucket,
+				Items.BUCKET,
+				new OreItemStacks("bucketHoney"),
+				new FluidStack(FluidRegistry.WATER, 1000))
+					.setRegistryName(toRegName("mead_fluid_to_bucket_2"))); */
+		
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBottle,
+				Items.GLASS_BOTTLE,
+				new TaggedFluidStacks(FluidContainerRegistry.BOTTLE_VOLUME, BeesFluidTag.HONEY.getName()),
+				new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BOTTLE_VOLUME))
+					.setRegistryName(toRegName("mead_fluid_to_bottle_1")));
+
+/* FIXME and give me a can of whoopass. I'm dump and don't want to work, because I'm trying to be funny and to annoy the devs
+ 		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBottle4,
+				Items.GLASS_BOTTLE,	// TODO: Make dynamically. Amount of bottles = floor(Bucket volume / Bottle volume)
+				Items.GLASS_BOTTLE,
+				Items.GLASS_BOTTLE,
+				Items.GLASS_BOTTLE,
+				new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName()),
+				new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME))
+					.setRegistryName(toRegName("mead_fluid_to_bottle_2")));*/
 		
 		// Honey extraction
 		final ItemStack honeyStack = GrowthcraftBeesItems.honeyCombFilled.asStack();
