@@ -299,7 +299,8 @@ public class Init {
 		// Silken Nectar - ETHEREAL
 		GrowthcraftCellarApis.boozeBuilderFactory.create(appleCiderBooze[AppleCiderTypes.APPLE_CIDER_ETHEREAL.ordinal()].getFluid())
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
-			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
+			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
+			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.addEffect(new EffectRandomList()
