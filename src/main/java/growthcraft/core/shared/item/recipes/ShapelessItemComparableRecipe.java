@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.shared.item.IItemStackComparator;
 import growthcraft.core.shared.item.ItemUtils;
+import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -88,7 +89,7 @@ public class ShapelessItemComparableRecipe extends net.minecraftforge.registries
         for (int i = 0; i < nonnulllist.size(); ++i)
         {
             ItemStack itemstack = inv.getStackInSlot(i);
-            nonnulllist.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
+            nonnulllist.set(i, FluidContainerRegistry.getContainerItemWithFallback(itemstack));
         }
 
         return nonnulllist;

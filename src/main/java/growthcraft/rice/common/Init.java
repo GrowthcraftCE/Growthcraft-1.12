@@ -33,6 +33,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -40,6 +41,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.Iterator;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 import static growthcraft.rice.shared.init.GrowthcraftRiceFluids.sakeBooze;
@@ -114,10 +117,21 @@ public class Init {
 
         GrowthcraftRiceItems.rice.registerItem(registry);
         GrowthcraftRiceItems.rice.getItem().setCreativeTab(tabGrowthcraft);
+        MinecraftForge.addGrassSeed(GrowthcraftRiceItems.rice.asStack(), 1);
+
 
         GrowthcraftRiceItems.rice_ball.registerItem(registry);
         GrowthcraftRiceItems.rice_ball.getItem().setCreativeTab(tabGrowthcraft);
 
+        Iterator iterator = GrowthcraftRiceConfig.ADD_GRASS_DROPS.iterator();
+        while (iterator.hasNext()) {
+            String itemRegistryName = (String)iterator.next();
+            Item item = Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName));
+            if ( item != null ) {
+                ItemStack itemStack = new ItemStack(item);
+                MinecraftForge.addGrassSeed(itemStack, 1);
+            }
+        }
     }
 
     @SideOnly(Side.CLIENT)

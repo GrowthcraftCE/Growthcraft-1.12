@@ -1,15 +1,9 @@
 package growthcraft.bees.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
 import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.common.block.BlockBeeBox;
 import growthcraft.bees.common.fluids.FluidHoney;
-import growthcraft.bees.common.items.ItemBee;
-import growthcraft.bees.common.items.ItemBeesWax;
-import growthcraft.bees.common.items.ItemHoneyCombEmpty;
-import growthcraft.bees.common.items.ItemHoneyCombFilled;
-import growthcraft.bees.common.items.ItemHoneyJar;
+import growthcraft.bees.common.items.*;
 import growthcraft.bees.common.lib.config.BeesFluidTag;
 import growthcraft.bees.common.lib.config.BeesRegistry;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
@@ -19,20 +13,38 @@ import growthcraft.bees.shared.init.GrowthcraftBeesBlocks;
 import growthcraft.bees.shared.init.GrowthcraftBeesFluids;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.BeesWaxTypes;
+import growthcraft.bees.shared.init.GrowthcraftBeesItems.MeadTypes;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.GrowthcraftCoreApis;
+import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.cellar.shared.GrowthcraftCellarApis;
+import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
+import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.booze.BoozeUtils;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
+import growthcraft.cellar.shared.definition.BoozeDefinition;
+import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.core.shared.fluids.FluidFactory;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetailsBuilder;
 import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
+import growthcraft.core.shared.item.OreItemStacks;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import growthcraft.core.shared.utils.LootUtils;
+import growthcraft.core.shared.utils.TickUtils;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
+import growthcraft.core.shared.effect.EffectAddPotionEffect;
+import growthcraft.core.shared.effect.EffectWeightedRandomList;
+import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -40,22 +52,22 @@ import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootEntry;
-import net.minecraft.world.storage.loot.LootEntryItem;
 import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraft.world.storage.loot.functions.LootFunction;
+import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.event.LootTableLoadEvent;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
-import scala.actors.threadpool.Arrays;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+import static growthcraft.bees.shared.init.GrowthcraftBeesFluids.meadBooze;
+import static growthcraft.bees.shared.init.GrowthcraftBeesBlocks.meadBoozeFluidBlocks;
 
 public class Init {
 	private Init() {}
@@ -95,6 +107,7 @@ public class Init {
 		GrowthcraftBeesItems.honeyJar = new ItemDefinition(new ItemHoneyJar("honey_jar"));
 		GrowthcraftBeesItems.bee = new ItemDefinition( new ItemBee("bee") );
 		GrowthcraftBeesItems.beesWax = new ItemDefinition( new ItemBeesWax("bees_wax") );
+		GrowthcraftBeesItems.honeyMeadBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
 	}
 	
 	public static void registerItemOres() {
@@ -125,6 +138,9 @@ public class Init {
 		GrowthcraftBeesItems.bee.registerItem(registry);
 		GrowthcraftBeesItems.beesWax.getItem().setCreativeTab(tabGrowthcraft);
 		GrowthcraftBeesItems.beesWax.registerItem(registry);
+		GrowthcraftBeesItems.honeyMeadBottle.registerItem(registry, new ResourceLocation(Reference.MODID, "mead"));
+		GrowthcraftBeesItems.honeyMeadBottle.getItem().setCreativeTab(tabGrowthcraft);
+		GrowthcraftBeesItems.honeyMeadBottle.getItem().setBoozes(meadBooze);
 	}
 	
 	@SideOnly(Side.CLIENT)
@@ -134,11 +150,18 @@ public class Init {
 		GrowthcraftBeesItems.honeyJar.registerRender();
 		GrowthcraftBeesItems.bee.registerRender();
 		GrowthcraftBeesItems.beesWax.registerRenders( BeesWaxTypes.class );
+		GrowthcraftBeesItems.honeyMeadBottle.registerRenders( MeadTypes.class );
 	}
+	
+    @SideOnly(Side.CLIENT)
+	public static void registerItemColorHandlers() {
+    	ItemRenderUtils.registerItemColorHandler(GrowthcraftBeesItems.honeyMeadBottle.getItem());
+    }
 	
 	@SideOnly(Side.CLIENT)
 	public static void registerItemVariants() {
 		GrowthcraftBeesItems.beesWax.registerModelBakeryVariants( BeesWaxTypes.class );
+		GrowthcraftBeesItems.honeyMeadBottle.registerModelBakeryVariants( MeadTypes.class );
 	}
 	
 	////////
@@ -154,15 +177,40 @@ public class Init {
 						.setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft); //.setItemColor(0xFFAC01);
 			GrowthcraftBeesFluids.honey.refreshItemColor();
 		}
+		
+		meadBooze = new BoozeDefinition[MeadTypes.values().length];
+		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(GrowthcraftBeesFluids.meadBooze, MeadTypes.class, "");
+		
+		// 0 = young
+		// 1 = fermented
+		// 2 = fermented, potent
+		// 3 = fermented, extended
+		// 4 = ethereal
+		// 5 = intoxicated
+		// 6 = poisoned
+		meadBooze[MeadTypes.MEAD_YOUNG.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_FERMENTED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_POTENT.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_EXTENDED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_INTOXICATED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+	}
+	
+	public static void initBoozes() {
+		BoozeRegistryHelper.initBoozeContainers(meadBooze,
+												GrowthcraftBeesItems.honeyMeadBottle,
+												Reference.MODID,
+												"mead",
+												MeadTypes.class);
+		registerFermentations();
 	}
 	
 	public static void registerFluidOres() {
 		if (GrowthcraftBeesFluids.honey != null)
 		{
 			OreDictionary.registerOre("bottleHoney", GrowthcraftBeesFluids.honey.asBottleItemStack());
-//			OreDictionary.registerOre("bucketHoney", honey.asBucketItemStack());
 			OreDictionary.registerOre("honeyDrop", GrowthcraftBeesFluids.honey.asBucketItemStack());
-			OreDictionary.registerOre("dropHoney", GrowthcraftBeesFluids.honey.asBucketItemStack());
 		}
 	}
 	
@@ -171,6 +219,14 @@ public class Init {
 			GrowthcraftBeesFluids.honey.registerBlocks(registry, Reference.MODID, "honey");
 			CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftBeesFluids.honey.getFluid(), BeesFluidTag.HONEY);
 		}	
+
+		GrowthcraftBeesBlocks.meadBoozeFluidBlocks = new BlockBoozeDefinition[meadBooze.length];
+		BoozeRegistryHelper.initializeBooze(meadBooze, meadBoozeFluidBlocks);
+		// TODO: Refactor me: Food stats need to be initialized in preInitFluids.
+		BoozeRegistryHelper.setBoozeFoodStats(meadBooze, 1, -0.45f);
+		BoozeRegistryHelper.setBoozeFoodStats(meadBooze[0], 1, 0.45f);
+		
+		BoozeRegistryHelper.registerBoozeBlocks(registry, meadBooze, meadBoozeFluidBlocks, Reference.MODID, "mead", MeadTypes.class);
 	}
 	
 	public static void registerFluidItems(IForgeRegistry<Item> registry) {
@@ -184,6 +240,7 @@ public class Init {
 		if( GrowthcraftBeesFluids.honey != null ) {
 			GrowthcraftBeesFluids.honey.registerRenderer();
 		}
+		BoozeRegistryHelper.registerBoozeRenderers(meadBooze, meadBoozeFluidBlocks);
 	}
 
 	@SideOnly(Side.CLIENT)
@@ -193,6 +250,75 @@ public class Init {
 		}
 	}
 
+	private static void registerFermentations() {
+    	final int fermentTime = GrowthcraftCellarConfig.fermentTime;
+		final FluidStack[] fs = new FluidStack[meadBooze.length];
+		for (int i = 0; i < meadBooze.length; ++i)
+		{
+			fs[i] = meadBooze[i].asFluidStack();
+		}
+		
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_YOUNG.ordinal()].getFluid())
+			.tags(BeesFluidTag.MEAD, BoozeTag.YOUNG);
+		
+		final TaggedFluidStacks youngMead = new TaggedFluidStacks(1, BoozeTag.YOUNG.getName(), BeesFluidTag.MEAD.getName());
+		
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_FERMENTED.ordinal()].getFluid())
+			.tags(BoozeTag.FERMENTED, BeesFluidTag.MEAD)
+			.fermentsFrom(youngMead, new OreItemStacks("yeastBrewers"), fermentTime)
+			.fermentsFrom(youngMead, new ItemStack(Items.NETHER_WART), (int)(fermentTime * 0.66))
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
+		
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_POTENT.ordinal()].getFluid())
+			.tags(BoozeTag.FERMENTED, BoozeTag.POTENT, BeesFluidTag.MEAD)
+			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.17f), TickUtils.seconds(90))
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
+
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_EXTENDED.ordinal()].getFluid())
+			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED, BeesFluidTag.MEAD)
+			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
+		
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid())
+			.tags(BoozeTag.FERMENTED, BoozeTag.MAGICAL, BeesFluidTag.MEAD)
+			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 2);
+
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_INTOXICATED.ordinal()].getFluid())
+			.tags(BoozeTag.FERMENTED, BoozeTag.INTOXICATED, BeesFluidTag.MEAD)
+			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastOrigin"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
+				.addEffect(new EffectWeightedRandomList()
+						.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.REGENERATION, TickUtils.seconds(90), 2)))
+						.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(MobEffects.POISON, TickUtils.seconds(90), 2)))
+					);
+		
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid())
+			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED, BeesFluidTag.MEAD)
+			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.fermentsFrom(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
+				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+	}
+	
 	
 	////////
 	// User Apis
@@ -215,7 +341,46 @@ public class Init {
 	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
 		ResourceLocation group = new ResourceLocation(Reference.MODID, "bees");
 		
+    	final UniversalBucket universalBucket = ForgeModContainer.getInstance().universalBucket;
+    	final ItemStack meadBucket = UniversalBucket.getFilledBucket(universalBucket, meadBooze[0].getFluid());
+		final ItemStack meadBottle = GrowthcraftBeesItems.honeyMeadBottle.asStack();
+		final ItemStack meadBottle4 = GrowthcraftBeesItems.honeyMeadBottle.asStack(4);
+		
 		// TODO: Use factory instead for these:
+		
+		// Create mead booze
+/* FIXME and give me a can of whoopass. I'm dump and don't want to work, because I'm trying to be funny and to annoy the devs		
+ 		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBucket,
+				Items.BUCKET,
+				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
+				new FluidStack(FluidRegistry.WATER, 1000))
+					.setRegistryName(toRegName("mead_fluid_to_bucket_1")));
+		
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBucket,
+				Items.BUCKET,
+				new OreItemStacks("bucketHoney"),
+				new FluidStack(FluidRegistry.WATER, 1000))
+					.setRegistryName(toRegName("mead_fluid_to_bucket_2"))); */
+		
+		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBottle,
+				Items.GLASS_BOTTLE,
+				new TaggedFluidStacks(FluidContainerRegistry.BOTTLE_VOLUME, BeesFluidTag.HONEY.getName()),
+				new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BOTTLE_VOLUME))
+					.setRegistryName(toRegName("mead_fluid_to_bottle_1")));
+
+/* FIXME and give me a can of whoopass. I'm dump and don't want to work, because I'm trying to be funny and to annoy the devs
+ 		registry.register(new ShapelessMultiRecipe(group.toString(),
+				meadBottle4,
+				Items.GLASS_BOTTLE,	// TODO: Make dynamically. Amount of bottles = floor(Bucket volume / Bottle volume)
+				Items.GLASS_BOTTLE,
+				Items.GLASS_BOTTLE,
+				Items.GLASS_BOTTLE,
+				new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName()),
+				new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME))
+					.setRegistryName(toRegName("mead_fluid_to_bottle_2")));*/
 		
 		// Honey extraction
 		final ItemStack honeyStack = GrowthcraftBeesItems.honeyCombFilled.asStack();

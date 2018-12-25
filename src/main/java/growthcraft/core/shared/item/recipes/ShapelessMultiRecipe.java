@@ -207,7 +207,7 @@ public class ShapelessMultiRecipe extends net.minecraftforge.registries.IForgeRe
         for (int i = 0; i < nonnulllist.size(); ++i)
         {
             ItemStack itemstack = inv.getStackInSlot(i);
-            nonnulllist.set(i, net.minecraftforge.common.ForgeHooks.getContainerItem(itemstack));
+            nonnulllist.set(i, FluidContainerRegistry.getContainerItemWithFallback(itemstack));
         }
 
         return nonnulllist;

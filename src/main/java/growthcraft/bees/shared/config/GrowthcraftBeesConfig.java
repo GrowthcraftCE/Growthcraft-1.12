@@ -11,4 +11,6 @@ public class GrowthcraftBeesConfig {
 	public static int beeBoxFlowerRadius = 5;
 	public static float beeBoxBonusMultiplier = 2.5f;
 	
+	public static int honeyMeadColor = 0xA3610C;
+	
 }
