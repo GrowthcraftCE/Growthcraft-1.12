@@ -13,9 +13,11 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
@@ -112,12 +114,12 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
     @Override
     public boolean canGrow(World world, BlockPos blockPos, IBlockState state, boolean b) {
-        return  (canBlockStay(world, blockPos, state) && getAge(state) < RiceStage.MATURE );
+        return  (canBlockStay(world, blockPos, state) && !isMature(world, blockPos, state) );
     }
 
     @Override
     public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
-        return (canBlockStay(world, blockPos, iBlockState) && getAge(iBlockState) < RiceStage.MATURE );
+        return (canBlockStay(world, blockPos, iBlockState) && !isMature(world, blockPos, iBlockState) );
     }
 
     @Override
@@ -130,7 +132,8 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
             growWithBoneMeal(world, random, pos, state);
         } else if (downBlockState.getValue(MOISTURE)) {
             int nextAge = getAge(state) + 1;
-            if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+            // TODO: Add config setting for rice growthrate.
+            if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(4) == 0) {
                 world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
             }
         } else {
@@ -180,6 +183,31 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
             }
         }
 
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+
+        if ( isMature(worldIn, pos, state) ) {
+            // Min = 1 max = 4
+            int modifier = 1 + rand.nextInt(3);
+
+            BlockPos posDown = pos.down();
+            IBlockState downBlockState = worldIn.getBlockState(posDown);
+
+            if ( downBlockState.getValue(IS_RADIOACTIVE) )
+                modifier = modifier * 2;
+
+            if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
+                spawnAsEntity(worldIn, pos, GrowthcraftRiceItems.rice.asStack(1 + rand.nextInt(modifier)) );
+            }
+
+            // reset age back to 0
+            worldIn.setBlockState(pos, state.withProperty(AGE, 0), BlockFlags.SYNC);
+            return true;
+        }
+
+        return false;
     }
 
     /**
