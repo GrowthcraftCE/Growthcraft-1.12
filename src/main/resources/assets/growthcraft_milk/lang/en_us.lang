@@ -67,19 +67,35 @@ item.yogurt.plain.name=Yogurt
 item.yogurt.watermelon.name=Watermelon Yogurt
 
 # Tiles (blocks)
-tile.cheese_aged.gorgonzola.unaged.name=Gorgonzola Cheese
-tile.cheese_aged.emmentaler.unaged.name=Emmentaler Cheese
-tile.cheese_aged.appenzeller.unaged.name=Appenzeller Cheese
-tile.cheese_aged.asiago.unaged.name=Asiago Cheese
-tile.cheese_aged.parmesan.unaged.name=Parmesan Cheese
+tile.cheese_aged.gorgonzola.unaged.name=Gorgonzola Cheese (Unaged)
+tile.cheese_aged.gorgonzola.aged.name=Gorgonzola Cheese (Aged)
+tile.cheese_aged.gorgonzola.cut.name=Gorgonzola Cheese (Aged)
+
+tile.cheese_aged.emmentaler.unaged.name=Emmentaler Cheese (Unaged)
+tile.cheese_aged.emmentaler.aged.name=Emmentaler Cheese (Aged)
+tile.cheese_aged.emmentaler.cut.name=Emmentaler Cheese (Aged)
+
+tile.cheese_aged.appenzeller.unaged.name=Appenzeller Cheese (Unaged)
+tile.cheese_aged.appenzeller.aged.name=Appenzeller Cheese (Aged)
+tile.cheese_aged.appenzeller.cut.name=Appenzeller Cheese (Aged)
+
+tile.cheese_aged.asiago.unaged.name=Asiago Cheese (Unaged)
+tile.cheese_aged.asiago.aged.name=Asiago Cheese (Aged)
+tile.cheese_aged.asiago.cut.name=Asiago Cheese (Aged)
+
+tile.cheese_aged.parmesan.unaged.name=Parmesan Cheese (Unaged)
+tile.cheese_aged.parmesan.aged.name=Parmesan Cheese (Aged)
+tile.cheese_aged.parmesan.cut.name=Parmesan Cheese (Aged)
 
 tile.cheese_waxed.cheddar.aged.name=Cheddar Cheese (Aged)
 tile.cheese_waxed.cheddar.unaged.name=Cheddar Cheese (Unaged)
-tile.cheese_waxed.cheddar.unwaxed.name=Cheddar Cheese
+tile.cheese_waxed.cheddar.unwaxed.name=Cheddar Cheese (Unwaxed)
+tile.cheese_waxed.cheddar.cut.name=Cheddar Cheese (Aged)
 
 tile.cheese_waxed.monterey.aged.name=Monterey Cheese (Aged)
 tile.cheese_waxed.monterey.unaged.name=Monterey Cheese (Unaged)
-tile.cheese_waxed.monterey.unwaxed.name=Monterey Cheese
+tile.cheese_waxed.monterey.unwaxed.name=Monterey Cheese (Unwaxed)
+tile.cheese_waxed.monterey.cut.name=Monterey Cheese (Aged)
 
 tile.curds_aged.gorgonzola.name=Gorgonzola Curds
 tile.curds_aged.gorgonzola.dried.name=Gorgonzola Curds (Dried)
