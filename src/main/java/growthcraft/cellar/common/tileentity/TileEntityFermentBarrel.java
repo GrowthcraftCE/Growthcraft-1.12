@@ -223,8 +223,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	@Override
 	public boolean canFill(EnumFacing from, Fluid fluid)
 	{
-		if( hasTap() )
-			return false;
 		final FluidStack fluidStack = getFluidStack(0);
 		if (fluidStack == null || fluidStack.getFluid() == null) return true;
 		return FluidTest.fluidMatches(fluidStack, fluid);
@@ -233,32 +231,24 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 	@Override
 	protected int doFill(EnumFacing from, FluidStack resource, boolean shouldFill)
 	{
-		if( hasTap() )
-			return 0;
 		return fillFluidTank(0, resource, shouldFill);
 	}
 
 	@Override
 	public boolean canDrain(EnumFacing from, Fluid fluid)
 	{
-		if( !hasTap() )
-			return false;
 		return FluidTest.fluidMatches(getFluidStack(0), fluid);
 	}
 
 	@Override
 	protected FluidStack doDrain(EnumFacing from, int maxDrain, boolean shouldDrain)
 	{
-		if( !hasTap() )
-			return null;
 		return drainFluidTank(0, maxDrain, shouldDrain);
 	}
 
 	@Override
 	protected FluidStack doDrain(EnumFacing from, FluidStack resource, boolean shouldDrain)
 	{
-		if( !hasTap() )
-			return null;
 		if (resource == null || !resource.isFluidEqual(getFluidStack(0)))
 		{
 			return null;
