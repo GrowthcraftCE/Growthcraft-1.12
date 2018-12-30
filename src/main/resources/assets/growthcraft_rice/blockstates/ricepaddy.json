@@ -1,0 +1,31 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "growthcraft_rice:ricepaddy_base" }
+    },
+    {
+      "when": { "north": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "uvlock": false }
+    },
+    {
+      "when": { "east": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 90, "uvlock": false }
+    },
+    {
+      "when": { "south": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 180, "uvlock": false }
+    },
+    {
+      "when": { "west": "false" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_edge", "y": 270, "uvlock": false }
+    },
+    {
+      "when": { "is_radioactive": "true", "moisture": "true" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_fluid_radioactive", "uvlock": false }
+    },
+    {
+      "when": { "is_radioactive": "false", "moisture": "true" },
+      "apply": { "model": "growthcraft_rice:ricepaddy_fluid_water", "uvlock": false }
+    }
+  ]
+}

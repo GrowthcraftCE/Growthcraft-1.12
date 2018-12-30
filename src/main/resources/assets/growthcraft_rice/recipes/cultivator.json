@@ -1,0 +1,20 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "iii",
+    "iSi",
+    " S "
+  ],
+  "key": {
+    "i": {
+      "type": "forge:ore_dict",
+      "ore": "nuggetIron"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "growthcraft_rice:cultivator"
+  }
+}

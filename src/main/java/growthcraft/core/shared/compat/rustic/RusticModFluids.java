@@ -7,4 +7,7 @@ public class RusticModFluids {
 	
     public static FluidDefinition rusticGrapeJuice;
     public static FluidDefinition rusticGrapeWine;
+    
+    public static FluidDefinition rusticAppleJuice;
+    public static FluidDefinition rusticAppleCider;
 }

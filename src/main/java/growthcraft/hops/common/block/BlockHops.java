@@ -1,28 +1,19 @@
 package growthcraft.hops.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.block.ICropDataProvider;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
-import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.hops.shared.Reference;
 import growthcraft.hops.shared.config.GrowthcraftHopsConfig;
 import growthcraft.hops.shared.init.GrowthcraftHopsItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockBush;
-import net.minecraft.block.BlockCrops;
-import net.minecraft.block.IGrowable;
-import net.minecraft.block.SoundType;
+import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -42,6 +33,11 @@ import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICropDataProvider, IGrowable {
 	
@@ -129,6 +125,12 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     public boolean isFullCube(IBlockState state) {
         return false;
     }
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
 
 	@SuppressWarnings("deprecation")
 	@SideOnly(Side.CLIENT)
@@ -404,6 +406,13 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         return block instanceof IBlockRope;
 	}
+	
+    @Override
+    public boolean canRopeBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
+    	// TODO: Check if this method is correct! Remove explicit dependencies of BlockRopeFence and BlockRopeKnot!
+        Block block = world.getBlockState(pos.offset(facing)).getBlock();
+        return block == GrowthcraftCoreBlocks.rope_fence.getBlock() || block == GrowthcraftCoreBlocks.rope_knot.getBlock();
+    }
 	
 	/************
 	 * DROPS

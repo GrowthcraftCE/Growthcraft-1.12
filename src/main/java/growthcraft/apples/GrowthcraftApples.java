@@ -2,7 +2,9 @@ package growthcraft.apples;
 
 import growthcraft.apples.common.CommonProxy;
 import growthcraft.apples.common.Init;
+import growthcraft.apples.common.compat.rustic.RusticApplesRecipes;
 import growthcraft.apples.shared.Reference;
+import growthcraft.core.shared.compat.Compat;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -36,14 +38,18 @@ public class GrowthcraftApples {
         // Register the blocks
     	Init.preInitBlocks();
         Init.preInitItems();
+        Init.preInitFluids();
         
         proxy.preInit();
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        Init.registerRecipes();
         proxy.init();
+        Init.initBoozes();
+        if (Compat.isModAvailable_Rustic())
+        	RusticApplesRecipes.initBoozes();
+        Init.registerRecipes();
     }
 
     @Mod.EventHandler
@@ -65,6 +71,7 @@ public class GrowthcraftApples {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
+        Init.registerFluidBlocks(registry);
 	}
 
 	@SubscribeEvent
@@ -84,6 +91,7 @@ public class GrowthcraftApples {
 	{
         Init.registerItemRenders();
         Init.registerBlockRenders();
+        Init.registerFluidRenders();
 	}
 	
 	

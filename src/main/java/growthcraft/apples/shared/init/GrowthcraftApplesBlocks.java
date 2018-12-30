@@ -1,5 +1,6 @@
 package growthcraft.apples.shared.init;
 
+import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.BlockTypeDefinition;
 import net.minecraft.block.BlockSlab;
@@ -17,6 +18,7 @@ public class GrowthcraftApplesBlocks {
     public static BlockTypeDefinition<BlockSlab> blockAppleSlabHalf;
     public static BlockTypeDefinition<BlockSlab> blockAppleSlabDouble;
     public static BlockDefinition blockAppleStairs;
-
+    
+    public static BlockBoozeDefinition[] appleCiderFluidBlocks;
 
 }

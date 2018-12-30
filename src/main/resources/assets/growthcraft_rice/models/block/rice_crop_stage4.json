@@ -1,0 +1,6 @@
+{
+  "parent": "block/cross",
+  "textures": {
+    "cross": "growthcraft_rice:blocks/rice_crop_stage4"
+  }
+}

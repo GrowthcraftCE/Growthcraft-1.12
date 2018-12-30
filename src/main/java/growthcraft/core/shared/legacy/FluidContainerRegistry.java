@@ -6,11 +6,13 @@ import java.util.Set;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
+import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
@@ -204,6 +206,25 @@ public abstract class FluidContainerRegistry
         MinecraftForge.EVENT_BUS.post(new FluidContainerRegisterEvent(data));
         return true;
     }
+    
+    /**
+     * Like {@link ForgeHooks#getContainerItem(ItemStack), but returns container items
+     * registered within the FluidContainerRegistry in case of fallback.
+     * 
+     * @param stack the item stack containing the fluid
+     * @return the empty container of stack 
+     */
+    public static ItemStack getContainerItemWithFallback(ItemStack stack) {
+    	ItemStack result = ForgeHooks.getContainerItem(stack);
+    	if( !ItemUtils.isEmpty(result) )
+    		return result;
+    	
+    	result = drainFluidContainer(stack);
+    	if( !ItemUtils.isEmpty(result) )
+    		return result;
+    	
+    	return ItemStack.EMPTY;
+    }
 
     /**
      * Determines the fluid type and amount inside a container.
@@ -236,7 +257,9 @@ public abstract class FluidContainerRegistry
      */
     public static ItemStack fillFluidContainer(FluidStack fluid, ItemStack container)
     {
-        if (container == null || fluid == null)
+    	// FIXME: Use MC 1.11.2 convention and return ItemStack.EMPTY instead of null . Adapt any code using this method.
+    	
+        if (ItemUtils.isEmpty(container) || fluid == null)
         {
             return null;
         }
@@ -258,7 +281,9 @@ public abstract class FluidContainerRegistry
      */
     public static ItemStack drainFluidContainer(ItemStack container)
     {
-        if (container == null)
+    	// FIXME: Use MC 1.11.2 convention and return ItemStack.EMPTY instead of null . Adapt any code using this method.
+    	
+        if (ItemUtils.isEmpty(container) )
         {
             return null;
         }

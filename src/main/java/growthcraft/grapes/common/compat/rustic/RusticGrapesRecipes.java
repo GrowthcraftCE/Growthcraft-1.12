@@ -16,8 +16,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class Recipes {
-	private Recipes() {}
+public class RusticGrapesRecipes {
+	private RusticGrapesRecipes() {}
 	
 	////////////
 	// Fermentations
@@ -65,7 +65,7 @@ public class Recipes {
 				GrowthcraftGrapesConfig.portWineBrewingTime * costRatio,
 				Residue.newDefault(0.3F));
 
-		// Intoxicated Wine
+		// Poisoned Wine
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POISONED.ordinal()].getFluid())
 			.fermentsFrom(rusticGrapeWineStack, new OreItemStacks("yeastPoison"), fermentTime * costRatio);
 	}

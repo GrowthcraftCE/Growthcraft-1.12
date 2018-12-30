@@ -23,4 +23,6 @@ public interface IBlockRope
 	 * </pre>
 	 */
 	public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing);
+	
+	public boolean canRopeBeConnectedTo(IBlockAccess world, BlockPos pos, EnumFacing facing);
 }
