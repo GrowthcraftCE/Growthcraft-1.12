@@ -410,7 +410,7 @@ public class Init {
 
 		registry.register(new ShapelessOreRecipe(group,
 			GrowthcraftBeesItems.honeyJar.asStack(),
-			Blocks.FLOWER_POT,
+			Items.FLOWER_POT,
 			"jarHoney"
 				).setRegistryName(toRegName("honey_ore_to_jar")));
 		
