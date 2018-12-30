@@ -396,17 +396,11 @@ public class Init {
 					.setRegistryName(toRegName("honey_comb_filled")));
 
 		// Transfer recipes
-		/// To Honey Jar from `jarHoney`
+		/// To Honey Jar from different sources
 		registry.register(new ShapelessMultiRecipe(group.toString(),
 				GrowthcraftBeesItems.honeyJar.asStack(),
-				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
+				new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName()),
 				Items.FLOWER_POT).setRegistryName(toRegName("honey_fluid_to_jar_1")));
-
-		registry.register(new ShapelessMultiRecipe(group.toString(),
-			GrowthcraftBeesItems.honeyJar.asStack(),
-			Blocks.FLOWER_POT,
-			new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, "honey")
-				).setRegistryName(toRegName("honey_fluid_to_jar_2")));
 
 		registry.register(new ShapelessOreRecipe(group,
 			GrowthcraftBeesItems.honeyJar.asStack(),
@@ -414,11 +408,11 @@ public class Init {
 			"jarHoney"
 				).setRegistryName(toRegName("honey_ore_to_jar")));
 		
-		/// To Honey Bucket from `bucketHoney`
+		/// To Honey Bucket from different sources
 		registry.register(new ShapelessMultiRecipe(group.toString(),
 			GrowthcraftBeesFluids.honey.asBucketItemStack(),
 			Items.BUCKET,
-			new TaggedFluidStacks(1000, "honey")
+			new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName())
 				).setRegistryName(toRegName("honey_fluid_to_bucket")));
 
 		registry.register(new ShapelessOreRecipe(group,
@@ -428,24 +422,6 @@ public class Init {
 				).setRegistryName(toRegName("honey_ore_to_bucket")));
 		
 		// TODO: RECIPE_REGISTER!
-		
-/*		// Devices
-		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthcraftBeesBlocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
-
-		// Bees wax
-		final ItemStack emptyComb = GrowthcraftBeesItems.honeyCombEmpty.asStack();
-		GameRegistry.addShapelessRecipe(BeesWaxTypes.NORMAL.asStack(),
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb);
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(BeesWaxTypes.BLACK.asStack(),
-			BeesWaxTypes.NORMAL.asStack(), "dyeBlack"));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(BeesWaxTypes.RED.asStack(),
-			BeesWaxTypes.NORMAL.asStack(), "dyeRed"));
-
-*/
 	}
 	
 	private static ResourceLocation toRegName(String name) {
