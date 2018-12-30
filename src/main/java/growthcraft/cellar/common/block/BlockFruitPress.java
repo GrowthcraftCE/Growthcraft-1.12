@@ -21,7 +21,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockFruitPress extends BlockOrientedCellarContainer {
+public class BlockFruitPress extends BlockRotatableCellarContainer {
 	// INITIALIZE
 	
 	public BlockFruitPress(String unlocalizedName) {

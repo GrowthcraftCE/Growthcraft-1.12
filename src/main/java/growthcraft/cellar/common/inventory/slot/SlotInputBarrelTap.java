@@ -1,22 +1,20 @@
 package growthcraft.cellar.common.inventory.slot;
 
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
-import growthcraft.core.shared.inventory.slot.GrowthcraftSlot;
 import growthcraft.core.shared.inventory.slot.SlotInput;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class SlotInputBrewKettleLid extends SlotInput {
-	
-	public SlotInputBrewKettleLid(IInventory inv, int x, int y, int z)
-	{
-		super(inv, x, y, z);
+public class SlotInputBarrelTap extends SlotInput {
+
+	public SlotInputBarrelTap(IInventory inv, int index, int x, int y) {
+		super(inv, index, x, y);
 	}
 
 	@Override
 	public boolean isItemValid(ItemStack stack)
 	{
-		return GrowthcraftCellarItems.brewKettleLid.getItem().equals(stack.getItem());
+		return isValidBarrelTap(stack);
 	}
 	
 	@Override
@@ -24,4 +22,8 @@ public class SlotInputBrewKettleLid extends SlotInput {
     {
         return 1;
     }
+	
+	public static boolean isValidBarrelTap(ItemStack stack) {
+		return GrowthcraftCellarItems.barrelTap.getItem().equals(stack.getItem());
+	}
 }

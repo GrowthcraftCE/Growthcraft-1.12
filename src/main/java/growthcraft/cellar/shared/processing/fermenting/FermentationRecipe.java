@@ -73,4 +73,15 @@ public class FermentationRecipe implements IFermentationRecipe
 	{
 		return ItemTest.itemMatches(fermentingItem, stack);
 	}
+
+	@Override
+	public boolean isItemIngredient(ItemStack stack) {
+		if (stack != null) {
+			if (fermentingItem.containsItemStack(stack))
+				return true;
+		}
+		return false;
+	}
+	
+	
 }
