@@ -18,4 +18,10 @@ public class SlotInputBrewKettleLid extends SlotInput {
 	{
 		return GrowthcraftCellarItems.brewKettleLid.getItem().equals(stack.getItem());
 	}
+	
+	@Override
+    public int getSlotStackLimit()
+    {
+        return 1;
+    }
 }
