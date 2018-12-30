@@ -13,6 +13,8 @@ public class MultiItemStacks implements IMultiItemStacks
 {
 	private List<ItemStack> itemStacks;
 
+	public static MultiItemStacks EMPTY = new MultiItemStacks();
+	
 	public MultiItemStacks(@Nonnull List<ItemStack> stacks)
 	{
 		this.itemStacks = stacks;

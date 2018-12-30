@@ -59,7 +59,7 @@ public class FermentBarrel extends DeviceBase {
 	{
 		return CellarRegistry.instance().fermenting().findRecipe(GrowthcraftFluidUtils.removeStackTags(fluidSlot.get()), fermentSlot.get());
 	}
-
+	
 	private IFermentationRecipe refreshRecipe()
 	{
 		final IFermentationRecipe recipe = loadRecipe();
@@ -132,10 +132,16 @@ public class FermentBarrel extends DeviceBase {
 				{
 					fluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(fluidSlot.get(), outputFluidStack.getFluid()));
 				}
-				final IMultiItemStacks fermenter = recipe.getFermentingItemStack();
-				if (fermenter != null && !fermenter.isEmpty())
-				{
-					fermentSlot.consume(fermenter.getStackSize());
+				
+				if (CellarRegistry.instance().fermenting().isFallbackRecipe(recipe)) {
+					fermentSlot.consume(1);
+				}
+				else {
+					final IMultiItemStacks fermenter = recipe.getFermentingItemStack();
+					if( !ItemUtils.isEmpty(fermenter))
+					{
+						fermentSlot.consume(fermenter.getStackSize());
+					}
 				}
 			}
 		}

@@ -10,6 +10,7 @@ import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
@@ -307,7 +308,22 @@ public class Init {
             .getEffect()
             .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
             .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(8), 1);
+        
         // TODO: SAKE_POISONED
+        GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POISONED.ordinal()].getFluid()))
+        	.tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POISONED)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_WATER.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_MASH.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_FERMENTED.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_EXTENDED.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], fermentTime)
+        	.fermentsFromFallback(fs[SakeTypes.SAKE_POISONED.ordinal()], fermentTime)
+			.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
+				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
 
 
     }

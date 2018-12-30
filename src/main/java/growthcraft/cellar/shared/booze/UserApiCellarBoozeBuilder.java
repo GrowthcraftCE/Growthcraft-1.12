@@ -54,6 +54,20 @@ public class UserApiCellarBoozeBuilder extends CellarBoozeBuilder
 		this.userApis.getUserFermentingRecipes().addDefault(stack, src, new FluidStack(fluid, src.getAmount()), time);
 		return this;
 	}
+	
+	@Override
+	public ICellarBoozeBuilder fermentsToFallback(@Nonnull FluidStack result, int time) {
+		this.userApis.getUserFermentingRecipes().addFallbackDefault(new FluidStack(fluid, result.amount), result, time);
+		return this;
+	}
+	
+	@Override
+	public ICellarBoozeBuilder fermentsFromFallback(@Nonnull Object srcFluid, int time) {
+		final IMultiFluidStacks src = MultiStacksUtil.toMultiFluidStacks(srcFluid);
+		this.userApis.getUserFermentingRecipes().addFallbackDefault(src, new FluidStack(fluid, src.getAmount()), time);
+		return this;
+	}
+
 
 	@Override
 	public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue)

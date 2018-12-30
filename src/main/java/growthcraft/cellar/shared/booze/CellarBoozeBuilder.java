@@ -67,6 +67,19 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 		CellarRegistry.instance().fermenting().addRecipe(new FluidStack(fluid, src.getAmount()), src, stack, time);
 		return this;
 	}
+	
+	@Override
+	public ICellarBoozeBuilder fermentsToFallback(@Nonnull FluidStack result, int time) {
+		CellarRegistry.instance().fermenting().addFallbackRecipe(result, new FluidStack(fluid, result.amount), time);
+		return this;
+	}
+
+	@Override
+	public ICellarBoozeBuilder fermentsFromFallback(@Nonnull Object srcFluid, int time) {
+		final IMultiFluidStacks src = MultiStacksUtil.toMultiFluidStacks(srcFluid);
+		CellarRegistry.instance().fermenting().addFallbackRecipe(new FluidStack(fluid, src.getAmount()), src, time);
+		return this;
+	}
 
 	@Override
 	public ICellarBoozeBuilder pressesFrom(@Nonnull Object stack, int time, int amount, @Nullable Residue residue)

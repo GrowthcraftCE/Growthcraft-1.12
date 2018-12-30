@@ -21,7 +21,7 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 	protected UserFermentingRecipes defaultRecipes = new UserFermentingRecipes();
 	protected UserFermentingRecipes recipes;
 
-	public void addDefaultSchemas(@Nonnull ItemKeySchema item, @Nonnull MultiFluidStackSchema inputFluid, @Nonnull FluidStackSchema outputFluid, int time)
+	public void addDefaultSchemas(ItemKeySchema item, @Nonnull MultiFluidStackSchema inputFluid, @Nonnull FluidStackSchema outputFluid, int time)
 	{
 		addDefault(new UserFermentingRecipe(item, inputFluid, outputFluid, time));
 	}
@@ -57,6 +57,17 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 			);
 		}
 	}
+	
+	public void addFallbackDefault(@Nonnull Object inputFluid, @Nonnull FluidStack outputFluid, int time)
+	{
+		addDefaultSchemas(
+				null,
+				new MultiFluidStackSchema(MultiStacksUtil.toMultiFluidStacks(inputFluid)),
+				new FluidStackSchema(outputFluid),
+				time
+			);
+	}
+
 
 	@Override
 	protected String getDefault()
@@ -78,8 +89,9 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 			return;
 		}
 
-		if (recipe.item == null || !recipe.item.isValid())
+		if (recipe.item != null && !recipe.item.isValid())
 		{
+			// NOTE: item == null means it is a fallback case
 			GrowthcraftLogger.getLogger(Reference.MODID).error("Recipe item is invalid! {%s}", recipe);
 			return;
 		}
@@ -97,14 +109,26 @@ public class UserFermentingRecipesConfig extends AbstractUserJSONConfig
 		}
 
 		GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding Fermenting Recipe {%s}", recipe);
-		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
-		{
+		if( recipe.item != null ) {
+			for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
+			{
+				for (IMultiFluidStacks inputFluid : recipe.input_fluid.getMultiFluidStacks())
+				{
+					CellarRegistry.instance().fermenting().addRecipe(
+						recipe.output_fluid.asFluidStack(),
+						inputFluid,
+						item,
+						recipe.time
+					);
+				}
+			}
+		}
+		else {
 			for (IMultiFluidStacks inputFluid : recipe.input_fluid.getMultiFluidStacks())
 			{
-				CellarRegistry.instance().fermenting().addRecipe(
+				CellarRegistry.instance().fermenting().addFallbackRecipe(
 					recipe.output_fluid.asFluidStack(),
 					inputFluid,
-					item,
 					recipe.time
 				);
 			}

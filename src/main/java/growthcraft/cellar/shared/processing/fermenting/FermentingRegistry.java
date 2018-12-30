@@ -23,6 +23,8 @@ public class FermentingRegistry
 
 	public void addRecipe(@Nonnull IFermentationRecipe recipe)
 	{
+		// TODO: Warn if multiple fallback recipes exist for same input fluid
+		
 		recipes.add(recipe);
 		onRecipeAdded(recipe);
 	}
@@ -31,14 +33,28 @@ public class FermentingRegistry
 	{
 		addRecipe(new FermentationRecipe(MultiStacksUtil.toMultiFluidStacks(booze), MultiStacksUtil.toMultiItemStacks(fermenter), result, time));
 	}
+	
+	public void addFallbackRecipe(@Nonnull FluidStack result, @Nonnull Object booze, int time) {
+		addRecipe(new FermentationFallbackRecipe(MultiStacksUtil.toMultiFluidStacks(booze), result, time));		
+	}
 
 	public IFermentationRecipe findRecipe(@Nullable FluidStack booze, @Nullable ItemStack fermenter)
 	{
 		if (booze == null || fermenter == null) return null;
 		for (IFermentationRecipe recipe : recipes)
 		{
+			if (isFallbackRecipe(recipe))
+				continue;
 			if (recipe.matchesRecipe(booze, fermenter)) return recipe;
 		}
+		
+		for (IFermentationRecipe recipe : recipes)
+		{
+			if (!isFallbackRecipe(recipe))
+				continue;
+			if (recipe.matchesIngredient(booze)) return recipe;
+		}
+
 		return null;
 	}
 
@@ -63,7 +79,7 @@ public class FermentingRegistry
 		{
 			for (IFermentationRecipe recipe : recipes)
 			{
-				if (recipe.matchesIngredient(fermenter))
+				if (isFallbackRecipe(recipe) || recipe.matchesIngredient(fermenter))
 					result.add(recipe);
 			}
 		}
@@ -89,9 +105,16 @@ public class FermentingRegistry
 
 		for (IFermentationRecipe recipe : recipes)
 		{
+			if (isFallbackRecipe(recipe) )	// Ignore default recipes
+				continue;
+			
 			if (recipe.isItemIngredient(itemstack))
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean isFallbackRecipe(IFermentationRecipe recipe) {
+		return (recipe instanceof FermentationFallbackRecipe) && !(recipe instanceof FermentationRecipe);
 	}
 }
