@@ -3,6 +3,7 @@ package growthcraft.hops;
 import growthcraft.hops.common.CommonProxy;
 import growthcraft.hops.common.Init;
 import growthcraft.hops.shared.Reference;
+import growthcraft.hops.shared.config.GrowthcraftHopsConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -33,6 +34,8 @@ public class GrowthcraftHops {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+
+		GrowthcraftHopsConfig.preInit(event);
 
         Init.preInitBlocks();
         Init.preInitItems();
