@@ -114,7 +114,7 @@ public class FermentingRegistry
 		return false;
 	}
 	
-	public static boolean isFallbackRecipe(IFermentationRecipe recipe) {
+	public boolean isFallbackRecipe(IFermentationRecipe recipe) {
 		return (recipe instanceof FermentationFallbackRecipe) && !(recipe instanceof FermentationRecipe);
 	}
 }
