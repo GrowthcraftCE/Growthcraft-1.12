@@ -393,7 +393,26 @@ public class Init {
 						Ingredient.fromStacks(honeyStack),
 						Ingredient.fromStacks(honeyStack),
 						Ingredient.fromItem(Items.FLOWER_POT)))
-					.setRegistryName(toRegName("honey_comb_filled")));
+					.setRegistryName(toRegName("honey_comb_filled_1")));
+		
+		registry.register(new ShapelessMultiRecipe(group.toString(), GrowthcraftBeesFluids.honey.asBucketItemStack(),	// NOTE: For some reason ShapelessRecipes is not working with buckets ...
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				Items.BUCKET)
+					.setRegistryName(toRegName("honey_comb_filled_2")));
+		
+		registry.register(new ShapelessRecipes(group.toString(), GrowthcraftBeesFluids.honey.asBottleItemStack(2),
+				NonNullList.from( Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromItem(Items.GLASS_BOTTLE),
+						Ingredient.fromItem(Items.GLASS_BOTTLE)))
+					.setRegistryName(toRegName("honey_comb_filled_3")));
 
 		// Transfer recipes
 		/// To Honey Jar from different sources
