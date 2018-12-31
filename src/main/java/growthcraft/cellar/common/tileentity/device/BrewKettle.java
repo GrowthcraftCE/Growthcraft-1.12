@@ -120,12 +120,17 @@ public class BrewKettle extends DeviceBase
 
 		final IBrewingRecipe recipe = findRecipe();
 		if (recipe == null) return null;
+		
+		if( brewingSlot.isEmpty() ) return null;
 
-		final IMultiItemStacks expected = recipe.getInputItemStack();
-		brewingSlot.hasEnough(expected);
+		// Avatair: Why the double check for input item and input fluid?
+		if( !CellarRegistry.instance().brewing().isFallbackRecipe(recipe) ) {
+			final IMultiItemStacks expected = recipe.getInputItemStack();
+			if( !brewingSlot.hasEnough(expected) ) return null;
+		}
 
 		final FluidStack inputFluid = recipe.getInputFluidStack();
-		inputFluidSlot.hasEnough(inputFluid);
+		if( !inputFluidSlot.hasEnough(inputFluid) ) return null;
 
 		if (outputFluidSlot.isEmpty()) return recipe;
 
@@ -159,7 +164,12 @@ public class BrewKettle extends DeviceBase
 		produceGrain(recipe);
 		inputFluidSlot.consume(GrowthcraftFluidUtils.replaceFluidStackTags(recipe.getInputFluidStack(), inputFluidSlot.get()), true);
 		outputFluidSlot.fill(recipe.asFluidStack(), true);
-		brewingSlot.consume(recipe.getInputItemStack());
+		if( !CellarRegistry.instance().brewing().isFallbackRecipe(recipe) ) {
+			brewingSlot.consume(recipe.getInputItemStack());
+		}
+		else {
+			brewingSlot.consume(1);
+		}
 		markForUpdate();
 		MinecraftForge.EVENT_BUS.post(new EventBrewed(parent, recipe));
 	}
