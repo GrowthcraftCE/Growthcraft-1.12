@@ -345,8 +345,8 @@ public class Init {
 		// the booze looses all its benefits and effectively becomes poisoned
 		GrowthcraftCellarApis.boozeBuilderFactory.create(appleCiderBooze[AppleCiderTypes.APPLE_CIDER_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFrom(fs[AppleCiderTypes.APPLE_JUICE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_JUICE.ordinal()], fermentTime)
-				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_JUICE.ordinal()], TickUtils.minutes(1), null)
+//			.fermentsFrom(fs[AppleCiderTypes.APPLE_JUICE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_JUICE.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_JUICE.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], fermentTime)
 				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], fermentTime)

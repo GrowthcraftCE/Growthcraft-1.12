@@ -387,8 +387,8 @@ public class Init {
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_WINE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFromFallback(fs[WineTypes.PURPLE_JUICE.ordinal()], fermentTime)
-				.brewsFromFallback(spoilInputFs[WineTypes.PURPLE_JUICE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
+//			.fermentsFromFallback(fs[WineTypes.PURPLE_JUICE.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[WineTypes.PURPLE_JUICE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[WineTypes.PURPLE_WINE.ordinal()], fermentTime)
 				.brewsFromFallback(spoilInputFs[WineTypes.PURPLE_WINE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
 			.fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], fermentTime)
@@ -409,8 +409,8 @@ public class Init {
 				.toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFromFallback(fs[WineTypes.RED_JUICE.ordinal()], fermentTime)
-				.brewsFromFallback(spoilInputFs[WineTypes.RED_JUICE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
+//			.fermentsFromFallback(fs[WineTypes.RED_JUICE.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[WineTypes.RED_JUICE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
 			.fermentsFrom(fs[WineTypes.RED_WINE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[WineTypes.RED_WINE.ordinal()], fermentTime)
 				.brewsFromFallback(spoilInputFs[WineTypes.RED_WINE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
 			.fermentsFrom(fs[WineTypes.RED_WINE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[WineTypes.RED_WINE_POTENT.ordinal()], fermentTime)
@@ -431,8 +431,8 @@ public class Init {
 				.toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
 		GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFromFallback(fs[WineTypes.GREEN_JUICE.ordinal()], fermentTime)
-				.brewsFromFallback(spoilInputFs[WineTypes.GREEN_JUICE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
+//			.fermentsFromFallback(fs[WineTypes.GREEN_JUICE.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[WineTypes.GREEN_JUICE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[WineTypes.GREEN_WINE.ordinal()], fermentTime)
 				.brewsFromFallback(spoilInputFs[WineTypes.GREEN_WINE.ordinal()], GrowthcraftGrapesConfig.portWineBrewingTime, null)
 			.fermentsFrom(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], fermentTime)

@@ -316,8 +316,8 @@ public class Init {
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED, BeesFluidTag.MEAD)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_YOUNG.ordinal()], fermentTime)
-				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_YOUNG.ordinal()], TickUtils.minutes(1), null)
+//			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_YOUNG.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_YOUNG.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_FERMENTED.ordinal()], fermentTime)
 				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_FERMENTED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_EXTENDED.ordinal()], fermentTime)

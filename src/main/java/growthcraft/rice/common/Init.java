@@ -318,10 +318,10 @@ public class Init {
         // TODO: SAKE_POISONED
         GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POISONED.ordinal()].getFluid()))
         	.tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POISONED)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_WATER.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_WATER.ordinal()], GrowthcraftRiceConfig.brewTime, null)		// Disabled, because it would appear strange if rice water would turn to sake, even if poisoned
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_MASH.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_MASH.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+//        	.fermentsFromFallback(fs[SakeTypes.SAKE_WATER.ordinal()], fermentTime)
+//        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_WATER.ordinal()], GrowthcraftRiceConfig.brewTime, null)		// Disabled, because it would appear strange if non alcoholic drink would turn to alcoholic drinks
+//        	.fermentsFromFallback(fs[SakeTypes.SAKE_MASH.ordinal()], fermentTime)
+//        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_MASH.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_FERMENTED.ordinal()], fermentTime)
         		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_FERMENTED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT.ordinal()], fermentTime)
