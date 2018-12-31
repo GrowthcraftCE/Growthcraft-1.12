@@ -201,11 +201,17 @@ public class Init {
 
     private static void registerFermentations() {
         // TODO: Implement boozeBuidlerFactory for Sake
+    	// TODO: Add configuration for brewing yield amount as it is done in grapes module
         final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 
         final FluidStack[] fs = new FluidStack[sakeBooze.length];
         for ( int i = 0; i < sakeBooze.length; ++i ) {
             fs[i] = sakeBooze[i].asFluidStack();
+        }
+        
+        final FluidStack[] spoilInputFs = new FluidStack[sakeBooze.length];
+        for ( int i = 0; i < sakeBooze.length; ++i ) {
+        	spoilInputFs[i] = sakeBooze[i].asFluidStack(200);
         }
 
         /**
@@ -313,14 +319,23 @@ public class Init {
         GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POISONED.ordinal()].getFluid()))
         	.tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POISONED)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_WATER.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_WATER.ordinal()], GrowthcraftRiceConfig.brewTime, null)		// Disabled, because it would appear strange if rice water would turn to sake, even if poisoned
         	.fermentsFromFallback(fs[SakeTypes.SAKE_MASH.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_MASH.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_FERMENTED.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_FERMENTED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_EXTENDED.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_EXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
         	.fermentsFromFallback(fs[SakeTypes.SAKE_POISONED.ordinal()], fermentTime)
+        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POISONED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);

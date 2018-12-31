@@ -256,12 +256,20 @@ public class Init {
     }
 	
     private static void registerFermentations() {
+    	// TODO: Add configuration for brewing time and yielding amount, like in grapes module
+    	
     	final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		final FluidStack[] fs = new FluidStack[appleCiderBooze.length];
 		for (int i = 0; i < appleCiderBooze.length; ++i)
 		{
 			fs[i] = appleCiderBooze[i].asFluidStack();
 		}
+		final FluidStack[] spoilInputFs = new FluidStack[appleCiderBooze.length];
+		for (int i = 0; i < appleCiderBooze.length; ++i)
+		{
+			spoilInputFs[i] = appleCiderBooze[i].asFluidStack(40);
+		}
+
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(appleCiderBooze[AppleCiderTypes.APPLE_JUICE.ordinal()].getFluid())
 			.tags(BoozeTag.YOUNG)
@@ -338,110 +346,22 @@ public class Init {
 		GrowthcraftCellarApis.boozeBuilderFactory.create(appleCiderBooze[AppleCiderTypes.APPLE_CIDER_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_JUICE.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_JUICE.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_JUICE.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_EXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_EXTENDED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_ETHEREAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_ETHEREAL.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_ETHEREAL.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_INTOXICATED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_INTOXICATED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFromFallback(fs[AppleCiderTypes.APPLE_CIDER_POISONED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_POISONED.ordinal()], TickUtils.minutes(1), null)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
-
-		
-    	/*
-    			final int fermentTime = GrowthCraftCellar.getConfig().fermentTime;
-		final FluidStack[] fs = new FluidStack[GrowthCraftApples.fluids.appleCiderBooze.length];
-		for (int i = 0; i < GrowthCraftApples.fluids.appleCiderBooze.length; ++i)
-		{
-			fs[i] = new FluidStack(GrowthCraftApples.fluids.appleCiderBooze[i], 1);
-		}
-
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[0])
-			.tags(BoozeTag.YOUNG)
-			.pressesFrom(
-				new OreItemStacks("foodApple"),
-				TickUtils.seconds(2),
-				40,
-				Residue.newDefault(0.3F)
-			);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[1])
-			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED)
-			.fermentsFrom(fs[0], new OreItemStacks("yeastBrewers"), fermentTime)
-			.fermentsFrom(fs[0], new ItemStack(Items.nether_wart), (int)(fermentTime * 0.66))
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[2])
-			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POTENT)
-			.fermentsFrom(fs[1], new OreItemStacks("dustGlowstone"), fermentTime)
-			.fermentsFrom(fs[3], new OreItemStacks("dustGlowstone"), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.080f), TickUtils.seconds(45))
-				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
-
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[3])
-			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-			.fermentsFrom(fs[1], new OreItemStacks("dustRedstone"), fermentTime)
-			.fermentsFrom(fs[2], new OreItemStacks("dustRedstone"), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-				.addPotionEntry(Potion.field_76444_x, TickUtils.seconds(90), 0);
-
-		// Silken Nectar - ETHEREAL
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[4])
-			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
-			.fermentsFrom(fs[1], new OreItemStacks("yeastEthereal"), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-				.addEffect(new EffectRandomList()
-					// This is terrifying, thank heavens for a decent text editor...
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.moveSpeed.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.digSpeed.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.damageBoost.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.heal.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.jump.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.regeneration.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.resistance.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.fireResistance.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.waterBreathing.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.invisibility.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.nightVision.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76434_w.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.minutes(10), 0)))
-					.add(new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76443_y.id, TickUtils.minutes(10), 0)))
-				);
-
-		// Intoxicated - Origin Yeast
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[5])
-			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.INTOXICATED)
-			.fermentsFrom(fs[2], new OreItemStacks("yeastOrigin"), fermentTime)
-			.fermentsFrom(fs[3], new OreItemStacks("yeastOrigin"), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f * 2.5f), TickUtils.seconds(45))
-				.addEffect(new EffectWeightedRandomList()
-					.add(8, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.field_76444_x.id, TickUtils.seconds(90), 2)))
-					.add(2, new EffectAddPotionEffect(new SimplePotionEffectFactory(Potion.wither.id, TickUtils.seconds(90), 2)))
-				);
-
-		// Poisoned - created from netherrash,
-		// the booze looses all its benefits and effectively becomes poisoned
-		GrowthCraftCellar.boozeBuilderFactory.create(GrowthCraftApples.fluids.appleCiderBooze[6])
-			.tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFrom(fs[0], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[1], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[2], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[3], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[4], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[5], new OreItemStacks("yeastPoison"), fermentTime)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-				.createPotionEntry(Potion.poison, TickUtils.seconds(90), 0).toggleDescription(!GrowthCraftCore.getConfig().hidePoisonedBooze);
-
-    	*/
-    	
     }
     
 	////////
