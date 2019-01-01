@@ -50,7 +50,8 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 
 		private HopsStage() {}
 	}
-	
+
+	private final int hopVineMaxYield = GrowthcraftHopsConfig.hopVineMaxYield;
 	private final float hopVineGrowthRate = GrowthcraftHopsConfig.hopVineGrowthRate;
 	private final float hopVineFlowerSpawnRate = GrowthcraftHopsConfig.hopVineFlowerSpawnRate;
 	
@@ -433,7 +434,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     }
     
     public ItemStack getFruitDrop(int fortune) {
-    	return GrowthcraftHopsItems.hops.asStack(1 + rand.nextInt(8));
+    	return GrowthcraftHopsItems.hops.asStack(1 + rand.nextInt(hopVineMaxYield));
     }
     
     @Override
