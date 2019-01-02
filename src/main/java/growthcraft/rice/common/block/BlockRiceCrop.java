@@ -4,6 +4,7 @@ import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.BlockPaddyBase;
 import growthcraft.core.shared.block.IPaddyCrop;
 import growthcraft.rice.shared.Reference;
+import growthcraft.rice.shared.config.GrowthcraftRiceConfig;
 import growthcraft.rice.shared.init.GrowthcraftRiceItems;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -114,31 +115,31 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
     @Override
     public boolean canGrow(World world, BlockPos blockPos, IBlockState state, boolean b) {
-        return  (canBlockStay(world, blockPos, state) && !isMature(world, blockPos, state) );
+        return  this.getAge(state) != 7;
     }
 
     @Override
     public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
-        return (canBlockStay(world, blockPos, iBlockState) && !isMature(world, blockPos, iBlockState) );
+        return this.getAge(iBlockState) < 7;
     }
 
     @Override
     public void grow(World world, Random random, BlockPos pos, IBlockState state) {
-
         BlockPos posDown = pos.down();
         IBlockState downBlockState = world.getBlockState(posDown);
 
         if (downBlockState.getValue(IS_RADIOACTIVE)) {
             growWithBoneMeal(world, random, pos, state);
+            return;
         } else if (downBlockState.getValue(MOISTURE)) {
             int nextAge = getAge(state) + 1;
-            // TODO: Add config setting for rice growthrate.
-            if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(4) == 0) {
+            if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(99) <= GrowthcraftRiceConfig.riceGrowthRate) {
                 world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
             }
-        } else {
-            // Do nothing as the RicePaddy isn't flooded.
+            return;
         }
+
+        return;
     }
 
     private void growWithBoneMeal(World world, Random random, BlockPos pos, IBlockState state) {
@@ -146,7 +147,7 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
         if ( nextAge > RiceStage.MATURE ) nextAge = RiceStage.MATURE;
 
-        if( nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0 ) {
+        if( nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && random.nextInt(7) == 0 ) {
             world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
             spawnBoneMealParticles(world, pos, 15);
         }
