@@ -28,6 +28,8 @@ public class GrowthcraftRiceConfig extends Configuration {
     public static boolean isDebug = false;
     public static String logLevel = "info";
 
+    public static int riceGrowthRate = 25;
+
     // GUI
     public static boolean enableDiscardButton = true;
 
@@ -76,6 +78,15 @@ public class GrowthcraftRiceConfig extends Configuration {
     }
 
     private static void initGeneralConfig() {
+
+        riceGrowthRate = configuration.getInt(
+                "riceGrowthRate",
+                CATEGORY_GENERAL,
+                riceGrowthRate,
+                1, 100,
+                "Percentage chance of rice growing."
+        );
+
         fermentTime = configuration.getInt(
                 "fermentTime",
                 CATEGORY_GENERAL,

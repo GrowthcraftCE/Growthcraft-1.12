@@ -1,5 +1,6 @@
 package growthcraft.apples.common.block;
 
+import growthcraft.apples.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -10,7 +11,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -23,12 +24,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
-
-import javax.annotation.Nullable;
-
-import growthcraft.apples.shared.Reference;
 
 public class BlockApple extends BlockBush implements IGrowable {
 
@@ -137,18 +135,10 @@ public class BlockApple extends BlockBush implements IGrowable {
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
-        super.onBlockDestroyedByPlayer(worldIn, pos, state);
-        // TODO: Drop a sapling
-    }
-
-    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if ( this.getAge(state) == 7) {
-            int qty = new Random().nextInt(1) + 1;
             if ( !worldIn.isRemote) {
-                ItemStack appleStack = new ItemStack(Items.APPLE, qty);
-                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), appleStack);
+                this.dropBlockAsItem(worldIn, pos, state, 0);
                 worldIn.setBlockToAir(pos);
             }
             return true;
@@ -156,4 +146,9 @@ public class BlockApple extends BlockBush implements IGrowable {
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        ItemStack appleStack = new ItemStack(Items.APPLE, 1);
+        return appleStack.getItem();
+    }
 }
