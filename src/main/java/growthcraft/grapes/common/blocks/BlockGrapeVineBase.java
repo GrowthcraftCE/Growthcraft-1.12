@@ -1,14 +1,9 @@
 package growthcraft.grapes.common.blocks;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.ICropDataProvider;
 import growthcraft.grapes.common.utils.GrapeBlockCheck;
-import growthcraft.core.shared.block.BlockCheck;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockCrops;
 import net.minecraft.block.IGrowable;
@@ -26,6 +21,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable, ICropDataProvider, IGrowable {
 	
@@ -90,7 +89,7 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
     @Override
     protected boolean canSustainBush(IBlockState state)
     {
-    	return state.getBlock() == Blocks.FARMLAND;
+    	return (state.getBlock() == Blocks.FARMLAND || state.getBlock() == Blocks.DIRT );
     }
 	
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
