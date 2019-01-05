@@ -11,16 +11,14 @@ import growthcraft.core.shared.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class BrewingRecipe extends ProcessingRecipe implements IBrewingRecipe {
+public class BrewingRecipe extends BrewingFallbackRecipe {
 	private IMultiItemStacks inputItemStack;
-	private FluidStack inputFluidStack;
 	private boolean requiresLid;
 
 	public BrewingRecipe(@Nonnull FluidStack pInputFluid, @Nonnull IMultiItemStacks pInputItem,
 			@Nonnull FluidStack pOutputFluid, boolean requiresLid, int pTime, @Nullable Residue pResidue) {
-		super(pOutputFluid, pTime, pResidue);
+		super(pInputFluid, pOutputFluid, pTime, pResidue);
 		this.inputItemStack = pInputItem;
-		this.inputFluidStack = pInputFluid;
 		this.requiresLid = requiresLid;
 	}
 
@@ -30,16 +28,11 @@ public class BrewingRecipe extends ProcessingRecipe implements IBrewingRecipe {
 	}
 
 	@Override
-	public FluidStack getInputFluidStack() {
-		return inputFluidStack;
-	}
-
-	@Override
 	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack, boolean requiresLid) {
 		if (fluidStack != null && itemStack != null) {
 			if( this.requiresLid != requiresLid )
 				return false;
-			if (!FluidTest.hasEnough(inputFluidStack, fluidStack))
+			if (!FluidTest.hasEnough(getInputFluidStack(), fluidStack))
 				return false;
 			if (!ItemTest.hasEnough(inputItemStack, itemStack))
 				return false;
@@ -50,7 +43,7 @@ public class BrewingRecipe extends ProcessingRecipe implements IBrewingRecipe {
 
 	@Override
 	public boolean matchesIngredient(@Nullable FluidStack fluidStack) {
-		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
+		return FluidTest.fluidMatches(getInputFluidStack(), fluidStack);
 	}
 
 	@Override

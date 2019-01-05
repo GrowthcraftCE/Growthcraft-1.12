@@ -19,6 +19,8 @@ public class BrewingRegistry
 
 	public void addRecipe(@Nonnull IBrewingRecipe recipe)
 	{
+		// TODO: Warn if multiple fallback recipes exist for same input fluid
+		
 		recipes.add(recipe);
 		GrowthcraftLogger.getLogger(Reference.MODID).debug("Added Brewing Recipe recipe={%s}", recipe);
 	}
@@ -27,6 +29,11 @@ public class BrewingRegistry
 	{
 		addRecipe(new BrewingRecipe(sourceFluid, MultiStacksUtil.toMultiItemStacks(raw), resultFluid, requiresLid, time, residue));
 	}
+	
+	public void addFallbackRecipe(@Nonnull FluidStack sourceFluid, @Nonnull FluidStack resultFluid, int time, @Nullable Residue residue)
+	{
+		addRecipe(new BrewingFallbackRecipe(sourceFluid, resultFluid, time, residue));
+	}
 
 	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack, boolean requiresLid)
 	{
@@ -34,8 +41,18 @@ public class BrewingRegistry
 
 		for (IBrewingRecipe recipe : recipes)
 		{
+			if (isFallbackRecipe(recipe))
+				continue;
 			if (recipe.matchesRecipe(fluidstack, itemstack, requiresLid)) return recipe;
 		}
+		
+		for (IBrewingRecipe recipe : recipes)
+		{
+			if (!isFallbackRecipe(recipe))
+				continue;
+			if (recipe.matchesIngredient(fluidstack)) return recipe;
+		}
+
 		return null;
 	}
 
@@ -60,7 +77,7 @@ public class BrewingRegistry
 		{
 			for (IBrewingRecipe recipe : recipes)
 			{
-				if (recipe.matchesIngredient(fermenter))
+				if (isFallbackRecipe(recipe) || recipe.matchesIngredient(fermenter))
 					result.add(recipe);
 			}
 		}
@@ -78,8 +95,15 @@ public class BrewingRegistry
 
 		for (IBrewingRecipe recipe : recipes)
 		{
+			if (isFallbackRecipe(recipe) )	// Ignore fallback recipes
+				continue;
+
 			if (recipe.isItemIngredient(itemstack)) return true;
 		}
 		return false;
+	}
+	
+	public boolean isFallbackRecipe(IBrewingRecipe recipe) {
+		return (recipe instanceof BrewingFallbackRecipe) && !(recipe instanceof BrewingRecipe);
 	}
 }

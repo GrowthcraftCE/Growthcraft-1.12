@@ -252,11 +252,18 @@ public class Init {
 	}
 
 	private static void registerFermentations() {
+		// TODO: Add configuration for brewing time and yielding amount, like in grapes module
+		
     	final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		final FluidStack[] fs = new FluidStack[meadBooze.length];
 		for (int i = 0; i < meadBooze.length; ++i)
 		{
 			fs[i] = meadBooze[i].asFluidStack();
+		}
+		final FluidStack[] spoilInputFs = new FluidStack[meadBooze.length];
+		for (int i = 0; i < meadBooze.length; ++i)
+		{
+			spoilInputFs[i] = meadBooze[i].asFluidStack(40);
 		}
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_YOUNG.ordinal()].getFluid())
@@ -309,13 +316,20 @@ public class Init {
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED, BeesFluidTag.MEAD)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_YOUNG.ordinal()], fermentTime)
+//			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_YOUNG.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_YOUNG.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_FERMENTED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_FERMENTED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_EXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_EXTENDED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_POTENT.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_POTENT.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_ETHEREAL.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_INTOXICATED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFromFallback(fs[MeadTypes.MEAD_POISONED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_POISONED.ordinal()], TickUtils.minutes(1), null)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);

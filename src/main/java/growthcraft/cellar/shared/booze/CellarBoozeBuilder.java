@@ -52,6 +52,20 @@ public class CellarBoozeBuilder implements ICellarBoozeBuilder
 		CellarRegistry.instance().brewing().addRecipe(src, stack, new FluidStack(fluid, src.amount), requiresLid, time, residue);
 		return this;
 	}
+	
+	@Override
+	public ICellarBoozeBuilder brewsToFallback(@Nonnull FluidStack result, int time, @Nullable Residue residue)
+	{
+		CellarRegistry.instance().brewing().addFallbackRecipe(new FluidStack(fluid, result.amount), result, time, residue);
+		return this;
+	}
+
+	@Override
+	public ICellarBoozeBuilder brewsFromFallback(@Nonnull FluidStack src, int time, @Nullable Residue residue)
+	{
+		CellarRegistry.instance().brewing().addFallbackRecipe(src, new FluidStack(fluid, src.amount), time, residue);
+		return this;
+	}
 
 	@Override
 	public ICellarBoozeBuilder fermentsTo(@Nonnull FluidStack result, @Nonnull Object stack, int time)

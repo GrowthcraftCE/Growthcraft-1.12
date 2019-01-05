@@ -161,12 +161,20 @@ public class Init {
 	}
 
 	private static void registerLagerFermentations() {
+		// TODO: Add configuration for brewing time and yielding amount, like in grapes module
+		
 		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		final FluidStack[] fs = new FluidStack[GrowthcraftHopsFluids.lagerBooze.length];
 		for (int i = 0; i < GrowthcraftHopsFluids.lagerBooze.length; ++i)
 		{
 			fs[i] = GrowthcraftHopsFluids.lagerBooze[i].asFluidStack();
 		}
+		final FluidStack[] spoilInputFs = new FluidStack[GrowthcraftHopsFluids.lagerBooze.length];
+		for (int i = 0; i < GrowthcraftHopsFluids.lagerBooze.length; ++i)
+		{
+			spoilInputFs[i] = GrowthcraftHopsFluids.lagerBooze[i].asFluidStack(40);
+		}
+
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_YOUNG.ordinal()].getFluid())
 			.tags(BoozeTag.YOUNG, BoozeTag.CHILLED)
@@ -228,24 +236,38 @@ public class Init {
 	
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.POISONED)
-			.fermentsFrom(fs[LagerTypes.LAGER_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_YOUNG.ordinal()], fermentTime)
+//			.fermentsFrom(fs[LagerTypes.LAGER_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_YOUNG.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_YOUNG.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[LagerTypes.LAGER_NORMAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_NORMAL.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_NORMAL.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[LagerTypes.LAGER_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_POTENT.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_POTENT.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[LagerTypes.LAGER_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_EXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_EXTENDED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[LagerTypes.LAGER_HYPEREXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_HYPEREXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_HYPEREXTENDED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[LagerTypes.LAGER_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[LagerTypes.LAGER_INTOXICATED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_INTOXICATED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFromFallback(fs[LagerTypes.LAGER_POISONED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[LagerTypes.LAGER_POISONED.ordinal()], TickUtils.minutes(1), null)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
 	}
 
 	private static void registerHopAleFermentations() {
+		// TODO: Add configuration for brewing time and yielding amount, like in grapes module
+		
 		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		final FluidStack[] fs = new FluidStack[GrowthcraftHopsFluids.hopAleBooze.length];
 		for (int i = 0; i < GrowthcraftHopsFluids.hopAleBooze.length; ++i)
 		{
 			fs[i] = GrowthcraftHopsFluids.hopAleBooze[i].asFluidStack();
+		}
+		final FluidStack[] spoilInputFs = new FluidStack[GrowthcraftHopsFluids.hopAleBooze.length];
+		for (int i = 0; i < GrowthcraftHopsFluids.hopAleBooze.length; ++i)
+		{
+			spoilInputFs[i] = GrowthcraftHopsFluids.hopAleBooze[i].asFluidStack(40);
 		}
 		
 		// Unhopped
@@ -326,15 +348,24 @@ public class Init {
 		// booze and poison it.
 		GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.hopAleBooze[HopAleTypes.ALE_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED)
-			.fermentsFromFallback(fs[HopAleTypes.ALE_YOUNG.ordinal()], fermentTime)
-			.fermentsFromFallback(fs[HopAleTypes.ALE_UNHOPPED.ordinal()], fermentTime)
+//			.fermentsFromFallback(fs[HopAleTypes.ALE_YOUNG.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_YOUNG.ordinal()], TickUtils.minutes(1), null)
+//			.fermentsFromFallback(fs[HopAleTypes.ALE_UNHOPPED.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_UNHOPPED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[HopAleTypes.ALE_NORMAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[HopAleTypes.ALE_NORMAL.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_NORMAL.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[HopAleTypes.ALE_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[HopAleTypes.ALE_POTENT.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_POTENT.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[HopAleTypes.ALE_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[HopAleTypes.ALE_EXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_EXTENDED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[HopAleTypes.ALE_HYPEREXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[HopAleTypes.ALE_HYPEREXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_HYPEREXTENDED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[HopAleTypes.ALE_LAGER.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[HopAleTypes.ALE_LAGER.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_LAGER.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFrom(fs[HopAleTypes.ALE_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[HopAleTypes.ALE_INTOXICATED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_INTOXICATED.ordinal()], TickUtils.minutes(1), null)
 			.fermentsFromFallback(fs[HopAleTypes.ALE_POISONED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[HopAleTypes.ALE_POISONED.ordinal()], TickUtils.minutes(1), null)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
