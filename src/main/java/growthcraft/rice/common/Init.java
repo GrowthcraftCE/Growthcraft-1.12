@@ -102,6 +102,9 @@ public class Init {
         OreDictionary.registerOre("foodRice", GrowthcraftRiceItems.rice_cooked.asStack());
         OreDictionary.registerOre("seedRice", GrowthcraftRiceItems.rice.asStack());
         OreDictionary.registerOre("foodRice", GrowthcraftRiceItems.rice_ball.asStack());
+        OreDictionary.registerOre("listAllRice", GrowthcraftRiceItems.rice.asStack());
+        OreDictionary.registerOre("listAllRice", GrowthcraftRiceItems.rice_cooked.asStack());
+
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
