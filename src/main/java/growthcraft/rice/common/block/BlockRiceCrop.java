@@ -101,6 +101,14 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
     }
 
+    public int getMaxAge() {
+        return RiceStage.MATURE;
+    }
+
+    public boolean isMaxAge(IBlockState state) {
+        return (Integer)state.getValue(AGE) >= this.getMaxAge();
+    }
+
     public int getAge(IBlockState state) {
         return state.getValue(AGE);
     }
@@ -115,12 +123,12 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
     @Override
     public boolean canGrow(World world, BlockPos blockPos, IBlockState state, boolean b) {
-        return  this.getAge(state) != 7;
+        return  this.getAge(state) != RiceStage.MATURE;
     }
 
     @Override
     public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
-        return this.getAge(iBlockState) < 7;
+        return this.getAge(iBlockState) < RiceStage.MATURE;
     }
 
     @Override
@@ -247,9 +255,9 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         Random rand = world instanceof World ? ((World)world).rand : new Random();
         int count = 1;
 
-        if ( state.getValue(AGE) >= 4 && downBlockState.getValue(IS_RADIOACTIVE)) {
+        if ( state.getValue(AGE) >= RiceStage.MATURE && downBlockState.getValue(IS_RADIOACTIVE)) {
             count = 3 + rand.nextInt(3) + (fortune > 0 ? rand.nextInt(fortune + 1) : 0);
-        } else if ( state.getValue(AGE) >= 4 ) {
+        } else if ( state.getValue(AGE) >= RiceStage.MATURE ) {
             count = 2 + rand.nextInt(3) + (fortune > 0 ? rand.nextInt(fortune + 1) : 0);
         }
 

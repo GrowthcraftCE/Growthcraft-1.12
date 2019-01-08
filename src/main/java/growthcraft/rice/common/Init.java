@@ -102,6 +102,9 @@ public class Init {
         OreDictionary.registerOre("foodRice", GrowthcraftRiceItems.rice_cooked.asStack());
         OreDictionary.registerOre("seedRice", GrowthcraftRiceItems.rice.asStack());
         OreDictionary.registerOre("foodRice", GrowthcraftRiceItems.rice_ball.asStack());
+        OreDictionary.registerOre("listAllRice", GrowthcraftRiceItems.rice.asStack());
+        OreDictionary.registerOre("listAllRice", GrowthcraftRiceItems.rice_cooked.asStack());
+
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -271,12 +274,12 @@ public class Init {
             .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
             .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(1), 1);
 
-        // TODO: SAKE_EXTENDED, SAKE_FERMENTED + Redstone
+        // SAKE_EXTENDED, SAKE_FERMENTED + Redstone
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_EXTENDED.ordinal()].getFluid())
             .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
             .fermentsFrom(
                 fs[SakeTypes.SAKE_FERMENTED.ordinal()],
-                new ItemStack(Items.GLOWSTONE_DUST),
+                new ItemStack(Items.REDSTONE),
                 fermentTime)
             .getEffect()
             .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
@@ -286,8 +289,8 @@ public class Init {
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_HYPEREXTENDED.ordinal()].getFluid())
             .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
             .fermentsFrom(
-                fs[SakeTypes.SAKE_FERMENTED.ordinal()],
-                new ItemStack(Items.GLOWSTONE_DUST),
+                fs[SakeTypes.SAKE_EXTENDED.ordinal()],
+                new ItemStack(Items.REDSTONE),
                 fermentTime)
             .getEffect()
             .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
