@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.MultiStacksUtil;
@@ -35,7 +36,11 @@ public class BrewingRegistry
 		addRecipe(new BrewingFallbackRecipe(sourceFluid, resultFluid, time, residue));
 	}
 
-	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack, boolean requiresLid)
+	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack, boolean requiresLid) {
+		return findRecipe(fluidstack, itemstack, requiresLid, false);
+	}
+	
+	public IBrewingRecipe findRecipe(@Nullable FluidStack fluidstack, @Nullable ItemStack itemstack, boolean requiresLid, boolean forceAllowFallback)
 	{
 		if (itemstack == null || fluidstack == null) return null;
 
@@ -46,11 +51,13 @@ public class BrewingRegistry
 			if (recipe.matchesRecipe(fluidstack, itemstack, requiresLid)) return recipe;
 		}
 		
-		for (IBrewingRecipe recipe : recipes)
-		{
-			if (!isFallbackRecipe(recipe))
-				continue;
-			if (recipe.matchesIngredient(fluidstack)) return recipe;
+		if( GrowthcraftCellarConfig.allowFallbackRecipes || forceAllowFallback ) {
+			for (IBrewingRecipe recipe : recipes)
+			{
+				if (!isFallbackRecipe(recipe))
+					continue;
+				if (recipe.matchesIngredient(fluidstack)) return recipe;
+			}
 		}
 
 		return null;
@@ -70,15 +77,28 @@ public class BrewingRegistry
 		return result;
 	}
 
-	public List<IBrewingRecipe> findRecipes(@Nullable ItemStack fermenter)
+	public List<IBrewingRecipe> findRecipes(@Nullable ItemStack fermenter) {
+		return findRecipes(fermenter, false);
+	}
+	
+	public List<IBrewingRecipe> findRecipes(@Nullable ItemStack fermenter, boolean forceAllowFallback)
 	{
+		final boolean allowFallback = GrowthcraftCellarConfig.allowFallbackRecipes || forceAllowFallback;
+		
 		final List<IBrewingRecipe> result = new ArrayList<IBrewingRecipe>();
 		if (fermenter != null)
 		{
 			for (IBrewingRecipe recipe : recipes)
 			{
-				if (isFallbackRecipe(recipe) || recipe.matchesIngredient(fermenter))
+				if( allowFallback && isFallbackRecipe(recipe) ) {
 					result.add(recipe);
+					continue;
+				}
+				
+				if( recipe.matchesIngredient(fermenter) ) {
+					result.add(recipe);
+					continue;
+				}
 			}
 		}
 		return result;
