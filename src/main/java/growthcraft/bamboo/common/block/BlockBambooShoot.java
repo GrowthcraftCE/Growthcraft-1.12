@@ -15,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
+import net.minecraftforge.common.ForgeHooks;
 
 import java.util.Random;
 
@@ -59,8 +60,11 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
         super.updateTick(worldIn, pos, state, rand);
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
-            this.grow(worldIn, pos, state, rand);
+        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
+        	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0) ) {
+				grow(worldIn, rand, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+			}
         }
 
     }
