@@ -22,6 +22,8 @@ import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 
+import net.minecraftforge.common.ForgeHooks;
+
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Random;
@@ -64,12 +66,14 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 		return state.getValue(AGE);
 	}
 
-	public void incrementGrowth(World world, BlockPos pos, IBlockState state)
+	public IBlockState incrementGrowth(World world, BlockPos pos, IBlockState state)
 	{
 		int nextStage = getAge(state) + 1;
 		if( nextStage > getMaxAge() )
-			return; // Maximal stage
-		world.setBlockState(pos, state.withProperty(AGE, nextStage), BlockFlags.SYNC);
+			return state; // Maximal stage
+		IBlockState newState = state.withProperty(AGE, nextStage);
+		world.setBlockState(pos, newState, BlockFlags.SYNC);
+		return newState;
 	}
 	
 	public int getMaxAge() {
@@ -147,12 +151,11 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	 * If all conditions have passed, do plant growth
 	 *
 	 * @param world - world with block
-	 * @param x - x coord
-	 * @param y - y coord
-	 * @param z - z coord
+	 * @param pos - the block position
 	 * @param meta - block metadata
+	 * @return the new state
 	 */
-	protected abstract void doGrowth(World world, BlockPos pos, IBlockState state);
+	protected abstract IBlockState doGrowth(World world, BlockPos pos, IBlockState state);
 
 	/**
 	 * Are the conditions right for this plant to grow?
@@ -170,18 +173,16 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
 	{
 		if (canUpdateGrowth(worldIn, pos))
 		{
-			final Event.Result allowGrowthResult = Event.Result.DEFAULT; // TODO: AppleCore.validateGrowthTick(this, world, x, y, z, random);
-			if (Event.Result.DENY == allowGrowthResult)
-				return;
-
 			final float f = this.getGrowthRate(worldIn, pos);
-
 			final boolean continueGrowth = rand.nextInt((int)(getGrowthRateMultiplier() / f) + 1) == 0;
-			if (Event.Result.ALLOW == allowGrowthResult || continueGrowth)
-			{
-				doGrowth(worldIn, pos, state);
+			
+			final boolean allowGrowthResult = ForgeHooks.onCropsGrowPre(worldIn, pos, state, continueGrowth); // Event.Result.DEFAULT; // TODO: AppleCore.validateGrowthTick(this, world, x, y, z, random);
+			if (!allowGrowthResult)
 				return;
-			}
+
+			IBlockState newState = doGrowth(worldIn, pos, state);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state, newState);
+			return;
 		}
 		
 		super.updateTick(worldIn, pos, state, rand);

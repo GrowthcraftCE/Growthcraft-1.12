@@ -13,7 +13,12 @@ Thumbs.db
 #gradle stuff
 /.gradle
 /build/
-/run*/
+/run/*
+!/run/config/
+/run/config/*
+!/run/config/sereneseasons/
+/run/config/sereneseasons/*
+!/run/config/sereneseasons/cropfertility.cfg
 /ui/
 gradle-app.setting
 #IDEA files from Gradle
