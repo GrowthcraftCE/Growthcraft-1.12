@@ -19,6 +19,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 
 import javax.annotation.Nullable;
 import java.util.Random;
@@ -106,9 +107,13 @@ public class BlockAppleLeaves extends Block implements IGrowable {
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if ( !worldIn.isRemote ) {
             super.updateTick(worldIn, pos, state, rand);
+            
             // check the light level and pick a randomness for growth.
-            if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0 ) {
-                this.grow( worldIn, rand, pos, state );
+            if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
+            	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0) ) {
+    				grow(worldIn, rand, pos, state);
+    				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+    			}
             }
         }
     }
