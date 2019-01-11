@@ -29,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.common.eventhandler.Event;
 import net.minecraftforge.fml.relauncher.Side;
@@ -161,7 +162,12 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 		}
 		else
 		{
-			grow(worldIn, rand, pos, state);
+			// NOTE: Same as in BlockReed.updateTick(World, BlockPos, IBlockState, Random)
+			
+			if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, true) ) {
+				grow(worldIn, rand, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+			}
 		}
 	}
 	
