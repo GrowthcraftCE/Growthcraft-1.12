@@ -25,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -96,7 +97,10 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         if ( !canBlockStay(worldIn, pos, state) ){
             worldIn.setBlockToAir(pos);
         } else if (this.canGrow(worldIn, pos, state, true) ) {
-            grow(worldIn, rand, pos, state);
+        	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, true) ) {
+				grow(worldIn, rand, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+			}
         }
 
     }
