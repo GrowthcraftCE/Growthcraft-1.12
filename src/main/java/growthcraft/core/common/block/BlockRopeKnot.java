@@ -1,6 +1,5 @@
 package growthcraft.core.common.block;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -14,11 +13,8 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
@@ -38,10 +34,10 @@ public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider 
 	private static final AxisAlignedBB FENCE_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
 	
     private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 0, 0.0625 * 11, 0.0625 * 14, 0.0625 * 5);
-    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 6, 0.0625 * 5, 0.0625 * 16, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 11, 0.0625 * 11, 0.0625 * 14, 0.0625 * 16);
-    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 6, 0.0625 * 5, 0.0625 * 5, 0.0625 * 14, 0.0625 * 11);
+	private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 0, 0.0625 * 9, 0.0625 * 9, 0.0625 * 5);
+    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 7, 0.0625 * 7, 0.0625 * 16, 0.0625 * 9, 0.0625 * 9);
+    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 11, 0.0625 * 9, 0.0625 * 9, 0.0625 * 16);
+    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 7, 0.0625 * 7, 0.0625 * 5, 0.0625 * 9, 0.0625 * 9);
 
     private boolean wasActivated;
 
@@ -92,6 +88,8 @@ public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider 
     		addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_BOUNDING_BOX);
     	if( actualState.getValue(WEST) )
     		addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_BOUNDING_BOX);
+    	
+    	// Up and down not necessary, because they are covered by FENCE_BOUNDING_BOX
     }
 
     @Override
