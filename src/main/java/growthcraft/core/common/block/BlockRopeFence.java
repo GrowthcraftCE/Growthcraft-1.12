@@ -1,5 +1,6 @@
 package growthcraft.core.common.block;
 
+import java.util.List;
 import java.util.Random;
 
 import growthcraft.core.shared.Reference;
@@ -20,17 +21,16 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockRopeFence extends Block implements IBlockRope {
+public class BlockRopeFence extends BlockRopeBase {
 
     private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 7, 0.0625 * 9, 0.0625 * 9, 0.0625 * 9);
-
-    public static final PropertyBool NORTH = PropertyBool.create("north");
-    public static final PropertyBool EAST = PropertyBool.create("east");
-    public static final PropertyBool SOUTH = PropertyBool.create("south");
-    public static final PropertyBool WEST = PropertyBool.create("west");
-    public static final PropertyBool UP = PropertyBool.create("up");
-    public static final PropertyBool DOWN = PropertyBool.create("down");
-
+    private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 0, 0.0625 * 9, 0.0625 * 9, 0.0625 * 7);
+    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 9, 0.0625 * 7, 0.0625 * 7, 0.0625 * 16, 0.0625 * 9, 0.0625 * 9);
+    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 9, 0.0625 * 9, 0.0625 * 9, 0.0625 * 16);
+    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 7, 0.0625 * 7, 0.0625 * 7, 0.0625 * 9, 0.0625 * 9);
+    private static final AxisAlignedBB UP_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 9, 0.0625 * 7, 0.0625 * 9, 0.0625 * 16, 0.0625 * 9);
+    private static final AxisAlignedBB DOWN_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 0, 0.0625 * 7, 0.0625 * 9, 0.0625 * 7, 0.0625 * 9);
+    
     public BlockRopeFence(String unlocalizedName) {
         super(Material.CARPET);
         this.setUnlocalizedName(unlocalizedName);
@@ -45,10 +45,22 @@ public class BlockRopeFence extends Block implements IBlockRope {
                 .withProperty(DOWN, Boolean.valueOf(false)));
     }
 
-    @SuppressWarnings("deprecation")
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return KNOT_BOUNDING_BOX;
+    protected void populateCollisionBoxes(IBlockState actualState, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes) {
+    	addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
+    	
+    	if( actualState.getValue(NORTH) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_BOUNDING_BOX);
+    	if( actualState.getValue(EAST) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_BOUNDING_BOX);
+    	if( actualState.getValue(SOUTH) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_BOUNDING_BOX);
+    	if( actualState.getValue(WEST) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_BOUNDING_BOX);
+    	if( actualState.getValue(UP) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, UP_BOUNDING_BOX);
+    	if( actualState.getValue(DOWN) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, DOWN_BOUNDING_BOX);
     }
 
     @Override

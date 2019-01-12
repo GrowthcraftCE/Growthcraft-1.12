@@ -33,7 +33,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockRope {
+public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider {
 
 	private static final AxisAlignedBB FENCE_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
 	
@@ -42,13 +42,6 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
     private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 6, 0.0625 * 5, 0.0625 * 16, 0.0625 * 14, 0.0625 * 11);
     private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 11, 0.0625 * 11, 0.0625 * 14, 0.0625 * 16);
     private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 6, 0.0625 * 5, 0.0625 * 5, 0.0625 * 14, 0.0625 * 11);
-
-    public static final PropertyBool NORTH = PropertyBool.create("north");
-    public static final PropertyBool EAST = PropertyBool.create("east");
-    public static final PropertyBool SOUTH = PropertyBool.create("south");
-    public static final PropertyBool WEST = PropertyBool.create("west");
-    public static final PropertyBool UP = PropertyBool.create("up");
-    public static final PropertyBool DOWN = PropertyBool.create("down");
 
     private boolean wasActivated;
 
@@ -86,34 +79,8 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
         return false;
     }
     
-    @SuppressWarnings("deprecation")
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-    	ArrayList<AxisAlignedBB> collidingBoxes = new ArrayList<>(5);
-    	
-    	state = state.getActualState(source, pos);
-    	populateCollisionBoxes(state, pos, FULL_BLOCK_AABB.offset(pos), collidingBoxes);
-    	if( collidingBoxes.isEmpty() )
-    		return FULL_BLOCK_AABB;
-    	
-    	AxisAlignedBB box = collidingBoxes.get(0);	// NOTE: Assuming that collidingBoxes is non empty!
-    	for( int i = 1; i < collidingBoxes.size(); i ++ )
-    		box = box.union(collidingBoxes.get(i));
-    	box = box.offset(new BlockPos(-pos.getX(), -pos.getY(), -pos.getZ()));
-    	
-    	return box;
-    }
-
-    @SuppressWarnings("deprecation")
-    @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
-        if( !isActualState )
-        	state = state.getActualState(worldIn, pos);
-        
-        populateCollisionBoxes(state, pos, entityBox, collidingBoxes);
-    }
-    
-    private void populateCollisionBoxes(IBlockState actualState, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes) {
+    protected void populateCollisionBoxes(IBlockState actualState, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes) {
     	addCollisionBoxToList(pos, entityBox, collidingBoxes, FENCE_BOUNDING_BOX);
     	addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
     	
