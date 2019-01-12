@@ -1,5 +1,6 @@
 package growthcraft.core.common.block;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -34,13 +35,13 @@ import net.minecraftforge.items.IItemHandler;
 
 public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockRope {
 
+	private static final AxisAlignedBB FENCE_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
+	
     private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-
-    private static final AxisAlignedBB COLLISION_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 6, 0.0625 * 6, 0.0625 * 10, 0.0625 * 13, 0.0625 * 10);
+    private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 0, 0.0625 * 11, 0.0625 * 14, 0.0625 * 5);
+    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 6, 0.0625 * 5, 0.0625 * 16, 0.0625 * 14, 0.0625 * 11);
+    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 11, 0.0625 * 11, 0.0625 * 14, 0.0625 * 16);
+    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 6, 0.0625 * 5, 0.0625 * 5, 0.0625 * 14, 0.0625 * 11);
 
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
@@ -88,13 +89,42 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
     @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return KNOT_BOUNDING_BOX;
+    	ArrayList<AxisAlignedBB> collidingBoxes = new ArrayList<>(5);
+    	
+    	state = state.getActualState(source, pos);
+    	populateCollisionBoxes(state, pos, FULL_BLOCK_AABB.offset(pos), collidingBoxes);
+    	if( collidingBoxes.isEmpty() )
+    		return FULL_BLOCK_AABB;
+    	
+    	AxisAlignedBB box = collidingBoxes.get(0);	// NOTE: Assuming that collidingBoxes is non empty!
+    	for( int i = 1; i < collidingBoxes.size(); i ++ )
+    		box = box.union(collidingBoxes.get(i));
+    	box = box.offset(new BlockPos(-pos.getX(), -pos.getY(), -pos.getZ()));
+    	
+    	return box;
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, COLLISION_BOX);
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+        if( !isActualState )
+        	state = state.getActualState(worldIn, pos);
+        
+        populateCollisionBoxes(state, pos, entityBox, collidingBoxes);
+    }
+    
+    private void populateCollisionBoxes(IBlockState actualState, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes) {
+    	addCollisionBoxToList(pos, entityBox, collidingBoxes, FENCE_BOUNDING_BOX);
+    	addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
+    	
+    	if( actualState.getValue(NORTH) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_BOUNDING_BOX);
+    	if( actualState.getValue(EAST) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_BOUNDING_BOX);
+    	if( actualState.getValue(SOUTH) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_BOUNDING_BOX);
+    	if( actualState.getValue(WEST) )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_BOUNDING_BOX);
     }
 
     @Override
