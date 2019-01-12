@@ -48,7 +48,7 @@ public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider 
 
         this.setHardness(3);
         this.setResistance(20);
-        this.setSoundType(SoundType.CLOTH);
+        this.setSoundType(SoundType.WOOD);
         this.setHarvestLevel("axe", 0);
 
         this.setDefaultState(this.blockState.getBaseState()

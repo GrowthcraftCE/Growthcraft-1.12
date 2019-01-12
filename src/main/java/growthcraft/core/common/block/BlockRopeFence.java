@@ -7,6 +7,7 @@ import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockFaceShape;
@@ -36,6 +37,7 @@ public class BlockRopeFence extends BlockRopeBase {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.5F);
+        this.setSoundType(SoundType.CLOTH);
         this.setDefaultState(this.blockState.getBaseState()
                 .withProperty(NORTH, Boolean.valueOf(false))
                 .withProperty(EAST, Boolean.valueOf(false))
