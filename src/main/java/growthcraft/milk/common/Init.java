@@ -1,11 +1,5 @@
 package growthcraft.milk.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.shared.processing.common.Residue;
@@ -15,15 +9,11 @@ import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
-import growthcraft.core.shared.effect.EffectExtinguish;
-import growthcraft.core.shared.effect.EffectList;
-import growthcraft.core.shared.effect.EffectRegistry;
-import growthcraft.core.shared.effect.EffectUtils;
-import growthcraft.core.shared.effect.IEffect;
+import growthcraft.core.shared.effect.*;
 import growthcraft.core.shared.fluids.FluidFactory;
-import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetails;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetailsBuilder;
+import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.item.CommonItemStackComparator;
 import growthcraft.core.shared.item.IItemStackComparator;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
@@ -36,54 +26,13 @@ import growthcraft.milk.client.render.RenderButterChurnPlunger;
 import growthcraft.milk.client.render.RenderCheesePress;
 import growthcraft.milk.client.render.RenderCheeseVat;
 import growthcraft.milk.client.render.RenderPancheon;
-import growthcraft.milk.common.block.BlockButterChurn;
-import growthcraft.milk.common.block.BlockButterChurnPlunger;
-import growthcraft.milk.common.block.BlockCheeseBlock;
-import growthcraft.milk.common.block.BlockCheesePress;
-import growthcraft.milk.common.block.BlockCheeseVat;
-import growthcraft.milk.common.block.BlockHangingCurds;
-import growthcraft.milk.common.block.BlockPancheon;
-import growthcraft.milk.common.block.BlockThistle;
-import growthcraft.milk.common.block.fluids.BlockFluidButterMilk;
-import growthcraft.milk.common.block.fluids.BlockFluidCheese;
-import growthcraft.milk.common.block.fluids.BlockFluidCream;
-import growthcraft.milk.common.block.fluids.BlockFluidMilk;
-import growthcraft.milk.common.block.fluids.BlockFluidMilkCurds;
-import growthcraft.milk.common.block.fluids.BlockFluidPasteurizedMilk;
-import growthcraft.milk.common.block.fluids.BlockFluidRennet;
-import growthcraft.milk.common.block.fluids.BlockFluidSkimMilk;
-import growthcraft.milk.common.block.fluids.BlockFluidWhey;
-import growthcraft.milk.common.fluids.FluidButterMilk;
-import growthcraft.milk.common.fluids.FluidCheese;
-import growthcraft.milk.common.fluids.FluidCream;
-import growthcraft.milk.common.fluids.FluidMilk;
-import growthcraft.milk.common.fluids.FluidMilkCurds;
-import growthcraft.milk.common.fluids.FluidPasteurizedMilk;
-import growthcraft.milk.common.fluids.FluidRennet;
-import growthcraft.milk.common.fluids.FluidSkimMilk;
-import growthcraft.milk.common.fluids.FluidWhey;
-import growthcraft.milk.common.item.ItemAgedCheeseSlice;
-import growthcraft.milk.common.item.ItemBlockCheeseBlock;
-import growthcraft.milk.common.item.ItemBlockHangingCurds;
-import growthcraft.milk.common.item.ItemButter;
-import growthcraft.milk.common.item.ItemCheeseCloth;
-import growthcraft.milk.common.item.ItemIceCream;
-import growthcraft.milk.common.item.ItemSeedThistle;
-import growthcraft.milk.common.item.ItemSimpleCheeseSlice;
-import growthcraft.milk.common.item.ItemStarterCulture;
-import growthcraft.milk.common.item.ItemStomach;
-import growthcraft.milk.common.item.ItemThistle;
-import growthcraft.milk.common.item.ItemWaxedCheeseSlice;
-import growthcraft.milk.common.item.ItemYogurt;
+import growthcraft.milk.common.block.*;
+import growthcraft.milk.common.block.fluids.*;
+import growthcraft.milk.common.fluids.*;
+import growthcraft.milk.common.item.*;
 import growthcraft.milk.common.lib.effect.EffectMilk;
 import growthcraft.milk.common.lib.processing.DriedCurdsCheesePressRecipe;
-import growthcraft.milk.common.tileentity.TileEntityButterChurn;
-import growthcraft.milk.common.tileentity.TileEntityButterChurnPlunger;
-import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
-import growthcraft.milk.common.tileentity.TileEntityCheesePress;
-import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
-import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
-import growthcraft.milk.common.tileentity.TileEntityPancheon;
+import growthcraft.milk.common.tileentity.*;
 import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.cheese.CheeseUtils;
@@ -96,12 +45,7 @@ import growthcraft.milk.shared.fluids.MilkFluidTags;
 import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
 import growthcraft.milk.shared.init.GrowthcraftMilkItems;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems.AgedCheeseTypes;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems.ButterTypes;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems.IceCreamTypes;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems.SimpleCheeseTypes;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems.WaxedCheeseTypes;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems.YogurtTypes;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems.*;
 import growthcraft.milk.shared.utils.CheeseVatRecipeBuilder;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -117,11 +61,17 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+import static net.minecraftforge.fml.common.registry.GameRegistry.registerTileEntity;
 
 public class Init {
 	private Init() {}
@@ -193,13 +143,13 @@ public class Init {
     }
     
     public static void registerTileEntities() {
-    	GameRegistry.registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
-    	GameRegistry.registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
-    	GameRegistry.registerTileEntity(TileEntityButterChurnPlunger.class, Reference.MODID + ":churn_plunger");
-    	GameRegistry.registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_block");
-    	GameRegistry.registerTileEntity(TileEntityHangingCurds.class, Reference.MODID + ":cheese_curds");
-    	GameRegistry.registerTileEntity(TileEntityCheeseVat.class, Reference.MODID + ":cheese_vat");
-    	GameRegistry.registerTileEntity(TileEntityCheesePress.class, Reference.MODID + ":cheese_press");
+    	registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
+    	registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
+    	registerTileEntity(TileEntityButterChurnPlunger.class, Reference.MODID + ":churn_plunger");
+    	registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_block");
+    	registerTileEntity(TileEntityHangingCurds.class, Reference.MODID + ":cheese_curds");
+    	registerTileEntity(TileEntityCheeseVat.class, Reference.MODID + ":cheese_vat");
+    	registerTileEntity(TileEntityCheesePress.class, Reference.MODID + ":cheese_press");
     }
     
     @SideOnly(Side.CLIENT)
@@ -763,8 +713,21 @@ public class Init {
 			SimpleCheeseTypes.RICOTTA.getCheeseItems().asStack(ricottaBowlCount), ricottaBowlRecipe
 		).setRegistryName(toRegName("ricotta")));
 		
-		// TODO: RECIPE_REGISTER!
-		
+		// TODO: Register standard shapeless and shaped recipes.
+		//			- Ricotta Cheese recipe
+		//			- Cheese Vat recipe
+		//			- Churn recipe
+		//			- Cheese Press recipe
+		//			- Pancheon recipe
+
+		// TODO: Register non-standard Cheese Vat recipes.
+		//			- Cheese
+
+		// TODO: Register non-standard Pancheon recipes.
+		//			- Cream recipe
+		//			- Skim Milk recipe
+
+
 /*		
 
 		GameRegistry.addRecipe(new ShapelessOreRecipe(GrowthcraftMilkBlocks.cheeseVat.asStack(),

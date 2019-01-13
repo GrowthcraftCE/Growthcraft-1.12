@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:simple_cheese",
+      "data": 2
+    },
+    {
+      "item": "minecraft:dye",
+      "data": 15
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:simple_cheese_slice",
+    "data": 0,
+    "count": 4
+  }
+}
