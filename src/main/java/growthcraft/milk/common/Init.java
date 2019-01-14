@@ -18,7 +18,6 @@ import growthcraft.core.shared.item.CommonItemStackComparator;
 import growthcraft.core.shared.item.IItemStackComparator;
 import growthcraft.core.shared.item.ItemFoodBottleFluid;
 import growthcraft.core.shared.item.OreItemStacks;
-import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.milk.GrowthcraftMilk;
@@ -54,6 +53,7 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -61,12 +61,12 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -703,18 +703,19 @@ public class Init {
 	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
 		// TODO: Use recipe factory instead factory 
 		final int ricottaBowlCount = GrowthcraftMilkConfig.ricottaBowlCount;
-		final List<ItemStack> ricottaBowlRecipe = new ArrayList<ItemStack>();
-		ricottaBowlRecipe.add(SimpleCheeseTypes.RICOTTA.getCurdBlocks().asStack());
-		for (int i = 0; i < ricottaBowlCount; ++i)
-		{
-			ricottaBowlRecipe.add(new ItemStack(Items.BOWL, 1));
-		}
-		registry.register(new ShapelessItemComparableRecipe("", new DriedCurdComparator(),
-			SimpleCheeseTypes.RICOTTA.getCheeseItems().asStack(ricottaBowlCount), ricottaBowlRecipe
-		).setRegistryName(toRegName("ricotta")));
-		
+
+		GameRegistry.addShapelessRecipe(
+				new ResourceLocation(Reference.MODID, "ricotta"),
+				null,
+				SimpleCheeseTypes.RICOTTA.getCheeseItems().asStack(ricottaBowlCount),
+				Ingredient.fromItem(SimpleCheeseTypes.RICOTTA.getCurdBlocks().asStack().getItem()),
+				Ingredient.fromItem(Items.BOWL),
+				Ingredient.fromItem(Items.BOWL),
+				Ingredient.fromItem(Items.BOWL),
+				Ingredient.fromItem(Items.BOWL)
+		);
+
 		// TODO: Register standard shapeless and shaped recipes.
-		//			- Ricotta Cheese recipe
 		//			- Cheese Vat recipe
 		//			- Churn recipe
 		//			- Cheese Press recipe
