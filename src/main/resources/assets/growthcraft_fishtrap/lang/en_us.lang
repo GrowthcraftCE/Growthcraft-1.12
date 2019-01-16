@@ -1,3 +1,6 @@
 container.fishtrap=Fishtrap
 
 tile.fishtrap.name=Fishtrap
+
+advancement.craft.fishtrap=Trapping fish
+advancement.craft.fishtrap.desc=Get yourself a Fish Trap.

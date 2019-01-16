@@ -1,0 +1,28 @@
+{
+	"display": {
+		"icon": {
+			"item": "growthcraft_fishtrap:fishtrap"
+		},
+    	"title": {
+      		"translate": "advancement.craft.fishtrap"
+    	},
+    	"description": {
+      		"translate": "advancement.craft.fishtrap.desc",
+      		"italic": true
+    	},
+		"frame": "task",
+		"background": "minecraft:textures/blocks/planks_spruce.png"
+	},
+	"criteria": {
+		"craft_fishtrap": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"item": "growthcraft_fishtrap:fishtrap"
+					}
+				]
+			}
+		}
+	}
+}
