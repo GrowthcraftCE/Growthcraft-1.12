@@ -11,7 +11,7 @@
 			"italic": true
 		},
 		"frame": "task",
-		"parent": "growthcraft_apples:advancements/advancement_get_applejuice"
+		"parent": "growthcraft_apples:advancement_get_applejuice"
 	},
 	"criteria": {
 		"get_applecider_ethereal_bucket": {

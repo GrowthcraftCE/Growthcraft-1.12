@@ -11,7 +11,7 @@
 			"italic": true
 		},
 		"frame": "task",
-		"parent": "growthcraft_apples:advancements/advancement_craft_apple_sapling"
+		"parent": "growthcraft_apples:advancement_craft_apple_sapling"
 	},
 	"criteria": {
 		"get_apple_log": {

@@ -11,7 +11,7 @@
 			"italic": true
 		},
 		"frame": "task",
-		"parent": "growthcraft_apples:advancements/advancement_get_apple"
+		"parent": "growthcraft_apples:advancement_get_apple"
 	},
 	"criteria": {
 		"get_applejuice_bucket": {

@@ -11,7 +11,7 @@
 		"italic": true
 	},
 	"frame": "task",
-	"parent": "growthcraft_apples:advancements/advancement_get_apple_log"
+	"parent": "growthcraft_apples:advancement_get_apple_log"
 	},
 	"criteria": {
 		"craft_apple_planks": {
