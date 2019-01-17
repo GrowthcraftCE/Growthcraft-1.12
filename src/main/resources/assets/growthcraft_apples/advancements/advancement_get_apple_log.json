@@ -3,24 +3,24 @@
 		"icon": { 
 			"item": "growthcraft_apples:apple_log"
 		},
-	"title": { 
-		"translate": "advancement.get.apple_log"
-	},
-	"description": {
-		"translate": "advancement.get.apple_log.desc",
-		"italic": true
-	},
-	"frame": "task"
-	"parent"; "growthcraft_apples:advancements/advancement_craft_apple_sapling"
+		"title": { 
+			"translate": "advancement.get.apple_log"
+		},
+		"description": {
+			"translate": "advancement.get.apple_log.desc",
+			"italic": true
+		},
+		"frame": "task",
+		"parent": "growthcraft_apples:advancements/advancement_craft_apple_sapling"
 	},
 	"criteria": {
 		"get_apple_log": {
 			"trigger": "minecraft:inventory_changed",
 			"contitions":{
-				"items"[
-				{
-					"item": "growthcraft_apples:apple_log"
-				}
+				"items": [
+					{
+						"item": "growthcraft_apples:apple_log"
+					}
 				]
 			}
 		}

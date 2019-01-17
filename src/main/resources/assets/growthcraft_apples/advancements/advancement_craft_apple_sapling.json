@@ -10,17 +10,17 @@
 		"translate": "advancement.craft.apple_sapling.desc",
 		"italic": true
 	},
-	"frame": "task"
-	"parent"; "growthcraft_apples:advancements/advancement_get_apple"
+	"frame": "task",
+	"parent": "growthcraft_apples:advancements/advancement_get_apple"
 	},
 	"criteria": {
 		"craft_apple_sapling": {
 			"trigger": "minecraft:inventory_changed",
 			"contitions":{
-				"items"[
-				{
-					"item": "growthcraft_apples:apple_sapling"
-				}
+				"items": [
+					{
+						"item": "growthcraft_apples:apple_sapling"
+					}
 				]
 			}
 		}

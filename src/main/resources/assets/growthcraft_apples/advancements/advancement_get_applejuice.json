@@ -3,43 +3,46 @@
 		"icon": { 
 			"item": "growthcraft_apples:applecider"
 		},
-	"title": { 
-		"translate": "advancement.get.applejuice"
-	},
-	"description": {
-		"translate": "advancement.get.applejuice.desc",
-		"italic": true
-	},
-	"frame": "task"
-	"parent"; "growthcraft_apples:advancements/advancement_get_apple"
+		"title": { 
+			"translate": "advancement.get.applejuice"
+		},
+		"description": {
+			"translate": "advancement.get.applejuice.desc",
+			"italic": true
+		},
+		"frame": "task",
+		"parent": "growthcraft_apples:advancements/advancement_get_apple"
 	},
 	"criteria": {
 		"get_applejuice_bucket": {
 			"trigger": "minecraft:inventory_changed",
 			"contitions":{
-				"items"[
-				{
-					 "item": "forge:bucketfilled", 
-					 "nbt": "{FluidName:"fluid_booze_apple_juice",Amount:1000}"
-				}
-				]
-			}
-		}
-		"get_applejuice_bottle": {
-			"trigger": "minecraft:inventory_changed",
-			"contitions":{
-				"items"[
-				{
-					 "item": "growthcraft_apples:applecider"
-				}
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+					 	"nbt": {
+					 		"FluidName": "fluid_booze_apple_juice",
+					 		"Amount": 1000
+					 	}
+					}
 				]
 			}
 		},
-		"requirements":[
-			[
-				"get_applejuice_bucket",
-				"get_applejuice_bottle"
-			]
+		"get_applejuice_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items": [
+					{
+					 	"item": "growthcraft_apples:applecider"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"get_applejuice_bucket",
+			"get_applejuice_bottle"
 		]
-	}
+	]
 }
