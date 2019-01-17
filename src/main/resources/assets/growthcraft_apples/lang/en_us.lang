@@ -1,5 +1,7 @@
+# Items
 item.apple_door_item.name=Apple Door
 
+# Tile
 tile.apple_crop.name=Apple
 tile.apple_fence.name=Apple Fence
 tile.apple_fence_gate.name=Apple Fence Gate
@@ -18,3 +20,19 @@ fluid.fluid_booze_apple_cider_extended=Apple Cider
 fluid.fluid_booze_apple_cider_ethereal=Silken Nectar
 fluid.fluid_booze_apple_cider_intoxicated=Apple Cider
 fluid.fluid_booze_apple_cider_poisoned=Apple Cider
+
+# Advancements
+advancement.get.apple=Forbidden fruit
+advancement.get.apple.desc=Find an apple, somewhere, somehow.
+advancement.craft.apple_sapling=Forbidden fruit farm
+advancement.craft.apple_sapling.desc=Craft an apple sapling.
+advancement.get.apple_log=The tastiest log!
+advancement.get.apple_log.desc=Get an apple wood log.
+advancement.get.apple_planks=The tastiest planks!
+advancement.get.apple_planks.desc=Craft apple wood planks.
+advancement.get.apple_item=The tastiest things!
+advancement.get.apple_item.desc=Craft an apple wood item.
+advancement.get.applejuice=Applejuice, applejuice, applejuice!
+advancement.get.applejuice.desc=Press apples in a fruit press and take it out using a bucket or bottle.
+advancement.get.applecider=Applecider.
+advancement.get.applecider.desc=Ferment applejuice to get applecider.

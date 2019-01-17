@@ -1,0 +1,166 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_apples:applecider"
+		},
+	"title": { 
+		"translate": "advancement.get.applecider"
+	},
+	"description": {
+		"translate": "advancement.get.applecider.desc",
+		"italic": true
+	},
+	"frame": "task"
+	"parent"; "growthcraft_apples:advancements/advancement_get_applejuice"
+	},
+	"criteria": {
+		"get_applecider_ethereal_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "forge:bucketfilled", 
+					 "nbt": "{FluidName:"fluid_booze_apple_cider_ethereal",Amount:1000}"
+				}
+				]
+			}
+		}
+		"get_applecider_extended_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "forge:bucketfilled", 
+					 "nbt": "{FluidName:"fluid_booze_apple_cider_extended",Amount:1000}"
+				}
+				]
+			}
+		}
+		"get_applecider_fermented_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "forge:bucketfilled", 
+					 "nbt": "{FluidName:"fluid_booze_apple_cider_fermented",Amount:1000}"
+				}
+				]
+			}
+		}
+		"get_applecider_intoxicated_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "forge:bucketfilled", 
+					 "nbt": "{FluidName:"fluid_booze_apple_cider_intoxicated",Amount:1000}"
+				}
+				]
+			}
+		}
+		"get_applecider_poisoned_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "forge:bucketfilled", 
+					 "nbt": "{FluidName:"fluid_booze_apple_cider_poisoned",Amount:1000}"
+				}
+				]
+			}
+		}
+		"get_applecider_potent_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "forge:bucketfilled", 
+					 "nbt": "{FluidName:"fluid_booze_apple_cider_potent",Amount:1000}"
+				}
+				]
+			}
+		}
+		"get_applecider_ethereal_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "growthcraft_apples:applecider"
+					 "damage": "4"
+				}
+				]
+			}
+		}
+		"get_applecider_extended_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "growthcraft_apples:applecider"
+					 "damage": "3"
+				}
+				]
+			}
+		}
+		"get_applecider_fermented_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "growthcraft_apples:applecider"
+					 "damage": "1"
+				}
+				]
+			}
+		}
+		"get_applecider_intoxicated_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "growthcraft_apples:applecider"
+					 "damage": "5"
+				}
+				]
+			}
+		}
+		"get_applecider_poisoned_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "growthcraft_apples:applecider"
+					 "damage": "6"
+				}
+				]
+			}
+		}
+		"get_applecider_potent_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					 "item": "growthcraft_apples:applecider"
+					 "damage": "2"
+				}
+				]
+			}
+		},
+		"requirements":[
+			[
+				"get_applecider_ethereal_bucket",
+				"get_applecider_extended_bucket",
+				"get_applecider_fermented_bucket",
+				"get_applecider_intoxicated_bucket",
+				"get_applecider_poisoned_bucket",
+				"get_applecider_potent_bucket",
+				"get_applecider_ethereal_bottle",
+				"get_applecider_extended_bottle",
+				"get_applecider_fermented_bottle",
+				"get_applecider_intoxicated_bottle",
+				"get_applecider_poisoned_bottle,
+				"get_applecider_potent_bottle"
+			]
+		]
+	}
+}
