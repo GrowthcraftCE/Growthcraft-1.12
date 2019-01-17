@@ -1,0 +1,28 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_apples:apple_planks"
+		},
+	"title": { 
+		"translate": "advancement.craft.apple_planks"
+	},
+	"description": {
+		"translate": "advancement.craft.apple_planks.desc",
+		"italic": true
+	},
+	"frame": "task"
+	"parent"; "growthcraft_apples:advancements/advancement_get_apple_log"
+	},
+	"criteria": {
+		"craft_apple_planks": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					"item": "growthcraft_apples:apple_planks"
+				}
+				]
+			}
+		}
+	}
+}

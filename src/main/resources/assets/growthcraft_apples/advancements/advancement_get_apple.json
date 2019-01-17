@@ -1,0 +1,28 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "minecraft:apple"
+		},
+	"title": { 
+		"translate": "advancement.get.apple"
+	},
+	"description": {
+		"translate": "advancement.get.apple.desc",
+		"italic": true
+	},
+	"frame": "task"
+	"background": "minecraft:textures/blocks/oak_leaves.png"
+	},
+	"criteria": {
+		"get_apple": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items"[
+				{
+					"item": "minecraft:apple"
+				}
+				]
+			}
+		}
+	}
+}
