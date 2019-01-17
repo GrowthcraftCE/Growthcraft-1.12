@@ -10,9 +10,9 @@
 			"translate": "advancement.get.applejuice.desc",
 			"italic": true
 		},
-		"frame": "task",
-		"parent": "growthcraft_apples:advancement_get_apple"
+		"frame": "task"
 	},
+	"parent": "growthcraft_apples:advancement_get_apple",
 	"criteria": {
 		"get_applejuice_bucket": {
 			"trigger": "minecraft:inventory_changed",

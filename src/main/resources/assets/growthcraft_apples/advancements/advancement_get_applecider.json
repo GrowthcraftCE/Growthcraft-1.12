@@ -10,9 +10,9 @@
 			"translate": "advancement.get.applecider.desc",
 			"italic": true
 		},
-		"frame": "task",
-		"parent": "growthcraft_apples:advancement_get_applejuice"
+		"frame": "task"
 	},
+	"parent": "growthcraft_apples:advancement_get_applejuice",
 	"criteria": {
 		"get_applecider_ethereal_bucket": {
 			"trigger": "minecraft:inventory_changed",

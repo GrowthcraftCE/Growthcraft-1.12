@@ -3,16 +3,16 @@
 		"icon": { 
 			"item": "growthcraft_apples:apple_door_item"
 		},
-	"title": { 
-		"translate": "advancement.craft.apple_item"
+		"title": { 
+			"translate": "advancement.craft.apple_item"
+		},
+		"description": {
+			"translate": "advancement.craft.apple_item.desc",
+			"italic": true
+		},
+		"frame": "task"
 	},
-	"description": {
-		"translate": "advancement.craft.apple_item.desc",
-		"italic": true
-	},
-	"frame": "task",
-	"parent": "growthcraft_apples:advancement_craft_apple_planks"
-	},
+	"parent": "growthcraft_apples:advancement_craft_apple_planks",
 	"criteria": {
 		"craft_apple_door": {
 			"trigger": "minecraft:inventory_changed",
