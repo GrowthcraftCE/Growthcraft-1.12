@@ -16,7 +16,7 @@
 	"criteria": {
 		"get_apple": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "minecraft:apple"

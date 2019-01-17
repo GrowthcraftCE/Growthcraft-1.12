@@ -16,7 +16,7 @@
 	"criteria": {
 		"craft_apple_door": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_door"
@@ -26,7 +26,7 @@
 		},
 		"craft_apple_fence": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_fence"
@@ -36,7 +36,7 @@
 		},
 		"craft_apple_fence_gate": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_fence_gate"
@@ -46,7 +46,7 @@
 		},
 		"craft_apple_stairs": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_stairs"
@@ -56,7 +56,7 @@
 		},
 		"craft_apple_wooden_slab": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_wooden_slab"

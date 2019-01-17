@@ -16,7 +16,7 @@
 	"criteria": {
 		"get_applejuice_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -30,7 +30,7 @@
 		},
 		"get_applejuice_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider"

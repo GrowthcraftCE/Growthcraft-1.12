@@ -16,7 +16,7 @@
 	"criteria": {
 		"get_applecider_ethereal_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -30,7 +30,7 @@
 		},
 		"get_applecider_extended_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -44,7 +44,7 @@
 		},
 		"get_applecider_fermented_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -58,7 +58,7 @@
 		},
 		"get_applecider_intoxicated_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -72,7 +72,7 @@
 		},
 		"get_applecider_poisoned_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -86,7 +86,7 @@
 		},
 		"get_applecider_potent_bucket": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
@@ -100,7 +100,7 @@
 		},
 		"get_applecider_ethereal_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
@@ -111,7 +111,7 @@
 		},
 		"get_applecider_extended_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
@@ -122,7 +122,7 @@
 		},
 		"get_applecider_fermented_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
@@ -133,7 +133,7 @@
 		},
 		"get_applecider_intoxicated_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
@@ -144,7 +144,7 @@
 		},
 		"get_applecider_poisoned_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
@@ -155,7 +155,7 @@
 		},
 		"get_applecider_potent_bottle": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",

@@ -16,7 +16,7 @@
 	"criteria": {
 		"get_apple_log": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_log"

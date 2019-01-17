@@ -16,7 +16,7 @@
 	"criteria": {
 		"craft_apple_sapling": {
 			"trigger": "minecraft:inventory_changed",
-			"contitions":{
+			"conditions":{
 				"items": [
 					{
 						"item": "growthcraft_apples:apple_sapling"
