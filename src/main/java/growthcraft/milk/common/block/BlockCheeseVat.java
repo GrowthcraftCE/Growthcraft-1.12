@@ -3,6 +3,7 @@ package growthcraft.milk.common.block;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
@@ -12,6 +13,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -37,7 +39,11 @@ public class BlockCheeseVat extends GrowthcraftBlockContainer {
     // The amount of milk in the Cheese Vat
 
 //    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 5);
-
+	public static final PropertyBool ATTACH_NORTH = PropertyBool.create("attachnorth");
+	public static final PropertyBool ATTACH_SOUTH = PropertyBool.create("attachsouth");
+	public static final PropertyBool ATTACH_EAST = PropertyBool.create("attacheast");
+	public static final PropertyBool ATTACH_WEST = PropertyBool.create("attachwest");
+	
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 1, 0.0625 * 0, 0.0625 * 1,
             0.0625 * 15, 0.0625 * 14, 0.0625 * 15);
@@ -51,6 +57,7 @@ public class BlockCheeseVat extends GrowthcraftBlockContainer {
         this.setSoundType(SoundType.METAL);
         this.useNeighborBrightness = true;
 //        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, Integer.valueOf(0)));
+        this.setDefaultState(this.blockState.getBaseState());
         setTileEntityType(TileEntityCheeseVat.class);
     }
 
@@ -102,23 +109,36 @@ public class BlockCheeseVat extends GrowthcraftBlockContainer {
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
-/*
+	
+	@Nonnull
+	@Override
+	protected BlockStateContainer createBlockState() {
+	    return new BlockStateContainer(this, ATTACH_NORTH, ATTACH_SOUTH, ATTACH_EAST, ATTACH_WEST );
+	}
+	
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(LEVEL, Integer.valueOf(meta));
+        return this.getDefaultState();
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(LEVEL).intValue();
+        return 0;
     }
+	
+	@Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    {
+		BlockPos down = pos.down();
+		IBlockState stateDown = worldIn.getBlockState(down);
+		boolean isOpaqueDown = stateDown.isOpaqueCube();
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, LEVEL);
+		return state.withProperty(ATTACH_NORTH, !isOpaqueDown && worldIn.getBlockState(down.north()).isOpaqueCube())
+		            .withProperty(ATTACH_SOUTH, !isOpaqueDown && worldIn.getBlockState(down.south()).isOpaqueCube())
+		            .withProperty(ATTACH_EAST, !isOpaqueDown && worldIn.getBlockState(down.east()).isOpaqueCube())
+		            .withProperty(ATTACH_WEST, !isOpaqueDown && worldIn.getBlockState(down.west()).isOpaqueCube());
     }
-*/
-
+	
 	@SuppressWarnings("deprecation")
 	@Override
 	public boolean hasComparatorInputOverride(IBlockState state)
