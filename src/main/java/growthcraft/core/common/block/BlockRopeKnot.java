@@ -6,11 +6,15 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.Reference;
+import growthcraft.core.shared.block.FenceUtils;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -37,9 +41,19 @@ public class BlockRopeKnot extends BlockRopeBase {
     private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 7, 0.0625 * 7, 0.0625 * 16, 0.0625 * 9, 0.0625 * 9);
     private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 11, 0.0625 * 9, 0.0625 * 9, 0.0625 * 16);
     private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 7, 0.0625 * 7, 0.0625 * 5, 0.0625 * 9, 0.0625 * 9);
+    
+	private static final AxisAlignedBB FENCE_NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 6, 0.0625 * 0, 0.0625 * 9, 0.0625 * 15, 0.0625 * 5);
+    private static final AxisAlignedBB FENCE_EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 6, 0.0625 * 7, 0.0625 * 16, 0.0625 * 15, 0.0625 * 9);
+    private static final AxisAlignedBB FENCE_SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 6, 0.0625 * 11, 0.0625 * 9, 0.0625 * 15, 0.0625 * 16);
+    private static final AxisAlignedBB FENCE_WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 6, 0.0625 * 7, 0.0625 * 5, 0.0625 * 15, 0.0625 * 9);
 
-    private boolean wasActivated;
-
+    public static final PropertyInteger NORTH = PropertyInteger.create("north", 0, 2);
+    public static final PropertyInteger EAST = PropertyInteger.create("east", 0, 2);
+    public static final PropertyInteger SOUTH = PropertyInteger.create("south", 0, 2);
+    public static final PropertyInteger WEST = PropertyInteger.create("west", 0, 2);
+    public static final PropertyBool UP = PropertyBool.create("up");
+    public static final PropertyBool DOWN = PropertyBool.create("down");
+    
     public BlockRopeKnot(String unlocalizedName) {
         super(Material.WOOD);
         this.setUnlocalizedName(unlocalizedName);
@@ -51,15 +65,14 @@ public class BlockRopeKnot extends BlockRopeBase {
         this.setHarvestLevel("axe", 0);
 
         this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(NORTH, Boolean.valueOf(false))
-                .withProperty(EAST, Boolean.valueOf(false))
-                .withProperty(SOUTH, Boolean.valueOf(false))
-                .withProperty(WEST, Boolean.valueOf(false))
+                .withProperty(NORTH, Integer.valueOf(0))
+                .withProperty(EAST, Integer.valueOf(0))
+                .withProperty(SOUTH, Integer.valueOf(0))
+                .withProperty(WEST, Integer.valueOf(0))
                 .withProperty(UP, Boolean.valueOf(false))
                 .withProperty(DOWN, Boolean.valueOf(false)));
 
         this.useNeighborBrightness = true;
-        this.wasActivated = false;
     }
 
     @SuppressWarnings("deprecation")
@@ -87,14 +100,22 @@ public class BlockRopeKnot extends BlockRopeBase {
     	addCollisionBoxToList(pos, entityBox, collidingBoxes, FENCE_BOUNDING_BOX);
     	addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
     	
-    	if( actualState.getValue(NORTH) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_BOUNDING_BOX);
-    	if( actualState.getValue(EAST) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_BOUNDING_BOX);
-    	if( actualState.getValue(SOUTH) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_BOUNDING_BOX);
-    	if( actualState.getValue(WEST) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_BOUNDING_BOX);
+    	int vN = actualState.getValue(NORTH);
+    	int vE = actualState.getValue(EAST);
+    	int vS = actualState.getValue(SOUTH);
+    	int vW = actualState.getValue(WEST);
+    	
+    	if( vN != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vN == 1) ? NORTH_BOUNDING_BOX : FENCE_NORTH_BOUNDING_BOX);
+    	
+    	if( vE != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vE == 1) ? EAST_BOUNDING_BOX : FENCE_EAST_BOUNDING_BOX);
+    	
+    	if( vS != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vS == 1) ? SOUTH_BOUNDING_BOX : FENCE_SOUTH_BOUNDING_BOX);
+    	
+    	if( vW != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vW == 1) ? WEST_BOUNDING_BOX : FENCE_WEST_BOUNDING_BOX);
     	
     	// Up and down not necessary, because they are covered by FENCE_BOUNDING_BOX
     }
@@ -102,11 +123,9 @@ public class BlockRopeKnot extends BlockRopeBase {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(playerIn.isSneaking()) {
-            this.wasActivated = true;
             // Put the Fence back.
             worldIn.setBlockState(pos, Blocks.OAK_FENCE.getDefaultState());
         } else {
-            this.wasActivated = false;
         }
         return false;
     }
@@ -116,8 +135,6 @@ public class BlockRopeKnot extends BlockRopeBase {
         // Always return a rope when broken
         ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
-
-        this.wasActivated = false;
     }
 
     @Override
@@ -149,12 +166,26 @@ public class BlockRopeKnot extends BlockRopeBase {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST, canConnectRopeTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canConnectRopeTo(worldIn, pos, EnumFacing.WEST))
+    	int vN = getConnectionValue(worldIn, pos, EnumFacing.NORTH);
+    	int vE = getConnectionValue(worldIn, pos, EnumFacing.EAST);
+    	int vS = getConnectionValue(worldIn, pos, EnumFacing.SOUTH);
+    	int vW = getConnectionValue(worldIn, pos, EnumFacing.WEST);
+    	
+        return state.withProperty(NORTH, vN)
+                .withProperty(EAST, vE)
+                .withProperty(SOUTH, vS)
+                .withProperty(WEST, vW)
                 .withProperty(UP, canConnectRopeTo(worldIn, pos, EnumFacing.UP))
                 .withProperty(DOWN, canConnectRopeTo(worldIn, pos, EnumFacing.DOWN));
+    }
+    
+    private int getConnectionValue(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
+    	if( canConnectRopeTo(worldIn, pos, facing) )
+    		return 1;
+    	else if( FenceUtils.canFenceConnectTo(worldIn, pos, facing) )
+    		return 2;
+    	else
+    		return 0;
     }
 
     @Override
