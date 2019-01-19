@@ -2,7 +2,6 @@ package growthcraft.core.common.item;
 
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
-import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import growthcraft.core.shared.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -35,9 +34,6 @@ public class ItemRope extends Item {
         if(block instanceof BlockFence) {
             // If the target block is a BlockFence, then replace it with a RopeKnot block.
             worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
-            // Add the fence to the inventory
-            TileEntityRopeKnot tileEntity = (TileEntityRopeKnot)worldIn.getTileEntity(pos);
-            tileEntity.addStackToInventory(new ItemStack(block));
             // Decrease the player inventory as we used the rope.
             player.getHeldItem(hand).shrink(1);
             return EnumActionResult.SUCCESS;

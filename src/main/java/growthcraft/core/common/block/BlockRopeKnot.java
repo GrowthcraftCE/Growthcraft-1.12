@@ -8,9 +8,7 @@ import javax.annotation.Nullable;
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
-import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -18,9 +16,9 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -28,10 +26,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
-public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider {
+public class BlockRopeKnot extends BlockRopeBase {
 
 	private static final AxisAlignedBB FENCE_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
 	private static final AxisAlignedBB FENCE_COLLISION_EXTRA_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 24, 0.0625 * 11);
@@ -108,10 +104,7 @@ public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider 
         if(playerIn.isSneaking()) {
             this.wasActivated = true;
             // Put the Fence back.
-            IItemHandler inventoryHandler = this.getInventoryHandler(worldIn, pos);
-            ItemStack stack = inventoryHandler.getStackInSlot(0);
-            IBlockState fenceBlockState = Block.getBlockFromItem(stack.getItem()).getDefaultState();
-            worldIn.setBlockState(pos, fenceBlockState);
+            worldIn.setBlockState(pos, Blocks.OAK_FENCE.getDefaultState());
         } else {
             this.wasActivated = false;
         }
@@ -124,13 +117,6 @@ public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider 
         ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
 
-        if(!this.wasActivated) {
-            // Returned the stored ItemFence
-            IItemHandler inventoryHandler = this.getInventoryHandler(worldIn, pos);
-            ItemStack stack = inventoryHandler.getStackInSlot(0);
-            InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, stack);
-        }
-
         this.wasActivated = false;
     }
 
@@ -138,18 +124,6 @@ public class BlockRopeKnot extends BlockRopeBase implements ITileEntityProvider 
     public int quantityDropped(Random random) {
         // Always return 0 as this is not a normal block.
         return 0;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityRopeKnot();
-    }
-
-    private IItemHandler getInventoryHandler(World worldIn, BlockPos pos) {
-        TileEntityRopeKnot te = (TileEntityRopeKnot) worldIn.getTileEntity(pos);
-        IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        return handler;
     }
 
     /**
