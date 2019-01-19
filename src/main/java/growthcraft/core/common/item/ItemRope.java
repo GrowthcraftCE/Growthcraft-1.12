@@ -6,6 +6,7 @@ import growthcraft.core.shared.GrowthcraftLogger;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -31,7 +32,7 @@ public class ItemRope extends Item {
 
         Block block = worldIn.getBlockState(pos).getBlock();
 
-        if(block instanceof BlockFence) {
+        if(block == Blocks.OAK_FENCE) {
             // If the target block is a BlockFence, then replace it with a RopeKnot block.
             worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
             // Decrease the player inventory as we used the rope.
