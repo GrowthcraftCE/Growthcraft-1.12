@@ -175,6 +175,7 @@ dependencies {
     compile "mcp.mobius.waila:Hwyla:" + project.property('hwyla_version')
     compile "baubles:Baubles:" + project.property('minecraft_version_short') + ":" + project.property('baubles_version')
 //TEST    compile "erebus:Erebus:1.0.22"
+	compile "com.github.glitchfiend.biomesoplenty:SereneSeasons:1.12.2-1.2.15.100:universal"
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
