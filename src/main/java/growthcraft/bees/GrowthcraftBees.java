@@ -128,7 +128,6 @@ public class GrowthcraftBees {
 		Init.registerFluidRender();
 	}
 	
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void registerCraftingRecipes(RegistryEvent.Register<IRecipe> event)
 	{
