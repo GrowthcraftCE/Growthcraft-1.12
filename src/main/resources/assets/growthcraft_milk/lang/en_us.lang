@@ -48,7 +48,7 @@ item.cheese_cloth.name=Cheese Cloth
 
 item.ice_cream.apple.name=Apple Ice Cream
 item.ice_cream.chocolate.name=Chocolate Ice Cream
-item.ice_cream.grape.name=Grape Ice Cream
+item.ice_cream.grape_purple.name=Purple Grape Ice Cream
 item.ice_cream.honey.name=Honey Ice Cream
 item.ice_cream.plain.name=Ice Cream
 item.ice_cream.watermelon.name=Watermelon Ice Cream
@@ -61,7 +61,7 @@ item.thistle_seed.name=Thistle
 
 item.yogurt.apple.name=Apple Yogurt
 item.yogurt.chocolate.name=Chocolate Yogurt
-item.yogurt.grape.name=Grape Yogurt
+item.yogurt.grape_purple.name=Purple Grape Yogurt
 item.yogurt.honey.name=Honey Yogurt
 item.yogurt.plain.name=Yogurt
 item.yogurt.watermelon.name=Watermelon Yogurt

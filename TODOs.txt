@@ -20,11 +20,10 @@ Bugs:
 BUG: Client and Server synchronisation for brewing kettle is not working unless the user opens the GUI. Possible other devices are impacted.
 BUG: Bee box has a spamming block update.
 BUG: Cheese press is triggered when placing a neighbor block.
-BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
-BUG: Collision boxes for brewing kettle walls are not correct.
 BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 BUG: Fix string formatting with arguments when logging.
+DONE: Collision boxes for brewing kettle walls are not correct.
 DONE: Thistle recipe not working to get seeds.
 DONE: Ricotta bowl recipe not working.
 DONE: Grape Leaves are removed, too, if a trunk has been removed.
@@ -32,6 +31,7 @@ DONE: Cheese rotation needs to be fixed.
 DONE: BUG: Tipsy Effect not saved when game is saved.
 DONE: BUG: No Tipsy Effect icon. 
 NOTABUG: BUG: Booze color is too dark.
+NOTABUG: BUG: Effect duration in Detail window appears to be wrong. E.g. for Skim Milk. 
 
 -----------------
 Potential Bugs:
@@ -44,7 +44,7 @@ Improvements:
 -----------------
 TODO: Heat blocks to react on meta and supporting neighborChanged events for tiles. For heat blocks which can be turned on/off.
 TODO: Only accepted items are consumed, thrown into brewing kettle 
-TODO: isItemValid for culture jar container
+DONE: isItemValid for culture jar container
 DONE: isItemValid for fermenting barrel container
 DONE: No whey production for dried curds over pancheons, in order to stop an infinite source of whey. 
 DONE: Fruit Press fluid render.
@@ -55,13 +55,13 @@ Not ported stuff:
 -----------------
 TODO: Missing translations.
 TODO: Mining levels for all ported devices.
-TODO: Real curds textures and models.
-TODO: Crafting Recipes for Cellar.
-TODO: Crafting Recipes for Milk.
 TODO: Crafting Recipes for Core.
-TODO: Crafting Recipes for Grapes.
-TODO: Crafting Recipes for Hops.
 TODO: Booze Fluid behavior like bubbles etc.
+DONE: Real curds textures and models.
+DONE: Crafting Recipes for Cellar.
+DONE: Crafting Recipes for Milk.
+DONE: Crafting Recipes for Grapes.
+DONE: Crafting Recipes for Hops.
 DONE: Add food ore dictionary: apple, grape
 DONE: Cheese model items to be textured.
 DONE: Curds textures and models.
@@ -104,13 +104,13 @@ DONE: Add Grapewine name enum.
 ------------
 Porting to 1.12.2:
 ------------
-TODO: Port recipes.
 TODO: Add cellar Advancements.
 TODO: Handle alpha for tile entity rendering.
 TODO: Reenable Bucket to bottle filling for boozes.
 TODO: BUG: Recipes using custom classes are displayed as empty.
-TODO: BUG: Honey jar recipe with bucket is broken.
-TODO: BUG: Crowbar is displayed in the slot for erasing items at Creative GUI.
+DONE: BUG: Honey jar recipe with bucket is broken.
+DONE: BUG: Crowbar is displayed in the slot for erasing items at Creative GUI.
+DONE: Port recipes.
 DONE: BUG: Right shift+clicking an item in inventory doesn't redraw GUI. 
 
 ------------

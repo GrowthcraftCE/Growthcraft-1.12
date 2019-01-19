@@ -29,7 +29,11 @@ import javax.annotation.Nullable;
 
 public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
 
-    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625 * 4, 0.0625 * 0, 0.0625 * 4, 0.0625 * 12, 0.0625 * 16, 0.0625 * 12);
+	// SYNC: Must be kept consistent with thistle textures
+    private static final AxisAlignedBB BOUNDING_BOX_0 = new AxisAlignedBB(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 4, 0.0625 * 11);
+    private static final AxisAlignedBB BOUNDING_BOX_1 = new AxisAlignedBB(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 9, 0.0625 * 11);
+    private static final AxisAlignedBB BOUNDING_BOX_2 = new AxisAlignedBB(0.0625 * 4, 0.0625 * 0, 0.0625 * 4, 0.0625 * 12, 0.0625 * 15, 0.0625 * 12);
+    private static final AxisAlignedBB BOUNDING_BOX_3 = new AxisAlignedBB(0.0625 * 2, 0.0625 * 0, 0.0625 * 2, 0.0625 * 14, 0.0625 * 16, 0.0625 * 14);
 
     public BlockThistle(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
@@ -51,7 +55,15 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDING_BOX;
+    	// SYNC: Must be kept consistent with thistle.json blockstate configuration
+    	int age = state.getValue(AGE);
+    	if( age <= 2 )
+    		return BOUNDING_BOX_0;
+    	if( age <= 4 )
+    		return BOUNDING_BOX_1;
+    	if( age <= 6 )
+    		return BOUNDING_BOX_2;
+    	return BOUNDING_BOX_3;
     }
 
     @Override
