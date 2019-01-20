@@ -1,0 +1,31 @@
+fluid.fluid_honey=벌꿀
+
+item.bee.name=꿀벌
+
+item.bees_wax.normal.name=밀랍
+item.bees_wax.red.name=빨간색 밀랍
+item.bees_wax.black.name=검은색 밀랍
+
+item.bottlefluid_honey.name=벌꿀 병
+
+item.honey_comb_empty.name=빈 벌집
+item.honey_comb_filled.name=가득 찬 벌집
+
+item.honey_jar.name=꿀단지
+
+container.growthcraft_bees.beeBox=양봉 상자
+
+tile.beebox.name=양봉 상자
+
+# Fluid Tags
+fluids.tag.mead=벌꿀주
+fluids.tag.honey=벌꿀
+
+# Fluids
+fluid.fluid_booze_mead_young=숙성되지 않은 벌꿀주
+fluid.fluid_booze_mead_fermented=벌꿀주
+fluid.fluid_booze_mead_potent=강한 벌꿀주
+fluid.fluid_booze_mead_extended=대형 벌꿀주
+fluid.fluid_booze_mead_ethereal=마법 벌꿀주
+fluid.fluid_booze_mead_intoxicated=도수 높은 벌꿀주
+fluid.fluid_booze_mead_poisoned=벌꿀주

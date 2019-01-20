@@ -1,0 +1,39 @@
+item.grape.green.name=청포도
+item.grape.purple.name=자주색 포도
+item.grape.red.name=붉은색 포도
+
+item.grape_seed.green.name=청포도 씨앗
+item.grape_seed.purple.name=자주색 포도 씨앗
+item.grape_seed.red.name=붉은색 포도 씨앗
+
+tile.grape_vine.name=포도 넝쿨
+tile.grape_vine_bush.name=포도 넝쿨
+tile.grape_vine_fruit.name=포도 넝쿨
+
+# Fluids
+fluid.fluid_booze_purple_juice=자주색 포도 주스
+fluid.fluid_booze_purple_wine=자주색 포도주
+fluid.fluid_booze_purple_wine_potent=자주색 포도주
+fluid.fluid_booze_purple_wine_extended=자주색 포도주
+fluid.fluid_booze_purple_ambrosia=자주색 암브로시아
+fluid.fluid_booze_purple_portwine=자주색 포트 포도주
+fluid.fluid_booze_purple_wine_intoxicated=자주색 포도주
+fluid.fluid_booze_purple_wine_poisoned=자주색 포도주
+
+fluid.fluid_booze_red_juice=붉은색 포도 주스
+fluid.fluid_booze_red_wine=붉은색 포도주
+fluid.fluid_booze_red_wine_potent=붉은색 포도주
+fluid.fluid_booze_red_wine_extended=붉은색 포도주
+fluid.fluid_booze_red_ambrosia=붉은색 암브로시아
+fluid.fluid_booze_red_portwine=붉은색 포트 포도주
+fluid.fluid_booze_red_wine_intoxicated=붉은색 포도주
+fluid.fluid_booze_red_wine_poisoned=붉은색 포도주
+
+fluid.fluid_booze_green_juice=청포도 주스
+fluid.fluid_booze_green_wine=청포도 포도주
+fluid.fluid_booze_green_wine_potent=청포도 포도주
+fluid.fluid_booze_green_wine_extended=청포도 포도주
+fluid.fluid_booze_green_ambrosia=청포도 암브로시아
+fluid.fluid_booze_green_portwine=청포도 포트 와인
+fluid.fluid_booze_green_wine_intoxicated=청포도 포도주
+fluid.fluid_booze_green_wine_poisoned=청포도 포도주

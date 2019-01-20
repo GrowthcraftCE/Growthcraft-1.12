@@ -1,0 +1,68 @@
+item.crowbar.white.name=하얀색 크로우바
+item.crowbar.orange.name=주황색 크로우바
+item.crowbar.magenta.name=자홍색 크로우바
+item.crowbar.lightBlue.name=하늘색 크로우바
+item.crowbar.yellow.name=노란색 크로우바
+item.crowbar.lime.name=연두색 크로우바
+item.crowbar.pink.name=분홍색 크로우바
+item.crowbar.gray.name=회색 크로우바
+item.crowbar.silver.name=은색 크로우바
+item.crowbar.cyan.name=청록색 크로우바
+item.crowbar.purple.name=보라색 크로우바
+item.crowbar.blue.name=파란색 크로우바
+item.crowbar.brown.name=갈색 크로우바
+item.crowbar.green.name=초록색 크로우바
+item.crowbar.red.name=빨간색 크로우바
+item.crowbar.black.name=검은색 크로우바
+item.rope.name=밧줄
+item.salt.name=암염
+
+itemGroup.Growthcraft=그로우스크래프트
+
+tile.rope_knot.name=밧줄 매듭
+tile.rope_fence.name=밧줄
+tile.salt_block.name=암염 블록
+tile.salt_ore.name=암염 광석
+
+# Effects
+effect.chance.format=%d%% 확률
+effect.extinguish.desc=화재를 진화합니다
+effect.ignite.desc=%d초 동안 불을 붙입니다
+effect.list.head=다음을 적용합니다:
+effect.null.desc=아무것도 하지 않습니다
+effect.random_list.head=다음 중 한 가지를 적용합니다:
+effect.remove_potion_effect.format=%s을(를) 제거합니다
+effect.weighted_random_list.format=%d%% 확률
+
+# Formats and Units
+format.value.true=네
+format.value.false=아니오
+format.state.true=켜기
+format.state.false=끄기
+format.invalid_fluid=<잘못된 액체>
+# Displayed for items
+format.itemslot.empty=<비어 있음>
+format.itemslot.invalid=<잘못된 아이템>
+
+# Modifier name
+format.booze.name=%2$s %1$s
+
+# When a fluid is not a booze
+format.fluid.name=%1$s
+
+# Name (stack_size)
+format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+format.tank_id=탱크 %d :
+# When the tank is empty
+format.tank.empty=<비어 있음>
+# %s is the fluid name
+format.tank.content_suffix=%s mB
+
+# Configuration File Comment Translations
+config.logging.log_level.comment=로그 수준을 설정하세요.
+config.worldgen.worldgenBlockSaltOre.comment=암염 광석을 월드에 생성하지 않으려면 false 로 설정하세요.
+config.general.hidePoisonedBooze.comment=술에 독성이 생기는 것을 원하지 않으면 false 로 설정하세요.
+config.worldgen.blockSaltOreMinHeight.comment=암염 광석이 생성될 최소 높이를 설정하세요. [ 기본값 = 10 ]
+config.worldgen.blockSaltOreMaxHeight.comment=암염 광석이 생성될 최대 높이를 설정하세요. [ 기본값 = 64 ]
+config.worldgen.blockSaltOreChanceToSpawn.comment=암염 광석이 월드에 생성될 확률을 설정하세요. [ 기본값 = 5 ]

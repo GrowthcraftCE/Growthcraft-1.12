@@ -1,0 +1,54 @@
+# Tooltips (Number is a percentage)
+# number is a percentage
+format.tipsy_chance=%d%% 취할 확률
+
+# Other
+potion.tipsy=취함
+
+# Achievements
+achievement.getDrunk=양조하는데 무슨 문제 있어?
+achievement.getDrunk.desc=취함 V를 얻으세요.
+
+# Modifiers
+fluids.tag.chilled=차가운
+fluids.tag.cider=사이다
+fluids.tag.cream=크림
+fluids.tag.deadly=치명적인
+fluids.tag.extended=대형
+fluids.tag.fermented=발효된
+fluids.tag.fortified=강화된
+fluids.tag.hopped=홉이 들어간
+fluids.tag.hyper_extended=특-대형
+fluids.tag.intoxicated=도수 높은
+fluids.tag.magical=마법
+fluids.tag.mash=숙성되지 않은
+fluids.tag.poisoned=독 있는
+fluids.tag.potent=강력한
+fluids.tag.sake=청주
+fluids.tag.wine=포도주
+fluids.tag.young=어린
+
+# Items
+item.achievement_dummy.name=양조하는데 무슨 문제 있어?
+item.yeast.brewers.name=맥주 효모
+item.yeast.lager.name=라거 효모
+item.yeast.bayanus.name=베이야누스 효모
+item.yeast.ethereal.name=여린 효모
+item.yeast.origin.name=기초 효모
+item.brew_kettle_lid.name=양조용 솥단지 뚜껑
+item.barrel_tap.name=나무통 꼭지
+
+# Gui
+container.growthcraft.brewKettle=양조용 솥단지
+container.grc.CultureJar=배양 단지
+container.grc.fermentBarrel=숙성용 나무통
+container.grc.fruitPress=과일 압착기
+gui.grc.discard=버리기
+gui.grc.cantferment=숙성시킬 수 없습니다
+gui.grc.switch=통 위치 바꾸기
+
+# Tile Entities
+tile.brew_kettle.name=양조용 솥단지
+tile.culture_jar.name=배양 단지
+tile.ferment_barrel.name=숙성용 나무통
+tile.fruit_press.name=과일 압착기
