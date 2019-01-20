@@ -1,0 +1,20 @@
+item.apple_door_item.name=사과나무 문
+
+tile.apple_crop.name=사과
+tile.apple_fence.name=사과나무 울타리
+tile.apple_fence_gate.name=사과나무 울타리 문
+tile.apple_leaves.name=사과나무 잎
+tile.apple_log.name=사과나무
+tile.apple_planks.name=사과나무 판자
+tile.apple_sapling.name=사과나무 묘목
+tile.apple_slab_half.name=사과나무 반 블록
+tile.apple_stairs.name=사과나무 계단
+
+# Fluids
+fluid.fluid_booze_apple_juice=사과 주스
+fluid.fluid_booze_apple_cider_fermented=사과 사이다
+fluid.fluid_booze_apple_cider_potent=사과 사이다
+fluid.fluid_booze_apple_cider_extended=사과 사이다
+fluid.fluid_booze_apple_cider_ethereal=부드러운 사과 과일즙
+fluid.fluid_booze_apple_cider_intoxicated=사과 사이다
+fluid.fluid_booze_apple_cider_poisoned=사과 사이다
