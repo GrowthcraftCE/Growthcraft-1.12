@@ -1,0 +1,125 @@
+
+
+# Fluids
+fluid.fluid_butter_milk=버터 우유
+
+fluid.fluid_cheese_asiago=아지아고 치즈
+fluid.fluid_cheese_gorgonzola=고르곤졸라 치즈
+fluid.fluid_cheese_appenzeller=아펜젤러 치즈
+fluid.fluid_cheese_cheddar=체다 치즈
+fluid.fluid_cheese_monterey=몬테레이 치즈
+fluid.fluid_cheese_parmesan=파마산 치즈
+fluid.fluid_cheese_emmentaler=에멘탈 치즈
+fluid.fluid_cheese_ricotta=리코타 치즈
+
+fluid.fluid_cream=크림
+
+fluid.fluid_milk=우유
+fluid.fluid_milk_curds=응고된 우유
+
+fluid.fluid_rennet=치즈 효소
+
+fluid.fluid_skim_milk=탈지유
+fluid.fluid_whey=단백질 빠진 맑은 우유
+fluid.fluid_pasteurized_milk=저온 살균 우유
+
+# Items
+item.bottlefluid_milk.name=우유병
+item.bottlefluid_butter_milk.name=버터 우유병
+item.bottlefluid_cream.name=크림 병
+item.bottlefluid_milk_curds.name=응고된 우유병
+item.bottlefluid_rennet.name=치즈 효소 병
+item.bottlefluid_skim_milk.name=탈지유 병
+item.bottlefluid_whey.name=단백질 빠진 맑은 우유병
+item.bottlefluid_pasteurized_milk.name=저온 살균 우유병
+
+item.butter.salted.name=가염 버터
+item.butter.unsalted.name=버터
+
+item.cheese_aged_slice.gorgonzola.name=고르곤졸라 치즈 조각
+item.cheese_aged_slice.emmentaler.name=에멘탈 치즈 조각
+item.cheese_aged_slice.appenzeller.name=아펜젤러 치즈 조각
+item.cheese_aged_slice.asiago.name=아지아고 치즈 조각
+item.cheese_aged_slice.parmesan.name=파마산 치즈 조각
+item.cheese_waxed_slice.cheddar.name=체다 치즈 조각
+item.cheese_waxed_slice.monterey.name=몬테레이 치즈 조각
+item.cheese_simple_slice.ricotta.name=리코타 치즈 조각
+item.cheese_cloth.name=치즈 천
+
+item.ice_cream.apple.name=사과 아이스크림
+item.ice_cream.chocolate.name=초콜릿 아이스크림
+item.ice_cream.grape_purple.name=자주색 포도 아이스크림
+item.ice_cream.honey.name=벌꿀 아이스크림
+item.ice_cream.plain.name=아이스크림
+item.ice_cream.watermelon.name=수박 아이스크림
+
+item.starter_culture.name=기초 배양균
+item.stomach.name=위장
+
+item.thistle.name=엉겅퀴
+item.thistle_seed.name=엉겅퀴
+
+item.yogurt.apple.name=사과 요거트
+item.yogurt.chocolate.name=초콜릿 요거트
+item.yogurt.grape_purple.name=자주색 포도 요거트
+item.yogurt.honey.name=벌꿀 요거트
+item.yogurt.plain.name=요거트
+item.yogurt.watermelon.name=수박 요거트
+
+# Tiles (blocks)
+tile.cheese_aged.gorgonzola.unaged.name=고르곤졸라 치즈 (숙성되지 않음)
+tile.cheese_aged.gorgonzola.aged.name=고르곤졸라 치즈 (숙성됨)
+tile.cheese_aged.gorgonzola.cut.name=고르곤졸라 치즈 (숙성됨)
+
+tile.cheese_aged.emmentaler.unaged.name=에멘탈 치즈 (숙성되지 않음)
+tile.cheese_aged.emmentaler.aged.name=에멘탈 치즈 (숙성됨)
+tile.cheese_aged.emmentaler.cut.name=에멘탈 치즈 (숙성됨)
+
+tile.cheese_aged.appenzeller.unaged.name=아펜젤러 치즈 (숙성되지 않음)
+tile.cheese_aged.appenzeller.aged.name=아펜젤러 치즈 (숙성됨)
+tile.cheese_aged.appenzeller.cut.name=아펜젤러 치즈 (숙성됨)
+
+tile.cheese_aged.asiago.unaged.name=아지아고 치즈 (숙성되지 않음)
+tile.cheese_aged.asiago.aged.name=아지아고 치즈 (숙성됨)
+tile.cheese_aged.asiago.cut.name=아지아고 치즈 (숙성됨)
+
+tile.cheese_aged.parmesan.unaged.name=파마산 치즈 (숙성되지 않음)
+tile.cheese_aged.parmesan.aged.name=파마산 치즈 (숙성됨)
+tile.cheese_aged.parmesan.cut.name=파마산 치즈 (숙성됨)
+
+tile.cheese_waxed.cheddar.aged.name=체다 치즈 (숙성됨)
+tile.cheese_waxed.cheddar.unaged.name=체다 치즈 (숙성되지 않음)
+tile.cheese_waxed.cheddar.unwaxed.name=체다 치즈 (밀랍 껍질 벗겨냄)
+tile.cheese_waxed.cheddar.cut.name=체다 치즈 (숙성됨)
+
+tile.cheese_waxed.monterey.aged.name=몬테레이 치즈 (숙성됨)
+tile.cheese_waxed.monterey.unaged.name=몬테레이 치즈 (숙성되지 않음)
+tile.cheese_waxed.monterey.unwaxed.name=몬테레이 치즈 (밀랍 껍질 벗겨냄)
+tile.cheese_waxed.monterey.cut.name=몬테레이 치즈 (숙성됨)
+
+tile.curds_aged.gorgonzola.name=고르곤졸라용 응고된 우유
+tile.curds_aged.gorgonzola.dried.name=고르곤졸라용 응고된 우유 (건조됨)
+tile.curds_aged.emmentaler.name=에멘탈용 응고된 우유
+tile.curds_aged.emmentaler.dried.name=에멘탈용 응고된 우유 (건조됨)
+tile.curds_aged.appenzeller.name=아펜젤러용 응고된 우유
+tile.curds_aged.appenzeller.dried.name=아펜젤러용 응고된 우유 (건조됨)
+tile.curds_aged.asiago.name=아지아고용 응고된 우유
+tile.curds_aged.asiago.dried.name=아지아고용 응고된 우유 (건조됨)
+tile.curds_aged.parmesan.name=파마산용 응고된 우유
+tile.curds_aged.parmesan.dried.name=파마산용 응고된 우유 (건조됨)
+
+tile.curds_simple.ricotta.name=리코타용 응고된 우유
+tile.curds_simple.ricotta.dried.name=리코타용 응고된 우유 (건조됨)
+
+tile.curds_waxed.cheddar.name=체다용 응고된 우유
+tile.curds_waxed.cheddar.dried.name=체다용 응고된 우유 (건조됨)
+tile.curds_waxed.monterey.name=몬테레이용 응고된 우유
+tile.curds_waxed.monterey.dried.name=몬테레이용 응고된 우유 (건조됨)
+
+tile.cheese_press.name=치즈 압착기
+tile.cheese_vat.name=치즈 제작용 통
+tile.churn.name=우유 거품기
+tile.milk.name=우유
+tile.pancheon.name=판천
+tile.rennet.name=치즈 효소
+tile.thistle.name=엉겅퀴
