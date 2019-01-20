@@ -8,8 +8,10 @@ import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -59,5 +61,18 @@ public class BlockPancheon extends GrowthcraftBlockContainer {
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
+    }
+    
+	@Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        if (face == EnumFacing.UP)
+        {
+            return BlockFaceShape.BOWL;
+        }
+        else
+        {
+            return face != EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
+        }
     }
 }

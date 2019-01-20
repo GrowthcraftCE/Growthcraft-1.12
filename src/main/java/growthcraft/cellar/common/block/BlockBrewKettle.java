@@ -14,6 +14,7 @@ import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -154,6 +155,22 @@ public class BlockBrewKettle extends BlockCellarContainer {
 		return 1;
 	}
     
+	@Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+		if( face == EnumFacing.UP ) {
+			final TileEntityBrewKettle te = getTileEntity(worldIn, pos);
+			if (te != null)
+			{
+				if( te.hasLid() )
+					return BlockFaceShape.SOLID;
+			}
+			return BlockFaceShape.BOWL;
+		}
+		
+		return face == EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
+    }
+	
 	/************
 	 * RENDERS
 	 ************/

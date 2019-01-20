@@ -32,6 +32,13 @@ public class BlockRopeFence extends BlockRopeBase {
     private static final AxisAlignedBB UP_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 9, 0.0625 * 7, 0.0625 * 9, 0.0625 * 16, 0.0625 * 9);
     private static final AxisAlignedBB DOWN_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 0, 0.0625 * 7, 0.0625 * 9, 0.0625 * 7, 0.0625 * 9);
     
+    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final PropertyBool WEST = PropertyBool.create("west");
+    public static final PropertyBool UP = PropertyBool.create("up");
+    public static final PropertyBool DOWN = PropertyBool.create("down");
+    
     public BlockRopeFence(String unlocalizedName) {
         super(Material.CARPET);
         this.setUnlocalizedName(unlocalizedName);
@@ -124,12 +131,28 @@ public class BlockRopeFence extends BlockRopeBase {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST, canConnectRopeTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canConnectRopeTo(worldIn, pos, EnumFacing.WEST))
-                .withProperty(UP, canConnectRopeTo(worldIn, pos, EnumFacing.UP))
-                .withProperty(DOWN, canConnectRopeTo(worldIn, pos, EnumFacing.DOWN));
+    	boolean vN = canConnectRopeTo(worldIn, pos, EnumFacing.NORTH);
+    	boolean vE = canConnectRopeTo(worldIn, pos, EnumFacing.EAST);
+    	boolean vS = canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH);
+    	boolean vW = canConnectRopeTo(worldIn, pos, EnumFacing.WEST);
+    	boolean vU = canConnectRopeTo(worldIn, pos, EnumFacing.UP);
+    	boolean vD = canConnectRopeTo(worldIn, pos, EnumFacing.DOWN);
+    	
+    	if( !vN && !vE && !vS && !vW && !vU && !vD ) {
+    		vN = true;
+    		vE = true;
+    		vS = true;
+    		vW = true;
+    		vU = true;
+    		vD = true;
+    	}
+    	
+        return state.withProperty(NORTH, vN)
+                .withProperty(EAST, vE)
+                .withProperty(SOUTH, vS)
+                .withProperty(WEST, vW)
+                .withProperty(UP, vU)
+                .withProperty(DOWN, vD);
     }
 
     @Override
