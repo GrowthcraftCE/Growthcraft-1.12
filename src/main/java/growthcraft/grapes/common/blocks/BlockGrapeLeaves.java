@@ -35,6 +35,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -252,7 +253,12 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		}
 		else
 		{
-			grow(worldIn, rand, pos, state);
+			// NOTE: Same as in BlockReed.updateTick(World, BlockPos, IBlockState, Random)
+			
+			if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, true) ) {
+				grow(worldIn, rand, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+			}
 		}
 	}
 

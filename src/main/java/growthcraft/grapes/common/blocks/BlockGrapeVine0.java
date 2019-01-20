@@ -95,18 +95,23 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
 	}
 
 	@Override
-	protected void doGrowth(World world, BlockPos pos, IBlockState state)
+	protected IBlockState doGrowth(World world, BlockPos pos, IBlockState state)
 	{
+		IBlockState newState;
+		
 		int age = getAge(state);
 		if (age <= 0)
 		{
-			incrementGrowth(world, pos, state);
+			newState = incrementGrowth(world, pos, state);
 		}
 		else
 		{
 			int type = state.getValue(SUBTYPE);
-			world.setBlockState(pos, blockVine1.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
+			newState = blockVine1.getDefaultState().withProperty(SUBTYPE, type); 
+			world.setBlockState(pos, newState, BlockFlags.UPDATE_AND_SYNC);
 		}
+		
+		return newState;
 	}
 
 }

@@ -81,15 +81,17 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	}
 
 	@Override
-	protected void doGrowth(World world, BlockPos pos, IBlockState state)
+	protected IBlockState doGrowth(World world, BlockPos pos, IBlockState state)
 	{
 		final BlockPos posAbove = pos.up();
 		final IBlockState above = world.getBlockState(posAbove);
 		final int type = state.getValue(SUBTYPE);
+		IBlockState newState;
+		
 		/* Is there a rope block above this? */
 		if (BlockCheck.isRope(above.getBlock()))
 		{
-			incrementGrowth(world, pos, state);
+			newState = incrementGrowth(world, pos, state);
 			world.setBlockState(posAbove, blockLeaves.getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 		}
 		else if (world.isAirBlock(posAbove))
@@ -98,14 +100,20 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 				final IBlockState aboveAbove = world.getBlockState(posAbove.up());
 				boolean connectToLeaves = aboveAbove.getBlock() instanceof BlockGrapeLeaves;
 				
-				incrementGrowth(world, pos, state);
+				newState = incrementGrowth(world, pos, state);
 				world.setBlockState(posAbove, getDefaultState().withProperty(AGE, !connectToLeaves? 0 : getMaxAge()).withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
 			}
+			else
+				newState = state;
 		}
 		else if (above.getBlock() instanceof BlockGrapeLeaves)
 		{
-			incrementGrowth(world, pos, state);
+			newState = incrementGrowth(world, pos, state);
 		}
+		else
+			newState = state;
+		
+		return newState;
 	}
 	
     @Override
