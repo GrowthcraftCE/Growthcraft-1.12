@@ -1,0 +1,20 @@
+fluid.fluid_booze_sake_water=쌀 끓인 물
+fluid.fluid_booze_sake_mash=숙성되지 않은 청주
+fluid.fluid_booze_sake_fermented=청주
+fluid.fluid_booze_sake_potent=청주
+fluid.fluid_booze_sake_potent_extended=청주
+fluid.fluid_booze_sake_potent_hyperextended=청주
+fluid.fluid_booze_sake_extended=청주
+fluid.fluid_booze_sake_hyperextended=청주
+fluid.fluid_booze_sake_intoxicated=청주
+fluid.fluid_booze_sake_poisoned=청주
+
+grc.tooltip.detailed_information=
+
+item.rice_cooked.name=익힌 쌀
+item.rice.name=쌀
+item.rice_ball.name=주먹밥
+item.cultivator.name=경작기
+
+tile.ricepaddy.name=논
+tile.ricecrop.name=쌀
