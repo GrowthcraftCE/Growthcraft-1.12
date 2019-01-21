@@ -10,7 +10,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit() {
     	super.preInit();
-        Init.setCustomBlockStateMappers();
     }
 
 	@Override
@@ -32,6 +31,11 @@ public class ClientProxy extends CommonProxy {
     }
 
     public void registerSpecialRenders() {
+    }
+    
+    @Override
+    public void registerStateMappers() {
+    	Init.setCustomBlockStateMappers();
     }
 
 }

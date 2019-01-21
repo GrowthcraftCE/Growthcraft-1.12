@@ -18,5 +18,8 @@ public class CommonProxy {
 
 	public void postRegisterItems() {
 	}
+	
+	public void registerStateMappers() {
+	}
 
 }
