@@ -37,7 +37,10 @@ import java.util.Random;
 public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
 //    private static final AxisAlignedBB BOUNDING_BOX =
 //            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
-
+	
+	private static final int APPLE_CHECK_AREA = 3;
+	private static final int MAX_APPLES_IN_AREA = 2;
+	
     public BlockAppleLeaves(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -159,13 +162,14 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
     
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        Block block = worldIn.getBlockState(pos.down()).getBlock();
-        return block instanceof BlockAir;
+        if( !canSustainApple(worldIn, pos, state) )
+        	return false;
+        return true;
     }
 
     @Override
     public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        return false;
+        return true;
     }
 
     @Override
@@ -174,20 +178,61 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
             worldIn.setBlockState(pos.down(), GrowthcraftApplesBlocks.blockApple.getDefaultState());
         }
     }
+    
+    private boolean canSustainApple(World worldIn, BlockPos pos, IBlockState state) {
+    	if( state.getBlock() != this )
+    		return false;
+    	if( !state.getValue(DECAYABLE) )
+    		return false; // Not originally growing on tree, so no apples.
+    	
+        Block block = worldIn.getBlockState(pos.down()).getBlock();
+        if( !(block instanceof BlockAir) )
+        	return false;
+        return true;
+    }
+    
+    private boolean canSpawnApple(World worldIn, BlockPos pos, IBlockState state ) {
+    	if( !canSustainApple(worldIn, pos, state) )
+    		return false;
+    	
+    	final int iX = pos.getX();
+    	final int iY = pos.getY();
+    	final int iZ = pos.getZ();
+    	
+    	BlockPos.MutableBlockPos mutpos = new BlockPos.MutableBlockPos();
+    	int countApples = 0;
+    	
+    	for( int jX = -APPLE_CHECK_AREA; jX <= APPLE_CHECK_AREA; jX ++ ) {
+    		for( int jY = -APPLE_CHECK_AREA; jY <= APPLE_CHECK_AREA; jY ++ ) {
+    			for( int jZ = -APPLE_CHECK_AREA; jZ <= APPLE_CHECK_AREA; jZ ++ ) {
+    				mutpos.setPos(iX+jX, iY+jY, iZ+jZ);
+    				IBlockState iblockstate = worldIn.getBlockState(mutpos);
+    				if( iblockstate.getBlock() == GrowthcraftApplesBlocks.blockApple.getBlock() ) {
+    					if( ++ countApples >= MAX_APPLES_IN_AREA )
+    						return false;
+    				}
+    			}
+    		}
+    	}
+    	
+    	return true;
+    }
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        super.updateTick(worldIn, pos, state, rand);
-
     	if ( !worldIn.isRemote ) {
             // check the light level and pick a randomness for growth.
             if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
             	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0) ) {
-    				grow(worldIn, rand, pos, state);
-    				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+            		if( canSpawnApple(worldIn, pos, state) ) {
+	    				grow(worldIn, rand, pos, state);
+	    				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+            		}
     			}
             }
         }
+    	
+        super.updateTick(worldIn, pos, state, rand);
     }
 
 /*    @Override
