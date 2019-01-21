@@ -4,6 +4,7 @@ import growthcraft.apples.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -31,6 +32,10 @@ import java.util.Random;
 
 public class BlockApple extends BlockBush implements IGrowable {
 
+	// TODO: Make fields configurable
+	public static final int CHANCE_GROWTH = 10;
+	public static final int CHANCE_TO_FALL = 0; // CHANCE_GROWTH * 6;	// NOTE: Must be approximately: "maximal production rate" * CHANCE_GROWTH  
+	
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 
     private static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[]{
@@ -49,6 +54,7 @@ public class BlockApple extends BlockBush implements IGrowable {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setTickRandomly(true);
+        this.setSoundType(SoundType.WOOD);
     }
 
     @Override
@@ -90,11 +96,20 @@ public class BlockApple extends BlockBush implements IGrowable {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9) {
-        	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0) ) {
-				grow(worldIn, rand, pos, state);
-				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-			}
+        
+        if( worldIn.isRemote )
+        	return;
+
+        if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(CHANCE_GROWTH) == 0) ) {
+			grow(worldIn, rand, pos, state);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+		}
+        
+        if( CHANCE_TO_FALL > 0 ) {
+	       	if( this.getAge(state) == 7 && rand.nextInt(CHANCE_TO_FALL) == 0 ) {
+		        this.dropBlockAsItem(worldIn, pos, state, 0);
+		      	worldIn.setBlockToAir(pos);
+	        }
         }
     }
 
@@ -112,7 +127,7 @@ public class BlockApple extends BlockBush implements IGrowable {
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
         super.updateTick(worldIn, pos, state, rand);
         // If we have enough light there is a 25% chance of growth to the next stage
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(1) == 0) {
+        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
             // If the apple isn't full grown
             if ( this.getAge(state) != 7) {
                 // Then increment the age.
@@ -133,6 +148,16 @@ public class BlockApple extends BlockBush implements IGrowable {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
         return block instanceof BlockAppleLeaves;
     }
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	{
+		if (!this.canBlockStay(worldIn, pos, state))
+		{
+			worldIn.destroyBlock(pos, false);
+		}
+	}
 
     private int getAge(IBlockState state) {
         return state.getValue(AGE).intValue();
@@ -152,7 +177,11 @@ public class BlockApple extends BlockBush implements IGrowable {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        ItemStack appleStack = new ItemStack(Items.APPLE, 1);
-        return appleStack.getItem();
+        if ( this.getAge(state) == 7) {
+	    	ItemStack appleStack = new ItemStack(Items.APPLE, 1);
+	        return appleStack.getItem();
+        }
+
+        return Items.AIR;
     }
 }

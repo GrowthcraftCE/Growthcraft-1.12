@@ -72,6 +72,8 @@ public class GrowthcraftApples {
 
         Init.registerBlocks(registry);
         Init.registerFluidBlocks(registry);
+        
+        proxy.registerStateMappers();
 	}
 
 	@SubscribeEvent

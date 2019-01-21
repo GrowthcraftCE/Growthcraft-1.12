@@ -63,6 +63,8 @@ public class GrowthcraftBamboo {
 		IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
+        
+        proxy.registerStateMappers();
 	}
 
 	@SubscribeEvent
@@ -80,7 +82,6 @@ public class GrowthcraftBamboo {
 	@SubscribeEvent
 	public void registerModels(ModelRegistryEvent event)
 	{
-		Init.setBlockCustomStateMappers();
         Init.registerItemRenders();
         Init.registerBlockRenders();
 	}	

@@ -1,6 +1,5 @@
 package growthcraft.apples.common;
 
-import growthcraft.apples.client.handlers.GrowthcraftApplesColorHandler;
 import growthcraft.apples.common.block.BlockApple;
 import growthcraft.apples.common.block.BlockAppleDoor;
 import growthcraft.apples.common.block.BlockAppleFence;
@@ -13,6 +12,7 @@ import growthcraft.apples.common.block.BlockAppleSlabDouble;
 import growthcraft.apples.common.block.BlockAppleSlabHalf;
 import growthcraft.apples.common.block.BlockAppleStairs;
 import growthcraft.apples.common.item.ItemAppleDoor;
+import growthcraft.apples.common.item.ItemAppleLeaves;
 import growthcraft.apples.shared.Reference;
 import growthcraft.apples.shared.config.GrowthcraftApplesConfig;
 import growthcraft.apples.shared.init.GrowthcraftApplesBlocks;
@@ -38,19 +38,28 @@ import growthcraft.core.shared.effect.EffectRandomList;
 import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
+import growthcraft.core.shared.utils.ColorUtils;
 import growthcraft.core.shared.utils.TickUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -59,7 +68,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
 import static growthcraft.apples.shared.init.GrowthcraftApplesFluids.appleCiderBooze;
 
 public class Init {
@@ -74,7 +82,7 @@ public class Init {
     	GrowthcraftApplesBlocks.blockAppleDoor = new BlockDefinition( new BlockAppleDoor("apple_door") );
     	GrowthcraftApplesBlocks.blockAppleFence = new BlockDefinition( new BlockAppleFence("apple_fence") );
     	GrowthcraftApplesBlocks.blockAppleFenceGate = new BlockDefinition( new BlockAppleFenceGate("apple_fence_gate") );
-    	GrowthcraftApplesBlocks.blockAppleLeaves = new BlockDefinition( new BlockAppleLeaves("apple_leaves") );
+    	GrowthcraftApplesBlocks.blockAppleLeaves = new BlockTypeDefinition<BlockAppleLeaves>( new BlockAppleLeaves("apple_leaves") );
     	GrowthcraftApplesBlocks.blockAppleLog = new BlockDefinition( new BlockAppleLog("apple_log") );
     	GrowthcraftApplesBlocks.blockApplePlanks = new BlockDefinition( new BlockApplePlanks("apple_planks") );
     	GrowthcraftApplesBlocks.blockAppleSapling = new BlockDefinition( new BlockAppleSapling("apple_sapling") );
@@ -113,7 +121,8 @@ public class Init {
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
     	GrowthcraftApplesBlocks.blockAppleFence.registerBlockItem(registry);
     	GrowthcraftApplesBlocks.blockAppleFenceGate.registerBlockItem(registry);
-    	GrowthcraftApplesBlocks.blockAppleLeaves.registerBlockItem(registry);
+    	GrowthcraftApplesBlocks.blockAppleLeaves.registerBlockItem(registry,
+    			new ItemAppleLeaves(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock()));
     	GrowthcraftApplesBlocks.blockAppleLog.registerBlockItem(registry);
     	GrowthcraftApplesBlocks.blockApplePlanks.registerBlockItem(registry);
     	GrowthcraftApplesBlocks.blockAppleSapling.registerBlockItem(registry);
@@ -141,7 +150,25 @@ public class Init {
 
     @SideOnly(Side.CLIENT)
     public static void registerBlockColorHandlers() {
-        registerBlockColorHandler(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
+        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+    	blockColors.registerBlockColorHandler(
+        		(state, worldIn, pos, tintindex) -> {
+        			float[] color = ColorUtils.getFloat4ARGB(BlockAppleLeaves.LEAVES_COLOR);
+        			if( worldIn != null && pos != null ) {
+        				float[] baseColor = ColorUtils.getFloat4ARGB(ColorizerFoliage.getFoliageColorBasic());
+        				float[] curColor = ColorUtils.getFloat4ARGB(BiomeColorHelper.getFoliageColorAtPos(worldIn, pos));
+        				
+        				float[] colorRatio = new float[3];
+        				for( int i = 1; i < 3; i ++ )
+        					colorRatio[i - 1] = curColor[i] / baseColor[i]; // (curColor[i] - baseColor[i]) / baseColor[i] + 1.0f;
+        				
+        				for( int i = 1; i < 3; i ++ )
+        					color[i] *= colorRatio[i - 1];
+        			}
+        			
+        			return ColorUtils.getIntARGB(color);
+        		},
+        		GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
     }
 
     /*
@@ -149,13 +176,8 @@ public class Init {
      */
     @SideOnly(Side.CLIENT)
     public static void setCustomBlockStateMappers() {
+        ModelLoader.setCustomStateMapper(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock(), (new StateMap.Builder().ignore(BlockAppleLeaves.DECAYABLE, BlockAppleLeaves.CHECK_DECAY)).build());
         ModelLoader.setCustomStateMapper(GrowthcraftApplesBlocks.blockAppleFenceGate.getBlock(), (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void registerBlockColorHandler(Block block) {
-        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
-        blockColors.registerBlockColorHandler(new GrowthcraftApplesColorHandler(), block);
     }
 
 
@@ -193,6 +215,18 @@ public class Init {
     @SideOnly(Side.CLIENT)
 	public static void registerItemColorHandlers() {
 		ItemRenderUtils.registerItemColorHandler(GrowthcraftApplesItems.appleCider.getItem());
+		
+		// TODO: Move to core utils
+		BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		itemColors.registerItemColorHandler(new IItemColor()
+        {
+            public int colorMultiplier(ItemStack stack, int tintIndex)
+            {
+                IBlockState iblockstate = ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+                return blockColors.colorMultiplier(iblockstate, (IBlockAccess)null, (BlockPos)null, tintIndex);
+            }
+        }, GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
 	}
     
     @SideOnly(Side.CLIENT)
