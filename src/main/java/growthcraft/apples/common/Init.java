@@ -49,7 +49,6 @@ import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
@@ -69,7 +68,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
 import static growthcraft.apples.shared.init.GrowthcraftApplesFluids.appleCiderBooze;
 
 public class Init {
@@ -166,14 +164,9 @@ public class Init {
         				
         				for( int i = 1; i < 3; i ++ )
         					color[i] *= colorRatio[i - 1];
-        				
-//        				int r = (baseColor & 0xFF0000) >> 16;
-//        				int g = (baseColor & 0x00FF00) >> 8;
         			}
         			
         			return ColorUtils.getIntARGB(color);
-        			
-        			// return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
         		},
         		GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
     }

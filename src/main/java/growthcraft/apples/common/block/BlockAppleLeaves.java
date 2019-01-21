@@ -35,9 +35,6 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
-//    private static final AxisAlignedBB BOUNDING_BOX =
-//            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
-	
 	public static final int LEAVES_COLOR = 0x58e21d; // 0x4fcb1a; // 0x48B518;
 	
 	private static final int APPLE_CHECK_AREA = 3;
@@ -51,52 +48,6 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
-/*    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    } */
-
-/*    @SuppressWarnings("deprecation")
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    } */
-
-/*    @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
-    } */
-
-/*    @Override
-    public boolean recolorBlock(World world, BlockPos pos, EnumFacing side, EnumDyeColor color) {
-        return super.recolorBlock(world, pos, side, EnumDyeColor.GREEN);
-    } */
-
-/*    @SuppressWarnings("deprecation")
-    @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDING_BOX;
-    } */
-
-/*    @SuppressWarnings("deprecation")
-    @Nullable
-    @Override
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return BOUNDING_BOX;
-    } */
-
-/*    @Override
-    public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
-        return false;
-    } */
-    
-/*
-    @Override
-    public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state) {
-        return true;
-    }
-*/
 	@Override
 	@SideOnly(Side.CLIENT)
 	public BlockRenderLayer getBlockLayer() {
@@ -236,15 +187,6 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
     	
         super.updateTick(worldIn, pos, state, rand);
     }
-
-/*    @Override
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
-        super.onBlockDestroyedByPlayer(worldIn, pos, state);
-        Block blockDown = worldIn.getBlockState(pos.down()).getBlock();
-        if ( blockDown instanceof BlockApple) {
-            worldIn.destroyBlock(pos.down(), false);
-        }
-    } */
 
     ////
     // DROPS

@@ -30,6 +30,6 @@ public class ItemAppleLeaves extends ItemLeaves {
 	@Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return /*super.getUnlocalizedName() + "." + */ leaves.getUnlocalizedName();
+        return leaves.getUnlocalizedName();
     }
 }
