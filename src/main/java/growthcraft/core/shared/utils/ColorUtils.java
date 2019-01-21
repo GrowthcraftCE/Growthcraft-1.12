@@ -1,6 +1,6 @@
 package growthcraft.core.shared.utils;
 
-import mezz.jei.util.MathUtil;
+import net.minecraft.util.math.MathHelper;
 
 public class ColorUtils {
 	private ColorUtils() {}
@@ -14,10 +14,10 @@ public class ColorUtils {
 	}
 	
 	public static int getIntARGB(float[] f4) {
-		int a = MathUtil.clamp((int)(f4[0] * 255.0f), 0, 255);
-		int r = MathUtil.clamp((int)(f4[1] * 255.0f), 0, 255);
-		int g = MathUtil.clamp((int)(f4[2] * 255.0f), 0, 255);
-		int b = MathUtil.clamp((int)(f4[3] * 255.0f), 0, 255);
+		int a = MathHelper.clamp((int)(f4[0] * 255.0f), 0, 255);
+		int r = MathHelper.clamp((int)(f4[1] * 255.0f), 0, 255);
+		int g = MathHelper.clamp((int)(f4[2] * 255.0f), 0, 255);
+		int b = MathHelper.clamp((int)(f4[3] * 255.0f), 0, 255);
 		return (a << 24) | (r << 16) | (g << 8) | b;
 	}
 }

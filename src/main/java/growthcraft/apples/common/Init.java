@@ -160,7 +160,7 @@ public class Init {
         				
         				float[] colorRatio = new float[3];
         				for( int i = 1; i < 3; i ++ )
-        					colorRatio[i - 1] = (curColor[i] - baseColor[i]) / baseColor[i] + 1.0f;
+        					colorRatio[i - 1] = curColor[i] / baseColor[i]; // (curColor[i] - baseColor[i]) / baseColor[i] + 1.0f;
         				
         				for( int i = 1; i < 3; i ++ )
         					color[i] *= colorRatio[i - 1];
