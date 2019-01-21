@@ -1,6 +1,5 @@
 package growthcraft.apples.common;
 
-import growthcraft.apples.client.handlers.GrowthcraftApplesColorHandler;
 import growthcraft.apples.common.block.BlockApple;
 import growthcraft.apples.common.block.BlockAppleDoor;
 import growthcraft.apples.common.block.BlockAppleFence;
@@ -43,15 +42,24 @@ import growthcraft.core.shared.utils.TickUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockSlab;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.client.renderer.color.BlockColors;
+import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.renderer.color.ItemColors;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.ColorizerFoliage;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -143,7 +151,12 @@ public class Init {
 
     @SideOnly(Side.CLIENT)
     public static void registerBlockColorHandlers() {
-        registerBlockColorHandler(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
+        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+    	blockColors.registerBlockColorHandler(
+        		(state, worldIn, pos, tintindex) -> {
+        			return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
+        		},
+        		GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
     }
 
     /*
@@ -153,12 +166,6 @@ public class Init {
     public static void setCustomBlockStateMappers() {
         ModelLoader.setCustomStateMapper(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock(), (new StateMap.Builder().ignore(BlockAppleLeaves.DECAYABLE, BlockAppleLeaves.CHECK_DECAY)).build());
         ModelLoader.setCustomStateMapper(GrowthcraftApplesBlocks.blockAppleFenceGate.getBlock(), (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void registerBlockColorHandler(Block block) {
-        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
-        blockColors.registerBlockColorHandler(new GrowthcraftApplesColorHandler(), block);
     }
 
 
@@ -196,6 +203,18 @@ public class Init {
     @SideOnly(Side.CLIENT)
 	public static void registerItemColorHandlers() {
 		ItemRenderUtils.registerItemColorHandler(GrowthcraftApplesItems.appleCider.getItem());
+		
+		// TODO: Move to core utils
+		BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		itemColors.registerItemColorHandler(new IItemColor()
+        {
+            public int colorMultiplier(ItemStack stack, int tintIndex)
+            {
+                IBlockState iblockstate = ((ItemBlock)stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
+                return blockColors.colorMultiplier(iblockstate, (IBlockAccess)null, (BlockPos)null, tintIndex);
+            }
+        }, GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
 	}
     
     @SideOnly(Side.CLIENT)

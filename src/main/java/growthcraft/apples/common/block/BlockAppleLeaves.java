@@ -17,6 +17,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
@@ -24,6 +26,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.fml.relauncher.Side;
 
 import javax.annotation.Nullable;
 
@@ -88,6 +92,23 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
         return true;
     }
 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public BlockRenderLayer getBlockLayer() {
+		return Blocks.LEAVES.getBlockLayer();
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return Blocks.LEAVES.isOpaqueCube(state);
+	}
+	
+    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+    	return Blocks.LEAVES.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
     
 	@Override
 	public EnumType getWoodType(int meta) {
