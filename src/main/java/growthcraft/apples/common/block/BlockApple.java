@@ -133,6 +133,16 @@ public class BlockApple extends BlockBush implements IGrowable {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
         return block instanceof BlockAppleLeaves;
     }
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	{
+		if (!this.canBlockStay(worldIn, pos, state))
+		{
+			worldIn.destroyBlock(pos, false);
+		}
+	}
 
     private int getAge(IBlockState state) {
         return state.getValue(AGE).intValue();
@@ -152,7 +162,11 @@ public class BlockApple extends BlockBush implements IGrowable {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-        ItemStack appleStack = new ItemStack(Items.APPLE, 1);
-        return appleStack.getItem();
+        if ( this.getAge(state) == 7) {
+	    	ItemStack appleStack = new ItemStack(Items.APPLE, 1);
+	        return appleStack.getItem();
+        }
+
+        return Items.AIR;
     }
 }

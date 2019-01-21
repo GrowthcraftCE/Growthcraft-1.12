@@ -19,7 +19,6 @@ import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
@@ -32,8 +31,8 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
-    private static final AxisAlignedBB BOUNDING_BOX =
-            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
+//    private static final AxisAlignedBB BOUNDING_BOX =
+//            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
 
     public BlockAppleLeaves(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
@@ -89,6 +88,12 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
         return true;
     }
 */
+    
+	@Override
+	public EnumType getWoodType(int meta) {
+		// NOTE: Is only used by ItemLeaves. 
+		return null;
+	}
     
     ///////
     // States
@@ -164,21 +169,15 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
         }
     }
 
-    @Override
+/*    @Override
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
         super.onBlockDestroyedByPlayer(worldIn, pos, state);
         Block blockDown = worldIn.getBlockState(pos.down()).getBlock();
         if ( blockDown instanceof BlockApple) {
             worldIn.destroyBlock(pos.down(), false);
         }
-    }
+    } */
 
-	@Override
-	public EnumType getWoodType(int meta) {
-		// NOTE: Is only used by ItemLeaves. 
-		return null;
-	}
-    
     ////
     // DROPS
     ////
@@ -224,7 +223,6 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
 	protected ItemStack getSilkTouchDrop(IBlockState state) {
 		return new ItemStack(Item.getItemFromBlock(this), 1, 0);
 	}
-	
 
 	@Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
