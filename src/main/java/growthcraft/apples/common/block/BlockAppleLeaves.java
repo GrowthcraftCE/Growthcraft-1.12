@@ -37,6 +37,7 @@ import java.util.Random;
 public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
 	public static final int LEAVES_COLOR = 0x58e21d; // 0x4fcb1a; // 0x48B518;
 	
+	// TODO: Make fields configurable
 	private static final int APPLE_CHECK_AREA = 3;
 	private static final int MAX_APPLES_IN_AREA = 2;
 	
