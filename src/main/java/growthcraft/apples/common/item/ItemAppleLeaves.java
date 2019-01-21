@@ -20,7 +20,7 @@ public class ItemAppleLeaves extends ItemLeaves {
 	@Override
     public int getMetadata(int damage)
     {
-        return 0;
+        return 4;
     }
 
     /**
@@ -30,6 +30,6 @@ public class ItemAppleLeaves extends ItemLeaves {
 	@Override
     public String getUnlocalizedName(ItemStack stack)
     {
-        return super.getUnlocalizedName() + "." + leaves.getUnlocalizedName();
+        return /*super.getUnlocalizedName() + "." + */ leaves.getUnlocalizedName();
     }
 }
