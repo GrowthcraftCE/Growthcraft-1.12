@@ -13,6 +13,7 @@ import growthcraft.apples.common.block.BlockAppleSlabDouble;
 import growthcraft.apples.common.block.BlockAppleSlabHalf;
 import growthcraft.apples.common.block.BlockAppleStairs;
 import growthcraft.apples.common.item.ItemAppleDoor;
+import growthcraft.apples.common.item.ItemAppleLeaves;
 import growthcraft.apples.shared.Reference;
 import growthcraft.apples.shared.config.GrowthcraftApplesConfig;
 import growthcraft.apples.shared.init.GrowthcraftApplesBlocks;
@@ -74,7 +75,7 @@ public class Init {
     	GrowthcraftApplesBlocks.blockAppleDoor = new BlockDefinition( new BlockAppleDoor("apple_door") );
     	GrowthcraftApplesBlocks.blockAppleFence = new BlockDefinition( new BlockAppleFence("apple_fence") );
     	GrowthcraftApplesBlocks.blockAppleFenceGate = new BlockDefinition( new BlockAppleFenceGate("apple_fence_gate") );
-    	GrowthcraftApplesBlocks.blockAppleLeaves = new BlockDefinition( new BlockAppleLeaves("apple_leaves") );
+    	GrowthcraftApplesBlocks.blockAppleLeaves = new BlockTypeDefinition<BlockAppleLeaves>( new BlockAppleLeaves("apple_leaves") );
     	GrowthcraftApplesBlocks.blockAppleLog = new BlockDefinition( new BlockAppleLog("apple_log") );
     	GrowthcraftApplesBlocks.blockApplePlanks = new BlockDefinition( new BlockApplePlanks("apple_planks") );
     	GrowthcraftApplesBlocks.blockAppleSapling = new BlockDefinition( new BlockAppleSapling("apple_sapling") );
@@ -113,7 +114,8 @@ public class Init {
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
     	GrowthcraftApplesBlocks.blockAppleFence.registerBlockItem(registry);
     	GrowthcraftApplesBlocks.blockAppleFenceGate.registerBlockItem(registry);
-    	GrowthcraftApplesBlocks.blockAppleLeaves.registerBlockItem(registry);
+    	GrowthcraftApplesBlocks.blockAppleLeaves.registerBlockItem(registry,
+    			new ItemAppleLeaves(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock()));
     	GrowthcraftApplesBlocks.blockAppleLog.registerBlockItem(registry);
     	GrowthcraftApplesBlocks.blockApplePlanks.registerBlockItem(registry);
     	GrowthcraftApplesBlocks.blockAppleSapling.registerBlockItem(registry);
@@ -149,6 +151,7 @@ public class Init {
      */
     @SideOnly(Side.CLIENT)
     public static void setCustomBlockStateMappers() {
+        ModelLoader.setCustomStateMapper(GrowthcraftApplesBlocks.blockAppleLeaves.getBlock(), (new StateMap.Builder().ignore(BlockAppleLeaves.DECAYABLE, BlockAppleLeaves.CHECK_DECAY)).build());
         ModelLoader.setCustomStateMapper(GrowthcraftApplesBlocks.blockAppleFenceGate.getBlock(), (new StateMap.Builder().ignore(BlockFenceGate.POWERED)).build());
     }
 
