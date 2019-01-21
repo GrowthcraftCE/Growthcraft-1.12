@@ -38,6 +38,8 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
 //    private static final AxisAlignedBB BOUNDING_BOX =
 //            new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
 	
+	public static final int LEAVES_COLOR = 0x58e21d; // 0x4fcb1a; // 0x48B518;
+	
 	private static final int APPLE_CHECK_AREA = 3;
 	private static final int MAX_APPLES_IN_AREA = 2;
 	

@@ -33,7 +33,7 @@ public class ParticleKettleBubble extends Particle {
         if( stack != null ) {
         	Fluid fluid = stack.getFluid();
         	if( fluid != null ) {
-        		float argb[] = ColorUtils.getARGB(fluid.getColor());
+        		float argb[] = ColorUtils.getFloat4ARGB(fluid.getColor());
                 this.particleRed = argb[1];
                 this.particleGreen = argb[2];
                 this.particleBlue = argb[3];

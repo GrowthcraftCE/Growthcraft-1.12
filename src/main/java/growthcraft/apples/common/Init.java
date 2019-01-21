@@ -38,6 +38,7 @@ import growthcraft.core.shared.effect.EffectRandomList;
 import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
+import growthcraft.core.shared.utils.ColorUtils;
 import growthcraft.core.shared.utils.TickUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
@@ -154,7 +155,25 @@ public class Init {
         BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
     	blockColors.registerBlockColorHandler(
         		(state, worldIn, pos, tintindex) -> {
-        			return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
+        			float[] color = ColorUtils.getFloat4ARGB(BlockAppleLeaves.LEAVES_COLOR);
+        			if( worldIn != null && pos != null ) {
+        				float[] baseColor = ColorUtils.getFloat4ARGB(ColorizerFoliage.getFoliageColorBasic());
+        				float[] curColor = ColorUtils.getFloat4ARGB(BiomeColorHelper.getFoliageColorAtPos(worldIn, pos));
+        				
+        				float[] colorRatio = new float[3];
+        				for( int i = 1; i < 3; i ++ )
+        					colorRatio[i - 1] = (curColor[i] - baseColor[i]) / baseColor[i] + 1.0f;
+        				
+        				for( int i = 1; i < 3; i ++ )
+        					color[i] *= colorRatio[i - 1];
+        				
+//        				int r = (baseColor & 0xFF0000) >> 16;
+//        				int g = (baseColor & 0x00FF00) >> 8;
+        			}
+        			
+        			return ColorUtils.getIntARGB(color);
+        			
+        			// return worldIn != null && pos != null ? BiomeColorHelper.getFoliageColorAtPos(worldIn, pos) : ColorizerFoliage.getFoliageColorBasic();
         		},
         		GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
     }
