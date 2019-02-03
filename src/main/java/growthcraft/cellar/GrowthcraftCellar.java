@@ -10,6 +10,7 @@ import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.modifier.GrowthcraftModifierFunctions;
 import growthcraft.cellar.common.lib.network.PacketPipeline;
 import growthcraft.cellar.shared.booze.CellarBoozeBuilderFactory;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.config.UserApis;
 import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
@@ -51,6 +52,8 @@ public class GrowthcraftCellar {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+    	GrowthcraftCellarConfig.preInit(event);
+    	
     	Init.preInitEffects();
     	
     	GrowthcraftCellarApis.userApis = new UserApis();

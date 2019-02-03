@@ -69,6 +69,9 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 	{
 	}
 
+	public void legacyReadFromNBT(NBTTagCompound data) {
+	}
+	
 	/**
 	 * @param data - parent nbt data to read from
 	 * @param name - sub tag to read
@@ -83,7 +86,8 @@ public class DeviceBase implements INBTSerializableContext, IStreamable
 		}
 		else
 		{
-			// LOG error
+			// LOG upgrade!
+			legacyReadFromNBT(data);
 		}
 	}
 

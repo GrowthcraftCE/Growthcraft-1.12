@@ -9,9 +9,11 @@ import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.shared.Reference;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.core.shared.block.BlockUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -28,7 +30,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockBeeBox extends GrowthcraftBlockContainer {
+public class BlockBeeBox extends GrowthcraftRotatableBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
@@ -134,6 +136,12 @@ public class BlockBeeBox extends GrowthcraftBlockContainer {
 		return fireSpreadSpeed;
 	}
 
+	@Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
+    }
+	
 	/*
 	@Override
 	@SideOnly(Side.CLIENT)

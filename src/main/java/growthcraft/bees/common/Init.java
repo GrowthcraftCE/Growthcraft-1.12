@@ -66,6 +66,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+
 import static growthcraft.bees.shared.init.GrowthcraftBeesFluids.meadBooze;
 import static growthcraft.bees.shared.init.GrowthcraftBeesBlocks.meadBoozeFluidBlocks;
 
@@ -251,11 +252,18 @@ public class Init {
 	}
 
 	private static void registerFermentations() {
+		// TODO: Add configuration for brewing time and yielding amount, like in grapes module
+		
     	final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 		final FluidStack[] fs = new FluidStack[meadBooze.length];
 		for (int i = 0; i < meadBooze.length; ++i)
 		{
 			fs[i] = meadBooze[i].asFluidStack();
+		}
+		final FluidStack[] spoilInputFs = new FluidStack[meadBooze.length];
+		for (int i = 0; i < meadBooze.length; ++i)
+		{
+			spoilInputFs[i] = meadBooze[i].asFluidStack(40);
 		}
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_YOUNG.ordinal()].getFluid())
@@ -308,12 +316,20 @@ public class Init {
 		
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.POISONED, BeesFluidTag.MEAD)
-			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
-			.fermentsFrom(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime)
+//			.fermentsFrom(fs[MeadTypes.MEAD_YOUNG.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_YOUNG.ordinal()], fermentTime)
+//				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_YOUNG.ordinal()], TickUtils.minutes(1), null)
+			.fermentsFrom(fs[MeadTypes.MEAD_FERMENTED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_FERMENTED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_FERMENTED.ordinal()], TickUtils.minutes(1), null)
+			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_EXTENDED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_EXTENDED.ordinal()], TickUtils.minutes(1), null)
+			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_POTENT.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_POTENT.ordinal()], TickUtils.minutes(1), null)
+			.fermentsFrom(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_ETHEREAL.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_ETHEREAL.ordinal()], TickUtils.minutes(1), null)
+			.fermentsFrom(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], new OreItemStacks("yeastPoison"), fermentTime).fermentsFromFallback(fs[MeadTypes.MEAD_INTOXICATED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_INTOXICATED.ordinal()], TickUtils.minutes(1), null)
+			.fermentsFromFallback(fs[MeadTypes.MEAD_POISONED.ordinal()], fermentTime)
+				.brewsFromFallback(spoilInputFs[MeadTypes.MEAD_POISONED.ordinal()], TickUtils.minutes(1), null)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
 				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
@@ -393,32 +409,45 @@ public class Init {
 						Ingredient.fromStacks(honeyStack),
 						Ingredient.fromStacks(honeyStack),
 						Ingredient.fromItem(Items.FLOWER_POT)))
-					.setRegistryName(toRegName("honey_comb_filled")));
+					.setRegistryName(toRegName("honey_comb_filled_1")));
+		
+		registry.register(new ShapelessMultiRecipe(group.toString(), GrowthcraftBeesFluids.honey.asBucketItemStack(),	// NOTE: For some reason ShapelessRecipes is not working with buckets ...
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				honeyStack,
+				Items.BUCKET)
+					.setRegistryName(toRegName("honey_comb_filled_2")));
+		
+		registry.register(new ShapelessRecipes(group.toString(), GrowthcraftBeesFluids.honey.asBottleItemStack(2),
+				NonNullList.from( Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromStacks(honeyStack),
+						Ingredient.fromItem(Items.GLASS_BOTTLE),
+						Ingredient.fromItem(Items.GLASS_BOTTLE)))
+					.setRegistryName(toRegName("honey_comb_filled_3")));
 
 		// Transfer recipes
-		/// To Honey Jar from `jarHoney`
+		/// To Honey Jar from different sources
 		registry.register(new ShapelessMultiRecipe(group.toString(),
 				GrowthcraftBeesItems.honeyJar.asStack(),
-				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
+				new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName()),
 				Items.FLOWER_POT).setRegistryName(toRegName("honey_fluid_to_jar_1")));
-
-		registry.register(new ShapelessMultiRecipe(group.toString(),
-			GrowthcraftBeesItems.honeyJar.asStack(),
-			Blocks.FLOWER_POT,
-			new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, "honey")
-				).setRegistryName(toRegName("honey_fluid_to_jar_2")));
 
 		registry.register(new ShapelessOreRecipe(group,
 			GrowthcraftBeesItems.honeyJar.asStack(),
-			Blocks.FLOWER_POT,
+			Items.FLOWER_POT,
 			"jarHoney"
 				).setRegistryName(toRegName("honey_ore_to_jar")));
 		
-		/// To Honey Bucket from `bucketHoney`
+		/// To Honey Bucket from different sources
 		registry.register(new ShapelessMultiRecipe(group.toString(),
 			GrowthcraftBeesFluids.honey.asBucketItemStack(),
 			Items.BUCKET,
-			new TaggedFluidStacks(1000, "honey")
+			new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName())
 				).setRegistryName(toRegName("honey_fluid_to_bucket")));
 
 		registry.register(new ShapelessOreRecipe(group,
@@ -428,24 +457,6 @@ public class Init {
 				).setRegistryName(toRegName("honey_ore_to_bucket")));
 		
 		// TODO: RECIPE_REGISTER!
-		
-/*		// Devices
-		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthcraftBeesBlocks.beeBox.asStack(), " A ", "A A", "AAA", 'A', "plankWood"));
-
-		// Bees wax
-		final ItemStack emptyComb = GrowthcraftBeesItems.honeyCombEmpty.asStack();
-		GameRegistry.addShapelessRecipe(BeesWaxTypes.NORMAL.asStack(),
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb,
-			emptyComb, emptyComb, emptyComb);
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(BeesWaxTypes.BLACK.asStack(),
-			BeesWaxTypes.NORMAL.asStack(), "dyeBlack"));
-
-		GameRegistry.addRecipe(new ShapelessOreRecipe(BeesWaxTypes.RED.asStack(),
-			BeesWaxTypes.NORMAL.asStack(), "dyeRed"));
-
-*/
 	}
 	
 	private static ResourceLocation toRegName(String name) {

@@ -124,7 +124,6 @@ public class GrowthcraftMilk {
 		Init.registerFluidRenders();
 	}
 	
-	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void registerCraftingRecipes(RegistryEvent.Register<IRecipe> event)
 	{

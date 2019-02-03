@@ -10,51 +10,29 @@ import growthcraft.core.shared.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FermentationRecipe implements IFermentationRecipe
+public class FermentationRecipe extends FermentationFallbackRecipe
 {
 	private final IMultiItemStacks fermentingItem;
-	private final IMultiFluidStacks inputFluidStack;
-	private final FluidStack outputFluidStack;
-	private final int time;
 
 	public FermentationRecipe(@Nonnull IMultiFluidStacks pInputFluidStack, @Nonnull IMultiItemStacks pFermentingItem, @Nonnull FluidStack pOutputFluidStack, int pTime)
 	{
+		super(pInputFluidStack, pOutputFluidStack, pTime);
 		this.fermentingItem = pFermentingItem;
-		this.inputFluidStack = pInputFluidStack;
-		this.outputFluidStack = pOutputFluidStack;
-		this.time = pTime;
 	}
-
-	@Override
-	public IMultiFluidStacks getInputFluidStack()
-	{
-		return inputFluidStack;
-	}
-
-	@Override
-	public FluidStack getOutputFluidStack()
-	{
-		return outputFluidStack;
-	}
-
+	
 	@Override
 	public IMultiItemStacks getFermentingItemStack()
 	{
 		return fermentingItem;
 	}
 
-	@Override
-	public int getTime()
-	{
-		return time;
-	}
 
 	@Override
 	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack)
 	{
 		if (FluidTest.isValid(fluidStack) && ItemTest.isValid(itemStack))
 		{
-			if (FluidTest.hasEnough(inputFluidStack, fluidStack))
+			if (FluidTest.hasEnough(getInputFluidStack(), fluidStack))
 			{
 				return ItemTest.hasEnough(fermentingItem, itemStack);
 			}
@@ -65,7 +43,7 @@ public class FermentationRecipe implements IFermentationRecipe
 	@Override
 	public boolean matchesIngredient(@Nullable FluidStack fluidStack)
 	{
-		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
+		return FluidTest.fluidMatches(getInputFluidStack(), fluidStack);
 	}
 
 	@Override
@@ -73,4 +51,15 @@ public class FermentationRecipe implements IFermentationRecipe
 	{
 		return ItemTest.itemMatches(fermentingItem, stack);
 	}
+
+	@Override
+	public boolean isItemIngredient(ItemStack stack) {
+		if (stack != null) {
+			if (fermentingItem.containsItemStack(stack))
+				return true;
+		}
+		return false;
+	}
+	
+	
 }

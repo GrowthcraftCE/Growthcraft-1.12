@@ -36,6 +36,7 @@ item.yeast.bayanus.name=Bayanus Yeast
 item.yeast.ethereal.name=Ethereal Yeast
 item.yeast.origin.name=Origin Yeast
 item.brew_kettle_lid.name=Brewing Kettle Lid
+item.barrel_tap.name=Barrel Tap
 
 # Gui
 container.growthcraft.brewKettle=Brew Kettle

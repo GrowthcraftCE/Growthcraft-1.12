@@ -14,6 +14,7 @@ import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -52,20 +53,20 @@ public class BlockBrewKettle extends BlockCellarContainer {
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 4, 0.0625 * 16);
     private static final AxisAlignedBB AABB_WALL_NORTH = new AxisAlignedBB(
-            0.0625 * 14, 0.0625 * 0, 0.0625 * 0,
-            0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
+            0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
+            0.0625 * 16, 0.0625 * 16, 0.0625 * 2);
     private static final AxisAlignedBB AABB_WALL_EAST = new AxisAlignedBB(
             0.0625 * 14, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
     private static final AxisAlignedBB AABB_WALL_SOUTH = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 14,
-            0.0625 * 2, 0.0625 * 16, 0.0625 * 16);
+            0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
     private static final AxisAlignedBB AABB_WALL_WEST = new AxisAlignedBB(
             0.0625 * 0, 0.0625 * 0, 0.0625 * 0,
             0.0625 * 2, 0.0625 * 16, 0.0625 * 16);
     private static final AxisAlignedBB AABB_LID = new AxisAlignedBB(
             0.0625 * 2, 0.0625 * 14, 0.0625 * 2,
-            0.0625 * 2, 0.0625 * 16, 0.0625 * 2);
+            0.0625 * 14, 0.0625 * 16, 0.0625 * 14);
 
     public BlockBrewKettle(String unlocalizedName) {
         super(Material.IRON);
@@ -154,6 +155,22 @@ public class BlockBrewKettle extends BlockCellarContainer {
 		return 1;
 	}
     
+	@Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+		if( face == EnumFacing.UP ) {
+			final TileEntityBrewKettle te = getTileEntity(worldIn, pos);
+			if (te != null)
+			{
+				if( te.hasLid() )
+					return BlockFaceShape.SOLID;
+			}
+			return BlockFaceShape.BOWL;
+		}
+		
+		return face == EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
+    }
+	
 	/************
 	 * RENDERS
 	 ************/
@@ -182,12 +199,16 @@ public class BlockBrewKettle extends BlockCellarContainer {
 
 	@SuppressWarnings("deprecation")
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BASE);
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+        if( !isActualState )
+        	state = state.getActualState(worldIn, pos);
+		
+		addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_BASE);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_NORTH);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_EAST);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_SOUTH);
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_WALL_WEST);
+        
         if( state.getValue(TYPE_LID).booleanValue() )
         	addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_LID);
     }

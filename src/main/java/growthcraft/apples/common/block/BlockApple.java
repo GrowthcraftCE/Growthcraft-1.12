@@ -1,8 +1,10 @@
 package growthcraft.apples.common.block;
 
+import growthcraft.apples.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -10,7 +12,7 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -20,18 +22,20 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nullable;
-
-import growthcraft.apples.shared.Reference;
-
 public class BlockApple extends BlockBush implements IGrowable {
 
+	// TODO: Make fields configurable
+	public static final int CHANCE_GROWTH = 10;
+	public static final int CHANCE_TO_FALL = 0; // CHANCE_GROWTH * 6;	// NOTE: Must be approximately: "maximal production rate" * CHANCE_GROWTH  
+	
     public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 7);
 
     private static final AxisAlignedBB[] BOUNDING_BOXES = new AxisAlignedBB[]{
@@ -50,6 +54,7 @@ public class BlockApple extends BlockBush implements IGrowable {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setTickRandomly(true);
+        this.setSoundType(SoundType.WOOD);
     }
 
     @Override
@@ -91,8 +96,20 @@ public class BlockApple extends BlockBush implements IGrowable {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
-            this.grow(worldIn, rand, pos, state);
+        
+        if( worldIn.isRemote )
+        	return;
+
+        if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(CHANCE_GROWTH) == 0) ) {
+			grow(worldIn, rand, pos, state);
+			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+		}
+        
+        if( CHANCE_TO_FALL > 0 ) {
+	       	if( this.getAge(state) == 7 && rand.nextInt(CHANCE_TO_FALL) == 0 ) {
+		        this.dropBlockAsItem(worldIn, pos, state, 0);
+		      	worldIn.setBlockToAir(pos);
+	        }
         }
     }
 
@@ -110,7 +127,7 @@ public class BlockApple extends BlockBush implements IGrowable {
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
         super.updateTick(worldIn, pos, state, rand);
         // If we have enough light there is a 25% chance of growth to the next stage
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(1) == 0) {
+        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
             // If the apple isn't full grown
             if ( this.getAge(state) != 7) {
                 // Then increment the age.
@@ -131,24 +148,26 @@ public class BlockApple extends BlockBush implements IGrowable {
         Block block = worldIn.getBlockState(pos.up()).getBlock();
         return block instanceof BlockAppleLeaves;
     }
+    
+	@SuppressWarnings("deprecation")
+	@Override
+	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
+	{
+		if (!this.canBlockStay(worldIn, pos, state))
+		{
+			worldIn.destroyBlock(pos, false);
+		}
+	}
 
     private int getAge(IBlockState state) {
         return state.getValue(AGE).intValue();
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
-        super.onBlockDestroyedByPlayer(worldIn, pos, state);
-        // TODO: Drop a sapling
-    }
-
-    @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if ( this.getAge(state) == 7) {
-            int qty = new Random().nextInt(1) + 1;
             if ( !worldIn.isRemote) {
-                ItemStack appleStack = new ItemStack(Items.APPLE, qty);
-                InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), appleStack);
+                this.dropBlockAsItem(worldIn, pos, state, 0);
                 worldIn.setBlockToAir(pos);
             }
             return true;
@@ -156,4 +175,13 @@ public class BlockApple extends BlockBush implements IGrowable {
         return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
     }
 
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        if ( this.getAge(state) == 7) {
+	    	ItemStack appleStack = new ItemStack(Items.APPLE, 1);
+	        return appleStack.getItem();
+        }
+
+        return Items.AIR;
+    }
 }

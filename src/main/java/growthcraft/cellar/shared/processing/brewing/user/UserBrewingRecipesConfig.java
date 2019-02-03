@@ -43,6 +43,21 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 			);
 		}
 	}
+	
+	public void addFallbackDefault(FluidStack inp, FluidStack out, Residue residue, int time)
+	{
+		addDefault(
+			new UserBrewingRecipe(
+				null,
+				new FluidStackSchema(inp),
+				new FluidStackSchema(out),
+				null,
+				residue == null ? null : new ResidueSchema(residue),
+				time
+			)
+		);
+	}
+
 
 	@Override
 	protected String getDefault()
@@ -64,9 +79,15 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 			return;
 		}
 
-		if (recipe.item == null || recipe.item.isInvalid())
+		if (recipe.item != null && recipe.item.isInvalid())
 		{
 			GrowthcraftLogger.getLogger(Reference.MODID).error("Invalid item for recipe {%s}", recipe);
+			return;
+		}
+		
+		if (recipe.item == null ^ recipe.requiresLid == null)
+		{
+			GrowthcraftLogger.getLogger(Reference.MODID).error("requiresLib must be null if and only if recipe {%s} is a fallback recipe.", recipe);
 			return;
 		}
 
@@ -93,14 +114,18 @@ public class UserBrewingRecipesConfig extends AbstractUserJSONConfig
 			}
 		}
 
-
 		final FluidStack inputFluidStack = recipe.input_fluid.asFluidStack();
 		final FluidStack outputFluidStack = recipe.output_fluid.asFluidStack();
 
 		GrowthcraftLogger.getLogger(Reference.MODID).debug("Adding user brewing recipe {%s}", recipe);
-		for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
-		{
-			CellarRegistry.instance().brewing().addRecipe(inputFluidStack, item, outputFluidStack, recipe.requiresLid, recipe.time, residue);
+		if( recipe.item != null ) {
+			for (IMultiItemStacks item : recipe.item.getMultiItemStacks())
+			{
+				CellarRegistry.instance().brewing().addRecipe(inputFluidStack, item, outputFluidStack, recipe.requiresLid, recipe.time, residue);
+			}
+		}
+		else {
+			CellarRegistry.instance().brewing().addFallbackRecipe(inputFluidStack, outputFluidStack, recipe.time, residue);
 		}
 	}
 

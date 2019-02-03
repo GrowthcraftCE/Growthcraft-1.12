@@ -10,6 +10,7 @@ import growthcraft.cellar.common.block.BlockCultureJar;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.cellar.common.item.ItemBarrelTap;
 import growthcraft.cellar.common.item.ItemBrewKettleLid;
 import growthcraft.cellar.common.item.ItemChievDummy;
 import growthcraft.cellar.common.item.ItemYeast;
@@ -113,6 +114,7 @@ public class Init {
     	GrowthcraftCellarItems.chievItemDummy = new ItemDefinition( new ItemChievDummy("achievement_dummy") );
     	GrowthcraftCellarItems.yeast = new ItemDefinition( new ItemYeast("yeast") );
     	GrowthcraftCellarItems.brewKettleLid = new ItemDefinition( new ItemBrewKettleLid("brew_kettle_lid") );
+    	GrowthcraftCellarItems.barrelTap = new ItemDefinition( new ItemBarrelTap("barrel_tap") );
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -121,12 +123,15 @@ public class Init {
     	GrowthcraftCellarItems.yeast.registerItem(registry);
     	GrowthcraftCellarItems.brewKettleLid.getItem().setCreativeTab(tabGrowthcraft);
     	GrowthcraftCellarItems.brewKettleLid.registerItem(registry);
+    	GrowthcraftCellarItems.barrelTap.getItem().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarItems.barrelTap.registerItem(registry);
     }
 
     public static void registerItemRenders() {
     	GrowthcraftCellarItems.chievItemDummy.registerRender();
     	GrowthcraftCellarItems.yeast.registerRenders(EnumYeast.class);
     	GrowthcraftCellarItems.brewKettleLid.registerRender();
+    	GrowthcraftCellarItems.barrelTap.registerRender();
     }
 
     ///////////

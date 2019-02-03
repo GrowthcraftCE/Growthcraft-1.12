@@ -7,12 +7,14 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -27,7 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockButterChurn extends GrowthcraftBlockContainer {
+public class BlockButterChurn extends GrowthcraftRotatableBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 2, 0.0625 * 0, 0.0625 * 2,
             0.0625 * 14, 0.0625 * 16, 0.0625 * 14);
@@ -93,6 +95,12 @@ public class BlockButterChurn extends GrowthcraftBlockContainer {
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
+    }
+	
+	@Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return BlockFaceShape.UNDEFINED;
     }
     
 	public boolean tryChurning(World world, BlockPos pos, EntityPlayer player)

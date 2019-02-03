@@ -4,6 +4,8 @@ import javax.annotation.Nonnull;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
+import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.core.shared.block.BlockUtils;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
@@ -17,12 +19,13 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockOrientable extends GrowthcraftBlockContainer {
+public class BlockOrientable extends GrowthcraftBlockContainer implements IRotatableBlock {
 
 	public final static PropertyEnum<Orient> TYPE_ORIENT = PropertyEnum.create("orient", Orient.class);
 	
 	public BlockOrientable(Material material) {
 		super(material);
+		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_ORIENT, Orient.NORTH));
 	}
 
 	@Override
@@ -31,7 +34,6 @@ public class BlockOrientable extends GrowthcraftBlockContainer {
 		return true;
 	}
 	
-	@Override
 	public void doRotateBlock(World world, BlockPos pos, IBlockState state, EnumFacing side) {
 		Orient orient = state.getValue(TYPE_ORIENT);
 		switch(orient) {
@@ -50,6 +52,19 @@ public class BlockOrientable extends GrowthcraftBlockContainer {
 		}
 		
 		world.setBlockState(pos, state.withProperty(TYPE_ORIENT, orient), BlockFlags.UPDATE_AND_SYNC);		
+	}
+	
+	@Override
+	public boolean rotateBlock(World world, BlockPos pos, EnumFacing side)
+	{
+		if (isRotatable(world, pos, side))
+		{
+			IBlockState state = world.getBlockState(pos);
+			doRotateBlock(world, pos, state, side);
+			markBlockForUpdate(world, pos);
+			return true;
+		}
+		return false;
 	}
 	
 	protected void setDefaultDirection(World world, BlockPos pos, IBlockState state)

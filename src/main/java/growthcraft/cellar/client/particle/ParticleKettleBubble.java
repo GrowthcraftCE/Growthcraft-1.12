@@ -24,7 +24,7 @@ public class ParticleKettleBubble extends Particle {
     {
         super(worldIn, xCoordIn, yCoordIn, zCoordIn, xSpeedIn, ySpeedIn, zSpeedIn);
         
-//      params.getTanks().getFluid(0);
+        // TODO: Retrieve color from texture as well
         this.particleRed = 1.0F;
         this.particleGreen = 1.0F;
         this.particleBlue = 1.0F;
@@ -33,7 +33,7 @@ public class ParticleKettleBubble extends Particle {
         if( stack != null ) {
         	Fluid fluid = stack.getFluid();
         	if( fluid != null ) {
-        		float argb[] = ColorUtils.getARGB(fluid.getColor());
+        		float argb[] = ColorUtils.getFloat4ARGB(fluid.getColor());
                 this.particleRed = argb[1];
                 this.particleGreen = argb[2];
                 this.particleBlue = argb[3];

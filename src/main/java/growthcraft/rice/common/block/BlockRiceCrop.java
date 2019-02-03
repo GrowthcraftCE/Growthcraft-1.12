@@ -4,6 +4,7 @@ import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.BlockPaddyBase;
 import growthcraft.core.shared.block.IPaddyCrop;
 import growthcraft.rice.shared.Reference;
+import growthcraft.rice.shared.config.GrowthcraftRiceConfig;
 import growthcraft.rice.shared.init.GrowthcraftRiceItems;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
@@ -13,15 +14,18 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -93,9 +97,20 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         if ( !canBlockStay(worldIn, pos, state) ){
             worldIn.setBlockToAir(pos);
         } else if (this.canGrow(worldIn, pos, state, true) ) {
-            grow(worldIn, rand, pos, state);
+        	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, true) ) {
+				grow(worldIn, rand, pos, state);
+				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+			}
         }
 
+    }
+
+    public int getMaxAge() {
+        return RiceStage.MATURE;
+    }
+
+    public boolean isMaxAge(IBlockState state) {
+        return (Integer)state.getValue(AGE) >= this.getMaxAge();
     }
 
     public int getAge(IBlockState state) {
@@ -112,30 +127,31 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
     @Override
     public boolean canGrow(World world, BlockPos blockPos, IBlockState state, boolean b) {
-        return  (canBlockStay(world, blockPos, state) && getAge(state) < RiceStage.MATURE );
+        return  this.getAge(state) != RiceStage.MATURE;
     }
 
     @Override
     public boolean canUseBonemeal(World world, Random random, BlockPos blockPos, IBlockState iBlockState) {
-        return (canBlockStay(world, blockPos, iBlockState) && getAge(iBlockState) < RiceStage.MATURE );
+        return this.getAge(iBlockState) < RiceStage.MATURE;
     }
 
     @Override
     public void grow(World world, Random random, BlockPos pos, IBlockState state) {
-
         BlockPos posDown = pos.down();
         IBlockState downBlockState = world.getBlockState(posDown);
 
         if (downBlockState.getValue(IS_RADIOACTIVE)) {
             growWithBoneMeal(world, random, pos, state);
+            return;
         } else if (downBlockState.getValue(MOISTURE)) {
             int nextAge = getAge(state) + 1;
-            if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+            if (nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(99) <= GrowthcraftRiceConfig.riceGrowthRate) {
                 world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
             }
-        } else {
-            // Do nothing as the RicePaddy isn't flooded.
+            return;
         }
+
+        return;
     }
 
     private void growWithBoneMeal(World world, Random random, BlockPos pos, IBlockState state) {
@@ -143,7 +159,7 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
         if ( nextAge > RiceStage.MATURE ) nextAge = RiceStage.MATURE;
 
-        if( nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0 ) {
+        if( nextAge <= RiceStage.MATURE && world.getLightFromNeighbors(pos.up()) >= 9 && random.nextInt(7) == 0 ) {
             world.setBlockState(pos, state.withProperty(AGE, nextAge), BlockFlags.SYNC);
             spawnBoneMealParticles(world, pos, 15);
         }
@@ -182,6 +198,31 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
 
     }
 
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+
+        if ( isMature(worldIn, pos, state) ) {
+            // Min = 1 max = 4
+            int modifier = 1 + rand.nextInt(3);
+
+            BlockPos posDown = pos.down();
+            IBlockState downBlockState = worldIn.getBlockState(posDown);
+
+            if ( downBlockState.getValue(IS_RADIOACTIVE) )
+                modifier = modifier * 2;
+
+            if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
+                spawnAsEntity(worldIn, pos, GrowthcraftRiceItems.rice.asStack(1 + rand.nextInt(modifier)) );
+            }
+
+            // reset age back to 0
+            worldIn.setBlockState(pos, state.withProperty(AGE, 0), BlockFlags.SYNC);
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * BlockRiceCrops can only be in the world if the block below them are an instance of BlockPaddyBase and it has MOISTURE
      */
@@ -218,9 +259,9 @@ public class BlockRiceCrop extends BlockBush implements IGrowable, IPlantable, I
         Random rand = world instanceof World ? ((World)world).rand : new Random();
         int count = 1;
 
-        if ( state.getValue(AGE) >= 4 && downBlockState.getValue(IS_RADIOACTIVE)) {
+        if ( state.getValue(AGE) >= RiceStage.MATURE && downBlockState.getValue(IS_RADIOACTIVE)) {
             count = 3 + rand.nextInt(3) + (fortune > 0 ? rand.nextInt(fortune + 1) : 0);
-        } else if ( state.getValue(AGE) >= 4 ) {
+        } else if ( state.getValue(AGE) >= RiceStage.MATURE ) {
             count = 2 + rand.nextInt(3) + (fortune > 0 ? rand.nextInt(fortune + 1) : 0);
         }
 

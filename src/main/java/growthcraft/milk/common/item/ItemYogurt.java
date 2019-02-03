@@ -3,10 +3,13 @@ package growthcraft.milk.common.item;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.init.GrowthcraftMilkItems.YogurtTypes;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class ItemYogurt extends ItemFood {
 
@@ -38,4 +41,15 @@ public class ItemYogurt extends ItemFood {
         }
         return super.getUnlocalizedName() + "." + YogurtTypes.PLAIN.getName();
     }
+    
+    /**
+     * Called when the player finishes using this Item (E.g. finishes eating.). Not called when the player stops using
+     * the Item before the action is complete.
+     */
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
+    {
+        super.onItemUseFinish(stack, worldIn, entityLiving);
+        return new ItemStack(Items.BOWL);
+    }
+
 }

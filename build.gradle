@@ -157,10 +157,7 @@ minecraft {
 
 def commonManifest = {
     attributes(
-//		"FMLCorePlugin": 'slimeknights.tconstruct.library.asm.TConstructLoadingPlugin',
-//		"FMLCorePluginContainsFMLMod": 'true',
-//		"ForceLoadAsMod": 'true',
-            "FMLAT": 'growthcraft_at.cfg'
+        "FMLAT": 'growthcraft_at.cfg'
     )
 }
 
@@ -174,7 +171,8 @@ dependencies {
     deobfProvided "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version') + ":api"
     compile "mcp.mobius.waila:Hwyla:" + project.property('hwyla_version')
     compile "baubles:Baubles:" + project.property('minecraft_version_short') + ":" + project.property('baubles_version')
-//TEST    compile "erebus:Erebus:1.0.22"
+//LOCAL  	compile "erebus:Erebus:1.0.22"
+//LOCAL		compile "com.github.glitchfiend.biomesoplenty:SereneSeasons:1.12.2-1.2.15.100:universal"
 
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }

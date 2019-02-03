@@ -1,5 +1,7 @@
 package growthcraft.cellar.shared.processing.fermenting;
 
+import javax.annotation.Nullable;
+
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
@@ -14,5 +16,6 @@ public interface IFermentationRecipe {
 	boolean matchesRecipe(FluidStack fluidStack, ItemStack itemStack);
 	boolean matchesIngredient(FluidStack fluidStack);
 	boolean matchesIngredient(ItemStack stack);
-
+	boolean isItemIngredient(@Nullable ItemStack stack);
+	
 }

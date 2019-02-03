@@ -28,4 +28,10 @@ public class ClientProxy extends CommonProxy {
     public void registerSpecialRenders() {
 
     }
+
+    @Override
+	public void registerStateMappers() {
+		Init.setBlockCustomStateMappers();
+	}
+
 }

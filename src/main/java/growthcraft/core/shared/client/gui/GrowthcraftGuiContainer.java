@@ -131,7 +131,7 @@ public abstract class GrowthcraftGuiContainer<C extends Container, T extends Til
 				try {
 		            mc.renderEngine.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
 
-		            final float argb[] = ColorUtils.getARGB(color);
+		            final float argb[] = ColorUtils.getFloat4ARGB(color);
 //		            final float r = (float)(color >> 16 & 255) / 255.0F;
 //					final float g = (float)(color >> 8 & 255) / 255.0F;
 //					final float b = (float)(color & 255) / 255.0F;

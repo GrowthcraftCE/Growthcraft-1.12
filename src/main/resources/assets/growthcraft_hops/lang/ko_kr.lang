@@ -1,0 +1,25 @@
+Hops.name=홉
+
+item.hops.name=홉
+item.hop_seeds.name=홉 씨앗
+
+tile.hops_bush.name=홉
+tile.hops_vine=홉
+
+fluid.fluid_booze_hopale_unhopped=에일 맥아즙
+fluid.fluid_booze_hopale_normal=에일
+fluid.fluid_booze_hopale_potent=에일
+fluid.fluid_booze_hopale_extended=에일
+fluid.fluid_booze_hopale_young=에일 맥아즙
+fluid.fluid_booze_hopale_hyperextended=에일
+fluid.fluid_booze_hopale_lager=에일
+fluid.fluid_booze_hopale_intoxicated=에일
+fluid.fluid_booze_hopale_poisoned=에일
+
+fluid.fluid_booze_lager_normal=라거
+fluid.fluid_booze_lager_potent=라거
+fluid.fluid_booze_lager_extended=라거
+fluid.fluid_booze_lager_young=라거 맥아즙
+fluid.fluid_booze_lager_hyperextended=라거
+fluid.fluid_booze_lager_intoxicated=라거
+fluid.fluid_booze_lager_poisoned=라거

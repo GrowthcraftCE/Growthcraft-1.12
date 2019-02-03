@@ -6,22 +6,23 @@ import java.util.Random;
 import javax.annotation.Nullable;
 
 import growthcraft.core.shared.Reference;
+import growthcraft.core.shared.block.FenceUtils;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
-import growthcraft.core.common.tileentity.TileEntityRopeKnot;
 import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
+import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
@@ -29,28 +30,30 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
 
-public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockRope {
+public class BlockRopeKnot extends BlockRopeBase {
 
+	private static final AxisAlignedBB FENCE_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 16, 0.0625 * 10);
+	private static final AxisAlignedBB FENCE_COLLISION_EXTRA_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 0, 0.0625 * 5, 0.0625 * 11, 0.0625 * 24, 0.0625 * 11);
+	
     private static final AxisAlignedBB KNOT_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
-    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 5, 0.0625 * 6, 0.0625 * 5, 0.0625 * 11, 0.0625 * 14, 0.0625 * 11);
+	private static final AxisAlignedBB NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 0, 0.0625 * 9, 0.0625 * 9, 0.0625 * 5);
+    private static final AxisAlignedBB EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 7, 0.0625 * 7, 0.0625 * 16, 0.0625 * 9, 0.0625 * 9);
+    private static final AxisAlignedBB SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 7, 0.0625 * 11, 0.0625 * 9, 0.0625 * 9, 0.0625 * 16);
+    private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 7, 0.0625 * 7, 0.0625 * 5, 0.0625 * 9, 0.0625 * 9);
+    
+	private static final AxisAlignedBB FENCE_NORTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 6, 0.0625 * 0, 0.0625 * 9, 0.0625 * 15, 0.0625 * 5);
+    private static final AxisAlignedBB FENCE_EAST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 11, 0.0625 * 6, 0.0625 * 7, 0.0625 * 16, 0.0625 * 15, 0.0625 * 9);
+    private static final AxisAlignedBB FENCE_SOUTH_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 6, 0.0625 * 11, 0.0625 * 9, 0.0625 * 15, 0.0625 * 16);
+    private static final AxisAlignedBB FENCE_WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 6, 0.0625 * 7, 0.0625 * 5, 0.0625 * 15, 0.0625 * 9);
 
-    private static final AxisAlignedBB COLLISION_BOX = new AxisAlignedBB(0.0625 * 6, 0.0625 * 6, 0.0625 * 6, 0.0625 * 10, 0.0625 * 13, 0.0625 * 10);
-
-    public static final PropertyBool NORTH = PropertyBool.create("north");
-    public static final PropertyBool EAST = PropertyBool.create("east");
-    public static final PropertyBool SOUTH = PropertyBool.create("south");
-    public static final PropertyBool WEST = PropertyBool.create("west");
+    public static final PropertyInteger NORTH = PropertyInteger.create("north", 0, 2);
+    public static final PropertyInteger EAST = PropertyInteger.create("east", 0, 2);
+    public static final PropertyInteger SOUTH = PropertyInteger.create("south", 0, 2);
+    public static final PropertyInteger WEST = PropertyInteger.create("west", 0, 2);
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
-
-    private boolean wasActivated;
-
+    
     public BlockRopeKnot(String unlocalizedName) {
         super(Material.WOOD);
         this.setUnlocalizedName(unlocalizedName);
@@ -58,19 +61,18 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
 
         this.setHardness(3);
         this.setResistance(20);
-        this.setSoundType(SoundType.CLOTH);
+        this.setSoundType(SoundType.WOOD);
         this.setHarvestLevel("axe", 0);
 
         this.setDefaultState(this.blockState.getBaseState()
-                .withProperty(NORTH, Boolean.valueOf(false))
-                .withProperty(EAST, Boolean.valueOf(false))
-                .withProperty(SOUTH, Boolean.valueOf(false))
-                .withProperty(WEST, Boolean.valueOf(false))
+                .withProperty(NORTH, Integer.valueOf(0))
+                .withProperty(EAST, Integer.valueOf(0))
+                .withProperty(SOUTH, Integer.valueOf(0))
+                .withProperty(WEST, Integer.valueOf(0))
                 .withProperty(UP, Boolean.valueOf(false))
                 .withProperty(DOWN, Boolean.valueOf(false)));
 
         this.useNeighborBrightness = true;
-        this.wasActivated = false;
     }
 
     @SuppressWarnings("deprecation")
@@ -85,29 +87,45 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
         return false;
     }
     
-    @SuppressWarnings("deprecation")
+
     @Override
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return KNOT_BOUNDING_BOX;
+    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
+    	addCollisionBoxToList(pos, entityBox, collidingBoxes, FENCE_COLLISION_EXTRA_BOX);
+    	super.addCollisionBoxToList(state, worldIn, pos, entityBox, collidingBoxes, entityIn, isActualState);
     }
 
-    @SuppressWarnings("deprecation")
+    
     @Override
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, COLLISION_BOX);
+    protected void populateCollisionBoxes(IBlockState actualState, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes) {
+    	addCollisionBoxToList(pos, entityBox, collidingBoxes, FENCE_BOUNDING_BOX);
+    	addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
+    	
+    	int vN = actualState.getValue(NORTH);
+    	int vE = actualState.getValue(EAST);
+    	int vS = actualState.getValue(SOUTH);
+    	int vW = actualState.getValue(WEST);
+    	
+    	if( vN != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vN == 1) ? NORTH_BOUNDING_BOX : FENCE_NORTH_BOUNDING_BOX);
+    	
+    	if( vE != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vE == 1) ? EAST_BOUNDING_BOX : FENCE_EAST_BOUNDING_BOX);
+    	
+    	if( vS != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vS == 1) ? SOUTH_BOUNDING_BOX : FENCE_SOUTH_BOUNDING_BOX);
+    	
+    	if( vW != 0 )
+    		addCollisionBoxToList(pos, entityBox, collidingBoxes, (vW == 1) ? WEST_BOUNDING_BOX : FENCE_WEST_BOUNDING_BOX);
+    	
+    	// Up and down not necessary, because they are covered by FENCE_BOUNDING_BOX
     }
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if(playerIn.isSneaking()) {
-            this.wasActivated = true;
             // Put the Fence back.
-            IItemHandler inventoryHandler = this.getInventoryHandler(worldIn, pos);
-            ItemStack stack = inventoryHandler.getStackInSlot(0);
-            IBlockState fenceBlockState = Block.getBlockFromItem(stack.getItem()).getDefaultState();
-            worldIn.setBlockState(pos, fenceBlockState);
+            worldIn.setBlockState(pos, Blocks.OAK_FENCE.getDefaultState());
         } else {
-            this.wasActivated = false;
         }
         return false;
     }
@@ -117,33 +135,12 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
         // Always return a rope when broken
         ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
-
-        if(!this.wasActivated) {
-            // Returned the stored ItemFence
-            IItemHandler inventoryHandler = this.getInventoryHandler(worldIn, pos);
-            ItemStack stack = inventoryHandler.getStackInSlot(0);
-            InventoryHelper.spawnItemStack(worldIn, pos.getX() + 0.5F, pos.getY() + 1, pos.getZ() + 0.5F, stack);
-        }
-
-        this.wasActivated = false;
     }
 
     @Override
     public int quantityDropped(Random random) {
         // Always return 0 as this is not a normal block.
         return 0;
-    }
-
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(World worldIn, int meta) {
-        return new TileEntityRopeKnot();
-    }
-
-    private IItemHandler getInventoryHandler(World worldIn, BlockPos pos) {
-        TileEntityRopeKnot te = (TileEntityRopeKnot) worldIn.getTileEntity(pos);
-        IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        return handler;
     }
 
     /**
@@ -169,12 +166,26 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-        return state.withProperty(NORTH, canConnectRopeTo(worldIn, pos, EnumFacing.NORTH))
-                .withProperty(EAST, canConnectRopeTo(worldIn, pos, EnumFacing.EAST))
-                .withProperty(SOUTH, canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canConnectRopeTo(worldIn, pos, EnumFacing.WEST))
+    	int vN = getConnectionValue(worldIn, pos, EnumFacing.NORTH);
+    	int vE = getConnectionValue(worldIn, pos, EnumFacing.EAST);
+    	int vS = getConnectionValue(worldIn, pos, EnumFacing.SOUTH);
+    	int vW = getConnectionValue(worldIn, pos, EnumFacing.WEST);
+    	
+        return state.withProperty(NORTH, vN)
+                .withProperty(EAST, vE)
+                .withProperty(SOUTH, vS)
+                .withProperty(WEST, vW)
                 .withProperty(UP, canConnectRopeTo(worldIn, pos, EnumFacing.UP))
                 .withProperty(DOWN, canConnectRopeTo(worldIn, pos, EnumFacing.DOWN));
+    }
+    
+    private int getConnectionValue(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
+    	if( canConnectRopeTo(worldIn, pos, facing) )
+    		return 1;
+    	else if( FenceUtils.canFenceConnectTo(worldIn, pos, facing) )
+    		return 2;
+    	else
+    		return 0;
     }
 
     @Override
@@ -192,5 +203,20 @@ public class BlockRopeKnot extends Block implements ITileEntityProvider, IBlockR
     public int getMetaFromState(IBlockState state) {
         return 0;
     }
+    
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
+    {
+        return face != EnumFacing.UP && face != EnumFacing.DOWN ? BlockFaceShape.MIDDLE_POLE : BlockFaceShape.CENTER;
+    }
 
+    /**
+     * Determines if an entity can path through this block
+     */
+    @Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
+    {
+        return false;
+    }
+    
 }
