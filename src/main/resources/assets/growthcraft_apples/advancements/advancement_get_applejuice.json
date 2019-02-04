@@ -1,9 +1,9 @@
 { 
 	"display": { 
-		"icon": { 
+		"icon": {
 			"item": "growthcraft_apples:applecider"
 		},
-		"title": { 
+		"title": {
 			"translate": "advancement.get.applejuice"
 		},
 		"description": {
@@ -19,11 +19,8 @@
 			"conditions":{
 				"items": [
 					{
-					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_juice",
-					 		"Amount": 1000
-					 	}
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_apple_juice\",Amount:1000}"
 					}
 				]
 			}
@@ -33,7 +30,8 @@
 			"conditions":{
 				"items": [
 					{
-					 	"item": "growthcraft_apples:applecider"
+					 	"item": "growthcraft_apples:applecider",
+						"data":0 
 					}
 				]
 			}
