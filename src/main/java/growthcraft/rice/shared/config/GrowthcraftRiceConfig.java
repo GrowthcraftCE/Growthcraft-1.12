@@ -29,6 +29,8 @@ public class GrowthcraftRiceConfig extends Configuration {
     public static String logLevel = "info";
 
     public static int riceGrowthRate = 25;
+    public static int riceGrowthMinLight = 5;
+    public static boolean boneMealIgnoreLight = false;
 
     // GUI
     public static boolean enableDiscardButton = true;
@@ -78,6 +80,21 @@ public class GrowthcraftRiceConfig extends Configuration {
     }
 
     private static void initGeneralConfig() {
+
+        boneMealIgnoreLight = configuration.getBoolean(
+          "boneMealIgnoreLight",
+          CATEGORY_GENERAL,
+          boneMealIgnoreLight,
+          "Allow for bonemeal to force growth regardless of light level."
+        );
+
+        riceGrowthMinLight = configuration.getInt(
+          "riceGrowthMinLight",
+                CATEGORY_GENERAL,
+                riceGrowthMinLight,
+                1, 15,
+                "Minimum light level for rice to grow. Midnight (4), Sunlight/Thunderstorms (8), Sunlight (12)."
+        );
 
         riceGrowthRate = configuration.getInt(
                 "riceGrowthRate",
