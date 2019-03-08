@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "fluid_booze_kumis_potent": [
+    "fluid_booze_kumis_kumis_potent_extended": [
       {
         "custom": {
-          "fluid": "fluid_booze_kumis_potent"
+          "fluid": "fluid_booze_kumis_kumis_potent_extended"
         }
       }
     ]
