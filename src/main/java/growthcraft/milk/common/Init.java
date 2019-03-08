@@ -1,18 +1,29 @@
 package growthcraft.milk.common;
 
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
+import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
+import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.booze.BoozeUtils;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
+import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
+import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.cellar.shared.utils.BoozeHelper;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.GrowthcraftCoreApis;
+import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.core.shared.effect.*;
 import growthcraft.core.shared.fluids.FluidFactory;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetails;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetailsBuilder;
+import growthcraft.core.shared.fluids.FluidTag;
 import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import growthcraft.core.shared.item.CommonItemStackComparator;
 import growthcraft.core.shared.item.IItemStackComparator;
@@ -36,10 +47,7 @@ import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.cheese.CheeseUtils;
 import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
-import growthcraft.milk.shared.definition.EnumCheeseStage;
-import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
-import growthcraft.milk.shared.definition.ICheeseCurdStackFactory;
-import growthcraft.milk.shared.definition.ICheeseType;
+import growthcraft.milk.shared.definition.*;
 import growthcraft.milk.shared.fluids.MilkFluidTags;
 import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
 import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
@@ -54,6 +62,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.potion.Potion;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -71,6 +80,7 @@ import java.util.List;
 import java.util.Map;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+import static growthcraft.milk.shared.init.GrowthcraftMilkFluids.kumisBooze;
 import static net.minecraftforge.fml.common.registry.GameRegistry.registerTileEntity;
 
 public class Init {
@@ -92,6 +102,7 @@ public class Init {
     	GrowthcraftMilkBlocks.blockFluidPasteurizedMilk = GrowthcraftMilkFluids.pasteurizedMilk.getFluidBlockDefinition();
     	GrowthcraftMilkBlocks.blockFluidSkimMilk = GrowthcraftMilkFluids.skimMilk.getFluidBlockDefinition();
     	GrowthcraftMilkBlocks.blockFluidWhey = GrowthcraftMilkFluids.whey.getFluidBlockDefinition();
+
     	GrowthcraftMilkBlocks.pancheon = new BlockDefinition( new BlockPancheon("pancheon") );
     	GrowthcraftMilkBlocks.churn = new BlockDefinition( new BlockButterChurn("churn") );
     	GrowthcraftMilkBlocks.churnPlunger = new BlockDefinition(new BlockButterChurnPlunger("churn_plunger") );
@@ -181,6 +192,7 @@ public class Init {
     	GrowthcraftMilkItems.agedCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseCurds.getBlock(), AgedCheeseTypes.values()) );
     	GrowthcraftMilkItems.waxedCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseCurds.getBlock(), WaxedCheeseTypes.values()) );
     	GrowthcraftMilkItems.simpleCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<SimpleCheeseTypes>(GrowthcraftMilkBlocks.simpleCheeseCurds.getBlock(), SimpleCheeseTypes.values()) );
+    	GrowthcraftMilkItems.kumisBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle());
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -212,6 +224,10 @@ public class Init {
     	GrowthcraftMilkItems.agedCheeseCurdsItem.registerItem(registry, GrowthcraftMilkBlocks.agedCheeseCurds.getBlock().getRegistryName());
     	GrowthcraftMilkItems.waxedCheeseCurdsItem.registerItem(registry, GrowthcraftMilkBlocks.waxedCheeseCurds.getBlock().getRegistryName());
     	GrowthcraftMilkItems.simpleCheeseCurdsItem.registerItem(registry, GrowthcraftMilkBlocks.simpleCheeseCurds.getBlock().getRegistryName());
+
+		GrowthcraftMilkItems.kumisBottle.registerItem(registry, new ResourceLocation(Reference.MODID, "kumisbottle"));
+		GrowthcraftMilkItems.kumisBottle.getItem().setCreativeTab(tabGrowthcraft);
+		GrowthcraftMilkItems.kumisBottle.getItem().setBoozes(kumisBooze);
     }
     
 	public static void registerItemOres()
@@ -317,13 +333,15 @@ public class Init {
         registerCheeseCurdsItemRenders(GrowthcraftMilkItems.agedCheeseCurdsItem, AgedCheeseTypes.values());
         registerCheeseCurdsItemRenders(GrowthcraftMilkItems.waxedCheeseCurdsItem, WaxedCheeseTypes.values());
         registerCheeseCurdsItemRenders(GrowthcraftMilkItems.simpleCheeseCurdsItem, SimpleCheeseTypes.values());
+
+        GrowthcraftMilkItems.kumisBottle.registerRenders(KumisTypes.class);
     }
     
 	@SideOnly(Side.CLIENT)
 	public
 	static void registerModelBakeryVariants() {
 		GrowthcraftMilkItems.butter.registerModelBakeryVariants(ButterTypes.class);
-//		agedCheeseBlockItem.registerModelBakeryVariants(AgedCheeseTypes.class);
+		GrowthcraftMilkItems.kumisBottle.registerModelBakeryVariants(KumisTypes.class);
 	}
 	
 	////////
@@ -500,7 +518,41 @@ public class Init {
         GrowthcraftMilkFluids.pasteurizedMilk = new FluidDetailsBuilder(fluidPasteurizedMilk)
 				.setFluidBlockClass(BlockFluidPasteurizedMilk.class).build()
 					.setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft).setItemColor(0xFFFFFA);
-		
+
+		/* Kumis */
+		kumisBooze = new BoozeDefinition[KumisTypes.values().length];
+		BoozeRegistryHelper.initializeAndRegisterBoozeFluids(kumisBooze, KumisTypes.class, "kumis");
+
+		// Set the fluid color and density for each of the fluid sub-types
+		kumisBooze[KumisTypes.KUMIS_FERMENTED.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisFermentedColor)
+				.setDensity(1120);
+		kumisBooze[KumisTypes.KUMIS_POTENT.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisPotentColor)
+				.setDensity(1120);
+		kumisBooze[KumisTypes.KUMIS_EXTENDED.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisExtendedColor)
+				.setDensity(1120);
+		kumisBooze[KumisTypes.KUMIS_HYPEREXTENDED.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisHyperExtendedColor)
+				.setDensity(1120);
+		kumisBooze[KumisTypes.KUMIS_POTENT_EXTENDED.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisPotentExtendedColor)
+				.setDensity(1120);
+		kumisBooze[KumisTypes.KUMIS_POTENT_HYPEREXTENDED.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisPotentHyperExtendedColor)
+				.setDensity(1120);
+		kumisBooze[KumisTypes.KUMIS_POISONED.ordinal()]
+				.getFluid()
+				.setColor(GrowthcraftMilkConfig.kumisPoisonedColor)
+				.setDensity(1120);
+
 		preInitCheeseFluids();
     }
 	
@@ -562,8 +614,144 @@ public class Init {
 		registerCheeseFluidBlocks(registry, GrowthcraftMilkFluids.cheesesSimple);
 		registerCheeseFluidBlocks(registry, GrowthcraftMilkFluids.cheesesAged);
 		registerCheeseFluidBlocks(registry, GrowthcraftMilkFluids.cheesesWaxed);
+
+		// Init the Kumis fluid blocks
+		GrowthcraftMilkBlocks.kumisFluidBlocks = new BlockBoozeDefinition[kumisBooze.length];
+		BoozeRegistryHelper.initializeBooze(kumisBooze, GrowthcraftMilkBlocks.kumisFluidBlocks);
+		BoozeRegistryHelper.setBoozeFoodStats(kumisBooze, 1, -0.3F);
+		BoozeRegistryHelper.registerBoozeBlocks(registry, kumisBooze, GrowthcraftMilkBlocks.kumisFluidBlocks, Reference.MODID, "kumisbooze", KumisTypes.class);
+
     }
-    
+
+    public static void initBoozes() {
+		BoozeRegistryHelper.initBoozeContainers(kumisBooze, GrowthcraftMilkItems.kumisBottle,
+				Reference.MODID, "kumisbooze", KumisTypes.class);
+		registerFermentations();
+	}
+
+	private static void registerFermentations() {
+
+		final int fermentTime = GrowthcraftCellarConfig.fermentTime;
+
+		final FluidStack[] fs = BoozeHelper.boozeDefintionsToFluidStacks(kumisBooze);
+		final FluidStack[] spoilInputFs = BoozeHelper.boozeDefintionsToFluidStacks(kumisBooze, 200);
+
+		// FERMENTABLE
+
+		for ( KumisTypes kumisType : KumisTypes.values() ) {
+			Fluid outputFluid;
+			FluidStack inputFluid;
+			FluidTag[] fluidTags;
+			Item inputItem;
+			Float fermentOffset = 1.00F;
+			Float alcoholRate = 0.045F;
+			int tipsyDuration = 60;
+			Potion potionEffect = MobEffects.RESISTANCE;
+			int potionDuration = 1;
+
+			switch (kumisType) {
+				case KUMIS_FERMENTED:
+					outputFluid = kumisBooze[KumisTypes.KUMIS_FERMENTED.ordinal()].getFluid();
+					inputFluid = new FluidStack(FluidRegistry.getFluid("fluid_milk"), 200);
+					fluidTags = new FluidTag[]{ BoozeTag.KUMIS, BoozeTag.FERMENTED };
+					inputItem = Items.NETHER_WART;
+					fermentOffset = 0.66F;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+					break;
+				case KUMIS_POTENT:
+					outputFluid = kumisBooze[KumisTypes.KUMIS_POTENT.ordinal()].getFluid();
+					inputFluid = fs[KumisTypes.KUMIS_FERMENTED.ordinal()];
+					fluidTags = new FluidTag[]{ BoozeTag.KUMIS, BoozeTag.FERMENTED, BoozeTag.POTENT };
+					inputItem = Items.GLOWSTONE_DUST;
+					alcoholRate = 0.09F;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+					break;
+				case KUMIS_EXTENDED:
+					outputFluid = kumisBooze[KumisTypes.KUMIS_EXTENDED.ordinal()].getFluid();
+					inputFluid = fs[KumisTypes.KUMIS_FERMENTED.ordinal()];
+					fluidTags = new FluidTag[]{ BoozeTag.KUMIS, BoozeTag.FERMENTED, BoozeTag.EXTENDED };
+					inputItem = Items.REDSTONE;
+					tipsyDuration = 180;
+					potionDuration = 3;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+					break;
+				case KUMIS_HYPEREXTENDED:
+					outputFluid = kumisBooze[KumisTypes.KUMIS_HYPEREXTENDED.ordinal()].getFluid();
+					inputFluid = fs[KumisTypes.KUMIS_EXTENDED.ordinal()];
+					fluidTags = new FluidTag[]{ BoozeTag.KUMIS, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED };
+					inputItem = Items.REDSTONE;
+					tipsyDuration = 360;
+					potionDuration = 6;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+					break;
+				case KUMIS_POTENT_EXTENDED:
+					outputFluid = kumisBooze[KumisTypes.KUMIS_POTENT_EXTENDED.ordinal()].getFluid();
+					inputFluid = fs[KumisTypes.KUMIS_POTENT.ordinal()];
+					fluidTags = new FluidTag[]{ BoozeTag.KUMIS, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.EXTENDED };
+					inputItem = Items.REDSTONE;
+					alcoholRate = 0.09F;
+					tipsyDuration = 180;
+					potionDuration = 3;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+
+					inputFluid = fs[KumisTypes.KUMIS_POTENT.ordinal()];
+					inputItem = Items.GLOWSTONE_DUST;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+
+					break;
+				case KUMIS_POTENT_HYPEREXTENDED:
+					outputFluid = kumisBooze[KumisTypes.KUMIS_POTENT_HYPEREXTENDED.ordinal()].getFluid();
+					inputFluid = fs[KumisTypes.KUMIS_POTENT_EXTENDED.ordinal()];
+					fluidTags = new FluidTag[]{ BoozeTag.KUMIS, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.HYPER_EXTENDED };
+					inputItem = Items.REDSTONE;
+					alcoholRate = 0.09F;
+					tipsyDuration = 360;
+					potionDuration = 6;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+
+					inputFluid = fs[KumisTypes.KUMIS_HYPEREXTENDED.ordinal()];
+					inputItem = Items.GLOWSTONE_DUST;
+					registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+
+					break;
+				default:
+					// If it is POISONED for not listed above, skip to the next ENUM value.
+					continue;
+			}
+
+		}
+
+		// POSIONED
+
+		// TODO: Implement recipe for KUMIS_POISONED
+
+	}
+
+	public static void registerFermentation(
+		Fluid outputFluid,
+		FluidStack inputFluid,
+		FluidTag[] fluidTags,
+		Item inputItem,
+		float fermentTime,
+		Float alcoholRate,
+		int tipsyDuration,
+		Potion potionEffect,
+		int potionDuration) {
+		try {
+			GrowthcraftCellarApis.boozeBuilderFactory.create(outputFluid)
+					.tags(fluidTags)
+					.fermentsFrom(
+							inputFluid,
+							new ItemStack(inputItem),
+							(int) (fermentTime))
+					.getEffect()
+					.setTipsy(BoozeUtils.alcoholToTipsy(alcoholRate), TickUtils.seconds(tipsyDuration))
+					.addPotionEntry(potionEffect, TickUtils.minutes(potionDuration), 0);
+		} catch ( Exception ex ) {
+
+		}
+	}
+
     public static void registerFluidItems(IForgeRegistry<Item> registry) {
 		if (GrowthcraftMilkFluids.milk != null )
 			GrowthcraftMilkFluids.milk.registerItems(registry, Reference.MODID, "milk");
@@ -579,6 +767,7 @@ public class Init {
 		registerCheeseFluidItems(registry, GrowthcraftMilkFluids.cheesesSimple);
 		registerCheeseFluidItems(registry, GrowthcraftMilkFluids.cheesesAged);
 		registerCheeseFluidItems(registry, GrowthcraftMilkFluids.cheesesWaxed);
+
     }
 
     @SideOnly(Side.CLIENT)
@@ -595,7 +784,10 @@ public class Init {
 		registerCheeseRenders(GrowthcraftMilkFluids.cheesesSimple);
 		registerCheeseRenders(GrowthcraftMilkFluids.cheesesAged);
 		registerCheeseRenders(GrowthcraftMilkFluids.cheesesWaxed);
-    }
+
+		BoozeRegistryHelper.registerBoozeRenderers(kumisBooze, GrowthcraftMilkBlocks.kumisFluidBlocks);
+
+	}
     
     @SideOnly(Side.CLIENT)
     public static void registerFluidColorHandlers() {
@@ -611,6 +803,8 @@ public class Init {
 		registerCheeseColorHandlers(GrowthcraftMilkFluids.cheesesSimple);
 		registerCheeseColorHandlers(GrowthcraftMilkFluids.cheesesAged);
 		registerCheeseColorHandlers(GrowthcraftMilkFluids.cheesesWaxed);
+		ItemRenderUtils.registerItemColorHandler(GrowthcraftMilkItems.kumisBottle.getItem());
+
     }
 	
 	////////

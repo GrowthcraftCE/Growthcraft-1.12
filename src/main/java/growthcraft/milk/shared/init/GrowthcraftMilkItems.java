@@ -1,16 +1,13 @@
 package growthcraft.milk.shared.init;
 
+import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.cheese.CheeseUtils;
-import growthcraft.milk.shared.definition.EnumCheeseStage;
-import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
-import growthcraft.milk.shared.definition.ICheeseCurdStackFactory;
-import growthcraft.milk.shared.definition.ICheeseFluidStackFactory;
-import growthcraft.milk.shared.definition.ICheeseItemStackFactory;
-import growthcraft.milk.shared.definition.ICheeseType;
+import growthcraft.milk.shared.definition.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -37,6 +34,8 @@ public class GrowthcraftMilkItems {
     public static ItemDefinition agedCheeseCurdsItem;
     public static ItemDefinition waxedCheeseCurdsItem;
     public static ItemDefinition simpleCheeseCurdsItem;
+
+    public static ItemTypeDefinition<ItemBoozeBottle> kumisBottle;
 
 	private static boolean canWax(WaxedCheeseTypes type, ItemStack stack) {
 		String oreName;

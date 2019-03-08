@@ -9,6 +9,7 @@ import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.cellar.shared.utils.BoozeHelper;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
@@ -210,15 +211,8 @@ public class Init {
     	// TODO: Add configuration for brewing yield amount as it is done in grapes module
         final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 
-        final FluidStack[] fs = new FluidStack[sakeBooze.length];
-        for ( int i = 0; i < sakeBooze.length; ++i ) {
-            fs[i] = sakeBooze[i].asFluidStack();
-        }
-        
-        final FluidStack[] spoilInputFs = new FluidStack[sakeBooze.length];
-        for ( int i = 0; i < sakeBooze.length; ++i ) {
-        	spoilInputFs[i] = sakeBooze[i].asFluidStack(200);
-        }
+        final FluidStack[] fs = BoozeHelper.boozeDefintionsToFluidStacks(sakeBooze);
+        final FluidStack[] spoilInputFs = BoozeHelper.boozeDefintionsToFluidStacks(sakeBooze, 200);
 
         /**
          * Water + Rice = SAKE_WATER (Rice Water)
