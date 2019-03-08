@@ -21,4 +21,14 @@ public class GrowthcraftMilkConfig {
 	public static boolean cheesePressHandOperated = true;
 	public static boolean cheesePressRedstoneOperated = true;
 	public static int ricottaBowlCount = 4;
+
+	/* Kumis Colors */
+	public static int kumisFermentedColor = 0xF9F9F9;
+	public static int kumisPotentColor = 0xF9F9F9;
+	public static int kumisExtendedColor = 0xF9F9F9;
+	public static int kumisHyperExtendedColor = 0xF9F9F9;
+	public static int kumisPotentExtendedColor = 0xF9F9F9;
+	public static int kumisPotentHyperExtendedColor = 0xF9F9F9;
+	public static int kumisPoisonedColor = 0xF9F9F9;
+
 }

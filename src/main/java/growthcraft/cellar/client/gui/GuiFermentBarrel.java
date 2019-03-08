@@ -118,6 +118,10 @@ public class GuiFermentBarrel extends GuiCellar<ContainerFermentBarrel, TileEnti
 				{
 					itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.REDSTONE), x + 114, y + 32);
 				}
+				if (tags.contains(BoozeTag.HYPER_EXTENDED))
+				{
+					itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.REDSTONE), x + 114, y + 32);
+				}
 				if (tags.contains(BoozeTag.POTENT))
 				{
 					itemRender.renderItemAndEffectIntoGUI(new ItemStack(Items.GLOWSTONE_DUST), x + 130, y + 32);

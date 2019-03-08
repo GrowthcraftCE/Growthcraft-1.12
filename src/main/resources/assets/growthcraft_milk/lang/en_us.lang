@@ -1,6 +1,22 @@
 
 
 # Fluids
+fluid.fluid_booze_kumis_fermented=Kumis
+fluid.fluid_booze_kumis_potent=Kumis
+fluid.fluid_booze_kumis_extended=Kumis
+fluid.fluid_booze_kumis_hyperextended=Kumis
+fluid.fluid_booze_kumis_potent_extended=Kumis
+fluid.fluid_booze_kumis_potent_hyperextended=Kumis
+fluid.fluid_booze_kumis_poisoned=Kumis
+
+fluid.fluid_booze_kumis_kumis_fermented=Kumis Fermented
+fluid.fluid_booze_kumis_kumis_potent=Kumis Potent
+fluid.fluid_booze_kumis_kumis_extended=Kumis Extended
+fluid.fluid_booze_kumis_kumis_hyperextended=Kumis Hyper-Extended
+fluid.fluid_booze_kumis_kumis_potent_extended=Kumis Potent Extended
+fluid.fluid_booze_kumis_kumis_potent_hyperextended=Kumis Potent Hyper-Extended
+fluid.fluid_booze_kumis_kumis_poisoned=Kumis
+
 fluid.fluid_butter_milk=Butter Milk
 
 fluid.fluid_cheese_asiago=Asiago Cheese
