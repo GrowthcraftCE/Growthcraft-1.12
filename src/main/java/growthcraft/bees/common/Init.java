@@ -265,9 +265,10 @@ public class Init {
 		{
 			spoilInputFs[i] = meadBooze[i].asFluidStack(40);
 		}
-		
+
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_YOUNG.ordinal()].getFluid())
-			.tags(BeesFluidTag.MEAD, BoozeTag.YOUNG);
+			.tags(BeesFluidTag.MEAD, BoozeTag.YOUNG)
+			.fermentsFrom(new FluidStack(FluidRegistry.getFluid("fluid_honey"), 250), new OreItemStacks("yeastBrewers"), fermentTime);
 		
 		final TaggedFluidStacks youngMead = new TaggedFluidStacks(1, BoozeTag.YOUNG.getName(), BeesFluidTag.MEAD.getName());
 		
