@@ -286,7 +286,7 @@ public class Init {
 			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.17f), TickUtils.seconds(90))
-				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 1);
 
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_EXTENDED.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED, BeesFluidTag.MEAD)
@@ -294,8 +294,15 @@ public class Init {
 			.fermentsFrom(fs[MeadTypes.MEAD_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
-				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(90), 0);
-		
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(180), 0);
+
+		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_HYPEREXTENDED.ordinal()].getFluid())
+				.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED, BeesFluidTag.MEAD)
+				.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+				.getEffect()
+				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
+				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(480), 0);
+
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.MAGICAL, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
