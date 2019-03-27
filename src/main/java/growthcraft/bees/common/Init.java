@@ -2,6 +2,7 @@ package growthcraft.bees.common;
 
 import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.common.block.BlockBeeBox;
+import growthcraft.bees.common.block.BlockBeeHive;
 import growthcraft.bees.common.fluids.FluidHoney;
 import growthcraft.bees.common.items.*;
 import growthcraft.bees.common.lib.config.BeesFluidTag;
@@ -79,19 +80,25 @@ public class Init {
 	
 	public static void preInitBlocks() {
 		GrowthcraftBeesBlocks.beeBox = new BlockDefinition(new BlockBeeBox("beebox"));
+		GrowthcraftBeesBlocks.beeHive = new BlockDefinition(new BlockBeeHive("beehive"));
 	}
 	
 	public static void registerBlocks(IForgeRegistry<Block> registry) {
 		GrowthcraftBeesBlocks.beeBox.getBlock().setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft);
 		GrowthcraftBeesBlocks.beeBox.registerBlock(registry);
+
+		GrowthcraftBeesBlocks.beeHive.getBlock().setCreativeTab(tabGrowthcraft);
+		GrowthcraftBeesBlocks.beeHive.registerBlock(registry);
 	}
 	
 	public static void registerBlockItems(IForgeRegistry<Item> registry) {
 		GrowthcraftBeesBlocks.beeBox.registerBlockItem(registry);
+		GrowthcraftBeesBlocks.beeHive.registerBlockItem(registry);
 	}
 	
 	public static void registerBlockRender() {
 		GrowthcraftBeesBlocks.beeBox.registerItemRender();
+		GrowthcraftBeesBlocks.beeHive.registerItemRender();
 	}
 
 	public static void registerTileEntities() {
@@ -196,13 +203,14 @@ public class Init {
 		meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
 		meadBooze[MeadTypes.MEAD_INTOXICATED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
 		meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		meadBooze[MeadTypes.MEAD_HYPEREXTENDED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
 	}
 	
 	public static void initBoozes() {
 		BoozeRegistryHelper.initBoozeContainers(meadBooze,
 												GrowthcraftBeesItems.honeyMeadBottle,
 												Reference.MODID,
-												"mead",
+												"meadbooze",
 												MeadTypes.class);
 		registerFermentations();
 	}
