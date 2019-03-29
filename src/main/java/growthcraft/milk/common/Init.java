@@ -907,7 +907,7 @@ public class Init {
 			CheeseVatRecipeBuilder.buildRecipe("CASU MARZU Recipe")
 					.outputFluids(AgedCheeseTypes.CASU_MARZU.getFluids().asFluidStack(5000))
 					.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeGray", 1), new ItemStack(Items.ROTTEN_FLESH))
+					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("listAllfruit", 1), new ItemStack(Items.ROTTEN_FLESH))
 					.register();
 		}
 	}
