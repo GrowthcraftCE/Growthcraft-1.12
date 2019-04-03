@@ -5,18 +5,11 @@ import growthcraft.bees.common.Init;
 import growthcraft.bees.common.lib.config.user.UserBeesConfig;
 import growthcraft.bees.common.lib.config.user.UserFlowersConfig;
 import growthcraft.bees.shared.Reference;
-import growthcraft.bees.shared.init.GrowthcraftBeesItems;
+import growthcraft.bees.shared.config.GrowthcraftBeesConfig;
 import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.world.storage.loot.LootEntry;
-import net.minecraft.world.storage.loot.LootEntryItem;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraft.world.storage.loot.LootTable;
-import net.minecraft.world.storage.loot.RandomValueRange;
-import net.minecraft.world.storage.loot.conditions.LootCondition;
-import net.minecraft.world.storage.loot.functions.LootFunction;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.LootTableLoadEvent;
@@ -53,6 +46,8 @@ public class GrowthcraftBees {
     
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+		GrowthcraftBeesConfig.preInit(event);
+
     	Init.preInitItems();
         Init.preInitBlocks();
         Init.preInitFluids();
