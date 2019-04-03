@@ -71,8 +71,8 @@ public class GrowthcraftBeesItems {
     	MEAD_EXTENDED(3, "mead_extended"),
     	MEAD_ETHEREAL(4, "mead_ethereal"),
     	MEAD_INTOXICATED(5, "mead_intoxicated"),
-    	MEAD_POISONED(6, "mead_poisoned");
-        //MEAD_HYPEREXTENDED(7, "mead_extended");
+    	MEAD_POISONED(6, "mead_poisoned"),
+        MEAD_HYPEREXTENDED(7, "mead_hyperextended");
 
         private int ID;
         private String NAME;

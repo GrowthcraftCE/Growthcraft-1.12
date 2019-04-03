@@ -16,6 +16,7 @@ item.honey_jar.name=Honey Jar
 container.growthcraft_bees.beeBox=Bee Box
 
 tile.beebox.name=Bee Box
+tile.beehive.name=Bee Hive
 
 # Fluid Tags
 fluids.tag.mead=Mead
