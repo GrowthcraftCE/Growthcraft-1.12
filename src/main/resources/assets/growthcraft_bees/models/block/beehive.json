@@ -1,9 +1,9 @@
 {
-	"credit": "Made with Blockbench",
+	"credit": "Made with Blockbench, Model by Kisutora.",
 	"textures": {
-		"0": "growthcraft_bees:beehive_front",
-		"1": "growthcraft_bees:beehive_sides",
-		"particle": "growthcraft_bees:beehive_sides"
+		"0": "growthcraft_bees:blocks/beehive_front",
+		"1": "growthcraft_bees:blocks/beehive_sides",
+		"particle": "growthcraft_bees:blocks/beehive_sides"
 	},
 	"elements": [
 		{

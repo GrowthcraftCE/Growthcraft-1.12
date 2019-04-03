@@ -16,6 +16,7 @@ item.honey_jar.name=Honey Jar
 container.growthcraft_bees.beeBox=Bee Box
 
 tile.beebox.name=Bee Box
+tile.beehive.name=Bee Hive
 
 # Fluid Tags
 fluids.tag.mead=Mead
@@ -29,3 +30,4 @@ fluid.fluid_booze_mead_extended=Extended Mead
 fluid.fluid_booze_mead_ethereal=Magical Mead
 fluid.fluid_booze_mead_intoxicated=Intoxicated Mead
 fluid.fluid_booze_mead_poisoned=Mead
+fluid.fluid_booze_mead_hyperextended=Hyper-Extended Mead

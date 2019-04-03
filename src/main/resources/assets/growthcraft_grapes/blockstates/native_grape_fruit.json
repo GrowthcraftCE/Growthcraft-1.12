@@ -21,14 +21,29 @@
         }
       },
       "3": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/red"
+        }
       },
       "4": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/red"
+        }
       },
       "5": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/red"
+        }
       },
       "6": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/red"
+        }
       },
       "7": {
+        "textures": {
+          "cross": "growthcraft_grapes:items/grape/red"
+        }
       }
     }    
   }
