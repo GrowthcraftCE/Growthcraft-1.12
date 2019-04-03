@@ -183,7 +183,9 @@ public class GrowthcraftMilkItems {
 
     public enum WaxedCheeseTypes implements ICheeseType, IObjectVariant, IStringSerializable {
         CHEDDAR(0, "cheddar", 0xed9200),
-        MONTEREY(1, "monterey", 0xf5f5da);
+        MONTEREY(1, "monterey", 0xf5f5da),
+	    GOUDA(2, "gouda", 0xEEDC82),
+	    PROVOLONE(3, "provolone", 0xFFFDD0);
 
         private int ID;
         private ResourceLocation name;
@@ -358,7 +360,8 @@ public class GrowthcraftMilkItems {
         EMMENTALER(1, "emmentaler", 0xddddbc),
         APPENZELLER(2, "appenzeller", 0xf3e2a7),
         ASIAGO(3, "asiago", 0xbfb68d),
-        PARMESAN(4, "parmesan", 0xd8d5c6);
+        PARMESAN(4, "parmesan", 0xd8d5c6),
+	    CASU_MARZU(5, "casu_marzu", 0xF1E9D2);
 
         private int ID;
         private ResourceLocation name;

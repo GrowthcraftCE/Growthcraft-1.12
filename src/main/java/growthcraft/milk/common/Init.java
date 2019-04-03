@@ -834,7 +834,7 @@ public class Init {
 	
 	private static void registerCheeseVatRecipes()
 	{
-		final String[] saltOres = { "foodSalt", "materialSalt", "dustSalt" };
+		final String[] saltOres = { "salt", "itemSalt", "dustSalt", "foodSalt", "listAllSalt", "ingredientSalt", "pinchSalt", "portionSalt", "lumpSalt", "materialSalt" };
 
 		for (String saltOre : saltOres)
 		{
@@ -891,6 +891,24 @@ public class Init {
 				.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
 				.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeRed", 1))
 				.register();
+
+			CheeseVatRecipeBuilder.buildRecipe("PROVOLONE Yellow Dye Recipe")
+					.outputFluids(WaxedCheeseTypes.PROVOLONE.getFluids().asFluidStack(5000))
+					.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeYellow", 1))
+					.register();
+
+			CheeseVatRecipeBuilder.buildRecipe("GOUDA Recipe")
+					.outputFluids(WaxedCheeseTypes.GOUDA.getFluids().asFluidStack(5000))
+					.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeGray", 1), new OreItemStacks("dyeYellow", 1))
+					.register();
+
+			CheeseVatRecipeBuilder.buildRecipe("CASU MARZU Recipe")
+					.outputFluids(AgedCheeseTypes.CASU_MARZU.getFluids().asFluidStack(5000))
+					.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
+					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("listAllfruit", 1), new ItemStack(Items.ROTTEN_FLESH))
+					.register();
 		}
 	}
 	
