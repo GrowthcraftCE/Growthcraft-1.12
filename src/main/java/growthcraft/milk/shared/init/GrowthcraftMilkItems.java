@@ -1,16 +1,13 @@
 package growthcraft.milk.shared.init;
 
+import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.cheese.CheeseUtils;
-import growthcraft.milk.shared.definition.EnumCheeseStage;
-import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
-import growthcraft.milk.shared.definition.ICheeseCurdStackFactory;
-import growthcraft.milk.shared.definition.ICheeseFluidStackFactory;
-import growthcraft.milk.shared.definition.ICheeseItemStackFactory;
-import growthcraft.milk.shared.definition.ICheeseType;
+import growthcraft.milk.shared.definition.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -37,6 +34,8 @@ public class GrowthcraftMilkItems {
     public static ItemDefinition agedCheeseCurdsItem;
     public static ItemDefinition waxedCheeseCurdsItem;
     public static ItemDefinition simpleCheeseCurdsItem;
+
+    public static ItemTypeDefinition<ItemBoozeBottle> kumisBottle;
 
 	private static boolean canWax(WaxedCheeseTypes type, ItemStack stack) {
 		String oreName;
@@ -184,7 +183,9 @@ public class GrowthcraftMilkItems {
 
     public enum WaxedCheeseTypes implements ICheeseType, IObjectVariant, IStringSerializable {
         CHEDDAR(0, "cheddar", 0xed9200),
-        MONTEREY(1, "monterey", 0xf5f5da);
+        MONTEREY(1, "monterey", 0xf5f5da),
+	    GOUDA(2, "gouda", 0xEEDC82),
+	    PROVOLONE(3, "provolone", 0xFFFDD0);
 
         private int ID;
         private ResourceLocation name;
@@ -359,7 +360,8 @@ public class GrowthcraftMilkItems {
         EMMENTALER(1, "emmentaler", 0xddddbc),
         APPENZELLER(2, "appenzeller", 0xf3e2a7),
         ASIAGO(3, "asiago", 0xbfb68d),
-        PARMESAN(4, "parmesan", 0xd8d5c6);
+        PARMESAN(4, "parmesan", 0xd8d5c6),
+	    CASU_MARZU(5, "casu_marzu", 0xF1E9D2);
 
         private int ID;
         private ResourceLocation name;

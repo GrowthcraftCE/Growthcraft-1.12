@@ -111,3 +111,4 @@ nb-configuration.xml
 /sources/
 /libs/
 src/api/java/thaumcraft/api/
+*.iws___jb_tmp___

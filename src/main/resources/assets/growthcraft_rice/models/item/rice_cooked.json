@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "items/wheat"
+    "layer0": "growthcraft_rice:items/cooked_rice"
   }
 }

@@ -76,6 +76,7 @@ public class GrowthcraftMilk {
         Init.initRecipes();
         userApis.init();
         userApis.loadConfigs();
+        Init.initBoozes();
     }
 
     @Mod.EventHandler

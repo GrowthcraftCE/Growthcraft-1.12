@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "forge:fluid"
+  },
+  "variants": {
+    "fluid_kumisbooze_kumis_fermented": [
+      {
+        "custom": {
+          "fluid": "fluid_kumisbooze_kumis_fermented"
+        }
+      }
+    ]
+  }
+}

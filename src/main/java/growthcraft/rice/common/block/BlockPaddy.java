@@ -3,6 +3,7 @@ package growthcraft.rice.common.block;
 import growthcraft.core.shared.block.BlockPaddyBase;
 import growthcraft.rice.shared.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockCrops;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -16,6 +17,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.IPlantable;
 
 import java.util.Random;
 
@@ -29,6 +31,11 @@ public class BlockPaddy extends BlockPaddyBase {
         this.setRegistryName(Reference.MODID, unlocalizedName);
         this.setHardness(0.5F);
         this.setSoundType(SoundType.GROUND);
+    }
+
+    @Override
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, IPlantable plantable) {
+        return plantable instanceof BlockCrops;
     }
 
     @Override
