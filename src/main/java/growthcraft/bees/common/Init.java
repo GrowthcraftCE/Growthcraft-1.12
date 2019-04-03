@@ -203,7 +203,7 @@ public class Init {
 		meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
 		meadBooze[MeadTypes.MEAD_INTOXICATED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
 		meadBooze[MeadTypes.MEAD_POISONED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
-		meadBooze[MeadTypes.MEAD_HYPEREXTENDED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
+		//meadBooze[MeadTypes.MEAD_HYPEREXTENDED.ordinal()].getFluid().setColor(GrowthcraftBeesConfig.honeyMeadColor).setDensity(1000).setViscosity(1200);
 	}
 	
 	public static void initBoozes() {
@@ -212,6 +212,7 @@ public class Init {
 												Reference.MODID,
 												"meadbooze",
 												MeadTypes.class);
+
 		registerFermentations();
 	}
 	
@@ -303,14 +304,14 @@ public class Init {
 			.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(180), 0);
-
+/**
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_HYPEREXTENDED.ordinal()].getFluid())
 				.tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED, BeesFluidTag.MEAD)
 				.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
 				.getEffect()
 				.setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
 				.addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(480), 0);
-
+*/
 		GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_ETHEREAL.ordinal()].getFluid())
 			.tags(BoozeTag.FERMENTED, BoozeTag.MAGICAL, BeesFluidTag.MEAD)
 			.fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
