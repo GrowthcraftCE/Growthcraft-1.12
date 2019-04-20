@@ -1,0 +1,28 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_grapes:grape",
+			"data":10
+		},
+		"title": { 
+			"translate": "advancement.get.grape"
+		},
+		"description": {
+			"translate": "advancement.get.grape.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_grapes:advancement_get_grape_seed",
+	"criteria": {
+		"get_grape": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+						"item": "growthcraft_grapes:grape"
+					}
+				]
+			}
+		}
+	}
+}

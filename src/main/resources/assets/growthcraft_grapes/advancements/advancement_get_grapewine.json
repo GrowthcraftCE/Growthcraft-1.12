@@ -1,0 +1,320 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_grapes:grapewine",
+			"data":10
+		},
+		"title": { 
+			"translate": "advancement.get.grapewine"
+		},
+		"description": {
+			"translate": "advancement.get.grapewine.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_grapes:advancement_get_grape",
+	"criteria": {		"get_grapewine_green_ambrosia": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_ambrosia\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_juice": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_juice\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_portwine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_portwine\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_wine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_wine\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_wine_extended": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_wine_extended\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_wine_intoxicated": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_wine_intoxicated\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_wine_poisoned": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_wine_poisoned\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_green_wine_potent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_green_wine_potent\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_ambrosia": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_ambrosia\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_juice": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_juice\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_portwine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_portwine\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_wine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_wine\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_wine_extended": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_wine_extended\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_wine_intoxicated": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_wine_intoxicated\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_wine_poisoned": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_wine_poisoned\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_purple_wine_potent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_purple_wine_potent\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_ambrosia": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_ambrosia\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_juice": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_juice\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_portwine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_portwine\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_wine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_wine\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_wine_extended": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_wine_extended\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_wine_intoxicated": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_wine_intoxicated\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_wine_poisoned": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_wine_poisoned\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_red_wine_potent": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled", 
+						"nbt" : "{FluidName:\"fluid_booze_red_wine_potent\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"get_grapewine_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_grapes:grapewine"
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"get_grapewine_green_ambrosia",
+			"get_grapewine_green_juice",
+			"get_grapewine_green_portwine",
+			"get_grapewine_green_wine",
+			"get_grapewine_green_wine_extended",
+			"get_grapewine_green_wine_intoxicated",
+			"get_grapewine_green_wine_poisoned",
+			"get_grapewine_green_wine_potent",
+			"get_grapewine_purple_ambrosia",
+			"get_grapewine_purple_juice",
+			"get_grapewine_purple_portwine",
+			"get_grapewine_purple_wine",
+			"get_grapewine_purple_wine_extended",
+			"get_grapewine_purple_wine_intoxicated",
+			"get_grapewine_purple_wine_poisoned",
+			"get_grapewine_purple_wine_potent",
+			"get_grapewine_red_ambrosia",
+			"get_grapewine_red_juice",
+			"get_grapewine_red_portwine",
+			"get_grapewine_red_wine",
+			"get_grapewine_red_wine_extended",
+			"get_grapewine_red_wine_intoxicated",
+			"get_grapewine_red_wine_poisoned",
+			"get_grapewine_red_wine_potent",
+			"get_grapewine_bottle"
+		]
+	]
+}
