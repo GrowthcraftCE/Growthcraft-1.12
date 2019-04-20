@@ -1,0 +1,82 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_cellar:yeast",
+			"data": 0
+		},
+		"title": { 
+			"translate": "advancement.craft.yeast"
+		},
+		"description": {
+			"translate": "advancement.craft.yeast.desc",
+			"italic": true
+		}
+ 	},
+	"parent": "growthcraft_cellar:advancement_craft_fruit_press",
+	"criteria": {
+		"craft_yeast_zero": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+						"item": "growthcraft_cellar:yeast",
+						"data":0
+					}
+				]
+			}
+		},
+		"craft_yeast_one": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+						"item": "growthcraft_cellar:yeast",
+						"data":1
+					}
+				]
+			}
+		},
+		"craft_yeast_two": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+						"item": "growthcraft_cellar:yeast",
+						"data":2
+					}
+				]
+			}
+		},
+		"craft_yeast_three": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+						"item": "growthcraft_cellar:yeast",
+						"data":3
+					}
+				]
+			}
+		},
+		"craft_yeast_four": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+						"item": "growthcraft_cellar:yeast",
+						"data":4
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"craft_yeast_zero",
+			"craft_yeast_one",
+			"craft_yeast_two",
+			"craft_yeast_three",
+			"craft_yeast_four"
+		]
+	]	
+}

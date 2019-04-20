@@ -1,0 +1,28 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_cellar:fruit_press"
+		},
+		"title": { 
+			"translate": "advancement.craft.fruit_press"
+		},
+		"description": {
+			"translate": "advancement.craft.fruit_press.desc",
+			"italic": true
+		},
+	"frame": "task",
+	"background": "growthcraft_cellar:textures/blocks/fluids/booze_still.png"
+	},
+	"criteria": {
+		"craft_fruit_press": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_cellar:fruit_press"
+				}
+				]
+			}
+		}
+	}
+}

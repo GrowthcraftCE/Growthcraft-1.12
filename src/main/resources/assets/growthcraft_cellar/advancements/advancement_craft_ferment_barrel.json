@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_cellar:ferment_barrel"
+		},
+		"title": { 
+			"translate": "advancement.craft.ferment_barrel"
+		},
+		"description": {
+			"translate": "advancement.craft.ferment_barrel.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_cellar:advancement_craft_fruit_press",
+	"criteria": {
+		"craft_ferment_barrel": {
+			"trigger": "minecraft:inventory_changed",
+			"contitions":{
+				"items":[
+				{
+					"item": "growthcraft_cellar:ferment_barrel"
+				}
+				]
+			}
+		}
+	}
+}

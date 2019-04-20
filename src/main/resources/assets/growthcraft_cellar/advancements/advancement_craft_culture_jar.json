@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_cellar:culture_jar"
+		},
+		"title": { 
+			"translate": "advancement.craft.culture_jar"
+		},
+		"description": {
+			"translate": "advancement.craft.culture_jar.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_cellar:advancement_craft_fruit_press",
+	"criteria": {
+		"craft_culture_jar": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_cellar:culture_jar"
+				}
+				]
+			}
+		}
+	}
+}
