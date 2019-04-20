@@ -10,7 +10,6 @@
       		"translate": "advancement.craft.fishtrap.desc",
       		"italic": true
     	},
-		"frame": "task",
 		"background": "minecraft:textures/blocks/planks_spruce.png"
 	},
 	"criteria": {
