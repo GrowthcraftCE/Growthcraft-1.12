@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bees:beebox"
+		},
+		"title": { 
+			"translate": "advancement.craft.beebox"
+		},
+		"description": {
+			"translate": "advancement.craft.beebox.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bees:advancement_get_bee",
+	"criteria": {
+		"craft_beebox": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:beebox"
+				}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,44 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bees:bottlefluid_honey"
+		},
+		"title": { 
+			"translate": "advancement.craft.liquid.honey"
+		},
+		"description": {
+			"translate": "advancement.craft.liquid.honey.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bees:advancement_craft_honeyjar",
+	"criteria": {
+		"craft_honey_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_honey\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_bottlefluid_honey": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:bottlefluid_honey"
+				}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"craft_honey_bucket",
+			"craft_bottlefluid_honey"
+		]
+	]
+}

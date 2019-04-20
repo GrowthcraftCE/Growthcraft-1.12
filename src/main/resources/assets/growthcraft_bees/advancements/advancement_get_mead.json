@@ -1,0 +1,191 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bees:mead",
+			"data": 0
+		},
+		"title": { 
+			"translate": "advancement.get.mead"
+		},
+		"description": {
+			"translate": "advancement.get.mead.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bees:advancement_craft_liquid_honey",
+	"criteria": {
+		"craft_mead_young_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_young\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_potent_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_potent\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_poisoned_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_poisoned\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_intoxicated_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_intoxicated\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_fermented_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_fermented\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_extended_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_extended\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_ethereal_bucket": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_mead_ethereal\",Amount:1000}"
+					}
+				]
+			}
+		},
+		"craft_mead_young_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 1
+					}
+				]
+			}
+		},
+		"craft_mead_potent_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 2
+					}
+				]
+			}
+		},
+		"craft_mead_poisoned_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 3
+					}
+				]
+			}
+		},
+		"craft_mead_intoxicated_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 4
+					}
+				]
+			}
+		},
+		"craft_mead_fermented_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 5
+					}
+				]
+			}
+		},
+		"craft_mead_extended_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 6
+					}
+				]
+			}
+		},
+		"craft_mead_ethereal_bottle": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items": [
+					{
+					 	"item": "growthcraft_bees:mead",
+						"data" : 0
+					}
+				]
+			}
+		}
+		
+	},
+	"requirements": [
+		[
+			"craft_mead_young_bucket",
+			"craft_mead_potent_bucket",
+			"craft_mead_poisoned_bucket",
+			"craft_mead_intoxicated_bucket",
+			"craft_mead_fermented_bucket",
+			"craft_mead_extended_bucket",
+			"craft_mead_ethereal_bucket",
+			"craft_mead_young_bottle",
+			"craft_mead_potent_bottle",
+			"craft_mead_poisoned_bottle",
+			"craft_mead_intoxicated_bottle",
+			"craft_mead_fermented_bottle",
+			"craft_mead_extended_bottle",
+			"craft_mead_ethereal_bottle"
+		]
+	]
+}

@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bees:bee"
+		},
+		"title": { 
+			"translate": "advancement.get.bee"
+		},
+		"description": {
+			"translate": "advancement.get.bee.desc",
+			"italic": true
+		},
+		"background": "growthcraft_bees:textures/blocks/fluids/fluid_honey_still.png"
+	},
+	"criteria": {
+		"get_bee": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:bee"
+				}
+				]
+			}
+		}
+	}
+}

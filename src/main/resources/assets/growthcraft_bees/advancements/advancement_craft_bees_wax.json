@@ -1,0 +1,57 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bees:bees_wax"
+		},
+		"title": { 
+			"translate": "advancement.craft.bees_wax"
+		},
+		"description": {
+			"translate": "advancement.craft.bees_wax.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bees:advancement_get_empty_honeycomb",
+	"criteria": {
+		"craft_bees_wax_yellow": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:bees_wax",
+					"data": 0
+				}
+				]
+			}
+		},
+		"craft_bees_wax_red": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:bees_wax",
+					"data": 1
+				}
+				]
+			}
+		},
+		"craft_bees_wax_black": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:bees_wax",
+					"data": 2
+				}
+				]
+			}
+		}
+	},
+	"requirements":[
+		[
+			"craft_bees_wax_yellow", 
+			"craft_bees_wax_red", 
+			"craft_bees_wax_black"
+		]
+	]
+}

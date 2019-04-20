@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bees:honey_jar"
+		},
+		"title": { 
+			"translate": "advancement.craft.honey_jar"
+		},
+		"description": {
+			"translate": "advancement.craft.honey_jar.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bees:advancement_get_filled_honeycomb",
+	"criteria": {
+		"craft_honeyjar": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bees:honey_jar"
+				}
+				]
+			}
+		}
+	}
+}
