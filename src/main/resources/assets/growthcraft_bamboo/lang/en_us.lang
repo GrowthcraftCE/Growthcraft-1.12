@@ -1,7 +1,9 @@
+#Items
 item.bamboo_coal.name=Bamboo Charcoal
 item.bamboo_door_item.name=Bamboo Door
 item.bamboo_stick.name=Bamboo Stick
 
+#Tile
 tile.bamboo_fence.name=Bamboo Fence
 tile.bamboo_fence_gate.name=Bamboo Fence Gate
 tile.bamboo_leaves.name=Bamboo Leaves
@@ -11,3 +13,15 @@ tile.bamboo_slab_double.name=Bamboo Slab
 tile.bamboo_slab_half.name=Bamboo Slab
 tile.bamboo_stairs.name=Bamboo Stairs
 tile.bamboo_stalk.name=Bamboo
+
+#Advancements
+advancement.get.bamboo_shoot=
+advancement.get.bamboo_shoot.desc=
+advancement.get.bamboo_stick=
+advancement.get.bamboo_stick.desc=
+advancement.smelt.bamboo_coal=
+advancement.smelt.bamboo_coal.desc=
+advancement.craft.bamboo_plank=
+advancement.craft.bamboo_plank.desc=
+advancement.craft.bamboo_item=
+advancement.craft.bamboo_item.desc=
