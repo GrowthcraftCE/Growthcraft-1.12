@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bamboo:bamboo_coal"
+		},
+		"title": { 
+			"translate": "advancement.smelt.bamboo_coal"
+		},
+		"description": {
+			"translate": "advancement.smelt.bamboo_coal.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bamboo:advancement_get_bamboo_stick",
+	"criteria": {
+		"smelt_bamboo_coal": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_coal"
+				}
+				]
+			}
+		}
+	}
+}

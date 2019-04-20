@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bamboo:bamboo_shoot"
+		},
+		"title": { 
+			"translate": "advancement.get.bamboo_shoot"
+		},
+		"description": {
+			"translate": "advancement.get.bamboo_shoot.desc",
+			"italic": true
+		},
+		"background": "growthcraft_bamboo:textures/blocks/bamboo_planks.png"
+	},
+	"criteria": {
+		"get_bamboo_shoot": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_shoot"
+				}
+				]
+			}
+		}
+	}
+}

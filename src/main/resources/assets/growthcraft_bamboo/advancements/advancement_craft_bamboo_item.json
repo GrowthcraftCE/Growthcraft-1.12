@@ -1,0 +1,76 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft_bamboo:bamboo_door_item"
+		},
+		"title": { 
+			"translate": "advancement.craft.bamboo_item"
+		},
+		"description": {
+			"translate": "advancement.craft.bamboo_item.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft_bamboo:advancement_craft_bamboo_plank",
+	"criteria": {
+		"craft_bamboo_door": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_door_item"
+				}
+				]
+			}
+		},
+		"craft_bamboo_fence": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_fence"
+				}
+				]
+			}
+		},
+		"craft_bamboo_fence_gate": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_fence_gate"
+				}
+				]
+			}
+		},
+		"craft_bamboo_stairs": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_stairs"
+				}
+				]
+			}
+		},
+		"craft_bamboo_wooden_slab": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft_bamboo:bamboo_slab_half"
+				}
+				]
+			}
+		}
+	},
+	"requirements":[
+		[
+			"craft_bamboo_door", 
+			"craft_bamboo_fence", 
+			"craft_bamboo_fence_gate", 
+			"craft_bamboo_stairs", 
+			"craft_bamboo_wooden_slab"
+		]
+	]
+}
