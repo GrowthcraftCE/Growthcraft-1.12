@@ -47,8 +47,20 @@ gui.grc.discard=Discard
 gui.grc.cantferment=Cannot Ferment
 gui.grc.switch=Switch Tanks
 
-# Tile Entities
+# Tile
 tile.brew_kettle.name=Brew Kettle
 tile.culture_jar.name=Culture Jar
 tile.ferment_barrel.name=Fermentation Barrel
 tile.fruit_press.name=Fruit Press
+
+# Advancements
+growthcraft_cellar:brew_kettle=
+growthcraft_cellar:brew_kettle.desc=
+growthcraft_cellar:culture_jar=
+growthcraft_cellar:culture_jar.desc=
+advancement.craft.ferment_barrel=
+advancement.craft.ferment_barrel.desc=
+advancement.craft.fruit_press=
+advancement.craft.fruit_press.desc=
+advancement.craft.yeast=
+advancement.craft.yeast.desc=
