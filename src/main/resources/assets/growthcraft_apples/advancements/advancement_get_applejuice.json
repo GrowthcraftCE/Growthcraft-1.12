@@ -1,16 +1,16 @@
 { 
 	"display": { 
-		"icon": { 
-			"item": "growthcraft_apples:applecider"
+		"icon": {
+			"item": "growthcraft_apples:applecider",
+			"data":0
 		},
-		"title": { 
+		"title": {
 			"translate": "advancement.get.applejuice"
 		},
 		"description": {
 			"translate": "advancement.get.applejuice.desc",
 			"italic": true
-		},
-		"frame": "task"
+		}
 	},
 	"parent": "growthcraft_apples:advancement_get_apple",
 	"criteria": {
@@ -19,11 +19,8 @@
 			"conditions":{
 				"items": [
 					{
-					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_juice",
-					 		"Amount": 1000
-					 	}
+					 	"item": "forge:bucketfilled",
+						"nbt" : "{FluidName:\"fluid_booze_apple_juice\",Amount:1000}"
 					}
 				]
 			}
@@ -33,7 +30,8 @@
 			"conditions":{
 				"items": [
 					{
-					 	"item": "growthcraft_apples:applecider"
+					 	"item": "growthcraft_apples:applecider",
+						"data":0 
 					}
 				]
 			}

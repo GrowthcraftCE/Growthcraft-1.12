@@ -10,14 +10,13 @@
 			"translate": "advancement.get.apple.desc",
 			"italic": true
 		},
-		"frame": "task",
-		"background": "minecraft:textures/blocks/oak_leaves.png"
+		"background": "growthcraft_apples:textures/blocks/apple_planks.png"
 	},
 	"criteria": {
 		"get_apple": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
+				"items":[
 					{
 						"item": "minecraft:apple"
 					}

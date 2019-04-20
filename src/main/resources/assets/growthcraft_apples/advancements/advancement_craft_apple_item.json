@@ -9,58 +9,57 @@
 		"description": {
 			"translate": "advancement.craft.apple_item.desc",
 			"italic": true
-		},
-		"frame": "task"
+		}
 	},
 	"parent": "growthcraft_apples:advancement_craft_apple_planks",
 	"criteria": {
 		"craft_apple_door": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_door"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_door_item"
+				}
 				]
 			}
 		},
 		"craft_apple_fence": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_fence"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_fence"
+				}
 				]
 			}
 		},
 		"craft_apple_fence_gate": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_fence_gate"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_fence_gate"
+				}
 				]
 			}
 		},
 		"craft_apple_stairs": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_stairs"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_stairs"
+				}
 				]
 			}
 		},
 		"craft_apple_wooden_slab": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_wooden_slab"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_slab_half"
+				}
 				]
 			}
 		}

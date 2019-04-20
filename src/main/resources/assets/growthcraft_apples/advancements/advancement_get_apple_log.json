@@ -9,18 +9,17 @@
 		"description": {
 			"translate": "advancement.get.apple_log.desc",
 			"italic": true
-		},
-		"frame": "task"
+		}
 	},
 	"parent": "growthcraft_apples:advancement_craft_apple_sapling",
 	"criteria": {
 		"get_apple_log": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_log"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_log"
+				}
 				]
 			}
 		}

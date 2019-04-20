@@ -1,16 +1,16 @@
 { 
 	"display": { 
-		"icon": { 
-			"item": "growthcraft_apples:applecider"
+		"icon": {
+			"item": "growthcraft_apples:applecider",
+			"data":1
 		},
-		"title": { 
+		"title": {
 			"translate": "advancement.get.applecider"
 		},
 		"description": {
-			"translate": "advancement.get.applecider.desc",
+			"translate": "advancement.get.applecider.desc",	
 			"italic": true
-		},
-		"frame": "task"
+		}
 	},
 	"parent": "growthcraft_apples:advancement_get_applejuice",
 	"criteria": {
@@ -20,10 +20,7 @@
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_cider_ethereal",
-					 		"Amount": 1000
-					 	}
+						"nbt" : "{FluidName:\"fluid_booze_apple_cider_ethereal\",Amount:1000}"
 					}
 				]
 			}
@@ -34,10 +31,7 @@
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_cider_extended",
-					 		"Amount": 1000
-					 	}
+						"nbt" : "{FluidName:\"fluid_booze_apple_cider_extended\",Amount:1000}"
 					}
 				]
 			}
@@ -48,10 +42,7 @@
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_cider_fermented",
-					 		"Amount": 1000
-					 	}
+						"nbt" : "{FluidName:\"fluid_booze_apple_cider_fermented\",Amount:1000}"
 					}
 				]
 			}
@@ -62,10 +53,7 @@
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_cider_intoxicated",
-					 		"Amount": 1000
-					 	}
+						"nbt" : "{FluidName:\"fluid_booze_apple_cider_intoxicated\",Amount:1000}"
 					}
 				]
 			}
@@ -76,10 +64,7 @@
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_cider_poisoned",
-					 		"Amount": 1000
-					 	}
+						"nbt" : "{FluidName:\"fluid_booze_apple_cider_poisoned\",Amount:1000}"
 					}
 				]
 			}
@@ -90,10 +75,7 @@
 				"items": [
 					{
 					 	"item": "forge:bucketfilled", 
-					 	"nbt": {
-					 		"FluidName": "fluid_booze_apple_cider_potent",
-					 		"Amount": 1000
-					 	}
+						"nbt" : "{FluidName:\"fluid_booze_apple_cider_potent\",Amount:1000}"
 					}
 				]
 			}
@@ -104,7 +86,7 @@
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
-					 	"damage": "4"
+						"data":4
 					}
 				]
 			}
@@ -115,7 +97,7 @@
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
-					 	"damage": "3"
+						"data":3
 					}
 				]
 			}
@@ -126,7 +108,7 @@
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
-					 	"damage": "1"
+						"data":1
 					}
 				]
 			}
@@ -137,7 +119,7 @@
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
-					 	"damage": "5"
+						"data":5
 					}
 				]
 			}
@@ -148,7 +130,7 @@
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
-					 	"damage": "6"
+						"data":6
 					}
 				]
 			}
@@ -159,7 +141,7 @@
 				"items": [
 					{
 					 	"item": "growthcraft_apples:applecider",
-					 	"damage": "2"
+						"data":2
 					}
 				]
 			}
@@ -167,18 +149,18 @@
 	},
 	"requirements": [
 		[
-			"get_applecider_ethereal_bucket",
-			"get_applecider_extended_bucket",
-			"get_applecider_fermented_bucket",
-			"get_applecider_intoxicated_bucket",
-			"get_applecider_poisoned_bucket",
-			"get_applecider_potent_bucket",
-			"get_applecider_ethereal_bottle",
-			"get_applecider_extended_bottle",
-			"get_applecider_fermented_bottle",
-			"get_applecider_intoxicated_bottle",
-			"get_applecider_poisoned_bottle",
-			"get_applecider_potent_bottle"
+			"get_applecider_ethereal_bucket", 
+			"get_applecider_extended_bucket", 
+			"get_applecider_fermented_bucket", 
+			"get_applecider_intoxicated_bucket", 
+			"get_applecider_poisoned_bucket", 
+			"get_applecider_potent_bucket", 
+			"get_applecider_ethereal_bottle", 
+			"get_applecider_extended_bottle", 
+			"get_applecider_fermented_bottle", 
+			"get_applecider_intoxicated_bottle", 
+			"get_applecider_poisoned_bottle", 
+			"get_applecider_potent_bottle" 
 		]
 	]
 }

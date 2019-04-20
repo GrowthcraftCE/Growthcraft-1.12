@@ -9,18 +9,17 @@
 		"description": {
 			"translate": "advancement.craft.apple_planks.desc",
 			"italic": true
-		},
-		"frame": "task"
+		}
 	},
 	"parent": "growthcraft_apples:advancement_get_apple_log",
 	"criteria": {
 		"craft_apple_planks": {
 			"trigger": "minecraft:inventory_changed",
 			"conditions":{
-				"items": [
-					{
-						"item": "growthcraft_apples:apple_planks"
-					}
+				"items":[
+				{
+					"item": "growthcraft_apples:apple_planks"
+				}
 				]
 			}
 		}
