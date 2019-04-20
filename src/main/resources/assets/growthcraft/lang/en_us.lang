@@ -1,3 +1,4 @@
+# Items
 item.crowbar.white.name=White Crowbar
 item.crowbar.orange.name=Orange Crowbar
 item.crowbar.magenta.name=Magenta Crowbar
@@ -16,9 +17,9 @@ item.crowbar.red.name=Red Crowbar
 item.crowbar.black.name=Black Crowbar
 item.rope.name=Rope
 item.salt.name=Rock Salt
-
 itemGroup.Growthcraft=Growthcraft
 
+# Tile
 tile.rope_knot.name=Rope Knot
 tile.rope_fence.name=Rope
 tile.salt_block.name=Rock Salt Block
@@ -40,6 +41,7 @@ format.value.false=NO
 format.state.true=ON
 format.state.false=OFF
 format.invalid_fluid=<Invalid Fluid>
+
 # Displayed for items
 format.itemslot.empty=<Empty>
 format.itemslot.invalid=<Invalid Item>
@@ -52,10 +54,13 @@ format.fluid.name=%1$s
 
 # Name (stack_size)
 format.itemslot.item=%s (x%d)
+
 # Displayed for tile entities with multiple tanks, %d is the tank index + 1
 format.tank_id=Tank %d :
+
 # When the tank is empty
 format.tank.empty=<Empty>
+
 # %s is the fluid name
 format.tank.content_suffix=mB of %s
 
@@ -66,3 +71,13 @@ config.general.hidePoisonedBooze.comment=Set to false if you want to diable Pois
 config.worldgen.blockSaltOreMinHeight.comment=Set the min height that Salt Ore will generate at. [ Default = 10 ]
 config.worldgen.blockSaltOreMaxHeight.comment=Set the max height that Salt Ore will generate at. [ Default = 64 ]
 config.worldgen.blockSaltOreChanceToSpawn.comment=Set the chance for Salt Ore world generatation. [ Default = 5 ]
+
+# Advancements
+advancement.get.salt=
+advancement.get.salt.desc=
+advancement.craft.salt_block=
+advancement.craft.salt_block.desc=
+advancement.craft.rope=
+advancement.craft.rope.desc=
+advancement.craft.crowbar=
+advancement.craft.crowbar.desc=
