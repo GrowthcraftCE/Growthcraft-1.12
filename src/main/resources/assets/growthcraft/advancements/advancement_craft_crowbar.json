@@ -1,0 +1,214 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft:crowbar",
+			"data": 0
+		},
+		"title": { 
+			"translate": "advancement.craft.crowbar"
+		},
+		"description": {
+			"translate": "advancement.craft.crowbar.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft:advancement_get_salt",
+	"criteria": {
+		"craft_crowbar_zero": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 0
+				}
+				]
+			}
+		},
+		"craft_crowbar_one": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 1
+				}
+				]
+			}
+		},
+		"craft_crowbar_two": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 2
+				}
+				]
+			}
+		},
+		"craft_crowbar_three": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 3
+				}
+				]
+			}
+		},
+		"craft_crowbar_four": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 4
+				}
+				]
+			}
+		},
+		"craft_crowbar_five": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 5
+				}
+				]
+			}
+		},
+		"craft_crowbar_six": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 6
+				}
+				]
+			}
+		},
+		"craft_crowbar_seven": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 7
+				}
+				]
+			}
+		},
+		"craft_crowbar_eight": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 8
+				}
+				]
+			}
+		},
+		"craft_crowbar_nine": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 9
+				}
+				]
+			}
+		},
+		"craft_crowbar_ten": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 10
+				}
+				]
+			}
+		},
+		"craft_crowbar_eleven": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 11
+				}
+				]
+			}
+		},
+		"craft_crowbar_twelve": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 12
+				}
+				]
+			}
+		},
+		"craft_crowbar_thirteen": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 13
+				}
+				]
+			}
+		},
+		"craft_crowbar_fourteen": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 14
+				}
+				]
+			}
+		},
+		"craft_crowbar_fifteen": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:crowbar",
+					"data": 15
+				}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"craft_crowbar_zero",
+			"craft_crowbar_one",
+			"craft_crowbar_two",
+			"craft_crowbar_three",
+			"craft_crowbar_four",
+			"craft_crowbar_five",
+			"craft_crowbar_six",
+			"craft_crowbar_seven",
+			"craft_crowbar_eight",
+			"craft_crowbar_nine",
+			"craft_crowbar_ten",
+			"craft_crowbar_eleven",
+			"craft_crowbar_twelve",
+			"craft_crowbar_thirteen",
+			"craft_crowbar_fourteen",
+			"craft_crowbar_fifteen"
+		]
+	]
+}

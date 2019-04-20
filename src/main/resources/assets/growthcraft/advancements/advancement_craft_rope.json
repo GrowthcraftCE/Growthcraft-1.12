@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft:rope"
+		},
+		"title": { 
+			"translate": "advancement.craft.rope"
+		},
+		"description": {
+			"translate": "advancement.craft.rope.desc",
+			"italic": true
+		}
+	},
+	"parent": "growthcraft:advancement_get_salt",
+	"criteria": {
+		"craft_rope": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+				{
+					"item": "growthcraft:rope"
+				}
+				]
+			}
+		}
+	}
+}

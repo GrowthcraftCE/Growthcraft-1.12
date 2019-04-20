@@ -1,0 +1,27 @@
+{ 
+	"display": { 
+		"icon": { 
+			"item": "growthcraft:salt"
+		},
+		"title": { 
+			"translate": "advancement.get.salt"
+		},
+		"description": {
+			"translate": "advancement.get.salt.desc",
+			"italic": true
+		},
+		"background": "growthcraft:textures/blocks/salt_ore.png"
+	},
+	"criteria": {
+		"get_salt": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions":{
+				"items":[
+					{
+						"item": "growthcraft:salt"
+					}
+				]
+			}
+		}
+	}
+}
