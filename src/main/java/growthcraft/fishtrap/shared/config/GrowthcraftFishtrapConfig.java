@@ -5,10 +5,10 @@ import growthcraft.core.shared.Reference;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Level;
-import scala.actors.threadpool.Arrays;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class GrowthcraftFishtrapConfig {
