@@ -8,11 +8,11 @@
         },
         {
         	"item": "minecraft:dye",
-        	"data": 1
+        	"data": 15
         }
     ],
     "result": {
         "item": "growthcraft_bees:bees_wax",
-        "data": 14
+        "data": 0
     }
 }
