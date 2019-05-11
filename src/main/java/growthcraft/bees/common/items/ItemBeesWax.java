@@ -34,6 +34,6 @@ public class ItemBeesWax extends GrowthcraftItemBase {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + BeesWaxTypes.NORMAL.getName();
+        return super.getUnlocalizedName() + "." + BeesWaxTypes.YELLOW.getName();
     }
 }
