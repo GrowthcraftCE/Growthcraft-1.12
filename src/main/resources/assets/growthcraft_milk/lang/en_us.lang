@@ -52,15 +52,21 @@ item.bottlefluid_pasteurized_milk.name=Pasteurized Milk Bottle
 item.butter.salted.name=Salted Butter
 item.butter.unsalted.name=Butter
 
+item.cheese_aged_slice.casu_marzu.name=Casu Marzu Cheese Slice
 item.cheese_aged_slice.gorgonzola.name=Gorgonzola Cheese Slice
 item.cheese_aged_slice.emmentaler.name=Emmentaler Cheese Slice
 item.cheese_aged_slice.appenzeller.name=Appenzeller Cheese Slice
 item.cheese_aged_slice.asiago.name=Asiago Cheese Slice
 item.cheese_aged_slice.parmesan.name=Parmesan Cheese Slice
-item.cheese_waxed_slice.cheddar.name=Cheddar Cheese Slice
-item.cheese_waxed_slice.monterey.name=Monterey Cheese Slice
-item.cheese_simple_slice.ricotta.name=Ricotta Cheese
+
 item.cheese_cloth.name=Cheese Cloth
+
+item.cheese_simple_slice.ricotta.name=Ricotta Cheese
+
+item.cheese_waxed_slice.cheddar.name=Cheddar Cheese Slice
+item.cheese_waxed_slice.gouda.name=Gouda Cheese Slice
+item.cheese_waxed_slice.monterey.name=Monterey Cheese Slice
+item.cheese_waxed_slice.provolone.name=Provolone Cheese Slice
 
 item.ice_cream.apple.name=Apple Ice Cream
 item.ice_cream.chocolate.name=Chocolate Ice Cream
@@ -83,14 +89,6 @@ item.yogurt.plain.name=Yogurt
 item.yogurt.watermelon.name=Watermelon Yogurt
 
 # Tiles (blocks)
-tile.cheese_aged.gorgonzola.unaged.name=Gorgonzola Cheese (Unaged)
-tile.cheese_aged.gorgonzola.aged.name=Gorgonzola Cheese (Aged)
-tile.cheese_aged.gorgonzola.cut.name=Gorgonzola Cheese (Aged)
-
-tile.cheese_aged.emmentaler.unaged.name=Emmentaler Cheese (Unaged)
-tile.cheese_aged.emmentaler.aged.name=Emmentaler Cheese (Aged)
-tile.cheese_aged.emmentaler.cut.name=Emmentaler Cheese (Aged)
-
 tile.cheese_aged.appenzeller.unaged.name=Appenzeller Cheese (Unaged)
 tile.cheese_aged.appenzeller.aged.name=Appenzeller Cheese (Aged)
 tile.cheese_aged.appenzeller.cut.name=Appenzeller Cheese (Aged)
@@ -98,6 +96,16 @@ tile.cheese_aged.appenzeller.cut.name=Appenzeller Cheese (Aged)
 tile.cheese_aged.asiago.unaged.name=Asiago Cheese (Unaged)
 tile.cheese_aged.asiago.aged.name=Asiago Cheese (Aged)
 tile.cheese_aged.asiago.cut.name=Asiago Cheese (Aged)
+
+tile.cheese_aged.casu_marzu.unaged.name=Casu Marzu Cheese (Unaged)
+
+tile.cheese_aged.emmentaler.unaged.name=Emmentaler Cheese (Unaged)
+tile.cheese_aged.emmentaler.aged.name=Emmentaler Cheese (Aged)
+tile.cheese_aged.emmentaler.cut.name=Emmentaler Cheese (Aged)
+
+tile.cheese_aged.gorgonzola.unaged.name=Gorgonzola Cheese (Unaged)
+tile.cheese_aged.gorgonzola.aged.name=Gorgonzola Cheese (Aged)
+tile.cheese_aged.gorgonzola.cut.name=Gorgonzola Cheese (Aged)
 
 tile.cheese_aged.parmesan.unaged.name=Parmesan Cheese (Unaged)
 tile.cheese_aged.parmesan.aged.name=Parmesan Cheese (Aged)
@@ -108,11 +116,16 @@ tile.cheese_waxed.cheddar.unaged.name=Cheddar Cheese (Unaged)
 tile.cheese_waxed.cheddar.unwaxed.name=Cheddar Cheese (Unwaxed)
 tile.cheese_waxed.cheddar.cut.name=Cheddar Cheese (Aged)
 
+tile.cheese_waxed.gouda.unwaxed.name=Gouda Cheese (Unwaxed)
+
 tile.cheese_waxed.monterey.aged.name=Monterey Cheese (Aged)
 tile.cheese_waxed.monterey.unaged.name=Monterey Cheese (Unaged)
 tile.cheese_waxed.monterey.unwaxed.name=Monterey Cheese (Unwaxed)
 tile.cheese_waxed.monterey.cut.name=Monterey Cheese (Aged)
 
+tile.cheese_waxed.provolone.unwaxed.name=Provolone Cheese (Unwaxed)
+
+tile.curds_aged.casu_marzu.name=Casu Marzu Curds
 tile.curds_aged.gorgonzola.name=Gorgonzola Curds
 tile.curds_aged.gorgonzola.dried.name=Gorgonzola Curds (Dried)
 tile.curds_aged.emmentaler.name=Emmentaler Curds
@@ -129,8 +142,10 @@ tile.curds_simple.ricotta.dried.name=Ricotta Curds (Dried)
 
 tile.curds_waxed.cheddar.name=Cheddar Curds
 tile.curds_waxed.cheddar.dried.name=Cheddar Curds (Dried)
+tile.curds_waxed.gouda.name=Gouda Curds
 tile.curds_waxed.monterey.name=Monterey Curds
 tile.curds_waxed.monterey.dried.name=Monterey Curds (Dried)
+tile.curds_waxed.provolone.name=Provolone Curds
 
 tile.cheese_press.name=Cheese Press
 tile.cheese_vat.name=Cheese Vat

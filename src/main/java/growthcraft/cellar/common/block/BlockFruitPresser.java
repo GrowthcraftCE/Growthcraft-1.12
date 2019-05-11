@@ -1,11 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.init.GrowthcraftCellarBlocks;
@@ -25,11 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
@@ -37,6 +27,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockFruitPresser extends BlockCellarContainer implements IWrenchable, IRotatableBlock {
 	
@@ -207,26 +202,20 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 
 	@SuppressWarnings("deprecation")
 	@Override
-	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
+	public boolean isSideSolid(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing side) {
 		Orient orient = state.getValue(TYPE_ORIENT);
 
-		if (orient == Orient.TOEAST)
-		{
+		if (orient == Orient.TOEAST) {
 			return side == EnumFacing.EAST || side == EnumFacing.WEST;
-		}
-		else if (orient == Orient.TOSOUTH)
-		{
+		} else if (orient == Orient.TOSOUTH) {
 			return side == EnumFacing.NORTH || side == EnumFacing.SOUTH;
 		}
-
 		return isNormalCube(state, world, pos);
 	}
 	
 	@Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
-        return BlockFaceShape.UNDEFINED;
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.SOLID;
     }
 	
 	/************
@@ -237,7 +226,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
 		return GrowthcraftCellarBlocks.fruitPress.getItemAsStack(1, 0);
 	}
-	
+
 	/************
 	 * DROPS
 	 ************/

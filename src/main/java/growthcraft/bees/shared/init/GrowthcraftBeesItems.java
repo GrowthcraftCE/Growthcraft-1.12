@@ -8,6 +8,7 @@ import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
@@ -25,22 +26,22 @@ public class GrowthcraftBeesItems {
 	public static ItemTypeDefinition<ItemBoozeBottle> honeyMeadBottle;
 
     public enum BeesWaxTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
-    	WHITE(0, "white"),
-        ORANGE(1, "orange"),
-        MAGENTA(2, "magenta"),
-        LIGHT_BLUE(3, "light_blue"),
-        YELLOW(4, "yellow"),
-        LIME(5, "lime"),
-        PINK(6, "pink"),
-        GRAY(7, "gray"),
-        SILVER(8, "silver"),
-        CYAN(9, "cyan"),
-        PURPLE(10, "purple"),
-        BLUE(11, "blue"),
-        BROWN(12, "brown"),
-        GREEN(13, "green"),
-        RED(14, "red"),
-        BLACK(15, "black")
+        WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getUnlocalizedName()),
+        ORANGE(EnumDyeColor.ORANGE.getMetadata(), EnumDyeColor.ORANGE.getUnlocalizedName()),
+        MAGENTA(EnumDyeColor.MAGENTA.getMetadata(), EnumDyeColor.MAGENTA.getUnlocalizedName()),
+        LIGHTBLUE(EnumDyeColor.LIGHT_BLUE.getMetadata(), EnumDyeColor.LIGHT_BLUE.getUnlocalizedName()),
+        NORMAL(EnumDyeColor.YELLOW.getMetadata(), "normal"),
+        LIME(EnumDyeColor.LIME.getMetadata(), EnumDyeColor.LIME.getUnlocalizedName()),
+        PINK(EnumDyeColor.PINK.getMetadata(), EnumDyeColor.PINK.getUnlocalizedName()),
+        GRAY(EnumDyeColor.GRAY.getMetadata(), EnumDyeColor.GRAY.getUnlocalizedName()),
+        SILVER(EnumDyeColor.SILVER.getMetadata(), EnumDyeColor.SILVER.getUnlocalizedName()),
+        CYAN(EnumDyeColor.CYAN.getMetadata(), EnumDyeColor.CYAN.getUnlocalizedName()),
+        PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getUnlocalizedName()),
+        BLUE(EnumDyeColor.BLUE.getMetadata(), EnumDyeColor.BLUE.getUnlocalizedName()),
+        BROWN(EnumDyeColor.BROWN.getMetadata(), EnumDyeColor.BROWN.getUnlocalizedName()),
+        GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
+        RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName()),
+        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName())
         ;
 
         private int ID;

@@ -115,7 +115,7 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable {
         IBlockState downBlockState = worldIn.getBlockState(posDown);
 
         // IS_RADIOACTIVE causes a double growth.
-        if ( downBlockState.getValue(IS_RADIOACTIVE) ) {
+        if ( downBlockState.getBlock() instanceof BlockPaddyBase && downBlockState.getValue(IS_RADIOACTIVE) ) {
             this.grow(worldIn, pos, state);
         }
 
@@ -135,7 +135,7 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable {
         BlockPos posDown = pos.down();
         IBlockState downBlockState = world.getBlockState(posDown);
 
-        if ( downBlockState.getValue(IS_RADIOACTIVE) ) {
+        if ( downBlockState.getBlock() instanceof BlockPaddyBase && downBlockState.getValue(IS_RADIOACTIVE) ) {
             drops.add(new ItemStack(GrowthcraftRiceItems.rice.getItem()));
         }
 

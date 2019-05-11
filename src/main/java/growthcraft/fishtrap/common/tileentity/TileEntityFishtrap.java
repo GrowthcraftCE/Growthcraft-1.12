@@ -4,6 +4,7 @@ import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.shared.tileentity.feature.IInteractionObject;
 import growthcraft.fishtrap.common.container.ContainerFishtrap;
 import growthcraft.fishtrap.common.utils.GrowthcraftPlaySound;
+import growthcraft.fishtrap.shared.config.GrowthcraftFishtrapConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockStaticLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -31,6 +32,7 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.wrapper.CombinedInvWrapper;
+import net.minecraftforge.oredict.OreDictionary;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -61,20 +63,47 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
 
     private void doFishing() {
         if ( !getWorld().isRemote ) {
+            // If bait is required and the bait inventory is empty, do not continue.
+            if (GrowthcraftFishtrapConfig.baitRequired) {
+                if (!hasBait()) return;
+            }
+            // If strictBait is enable, check the bait inventory for a valid item.
+            if (!hasBait(GrowthcraftFishtrapConfig.strictBait)) {
+                 return;
+            }
+
             // Get a random item from the Fishing_Rod LootTable. Pulled this from the EntityFishHook class.
             LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
-            List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(this.getLootTableList()).generateLootForPools(new Random(), lootcontext$builder.build());
+            List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(
+                    this.getLootTableList()).generateLootForPools(new Random(),
+                    lootcontext$builder.build());
+
             for (ItemStack itemstack : result) {
                 if ( !this.isInventoryFull(this.handlerOutput)) {
                     this.addStackToInventory(this.handlerOutput, itemstack, false);
                 }
             }
         }
-
         GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 3);
-
     }
 
+    public boolean hasBait() {
+        return hasBait(false);
+    }
+
+    public boolean hasBait(boolean strict){
+        if ( strict ) {
+            List<ItemStack> oreDictionaryBaitFishing = OreDictionary.getOres("baitFishing");
+            ItemStack baitStack = this.handlerInput.getStackInSlot(0);
+            for ( ItemStack itemStack: oreDictionaryBaitFishing ) {
+                if (itemStack.getUnlocalizedName().contentEquals(baitStack.getUnlocalizedName()) ) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        return this.handlerInput.getStackInSlot(0).getCount() > 0;
+    }
     /**
      * Determine which loot table should be used.
      * @return ResourceLocation of the LootTable
