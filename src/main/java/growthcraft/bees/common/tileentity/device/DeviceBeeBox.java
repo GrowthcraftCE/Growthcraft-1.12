@@ -1,17 +1,12 @@
 package growthcraft.bees.common.tileentity.device;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 import growthcraft.bees.common.lib.config.BeesRegistry;
 import growthcraft.bees.common.lib.config.IFlowerBlockEntry;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.shared.config.GrowthcraftBeesConfig;
 import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.core.shared.utils.RandomUtils;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
+import growthcraft.core.shared.utils.RandomUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlowerPot;
@@ -23,6 +18,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class DeviceBeeBox extends DeviceBase
 {
@@ -76,14 +76,6 @@ public class DeviceBeeBox extends DeviceBase
 		return getWorld().getLightFromNeighbors(posUp) >= 7;
 	}
 
-	//Fixme: Why are these javadocs broken?
-	/**
-	 * Is the provided block a flower?
-	 *
-	 * @param block - block to check
-	 * @param meta - block's metadata
-	 * @return true, the block is a recognized flower, false otherwise
-	 */
 	private boolean isBlockFlower(IBlockState blockState)
 	{
 		return BeesRegistry.instance().isBlockFlower(blockState);

@@ -4,7 +4,6 @@ import growthcraft.bees.shared.Reference;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.BeesWaxTypes;
 import growthcraft.core.shared.item.GrowthcraftItemBase;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
@@ -34,6 +33,6 @@ public class ItemBeesWax extends GrowthcraftItemBase {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + BeesWaxTypes.YELLOW.getName();
+        return super.getUnlocalizedName() + "." + BeesWaxTypes.NORMAL.getName();
     }
 }
