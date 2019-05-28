@@ -1,8 +1,5 @@
 package growthcraft.grapes.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
-
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
 import growthcraft.cellar.shared.booze.BoozeTag;
@@ -21,7 +18,6 @@ import growthcraft.core.shared.effect.EffectAddPotionEffect;
 import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.item.OreItemStacks;
-import growthcraft.core.shared.utils.LootUtils;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.grapes.common.blocks.BlockGrapeFruit;
 import growthcraft.grapes.common.blocks.BlockGrapeLeaves;
@@ -35,20 +31,21 @@ import growthcraft.grapes.shared.init.GrowthcraftGrapesBlocks;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesItems;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.GrapeTypes;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.WineTypes;
+import growthcraft.grapes.shared.init.GrowthcraftGrapesLootTables;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.storage.loot.LootPool;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
 
 public class Init {
 	private Init() {}
@@ -473,19 +470,11 @@ public class Init {
 		GameRegistry.addShapelessRecipe(GrapeTypes.RED.asSeedsStack(1), GrapeTypes.RED.asStack(1) );
 		*/
 	}
-	
-	// Loot
-	////////
 
-	public static void lootLoad(LootTableLoadEvent evt) {
-		boolean isSimpleDungeon = evt.getName().toString().equals("minecraft:chests/simple_dungeon");
-		boolean isMineshaft = evt.getName().toString().equals("minecraft:chests/abandoned_mineshaft");
-		
-	    if (isMineshaft || isSimpleDungeon) {
-	    	LootPool pool = LootUtils.getOrCreateLootPool(evt.getTable(), "growthcraft");
-	    	LootUtils.addLootEntry(pool, GrowthcraftGrapesItems.GrapeTypes.PURPLE.asSeedsStack(1), 1, 5, isSimpleDungeon ? 3 : 10);
-	    	LootUtils.addLootEntry(pool, GrowthcraftGrapesItems.GrapeTypes.RED.asSeedsStack(1), 1, 5, isSimpleDungeon ? 2 : 5);
-	    	LootUtils.addLootEntry(pool, GrowthcraftGrapesItems.GrapeTypes.GREEN.asSeedsStack(1), 1, 5, isSimpleDungeon ? 1 : 3);
-	    }
+	/**
+	 * Loot tables need to be in the preInit but after the items and blocks.
+	 */
+	public static void	preInitLootTables() {
+		GrowthcraftGrapesLootTables.registerLootTables();
 	}
 }
