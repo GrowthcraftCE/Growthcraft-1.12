@@ -2,6 +2,7 @@ package growthcraft.hops;
 
 import growthcraft.hops.common.CommonProxy;
 import growthcraft.hops.common.Init;
+import growthcraft.hops.common.handler.HarvestDropsEventHandler;
 import growthcraft.hops.shared.Reference;
 import growthcraft.hops.shared.config.GrowthcraftHopsConfig;
 import net.minecraft.block.Block;
@@ -35,6 +36,7 @@ public class GrowthcraftHops {
     public static void preInit(FMLPreInitializationEvent event) {
 
 		GrowthcraftHopsConfig.preInit(event);
+		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
 
         Init.preInitBlocks();
         Init.preInitItems();
