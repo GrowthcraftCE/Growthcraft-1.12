@@ -11,7 +11,6 @@ public class CommonProxy {
     }
 
 	public void postInit() {
-		
 	}
 	
     public void registerTileEntities() {

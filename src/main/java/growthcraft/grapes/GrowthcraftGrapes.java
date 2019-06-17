@@ -5,6 +5,7 @@ import growthcraft.grapes.common.CommonProxy;
 import growthcraft.grapes.common.Init;
 import growthcraft.grapes.common.compat.rustic.RusticGrapesRecipes;
 import growthcraft.grapes.common.compat.thaumcraft.GrapesAspectRegistry;
+import growthcraft.grapes.common.handler.HarvestDropsEventHandler;
 import growthcraft.grapes.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -36,6 +37,8 @@ public class GrowthcraftGrapes {
 
 	@Mod.EventHandler
 	public static void preInit(FMLPreInitializationEvent event) {
+		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
+
 		Init.preInitBlocks();
 		Init.preInitItems();
 		Init.preInitFluids();
