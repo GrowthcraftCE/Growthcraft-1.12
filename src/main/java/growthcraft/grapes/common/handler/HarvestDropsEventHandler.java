@@ -38,7 +38,7 @@ public class HarvestDropsEventHandler {
             GrapeTypes grapeTypes = GrapeTypes.values()[randomGrapeSeed];
             int metaGrapeSeed = grapeTypes.getVariantID();
             ItemStack itemStack = new ItemStack(GrowthcraftGrapesItems.grape_seed.getItem(), 1, metaGrapeSeed);
-            Block.spawnAsEntity(event.getWorld(), event.getPos(), itemStack);
+            event.getDrops().add(itemStack);
         }
     }
 }
