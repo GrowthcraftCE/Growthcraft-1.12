@@ -1,10 +1,12 @@
 package growthcraft.apples.common.block;
 
 import growthcraft.apples.shared.Reference;
+import growthcraft.core.shared.block.ICropDataProvider;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,7 +24,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.EnumPlantType;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -30,7 +34,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class BlockApple extends BlockBush implements IGrowable {
+public class BlockApple extends BlockBush implements ICropDataProvider, IGrowable, IPlantable {
 
 	// TODO: Make fields configurable
 	public static final int CHANCE_GROWTH = 10;
@@ -51,10 +55,12 @@ public class BlockApple extends BlockBush implements IGrowable {
     };
 
     public BlockApple(String unlocalizedName) {
+        super(Material.PLANTS);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setTickRandomly(true);
         this.setSoundType(SoundType.WOOD);
+        this.setHarvestLevel("axe", 0);
     }
 
     @Override
@@ -183,5 +189,30 @@ public class BlockApple extends BlockBush implements IGrowable {
         }
 
         return Items.AIR;
+    }
+
+    @Override
+    public float getGrowthProgress(IBlockAccess world, BlockPos pos, IBlockState state) {
+        return (float)getAge(state) / 7.0F;
+    }
+
+    @Override
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+        return new ItemStack(Items.APPLE);
+    }
+
+    /************
+     * IPLANTABLE
+     ************/
+    @Override
+    public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos)
+    {
+        return EnumPlantType.Crop;
+    }
+
+    @Override
+    public IBlockState getPlant(IBlockAccess world, BlockPos pos)
+    {
+        return getDefaultState();
     }
 }
