@@ -2,13 +2,13 @@ package growthcraft.hops;
 
 import growthcraft.hops.common.CommonProxy;
 import growthcraft.hops.common.Init;
+import growthcraft.hops.common.handler.HarvestDropsEventHandler;
 import growthcraft.hops.shared.Reference;
 import growthcraft.hops.shared.config.GrowthcraftHopsConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -36,10 +36,12 @@ public class GrowthcraftHops {
     public static void preInit(FMLPreInitializationEvent event) {
 
 		GrowthcraftHopsConfig.preInit(event);
+		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
 
         Init.preInitBlocks();
         Init.preInitItems();
         Init.preInitFluids();
+		Init.preInitLootTables();
 
         proxy.preInit();
         proxy.registerTileEntities();
@@ -90,9 +92,5 @@ public class GrowthcraftHops {
         Init.registerBlockRenders();
 		Init.registerFluidRenders();
 	}
-	
-	@SubscribeEvent
-	public void lootLoad(LootTableLoadEvent evt) {
-		Init.lootLoad(evt);
-	}
+
 }

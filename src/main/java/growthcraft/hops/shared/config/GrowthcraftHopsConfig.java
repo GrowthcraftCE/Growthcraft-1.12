@@ -20,7 +20,7 @@ public class GrowthcraftHopsConfig extends Configuration {
 	public static int hopVineMaxYield = 2;
 	public static float hopVineGrowthRate = 25.0f;
 	public static float hopVineFlowerSpawnRate = 40.0f;
-
+	public static int changeVineDropHopSeeds = 10;
 	/* CATEGORIES */
 	private static final String CATEGORY_GENERAL = "general";
 
@@ -44,6 +44,14 @@ public class GrowthcraftHopsConfig extends Configuration {
 	}
 
 	private static void initGeneralConfig() {
+		changeVineDropHopSeeds = configuration.getInt(
+				"chanceVineDropHopSeeds",
+				CATEGORY_GENERAL,
+				changeVineDropHopSeeds,
+				0, 100,
+				"Chance (percentage) that BlockVine will drop a hop seeds."
+		);
+
 		hopVineMaxYield = configuration.getInt(
 				"maxHopYield",
 				CATEGORY_GENERAL,

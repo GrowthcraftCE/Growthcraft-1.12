@@ -1,4 +1,10 @@
 {
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "growthcraft_milk:blocks/butter_churn/butter_churn"
+    }
+  },
   "variants": {
     "rotation=north": {
       "model": "growthcraft_milk:churn_up"
