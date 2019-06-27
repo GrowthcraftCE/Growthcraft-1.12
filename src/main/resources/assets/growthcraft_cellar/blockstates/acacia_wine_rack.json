@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "growthcraft_cellar:acacia_wine_rack" },
+        "facing=south": { "model": "growthcraft_cellar:acacia_wine_rack", "y": 180 },
+        "facing=west":  { "model": "growthcraft_cellar:acacia_wine_rack", "y": 270 },
+        "facing=east":  { "model": "growthcraft_cellar:acacia_wine_rack", "y": 90 }
+    }
+}

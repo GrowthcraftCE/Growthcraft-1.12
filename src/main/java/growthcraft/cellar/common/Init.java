@@ -5,11 +5,19 @@ import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.client.render.RenderFruitPress;
+import growthcraft.cellar.common.block.BlockAcaciaWineRack;
+import growthcraft.cellar.common.block.BlockAppleWineRack;
+import growthcraft.cellar.common.block.BlockBirchWineRack;
 import growthcraft.cellar.common.block.BlockBrewKettle;
 import growthcraft.cellar.common.block.BlockCultureJar;
+import growthcraft.cellar.common.block.BlockDarkOakWineRack;
 import growthcraft.cellar.common.block.BlockFermentBarrel;
 import growthcraft.cellar.common.block.BlockFruitPress;
 import growthcraft.cellar.common.block.BlockFruitPresser;
+import growthcraft.cellar.common.block.BlockJungleWineRack;
+import growthcraft.cellar.common.block.BlockOakWineRack;
+import growthcraft.cellar.common.block.BlockSpruceWineRack;
+import growthcraft.cellar.common.block.BlockWineRack;
 import growthcraft.cellar.common.item.ItemBarrelTap;
 import growthcraft.cellar.common.item.ItemBrewKettleLid;
 import growthcraft.cellar.common.item.ItemChievDummy;
@@ -63,6 +71,13 @@ public class Init {
         GrowthcraftCellarBlocks.cultureJar = new BlockDefinition(new BlockCultureJar("culture_jar"));
         GrowthcraftCellarBlocks.fruitPress = new BlockDefinition(new BlockFruitPress("fruit_press"));
         GrowthcraftCellarBlocks.fruitPresser = new BlockDefinition(new BlockFruitPresser("fruit_presser"));
+        GrowthcraftCellarBlocks.oakWineRack = new BlockDefinition(new BlockOakWineRack("oak_wine_rack"));
+        GrowthcraftCellarBlocks.spruceWineRack = new BlockDefinition(new BlockSpruceWineRack("spruce_wine_rack"));
+        GrowthcraftCellarBlocks.birchWineRack = new BlockDefinition(new BlockBirchWineRack("birch_wine_rack"));
+        GrowthcraftCellarBlocks.jungleWineRack = new BlockDefinition(new BlockJungleWineRack("jungle_wine_rack"));
+        GrowthcraftCellarBlocks.acaciaWineRack = new BlockDefinition(new BlockAcaciaWineRack("acacia_wine_rack"));
+        GrowthcraftCellarBlocks.darkOakWineRack = new BlockDefinition(new BlockDarkOakWineRack("dark_oak_wine_rack"));
+        GrowthcraftCellarBlocks.appleWineRack = new BlockDefinition(new BlockAppleWineRack("apple_wine_rack"));
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
@@ -75,6 +90,20 @@ public class Init {
     	GrowthcraftCellarBlocks.fruitPress.getBlock().setCreativeTab(tabGrowthcraft);
     	GrowthcraftCellarBlocks.fruitPress.registerBlock(registry);
     	GrowthcraftCellarBlocks.fruitPresser.registerBlock(registry);
+    	GrowthcraftCellarBlocks.oakWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.oakWineRack.registerBlock(registry);
+    	GrowthcraftCellarBlocks.spruceWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.spruceWineRack.registerBlock(registry);
+    	GrowthcraftCellarBlocks.birchWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.birchWineRack.registerBlock(registry);
+    	GrowthcraftCellarBlocks.jungleWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.jungleWineRack.registerBlock(registry);
+    	GrowthcraftCellarBlocks.acaciaWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.acaciaWineRack.registerBlock(registry);
+    	GrowthcraftCellarBlocks.darkOakWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.darkOakWineRack.registerBlock(registry);
+    	GrowthcraftCellarBlocks.appleWineRack.getBlock().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftCellarBlocks.appleWineRack.registerBlock(registry);
     }
     
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
@@ -82,6 +111,13 @@ public class Init {
     	GrowthcraftCellarBlocks.fermentBarrel.registerBlockItem(registry);
     	GrowthcraftCellarBlocks.cultureJar.registerBlockItem(registry);
     	GrowthcraftCellarBlocks.fruitPress.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.oakWineRack.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.spruceWineRack.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.birchWineRack.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.jungleWineRack.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.acaciaWineRack.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.darkOakWineRack.registerBlockItem(registry);
+    	GrowthcraftCellarBlocks.appleWineRack.registerBlockItem(registry);
     }
 
     public static void registerBlockRenders() {
@@ -89,6 +125,13 @@ public class Init {
     	GrowthcraftCellarBlocks.fermentBarrel.registerItemRender();
     	GrowthcraftCellarBlocks.cultureJar.registerItemRender();
     	GrowthcraftCellarBlocks.fruitPress.registerItemRender();
+    	GrowthcraftCellarBlocks.oakWineRack.registerItemRender();
+    	GrowthcraftCellarBlocks.spruceWineRack.registerItemRender();
+    	GrowthcraftCellarBlocks.birchWineRack.registerItemRender();
+    	GrowthcraftCellarBlocks.jungleWineRack.registerItemRender();
+    	GrowthcraftCellarBlocks.acaciaWineRack.registerItemRender();
+    	GrowthcraftCellarBlocks.darkOakWineRack.registerItemRender();
+    	GrowthcraftCellarBlocks.appleWineRack.registerItemRender();
     }
 
     @SideOnly(Side.CLIENT)

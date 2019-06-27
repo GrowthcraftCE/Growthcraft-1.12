@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "wine_rack",
+  "pattern": [
+    "ABA",
+    "BBB",
+	"ABA"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:stick"
+    },
+    "A": {
+      "item": "minecraft:planks",
+      "data": 1
+    }
+  },
+  "result": {
+    "item": "growthcraft_cellar:spruce_wine_rack"
+  }
+}

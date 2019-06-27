@@ -1,0 +1,7 @@
+{
+    "parent": "growthcraft_cellar:block/wine_rack",
+    "textures": {
+		"particle": "growthcraft_apples:blocks/apple_planks",
+        "texture": "growthcraft_apples:blocks/apple_planks"
+    }
+}
