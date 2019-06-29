@@ -1,141 +1,128 @@
 package growthcraft.cellar.common.block;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
+import growthcraft.cellar.common.tileentity.TileEntityWineRack;
+import growthcraft.core.shared.block.BlockFlags;
+import growthcraft.core.shared.block.BlockUtils;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.Mirror;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockWineRack extends Block {
+public class BlockWineRack extends GrowthcraftRotatableBlockContainer
+{
 	
-	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	private int flammability;
+	private int fireSpreadSpeed;
 	
-	public BlockWineRack(Material material) {
+	public BlockWineRack(Material material)
+	{
 		super(Material.WOOD);
-		this.setSoundType(SoundType.WOOD);
-		this.setResistance(12.5F);
-		this.setHardness(2.5F);
-		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+		setTileEntityType(TileEntityWineRack.class);
+		setHardness(2.5F);
+		setSoundType(SoundType.WOOD);
+        this.setTickRandomly(true);
 	}
-
-	/**
-     * Used to determine ambient occlusion and culling when rebuilding chunks for render
-     */
-    public boolean isOpaqueCube(IBlockState state)
-    {
-        return false;
-    }
-
-    public boolean isFullCube(IBlockState state)
-    {
-        return false;
-    }
-
-	// Below is code borrowed from BlockFurnace.class
 	
-	/**
-     * Called after the block is set in the Chunk data, but before the Tile Entity is set
-     */
+	@Override
+	public boolean isFullBlock(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isFullCube(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+	{
+		return false;
+	}
+	
+	@Override
+	public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
+	{
+		return true;
+	}
+	
+	protected void setDefaultDirection(World world, BlockPos pos, IBlockState state)
+	{
+		if (!world.isRemote)
+		{
+			EnumFacing facing = BlockUtils.getDefaultDirection(world, pos, state);
+			world.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
+		}
+	}
+	
+	protected EnumFacing setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer) {
+		EnumFacing facing = EnumFacing.fromAngle(placer.rotationYaw);
+		worldIn.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
+		return facing;
+	}
+	
+	@Override
 	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
 	{
-        this.setDefaultFacing(worldIn, pos, state);
-    }
-
-    private void setDefaultFacing(World worldIn, BlockPos pos, IBlockState state)
-    {
-        if (!worldIn.isRemote)
-        {
-            IBlockState iblockstate = worldIn.getBlockState(pos.north());
-            IBlockState iblockstate1 = worldIn.getBlockState(pos.south());
-            IBlockState iblockstate2 = worldIn.getBlockState(pos.west());
-            IBlockState iblockstate3 = worldIn.getBlockState(pos.east());
-            EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
-
-            if (enumfacing == EnumFacing.NORTH && iblockstate.isFullBlock() && !iblockstate1.isFullBlock())
-            {
-                enumfacing = EnumFacing.SOUTH;
-            }
-            else if (enumfacing == EnumFacing.SOUTH && iblockstate1.isFullBlock() && !iblockstate.isFullBlock())
-            {
-                enumfacing = EnumFacing.NORTH;
-            }
-            else if (enumfacing == EnumFacing.WEST && iblockstate2.isFullBlock() && !iblockstate3.isFullBlock())
-            {
-                enumfacing = EnumFacing.EAST;
-            }
-            else if (enumfacing == EnumFacing.EAST && iblockstate3.isFullBlock() && !iblockstate2.isFullBlock())
-            {
-                enumfacing = EnumFacing.WEST;
-            }
-
-            worldIn.setBlockState(pos, state.withProperty(FACING, enumfacing), 2);
-        }
-    }
-
-
-
-	/**
-     * Called by ItemBlocks just before a block is actually set in the world, to allow for adjustments to the
-     * IBlockstate
-     */
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-    }
-
-/**
-     * Convert the given metadata into a BlockState for this Block
-     */
-    public IBlockState getStateFromMeta(int meta)
-    {
-        EnumFacing enumfacing = EnumFacing.getFront(meta);
-
-        if (enumfacing.getAxis() == EnumFacing.Axis.Y)
-        {
-            enumfacing = EnumFacing.NORTH;
-        }
-
-        return this.getDefaultState().withProperty(FACING, enumfacing);
-    }
-
-    /**
-     * Convert the BlockState into the correct metadata value
-     */
-    public int getMetaFromState(IBlockState state)
-    {
-        return ((EnumFacing)state.getValue(FACING)).getIndex();
-    }
-
-    /**
-     * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
-    public IBlockState withRotation(IBlockState state, Rotation rot)
-    {
-        return state.withProperty(FACING, rot.rotate((EnumFacing)state.getValue(FACING)));
-    }
-
-    /**
-     * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
-     * blockstate.
-     */
-    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-    {
-        return state.withRotation(mirrorIn.toRotation((EnumFacing)state.getValue(FACING)));
-    }
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
-    }
+		super.onBlockAdded(worldIn, pos, state);
+		setDefaultDirection(worldIn, pos, state);
+	}
 	
+	@Override
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
+	{
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+		setOrientWhenPlacing(worldIn, pos, state, placer);
+	}
+	
+	public BlockWineRack setFlammability(int flam)
+	{
+		this.flammability = flam;
+		return this;
+	}
+	
+	public BlockWineRack setFireSpread(int speed)
+	{
+		this.fireSpreadSpeed = speed;
+		return this;
+	}
+	
+	@Override
+    public int getFlammability(IBlockAccess world, BlockPos pos, EnumFacing face)
+	{
+    	return flammability;
+    }
+
+	@Override
+	public int getFireSpreadSpeed(IBlockAccess world, BlockPos pos, EnumFacing face)
+	{
+		return fireSpreadSpeed;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 {
     "variants": {
-        "facing=north": { "model": "growthcraft_cellar:jungle_wine_rack" },
-        "facing=south": { "model": "growthcraft_cellar:jungle_wine_rack", "y": 180 },
-        "facing=west":  { "model": "growthcraft_cellar:jungle_wine_rack", "y": 270 },
-        "facing=east":  { "model": "growthcraft_cellar:jungle_wine_rack", "y": 90 }
+        "rotation=north": { "model": "growthcraft_cellar:jungle_wine_rack" },
+        "rotation=south": { "model": "growthcraft_cellar:jungle_wine_rack", "y": 180 },
+        "rotation=west":  { "model": "growthcraft_cellar:jungle_wine_rack", "y": 270 },
+        "rotation=east":  { "model": "growthcraft_cellar:jungle_wine_rack", "y": 90 }
     }
 }

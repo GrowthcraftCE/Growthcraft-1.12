@@ -29,6 +29,7 @@ import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
 import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.cellar.common.tileentity.TileEntityWineRack;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.Reference;
@@ -147,6 +148,7 @@ public class Init {
         GameRegistry.registerTileEntity(TileEntityCultureJar.class, Reference.MODID + ":culture_jar");
         GameRegistry.registerTileEntity(TileEntityFruitPress.class, Reference.MODID + ":fruit_press");
         GameRegistry.registerTileEntity(TileEntityFruitPresser.class, Reference.MODID + ":fruit_presser");
+        GameRegistry.registerTileEntity(TileEntityWineRack.class, Reference.MODID + ":wine_rack");
     }
     
     ///////////
