@@ -1,11 +1,16 @@
 package growthcraft.cellar.common.tileentity;
 
-import net.minecraft.tileentity.TileEntity;
+import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
 
-public class TileEntityWineRack extends TileEntity
+public class TileEntityWineRack extends GrowthcraftTileInventoryBase
 {
 	public TileEntityWineRack()
 	{
-		
+		/*
+		 * nbt
+		 * get gui
+		 * create container
+		 * rendering?
+		 */
 	}
 }
