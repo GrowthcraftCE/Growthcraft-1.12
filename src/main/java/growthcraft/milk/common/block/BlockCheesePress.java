@@ -1,13 +1,9 @@
 package growthcraft.milk.common.block;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
+import growthcraft.milk.shared.init.GrowthcraftMilkBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -20,18 +16,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockCheesePress extends BlockOrientable {
 
@@ -194,5 +189,9 @@ public class BlockCheesePress extends BlockOrientable {
 			return name().toLowerCase();
 		}
 	}
-	
+
+	@Override
+	public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
+		return new ItemStack(Item.getItemFromBlock(GrowthcraftMilkBlocks.cheesePress.getBlock()));
+	}
 }
