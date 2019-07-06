@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "growthcraft_bamboo:bamboo_plank"
+    }
+  },
+  "result": {
+    "item": "growthcraft_bamboo:bamboo_slab_half",
+    "data": 0,
+    "count": 6
+  }
+}

@@ -1,23 +1,8 @@
 package growthcraft.bamboo.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
-import java.io.File;
-
-import org.apache.logging.log4j.Level;
-
 import growthcraft.bamboo.GrowthcraftBamboo;
 import growthcraft.bamboo.client.handler.ColorHandlerBlockBambooLeaves;
-import growthcraft.bamboo.common.block.BlockBambooDoor;
-import growthcraft.bamboo.common.block.BlockBambooFence;
-import growthcraft.bamboo.common.block.BlockBambooFenceGate;
-import growthcraft.bamboo.common.block.BlockBambooLeaves;
-import growthcraft.bamboo.common.block.BlockBambooPlank;
-import growthcraft.bamboo.common.block.BlockBambooShoot;
-import growthcraft.bamboo.common.block.BlockBambooSlabDouble;
-import growthcraft.bamboo.common.block.BlockBambooSlabHalf;
-import growthcraft.bamboo.common.block.BlockBambooStairs;
-import growthcraft.bamboo.common.block.BlockBambooStalk;
+import growthcraft.bamboo.common.block.*;
 import growthcraft.bamboo.common.item.ItemBambooCoal;
 import growthcraft.bamboo.common.item.ItemBambooDoor;
 import growthcraft.bamboo.common.item.ItemBambooStick;
@@ -40,9 +25,16 @@ import net.minecraft.item.ItemSlab;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.Level;
+
+import java.io.File;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
 	private Init() {}
@@ -101,6 +93,10 @@ public class Init {
     	GrowthcraftBambooBlocks.bambooShoot.registerBlockItem(registry);
     }
 
+	public static void registerBlockOres() {
+		OreDictionary.registerOre("plankWood", GrowthcraftBambooBlocks.bambooPlank.getItem());
+	}
+
     public static void registerBlockRenders() {
     	GrowthcraftBambooBlocks.bambooPlank.registerItemRender();
     	GrowthcraftBambooBlocks.bambooSlabHalf.registerItemRender();
@@ -141,6 +137,10 @@ public class Init {
     	GrowthcraftBambooItems.itemBambooDoor = new ItemDefinition( new ItemBambooDoor("bamboo_door_item", GrowthcraftBambooBlocks.blockBambooDoor.getBlock()) );
     }
 
+    public static void registerItemOres() {
+		OreDictionary.registerOre("stickWood", GrowthcraftBambooItems.bambooStick.getItem());
+	}
+
     public static void registerItems(IForgeRegistry<Item> registry) {
     	GrowthcraftBambooItems.bambooStick.getItem().setCreativeTab(tabGrowthcraft);
     	GrowthcraftBambooItems.bambooStick.registerItem(registry);
@@ -167,6 +167,10 @@ public class Init {
     private static void registerCraftingRecipes() {
 
     }
+
+    public static void registerSmeltingRecipes() {
+		GameRegistry.addSmelting(GrowthcraftBambooBlocks.bambooStalk.getItemAsStack(1), GrowthcraftBambooItems.bambooCoal.asStack(1),  0.4f);
+	}
     
     // Config
     
