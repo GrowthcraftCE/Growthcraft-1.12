@@ -76,6 +76,11 @@
         }
       },
       5: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/casu_marzu_unaged_top",
+          "1": "growthcraft_milk:blocks/cheese/casu_marzu_unaged_side",
+          "particle": "growthcraft_milk:blocks/cheese/casu_marzu_unaged_top"
+        }
       },
       6: {
       },
@@ -122,6 +127,11 @@
         }
       },
       15: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/casu_marzu_aged_top",
+          "1": "growthcraft_milk:blocks/cheese/casu_marzu_aged_side",
+          "particle": "growthcraft_milk:blocks/cheese/casu_marzu_aged_top"
+        }
       },
       16: {
       },
