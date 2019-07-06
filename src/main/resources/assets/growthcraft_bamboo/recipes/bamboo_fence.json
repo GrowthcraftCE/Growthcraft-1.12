@@ -1,0 +1,21 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "wooden_fence",
+  "pattern": [
+    "PSP",
+    "PSP"
+  ],
+  "key": {
+    "P": {
+      "item": "growthcraft_bamboo:bamboo_stalk"
+    },
+    "S": {
+      "type": "forge:ore_dict",
+      "ore": "stickWood"
+    }
+  },
+  "result": {
+    "item": "growthcraft_bamboo:bamboo_fence",
+    "count": 3
+  }
+}

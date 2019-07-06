@@ -1,0 +1,16 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "planks",
+  "pattern": [
+    "#"
+  ],
+  "key": {
+    "#": {
+      "item": "growthcraft_bamboo:bamboo_stalk"
+    }
+  },
+  "result": {
+    "item": "growthcraft_bamboo:bamboo_plank",
+    "count": 4
+  }
+}

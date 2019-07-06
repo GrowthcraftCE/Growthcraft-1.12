@@ -1,0 +1,18 @@
+{
+  "type": "forge:ore_shaped",
+  "group": "wooden_door",
+  "pattern": [
+    "PP",
+    "PP",
+    "PP"
+  ],
+  "key": {
+    "P": {
+      "item": "growthcraft_bamboo:bamboo_plank"
+    }
+  },
+  "result": {
+    "item": "growthcraft_bamboo:bamboo_door_item",
+    "count": 3
+  }
+}
