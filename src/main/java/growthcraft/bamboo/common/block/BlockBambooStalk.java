@@ -89,4 +89,8 @@ public class BlockBambooStalk extends Block {
         }
     }
 
+    @Override
+    public boolean canSustainLeaves(IBlockState state, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
 }
