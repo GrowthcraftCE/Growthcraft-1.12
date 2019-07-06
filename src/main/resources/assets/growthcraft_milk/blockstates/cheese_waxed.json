@@ -55,8 +55,18 @@
         }
       },
       2: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/gouda_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/gouda_waxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/gouda_waxed_top"
+        }
       },
       3: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/provolone_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/provolone_waxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/provolone_waxed_top"
+        }
       },
       4: {
       },
@@ -86,8 +96,18 @@
         }
       },
       12: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/gouda_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/gouda_waxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/gouda_waxed_top"
+        }
       },
       13: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/provolone_waxed_top",
+          "1": "growthcraft_milk:blocks/cheese/provolone_waxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/provolone_waxed_top"
+        }
       },
       14: {
       },
@@ -117,8 +137,18 @@
         }
       },
       22: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/gouda_unwaxed_top",
+          "1": "growthcraft_milk:blocks/cheese/gouda_unwaxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/gouda_unwaxed_top"
+        }
       },
       23: {
+	    "textures": {
+          "0": "growthcraft_milk:blocks/cheese/provolone_unwaxed_top",
+          "1": "growthcraft_milk:blocks/cheese/provolone_unwaxed_side",
+          "particle": "growthcraft_milk:blocks/cheese/provolone_unwaxed_top"
+        }
       },
       24: {
       },

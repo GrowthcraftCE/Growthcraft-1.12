@@ -43,6 +43,12 @@ public class GrowthcraftMilkItems {
 		case MONTEREY:
 			oreName = "materialBeeswaxBlack";
 			break;
+		case GOUDA:
+			oreName = "materialBeeswaxNormal";	// Is Yellow
+			break;
+		case PROVOLONE:
+			oreName = "materialBeeswaxWhite";
+			break;
 		default:
 		case CHEDDAR:
 			oreName = "materialBeeswaxRed";
