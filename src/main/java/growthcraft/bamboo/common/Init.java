@@ -25,6 +25,7 @@ import net.minecraft.item.ItemSlab;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -138,7 +139,6 @@ public class Init {
 
     public static void registerItemOres() {
 		OreDictionary.registerOre("stickWood", GrowthcraftBambooItems.bambooStick.getItem());
-
 	}
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -167,6 +167,10 @@ public class Init {
     private static void registerCraftingRecipes() {
 
     }
+
+    public static void registerSmeltingRecipes() {
+		GameRegistry.addSmelting(GrowthcraftBambooBlocks.bambooStalk.getItemAsStack(1), GrowthcraftBambooItems.bambooCoal.asStack(1),  0.4f);
+	}
     
     // Config
     

@@ -50,6 +50,7 @@ public class GrowthcraftBamboo {
     public static void init(FMLInitializationEvent event) {
         if (GrowthcraftBambooConfig.enableGrowthcraftBamboo) {
             Init.registerRecipes();
+            Init.registerSmeltingRecipes();
             proxy.init();
         }
     }
