@@ -34,7 +34,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 			final NBTTagCompound cheeseTag = new NBTTagCompound();
 			final ICheeseType cheese = getTypeForVariantID(CheeseUtils.getVariantIDFromMeta(stack.getItemDamage())); // EnumCheeseType.getSafeById(EnumCheeseType.getTypeFromMeta(stack.getItemDamage()));
 			final EnumCheeseStage stage = CheeseUtils.getStageFromMeta(stack.getItemDamage());
-			final int slices = CheeseUtils.getSlicesFromMeta(stack.getItemDamage());
+			final int slices = CheeseUtils.getTopSlicesFromMeta(stack.getItemDamage());
 			CheeseIO.writeToNBT(cheeseTag, cheese);
 			stage.writeToNBT(cheeseTag);
 			cheeseTag.setInteger("slices", slices);
@@ -77,12 +77,12 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 			"." + getCheeseStage(stack).getName();
 	}
 
-	public int getSlices(ItemStack stack)
+	public int getTopSlices(ItemStack stack)
 	{
 		return getTileTagCompound(stack).getInteger("slices");
 	}
 
-	public int getSlicesMax(ItemStack stack)
+	public int getTopSlicesMax(ItemStack stack)
 	{
 		return getTileTagCompound(stack).getInteger("slices_max");
 	}
@@ -90,7 +90,7 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 	@Override
     public int getMetadata(int damage)
     {
-        int numSlices = CheeseUtils.getSlicesFromMeta(damage);
+        int numSlices = CheeseUtils.getTopSlicesFromMeta(damage);
         if( numSlices <= 0 ) {
         	GrowthcraftMilk.logger.warn("Cheese item meta returned slicescount=0.");
         	numSlices = 1;

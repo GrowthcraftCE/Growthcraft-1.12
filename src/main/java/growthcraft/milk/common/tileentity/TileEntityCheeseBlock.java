@@ -24,16 +24,16 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	public List<ItemStack> populateDrops(List<ItemStack> list)
 	{
 		ItemStack stack = null;
-		boolean bHasAllSlices = cheese.getSlicesMax() == cheese.getSlices();
-		boolean bHasAnySlices = cheese.getSlices() > 0;
+		boolean bHasAllSlices = cheese.getTopSlicesMax() == cheese.getTopSlices();
+		boolean bHasAnySlices = cheese.getTopSlices() > 0;
 		if( cheese.isAged() && bHasAnySlices ) {
 /*			if( !bHasAllSlices )
 				stack = cheese.asFullStack();
 			else*/
-				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getSlices(), cheese.getStage());
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
 		}
 		else if( bHasAllSlices )
-			stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getSlices(), cheese.getStage());
+			stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
 		
 		if (stack != null)
 			list.add(stack);
@@ -105,7 +105,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	public ItemStack asItemStack()
 	{
 		final ICheeseBlockStackFactory blockStackFactory = cheese.getType().getCheeseBlocks();
-		final ItemStack stack = blockStackFactory.asStackForStage(cheese.getSlices(), blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
+		final ItemStack stack = blockStackFactory.asStackForStage(cheese.getTopSlices(), blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
 		final NBTTagCompound tag = ItemBlockCheeseBlock.openNBT(stack);
 		writeToNBTForItem(tag);
 		return stack;

@@ -19,8 +19,9 @@ public class Cheese implements IStreamable
 
 	private int ageMax = GrowthcraftMilkConfig.cheeseMaxAge;
 	private int age;
-	private int slicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
-	private int slices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+	private int topSlicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+	private int topSlices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+	private boolean isDoubleStacked = false;
 	private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
 	private ICheeseType cheese = WaxedCheeseTypes.CHEDDAR;
 	private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
@@ -45,6 +46,14 @@ public class Cheese implements IStreamable
 		this.needClientUpdate = true;
 		return this;
 	}
+	
+	public Cheese setDoubleStacked(boolean isDoubleStacked) {
+		if( this.isDoubleStacked != isDoubleStacked ) {
+			this.age = 0;	// HACK: Reset age if changed. Change if different stack elements can have different age
+			this.isDoubleStacked = isDoubleStacked;
+		}
+		return this;
+	}
 
 	public int getId()
 	{
@@ -56,19 +65,23 @@ public class Cheese implements IStreamable
 		return cheeseStage.index;
 	}
 
-	public int getSlices()
+	public int getTopSlices()
 	{
-		return slices;
+		return topSlices;
 	}
 
-	public int getSlicesMax()
+	public int getTopSlicesMax()
 	{
-		return slicesMax;
+		return topSlicesMax;
 	}
 
 	public boolean hasSlices()
 	{
-		return getSlices() > 0;
+		return getTopSlices() > 0;
+	}
+	
+	public boolean isDoubleStacked() {
+		return isDoubleStacked;
 	}
 
 	public float getAgeProgress()
@@ -94,13 +107,15 @@ public class Cheese implements IStreamable
 
 	public ItemStack yankSlices(int count, boolean doYank)
 	{
-		final int yankedCount = MathHelper.clamp(count, 0, getSlices());
+		// final int numSlices = (isDoubleStacked()?getTopSlicesMax():0) + getTopSlices();
+		
+		final int yankedCount = MathHelper.clamp(count, 0, getTopSlices());
 		final int quantity = yankedCount * cheesePerSlice;
 		if (quantity > 0)
 		{
 			if (doYank)
 			{
-				this.slices -= yankedCount;
+				this.topSlices -= yankedCount;
 				setStage(EnumCheeseStage.CUT);
 			}
 			return cheese.getCheeseItems().asStack(quantity);
@@ -110,7 +125,7 @@ public class Cheese implements IStreamable
 
 	public ItemStack asFullStack()
 	{
-		return yankSlices(getSlices(), false);
+		return yankSlices(getTopSlices(), false);
 	}
 
 	public boolean tryWaxing(ItemStack stack)
@@ -128,8 +143,9 @@ public class Cheese implements IStreamable
 		CheeseIO.writeToNBT(nbt, cheese);
 		cheeseStage.writeToNBT(nbt);
 		nbt.setInteger("age", age);
-		nbt.setInteger("slices", slices);
-		nbt.setInteger("slices_max", slicesMax);
+		nbt.setInteger("slices", topSlices);
+		nbt.setInteger("slices_max", topSlicesMax);
+		nbt.setBoolean("double_stacked", isDoubleStacked);
 	}
 
 	/**
@@ -147,11 +163,15 @@ public class Cheese implements IStreamable
 		}
 		if (nbt.hasKey("slices"))
 		{
-			this.slices = nbt.getInteger("slices");
+			this.topSlices = nbt.getInteger("slices");
 		}
 		if (nbt.hasKey("slices_max"))
 		{
-			this.slicesMax = nbt.getInteger("slices_max");
+			this.topSlicesMax = nbt.getInteger("slices_max");
+		}
+		if (nbt.hasKey("double_stacked"))
+		{
+			this.isDoubleStacked = nbt.getBoolean("double_stacked");
 		}
 	}
 
@@ -161,8 +181,9 @@ public class Cheese implements IStreamable
 		this.cheese = CheeseIO.loadFromStream(stream);
 		this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
 		this.age = stream.readInt();
-		this.slices = stream.readInt();
-		this.slicesMax = stream.readInt();
+		this.topSlices = stream.readInt();
+		this.topSlicesMax = stream.readInt();
+		this.isDoubleStacked = stream.readBoolean();
 		return false;
 	}
 
@@ -172,8 +193,9 @@ public class Cheese implements IStreamable
 		CheeseIO.writeToStream(stream, cheese);
 		cheeseStage.writeToStream(stream);
 		stream.writeInt(age);
-		stream.writeInt(slices);
-		stream.writeInt(slicesMax);
+		stream.writeInt(topSlices);
+		stream.writeInt(topSlicesMax);
+		stream.writeBoolean(isDoubleStacked);
 		return false;
 	}
 
