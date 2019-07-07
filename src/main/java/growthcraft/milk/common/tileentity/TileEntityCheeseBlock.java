@@ -9,6 +9,7 @@ import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.struct.Cheese;
 import growthcraft.milk.shared.definition.EnumCheeseStage;
@@ -37,8 +38,18 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 			ItemStack stack = null;
 
 			boolean bHasAnySlices = cheese.getTopSlices() > 0;
-			if( bHasAnySlices )
+			if( bHasAnySlices ) {
+				boolean bHasFullSlices = cheese.getTopSlices() == cheese.getTopSlicesMax();
+				if( bHasFullSlices ) {
+					EnumCheeseStage stage = cheese.getStage();
+					if( stage == EnumCheeseStage.CUT ) {
+						GrowthcraftMilk.logger.warn("A cut cheese wheel with full amount of slices found.");
+						stage = EnumCheeseStage.AGED;	// Is a full wheel
+					}
+				}
+				
 				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
+			}
 			
 			if (stack != null)
 				list.add(stack);
@@ -47,8 +58,12 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		// Populate drop with bottom cheese wheel
 		{
 			ItemStack stack = null;
-			if( cheese.isDoubleStacked() )
+			if( cheese.isDoubleStacked() ) {
+				EnumCheeseStage stage = cheese.getStage();
+				if( stage == EnumCheeseStage.CUT )
+					stage = EnumCheeseStage.AGED;	// Is a full wheel
 				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlicesMax(), cheese.getStage());
+			}
 			
 			if (stack != null)
 				list.add(stack);
