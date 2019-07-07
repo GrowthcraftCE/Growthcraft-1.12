@@ -149,8 +149,12 @@ public class Cheese implements IStreamable
 			int meta = stack.getMetadata();
 			
 			EnumCheeseStage stage = CheeseUtils.getStageFromMeta(meta);
-			if( stage != this.cheeseStage )
-				return false;
+			if( stage != cheeseStage ) {
+				if( stage != EnumCheeseStage.CUT && stage != EnumCheeseStage.AGED )
+					return false;
+				if( cheeseStage != EnumCheeseStage.CUT && cheeseStage != EnumCheeseStage.AGED )
+					return false;
+			}
 
 			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
 			if( variantID != cheese.getVariantID() )
