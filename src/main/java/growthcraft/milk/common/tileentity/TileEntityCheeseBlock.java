@@ -40,15 +40,15 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 			boolean bHasAnySlices = cheese.getTopSlices() > 0;
 			if( bHasAnySlices ) {
 				boolean bHasFullSlices = cheese.getTopSlices() == cheese.getTopSlicesMax();
+				EnumCheeseStage stage = cheese.getStage();
 				if( bHasFullSlices ) {
-					EnumCheeseStage stage = cheese.getStage();
 					if( stage == EnumCheeseStage.CUT ) {
 						GrowthcraftMilk.logger.warn("A cut cheese wheel with full amount of slices found.");
 						stage = EnumCheeseStage.AGED;	// Is a full wheel
 					}
 				}
 				
-				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), stage);
 			}
 			
 			if (stack != null)
@@ -62,7 +62,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 				EnumCheeseStage stage = cheese.getStage();
 				if( stage == EnumCheeseStage.CUT )
 					stage = EnumCheeseStage.AGED;	// Is a full wheel
-				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlicesMax(), cheese.getStage());
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlicesMax(), stage);
 			}
 			
 			if (stack != null)
