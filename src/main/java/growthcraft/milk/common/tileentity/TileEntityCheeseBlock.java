@@ -35,10 +35,6 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		// Populate drop with top cheese wheel
 		{
 			ItemStack stack = null;
-//			boolean bHasAllSlices = cheese.getTopSlicesMax() == cheese.getTopSlices();
-//			boolean bHasAnySlices = cheese.getTopSlices() > 0;
-//			if( bHasAllSlices || (cheese.isAged() && bHasAnySlices) )
-//				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
 
 			boolean bHasAnySlices = cheese.getTopSlices() > 0;
 			if( bHasAnySlices )
@@ -223,8 +219,6 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		if (IItemOperable.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
-//			if( !OreDictionary.itemMatches(GrowthcraftMilkItems.knife.asStack(), onHand, false) )
-//				return false;
 			if( !ItemTest.itemMatchesOre(onHand, "toolKnife") )
 				return false;
 			
