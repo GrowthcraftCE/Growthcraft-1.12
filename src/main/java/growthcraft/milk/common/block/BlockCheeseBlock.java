@@ -36,9 +36,9 @@ import net.minecraft.world.World;
 
 public class BlockCheeseBlock extends BlockOrientable {
     
-	public final static int MAX_VARIANTS = 10;
+	public final static int MAX_VARIANTS = 10;	// NOTE: Update jsons if changing this value! Alternatively create a new cheese block type for new variants if reaching max.
 	
-	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 0, 4);
+	public final static PropertyInteger TYPE_SLICES_COUNT = PropertyInteger.create("slicescount", 0, 8);
 	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("typexstage", 0, (MAX_VARIANTS-1) * 3 );
 
 	private static final AxisAlignedBB BOUNDING_BOX_FULL = new AxisAlignedBB(
@@ -66,7 +66,7 @@ public class BlockCheeseBlock extends BlockOrientable {
 		final TileEntityCheeseBlock te = getTileEntity(source, pos);
 		if (te != null)
 		{
-			int numSlices = te.getCheese().getSlices();
+			int numSlices = te.getCheese().getTopSlices();
 			Orient orient = state.getValue(TYPE_ORIENT);
 			AxisAlignedBB bounds;
 			if( numSlices >= 3 )
@@ -241,8 +241,8 @@ public class BlockCheeseBlock extends BlockOrientable {
 				break;
 			}
 			
-			numSlices = te.getCheese().getSlices();
-			variantID = effectiveStageId*10 + te.getCheese().getType().getVariantID();
+			numSlices = te.getCheese().getTopSlices();
+			variantID = effectiveStageId*MAX_VARIANTS + te.getCheese().getType().getVariantID();
 		}
 		
         return state.withProperty(TYPE_CHEESE_VARIANT, variantID).withProperty(TYPE_SLICES_COUNT, numSlices);
