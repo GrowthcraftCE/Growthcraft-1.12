@@ -13,11 +13,15 @@ import growthcraft.milk.common.tileentity.struct.Cheese;
 import growthcraft.milk.shared.definition.EnumCheeseStage;
 import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
 
 public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IItemOperable, INBTItemSerializable
 {
@@ -179,7 +183,16 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		consumeAmount = cheese.canStack(onHand);
 		if( consumeAmount > 0 ) {
 			// Stacking
-			cheese.setDoubleStacked(true);
+			cheese.stackWheel(onHand, true);
+
+			// placement sound
+			{
+				World world = player.getEntityWorld();
+				IBlockState state = world.getBlockState(pos);
+				SoundType soundtype = getBlockType().getSoundType(state, world, pos, player);
+				world.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+			}
+
 			updateOnTryPlaceItem(consumeAmount, player, onHand);
 			return true;
 		}

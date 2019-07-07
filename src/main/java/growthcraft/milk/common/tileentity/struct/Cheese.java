@@ -121,10 +121,9 @@ public class Cheese implements IStreamable
 		{
 			if (doYank)
 			{
-				int resYankedCount = yankedCount;
-				if( this.topSlices < resYankedCount ) {
+				if( this.topSlices < yankedCount ) {
 					if( isDoubleStacked ) {
-						resYankedCount -= this.topSlices;
+						this.topSlices = this.topSlicesMax + this.topSlices - yankedCount;
 						isDoubleStacked = false;
 					}
 					else {
@@ -134,12 +133,48 @@ public class Cheese implements IStreamable
 					}
 				}
 				else
-					this.topSlices -= resYankedCount;
+					this.topSlices -= yankedCount;
 				setStage(EnumCheeseStage.CUT);
 			}
 			return cheese.getCheeseItems().asStack(quantity);
 		}
 		return ItemStack.EMPTY;
+	}
+	
+	public boolean stackWheel(ItemStack stack, boolean doStack) {
+		if( isDoubleStacked )
+			return false;
+		
+		if( stack.getItem() == getBlockTopItemStack().getItem() ) {
+			int meta = stack.getMetadata();
+			
+			EnumCheeseStage stage = CheeseUtils.getStageFromMeta(meta);
+			if( stage != this.cheeseStage )
+				return false;
+
+			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
+			if( variantID != cheese.getVariantID() )
+				return false;
+
+			// Do stacking
+			int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
+			if( curSlices != topSlicesMax ) {
+				if( topSlices != topSlicesMax )
+					return false;	// At least one of them must be a full wheel!
+				
+				if( doStack ) {
+					isDoubleStacked = true;
+					topSlices = curSlices;
+				}
+			}
+			else {
+				if( doStack )
+					isDoubleStacked = true;
+			}
+			
+			return true;
+		}
+		return false;
 	}
 
 	public ItemStack asFullStack()
@@ -163,27 +198,7 @@ public class Cheese implements IStreamable
 	}
 	
 	public int canStack(ItemStack stack) {
-		if( isDoubleStacked )
-			return 0;
-		
-		if( stack.getItem() == getBlockTopItemStack().getItem() ) {
-			int meta = stack.getMetadata();
-			
-			EnumCheeseStage stage = CheeseUtils.getStageFromMeta(meta);
-			if( stage != this.cheeseStage )
-				return 0;
-
-			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
-			if( variantID != cheese.getVariantID() )
-				return 0;
-			
-			int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
-			if( curSlices != topSlicesMax )
-				return 0;	// Must be a full wheel!
-			
-			return 1;
-		}
-		return 0;
+		return stackWheel(stack, false) ? 1 : 0;
 	}
 
 	public void writeToNBT(NBTTagCompound nbt)
