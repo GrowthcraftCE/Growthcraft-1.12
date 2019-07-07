@@ -10,12 +10,14 @@ import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.struct.Cheese;
+import growthcraft.milk.shared.definition.EnumCheeseStage;
 import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.MathHelper;
 
 public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IItemOperable, INBTItemSerializable
 {
@@ -111,7 +113,8 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	public ItemStack asItemStack()
 	{
 		final ICheeseBlockStackFactory blockStackFactory = cheese.getType().getCheeseBlocks();
-		final ItemStack stack = blockStackFactory.asStackForStage(cheese.getTopSlices(), blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
+		final int numSlices = MathHelper.clamp(cheese.getSlices(), 0, cheese.getTopSlicesMax());	// NOTE: Not a full representation! Is clamped by maximal slices of a single wheel.
+		final ItemStack stack = blockStackFactory.asStackForStage(numSlices, blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
 		final NBTTagCompound tag = ItemBlockCheeseBlock.openNBT(stack);
 		writeToNBTForItem(tag);
 		return stack;
@@ -165,20 +168,35 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	{
 		if (IItemOperable.Action.RIGHT != action) return false;
 		
-		int consumeAmount = cheese.tryWaxing(onHand);
+		int consumeAmount = cheese.canWaxing(onHand);
 		if( consumeAmount > 0 ) {
-			if( !player.capabilities.isCreativeMode ) {
-				if( onHand.getCount() > consumeAmount ) {
-					onHand.shrink(consumeAmount);
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, onHand);
-				}
-				else
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);				
-			}
-			markDirtyAndUpdate(); // Test, if correct
+			// Waxing
+			cheese.setStage(EnumCheeseStage.UNAGED);
+			updateOnTryPlaceItem(consumeAmount, player, onHand);
 			return true;
 		}
+		
+		consumeAmount = cheese.canStack(onHand);
+		if( consumeAmount > 0 ) {
+			// Stacking
+			cheese.setDoubleStacked(true);
+			updateOnTryPlaceItem(consumeAmount, player, onHand);
+			return true;
+		}
+
 		return false;
+	}
+	
+	private void updateOnTryPlaceItem(int consumeAmount, EntityPlayer player, ItemStack onHand) {
+		if( !player.capabilities.isCreativeMode ) {
+			if( onHand.getCount() > consumeAmount ) {
+				onHand.shrink(consumeAmount);
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, onHand);
+			}
+			else
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);				
+		}
+		markDirtyAndUpdate(); // Test, if correct
 	}
 
 	@Override

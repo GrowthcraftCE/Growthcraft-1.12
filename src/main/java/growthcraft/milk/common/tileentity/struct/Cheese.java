@@ -2,13 +2,17 @@ package growthcraft.milk.common.tileentity.struct;
 
 import growthcraft.core.shared.io.stream.IStreamable;
 import growthcraft.milk.GrowthcraftMilk;
+import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.cheese.CheeseIO;
+import growthcraft.milk.shared.cheese.CheeseUtils;
 import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
 import growthcraft.milk.shared.definition.EnumCheeseStage;
+import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
 import growthcraft.milk.shared.definition.ICheeseType;
 import growthcraft.milk.shared.init.GrowthcraftMilkItems.WaxedCheeseTypes;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
@@ -142,16 +146,42 @@ public class Cheese implements IStreamable
 	{
 		return yankSlices(getSlices(), false);
 	}
+	
+	public ItemStack getBlockTopItemStack() {
+		return cheese.getCheeseBlocks().asStackForStage(topSlices, cheeseStage);
+	}
 
-	public int tryWaxing(ItemStack stack)
+	public int canWaxing(ItemStack stack)
 	{
 		if (isUnwaxed() && getType().canWax(stack))
 		{
 			int requiredAmount = isDoubleStacked?2:1;
-			if( stack.getCount() >= requiredAmount ) {
-				setStage(EnumCheeseStage.UNAGED);
+			if( stack.getCount() >= requiredAmount )
 				return requiredAmount;
-			}
+		}
+		return 0;
+	}
+	
+	public int canStack(ItemStack stack) {
+		if( isDoubleStacked )
+			return 0;
+		
+		if( stack.getItem() == getBlockTopItemStack().getItem() ) {
+			int meta = stack.getMetadata();
+			
+			EnumCheeseStage stage = CheeseUtils.getStageFromMeta(meta);
+			if( stage != this.cheeseStage )
+				return 0;
+
+			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
+			if( variantID != cheese.getVariantID() )
+				return 0;
+			
+			int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
+			if( curSlices != topSlicesMax )
+				return 0;	// Must be a full wheel!
+			
+			return 1;
 		}
 		return 0;
 	}
