@@ -65,6 +65,10 @@ public class Cheese implements IStreamable
 		return cheeseStage.index;
 	}
 
+	public int getSlices() {
+		return (isDoubleStacked?topSlicesMax:0) + topSlices;
+	}
+	
 	public int getTopSlices()
 	{
 		return topSlices;
@@ -77,7 +81,7 @@ public class Cheese implements IStreamable
 
 	public boolean hasSlices()
 	{
-		return getTopSlices() > 0;
+		return getSlices() > 0;
 	}
 	
 	public boolean isDoubleStacked() {
@@ -107,15 +111,26 @@ public class Cheese implements IStreamable
 
 	public ItemStack yankSlices(int count, boolean doYank)
 	{
-		// final int numSlices = (isDoubleStacked()?getTopSlicesMax():0) + getTopSlices();
-		
-		final int yankedCount = MathHelper.clamp(count, 0, getTopSlices());
+		final int yankedCount = MathHelper.clamp(count, 0, getSlices());
 		final int quantity = yankedCount * cheesePerSlice;
 		if (quantity > 0)
 		{
 			if (doYank)
 			{
-				this.topSlices -= yankedCount;
+				int resYankedCount = yankedCount;
+				if( this.topSlices < resYankedCount ) {
+					if( isDoubleStacked ) {
+						resYankedCount -= this.topSlices;
+						isDoubleStacked = false;
+					}
+					else {
+						// Should never happen. Something is wrong with getSlices() implementation
+						GrowthcraftMilk.logger.warn("Something is wrong with cheese yanking. Please report as bug.");
+						return ItemStack.EMPTY;
+					}
+				}
+				else
+					this.topSlices -= resYankedCount;
 				setStage(EnumCheeseStage.CUT);
 			}
 			return cheese.getCheeseItems().asStack(quantity);
@@ -125,17 +140,20 @@ public class Cheese implements IStreamable
 
 	public ItemStack asFullStack()
 	{
-		return yankSlices(getTopSlices(), false);
+		return yankSlices(getSlices(), false);
 	}
 
-	public boolean tryWaxing(ItemStack stack)
+	public int tryWaxing(ItemStack stack)
 	{
 		if (isUnwaxed() && getType().canWax(stack))
 		{
-			setStage(EnumCheeseStage.UNAGED);
-			return true;
+			int requiredAmount = isDoubleStacked?2:1;
+			if( stack.getCount() >= requiredAmount ) {
+				setStage(EnumCheeseStage.UNAGED);
+				return requiredAmount;
+			}
 		}
-		return false;
+		return 0;
 	}
 
 	public void writeToNBT(NBTTagCompound nbt)

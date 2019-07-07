@@ -23,26 +23,32 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 
 	public List<ItemStack> populateDrops(List<ItemStack> list)
 	{
-		ItemStack stack = null;
-		boolean bHasAllSlices = cheese.getTopSlicesMax() == cheese.getTopSlices();
-		boolean bHasAnySlices = cheese.getTopSlices() > 0;
-		if( cheese.isAged() && bHasAnySlices ) {
-/*			if( !bHasAllSlices )
-				stack = cheese.asFullStack();
-			else*/
-				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
-		}
-		else if( bHasAllSlices )
-			stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
-		
-		if (stack != null)
-			list.add(stack);
-		
-/*		if (cheese.isAged())
+		// Populate drop with top cheese wheel
 		{
-			final ItemStack stack = cheese.asFullStack();
-			if (stack != null) list.add(stack);
-		} */
+			ItemStack stack = null;
+//			boolean bHasAllSlices = cheese.getTopSlicesMax() == cheese.getTopSlices();
+//			boolean bHasAnySlices = cheese.getTopSlices() > 0;
+//			if( bHasAllSlices || (cheese.isAged() && bHasAnySlices) )
+//				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
+
+			boolean bHasAnySlices = cheese.getTopSlices() > 0;
+			if( bHasAnySlices )
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), cheese.getStage());
+			
+			if (stack != null)
+				list.add(stack);
+		}
+		
+		// Populate drop with bottom cheese wheel
+		{
+			ItemStack stack = null;
+			if( cheese.isDoubleStacked() )
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlicesMax(), cheese.getStage());
+			
+			if (stack != null)
+				list.add(stack);
+		}
+		
 		return list;
 	}
 
@@ -158,10 +164,12 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
 		if (IItemOperable.Action.RIGHT != action) return false;
-		if( cheese.tryWaxing(onHand) ) {
+		
+		int consumeAmount = cheese.tryWaxing(onHand);
+		if( consumeAmount > 0 ) {
 			if( !player.capabilities.isCreativeMode ) {
-				if( onHand.getCount() > 1 ) {
-					onHand.shrink(1);
+				if( onHand.getCount() > consumeAmount ) {
+					onHand.shrink(consumeAmount);
 					player.inventory.setInventorySlotContents(player.inventory.currentItem, onHand);
 				}
 				else
