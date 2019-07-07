@@ -26,6 +26,7 @@ public class GrowthcraftMilkItems {
     public static ItemDefinition iceCream;
     public static ItemDefinition yogurt;
     public static ItemDefinition starterCulture;
+    public static ItemDefinition knife;
     public static ItemDefinition agedCheeseSlice;
     public static ItemDefinition agedCheeseBlockItem;
     public static ItemDefinition waxedCheeseBlockItem;

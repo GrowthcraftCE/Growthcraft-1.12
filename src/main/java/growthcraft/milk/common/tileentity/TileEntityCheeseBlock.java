@@ -7,11 +7,13 @@ import growthcraft.core.shared.io.nbt.INBTItemSerializable;
 import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
+import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.struct.Cheese;
 import growthcraft.milk.shared.definition.EnumCheeseStage;
 import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -22,6 +24,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IItemOperable, INBTItemSerializable
 {
@@ -118,6 +121,8 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	{
 		final ICheeseBlockStackFactory blockStackFactory = cheese.getType().getCheeseBlocks();
 		final int numSlices = MathHelper.clamp(cheese.getSlices(), 0, cheese.getTopSlicesMax());	// NOTE: Not a full representation! Is clamped by maximal slices of a single wheel.
+		if( numSlices <= 0 )
+			return ItemStack.EMPTY;
 		final ItemStack stack = blockStackFactory.asStackForStage(numSlices, blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
 		final NBTTagCompound tag = ItemBlockCheeseBlock.openNBT(stack);
 		writeToNBTForItem(tag);
@@ -218,6 +223,11 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		if (IItemOperable.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
+//			if( !OreDictionary.itemMatches(GrowthcraftMilkItems.knife.asStack(), onHand, false) )
+//				return false;
+			if( !ItemTest.itemMatchesOre(onHand, "toolKnife") )
+				return false;
+			
 			final ItemStack stack = cheese.yankSlices(1, true);
 			if (!ItemUtils.isEmpty(stack))
 			{
