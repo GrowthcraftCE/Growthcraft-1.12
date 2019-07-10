@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemTest
 {
@@ -58,6 +59,17 @@ public class ItemTest
 				}
 			}
 		}
+		return false;
+	}
+	
+	public static boolean itemMatchesOre(@Nullable ItemStack actual, String oreName) {
+		int oreID = OreDictionary.getOreID(oreName);
+		int[] stackOreIDs = OreDictionary.getOreIDs(actual);
+		for( int stackOreID : stackOreIDs ) {
+			if( oreID == stackOreID )
+				return true;
+		}
+		
 		return false;
 	}
 

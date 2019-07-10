@@ -1,5 +1,6 @@
 package growthcraft.core.shared.item;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Nonnull;
@@ -143,6 +144,16 @@ public class ItemUtils
 	
 	public static boolean isEmpty(ItemStack stack) {
 		return !ItemTest.isValid(stack) || stack.getItem() == Items.AIR;
+	}
+	
+	public static boolean isEmpty(List<ItemStack> stacks) {
+		if( stacks != null ) {
+			for( ItemStack itemStack : stacks ) {
+				if( !isEmpty(itemStack) )
+					return false;
+			}				
+		}
+		return true;
 	}
 	
 	public static boolean isEmpty(IMultiItemStacks stacks) {

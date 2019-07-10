@@ -7,15 +7,25 @@ import growthcraft.core.shared.io.nbt.INBTItemSerializable;
 import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
+import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.struct.Cheese;
+import growthcraft.milk.shared.definition.EnumCheeseStage;
 import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
+import growthcraft.milk.shared.init.GrowthcraftMilkItems;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IItemOperable, INBTItemSerializable
 {
@@ -23,26 +33,42 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 
 	public List<ItemStack> populateDrops(List<ItemStack> list)
 	{
-		ItemStack stack = null;
-		boolean bHasAllSlices = cheese.getSlicesMax() == cheese.getSlices();
-		boolean bHasAnySlices = cheese.getSlices() > 0;
-		if( cheese.isAged() && bHasAnySlices ) {
-/*			if( !bHasAllSlices )
-				stack = cheese.asFullStack();
-			else*/
-				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getSlices(), cheese.getStage());
-		}
-		else if( bHasAllSlices )
-			stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getSlices(), cheese.getStage());
-		
-		if (stack != null)
-			list.add(stack);
-		
-/*		if (cheese.isAged())
+		// Populate drop with top cheese wheel
 		{
-			final ItemStack stack = cheese.asFullStack();
-			if (stack != null) list.add(stack);
-		} */
+			ItemStack stack = null;
+
+			boolean bHasAnySlices = cheese.getTopSlices() > 0;
+			if( bHasAnySlices ) {
+				boolean bHasFullSlices = cheese.getTopSlices() == cheese.getTopSlicesMax();
+				EnumCheeseStage stage = cheese.getStage();
+				if( bHasFullSlices ) {
+					if( stage == EnumCheeseStage.CUT ) {
+						GrowthcraftMilk.logger.warn("A cut cheese wheel with full amount of slices found.");
+						stage = EnumCheeseStage.AGED;	// Is a full wheel
+					}
+				}
+				
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlices(), stage);
+			}
+			
+			if (stack != null)
+				list.add(stack);
+		}
+		
+		// Populate drop with bottom cheese wheel
+		{
+			ItemStack stack = null;
+			if( cheese.isDoubleStacked() ) {
+				EnumCheeseStage stage = cheese.getStage();
+				if( stage == EnumCheeseStage.CUT )
+					stage = EnumCheeseStage.AGED;	// Is a full wheel
+				stack = cheese.getType().getCheeseBlocks().asStackForStage(cheese.getTopSlicesMax(), stage);
+			}
+			
+			if (stack != null)
+				list.add(stack);
+		}
+		
 		return list;
 	}
 
@@ -105,7 +131,10 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	public ItemStack asItemStack()
 	{
 		final ICheeseBlockStackFactory blockStackFactory = cheese.getType().getCheeseBlocks();
-		final ItemStack stack = blockStackFactory.asStackForStage(cheese.getSlices(), blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
+		final int numSlices = MathHelper.clamp(cheese.getSlices(), 0, cheese.getTopSlicesMax());	// NOTE: Not a full representation! Is clamped by maximal slices of a single wheel.
+		if( numSlices <= 0 )
+			return ItemStack.EMPTY;
+		final ItemStack stack = blockStackFactory.asStackForStage(numSlices, blockStackFactory.getInitialStage());  // GrowthcraftMilkBlocks.cheeseBlock.asStack();
 		final NBTTagCompound tag = ItemBlockCheeseBlock.openNBT(stack);
 		writeToNBTForItem(tag);
 		return stack;
@@ -158,19 +187,45 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 	public boolean tryPlaceItem(IItemOperable.Action action, EntityPlayer player, ItemStack onHand)
 	{
 		if (IItemOperable.Action.RIGHT != action) return false;
-		if( cheese.tryWaxing(onHand) ) {
-			if( !player.capabilities.isCreativeMode ) {
-				if( onHand.getCount() > 1 ) {
-					onHand.shrink(1);
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, onHand);
-				}
-				else
-					player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);				
-			}
-			markDirtyAndUpdate(); // Test, if correct
+		
+		int consumeAmount = cheese.canWaxing(onHand);
+		if( consumeAmount > 0 ) {
+			// Waxing
+			cheese.setStage(EnumCheeseStage.UNAGED);
+			updateOnTryPlaceItem(consumeAmount, player, onHand);
 			return true;
 		}
+		
+		consumeAmount = cheese.canStack(onHand);
+		if( consumeAmount > 0 ) {
+			// Stacking
+			cheese.stackWheel(onHand, true);
+
+			// placement sound
+			{
+				World world = player.getEntityWorld();
+				IBlockState state = world.getBlockState(pos);
+				SoundType soundtype = getBlockType().getSoundType(state, world, pos, player);
+				world.playSound(null, pos, soundtype.getPlaceSound(), SoundCategory.BLOCKS, (soundtype.getVolume() + 1.0F) / 2.0F, soundtype.getPitch() * 0.8F);
+			}
+
+			updateOnTryPlaceItem(consumeAmount, player, onHand);
+			return true;
+		}
+
 		return false;
+	}
+	
+	private void updateOnTryPlaceItem(int consumeAmount, EntityPlayer player, ItemStack onHand) {
+		if( !player.capabilities.isCreativeMode ) {
+			if( onHand.getCount() > consumeAmount ) {
+				onHand.shrink(consumeAmount);
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, onHand);
+			}
+			else
+				player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);				
+		}
+		markDirtyAndUpdate(); // Test, if correct
 	}
 
 	@Override
@@ -179,6 +234,9 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		if (IItemOperable.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
+			if( !ItemTest.itemMatchesOre(onHand, "toolKnife") )
+				return false;
+			
 			final ItemStack stack = cheese.yankSlices(1, true);
 			if (!ItemUtils.isEmpty(stack))
 			{
