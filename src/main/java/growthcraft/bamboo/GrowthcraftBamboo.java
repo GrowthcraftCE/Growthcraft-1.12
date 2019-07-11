@@ -3,6 +3,7 @@ package growthcraft.bamboo;
 import growthcraft.bamboo.common.CommonProxy;
 import growthcraft.bamboo.common.Init;
 import growthcraft.bamboo.shared.Reference;
+import growthcraft.bamboo.shared.config.GrowthcraftBambooConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -21,11 +22,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
-	dependencies = "required-after:"+growthcraft.core.shared.Reference.MODID)
+        dependencies = "required-after:" + growthcraft.core.shared.Reference.MODID)
 public class GrowthcraftBamboo {
     private static final String CLIENT_PROXY_CLASS = "growthcraft.bamboo.client.ClientProxy";
     private static final String SERVER_PROXY_CLASS = "growthcraft.bamboo.common.CommonProxy";
-    
+
     public static Configuration configuration;
 
     @Mod.Instance(Reference.MODID)
@@ -36,53 +37,63 @@ public class GrowthcraftBamboo {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-        Init.preInitBlocks();
-        Init.preInitItems();
-        proxy.preInit();
+        GrowthcraftBambooConfig.preInit(event);
+
+        if (GrowthcraftBambooConfig.enableGrowthcraftBamboo) {
+            Init.preInitBlocks();
+            Init.preInitItems();
+            proxy.preInit();
+        }
     }
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-        Init.registerRecipes();
-        proxy.init();
+        if (GrowthcraftBambooConfig.enableGrowthcraftBamboo) {
+            Init.registerRecipes();
+            Init.registerSmeltingRecipes();
+            proxy.init();
+        }
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
+        // Nothing to do here at this time.
     }
-    
-	@Mod.EventHandler
-	public void construct(FMLConstructionEvent event)
-	{
-		MinecraftForge.EVENT_BUS.register(this);
-	}
 
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		IForgeRegistry<Block> registry = event.getRegistry();
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-        Init.registerBlocks(registry);
-        
-        proxy.registerStateMappers();
-	}
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+        if (GrowthcraftBambooConfig.enableGrowthcraftBamboo) {
+            IForgeRegistry<Block> registry = event.getRegistry();
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event)
-	{
-		IForgeRegistry<Item> registry = event.getRegistry();
-		
-        Init.registerItems(registry);
-        Init.registerBlockItems(registry);
-        
-        proxy.postRegisterItems();
-	}
-    
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
-        Init.registerItemRenders();
-        Init.registerBlockRenders();
-	}	
+            Init.registerBlocks(registry);
+
+            proxy.registerStateMappers();
+        }
+    }
+
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        if (GrowthcraftBambooConfig.enableGrowthcraftBamboo) {
+            IForgeRegistry<Item> registry = event.getRegistry();
+
+            Init.registerItems(registry);
+            Init.registerBlockItems(registry);
+
+            proxy.postRegisterItems();
+        }
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void registerModels(ModelRegistryEvent event) {
+        if (GrowthcraftBambooConfig.enableGrowthcraftBamboo) {
+            Init.registerItemRenders();
+            Init.registerBlockRenders();
+        }
+    }
 }

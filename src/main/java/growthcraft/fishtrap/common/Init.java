@@ -4,12 +4,15 @@ import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.fishtrap.common.block.BlockFishtrap;
 import growthcraft.fishtrap.common.tileentity.TileEntityFishtrap;
 import growthcraft.fishtrap.shared.Reference;
+import growthcraft.fishtrap.shared.config.GrowthcraftFishtrapConfig;
 import growthcraft.fishtrap.shared.init.GrowthcraftFishtrapBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
@@ -47,7 +50,13 @@ public class Init {
         //////////
 	// Items
 	//////////
-
+    public static void registerItemOres() {
+	    if (GrowthcraftFishtrapConfig.FISHTRAP_BAIT_TABLE.size() > 0) {
+            GrowthcraftFishtrapConfig.FISHTRAP_BAIT_TABLE.forEach(
+                    name -> OreDictionary.registerOre("baitFishing", Item.REGISTRY.getObject( new ResourceLocation(name)))
+                    );
+        }
+    }
 	
 	//////////
 	// Recipes

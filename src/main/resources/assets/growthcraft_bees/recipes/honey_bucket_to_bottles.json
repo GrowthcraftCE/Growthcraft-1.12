@@ -1,0 +1,33 @@
+{
+  "_comment": [ "Convert a bucket of honey into four bottles of honey." ],
+  "type": "minecraft:crafting_shapeless",
+  "group": "honey",
+  "ingredients": [
+    {
+      "type": "minecraft:item_nbt",
+      "item": "forge:bucketFilled",
+      "nbt": {
+        "FluidName": "honey",
+        "Amount": 1000
+      }
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+
+  ],
+  "result": {
+    "item": "growthcraft_bees:bottlefluid_honey",
+    "count": 4
+  }
+
+}

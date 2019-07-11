@@ -37,6 +37,18 @@
       },
       4: {
         "model": "growthcraft_milk:cheese_block_slices4"
+      },
+      5: {
+        "model": "growthcraft_milk:cheese_block_double_slices1"
+      },
+      6: {
+        "model": "growthcraft_milk:cheese_block_double_slices2"
+      },
+      7: {
+        "model": "growthcraft_milk:cheese_block_double_slices3"
+      },
+      8: {
+        "model": "growthcraft_milk:cheese_block_double_slices4"
       }
     },
     "typexstage": {

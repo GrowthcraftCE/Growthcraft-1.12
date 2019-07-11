@@ -8,6 +8,7 @@ import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 
@@ -25,9 +26,22 @@ public class GrowthcraftBeesItems {
 	public static ItemTypeDefinition<ItemBoozeBottle> honeyMeadBottle;
 
     public enum BeesWaxTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
-        NORMAL(0, "normal"),
-        RED(1, "red"),
-        BLACK(2, "black")
+        WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getUnlocalizedName()),
+        ORANGE(EnumDyeColor.ORANGE.getMetadata(), EnumDyeColor.ORANGE.getUnlocalizedName()),
+        MAGENTA(EnumDyeColor.MAGENTA.getMetadata(), EnumDyeColor.MAGENTA.getUnlocalizedName()),
+        LIGHTBLUE(EnumDyeColor.LIGHT_BLUE.getMetadata(), EnumDyeColor.LIGHT_BLUE.getUnlocalizedName()),
+        NORMAL(EnumDyeColor.YELLOW.getMetadata(), "normal"),
+        LIME(EnumDyeColor.LIME.getMetadata(), EnumDyeColor.LIME.getUnlocalizedName()),
+        PINK(EnumDyeColor.PINK.getMetadata(), EnumDyeColor.PINK.getUnlocalizedName()),
+        GRAY(EnumDyeColor.GRAY.getMetadata(), EnumDyeColor.GRAY.getUnlocalizedName()),
+        SILVER(EnumDyeColor.SILVER.getMetadata(), EnumDyeColor.SILVER.getUnlocalizedName()),
+        CYAN(EnumDyeColor.CYAN.getMetadata(), EnumDyeColor.CYAN.getUnlocalizedName()),
+        PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getUnlocalizedName()),
+        BLUE(EnumDyeColor.BLUE.getMetadata(), EnumDyeColor.BLUE.getUnlocalizedName()),
+        BROWN(EnumDyeColor.BROWN.getMetadata(), EnumDyeColor.BROWN.getUnlocalizedName()),
+        GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
+        RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName()),
+        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName())
         ;
 
         private int ID;

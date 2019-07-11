@@ -78,18 +78,14 @@ public class BlockFishtrap extends GrowthcraftBlockContainer {
 
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-        if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ))
-            return true;
 
-        if (worldIn.isRemote)
-        {
+        if (worldIn.isRemote) {
             return true;
-        }
-        else
-        {
+        } else {
             final TileEntityFishtrap te = getTileEntity(worldIn, pos);
             if ( te != null ) {
                 playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
+                return true;
             }
             return false;
         }

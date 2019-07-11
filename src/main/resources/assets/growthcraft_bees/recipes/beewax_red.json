@@ -4,7 +4,7 @@
     "ingredients": [
         {
             "item": "growthcraft_bees:bees_wax",
-            "data": 0
+            "data": 4
         },
         {
         	"item": "minecraft:dye",
@@ -13,6 +13,6 @@
     ],
     "result": {
         "item": "growthcraft_bees:bees_wax",
-        "data": 1
+        "data": 14
     }
 }

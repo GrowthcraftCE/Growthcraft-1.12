@@ -2,7 +2,20 @@ fluid.fluid_honey=Honey
 
 item.bee.name=Bee
 
-item.bees_wax.normal.name=Beeswax
+item.bees_wax.white.name=White Beeswax
+item.bees_wax.orange.name=Orange Beeswax
+item.bees_wax.magenta.name=Magenta Beeswax
+item.bees_wax.light_blue.name=Light Blue Beeswax
+item.bees_wax.normal.name=Yellow Beeswax
+item.bees_wax.lime.name=Lime Beeswax
+item.bees_wax.pink.name=Pink Beeswax
+item.bees_wax.gray.name=Gray Beeswax
+item.bees_wax.silver.name=Light Gray Beeswax
+item.bees_wax.cyan.name=Cyan Beeswax
+item.bees_wax.purple.name=Purple Beeswax
+item.bees_wax.blue.name=Blue Beeswax
+item.bees_wax.brown.name=Brown Beeswax
+item.bees_wax.green.name=Green Beeswax
 item.bees_wax.red.name=Red Beeswax
 item.bees_wax.black.name=Black Beeswax
 

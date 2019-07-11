@@ -1,22 +1,20 @@
 package growthcraft.bees.common.lib.config;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.shared.Reference;
-import growthcraft.core.shared.item.ItemKey;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.block.BlockKey;
+import growthcraft.core.shared.item.ItemKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class BeesRegistry
 {
@@ -162,14 +160,6 @@ public class BeesRegistry
 		addFlower(flower, ItemKey.WILDCARD_VALUE);
 	}
 
-	//FIXME: okay this java doc probably needs some fixing.
-	/**
-	 * Adds a custom flower the mod.
-	 * NOTE: This is meta-sensitive.
-	 *
-	 * @param flower - Block to be registered.
-	 * @param meta   - Metadata of the block to be registered.
-	 */
 	public void addFlower(@Nonnull IBlockState flower)
 	{
 		addFlower(new BlockKey(flower), new GenericFlowerBlockEntry(flower));

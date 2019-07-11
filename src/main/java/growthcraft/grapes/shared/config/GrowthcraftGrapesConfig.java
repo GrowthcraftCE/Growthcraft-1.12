@@ -25,4 +25,6 @@ public class GrowthcraftGrapesConfig {
 	public static int grapeVineSupportedLength = 3;
 	public static float grapeVineSeedlingGrowthRate = 25.0f;
 	public static float grapeVineTrunkGrowthRate = 25.0f;
+
+	public static int chanceVineDropGrapeSeeds = 10;
 }

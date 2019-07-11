@@ -5,6 +5,7 @@ import growthcraft.fishtrap.client.gui.GuiHandler;
 import growthcraft.fishtrap.common.CommonProxy;
 import growthcraft.fishtrap.common.Init;
 import growthcraft.fishtrap.shared.Reference;
+import growthcraft.fishtrap.shared.config.GrowthcraftFishtrapConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -38,6 +39,7 @@ public class GrowthcraftFishtrap {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+		GrowthcraftFishtrapConfig.preInit(event);
         Init.initBlocks();
         proxy.preInit();
     }
@@ -55,6 +57,7 @@ public class GrowthcraftFishtrap {
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
     	proxy.postInit();
+    	Init.registerItemOres();
     }
 
 	@Mod.EventHandler

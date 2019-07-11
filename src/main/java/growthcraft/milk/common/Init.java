@@ -184,6 +184,7 @@ public class Init {
     	GrowthcraftMilkItems.butter = new ItemDefinition( new ItemButter("butter", 2, 0.3F, false) );
     	GrowthcraftMilkItems.iceCream = new ItemDefinition( new ItemIceCream("ice_cream", 2, 0.3F, false) );
     	GrowthcraftMilkItems.yogurt = new ItemDefinition( new ItemYogurt("yogurt", 2, 0.3F, false) );
+    	GrowthcraftMilkItems.knife = new ItemDefinition( new ItemKnife("knife") );
     	GrowthcraftMilkItems.agedCheeseSlice = new ItemDefinition( new ItemAgedCheeseSlice("cheese_aged_slice", 2, 0.3F, false) );
     	GrowthcraftMilkItems.agedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock(), AgedCheeseTypes.values()) );
     	GrowthcraftMilkItems.waxedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock(), WaxedCheeseTypes.values()) );
@@ -213,6 +214,8 @@ public class Init {
     	GrowthcraftMilkItems.iceCream.registerItem(registry);
     	GrowthcraftMilkItems.yogurt.getItem().setCreativeTab(tabGrowthcraft);
     	GrowthcraftMilkItems.yogurt.registerItem(registry);
+    	GrowthcraftMilkItems.knife.getItem().setCreativeTab(tabGrowthcraft);
+    	GrowthcraftMilkItems.knife.registerItem(registry);
     	GrowthcraftMilkItems.agedCheeseSlice.getItem().setCreativeTab(tabGrowthcraft);
     	GrowthcraftMilkItems.agedCheeseSlice.registerItem(registry);
     	GrowthcraftMilkItems.waxedCheeseSlice.getItem().setCreativeTab(tabGrowthcraft);
@@ -257,6 +260,7 @@ public class Init {
 			OreDictionary.registerOre("foodCheese", e.getCheeseItems().asStack());
 		}
 
+		OreDictionary.registerOre("toolKnife", GrowthcraftMilkItems.knife.getItem());
 		OreDictionary.registerOre("foodYogurt", GrowthcraftMilkItems.yogurt.asStack());
 		OreDictionary.registerOre("materialStomach", GrowthcraftMilkItems.stomach.asStack());
 		OreDictionary.registerOre("rennetSource", GrowthcraftMilkItems.thistle.getItem());
@@ -323,6 +327,7 @@ public class Init {
 		GrowthcraftMilkItems.butter.registerRenders(ButterTypes.class);
 		GrowthcraftMilkItems.iceCream.registerRenders(IceCreamTypes.class);
 		GrowthcraftMilkItems.yogurt.registerRenders(YogurtTypes.class);
+		GrowthcraftMilkItems.knife.registerRender();
 		GrowthcraftMilkItems.agedCheeseSlice.registerRenders(AgedCheeseTypes.class);
 		GrowthcraftMilkItems.waxedCheeseSlice.registerRenders(WaxedCheeseTypes.class);
 		GrowthcraftMilkItems.simpleCheeseSlice.registerRenders(SimpleCheeseTypes.class);

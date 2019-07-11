@@ -1,0 +1,25 @@
+{
+  "pools": [
+    {
+      "name": "grapes",
+      "rolls": 4,
+      "entries": [
+        {
+          "type": "item",
+          "name": "growthcraft_grapes:grape",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "set_data",
+              "data": { "min": 13, "max":  14 }
+            },
+            {
+              "function": "set_count",
+              "count": { "min":  1, "max":  5 }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

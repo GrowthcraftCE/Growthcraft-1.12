@@ -1,8 +1,8 @@
 Growthcraft
 ===========
 [![](http://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-4.0.4.500-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.12)
-[![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-14.23.4.2705-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-4.0.5.200-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.12)
+[![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-14.23.4.2768-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html)
 [![Java Version](https://img.shields.io/badge/JAVA-8-blue.svg)](https://www.java.com/en/)
 [![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.12.svg?branch=development)](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.12)
 [![Discord Channel](https://img.shields.io/discord/333690296334548994.svg?color=green)](https://discord.gg/Quh76Jn)
