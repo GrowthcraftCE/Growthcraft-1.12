@@ -27,7 +27,7 @@ public class CheeseUtils {
 		return meta >> 5;
 	}
 
-	public static int getSlicesFromMeta(int meta) {
+	public static int getTopSlicesFromMeta(int meta) {
 		return ((meta >> 3) & 0x3) + 1;
 	}
 	
