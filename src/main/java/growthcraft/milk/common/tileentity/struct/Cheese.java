@@ -155,12 +155,13 @@ public class Cheese implements IStreamable
 				if( cheeseStage != EnumCheeseStage.CUT && cheeseStage != EnumCheeseStage.AGED )
 					return false;
 			}
-
+			
 			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
 			if( variantID != cheese.getVariantID() )
 				return false;
 
 			// Do stacking
+			boolean mustBeCut = stage == EnumCheeseStage.CUT || cheeseStage == EnumCheeseStage.CUT;
 			int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
 			if( curSlices != topSlicesMax ) {
 				if( topSlices != topSlicesMax )
@@ -169,11 +170,16 @@ public class Cheese implements IStreamable
 				if( doStack ) {
 					isDoubleStacked = true;
 					topSlices = curSlices;
+					if( mustBeCut )
+						cheeseStage = EnumCheeseStage.CUT;
 				}
 			}
 			else {
-				if( doStack )
+				if( doStack ) {
 					isDoubleStacked = true;
+					if( mustBeCut )
+						cheeseStage = EnumCheeseStage.CUT;
+				}
 			}
 			
 			return true;
