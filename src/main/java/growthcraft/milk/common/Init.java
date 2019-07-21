@@ -188,7 +188,7 @@ public class Init {
     	GrowthcraftMilkItems.agedCheeseSlice = new ItemDefinition( new ItemAgedCheeseSlice("cheese_aged_slice", 3, 0.3F, false) );
     	GrowthcraftMilkItems.agedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock(), AgedCheeseTypes.values()) );
     	GrowthcraftMilkItems.waxedCheeseBlockItem = new ItemDefinition( new ItemBlockCheeseBlock<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock(), WaxedCheeseTypes.values()) );
-    	GrowthcraftMilkItems.waxedCheeseSlice = new ItemDefinition( new ItemWaxedCheeseSlice("cheese_waxed_slice", 5, 0.3F, false) );
+    	GrowthcraftMilkItems.waxedCheeseSlice = new ItemDefinition( new ItemWaxedCheeseSlice("cheese_waxed_slice", 4, 0.3F, false) );
     	GrowthcraftMilkItems.simpleCheeseSlice = new ItemDefinition( new ItemCheeseBowl("cheese_simple_slice", 2, 0.3F, false) );
     	GrowthcraftMilkItems.agedCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseCurds.getBlock(), AgedCheeseTypes.values()) );
     	GrowthcraftMilkItems.waxedCheeseCurdsItem = new ItemDefinition( new ItemBlockHangingCurds<WaxedCheeseTypes>(GrowthcraftMilkBlocks.waxedCheeseCurds.getBlock(), WaxedCheeseTypes.values()) );
