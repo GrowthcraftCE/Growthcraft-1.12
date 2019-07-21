@@ -1,25 +1,23 @@
 package growthcraft.milk.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
+import growthcraft.core.shared.compat.theoneprobe.ITheOneProbeInfoProvider;
 import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
 import growthcraft.milk.shared.Reference;
-import net.minecraft.block.Block;
+import mcjty.theoneprobe.api.IProbeHitData;
+import mcjty.theoneprobe.api.IProbeInfo;
+import mcjty.theoneprobe.api.ProbeMode;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
@@ -31,13 +29,18 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Growthcraft Milk: Cheese Vat
  * <p>
  * The cheese vat is used to make cheese. To get started making cheese, you will need a cheese vat, culture jar, and a
  * sword. The cheese vat will take five buckets (LEVEL) of milk.
  */
-public class BlockCheeseVat extends GrowthcraftBlockContainer {
+public class BlockCheeseVat extends GrowthcraftBlockContainer implements ITheOneProbeInfoProvider {
     // The amount of milk in the Cheese Vat
 
 //    public static final PropertyInteger LEVEL = PropertyInteger.create("level", 0, 5);
@@ -56,6 +59,7 @@ public class BlockCheeseVat extends GrowthcraftBlockContainer {
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setResistance(5.0F);
         this.setHardness(2.0F);
+        this.setHarvestLevel("pickaxe", 1);
         this.setSoundType(SoundType.METAL);
         this.useNeighborBrightness = true;
 //        this.setDefaultState(this.blockState.getBaseState().withProperty(LEVEL, Integer.valueOf(0)));
@@ -164,5 +168,24 @@ public class BlockCheeseVat extends GrowthcraftBlockContainer {
 			return te.calcRedstone();
 		}
 		return 0;
+	}
+
+	@Override
+	public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
+		TileEntity tileEntity = world.getTileEntity(data.getPos());
+		if ( tileEntity instanceof TileEntityCheeseVat ) {
+			probeInfo.horizontal(
+					probeInfo.defaultLayoutStyle()
+			).text("Status: " + ((TileEntityCheeseVat) tileEntity).getVatState());
+
+			int tileEntityProgress = ((TileEntityCheeseVat) tileEntity).getDeviceProgressScaled(100);
+			if ( tileEntityProgress > 0 ) {
+				probeInfo.horizontal(
+						probeInfo.defaultLayoutStyle())
+						.progress(((TileEntityCheeseVat) tileEntity).getDeviceProgressScaled(100), 100, probeInfo.defaultProgressStyle().suffix("%"));
+			}
+
+
+		}
 	}
 }
