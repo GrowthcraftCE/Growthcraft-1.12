@@ -40,6 +40,10 @@
 		}
       },
       "5": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/casu_marzu_curds",
+			"particle": "growthcraft_milk:blocks/cheese/casu_marzu_curds"
+		}
       },
       "6": {
       },

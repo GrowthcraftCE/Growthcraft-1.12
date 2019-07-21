@@ -22,8 +22,16 @@
 		}
       },
       "2": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/gouda_curds",
+			"particle": "growthcraft_milk:blocks/cheese/gouda_curds"
+		}
       },
       "3": {
+		"textures": {
+			"1": "growthcraft_milk:blocks/cheese/provolone_curds",
+			"particle": "growthcraft_milk:blocks/cheese/provolone_curds"
+		}
       },
       "4": {
       },
