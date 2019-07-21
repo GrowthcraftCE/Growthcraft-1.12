@@ -120,14 +120,20 @@ tile.cheese_waxed.cheddar.unaged.name=Cheddar Cheese (Unaged)
 tile.cheese_waxed.cheddar.unwaxed.name=Cheddar Cheese (Unwaxed)
 tile.cheese_waxed.cheddar.cut.name=Cheddar Cheese (Aged)
 
+tile.cheese_waxed.gouda.aged.name=Gouda Cheese (Aged)
+tile.cheese_waxed.gouda.unaged.name=Gouda Cheese (Unaged)
 tile.cheese_waxed.gouda.unwaxed.name=Gouda Cheese (Unwaxed)
+tile.cheese_waxed.gouda.cut.name=Gouda Cheese (Aged)
 
 tile.cheese_waxed.monterey.aged.name=Monterey Cheese (Aged)
 tile.cheese_waxed.monterey.unaged.name=Monterey Cheese (Unaged)
 tile.cheese_waxed.monterey.unwaxed.name=Monterey Cheese (Unwaxed)
 tile.cheese_waxed.monterey.cut.name=Monterey Cheese (Aged)
 
+tile.cheese_waxed.provolone.aged.name=Provolone Cheese (Aged)
+tile.cheese_waxed.provolone.unaged.name=Provolone Cheese (Unaged)
 tile.cheese_waxed.provolone.unwaxed.name=Provolone Cheese (Unwaxed)
+tile.cheese_waxed.provolone.cut.name=Provolone Cheese (Aged)
 
 tile.curds_aged.casu_marzu.name=Casu Marzu Curds
 tile.curds_aged.gorgonzola.name=Gorgonzola Curds
