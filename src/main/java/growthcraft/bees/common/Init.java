@@ -125,6 +125,8 @@ public class Init {
 		OreDictionary.registerOre("materialBeeswaxBlack", BeesWaxTypes.BLACK.asStack());
 		OreDictionary.registerOre("materialBeeswaxRed", BeesWaxTypes.RED.asStack());
 		OreDictionary.registerOre("materialBeeswaxBlue", BeesWaxTypes.BLUE.asStack());
+		OreDictionary.registerOre("materialBeeswaxWhite", BeesWaxTypes.WHITE.asStack());
+		OreDictionary.registerOre("materialBeeswaxNormal", BeesWaxTypes.NORMAL.asStack());
 //		OreDictionary.registerOre("beeQueen", GrowthcraftBeesItems.bee.getItem());
 		OreDictionary.registerOre("materialWaxcomb", GrowthcraftBeesItems.honeyCombEmpty.getItem());
 		OreDictionary.registerOre("beecomb", GrowthcraftBeesItems.honeyCombEmpty.getItem());
