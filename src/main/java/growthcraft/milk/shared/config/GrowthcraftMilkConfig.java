@@ -8,7 +8,7 @@ public class GrowthcraftMilkConfig {
 	public static boolean milkEnabled = true;
 	public static boolean fantasyMilkEffects = true;
 	public static int cheeseMaxAge = 1200;
-	public static int cheeseItemPerBlockSlice = 32;
+	public static int cheeseItemPerBlockSlice = 4;
 	public static int cheeseVatPrimaryTankCapacity = 5000;
 	public static int cheeseVatRennetTankCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
 	public static int cheeseVatWasteTankCapacity = 1000;
