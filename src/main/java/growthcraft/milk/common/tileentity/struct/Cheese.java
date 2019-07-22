@@ -121,7 +121,7 @@ public class Cheese implements IStreamable
 		{
 			if (doYank)
 			{
-				if( this.topSlices < yankedCount ) {
+				if( this.topSlices <= yankedCount ) {
 					if( isDoubleStacked ) {
 						this.topSlices = this.topSlicesMax + this.topSlices - yankedCount;
 						isDoubleStacked = false;
