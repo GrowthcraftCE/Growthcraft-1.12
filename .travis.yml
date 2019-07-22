@@ -26,7 +26,7 @@ install: ./gradlew setupCIWorkspace -S
 
 script:
 - ./gradlew build
-- sonar-scanner -x
+- sonar-scanner -X
 - ls -la build/libs
 
 # Deploy the artifacts back to GitHub
