@@ -131,5 +131,20 @@
     "screenshots": [],
     "dependencies": ["mod_MinecraftForge", "growthcraft"],
     "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_rice",
+    "name": "Growthcraft Rice",
+    "description": "Growthcraft Rice - Add rice farming and things to make with rice.",
+    "version": "4.0.5.200",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": ["Alatyami", "Avatair", "Kisutora"],
+    "credits": "1.7.10 IceDragon, Gwafu",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": ["mod_MinecraftForge", "growthcraft"],
+    "parent": "growthcraft"
   }
 ]
