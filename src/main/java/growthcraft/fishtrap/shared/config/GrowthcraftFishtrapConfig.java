@@ -1,7 +1,7 @@
 package growthcraft.fishtrap.shared.config;
 
 import growthcraft.core.shared.GrowthcraftLogger;
-import growthcraft.core.shared.Reference;
+import growthcraft.fishtrap.shared.Reference;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.Level;
