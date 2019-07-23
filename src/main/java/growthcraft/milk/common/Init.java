@@ -261,6 +261,9 @@ public class Init {
 		}
 
 		OreDictionary.registerOre("toolKnife", GrowthcraftMilkItems.knife.getItem());
+		for( ItemStack stack : OreDictionary.getOres("itemFoodCutter") ) 
+			OreDictionary.registerOre("toolKnife", stack);
+		
 		OreDictionary.registerOre("foodYogurt", GrowthcraftMilkItems.yogurt.asStack());
 		OreDictionary.registerOre("materialStomach", GrowthcraftMilkItems.stomach.asStack());
 		OreDictionary.registerOre("rennetSource", GrowthcraftMilkItems.thistle.getItem());
