@@ -1,0 +1,5 @@
+{
+  "recipes": {
+    "shapeless_recipe_with_bucket": "growthcraft.bees.common.crafting.recipe.ShapelessRecipeWithBucket$Factory"
+  }
+}
