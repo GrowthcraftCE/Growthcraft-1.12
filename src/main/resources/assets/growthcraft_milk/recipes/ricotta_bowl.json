@@ -1,0 +1,27 @@
+{
+  "type": "forge:ore_shapeless",
+  "group": "ice_cream",
+  "ingredients": [
+    {
+      "item": "growthcraft_milk:curds_simple",
+      "data": 24
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:bowl"
+    }
+  ],
+  "result": {
+    "item": "growthcraft_milk:cheese_simple_slice",
+    "data": 0,
+    "count": 4
+  }
+}

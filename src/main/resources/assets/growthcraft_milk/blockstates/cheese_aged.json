@@ -23,13 +23,13 @@
       }
     },
     "slicescount": {
-      0: {
+      "0": {
         "model": "growthcraft:dummy"
       },
-      1: {
+      "1": {
         "model": "growthcraft_milk:cheese_block_slices1"
       },
-      2: {
+      "2": {
         "model": "growthcraft_milk:cheese_block_slices2"
       },
       3: {
