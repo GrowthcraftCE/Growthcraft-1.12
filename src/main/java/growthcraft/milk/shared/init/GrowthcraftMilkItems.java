@@ -330,7 +330,6 @@ public class GrowthcraftMilkItems {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-//					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getVariantID());
 					return GrowthcraftMilkItems.simpleCheeseSlice.asStack(size, getVariantID());
 				}
 			};
