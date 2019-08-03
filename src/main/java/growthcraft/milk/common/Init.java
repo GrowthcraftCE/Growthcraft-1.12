@@ -61,7 +61,6 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -70,7 +69,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
@@ -921,20 +919,6 @@ public class Init {
 	}
 	
 	public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
-		// TODO: Use recipe factory instead factory 
-		final int ricottaBowlCount = GrowthcraftMilkConfig.ricottaBowlCount;
-
-		GameRegistry.addShapelessRecipe(
-				new ResourceLocation(Reference.MODID, "ricotta"),
-				null,
-				SimpleCheeseTypes.RICOTTA.getCheeseItems().asStack(ricottaBowlCount),
-				Ingredient.fromItem(SimpleCheeseTypes.RICOTTA.getCurdBlocks().asStack().getItem()),
-				Ingredient.fromItem(Items.BOWL),
-				Ingredient.fromItem(Items.BOWL),
-				Ingredient.fromItem(Items.BOWL),
-				Ingredient.fromItem(Items.BOWL)
-		);
-
 		// TODO: Register non-standard Cheese Vat recipes.
 		//			- Cheese
 
