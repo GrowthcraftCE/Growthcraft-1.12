@@ -1,16 +1,10 @@
 package growthcraft.grapes.common.blocks;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
-import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.grapes.common.utils.GrapeBlockCheck;
 import growthcraft.grapes.common.utils.GrapeTypeUtils;
 import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
@@ -38,6 +32,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
 
 public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope {
 
@@ -106,9 +106,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	 * Use this method to check if the block can grow outwards on a rope
 	 *
 	 * @param world - the world
-	 * @param x - x coord
-	 * @param y - y coord
-	 * @param z - z coord
+	 * @param pos - block pos offset to check
 	 * @return true if the block can grow here, false otherwise
 	 */
 	public boolean canGrowOutwardsOnRope(World world, BlockPos pos)
@@ -119,23 +117,46 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		if (BlockCheck.isRope(world.getBlockState(pos.add(0, 0, -1)).getBlock())) return true;
 		return false;
 	}
-	
+
+	/**
+	 * Check the surrounding blocks to identify if the given block at pos is connected to a vine trunk.
+	 * @param world - the world
+	 * @param pos - block pos to base the check from
+	 * @return true if the given block at pos can grow outwards
+	 */
 	public boolean canGrowOutwards(World world, BlockPos pos)
 	{
-		final boolean leavesTotheSouth = world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
+
+		final boolean leavesToTheSouth = world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
 		final boolean leavesToTheNorth = world.getBlockState(pos.add(0, 0, -1)).getBlock() == this;
 		final boolean leavesToTheEast = world.getBlockState(pos.add(1, 0, 0)).getBlock() == this;
 		final boolean leavesToTheWest = world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this;
 
-		if (!leavesTotheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
+		/*
+		 * If the neighbor block is not a grape leaves block, then the given block at pos cannot grow outward.
+		 */
+		if (!leavesToTheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
 
-		for (int i = 1; i <= grapeVineSupportedLength; ++i)
-		{
-			if (leavesTotheSouth && isTrunk(world, pos.add(0, -1, i))) return true;
-			if (leavesToTheNorth && isTrunk(world, pos.add(0, -1, -i))) return true;
-			if (leavesToTheEast && isTrunk(world, pos.add(i, -1, 0))) return true;
-			if (leavesToTheWest && isTrunk(world, pos.add(-i, -1, 0))) return true;
+		/*
+		 * Iterate over all of the blocks within the max growth area to determine if we have a grape vine trunk
+		 * within range. We have to have a trunk that is one level below pos.
+		 */
+		Iterator var3 = BlockPos.getAllInBoxMutable(
+				pos.add(-(grapeVineSupportedLength), -1, -(grapeVineSupportedLength)),
+				pos.add(grapeVineSupportedLength, 0, grapeVineSupportedLength)
+		).iterator();
+
+		BlockPos.MutableBlockPos blockpos$mutableblockpos;
+
+		while (var3.hasNext()) {
+			blockpos$mutableblockpos = (BlockPos.MutableBlockPos) var3.next();
+
+			if ( world.getBlockState(blockpos$mutableblockpos).getBlock() != null
+					&& GrapeBlockCheck.isGrapeVineTrunk(world.getBlockState(blockpos$mutableblockpos).getBlock())) {
+				return true;
+			}
 		}
+
 		return false;
 	}
 
@@ -143,9 +164,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	 * Variation of canGrowOutwards, use this method to check rope blocks
 	 *
 	 * @param world - the world
-	 * @param x - x coord
-	 * @param y - y coord
-	 * @param z - z coord
+	 * @param pos - blockpos to check
 	 * @return true if the block can grow here, false otherwise
 	 */
 	public boolean canGrowHere(World world, BlockPos pos)
