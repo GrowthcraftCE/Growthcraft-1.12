@@ -1,12 +1,10 @@
 package growthcraft.grapes.common.blocks;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
+import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
-import growthcraft.core.shared.block.BlockCheck;
+import net.minecraft.block.BlockDirt;
+import net.minecraft.block.BlockGrass;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -19,6 +17,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	
@@ -146,7 +147,9 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
 	public boolean canBlockStay(World worldIn, BlockPos pos, IBlockState state)
 	{
 		BlockPos down = pos.down();
-		return BlockCheck.canSustainPlant(worldIn, down, EnumFacing.UP, this) ||
-			this == worldIn.getBlockState(down).getBlock();
+		return BlockCheck.canSustainPlant(worldIn, down, EnumFacing.UP, this)
+				|| this == worldIn.getBlockState(down).getBlock()
+				|| worldIn.getBlockState(down).getBlock() instanceof BlockDirt
+				|| worldIn.getBlockState(down).getBlock() instanceof BlockGrass;
 	}
 }
