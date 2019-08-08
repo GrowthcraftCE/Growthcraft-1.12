@@ -1,16 +1,10 @@
 package growthcraft.grapes.common.blocks;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
+import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
-import growthcraft.core.shared.block.BlockCheck;
 import growthcraft.grapes.common.utils.GrapeBlockCheck;
 import growthcraft.grapes.common.utils.GrapeTypeUtils;
 import growthcraft.grapes.shared.config.GrowthcraftGrapesConfig;
@@ -39,8 +33,15 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
+
 public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope {
 
+	// region Properties
+	//=================================================================================================================
 	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 0, 0.0625 * 0, 0.0625 * 16, 0.0625 * 16, 0.0625 * 16);
 
 	private final int grapeLeavesGrowthRate = GrowthcraftGrapesConfig.grapeLeavesGrowthRate;
@@ -59,6 +60,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	
 	private final BlockGrapeFruit blockFruit;
 	private final IGrapeType[] grapeTypes;
+
+	// endregion
 	
 	public BlockGrapeLeaves(IGrapeType[] grapeTypes, BlockGrapeFruit blockFruit) {
 		super();
@@ -91,24 +94,12 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, getBoundingBox(state, worldIn, pos));
     }
-    
-	private boolean isTrunk(World world, BlockPos pos)
-	{
-		return GrapeBlockCheck.isGrapeVineTrunk(world.getBlockState(pos).getBlock());
-	}
 
-	public boolean isSupportedByTrunk(World world, BlockPos pos)
-	{
-		return isTrunk(world, pos.down());
-	}
-    
 	/**
 	 * Use this method to check if the block can grow outwards on a rope
 	 *
 	 * @param world - the world
-	 * @param x - x coord
-	 * @param y - y coord
-	 * @param z - z coord
+	 * @param pos - block pos offset to check
 	 * @return true if the block can grow here, false otherwise
 	 */
 	public boolean canGrowOutwardsOnRope(World world, BlockPos pos)
@@ -119,33 +110,34 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		if (BlockCheck.isRope(world.getBlockState(pos.add(0, 0, -1)).getBlock())) return true;
 		return false;
 	}
-	
+
+	/**
+	 * Check the surrounding blocks to identify if the given block at pos is connected to a vine trunk.
+	 * @param world - the world
+	 * @param pos - block pos to base the check from
+	 * @return true if the given block at pos can grow outwards
+	 */
 	public boolean canGrowOutwards(World world, BlockPos pos)
 	{
-		final boolean leavesTotheSouth = world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
+
+		final boolean leavesToTheSouth = world.getBlockState(pos.add(0, 0, 1)).getBlock() == this;
 		final boolean leavesToTheNorth = world.getBlockState(pos.add(0, 0, -1)).getBlock() == this;
 		final boolean leavesToTheEast = world.getBlockState(pos.add(1, 0, 0)).getBlock() == this;
 		final boolean leavesToTheWest = world.getBlockState(pos.add(-1, 0, 0)).getBlock() == this;
 
-		if (!leavesTotheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
+		/*
+		 * If the neighbor block is not a grape leaves block, then the given block at pos cannot grow outward.
+		 */
+		if (!leavesToTheSouth && !leavesToTheNorth && !leavesToTheEast && !leavesToTheWest) return false;
 
-		for (int i = 1; i <= grapeVineSupportedLength; ++i)
-		{
-			if (leavesTotheSouth && isTrunk(world, pos.add(0, -1, i))) return true;
-			if (leavesToTheNorth && isTrunk(world, pos.add(0, -1, -i))) return true;
-			if (leavesToTheEast && isTrunk(world, pos.add(i, -1, 0))) return true;
-			if (leavesToTheWest && isTrunk(world, pos.add(-i, -1, 0))) return true;
-		}
-		return false;
+		return this.isSupported(world, pos);
 	}
 
 	/**
 	 * Variation of canGrowOutwards, use this method to check rope blocks
 	 *
 	 * @param world - the world
-	 * @param x - x coord
-	 * @param y - y coord
-	 * @param z - z coord
+	 * @param pos - blockpos to check
 	 * @return true if the block can grow here, false otherwise
 	 */
 	public boolean canGrowHere(World world, BlockPos pos)
@@ -219,7 +211,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     	
     	return false;
     }
-    
+
+    @Override
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
@@ -227,6 +220,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
     }
 
 	@SuppressWarnings("deprecation")
+	@Override
     @SideOnly(Side.CLIENT)
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -262,49 +256,16 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		}
 	}
 
-	/************
-	 * CONDITIONS
-	 ************/
-	public boolean isSupported(World world, BlockPos pos, IBlockState state)
-	{
-		if (this.isSupportedByTrunk(world, pos))
-		{
-			return true;
-		}
-		else
-		{
-			for (EnumFacing dir : BlockCheck.DIR4)
-			{
-				for (int i = 1; i <= grapeVineSupportedLength; ++i)
-				{
-					BlockPos posOfs = pos.add(dir.getFrontOffsetX()*i, 0, dir.getFrontOffsetZ()*i);
-					if (world.getBlockState(posOfs).getBlock() != this)
-					{
-						break;
-					}
-					else if (isSupportedByTrunk(world, posOfs))
-					{
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
+	// region Conditions
+
+	//=================================================================================================================
+	/**
+	 * Can this block sustain a BlockBush
+	 * @param state
+	 * @return always return true
+	 */
 	@Override
 	protected boolean canSustainBush(IBlockState state) {
-		// Grape fruits are growing along ropes.
-		return true;
-	}
-
-	/************
-	 * STUFF
-	 ************/
-	
-	@Override
-	public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
-	{
 		return true;
 	}
 
@@ -314,17 +275,62 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 		return false;
 	}
 
+    /**
+     * Is the given block supported by a grape vine trunk
+     * @param world - the world
+     * @param pos - the position to base the check on
+     * @return true if block is supported by a vine trunk
+     */
+	public boolean isSupported(World world, BlockPos pos) {
+	    // Fast check, is there a trunk below this pos? Otherwise we have to go find one.
+		if (this.isSupportedByTrunk(world, pos)) {
+		    return true;
+		} else {
+			for (BlockPos.MutableBlockPos blockpos$mutableblockpos : BlockPos.getAllInBoxMutable(
+					pos.add(-(grapeVineSupportedLength), 0, -(grapeVineSupportedLength)),
+					pos.add(grapeVineSupportedLength, 0, grapeVineSupportedLength)
+			)) {
+				if (isSupportedByTrunk(world, blockpos$mutableblockpos)) {
+					return true;
+				}
+			}
+        }
+		return false;
+	}
+
+	/**
+	 * Is the given block supported by a grape vine trunk
+	 * @param world - the world
+	 * @param pos - the position to base the check on
+	 * @param state - block state, not used at this time
+	 * @return true if block is supported by a vine trunk
+	 */
+	public boolean isSupported(World world, BlockPos pos, IBlockState state) {
+		return isSupported(world, pos);
+	}
+
+	public boolean isSupportedByTrunk(World world, BlockPos pos)
+	{
+		return isTrunk(world, pos.down());
+	}
+
+	private boolean isTrunk(World world, BlockPos pos)
+	{
+		return GrapeBlockCheck.isGrapeVineTrunk(world.getBlockState(pos).getBlock());
+	}
+
+
+	@Override
+	public boolean isLeaves(IBlockState state, IBlockAccess world, BlockPos pos)
+	{
+		return true;
+	}
+
     @Override
     public boolean isPassable(IBlockAccess worldIn, BlockPos pos) {
         return false;
     }
-    
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
-    
+
     @Override
     public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
@@ -337,10 +343,21 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
         return block == GrowthcraftCoreBlocks.rope_fence.getBlock() || block == GrowthcraftCoreBlocks.rope_knot.getBlock();
     }
+    // endregion
+
+	// region Extras
+	//=================================================================================================================
+
+	@SuppressWarnings("deprecation")
+	@Override
+	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+		return BlockFaceShape.UNDEFINED;
+	}
     
-	/************
-	 * DROPS
-	 ************/
+	// endregion
+
+	// region Drops
+	//=================================================================================================================
 	@SuppressWarnings("deprecation")
     public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
     	List<ItemStack> drops = super.getDrops(world, pos, state, fortune);
@@ -368,6 +385,8 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 	{
 		return random.nextInt(3) == 0 ? 1 : 0;
 	}
+
+	// endregion
 	
 	/************
 	 * RENDERS
