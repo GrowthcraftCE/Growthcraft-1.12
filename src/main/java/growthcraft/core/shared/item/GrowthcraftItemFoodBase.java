@@ -1,10 +1,5 @@
 package growthcraft.core.shared.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.client.GrowthcraftCoreState;
 import growthcraft.core.shared.effect.IEffect;
 import net.minecraft.client.resources.I18n;
@@ -21,110 +16,96 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class GrowthcraftItemFoodBase extends ItemFood
-{
-	private IEffect effect;
-	private EnumAction action = EnumAction.EAT;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
-	public GrowthcraftItemFoodBase(int hunger, float saturation, boolean isWolfFav)
-	{
-		super(hunger, saturation, isWolfFav);
-	}
+public class GrowthcraftItemFoodBase extends ItemFood {
+    private IEffect effect;
+    private EnumAction action = EnumAction.EAT;
 
-	public GrowthcraftItemFoodBase(int hunger, boolean isWolfFav)
-	{
-		super(hunger, isWolfFav);
-	}
+    public GrowthcraftItemFoodBase(int hunger, float saturation, boolean isWolfFav) {
+        super(hunger, saturation, isWolfFav);
+    }
 
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack)
-	{
-		return action;
-	}
+    public GrowthcraftItemFoodBase(int hunger, boolean isWolfFav) {
+        super(hunger, isWolfFav);
+    }
 
-	public GrowthcraftItemFoodBase setItemUseAction(EnumAction act)
-	{
-		this.action = act;
-		return this;
-	}
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return action;
+    }
 
-	public GrowthcraftItemFoodBase setEffect(IEffect ef)
-	{
-		this.effect = ef;
-		return this;
-	}
+    public GrowthcraftItemFoodBase setItemUseAction(EnumAction act) {
+        this.action = act;
+        return this;
+    }
 
-	public IEffect getEffect()
-	{
-		return effect;
-	}
+    public GrowthcraftItemFoodBase setEffect(IEffect ef) {
+        this.effect = ef;
+        return this;
+    }
 
-	protected void applyIEffects(ItemStack itemStack, World world, EntityPlayer player)
-	{
-		if (effect != null)
-		{
-			effect.apply(world, player, world.rand, itemStack);
-		}
-	}
+    public IEffect getEffect() {
+        return effect;
+    }
 
-	@Override
-	protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player)
-	{
-		super.onFoodEaten(itemStack, world, player);
-		if (!world.isRemote)
-		{
-			applyIEffects(itemStack, world, player);
-		}
-	}
+    protected void applyIEffects(ItemStack itemStack, World world, EntityPlayer player) {
+        if (effect != null) {
+            effect.apply(world, player, world.rand, itemStack);
+        }
+    }
 
-	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
-	{
-		if( entityLiving instanceof EntityPlayer ) {
-			EntityPlayer player = (EntityPlayer)entityLiving;
-			
-			if (!player.capabilities.isCreativeMode)
-			{
-				if (!worldIn.isRemote)
-				{
-					stack = stack.copy();
-					final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
-					ItemUtils.addStackToPlayer(result, player, worldIn, false);
-				}
-			}
+    @Override
+    protected void onFoodEaten(ItemStack itemStack, World world, EntityPlayer player) {
+        super.onFoodEaten(itemStack, world, player);
+        if (!world.isRemote) {
+            applyIEffects(itemStack, world, player);
+        }
+    }
 
+    @Override
+    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+        if (entityLiving instanceof EntityPlayer) {
+            EntityPlayer player = (EntityPlayer) entityLiving;
+
+            // Add the stats, even in creative mode
 			player.getFoodStats().addStats(this, stack);
-			worldIn.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
-			this.onFoodEaten(stack, worldIn, player);
-		}
 
-		return stack;
-	}
+			if (!player.capabilities.isCreativeMode) {
+                if (!worldIn.isRemote) {
+                    stack = stack.copy();
+                    final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));
+                    ItemUtils.addStackToPlayer(result, player, worldIn, false);
+                }
+            }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"rawtypes", "unchecked"})
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-	{
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-		GrowthcraftItemBase.addDescription(this, stack, worldIn, tooltip, flagIn);
-		if (effect != null)
-		{
-			final List<String> tempList = new ArrayList<String>();
-			effect.getDescription(tempList);
-			if (tempList.size() > 0)
-			{
-				if (GrowthcraftCoreState.showDetailedInformation())
-				{
-					tooltip.addAll((List)tempList);
-				}
-				else
-				{
-					tooltip.add(TextFormatting.GRAY +
-							I18n.format("grc.tooltip.detailed_information",
-								TextFormatting.WHITE + GrowthcraftCoreState.detailedKey + TextFormatting.GRAY));
-				}
-			}
-		}
-	}
+            worldIn.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            this.onFoodEaten(stack, worldIn, player);
+        }
+
+        return stack;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+        GrowthcraftItemBase.addDescription(this, stack, worldIn, tooltip, flagIn);
+        if (effect != null) {
+            final List<String> tempList = new ArrayList<String>();
+            effect.getDescription(tempList);
+            if (tempList.size() > 0) {
+                if (GrowthcraftCoreState.showDetailedInformation()) {
+                    tooltip.addAll((List) tempList);
+                } else {
+                    tooltip.add(TextFormatting.GRAY +
+                            I18n.format("grc.tooltip.detailed_information",
+                                    TextFormatting.WHITE + GrowthcraftCoreState.detailedKey + TextFormatting.GRAY));
+                }
+            }
+        }
+    }
 }
