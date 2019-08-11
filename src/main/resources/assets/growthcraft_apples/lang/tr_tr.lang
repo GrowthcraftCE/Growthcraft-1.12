@@ -1,0 +1,20 @@
+item.apple_door_item.name=Elma Kapısı
+
+tile.apple_crop.name=Elma
+tile.apple_fence.name=Elma Çiti
+tile.apple_fence_gate.name=Elma Çit Kapısı
+tile.apple_leaves.name=Elma Yaprakları
+tile.apple_log.name=Elma Odunu
+tile.apple_planks.name=Elma Tahtası
+tile.apple_sapling.name=Elma Fidanı
+tile.apple_slab_half.name=Elma Ağacı Basamağı
+tile.apple_stairs.name=Elma Ağacı Merdiven
+
+# Fluids
+fluid.fluid_booze_apple_juice=Elma Suyu
+fluid.fluid_booze_apple_cider_fermented=Elma Şarabı
+fluid.fluid_booze_apple_cider_potent=Elma Şarabı
+fluid.fluid_booze_apple_cider_extended=Elma Şarabı
+fluid.fluid_booze_apple_cider_ethereal=İpeksi Nektar
+fluid.fluid_booze_apple_cider_intoxicated=Elma Şarabı
+fluid.fluid_booze_apple_cider_poisoned=Elma Şarabı
