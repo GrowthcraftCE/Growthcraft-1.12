@@ -1,0 +1,25 @@
+Hops.name=Hops
+
+item.hops.name=Şerbetçiotu
+item.hop_seeds.name=Şerbetçiotu Tohumu
+
+tile.hops_bush.name=Şerbetçiotu
+tile.hops_vine=Şerbetçiotu
+
+fluid.fluid_booze_hopale_unhopped=Mayalı Ale
+fluid.fluid_booze_hopale_normal=Ale
+fluid.fluid_booze_hopale_potent=Ale
+fluid.fluid_booze_hopale_extended=Ale
+fluid.fluid_booze_hopale_young=Mayalı Ale
+fluid.fluid_booze_hopale_hyperextended=Ale
+fluid.fluid_booze_hopale_lager=Ale
+fluid.fluid_booze_hopale_intoxicated=Ale
+fluid.fluid_booze_hopale_poisoned=Ale
+
+fluid.fluid_booze_lager_normal=Alman Birası
+fluid.fluid_booze_lager_potent=Alman Birası
+fluid.fluid_booze_lager_extended=Alman Birası
+fluid.fluid_booze_lager_young=Alman Bira Mayası
+fluid.fluid_booze_lager_hyperextended=Alman Birası
+fluid.fluid_booze_lager_intoxicated=Alman Birası
+fluid.fluid_booze_lager_poisoned=Alman Birası
