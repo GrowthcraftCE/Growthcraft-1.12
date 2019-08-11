@@ -1,0 +1,46 @@
+fluid.fluid_honey=Bal
+
+item.bee.name=Arı
+
+item.bees_wax.white.name=Beyaz Balmumu
+item.bees_wax.orange.name=Turuncu Balmumu
+item.bees_wax.magenta.name=Eflatun Balmumu
+item.bees_wax.light_blue.name=Açık Mavi Balmumu
+item.bees_wax.normal.name=Sarı Balmumu
+item.bees_wax.lime.name=Kireç Yeşili Balmumu
+item.bees_wax.pink.name=Pembe Balmumu
+item.bees_wax.gray.name=Gri Balmumu
+item.bees_wax.silver.name=Açık Gri Balmumu
+item.bees_wax.cyan.name=Camgöbeği Balmumu
+item.bees_wax.purple.name=Mor Balmumu
+item.bees_wax.blue.name=Mavi Balmumu
+item.bees_wax.brown.name=Kahverengi Balmumu
+item.bees_wax.green.name=Yeşil Balmumu
+item.bees_wax.red.name=Kırmızı Balmumu
+item.bees_wax.black.name=Siyah Balmumu
+
+item.bottlefluid_honey.name=Bal Şişesi
+
+item.honey_comb_empty.name=Boş Bal Peteği
+item.honey_comb_filled.name=Dolu Bal Peteği
+
+item.honey_jar.name=Bal Kavanozu
+
+container.growthcraft_bees.beeBox=Arı Kutusu
+
+tile.beebox.name=Arı Kutusu
+tile.beehive.name=Arı Kovanı
+
+# Fluid Tags
+fluids.tag.mead=Bal Likörü
+fluids.tag.honey=Bal
+
+# Fluids
+fluid.fluid_booze_mead_young=Bal Likör Şırası
+fluid.fluid_booze_mead_fermented=Bal Likörü
+fluid.fluid_booze_mead_potent=Güçlü Bal Likörü
+fluid.fluid_booze_mead_extended=Uzun Bal Likörü
+fluid.fluid_booze_mead_ethereal=Sihirli Bal Likörü
+fluid.fluid_booze_mead_intoxicated=Alkollü Bal Likörü
+fluid.fluid_booze_mead_poisoned=Bal Likörü
+fluid.fluid_booze_mead_hyperextended=Hiper-Uzun Bal Likörü
