@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -52,8 +53,20 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
     public TileEntityFishtrap() {
         this.cooldown = 0;
         this.randomMaxCooldown = intMaxCooldown;
-        this.handlerOutput = new ItemStackHandler(6);
-        this.handlerInput = new ItemStackHandler(1);
+        this.handlerOutput = new ItemStackHandler(6) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                markDirty();
+            }
+        };
+        this.handlerInput = new ItemStackHandler(1) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                markDirty();
+            }
+        };
         rand = new Random();
     }
 
@@ -63,20 +76,18 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
 
     private void doFishing() {
         if ( !getWorld().isRemote ) {
-            // If bait is required and the bait inventory is empty, do not continue.
-            if (GrowthcraftFishtrapConfig.baitRequired) {
-                if (!hasBait()) return;
-            }
-            // If strictBait is enable, check the bait inventory for a valid item.
-            if (!hasBait(GrowthcraftFishtrapConfig.strictBait)) {
-                 return;
+            // If strictBait is required then we need to ensure there is bait also if bait is required then we need
+            // to ensure that there is any bait.
+            if (GrowthcraftFishtrapConfig.strictBait && !hasBait(GrowthcraftFishtrapConfig.strictBait)
+                || GrowthcraftFishtrapConfig.baitRequired && !hasBait() ) {
+                return;
             }
 
             // Get a random item from the Fishing_Rod LootTable. Pulled this from the EntityFishHook class.
-            LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
+            LootContext.Builder lootContextBuilder = new LootContext.Builder((WorldServer)this.world);
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(
                     this.getLootTableList()).generateLootForPools(new Random(),
-                    lootcontext$builder.build());
+                    lootContextBuilder.build());
 
             for (ItemStack itemstack : result) {
                 if ( !this.isInventoryFull(this.handlerOutput)) {
@@ -85,6 +96,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             }
         }
         GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 3);
+
     }
 
     public boolean hasBait() {
@@ -133,6 +145,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             remainder = handler.insertItem(slot, stack, simulate);
             if ( remainder == ItemStack.EMPTY) break;
         }
+        markDirtyAndUpdate();
         return remainder;
     }
 
@@ -161,9 +174,9 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
 
     /**
      * Check to determine if the surrounding blocks are static fluid.
-     * @return
+     * @return returns true if the block is surrounded by water
      */
-    private Boolean inWater() {
+    private boolean inWater() {
 
         boolean underFluid = true;
 
@@ -188,7 +201,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             }
         }
 
-        /**
+        /*
          * If underFluid is still false, then let's see if there is fluid on the .UP and the .DOWN. This will allow you
          * to have a cluster of fishtraps, but you can only branch them out horizontally.
          */
@@ -260,7 +273,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@Nullable Capability<?> capability, @Nullable EnumFacing facing) {
         return this.getCapability(capability, facing) != null;
     }
 
@@ -272,5 +285,15 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
     @Override
     public String getGuiID() {
         return "growthcraft_fishtrap:fishtrap";
+    }
+
+    @Override
+    public void onInventoryChanged(IInventory inv, int index) {
+        super.onInventoryChanged(inv, index);
+        if (index == 0) {
+            markDirty();
+        } else if (index > 0) {
+            markDirtyAndUpdate();
+        }
     }
 }
