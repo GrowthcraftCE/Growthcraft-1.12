@@ -1,0 +1,39 @@
+item.grape.green.name=Yeşil Üzüm
+item.grape.purple.name=Mor Üzüm
+item.grape.red.name=Kırmızı Üzüm
+
+item.grape_seed.green.name=Yeşil Üzüm Tohumu
+item.grape_seed.purple.name=Mor Üzüm Tohumu
+item.grape_seed.red.name=Kırmızı Üzüm Tohumu
+
+tile.grape_vine.name=Üzüm Bağı
+tile.grape_vine_bush.name=Üzüm Bağı
+tile.grape_vine_fruit.name=Üzüm Bağı
+
+# Fluids
+fluid.fluid_booze_purple_juice=Mor Üzüm Suyu
+fluid.fluid_booze_purple_wine=Mor Üzüm Şarabı
+fluid.fluid_booze_purple_wine_potent=Mor Üzüm Suyu
+fluid.fluid_booze_purple_wine_extended=Mor Üzüm Şarabı
+fluid.fluid_booze_purple_ambrosia=Lezzetli Mor Üzüm Suyu
+fluid.fluid_booze_purple_portwine=Mor Porto Şarabı
+fluid.fluid_booze_purple_wine_intoxicated=Mor Üzüm Şarabı
+fluid.fluid_booze_purple_wine_poisoned=Mor Üzüm Şarabı
+
+fluid.fluid_booze_red_juice=Kırmızı Üzüm Suyu
+fluid.fluid_booze_red_wine=Kırmızı Üzüm Şarabı
+fluid.fluid_booze_red_wine_potent=Kırmızı Üzüm Şarabı
+fluid.fluid_booze_red_wine_extended=Kırmızı Üzüm Şarabı
+fluid.fluid_booze_red_ambrosia=Lezzetli Kırmızı Üzüm Suyu
+fluid.fluid_booze_red_portwine=Kırmızı Porto Şarabı
+fluid.fluid_booze_red_wine_intoxicated=Kırmızı Üzüm Şarabı
+fluid.fluid_booze_red_wine_poisoned=Kırmızı Üzüm Şarabı
+
+fluid.fluid_booze_green_juice=Yeşil Üzüm Suyu
+fluid.fluid_booze_green_wine=Yeşil Üzüm Şarabı
+fluid.fluid_booze_green_wine_potent=Yeşil Üzüm Suyu
+fluid.fluid_booze_green_wine_extended=Yeşil Üzüm Suyu
+fluid.fluid_booze_green_ambrosia=Lezzetli Yeşil Üzüm Suyu
+fluid.fluid_booze_green_portwine=Yeşil Porto Şarabı
+fluid.fluid_booze_green_wine_intoxicated=Yeşil Üzüm Şarabı
+fluid.fluid_booze_green_wine_poisoned=Yeşil Üzüm Şarabı
