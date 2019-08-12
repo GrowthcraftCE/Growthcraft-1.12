@@ -1,0 +1,20 @@
+fluid.fluid_booze_sake_water=Pirinç Suyu
+fluid.fluid_booze_sake_mash=Sake Püresi
+fluid.fluid_booze_sake_fermented=Sake
+fluid.fluid_booze_sake_potent=Sake
+fluid.fluid_booze_sake_potent_extended=Sake
+fluid.fluid_booze_sake_potent_hyperextended=Sake
+fluid.fluid_booze_sake_extended=Sake
+fluid.fluid_booze_sake_hyperextended=Sake
+fluid.fluid_booze_sake_intoxicated=Sake
+fluid.fluid_booze_sake_poisoned=Sake
+
+grc.tooltip.detailed_information=
+
+item.rice_cooked.name=Pirinç Püresi
+item.rice.name=Pirinç
+item.rice_ball.name=Pirinç Topları
+item.cultivator.name=Ekici
+
+tile.ricepaddy.name=Pirinç Tarlası
+tile.ricecrop.name=Pirinç
