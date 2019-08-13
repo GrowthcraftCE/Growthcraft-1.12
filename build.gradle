@@ -31,6 +31,7 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.7'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
     }
 }
 
@@ -45,6 +46,7 @@ sonarqube {
         property "sonar.projectKey", "growthcraft:Growthcraft-1.12"
     }
 }
+
 repositories {
     mavenLocal()
     maven {
