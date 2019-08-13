@@ -1,0 +1,55 @@
+# Tooltips (Number is a percentage)
+# number is a percentage
+format.tipsy_chance=%d%% Şansla İçkili
+
+# Other
+potion.tipsy=İçkili
+
+# Achievements
+achievement.getDrunk=Sorun mu biracılık?
+achievement.getDrunk.desc=İçkili V etkisini elde et.
+
+# Modifiers
+fluids.tag.chilled=Dinlendirilmiş
+fluids.tag.cider=Şıra
+fluids.tag.cream=Krema
+fluids.tag.deadly=Ölümcül
+fluids.tag.extended=Uzatılmış
+fluids.tag.fermented=Fermente Edilmiş
+fluids.tag.fortified=Güçlendirilmiş
+fluids.tag.hopped=Şerbetçiotu Katılmış
+fluids.tag.hyper_extended=Hiper-Uzatılmış
+fluids.tag.intoxicated=Alkollü
+fluids.tag.kumis=Kımız
+fluids.tag.magical=Sihirli
+fluids.tag.mash=Püre
+fluids.tag.poisoned=Zehirli
+fluids.tag.potent=Güçlü
+fluids.tag.sake=Sake
+fluids.tag.wine=Şarap
+fluids.tag.young=Yeni
+
+# Items
+item.achievement_dummy.name=Sorun mu biracılık?
+item.yeast.brewers.name=Biracı'nın Mayası
+item.yeast.lager.name=Alman Bira Mayası
+item.yeast.bayanus.name=Bayanus Mayası
+item.yeast.ethereal.name=Ruhani Maya
+item.yeast.origin.name=Asıl Maya
+item.brew_kettle_lid.name=Biracı İbrik Kapağı
+item.barrel_tap.name=Fıçı Musluğu
+
+# Gui
+container.growthcraft.brewKettle=Bira İbriği
+container.grc.CultureJar=Maya Kavanozu
+container.grc.fermentBarrel=Fermentasyon Fıçısı
+container.grc.fruitPress=Meyve Presi
+gui.grc.discard=Vazgeç
+gui.grc.cantferment=Fermente Edilemez
+gui.grc.switch=Tankları Değiştir
+
+# Tile Entities
+tile.brew_kettle.name=Bira İbriği
+tile.culture_jar.name=Kültür Kavanozu
+tile.ferment_barrel.name=Fermentasyon Fıçısı
+tile.fruit_press.name=Meyve Presi
