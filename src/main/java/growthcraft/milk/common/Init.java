@@ -907,7 +907,7 @@ public class Init {
 			CheeseVatRecipeBuilder.buildRecipe("GOUDA Recipe")
 					.outputFluids(WaxedCheeseTypes.GOUDA.getFluids().asFluidStack(5000))
 					.inputFluids(new TaggedFluidStacks(5000, "milk_curds"))
-					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeGray", 1), new OreItemStacks("dyeYellow", 1))
+					.inputItems(new OreItemStacks(saltOre, 1), new OreItemStacks("dyeGray", 1))
 					.register();
 
 			CheeseVatRecipeBuilder.buildRecipe("CASU MARZU Recipe")
