@@ -1,0 +1,60 @@
+item.crowbar.white.name=Beyaz Levye
+item.crowbar.orange.name=Turuncu Levye
+item.crowbar.magenta.name=Eflatun Levye
+item.crowbar.lightBlue.name=Açık Mavi Levye
+item.crowbar.yellow.name=Sarı Levye
+item.crowbar.lime.name=Kireç Yeşili Levye
+item.crowbar.pink.name=Pembe Levye
+item.crowbar.gray.name=Gri Levye
+item.crowbar.silver.name=Gümüş Levye
+item.crowbar.cyan.name=Camgöbeği Levye
+item.crowbar.purple.name=Mor Levye
+item.crowbar.blue.name=Mavi Levye
+item.crowbar.brown.name=Kahverengi Levye
+item.crowbar.green.name=Yeşil Levye
+item.crowbar.red.name=Kırmızı Levye
+item.crowbar.black.name=Siyah Levye
+item.rope.name=Halat
+item.salt.name=Kaya Tuzu
+
+itemGroup.Growthcraft=Growthcraft
+
+tile.rope_knot.name=Halat Düğümü
+tile.rope_fence.name=Halat
+tile.salt_block.name=Kaya Tuzu Blok
+tile.salt_ore.name=Kaya Tuzu Cevheri
+
+# Effects
+effect.chance.format=%%d% Şansla
+effect.extinguish.desc=Yanmayı Söndürür
+effect.ignite.desc=%d Saniyeliğine Yakar
+effect.list.head=Aşağıdakileri Uygular:
+effect.null.desc=Hiçbir Şey Yapmaz
+effect.random_list.head=Aşağıdakilerden Birini Uygular:
+effect.remove_potion_effect.format=%s'ı Kaldırır
+effect.weighted_random_list.format=%%d% Şansla
+
+# Formats and Units
+format.value.true=EVET
+format.value.false=HAYIR
+format.state.true=AÇIK
+format.state.false=KAPALI
+format.invalid_fluid=<Geçersiz Sıvı>
+# Displayed for items
+format.itemslot.empty=<Boş>
+format.itemslot.invalid=<Geçersiz Eşya>
+
+# Modifier name
+format.booze.name=%2$s %1$s
+
+# When a fluid is not a booze
+format.fluid.name=%1$s
+
+# Name (stack_size)
+format.itemslot.item=%s (x%d)
+# Displayed for tile entities with multiple tanks, %d is the tank index + 1
+format.tank_id=Tank %d :
+# When the tank is empty
+format.tank.empty=<Boş>
+# %s is the fluid name
+format.tank.content_suffix=mB %s
