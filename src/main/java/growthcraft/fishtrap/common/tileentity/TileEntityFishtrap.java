@@ -1,6 +1,5 @@
 package growthcraft.fishtrap.common.tileentity;
 
-import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.shared.tileentity.feature.IInteractionObject;
 import growthcraft.fishtrap.common.container.ContainerFishtrap;
 import growthcraft.fishtrap.common.utils.GrowthcraftPlaySound;
@@ -12,11 +11,11 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
@@ -39,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements ITickable, ICapabilityProvider, IInteractionObject {
+public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabilityProvider, IInteractionObject {
 
     private int cooldown;
     private int randomMaxCooldown;
@@ -145,8 +144,22 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             remainder = handler.insertItem(slot, stack, simulate);
             if ( remainder == ItemStack.EMPTY) break;
         }
-        markDirtyAndUpdate();
+        //markDirtyAndUpdate();
         return remainder;
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound.setTag("handler_output", handlerOutput.serializeNBT());
+        compound.setTag("handler_input", handlerInput.serializeNBT());
+        return super.writeToNBT(compound);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        handlerOutput.deserializeNBT(compound.getCompoundTag("handler_output"));
+        handlerInput.deserializeNBT(compound.getCompoundTag("handler_input"));
+        super.readFromNBT(compound);
     }
 
     /**
@@ -287,7 +300,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
         return "growthcraft_fishtrap:fishtrap";
     }
 
-    @Override
+/*    @Override
     public void onInventoryChanged(IInventory inv, int index) {
         super.onInventoryChanged(inv, index);
         if (index == 0) {
@@ -295,5 +308,5 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
         } else if (index > 0) {
             markDirtyAndUpdate();
         }
-    }
+    }*/
 }
