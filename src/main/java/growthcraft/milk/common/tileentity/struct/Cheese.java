@@ -126,6 +126,9 @@ public class Cheese implements IStreamable
 						this.topSlices = this.topSlicesMax + this.topSlices - yankedCount;
 						isDoubleStacked = false;
 					}
+					else if( this.topSlices == yankedCount ) {
+						this.topSlices = 0;
+					}
 					else {
 						// Should never happen. Something is wrong with getSlices() implementation
 						GrowthcraftMilk.logger.warn("Something is wrong with cheese yanking. Please report as bug.");
