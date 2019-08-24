@@ -1,6 +1,5 @@
 package growthcraft.fishtrap.common.tileentity;
 
-import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
 import growthcraft.core.shared.tileentity.feature.IInteractionObject;
 import growthcraft.fishtrap.common.container.ContainerFishtrap;
 import growthcraft.fishtrap.common.utils.GrowthcraftPlaySound;
@@ -16,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.ResourceLocation;
@@ -38,7 +38,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
-public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements ITickable, ICapabilityProvider, IInteractionObject {
+public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabilityProvider, IInteractionObject {
 
     private int cooldown;
     private int randomMaxCooldown;
@@ -52,8 +52,20 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
     public TileEntityFishtrap() {
         this.cooldown = 0;
         this.randomMaxCooldown = intMaxCooldown;
-        this.handlerOutput = new ItemStackHandler(6);
-        this.handlerInput = new ItemStackHandler(1);
+        this.handlerOutput = new ItemStackHandler(6) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                markDirty();
+            }
+        };
+        this.handlerInput = new ItemStackHandler(1) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                super.onContentsChanged(slot);
+                markDirty();
+            }
+        };
         rand = new Random();
     }
 
@@ -63,20 +75,18 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
 
     private void doFishing() {
         if ( !getWorld().isRemote ) {
-            // If bait is required and the bait inventory is empty, do not continue.
-            if (GrowthcraftFishtrapConfig.baitRequired) {
-                if (!hasBait()) return;
-            }
-            // If strictBait is enable, check the bait inventory for a valid item.
-            if (!hasBait(GrowthcraftFishtrapConfig.strictBait)) {
-                 return;
+            // If strictBait is required then we need to ensure there is bait also if bait is required then we need
+            // to ensure that there is any bait.
+            if (GrowthcraftFishtrapConfig.strictBait && !hasBait(GrowthcraftFishtrapConfig.strictBait)
+                || GrowthcraftFishtrapConfig.baitRequired && !hasBait() ) {
+                return;
             }
 
             // Get a random item from the Fishing_Rod LootTable. Pulled this from the EntityFishHook class.
-            LootContext.Builder lootcontext$builder = new LootContext.Builder((WorldServer)this.world);
+            LootContext.Builder lootContextBuilder = new LootContext.Builder((WorldServer)this.world);
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(
                     this.getLootTableList()).generateLootForPools(new Random(),
-                    lootcontext$builder.build());
+                    lootContextBuilder.build());
 
             for (ItemStack itemstack : result) {
                 if ( !this.isInventoryFull(this.handlerOutput)) {
@@ -85,6 +95,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             }
         }
         GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 3);
+
     }
 
     public boolean hasBait() {
@@ -133,7 +144,22 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             remainder = handler.insertItem(slot, stack, simulate);
             if ( remainder == ItemStack.EMPTY) break;
         }
+        //markDirtyAndUpdate();
         return remainder;
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+        compound.setTag("handler_output", handlerOutput.serializeNBT());
+        compound.setTag("handler_input", handlerInput.serializeNBT());
+        return super.writeToNBT(compound);
+    }
+
+    @Override
+    public void readFromNBT(NBTTagCompound compound) {
+        handlerOutput.deserializeNBT(compound.getCompoundTag("handler_output"));
+        handlerInput.deserializeNBT(compound.getCompoundTag("handler_input"));
+        super.readFromNBT(compound);
     }
 
     /**
@@ -161,9 +187,9 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
 
     /**
      * Check to determine if the surrounding blocks are static fluid.
-     * @return
+     * @return returns true if the block is surrounded by water
      */
-    private Boolean inWater() {
+    private boolean inWater() {
 
         boolean underFluid = true;
 
@@ -188,7 +214,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
             }
         }
 
-        /**
+        /*
          * If underFluid is still false, then let's see if there is fluid on the .UP and the .DOWN. This will allow you
          * to have a cluster of fishtraps, but you can only branch them out horizontally.
          */
@@ -260,7 +286,7 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@Nullable Capability<?> capability, @Nullable EnumFacing facing) {
         return this.getCapability(capability, facing) != null;
     }
 
@@ -273,4 +299,14 @@ public class TileEntityFishtrap extends GrowthcraftTileInventoryBase implements 
     public String getGuiID() {
         return "growthcraft_fishtrap:fishtrap";
     }
+
+/*    @Override
+    public void onInventoryChanged(IInventory inv, int index) {
+        super.onInventoryChanged(inv, index);
+        if (index == 0) {
+            markDirty();
+        } else if (index > 0) {
+            markDirtyAndUpdate();
+        }
+    }*/
 }

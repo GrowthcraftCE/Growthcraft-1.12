@@ -31,12 +31,21 @@ buildscript {
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
         classpath 'gradle.plugin.com.matthewprenger:CurseGradle:1.0.7'
+        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
 apply plugin: 'com.matthewprenger.cursegradle'
+apply plugin: 'org.sonarqube'
 //apply plugin: "checkstyle"
+
+sonarqube {
+    properties {
+        property "sonar.projectName" , "Growthcraft-1.12"
+        property "sonar.projectKey", "growthcraft:Growthcraft-1.12"
+    }
+}
 
 repositories {
     mavenLocal()
@@ -165,12 +174,17 @@ dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     // deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:" + project.property('theoneprobe_version')
+    
+    deobfProvided "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version') + ":api"
+
     compile "rustic:Rustic:" + project.property('rustic_version')
     compile "thaumcraft:Thaumcraft:" + project.property('minecraft_version') + ":" + project.property('thaumcraft_version')
-    runtime "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version')
-    deobfProvided "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version') + ":api"
     compile "mcp.mobius.waila:Hwyla:" + project.property('hwyla_version')
     compile "baubles:Baubles:" + project.property('minecraft_version_short') + ":" + project.property('baubles_version')
+
+    runtime "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version')
+    
 //LOCAL  	compile "erebus:Erebus:1.0.22"
 //LOCAL		compile "com.github.glitchfiend.biomesoplenty:SereneSeasons:1.12.2-1.2.15.100:universal"
 

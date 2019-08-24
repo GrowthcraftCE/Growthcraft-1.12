@@ -20,6 +20,7 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
@@ -234,7 +235,8 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 		if (IItemOperable.Action.RIGHT != action) return false;
 		if (cheese.isAged())
 		{
-			if( !ItemTest.itemMatchesOre(onHand, "toolKnife") )
+			if( !(onHand.getItem() instanceof ItemSword) &&
+				!ItemTest.itemMatchesOre(onHand, "toolKnife") )
 				return false;
 			
 			final ItemStack stack = cheese.yankSlices(1, true);

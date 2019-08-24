@@ -1,10 +1,5 @@
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.FluidTest;
@@ -51,6 +46,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements ITickable, IItemOperable, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice
 {
@@ -110,6 +110,10 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 	{
 		this.vatState = state;
 		markDirty();
+	}
+
+	public String getVatState() {
+		return this.vatState.name();
 	}
 
 	private void goIdle()

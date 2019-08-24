@@ -121,10 +121,13 @@ public class Cheese implements IStreamable
 		{
 			if (doYank)
 			{
-				if( this.topSlices < yankedCount ) {
+				if( this.topSlices <= yankedCount ) {
 					if( isDoubleStacked ) {
 						this.topSlices = this.topSlicesMax + this.topSlices - yankedCount;
 						isDoubleStacked = false;
+					}
+					else if( this.topSlices == yankedCount ) {
+						this.topSlices = 0;
 					}
 					else {
 						// Should never happen. Something is wrong with getSlices() implementation
@@ -155,12 +158,13 @@ public class Cheese implements IStreamable
 				if( cheeseStage != EnumCheeseStage.CUT && cheeseStage != EnumCheeseStage.AGED )
 					return false;
 			}
-
+			
 			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
 			if( variantID != cheese.getVariantID() )
 				return false;
 
 			// Do stacking
+			boolean mustBeCut = stage == EnumCheeseStage.CUT || cheeseStage == EnumCheeseStage.CUT;
 			int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
 			if( curSlices != topSlicesMax ) {
 				if( topSlices != topSlicesMax )
@@ -169,11 +173,16 @@ public class Cheese implements IStreamable
 				if( doStack ) {
 					isDoubleStacked = true;
 					topSlices = curSlices;
+					if( mustBeCut )
+						cheeseStage = EnumCheeseStage.CUT;
 				}
 			}
 			else {
-				if( doStack )
+				if( doStack ) {
 					isDoubleStacked = true;
+					if( mustBeCut )
+						cheeseStage = EnumCheeseStage.CUT;
+				}
 			}
 			
 			return true;

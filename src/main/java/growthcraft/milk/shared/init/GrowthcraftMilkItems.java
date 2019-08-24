@@ -44,6 +44,12 @@ public class GrowthcraftMilkItems {
 		case MONTEREY:
 			oreName = "materialBeeswaxBlack";
 			break;
+		case GOUDA:
+			oreName = "materialBeeswaxNormal";	// Is Yellow
+			break;
+		case PROVOLONE:
+			oreName = "materialBeeswaxWhite";
+			break;
 		default:
 		case CHEDDAR:
 			oreName = "materialBeeswaxRed";
@@ -324,7 +330,6 @@ public class GrowthcraftMilkItems {
 			return new ICheeseItemStackFactory() {
 				@Override
 				public ItemStack asStack(int size) {
-//					return new ItemStack(GrowthcraftMilkItems.itemSimpleCheeseSlice,size,getVariantID());
 					return GrowthcraftMilkItems.simpleCheeseSlice.asStack(size, getVariantID());
 				}
 			};

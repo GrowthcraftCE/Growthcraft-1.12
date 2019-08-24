@@ -2,13 +2,19 @@ package growthcraft.milk.common.item;
 
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.init.GrowthcraftMilkItems.IceCreamTypes;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 public class ItemIceCream extends ItemFood {
@@ -48,7 +54,20 @@ public class ItemIceCream extends ItemFood {
      */
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving)
     {
-        super.onItemUseFinish(stack, worldIn, entityLiving);
-        return new ItemStack(Items.BOWL);
+        if (entityLiving instanceof EntityPlayer) {
+            EntityPlayer entityplayer = (EntityPlayer)entityLiving;
+            entityplayer.getFoodStats().addStats(this, stack);
+            worldIn.playSound((EntityPlayer)null, entityplayer.posX, entityplayer.posY, entityplayer.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, worldIn.rand.nextFloat() * 0.1F + 0.9F);
+            this.onFoodEaten(stack, worldIn, entityplayer);
+            entityplayer.addStat(StatList.getObjectUseStats(this));
+            if (entityplayer instanceof EntityPlayerMP) {
+                CriteriaTriggers.CONSUME_ITEM.trigger((EntityPlayerMP)entityplayer, stack);
+            }
+            // Add a bowl to the player inventory as a result of consuming the ItemCheeseBowl
+            entityplayer.inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
+        }
+
+        stack.shrink(1);
+        return stack;
     }
 }

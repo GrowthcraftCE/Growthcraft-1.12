@@ -1,7 +1,6 @@
 {
-  "_comment": [ "Convert a bucket of honey into four bottles of honey." ],
-  "type": "minecraft:crafting_shapeless",
-  "group": "honey",
+  "_comment": [ "Convert a bucket of 'honey' into four bottles of honey." ],
+  "type": "growthcraft_bees:shapeless_recipe_with_bucket",
   "ingredients": [
     {
       "type": "minecraft:item_nbt",

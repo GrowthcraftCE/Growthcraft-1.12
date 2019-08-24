@@ -63,7 +63,10 @@ public class ItemTest
 	}
 	
 	public static boolean itemMatchesOre(@Nullable ItemStack actual, String oreName) {
+		if( ItemUtils.isEmpty(actual) )
+			return false;
 		int oreID = OreDictionary.getOreID(oreName);
+		
 		int[] stackOreIDs = OreDictionary.getOreIDs(actual);
 		for( int stackOreID : stackOreIDs ) {
 			if( oreID == stackOreID )

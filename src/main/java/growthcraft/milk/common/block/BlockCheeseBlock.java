@@ -1,38 +1,29 @@
 package growthcraft.milk.common.block;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.BlockUtils;
-import growthcraft.core.shared.utils.BoundUtils;
 import growthcraft.core.shared.item.ItemUtils;
-import growthcraft.milk.common.block.BlockOrientable.Orient;
+import growthcraft.core.shared.utils.BoundUtils;
 import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
-import growthcraft.milk.shared.definition.EnumCheeseStage;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockCheeseBlock extends BlockOrientable {
     
@@ -204,14 +195,11 @@ public class BlockCheeseBlock extends BlockOrientable {
 	}
 	
 	@Override
-	public int damageDropped(IBlockState state)
-	{
+	public int damageDropped(IBlockState state)	{
 		// TODO: Will create always initial stage block. Maybe find a better approach.
 		return state.getBlock().getMetaFromState(state);
 	}
-	
-	
-	
+
 	/************
 	 * PROPERTIES
 	 ************/	
