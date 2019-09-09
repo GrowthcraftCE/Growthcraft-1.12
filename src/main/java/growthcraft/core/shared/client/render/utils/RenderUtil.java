@@ -143,7 +143,7 @@ public final class RenderUtil {
 	    // we have to add the whole number for ymin or otherwise things render incorrectly if above the first block
 	    // example, heights of 2 and 5 would produce array of 2, 1, 2, 5
 	    ys[0] = ymin;
-	    for(int i = 1; i <= yd; i++) ys[i] = i + yminInt;
+	    for(int i = 1; i <= yd; i++) ys[i] = (double)(i + yminInt);
 	    ys[yd+1] = ymax;
 
 	    zs[0] = zmin;
