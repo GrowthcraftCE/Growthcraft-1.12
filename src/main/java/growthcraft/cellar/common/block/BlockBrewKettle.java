@@ -1,11 +1,5 @@
 package growthcraft.cellar.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
@@ -36,6 +30,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
@@ -132,7 +127,9 @@ public class BlockBrewKettle extends BlockCellarContainer {
 							}
 							else if( isFull && entityIn.isBurning() )
 							{
-								entityIn.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
+								float randA = this.rand.nextFloat();
+								float randB = this.rand.nextFloat();
+								entityIn.playSound(SoundEvents.ENTITY_GENERIC_EXTINGUISH_FIRE, 0.7F, 1.6F + (randA - randB) * 0.4F);
 								entityIn.extinguish();
 							}
 						}
