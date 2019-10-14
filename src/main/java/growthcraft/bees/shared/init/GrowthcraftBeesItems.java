@@ -14,16 +14,17 @@ import net.minecraft.util.IStringSerializable;
 
 
 public class GrowthcraftBeesItems {
-	
-	private GrowthcraftBeesItems() {}
 
-	public static ItemDefinition honeyCombEmpty;
-	public static ItemDefinition honeyCombFilled;
-	public static ItemDefinition honeyJar;
-	public static ItemDefinition bee;
-	public static ItemDefinition beesWax;
-	
-	public static ItemTypeDefinition<ItemBoozeBottle> honeyMeadBottle;
+    private GrowthcraftBeesItems() {
+    }
+
+    public static ItemDefinition honeyCombEmpty;
+    public static ItemDefinition honeyCombFilled;
+    public static ItemDefinition honeyJar;
+    public static ItemDefinition bee;
+    public static ItemDefinition beesWax;
+
+    public static ItemTypeDefinition<ItemBoozeBottle> honeyMeadBottle;
 
     public enum BeesWaxTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
         WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getUnlocalizedName()),
@@ -41,8 +42,7 @@ public class GrowthcraftBeesItems {
         BROWN(EnumDyeColor.BROWN.getMetadata(), EnumDyeColor.BROWN.getUnlocalizedName()),
         GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
         RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName()),
-        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName())
-        ;
+        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName());
 
         private int ID;
         private String NAME;
@@ -66,36 +66,36 @@ public class GrowthcraftBeesItems {
         public int getVariantID() {
             return this.ID;
         }
-        
+
         @Override
         public ItemStack asStack(int amount) {
-        	return GrowthcraftBeesItems.beesWax.asStack(amount, getVariantID());
+            return GrowthcraftBeesItems.beesWax.asStack(amount, getVariantID());
         }
-        
+
         @Override
         public ItemStack asStack() {
-        	return asStack(1);
+            return asStack(1);
         }
     }
-    
-	public enum MeadTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
-    	MEAD_YOUNG(0, "mead_young"),
-    	MEAD_FERMENTED(1, "mead_fermented"),
-    	MEAD_POTENT(2, "mead_potent"),
-    	MEAD_EXTENDED(3, "mead_extended"),
-    	MEAD_ETHEREAL(4, "mead_ethereal"),
-    	MEAD_INTOXICATED(5, "mead_intoxicated"),
-    	MEAD_POISONED(6, "mead_poisoned"),
+
+    public enum MeadTypes implements IObjectBooze, IStringSerializable, IItemStackFactory, IObjectVariant {
+        MEAD_YOUNG(0, "mead_young"),
+        MEAD_FERMENTED(1, "mead_fermented"),
+        MEAD_POTENT(2, "mead_potent"),
+        MEAD_EXTENDED(3, "mead_extended"),
+        MEAD_ETHEREAL(4, "mead_ethereal"),
+        MEAD_INTOXICATED(5, "mead_intoxicated"),
+        MEAD_POISONED(6, "mead_poisoned"),
         MEAD_HYPEREXTENDED(7, "mead_hyperextended");
 
         private int ID;
         private String NAME;
-        
+
         MeadTypes(int id, String name) {
             this.ID = id;
             this.NAME = name;
         }
-        
+
         @Override
         public String toString() {
             return getName();
@@ -105,30 +105,30 @@ public class GrowthcraftBeesItems {
         public String getName() {
             return this.NAME;
         }
-        
+
         @Override
         public int getVariantID() {
             return this.ID;
         }
-        
+
         @Override
         public ItemStack asStack(int amount) {
-        	return GrowthcraftBeesItems.honeyMeadBottle.asStack(amount, getVariantID());
+            return GrowthcraftBeesItems.honeyMeadBottle.asStack(amount, getVariantID());
         }
-        
+
         @Override
         public ItemStack asStack() {
-        	return asStack(1);
+            return asStack(1);
         }
-        
+
         @Override
         public BoozeDefinition getFluidDefinition() {
-        	return GrowthcraftBeesFluids.meadBooze[ordinal()];
+            return GrowthcraftBeesFluids.meadBooze[ordinal()];
         }
-        
+
         @Override
         public BlockBoozeDefinition getBoozeBlockDefinition() {
-        	return GrowthcraftBeesBlocks.meadBoozeFluidBlocks[ordinal()];
+            return GrowthcraftBeesBlocks.meadBoozeFluidBlocks[ordinal()];
         }
     }
 }

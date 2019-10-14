@@ -44,7 +44,7 @@ public enum KumisTypes implements IObjectBooze, IStringSerializable, IItemStackF
     @Nullable
     @Override
     public ItemStack asStack(int size) {
-        return GrowthcraftMilkItems.kumisBottle.asStack( 1);
+        return GrowthcraftMilkItems.kumisBottle.asStack(1);
     }
 
     @Nullable

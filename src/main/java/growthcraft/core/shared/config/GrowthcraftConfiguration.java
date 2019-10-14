@@ -11,10 +11,10 @@ import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.GrowthcraftLogger;
 
 public class GrowthcraftConfiguration extends Configuration {
-	// REVISE_TEAM 0: Reused pattern from GrowthcraftBambooConfig, correct?
-	// REVISE_ME 0: Remove cellar dependency.
-	// INITIALIZE
-	
+    // REVISE_TEAM 0: Reused pattern from GrowthcraftBambooConfig, correct?
+    // REVISE_ME 0: Remove cellar dependency.
+    // INITIALIZE
+
     private static Configuration configuration;
 
     // Categories
@@ -44,17 +44,17 @@ public class GrowthcraftConfiguration extends Configuration {
         } catch (Exception e) {
             GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Bamboo!", e);
         } finally {
-            if ( configuration.hasChanged() ) {
+            if (configuration.hasChanged()) {
                 configuration.save();
             }
         }
     }
 
-	private static void initDebugConfig() {
+    private static void initDebugConfig() {
         logLevel = configuration.getString("logLevel", CATEGORY_GENERAL, logLevel, "Set standard logging levels. (INFO, ERROR, DEBUG)");
     }
 
     private static void initBoozeConfig() {
-    	hidePoisonedBooze = configuration.getBoolean("hidePoisoned", CATEGORY_BOOZE, hidePoisonedBooze, "Should purposely poisoned booze have its effect hidden?");
-	}
+        hidePoisonedBooze = configuration.getBoolean("hidePoisoned", CATEGORY_BOOZE, hidePoisonedBooze, "Should purposely poisoned booze have its effect hidden?");
+    }
 }

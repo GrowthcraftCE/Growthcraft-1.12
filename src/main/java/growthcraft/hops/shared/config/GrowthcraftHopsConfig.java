@@ -10,75 +10,75 @@ import java.io.File;
 
 public class GrowthcraftHopsConfig extends Configuration {
 
-	public static  Configuration configuration;
+    public static Configuration configuration;
 
-	// Non-configurable settings.
-	public static int lagerColor = 0x9F7851;
-	public static int hopAleColor = 0xD0AF4E;
+    // Non-configurable settings.
+    public static int lagerColor = 0x9F7851;
+    public static int hopAleColor = 0xD0AF4E;
 
-	// Configurable settings.
-	public static int hopVineMaxYield = 2;
-	public static float hopVineGrowthRate = 25.0f;
-	public static float hopVineFlowerSpawnRate = 40.0f;
-	public static int changeVineDropHopSeeds = 10;
-	/* CATEGORIES */
-	private static final String CATEGORY_GENERAL = "general";
+    // Configurable settings.
+    public static int hopVineMaxYield = 2;
+    public static float hopVineGrowthRate = 25.0f;
+    public static float hopVineFlowerSpawnRate = 40.0f;
+    public static int changeVineDropHopSeeds = 10;
+    /* CATEGORIES */
+    private static final String CATEGORY_GENERAL = "general";
 
-	public static void preInit(FMLPreInitializationEvent e) {
-		File directory = e.getModConfigurationDirectory();
-		configuration = new Configuration(new File(directory.getPath(), "growthcraft/growthcraft-hops.cfg"));
-		readConfig();
-	}
+    public static void preInit(FMLPreInitializationEvent e) {
+        File directory = e.getModConfigurationDirectory();
+        configuration = new Configuration(new File(directory.getPath(), "growthcraft/growthcraft-hops.cfg"));
+        readConfig();
+    }
 
-	public static void readConfig() {
-		try {
-			configuration.load();
-			initGeneralConfig();
-		} catch (Exception e) {
-			GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Hops!", e);
-		} finally {
-			if ( configuration.hasChanged() ) {
-				configuration.save();
-			}
-		}
-	}
+    public static void readConfig() {
+        try {
+            configuration.load();
+            initGeneralConfig();
+        } catch (Exception e) {
+            GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Hops!", e);
+        } finally {
+            if (configuration.hasChanged()) {
+                configuration.save();
+            }
+        }
+    }
 
-	private static void initGeneralConfig() {
-		changeVineDropHopSeeds = configuration.getInt(
-				"chanceVineDropHopSeeds",
-				CATEGORY_GENERAL,
-				changeVineDropHopSeeds,
-				0, 100,
-				"Chance (percentage) that BlockVine will drop a hop seeds."
-		);
+    private static void initGeneralConfig() {
+        changeVineDropHopSeeds = configuration.getInt(
+                "chanceVineDropHopSeeds",
+                CATEGORY_GENERAL,
+                changeVineDropHopSeeds,
+                0, 100,
+                "Chance (percentage) that BlockVine will drop a hop seeds."
+        );
 
-		hopVineMaxYield = configuration.getInt(
-				"maxHopYield",
-				CATEGORY_GENERAL,
-				hopVineMaxYield,
-				0, 10,
-				"Set the maximum number of Hops yielded from hop vines."
-		);
+        hopVineMaxYield = configuration.getInt(
+                "maxHopYield",
+                CATEGORY_GENERAL,
+                hopVineMaxYield,
+                0, 10,
+                "Set the maximum number of Hops yielded from hop vines."
+        );
 
-		hopVineGrowthRate = configuration.getFloat(
-				"hopGrowthRate",
-				CATEGORY_GENERAL,
-				hopVineGrowthRate,
-				1.0F, 100.0F,
-				"Chance that a hop vine will grow up the rope."
-		);
+        hopVineGrowthRate = configuration.getFloat(
+                "hopGrowthRate",
+                CATEGORY_GENERAL,
+                hopVineGrowthRate,
+                1.0F, 100.0F,
+                "Chance that a hop vine will grow up the rope."
+        );
 
-		hopVineFlowerSpawnRate = configuration.getFloat(
-				"hopFlowerRate",
-				CATEGORY_GENERAL,
-				hopVineFlowerSpawnRate,
-				1.0F, 100.0F,
-				"Chance that a hop vine will advance in growth age."
-		);
-	}
+        hopVineFlowerSpawnRate = configuration.getFloat(
+                "hopFlowerRate",
+                CATEGORY_GENERAL,
+                hopVineFlowerSpawnRate,
+                1.0F, 100.0F,
+                "Chance that a hop vine will advance in growth age."
+        );
+    }
 
-	private static void initDebugConfig() {
-		// TODO: [Growhtcraft Hops] Implement dynamic logging at the sub-module level.
-	}
+    private static void initDebugConfig() {
+        // TODO: [Growhtcraft Hops] Implement dynamic logging at the sub-module level.
+    }
 
 }

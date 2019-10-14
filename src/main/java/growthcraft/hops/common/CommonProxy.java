@@ -12,7 +12,7 @@ public class CommonProxy {
     public void registerTileEntities() {
     }
 
-	public void postRegisterItems() {
-	}
+    public void postRegisterItems() {
+    }
 
 }

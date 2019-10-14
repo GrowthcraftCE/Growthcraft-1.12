@@ -16,28 +16,28 @@ public class ClientProxy extends CommonProxy {
         super.preInit();
         registerSpecialRenders();
     }
-    
+
     @Override
     public void postRegisterItems() {
-    	super.postRegisterItems();
-    	registerModelBakeryVariants();
+        super.postRegisterItems();
+        registerModelBakeryVariants();
     }
-    
+
     @Override
     public void init() {
-    	super.init();    	
-    	registerSpecialRenders();
-    	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:fruit_press", GuiFruitPress.class);
-    	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:brew_kettle", GuiBrewKettle.class);
-    	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:ferment_barrel", GuiFermentBarrel.class);
-    	GrowthcraftCellar.guiProvider.register("growthcraft_cellar:culture_jar", GuiCultureJar.class);
+        super.init();
+        registerSpecialRenders();
+        GrowthcraftCellar.guiProvider.register("growthcraft_cellar:fruit_press", GuiFruitPress.class);
+        GrowthcraftCellar.guiProvider.register("growthcraft_cellar:brew_kettle", GuiBrewKettle.class);
+        GrowthcraftCellar.guiProvider.register("growthcraft_cellar:ferment_barrel", GuiFermentBarrel.class);
+        GrowthcraftCellar.guiProvider.register("growthcraft_cellar:culture_jar", GuiCultureJar.class);
     }
 
     public void registerModelBakeryVariants() {
-    	GrowthcraftCellarItems.yeast.registerModelBakeryVariants(EnumYeast.class);
+        GrowthcraftCellarItems.yeast.registerModelBakeryVariants(EnumYeast.class);
     }
 
     public void registerSpecialRenders() {
-    	Init.registerBlockSpecialRenders();
+        Init.registerBlockSpecialRenders();
     }
 }

@@ -10,14 +10,14 @@ public class GrowthcraftLogger {
     private static Logger logger;
 
     public static Logger getLogger(String modID) {
-        if ( logger == null ) {
+        if (logger == null) {
             logger = LogManager.getLogger(modID);
         }
         return logger;
     }
 
     public static void debugDumpLog(String modID, World worldIn, BlockPos pos) {
-        if ( logger == null ) {
+        if (logger == null) {
             logger = LogManager.getLogger(modID);
         }
 

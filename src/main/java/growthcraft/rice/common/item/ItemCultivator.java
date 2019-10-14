@@ -34,7 +34,7 @@ public class ItemCultivator extends ItemHoe {
         ItemStack itemstack = player.getHeldItem(hand);
         IBlockState state = worldIn.getBlockState(pos);
 
-        if ( state.getBlock() instanceof BlockFarmland) {
+        if (state.getBlock() instanceof BlockFarmland) {
             worldIn.setBlockState(pos, GrowthcraftRiceBlocks.ricePaddy.getDefaultState(), BlockFlags.UPDATE_AND_SYNC);
             itemstack.damageItem(1, player);
             // Check for secondary output
@@ -47,7 +47,7 @@ public class ItemCultivator extends ItemHoe {
     }
 
     private void checkSecondaryOutput(EntityPlayer player, World worldIn, BlockPos pos) {
-        if ( !worldIn.isRemote && !worldIn.restoringBlockSnapshots ) {
+        if (!worldIn.isRemote && !worldIn.restoringBlockSnapshots) {
             int maxLootIndex = GrowthcraftRiceConfig.CULTIVATOR_HARVEST_TABLE.size();
             if (maxLootIndex > 0) {
                 Random random = new Random();

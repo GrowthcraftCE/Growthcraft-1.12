@@ -75,7 +75,7 @@ public class GrowthcraftRice {
     }
 
     @Mod.EventHandler
-    public static void  postInit(FMLPostInitializationEvent event) {
+    public static void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
         userApis.postInit();
 

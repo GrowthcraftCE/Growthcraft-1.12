@@ -14,62 +14,52 @@ import net.minecraft.world.World;
  * it will apply all of its children effects.
  * When the description is retrieved, it will join them together.
  */
-public class EffectList extends AbstractEffectList
-{
-	// REVISE_ME 0
-	
-	/**
-	 * Performs a shallow copy of the EffectList
-	 *
-	 * @return new effect list
-	 */
-	public EffectList copy()
-	{
-		return new EffectList().concat(effects);
-	}
+public class EffectList extends AbstractEffectList {
+    // REVISE_ME 0
 
-	/**
-	 * Applies all of the internal effects to the targets
-	 *
-	 * @param world - world that the entity is currently present ing
-	 * @param entity - entity to apply the effect to
-	 * @param data - any extra data you want to pass along
-	 */
-	@Override
-	public void apply(World world, Entity entity, Random random, Object data)
-	{
-		for (IEffect effect : effects)
-		{
-			effect.apply(world, entity, random, data);
-		}
-	}
+    /**
+     * Performs a shallow copy of the EffectList
+     *
+     * @return new effect list
+     */
+    public EffectList copy() {
+        return new EffectList().concat(effects);
+    }
 
-	protected void addDescriptionHead(List<String> list)
-	{
-		list.add(I18n.translateToLocal("effect.list.head"));
-	}
+    /**
+     * Applies all of the internal effects to the targets
+     *
+     * @param world  - world that the entity is currently present ing
+     * @param entity - entity to apply the effect to
+     * @param data   - any extra data you want to pass along
+     */
+    @Override
+    public void apply(World world, Entity entity, Random random, Object data) {
+        for (IEffect effect : effects) {
+            effect.apply(world, entity, random, data);
+        }
+    }
 
-	/**
-	 * Adds the description of all the internal effects
-	 *
-	 * @param list - list to add description lines to
-	 */
-	@Override
-	protected void getActualDescription(List<String> list)
-	{
-		if (effects.size() > 1)
-		{
-			addDescriptionHead(list);
-			for (IEffect effect : effects)
-			{
-				final List<String> tempList = new ArrayList<String>();
-				effect.getDescription(tempList);
-				Describer.addAllIndented(list, tempList);
-			}
-		}
-		else if (effects.size() == 1)
-		{
-			effects.get(0).getDescription(list);
-		}
-	}
+    protected void addDescriptionHead(List<String> list) {
+        list.add(I18n.translateToLocal("effect.list.head"));
+    }
+
+    /**
+     * Adds the description of all the internal effects
+     *
+     * @param list - list to add description lines to
+     */
+    @Override
+    protected void getActualDescription(List<String> list) {
+        if (effects.size() > 1) {
+            addDescriptionHead(list);
+            for (IEffect effect : effects) {
+                final List<String> tempList = new ArrayList<String>();
+                effect.getDescription(tempList);
+                Describer.addAllIndented(list, tempList);
+            }
+        } else if (effects.size() == 1) {
+            effects.get(0).getDescription(list);
+        }
+    }
 }

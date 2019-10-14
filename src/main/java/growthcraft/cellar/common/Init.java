@@ -51,12 +51,13 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class Init {
-	private Init() {}
-	
-	///////////
-	// Blocks
-	///////////
-	
+    private Init() {
+    }
+
+    ///////////
+    // Blocks
+    ///////////
+
     public static void preInitBlocks() {
         GrowthcraftCellarBlocks.brewKettle = new BlockDefinition(new BlockBrewKettle("brew_kettle"));
         GrowthcraftCellarBlocks.fermentBarrel = new BlockDefinition(new BlockFermentBarrel("ferment_barrel"));
@@ -66,29 +67,29 @@ public class Init {
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
-    	GrowthcraftCellarBlocks.brewKettle.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarBlocks.brewKettle.registerBlock(registry);
-    	GrowthcraftCellarBlocks.fermentBarrel.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarBlocks.fermentBarrel.registerBlock(registry);
-    	GrowthcraftCellarBlocks.cultureJar.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarBlocks.cultureJar.registerBlock(registry);
-    	GrowthcraftCellarBlocks.fruitPress.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarBlocks.fruitPress.registerBlock(registry);
-    	GrowthcraftCellarBlocks.fruitPresser.registerBlock(registry);
+        GrowthcraftCellarBlocks.brewKettle.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.brewKettle.registerBlock(registry);
+        GrowthcraftCellarBlocks.fermentBarrel.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.fermentBarrel.registerBlock(registry);
+        GrowthcraftCellarBlocks.cultureJar.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.cultureJar.registerBlock(registry);
+        GrowthcraftCellarBlocks.fruitPress.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.fruitPress.registerBlock(registry);
+        GrowthcraftCellarBlocks.fruitPresser.registerBlock(registry);
     }
-    
+
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
-    	GrowthcraftCellarBlocks.brewKettle.registerBlockItem(registry);
-    	GrowthcraftCellarBlocks.fermentBarrel.registerBlockItem(registry);
-    	GrowthcraftCellarBlocks.cultureJar.registerBlockItem(registry);
-    	GrowthcraftCellarBlocks.fruitPress.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.brewKettle.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.fermentBarrel.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.cultureJar.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.fruitPress.registerBlockItem(registry);
     }
 
     public static void registerBlockRenders() {
-    	GrowthcraftCellarBlocks.brewKettle.registerItemRender();
-    	GrowthcraftCellarBlocks.fermentBarrel.registerItemRender();
-    	GrowthcraftCellarBlocks.cultureJar.registerItemRender();
-    	GrowthcraftCellarBlocks.fruitPress.registerItemRender();
+        GrowthcraftCellarBlocks.brewKettle.registerItemRender();
+        GrowthcraftCellarBlocks.fermentBarrel.registerItemRender();
+        GrowthcraftCellarBlocks.cultureJar.registerItemRender();
+        GrowthcraftCellarBlocks.fruitPress.registerItemRender();
     }
 
     @SideOnly(Side.CLIENT)
@@ -97,7 +98,7 @@ public class Init {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCultureJar.class, new RenderCultureJar());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFruitPress.class, new RenderFruitPress());
     }
-    
+
     public static void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityBrewKettle.class, Reference.MODID + ":brew_kettle");
         GameRegistry.registerTileEntity(TileEntityFermentBarrel.class, Reference.MODID + ":ferment_barrel");
@@ -105,108 +106,107 @@ public class Init {
         GameRegistry.registerTileEntity(TileEntityFruitPress.class, Reference.MODID + ":fruit_press");
         GameRegistry.registerTileEntity(TileEntityFruitPresser.class, Reference.MODID + ":fruit_presser");
     }
-    
+
     ///////////
     // Items
     ///////////
-    
+
     public static void preInitItems() {
-    	GrowthcraftCellarItems.chievItemDummy = new ItemDefinition( new ItemChievDummy("achievement_dummy") );
-    	GrowthcraftCellarItems.yeast = new ItemDefinition( new ItemYeast("yeast") );
-    	GrowthcraftCellarItems.brewKettleLid = new ItemDefinition( new ItemBrewKettleLid("brew_kettle_lid") );
-    	GrowthcraftCellarItems.barrelTap = new ItemDefinition( new ItemBarrelTap("barrel_tap") );
+        GrowthcraftCellarItems.chievItemDummy = new ItemDefinition(new ItemChievDummy("achievement_dummy"));
+        GrowthcraftCellarItems.yeast = new ItemDefinition(new ItemYeast("yeast"));
+        GrowthcraftCellarItems.brewKettleLid = new ItemDefinition(new ItemBrewKettleLid("brew_kettle_lid"));
+        GrowthcraftCellarItems.barrelTap = new ItemDefinition(new ItemBarrelTap("barrel_tap"));
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
-    	GrowthcraftCellarItems.chievItemDummy.registerItem(registry);
-    	GrowthcraftCellarItems.yeast.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarItems.yeast.registerItem(registry);
-    	GrowthcraftCellarItems.brewKettleLid.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarItems.brewKettleLid.registerItem(registry);
-    	GrowthcraftCellarItems.barrelTap.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCellarItems.barrelTap.registerItem(registry);
+        GrowthcraftCellarItems.chievItemDummy.registerItem(registry);
+        GrowthcraftCellarItems.yeast.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarItems.yeast.registerItem(registry);
+        GrowthcraftCellarItems.brewKettleLid.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarItems.brewKettleLid.registerItem(registry);
+        GrowthcraftCellarItems.barrelTap.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarItems.barrelTap.registerItem(registry);
     }
 
     public static void registerItemRenders() {
-    	GrowthcraftCellarItems.chievItemDummy.registerRender();
-    	GrowthcraftCellarItems.yeast.registerRenders(EnumYeast.class);
-    	GrowthcraftCellarItems.brewKettleLid.registerRender();
-    	GrowthcraftCellarItems.barrelTap.registerRender();
+        GrowthcraftCellarItems.chievItemDummy.registerRender();
+        GrowthcraftCellarItems.yeast.registerRenders(EnumYeast.class);
+        GrowthcraftCellarItems.brewKettleLid.registerRender();
+        GrowthcraftCellarItems.barrelTap.registerRender();
     }
 
     ///////////
     // Effects
     ///////////
-    
-	public static void preInitEffects()
-	{
-		final EffectRegistry reg = CoreRegistry.instance().getEffectsRegistry();
-		reg.register("booze_effect", BoozeEffect.class);
-		reg.register("booze_effect_list", BoozeEffect.BoozeEffectList.class);
-		reg.register("tipsy", EffectTipsy.class);
-	}
 
-	///////////
-	// Heat sources
-	///////////
-	
-	public static void preInitHeatSources() {
-	}
-	
-	public static void registerHeatSources() {
-		GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
-			.setComment("Fire!");
-		GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
-			.setComment("We need to register both states of lava, this when its flowing");
-		GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
-			.setComment("And when its a still pool.");
-		GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault(Blocks.MAGMA.getRegistryName(), UserHeatSourceEntry.newWildcardHeat(0.7f))
-		    .setComment("Magma Block. Something like lava.");
-	}
-	
-	///////////
-	// Yeasts
-	///////////
-	
-	public static void initYeasts() {
-    }
-	
-	public static void registerYeasts() {
-		OreDictionary.registerOre("materialYeast", GrowthcraftCellarItems.yeast.getItem());
-		for( EnumYeast type : EnumYeast.values() ) {
-			ItemStack yeastItemStack = type.asStack();
-			OreDictionary.registerOre(type.toOreName(), yeastItemStack);
-			CellarRegistry.instance().yeast().addYeast(yeastItemStack);
-		}
+    public static void preInitEffects() {
+        final EffectRegistry reg = CoreRegistry.instance().getEffectsRegistry();
+        reg.register("booze_effect", BoozeEffect.class);
+        reg.register("booze_effect_list", BoozeEffect.BoozeEffectList.class);
+        reg.register("tipsy", EffectTipsy.class);
     }
 
-	///////////
-	// Potions
-	///////////
-	
-	public static void registerPotions(IForgeRegistry<Potion> registry) {
-		// TODO: Add some class PotionDefinition like BlockDefinition or ItemDefinition
-		GrowthcraftCellarPotions.potionTipsy = new PotionCellar(false, 0, 1, 0).setPotionName("potion.tipsy");
-		registerPotion(registry, GrowthcraftCellarPotions.potionTipsy);
-		
-		EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
-	}
-	
-	private static void registerPotion(IForgeRegistry<Potion> registry, Potion potion) {
-		potion.setRegistryName(new ResourceLocation(Reference.MODID, potion.getName()));
-		registry.register(potion);
-	}
-	
-	///////////
-	// Recipes
-	///////////
-	
+    ///////////
+    // Heat sources
+    ///////////
+
+    public static void preInitHeatSources() {
+    }
+
+    public static void registerHeatSources() {
+        GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault("minecraft", "fire", UserHeatSourceEntry.newWildcardHeat(1.0f))
+                .setComment("Fire!");
+        GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault("minecraft", "flowing_lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+                .setComment("We need to register both states of lava, this when its flowing");
+        GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault("minecraft", "lava", UserHeatSourceEntry.newWildcardHeat(0.7f))
+                .setComment("And when its a still pool.");
+        GrowthcraftCellarApis.userApis.getUserHeatSources().addDefault(Blocks.MAGMA.getRegistryName(), UserHeatSourceEntry.newWildcardHeat(0.7f))
+                .setComment("Magma Block. Something like lava.");
+    }
+
+    ///////////
+    // Yeasts
+    ///////////
+
+    public static void initYeasts() {
+    }
+
+    public static void registerYeasts() {
+        OreDictionary.registerOre("materialYeast", GrowthcraftCellarItems.yeast.getItem());
+        for (EnumYeast type : EnumYeast.values()) {
+            ItemStack yeastItemStack = type.asStack();
+            OreDictionary.registerOre(type.toOreName(), yeastItemStack);
+            CellarRegistry.instance().yeast().addYeast(yeastItemStack);
+        }
+    }
+
+    ///////////
+    // Potions
+    ///////////
+
+    public static void registerPotions(IForgeRegistry<Potion> registry) {
+        // TODO: Add some class PotionDefinition like BlockDefinition or ItemDefinition
+        GrowthcraftCellarPotions.potionTipsy = new PotionCellar(false, 0, 1, 0).setPotionName("potion.tipsy");
+        registerPotion(registry, GrowthcraftCellarPotions.potionTipsy);
+
+        EffectTipsy.achievement = CellarAchievement.GET_DRUNK;
+    }
+
+    private static void registerPotion(IForgeRegistry<Potion> registry, Potion potion) {
+        potion.setRegistryName(new ResourceLocation(Reference.MODID, potion.getName()));
+        registry.register(potion);
+    }
+
+    ///////////
+    // Recipes
+    ///////////
+
     public static void registerRecipes() {
         registerCraftingRecipes();
     }
 
     private static void registerCraftingRecipes() {
-    	// TODO: RECIPE_REGISTER!
+        // TODO: RECIPE_REGISTER!
 /*
         GameRegistry.addRecipe(GrowthcraftCellarBlocks.cultureJar.asStack(1),
                 "BAB", "B B", "BBB",
@@ -225,5 +225,5 @@ public class Init {
 		GameRegistry.addRecipe(new ShapedOreRecipe(GrowthcraftCellarBlocks.cultureJar.asStack(), "GAG", "G G", "GGG", 'A', "plankWood", 'G', "paneGlass"));
 */
     }
-	
+
 }

@@ -9,15 +9,15 @@ public class CommonProxy {
         registerTileEntities();
     }
 
-	public void postInit() {
-		
-	}
-	
-	public void postRegisterItems() {
-	}
-    
+    public void postInit() {
+
+    }
+
+    public void postRegisterItems() {
+    }
+
     public void registerTileEntities() {
-    	Init.registerTileEntities();
+        Init.registerTileEntities();
     }
 
 }

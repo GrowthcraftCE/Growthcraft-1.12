@@ -14,90 +14,75 @@ import net.minecraft.world.World;
 /**
  * Has a random chance of applying its sub effect to the target
  */
-public class EffectChance extends AbstractEffect
-{
-	// REVISE_ME 0
-	
-	private float chance;
-	private IEffect effect;
+public class EffectChance extends AbstractEffect {
+    // REVISE_ME 0
 
-	/**
-	 * @param effekt - the effect to apply when the conditions are met
-	 */
-	public EffectChance(IEffect effekt)
-	{
-		this.effect = effekt;
-	}
+    private float chance;
+    private IEffect effect;
 
-	public EffectChance() {}
+    /**
+     * @param effekt - the effect to apply when the conditions are met
+     */
+    public EffectChance(IEffect effekt) {
+        this.effect = effekt;
+    }
 
-	public EffectChance setChance(float chan)
-	{
-		this.chance = chan;
-		return this;
-	}
+    public EffectChance() {
+    }
 
-	public float getChance()
-	{
-		return chance;
-	}
+    public EffectChance setChance(float chan) {
+        this.chance = chan;
+        return this;
+    }
 
-	public IEffect getEffect()
-	{
-		return effect;
-	}
+    public float getChance() {
+        return chance;
+    }
 
-	public EffectChance setEffect(IEffect effekt)
-	{
-		this.effect = effekt;
-		return this;
-	}
+    public IEffect getEffect() {
+        return effect;
+    }
 
-	@Override
-	public void apply(World world, Entity entity, Random random, Object data)
-	{
-		if (effect != null)
-		{
-			if ((random.nextInt(2000) / 2000.0f) < chance)
-			{
-				effect.apply(world, entity, random, data);
-			}
-		}
-	}
+    public EffectChance setEffect(IEffect effekt) {
+        this.effect = effekt;
+        return this;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	protected void getActualDescription(List<String> list)
-	{
-		if (effect != null)
-		{
-			final List<String> tempList = new ArrayList<String>();
-			effect.getDescription(tempList);
-			if (tempList.size() > 0)
-			{
-				final String str = I18n.translateToLocalFormatted("effect.chance.format", (int)(chance * 100));
-				Describer.compactDescription(str, list, tempList);
-			}
-		}
-	}
+    @Override
+    public void apply(World world, Entity entity, Random random, Object data) {
+        if (effect != null) {
+            if ((random.nextInt(2000) / 2000.0f) < chance) {
+                effect.apply(world, entity, random, data);
+            }
+        }
+    }
 
-	@Override
-	protected void readFromNBT(NBTTagCompound data)
-	{
-		this.chance = data.getFloat("chance");
-		if (data.hasKey("effect"))
-		{
-			this.effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effect");
-		}
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void getActualDescription(List<String> list) {
+        if (effect != null) {
+            final List<String> tempList = new ArrayList<String>();
+            effect.getDescription(tempList);
+            if (tempList.size() > 0) {
+                final String str = I18n.translateToLocalFormatted("effect.chance.format", (int) (chance * 100));
+                Describer.compactDescription(str, list, tempList);
+            }
+        }
+    }
 
-	@Override
-	protected void writeToNBT(NBTTagCompound data)
-	{
-		data.setFloat("chance", chance);
-		if (effect != null)
-		{
-			effect.writeToNBT(data, "effect");
-		}
-	}
+    @Override
+    protected void readFromNBT(NBTTagCompound data) {
+        this.chance = data.getFloat("chance");
+        if (data.hasKey("effect")) {
+            this.effect = CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effect");
+        }
+    }
+
+    @Override
+    protected void writeToNBT(NBTTagCompound data) {
+        data.setFloat("chance", chance);
+        if (effect != null) {
+            effect.writeToNBT(data, "effect");
+        }
+    }
 }

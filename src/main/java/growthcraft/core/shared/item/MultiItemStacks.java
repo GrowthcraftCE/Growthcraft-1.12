@@ -9,57 +9,47 @@ import javax.annotation.Nullable;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
 
-public class MultiItemStacks implements IMultiItemStacks
-{
-	private List<ItemStack> itemStacks;
+public class MultiItemStacks implements IMultiItemStacks {
+    private List<ItemStack> itemStacks;
 
-	public static MultiItemStacks EMPTY = new MultiItemStacks();
-	
-	public MultiItemStacks(@Nonnull List<ItemStack> stacks)
-	{
-		this.itemStacks = stacks;
-	}
+    public static MultiItemStacks EMPTY = new MultiItemStacks();
 
-	public MultiItemStacks(@Nonnull ItemStack... stacks)
-	{
-		this(Arrays.asList(stacks));
-	}
+    public MultiItemStacks(@Nonnull List<ItemStack> stacks) {
+        this.itemStacks = stacks;
+    }
 
-	public MultiItemStacks copy()
-	{
-		return new MultiItemStacks(itemStacks);
-	}
+    public MultiItemStacks(@Nonnull ItemStack... stacks) {
+        this(Arrays.asList(stacks));
+    }
 
-	@Override
-	public boolean isEmpty()
-	{
-		return itemStacks.isEmpty();
-	}
+    public MultiItemStacks copy() {
+        return new MultiItemStacks(itemStacks);
+    }
 
-	@Override
-	public int getStackSize()
-	{
-		for (ItemStack stack : itemStacks)
-		{
-			return stack.getCount();
-		}
-		return 0;
-	}
+    @Override
+    public boolean isEmpty() {
+        return itemStacks.isEmpty();
+    }
 
-	@Override
-	public List<ItemStack> getItemStacks()
-	{
-		return itemStacks;
-	}
+    @Override
+    public int getStackSize() {
+        for (ItemStack stack : itemStacks) {
+            return stack.getCount();
+        }
+        return 0;
+    }
 
-	@Override
-	public boolean containsItemStack(@Nullable ItemStack stack)
-	{
-		if (!ItemTest.isValid(stack)) return false;
-		for (ItemStack content : getItemStacks())
-		{
-			if (content.isItemEqual(stack)) return true;
-		}
-		return false;
-	}
+    @Override
+    public List<ItemStack> getItemStacks() {
+        return itemStacks;
+    }
+
+    @Override
+    public boolean containsItemStack(@Nullable ItemStack stack) {
+        if (!ItemTest.isValid(stack)) return false;
+        for (ItemStack content : getItemStacks()) {
+            if (content.isItemEqual(stack)) return true;
+        }
+        return false;
+    }
 }

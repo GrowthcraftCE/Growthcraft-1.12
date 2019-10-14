@@ -35,89 +35,83 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
-	public static final int LEAVES_COLOR = 0x58e21d; // 0x4fcb1a; // 0x48B518;
-	
-	// TODO: Make fields configurable
-	private static final int APPLE_CHECK_AREA = 3;
-	private static final int MAX_APPLES_IN_AREA = 2;
-	
+    public static final int LEAVES_COLOR = 0x58e21d; // 0x4fcb1a; // 0x48B518;
+
+    // TODO: Make fields configurable
+    private static final int APPLE_CHECK_AREA = 3;
+    private static final int MAX_APPLES_IN_AREA = 2;
+
     public BlockAppleLeaves(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
-        this.setCreativeTab(null);	// Will be initialized in Init class
+        this.setCreativeTab(null);    // Will be initialized in Init class
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
         Blocks.FIRE.setFireInfo(this, 5, 20);
     }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public BlockRenderLayer getBlockLayer() {
-		return Blocks.LEAVES.getBlockLayer();
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer() {
+        return Blocks.LEAVES.getBlockLayer();
+    }
 
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return Blocks.LEAVES.isOpaqueCube(state);
-	}
-	
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return Blocks.LEAVES.isOpaqueCube(state);
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
-    	return Blocks.LEAVES.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
+        return Blocks.LEAVES.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
-    
-	@Override
-	public EnumType getWoodType(int meta) {
-		// NOTE: Is only used by ItemLeaves. 
-		return null;
-	}
-    
+
+    @Override
+    public EnumType getWoodType(int meta) {
+        // NOTE: Is only used by ItemLeaves.
+        return null;
+    }
+
     ///////
     // States
     ///////
-    
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, new IProperty[]{CHECK_DECAY, DECAYABLE});
     }
-    
+
     /**
      * Convert the BlockState into the correct metadata value
      */
-    public int getMetaFromState(IBlockState state)
-    {
+    public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        if (!((Boolean)state.getValue(DECAYABLE)).booleanValue())
-        {
+        if (!((Boolean) state.getValue(DECAYABLE)).booleanValue()) {
             i |= 4;
         }
 
-        if (((Boolean)state.getValue(CHECK_DECAY)).booleanValue())
-        {
+        if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue()) {
             i |= 8;
         }
 
         return i;
     }
-    
+
     /**
      * Convert the given metadata into a BlockState for this Block
      */
-    public IBlockState getStateFromMeta(int meta)
-    {
+    public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(DECAYABLE, Boolean.valueOf((meta & 4) == 0)).withProperty(CHECK_DECAY, Boolean.valueOf((meta & 8) > 0));
     }
-    
+
     ///////
     // Growing apples
     ///////
-    
+
     @Override
     public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-        if( !canSustainApple(worldIn, pos, state) )
-        	return false;
+        if (!canSustainApple(worldIn, pos, state))
+            return false;
         return true;
     }
 
@@ -128,83 +122,83 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
 
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-        if ( worldIn.getBlockState(pos.down()).getBlock() instanceof BlockAir ){
+        if (worldIn.getBlockState(pos.down()).getBlock() instanceof BlockAir) {
             worldIn.setBlockState(pos.down(), GrowthcraftApplesBlocks.blockApple.getDefaultState());
         }
     }
-    
+
     private boolean canSustainApple(World worldIn, BlockPos pos, IBlockState state) {
-    	if( state.getBlock() != this )
-    		return false;
-    	if( !state.getValue(DECAYABLE) )
-    		return false; // Not originally growing on tree, so no apples.
-    	
+        if (state.getBlock() != this)
+            return false;
+        if (!state.getValue(DECAYABLE))
+            return false; // Not originally growing on tree, so no apples.
+
         Block block = worldIn.getBlockState(pos.down()).getBlock();
-        if( !(block instanceof BlockAir) )
-        	return false;
+        if (!(block instanceof BlockAir))
+            return false;
         return true;
     }
-    
-    private boolean canSpawnApple(World worldIn, BlockPos pos, IBlockState state ) {
-    	if( !canSustainApple(worldIn, pos, state) )
-    		return false;
-    	
-    	final int iX = pos.getX();
-    	final int iY = pos.getY();
-    	final int iZ = pos.getZ();
-    	
-    	BlockPos.MutableBlockPos mutpos = new BlockPos.MutableBlockPos();
-    	int countApples = 0;
-    	
-    	for( int jX = -APPLE_CHECK_AREA; jX <= APPLE_CHECK_AREA; jX ++ ) {
-    		for( int jY = -APPLE_CHECK_AREA; jY <= APPLE_CHECK_AREA; jY ++ ) {
-    			for( int jZ = -APPLE_CHECK_AREA; jZ <= APPLE_CHECK_AREA; jZ ++ ) {
-    				mutpos.setPos(iX+jX, iY+jY, iZ+jZ);
-    				IBlockState iblockstate = worldIn.getBlockState(mutpos);
-    				if( iblockstate.getBlock() == GrowthcraftApplesBlocks.blockApple.getBlock() ) {
-    					if( ++ countApples >= MAX_APPLES_IN_AREA )
-    						return false;
-    				}
-    			}
-    		}
-    	}
-    	
-    	return true;
+
+    private boolean canSpawnApple(World worldIn, BlockPos pos, IBlockState state) {
+        if (!canSustainApple(worldIn, pos, state))
+            return false;
+
+        final int iX = pos.getX();
+        final int iY = pos.getY();
+        final int iZ = pos.getZ();
+
+        BlockPos.MutableBlockPos mutpos = new BlockPos.MutableBlockPos();
+        int countApples = 0;
+
+        for (int jX = -APPLE_CHECK_AREA; jX <= APPLE_CHECK_AREA; jX++) {
+            for (int jY = -APPLE_CHECK_AREA; jY <= APPLE_CHECK_AREA; jY++) {
+                for (int jZ = -APPLE_CHECK_AREA; jZ <= APPLE_CHECK_AREA; jZ++) {
+                    mutpos.setPos(iX + jX, iY + jY, iZ + jZ);
+                    IBlockState iblockstate = worldIn.getBlockState(mutpos);
+                    if (iblockstate.getBlock() == GrowthcraftApplesBlocks.blockApple.getBlock()) {
+                        if (++countApples >= MAX_APPLES_IN_AREA)
+                            return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-    	if ( !worldIn.isRemote ) {
+        if (!worldIn.isRemote) {
             // check the light level and pick a randomness for growth.
-            if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
-            	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0) ) {
-            		if( canSpawnApple(worldIn, pos, state) ) {
-	    				grow(worldIn, rand, pos, state);
-	    				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-            		}
-    			}
+            if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
+                if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0)) {
+                    if (canSpawnApple(worldIn, pos, state)) {
+                        grow(worldIn, rand, pos, state);
+                        ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+                    }
+                }
             }
         }
-    	
+
         super.updateTick(worldIn, pos, state, rand);
     }
 
     ////
     // DROPS
     ////
-    
-	@Override
-	protected int getSaplingDropChance(IBlockState state) {
-		return 20;
-	}
-    
-	@Override
-	protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
-		if (worldIn.rand.nextInt(chance) == 0 ) {
-			spawnAsEntity(worldIn, pos, new ItemStack(Items.APPLE));
-		}
-	}
-    
+
+    @Override
+    protected int getSaplingDropChance(IBlockState state) {
+        return 20;
+    }
+
+    @Override
+    protected void dropApple(World worldIn, BlockPos pos, IBlockState state, int chance) {
+        if (worldIn.rand.nextInt(chance) == 0) {
+            spawnAsEntity(worldIn, pos, new ItemStack(Items.APPLE));
+        }
+    }
+
     @Override
     public int quantityDroppedWithBonus(int fortune, Random random) {
         return MathHelper.clamp(this.quantityDropped(random) + random.nextInt(fortune + 1), 0, 2);
@@ -214,38 +208,34 @@ public class BlockAppleLeaves extends BlockLeaves implements IGrowable {
     public int quantityDropped(Random random) {
         return random.nextInt(5) == 0 ? 1 : 0;
     }
-    
+
     @Override
     public int damageDropped(IBlockState state) {
-    	return 0;
+        return 0;
     }
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return GrowthcraftApplesBlocks.blockAppleSapling.getItem();
     }
-    
-	@Override
-	public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-		return NonNullList.withSize(1, new ItemStack(this, 1, 0));
-	}
-	
-	@Override
-	protected ItemStack getSilkTouchDrop(IBlockState state) {
-		return new ItemStack(Item.getItemFromBlock(this), 1, 0);
-	}
 
-	@Override
-    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack)
-    {
-		// SYNC: Copied from net.minecraft.block.BlockOldLeaf.harvestBlock() . Keep in sync with it on changes.
-		
-        if (!worldIn.isRemote && stack.getItem() == Items.SHEARS)
-        {
+    @Override
+    public List<ItemStack> onSheared(ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
+        return NonNullList.withSize(1, new ItemStack(this, 1, 0));
+    }
+
+    @Override
+    protected ItemStack getSilkTouchDrop(IBlockState state) {
+        return new ItemStack(Item.getItemFromBlock(this), 1, 0);
+    }
+
+    @Override
+    public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        // SYNC: Copied from net.minecraft.block.BlockOldLeaf.harvestBlock() . Keep in sync with it on changes.
+
+        if (!worldIn.isRemote && stack.getItem() == Items.SHEARS) {
             player.addStat(StatList.getBlockStats(this));
-        }
-        else
-        {
+        } else {
             super.harvestBlock(worldIn, player, pos, state, te, stack);
         }
     }

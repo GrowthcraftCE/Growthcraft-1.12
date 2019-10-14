@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 @Mod.EventBusSubscriber(modid = Reference.MODID)
 public class GrowthcraftHopsLootTableHandler {
     @SubscribeEvent
-    public static void  lootTableLoad(final LootTableLoadEvent event) {
+    public static void lootTableLoad(final LootTableLoadEvent event) {
 
         boolean isSimpleDungeon = event.getName().toString().equals("minecraft:chests/simple_dungeon");
         boolean isMineshaft = event.getName().toString().equals("minecraft:chests/abandoned_mineshaft");
@@ -28,7 +28,7 @@ public class GrowthcraftHopsLootTableHandler {
                     50, 0,
                     new LootCondition[0], name);
 
-            final RandomValueRange rolls = new RandomValueRange(0,1);
+            final RandomValueRange rolls = new RandomValueRange(0, 1);
             final LootPool pool = new LootPool(new LootEntry[]{entry}, new LootCondition[0], rolls, rolls, name);
             event.getTable().addPool(pool);
         }

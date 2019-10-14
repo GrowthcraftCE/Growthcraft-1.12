@@ -14,50 +14,43 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
-{
-	protected T fluid;
+public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory {
+    protected T fluid;
 
-	public FluidTypeDefinition(@Nonnull T obj)
-	{
-		this.fluid = obj;
-	}
+    public FluidTypeDefinition(@Nonnull T obj) {
+        this.fluid = obj;
+    }
 
-	@Nonnull
-	public T getFluid()
-	{
-		return fluid;
-	}
+    @Nonnull
+    public T getFluid() {
+        return fluid;
+    }
 
-	@Nonnull
-	public FluidStack asFluidStack(int size)
-	{
-		return new FluidStack(getFluid(), size);
-	}
+    @Nonnull
+    public FluidStack asFluidStack(int size) {
+        return new FluidStack(getFluid(), size);
+    }
 
-	@Nonnull
-	public FluidStack asFluidStack()
-	{
-		return asFluidStack(1);
-	}
+    @Nonnull
+    public FluidStack asFluidStack() {
+        return asFluidStack(1);
+    }
 
-	public boolean equals(Fluid other)
-	{
-		if (other == null) return false;
-		return getFluid() == other;
-	}
+    public boolean equals(Fluid other) {
+        if (other == null) return false;
+        return getFluid() == other;
+    }
 
-	public void register()
-	{
-		FluidRegistry.registerFluid(fluid);
-	}
-	
-	public void registerBucketItem() {
-		FluidContainerRegistry.addBucketForFluid(fluid);
-	}
-	
-	@SideOnly(Side.CLIENT)
-	public void registerRenderer() {
+    public void register() {
+        FluidRegistry.registerFluid(fluid);
+    }
+
+    public void registerBucketItem() {
+        FluidContainerRegistry.addBucketForFluid(fluid);
+    }
+
+    @SideOnly(Side.CLIENT)
+    public void registerRenderer() {
         Item item = Item.getItemFromBlock(fluid.getBlock());
 
         // subString 6 because "fluid." is 6.
@@ -74,5 +67,5 @@ public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory
                 return modelResourceLocation;
             }
         });
-	}
+    }
 }

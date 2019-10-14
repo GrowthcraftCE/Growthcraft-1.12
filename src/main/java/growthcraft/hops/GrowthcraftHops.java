@@ -35,13 +35,13 @@ public class GrowthcraftHops {
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
 
-		GrowthcraftHopsConfig.preInit(event);
-		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
+        GrowthcraftHopsConfig.preInit(event);
+        MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
 
         Init.preInitBlocks();
         Init.preInitItems();
         Init.preInitFluids();
-		Init.preInitLootTables();
+        Init.preInitLootTables();
 
         proxy.preInit();
         proxy.registerTileEntities();
@@ -49,48 +49,44 @@ public class GrowthcraftHops {
 
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
-    	proxy.init();
-    	Init.initBoozes();
+        proxy.init();
+        Init.initBoozes();
         Init.registerRecipes();
     }
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-		Init.registerItemOres();
+        Init.registerItemOres();
     }
-    
-	@Mod.EventHandler
-	public void construct(FMLConstructionEvent event)
-	{
-		MinecraftForge.EVENT_BUS.register(this);
-	}
 
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		IForgeRegistry<Block> registry = event.getRegistry();
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+        IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
-		Init.registerFluidBlocks(registry);
-	}
+        Init.registerFluidBlocks(registry);
+    }
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event)
-	{
-		IForgeRegistry<Item> registry = event.getRegistry();
-		
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        IForgeRegistry<Item> registry = event.getRegistry();
+
         Init.registerItems(registry);
-        
+
         proxy.postRegisterItems();
-	}
-    
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void registerModels(ModelRegistryEvent event) {
         Init.registerItemRenders();
         Init.registerBlockRenders();
-		Init.registerFluidRenders();
-	}
+        Init.registerFluidRenders();
+    }
 
 }

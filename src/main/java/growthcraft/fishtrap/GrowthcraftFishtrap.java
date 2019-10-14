@@ -24,22 +24,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
-	dependencies = "required-after:"+growthcraft.core.shared.Reference.MODID)
+        dependencies = "required-after:" + growthcraft.core.shared.Reference.MODID)
 public class GrowthcraftFishtrap {
-	private static final String CLIENT_PROXY_CLASS = "growthcraft.fishtrap.client.ClientProxy";
-	private static final String SERVER_PROXY_CLASS = "growthcraft.fishtrap.common.CommonProxy";
-	
+    private static final String CLIENT_PROXY_CLASS = "growthcraft.fishtrap.client.ClientProxy";
+    private static final String SERVER_PROXY_CLASS = "growthcraft.fishtrap.common.CommonProxy";
+
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftFishtrap instance;
 
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
-	public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
+    public static GrowthcraftGuiProvider guiProvider = new GuiHandler();
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
-		GrowthcraftFishtrapConfig.preInit(event);
+        GrowthcraftFishtrapConfig.preInit(event);
         Init.initBlocks();
         proxy.preInit();
     }
@@ -47,7 +47,7 @@ public class GrowthcraftFishtrap {
     @Mod.EventHandler
     public static void init(FMLInitializationEvent event) {
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
+        NetworkRegistry.INSTANCE.registerGuiHandler(Reference.MODID, guiProvider);
 
         proxy.init();
 
@@ -56,38 +56,34 @@ public class GrowthcraftFishtrap {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-    	proxy.postInit();
-    	Init.registerItemOres();
+        proxy.postInit();
+        Init.registerItemOres();
     }
 
-	@Mod.EventHandler
-	public void construct(FMLConstructionEvent event)
-	{
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		IForgeRegistry<Block> registry = event.getRegistry();
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+        IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
-	}
+    }
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event)
-	{
-		IForgeRegistry<Item> registry = event.getRegistry();
-		
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        IForgeRegistry<Item> registry = event.getRegistry();
+
         Init.registerBlockItems(registry);
-        
+
         proxy.postRegisterItems();
-	}
-    
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
+    }
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void registerModels(ModelRegistryEvent event) {
         Init.registerBlockRenders();
-	}
+    }
 }

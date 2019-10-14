@@ -16,12 +16,12 @@ public class ClientProxy extends CommonProxy {
         registerSpecialRenders();
     }
 
-	@Override
+    @Override
     public void postRegisterItems() {
-    	super.postRegisterItems();
-    	registerModelBakeryVariants();
+        super.postRegisterItems();
+        registerModelBakeryVariants();
     }
-	
+
     public void registerModelBakeryVariants() {
     }
 
@@ -30,8 +30,8 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-	public void registerStateMappers() {
-		Init.setBlockCustomStateMappers();
-	}
+    public void registerStateMappers() {
+        Init.setBlockCustomStateMappers();
+    }
 
 }

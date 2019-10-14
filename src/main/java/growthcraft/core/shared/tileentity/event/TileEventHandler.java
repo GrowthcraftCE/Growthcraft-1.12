@@ -7,18 +7,16 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-public @interface TileEventHandler
-{
-	public static enum EventType
-	{
-		NULL,
-		GUI_NETWORK_WRITE,
-		GUI_NETWORK_READ,
-		NETWORK_WRITE,
-		NETWORK_READ,
-		NBT_WRITE,
-		NBT_READ;
-	}
+public @interface TileEventHandler {
+    public static enum EventType {
+        NULL,
+        GUI_NETWORK_WRITE,
+        GUI_NETWORK_READ,
+        NETWORK_WRITE,
+        NETWORK_READ,
+        NBT_WRITE,
+        NBT_READ;
+    }
 
-	EventType event();
+    EventType event();
 }

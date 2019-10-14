@@ -4,13 +4,13 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface IPancheonRecipe {
 
-	boolean isValidForRecipe(FluidStack stack);
+    boolean isValidForRecipe(FluidStack stack);
 
-	FluidStack getInputFluid();
+    FluidStack getInputFluid();
 
-	FluidStack getTopOutputFluid();
-	
-	FluidStack getBottomOutputFluid();
-	
-	int getTime();
+    FluidStack getTopOutputFluid();
+
+    FluidStack getBottomOutputFluid();
+
+    int getTime();
 }

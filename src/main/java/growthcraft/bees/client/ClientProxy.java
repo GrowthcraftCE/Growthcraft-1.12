@@ -10,24 +10,24 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ClientProxy extends CommonProxy {
 
-	@Override
-	public void init() {
-		super.init();
-		
-		GrowthcraftBees.guiProvider.register("growthcraft_bees:bee_box", GuiBeeBox.class);
-		Init.registerFluidColorHandlers();
-		Init.registerItemColorHandlers();
-		registerSpecialRenders();
-	}
-	
-	@Override
-    public void postRegisterItems() {
-    	super.postRegisterItems();
-    	registerModelBakeryVariants();
+    @Override
+    public void init() {
+        super.init();
+
+        GrowthcraftBees.guiProvider.register("growthcraft_bees:bee_box", GuiBeeBox.class);
+        Init.registerFluidColorHandlers();
+        Init.registerItemColorHandlers();
+        registerSpecialRenders();
     }
-	
+
+    @Override
+    public void postRegisterItems() {
+        super.postRegisterItems();
+        registerModelBakeryVariants();
+    }
+
     public void registerModelBakeryVariants() {
-    	Init.registerItemVariants();
+        Init.registerItemVariants();
     }
 
     public void registerSpecialRenders() {

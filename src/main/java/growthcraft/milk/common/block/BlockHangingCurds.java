@@ -32,202 +32,180 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockHangingCurds extends GrowthcraftBlockContainer {
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 4, 0.0625 * 0, 0.0625 * 4,
             0.0625 * 12, 0.0625 * 16, 0.0625 * 12);
-	
-	public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("type", 0, BlockCheeseBlock.MAX_VARIANTS-1 );
-	
-	public BlockHangingCurds() {
-		super(Material.CAKE);
-		// make it god awful difficult to break by hand.
-		setHardness(6.0F);
-		setTickRandomly(true);
-		this.setSoundType(SoundType.CLOTH);
-		setTileEntityType(TileEntityHangingCurds.class);
-		this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_CHEESE_VARIANT, 0));
-	}
 
-	@SuppressWarnings("deprecation")
+    public final static PropertyInteger TYPE_CHEESE_VARIANT = PropertyInteger.create("type", 0, BlockCheeseBlock.MAX_VARIANTS - 1);
+
+    public BlockHangingCurds() {
+        super(Material.CAKE);
+        // make it god awful difficult to break by hand.
+        setHardness(6.0F);
+        setTickRandomly(true);
+        this.setSoundType(SoundType.CLOTH);
+        setTileEntityType(TileEntityHangingCurds.class);
+        this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_CHEESE_VARIANT, 0));
+    }
+
+    @SuppressWarnings("deprecation")
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDING_BOX;
     }
 
-	@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, BOUNDING_BOX);
     }
 
-	@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullBlock(IBlockState state) {
         return false;
     }
 
-	@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
 
-	@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
     }
-	
-	@Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
-    
+
     @Override
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
-	
-	@Override
-	protected boolean shouldRestoreBlockState(World world, BlockPos pos, ItemStack stack)
-	{
-		return true;
-	}
 
-	@Override
-	protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		return true;
-	}
-	
-	@Override
-	protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, IBlockState state)
-	{
-		final TileEntityHangingCurds te = getTileEntity(world, pos);
-		if (te != null)
-		{
-			return te.asItemStack();
-		}
-		
-		// TODO: Check if correct
-		return new ItemStack(this, 1, damageDropped(state)/*state.getBlock().getMetaFromState(state)*/);
-	}
-	
-	@Override
-	protected void getTileItemStackDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
-	{
-		final TileEntityHangingCurds te = getTileEntity(world, pos);
-		if (te != null)
-		{
-			ret.add(te.asItemStack());
-		}
-		else
-		{
-			super.getTileItemStackDrops(ret, world, pos, state, fortune);
-		}
-	}
+    @Override
+    protected boolean shouldRestoreBlockState(World world, BlockPos pos, ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)) return true;
-		if (!playerIn.isSneaking())
-		{
-			final TileEntityHangingCurds hangingCurd = getTileEntity(worldIn, pos);
-			if (hangingCurd != null)
-			{
-				if (hangingCurd.isDried())
-				{
-					fellBlockAsItem(worldIn, pos);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
-	@Override
-	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
-		final TileEntityHangingCurds teHangingCurds = getTileEntity(world, pos);
-		if (teHangingCurds != null)
-		{
-			return teHangingCurds.asItemStack();
-		}
-		return super.getPickBlock(state, target, world, pos, player);
-	}
-	
-	public boolean canBlockStay(World world, BlockPos pos)
-	{
-		return !world.isAirBlock(pos.up()) &&
-			BlockCheck.isBlockPlacableOnSide(world, pos.up(), EnumFacing.DOWN);
-	}
-	
-	@Override
-	public boolean canPlaceBlockAt(World world, BlockPos pos)
-	{
-		return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos);
-	}
+    @Override
+    protected boolean shouldDropTileStack(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        return true;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
-		if (!this.canBlockStay(worldIn, pos))
-		{
-			fellBlockAsItem(worldIn, pos);
-		}
-	}
-	
-	@Override
-	public void updateTick(World world, BlockPos pos, IBlockState state, Random random)
-	{
-		super.updateTick(world, pos, state, random);
-		if (!world.isRemote)
-		{
-			if (!canBlockStay(world, pos))
-			{
-				dropBlockAsItem(world, pos, state, 0);
-				world.setBlockToAir(pos);
-			}
-		}
-	}
+    @Override
+    protected ItemStack createHarvestedBlockItemStack(World world, EntityPlayer player, BlockPos pos, IBlockState state) {
+        final TileEntityHangingCurds te = getTileEntity(world, pos);
+        if (te != null) {
+            return te.asItemStack();
+        }
 
-	@Override
-	public int damageDropped(IBlockState state)
-	{
-		// TODO: Will create always initial stage block. Maybe find a better approach.
-		return state.getBlock().getMetaFromState(state);
-	}
-	
-	/************
-	 * PROPERTIES
-	 ************/	
-	
-	@Nonnull
-	@Override
-	protected BlockStateContainer createBlockState() {
-	    return new BlockStateContainer(this, TYPE_CHEESE_VARIANT);
-	}
-	
-	@Nonnull
-	@Override
-	public IBlockState getStateFromMeta(int meta) {
-	    return this.getDefaultState();
-	}
+        // TODO: Check if correct
+        return new ItemStack(this, 1, damageDropped(state)/*state.getBlock().getMetaFromState(state)*/);
+    }
 
-	@Override
-	public int getMetaFromState(IBlockState state) {
-	    return 0;
-	}
+    @Override
+    protected void getTileItemStackDrops(List<ItemStack> ret, IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+        final TileEntityHangingCurds te = getTileEntity(world, pos);
+        if (te != null) {
+            ret.add(te.asItemStack());
+        } else {
+            super.getTileItemStackDrops(ret, world, pos, state, fortune);
+        }
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-		final TileEntityHangingCurds teHangingCurds = getTileEntity(worldIn, pos);
-		if (teHangingCurds != null)
-			return state.withProperty(TYPE_CHEESE_VARIANT, teHangingCurds.getCheeseType().getVariantID());
-		return state.withProperty(TYPE_CHEESE_VARIANT, 0);
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)) return true;
+        if (!playerIn.isSneaking()) {
+            final TileEntityHangingCurds hangingCurd = getTileEntity(worldIn, pos);
+            if (hangingCurd != null) {
+                if (hangingCurd.isDried()) {
+                    fellBlockAsItem(worldIn, pos);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player) {
+        final TileEntityHangingCurds teHangingCurds = getTileEntity(world, pos);
+        if (teHangingCurds != null) {
+            return teHangingCurds.asItemStack();
+        }
+        return super.getPickBlock(state, target, world, pos, player);
+    }
+
+    public boolean canBlockStay(World world, BlockPos pos) {
+        return !world.isAirBlock(pos.up()) &&
+                BlockCheck.isBlockPlacableOnSide(world, pos.up(), EnumFacing.DOWN);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World world, BlockPos pos) {
+        return super.canPlaceBlockAt(world, pos) && canBlockStay(world, pos);
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
+        if (!this.canBlockStay(worldIn, pos)) {
+            fellBlockAsItem(worldIn, pos);
+        }
+    }
+
+    @Override
+    public void updateTick(World world, BlockPos pos, IBlockState state, Random random) {
+        super.updateTick(world, pos, state, random);
+        if (!world.isRemote) {
+            if (!canBlockStay(world, pos)) {
+                dropBlockAsItem(world, pos, state, 0);
+                world.setBlockToAir(pos);
+            }
+        }
+    }
+
+    @Override
+    public int damageDropped(IBlockState state) {
+        // TODO: Will create always initial stage block. Maybe find a better approach.
+        return state.getBlock().getMetaFromState(state);
+    }
+
+    /************
+     * PROPERTIES
+     ************/
+
+    @Nonnull
+    @Override
+    protected BlockStateContainer createBlockState() {
+        return new BlockStateContainer(this, TYPE_CHEESE_VARIANT);
+    }
+
+    @Nonnull
+    @Override
+    public IBlockState getStateFromMeta(int meta) {
+        return this.getDefaultState();
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state) {
+        return 0;
+    }
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        final TileEntityHangingCurds teHangingCurds = getTileEntity(worldIn, pos);
+        if (teHangingCurds != null)
+            return state.withProperty(TYPE_CHEESE_VARIANT, teHangingCurds.getCheeseType().getVariantID());
+        return state.withProperty(TYPE_CHEESE_VARIANT, 0);
     }
 
 }

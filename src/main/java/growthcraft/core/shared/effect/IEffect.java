@@ -12,17 +12,16 @@ import net.minecraft.world.World;
  * Its meant to solve the problem with constructing complex item effects,
  * where data along just won't cut it.
  */
-public interface IEffect extends IDescribable, INBTSerializableContext
-{
-	// REVISE_ME 0
-	
-	/**
-	 * This method is called when the effect needs to be applied to the
-	 * given world and entity.
-	 *
-	 * @param world - world that the entity is currently present ing
-	 * @param entity - entity to apply the effect to
-	 * @param data - any extra data you want to pass along
-	 */
-	void apply(World world, Entity entity, Random random, Object data);
+public interface IEffect extends IDescribable, INBTSerializableContext {
+    // REVISE_ME 0
+
+    /**
+     * This method is called when the effect needs to be applied to the
+     * given world and entity.
+     *
+     * @param world  - world that the entity is currently present ing
+     * @param entity - entity to apply the effect to
+     * @param data   - any extra data you want to pass along
+     */
+    void apply(World world, Entity entity, Random random, Object data);
 }

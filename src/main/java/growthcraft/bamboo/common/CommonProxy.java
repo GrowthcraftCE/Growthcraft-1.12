@@ -9,17 +9,17 @@ public class CommonProxy {
         registerTileEntities();
     }
 
-	public void postInit() {
-		
-	}
-	
+    public void postInit() {
+
+    }
+
     public void registerTileEntities() {
     }
 
-	public void postRegisterItems() {
-	}
-	
-	public void registerStateMappers() {
-	}
+    public void postRegisterItems() {
+    }
+
+    public void registerStateMappers() {
+    }
 
 }

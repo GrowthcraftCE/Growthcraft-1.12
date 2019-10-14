@@ -16,10 +16,10 @@ public class CommonProxy {
     }
 
     public void registerTitleEntities() {
-    	Init.registerTileEntities();
+        Init.registerTileEntities();
     }
 
-	public void postRegisterItems() {
-	}
+    public void postRegisterItems() {
+    }
 
 }

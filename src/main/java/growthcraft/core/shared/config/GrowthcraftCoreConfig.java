@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GrowthcraftCoreConfig {
-	// TODO: Keep either this class or GrowthcraftConfiguration
+    // TODO: Keep either this class or GrowthcraftConfiguration
 
     // TODO: Need to make a super class so that sub-modules can extend.
 
@@ -30,13 +30,13 @@ public class GrowthcraftCoreConfig {
     public static String loggingLevel;
 
     public static final String CATEGORY_NAME_WORLDGEN = "worldgen";
-	public static boolean blockSaltOreWorldGen = true;
+    public static boolean blockSaltOreWorldGen = true;
     public static int blockSaltOreMinHeight = 10;
     public static int blockSaltOreMaxHeight = 64;
     public static int blockSaltOreChanceToSpawn = 5;
 
 
-	public static int bottleCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
+    public static int bottleCapacity = FluidContainerRegistry.BOTTLE_VOLUME;
 
 
     public static void preInit() {
@@ -59,15 +59,15 @@ public class GrowthcraftCoreConfig {
     }
 
     public static void syncFromGui() {
-        syncConfig(false, true );
+        syncConfig(false, true);
     }
 
     public static void syncFromFields() {
-        syncConfig(false, false );
+        syncConfig(false, false);
     }
 
     private static void syncConfig(boolean loadFromConfigFile, boolean readFieldsFromConfig) {
-        if ( loadFromConfigFile ) {
+        if (loadFromConfigFile) {
             config.load();
         }
 
@@ -116,7 +116,7 @@ public class GrowthcraftCoreConfig {
 
         config.setCategoryPropertyOrder(CATEGORY_NAME_GENERAL, propertyOrderGeneralBlocks);
 
-        if ( readFieldsFromConfig ) {
+        if (readFieldsFromConfig) {
             loggingLevel = propertyLogLevel.getString();
 
             blockSaltOreWorldGen = propertyWorldGEnBlocksaltOre.getBoolean();
@@ -129,7 +129,7 @@ public class GrowthcraftCoreConfig {
 
         propertyLogLevel.set(loggingLevel);
 
-        if(config.hasChanged())
+        if (config.hasChanged())
             config.save();
 
     }
@@ -137,7 +137,7 @@ public class GrowthcraftCoreConfig {
     public static class ConfigEventHandler {
         @SubscribeEvent(priority = EventPriority.LOWEST)
         public void onEvent(ConfigChangedEvent.OnConfigChangedEvent event) {
-            if(event.getModID().equals(Reference.MODID)) {
+            if (event.getModID().equals(Reference.MODID)) {
                 syncFromGui();
             }
         }

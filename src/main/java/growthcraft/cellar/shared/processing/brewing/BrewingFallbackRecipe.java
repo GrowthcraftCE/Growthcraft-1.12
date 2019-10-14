@@ -12,46 +12,46 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
 public class BrewingFallbackRecipe extends ProcessingRecipe implements IBrewingRecipe {
-	private FluidStack inputFluidStack;
+    private FluidStack inputFluidStack;
 
-	public BrewingFallbackRecipe(@Nonnull FluidStack pInputFluid, 
-			@Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue) {
-		super(pOutputFluid, pTime, pResidue);
-		this.inputFluidStack = pInputFluid;
-	}
+    public BrewingFallbackRecipe(@Nonnull FluidStack pInputFluid,
+                                 @Nonnull FluidStack pOutputFluid, int pTime, @Nullable Residue pResidue) {
+        super(pOutputFluid, pTime, pResidue);
+        this.inputFluidStack = pInputFluid;
+    }
 
-	@Override
-	public IMultiItemStacks getInputItemStack() {
-		return MultiItemStacks.EMPTY;
-	}
+    @Override
+    public IMultiItemStacks getInputItemStack() {
+        return MultiItemStacks.EMPTY;
+    }
 
-	@Override
-	public FluidStack getInputFluidStack() {
-		return inputFluidStack;
-	}
+    @Override
+    public FluidStack getInputFluidStack() {
+        return inputFluidStack;
+    }
 
-	@Override
-	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack, boolean requiresLid) {
-		if (fluidStack != null && itemStack != null) {
-			if (!FluidTest.hasEnough(inputFluidStack, fluidStack))
-				return false;
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack, boolean requiresLid) {
+        if (fluidStack != null && itemStack != null) {
+            if (!FluidTest.hasEnough(inputFluidStack, fluidStack))
+                return false;
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public boolean matchesIngredient(@Nullable FluidStack fluidStack) {
-		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
-	}
+    @Override
+    public boolean matchesIngredient(@Nullable FluidStack fluidStack) {
+        return FluidTest.fluidMatches(inputFluidStack, fluidStack);
+    }
 
-	@Override
-	public boolean matchesIngredient(@Nullable ItemStack stack) {
-		return true;
-	}
+    @Override
+    public boolean matchesIngredient(@Nullable ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public boolean isItemIngredient(@Nullable ItemStack stack) {
-		return true;
-	}
+    @Override
+    public boolean isItemIngredient(@Nullable ItemStack stack) {
+        return true;
+    }
 }

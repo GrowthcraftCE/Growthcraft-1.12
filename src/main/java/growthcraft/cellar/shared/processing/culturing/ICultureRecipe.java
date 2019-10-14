@@ -5,10 +5,14 @@ import net.minecraftforge.fluids.FluidStack;
 
 public interface ICultureRecipe {
 
-	ItemStack getOutputItemStack();
-	FluidStack getInputFluidStack();
-	float getRequiredHeat();
-	int getTime();
-	boolean matchesRecipe(FluidStack fluid, float heat);
+    ItemStack getOutputItemStack();
+
+    FluidStack getInputFluidStack();
+
+    float getRequiredHeat();
+
+    int getTime();
+
+    boolean matchesRecipe(FluidStack fluid, float heat);
 
 }

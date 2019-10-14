@@ -19,7 +19,8 @@ public class GrowthcraftBambooConfig {
     public static String logLevel = "info";
     public static boolean enableGrowthcraftBamboo = true;
 
-    private GrowthcraftBambooConfig() {}
+    private GrowthcraftBambooConfig() {
+    }
 
 
     public static void preInit(FMLPreInitializationEvent e) {
@@ -36,7 +37,7 @@ public class GrowthcraftBambooConfig {
         } catch (Exception e) {
             GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Bamboo!", e);
         } finally {
-            if ( configuration.hasChanged() ) {
+            if (configuration.hasChanged()) {
                 configuration.save();
             }
         }
@@ -53,7 +54,9 @@ public class GrowthcraftBambooConfig {
 
     private static void initDebugConfig() {
         logLevel = configuration.getString("logLevel", CATEGORY_GENERAL, logLevel, "Set standard logging levels. (INFO, ERROR, DEBUG)");
-        if ( logLevel.equalsIgnoreCase("debug")) { isDebug = true; }
+        if (logLevel.equalsIgnoreCase("debug")) {
+            isDebug = true;
+        }
     }
 
 

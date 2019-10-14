@@ -31,7 +31,7 @@ public abstract class BlockBambooSlab extends BlockSlab {
 
 
         IBlockState state = this.blockState.getBaseState();
-        if(!this.isDouble()) {
+        if (!this.isDouble()) {
             state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
         }
         this.setDefaultState(state);
@@ -60,7 +60,7 @@ public abstract class BlockBambooSlab extends BlockSlab {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        if(!this.isDouble()) {
+        if (!this.isDouble()) {
             return this.getDefaultState().withProperty(HALF, EnumBlockHalf.values()[meta % EnumBlockHalf.values().length]);
         }
         return this.getDefaultState();
@@ -68,10 +68,10 @@ public abstract class BlockBambooSlab extends BlockSlab {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        if(this.isDouble()) {
+        if (this.isDouble()) {
             return 0;
         }
-        return ((EnumBlockHalf)state.getValue(HALF)).ordinal() + 1;
+        return ((EnumBlockHalf) state.getValue(HALF)).ordinal() + 1;
 
     }
 

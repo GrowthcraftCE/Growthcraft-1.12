@@ -23,13 +23,12 @@ public class BlockSaltOre extends BlockOre {
         this.setSoundType(SoundType.STONE);
         this.setHarvestLevel("pickaxe", 1);
     }
-	
+
     /**
      * Get the Item that this Block should drop when harvested.
      */
     @Override
-    public Item getItemDropped(IBlockState state, Random rand, int fortune)
-    {
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return GrowthcraftCoreItems.salt.getItem();
     }
 
@@ -37,29 +36,25 @@ public class BlockSaltOre extends BlockOre {
      * Returns the quantity of items to drop on block destruction.
      */
     @Override
-    public int quantityDropped(Random random)
-    {
+    public int quantityDropped(Random random) {
         return MathHelper.getInt(random, 1, 2);
     }
-    
+
     @Override
-    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
-    {
-        Random rand = world instanceof World ? ((World)world).rand : new Random();
-        if (this.getItemDropped(state, rand, fortune) != Item.getItemFromBlock(this))
-        {
+    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
+        Random rand = world instanceof World ? ((World) world).rand : new Random();
+        if (this.getItemDropped(state, rand, fortune) != Item.getItemFromBlock(this)) {
             return MathHelper.getInt(rand, 0, 2);
         }
         return 0;
     }
-    
+
     /**
      * Gets the metadata of the item this Block can drop. This method is called when the block gets destroyed. It
      * returns the metadata of the dropped item based on the old metadata of the block.
      */
     @Override
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return 0;
     }
 }

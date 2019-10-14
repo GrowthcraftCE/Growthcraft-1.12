@@ -16,8 +16,8 @@ public class GrowthcraftGrapesLootTables {
      * Define the custom loot table(s). The String passed to RegistrationHandler.create will determine the name of
      * loot json file located in the assets directory.
      * Example:
-     *  String = "loot_table_simple_dungeon"
-     *  ResourceLocation = "growthcraft_grapes:loot_tables/loot_table_simple_dungeon.json"
+     * String = "loot_table_simple_dungeon"
+     * ResourceLocation = "growthcraft_grapes:loot_tables/loot_table_simple_dungeon.json"
      */
     public static final ResourceLocation LOOT_TABLE_SIMPLE_DUNGEON = RegistrationHandler.create("loot_table_simple_dungeon");
 
@@ -34,6 +34,7 @@ public class GrowthcraftGrapesLootTables {
 
         /**
          * Creates a LootTable ID
+         *
          * @param id The ID of the LootTable without the modid reference.
          * @return The ID of the LootTable as a ResourceLocation.
          */

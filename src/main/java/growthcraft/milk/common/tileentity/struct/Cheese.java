@@ -17,279 +17,242 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.MathHelper;
 
-public class Cheese implements IStreamable
-{
-	public boolean needClientUpdate = true;
+public class Cheese implements IStreamable {
+    public boolean needClientUpdate = true;
 
-	private int ageMax = GrowthcraftMilkConfig.cheeseMaxAge;
-	private int age;
-	private int topSlicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
-	private int topSlices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
-	private boolean isDoubleStacked = false;
-	private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
-	private ICheeseType cheese = WaxedCheeseTypes.CHEDDAR;
-	private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
-	
-	public Cheese() {
-		
-	}
+    private int ageMax = GrowthcraftMilkConfig.cheeseMaxAge;
+    private int age;
+    private int topSlicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+    private int topSlices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
+    private boolean isDoubleStacked = false;
+    private final int cheesePerSlice = GrowthcraftMilkConfig.cheeseItemPerBlockSlice;
+    private ICheeseType cheese = WaxedCheeseTypes.CHEDDAR;
+    private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
 
-	public ICheeseType getType()
-	{
-		return cheese;
-	}
+    public Cheese() {
 
-	public EnumCheeseStage getStage()
-	{
-		return cheeseStage;
-	}
-	
-	public Cheese setStage(EnumCheeseStage stage)
-	{
-		this.cheeseStage = stage;
-		this.needClientUpdate = true;
-		return this;
-	}
-	
-	public Cheese setDoubleStacked(boolean isDoubleStacked) {
-		if( this.isDoubleStacked != isDoubleStacked ) {
-			this.age = 0;	// HACK: Reset age if changed. Change if different stack elements can have different age
-			this.isDoubleStacked = isDoubleStacked;
-		}
-		return this;
-	}
+    }
 
-	public int getId()
-	{
-		return MilkRegistry.instance().cheese().getCheeseId(cheese);
-	}
+    public ICheeseType getType() {
+        return cheese;
+    }
 
-	public int getStageId()
-	{
-		return cheeseStage.index;
-	}
+    public EnumCheeseStage getStage() {
+        return cheeseStage;
+    }
 
-	public int getSlices() {
-		return (isDoubleStacked?topSlicesMax:0) + topSlices;
-	}
-	
-	public int getTopSlices()
-	{
-		return topSlices;
-	}
+    public Cheese setStage(EnumCheeseStage stage) {
+        this.cheeseStage = stage;
+        this.needClientUpdate = true;
+        return this;
+    }
 
-	public int getTopSlicesMax()
-	{
-		return topSlicesMax;
-	}
+    public Cheese setDoubleStacked(boolean isDoubleStacked) {
+        if (this.isDoubleStacked != isDoubleStacked) {
+            this.age = 0;    // HACK: Reset age if changed. Change if different stack elements can have different age
+            this.isDoubleStacked = isDoubleStacked;
+        }
+        return this;
+    }
 
-	public boolean hasSlices()
-	{
-		return getSlices() > 0;
-	}
-	
-	public boolean isDoubleStacked() {
-		return isDoubleStacked;
-	}
+    public int getId() {
+        return MilkRegistry.instance().cheese().getCheeseId(cheese);
+    }
 
-	public float getAgeProgress()
-	{
-		return (float)age / (float)ageMax;
-	}
+    public int getStageId() {
+        return cheeseStage.index;
+    }
 
-	public boolean canAge()
-	{
-		return cheeseStage == EnumCheeseStage.UNAGED;
-	}
+    public int getSlices() {
+        return (isDoubleStacked ? topSlicesMax : 0) + topSlices;
+    }
 
-	public boolean isAged()
-	{
-		return cheeseStage == EnumCheeseStage.AGED ||
-			cheeseStage == EnumCheeseStage.CUT;
-	}
+    public int getTopSlices() {
+        return topSlices;
+    }
 
-	public boolean isUnwaxed()
-	{
-		return cheeseStage == EnumCheeseStage.UNWAXED;
-	}
+    public int getTopSlicesMax() {
+        return topSlicesMax;
+    }
 
-	public ItemStack yankSlices(int count, boolean doYank)
-	{
-		final int yankedCount = MathHelper.clamp(count, 0, getSlices());
-		final int quantity = yankedCount * cheesePerSlice;
-		if (quantity > 0)
-		{
-			if (doYank)
-			{
-				if( this.topSlices <= yankedCount ) {
-					if( isDoubleStacked ) {
-						this.topSlices = this.topSlicesMax + this.topSlices - yankedCount;
-						isDoubleStacked = false;
-					}
-					else if( this.topSlices == yankedCount ) {
-						this.topSlices = 0;
-					}
-					else {
-						// Should never happen. Something is wrong with getSlices() implementation
-						GrowthcraftMilk.logger.warn("Something is wrong with cheese yanking. Please report as bug.");
-						return ItemStack.EMPTY;
-					}
-				}
-				else
-					this.topSlices -= yankedCount;
-				setStage(EnumCheeseStage.CUT);
-			}
-			return cheese.getCheeseItems().asStack(quantity);
-		}
-		return ItemStack.EMPTY;
-	}
-	
-	public boolean stackWheel(ItemStack stack, boolean doStack) {
-		if( isDoubleStacked )
-			return false;
-		
-		if( stack.getItem() == getBlockTopItemStack().getItem() ) {
-			int meta = stack.getMetadata();
-			
-			EnumCheeseStage stage = CheeseUtils.getStageFromMeta(meta);
-			if( stage != cheeseStage ) {
-				if( stage != EnumCheeseStage.CUT && stage != EnumCheeseStage.AGED )
-					return false;
-				if( cheeseStage != EnumCheeseStage.CUT && cheeseStage != EnumCheeseStage.AGED )
-					return false;
-			}
-			
-			int variantID = CheeseUtils.getVariantIDFromMeta(meta);
-			if( variantID != cheese.getVariantID() )
-				return false;
+    public boolean hasSlices() {
+        return getSlices() > 0;
+    }
 
-			// Do stacking
-			boolean mustBeCut = stage == EnumCheeseStage.CUT || cheeseStage == EnumCheeseStage.CUT;
-			int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
-			if( curSlices != topSlicesMax ) {
-				if( topSlices != topSlicesMax )
-					return false;	// At least one of them must be a full wheel!
-				
-				if( doStack ) {
-					isDoubleStacked = true;
-					topSlices = curSlices;
-					if( mustBeCut )
-						cheeseStage = EnumCheeseStage.CUT;
-				}
-			}
-			else {
-				if( doStack ) {
-					isDoubleStacked = true;
-					if( mustBeCut )
-						cheeseStage = EnumCheeseStage.CUT;
-				}
-			}
-			
-			return true;
-		}
-		return false;
-	}
+    public boolean isDoubleStacked() {
+        return isDoubleStacked;
+    }
 
-	public ItemStack asFullStack()
-	{
-		return yankSlices(getSlices(), false);
-	}
-	
-	public ItemStack getBlockTopItemStack() {
-		return cheese.getCheeseBlocks().asStackForStage(topSlices, cheeseStage);
-	}
+    public float getAgeProgress() {
+        return (float) age / (float) ageMax;
+    }
 
-	public int canWaxing(ItemStack stack)
-	{
-		if (isUnwaxed() && getType().canWax(stack))
-		{
-			int requiredAmount = isDoubleStacked?2:1;
-			if( stack.getCount() >= requiredAmount )
-				return requiredAmount;
-		}
-		return 0;
-	}
-	
-	public int canStack(ItemStack stack) {
-		return stackWheel(stack, false) ? 1 : 0;
-	}
+    public boolean canAge() {
+        return cheeseStage == EnumCheeseStage.UNAGED;
+    }
 
-	public void writeToNBT(NBTTagCompound nbt)
-	{
-		CheeseIO.writeToNBT(nbt, cheese);
-		cheeseStage.writeToNBT(nbt);
-		nbt.setInteger("age", age);
-		nbt.setInteger("slices", topSlices);
-		nbt.setInteger("slices_max", topSlicesMax);
-		nbt.setBoolean("double_stacked", isDoubleStacked);
-	}
+    public boolean isAged() {
+        return cheeseStage == EnumCheeseStage.AGED ||
+                cheeseStage == EnumCheeseStage.CUT;
+    }
 
-	/**
-	 * When the tileentity is reloaded from an ItemStack
-	 *
-	 * @param nbt  tag compound to read
-	 */
-	public void readFromNBT(NBTTagCompound nbt)
-	{
-		this.cheese = CheeseIO.loadFromNBT(nbt);
-		this.cheeseStage = EnumCheeseStage.loadFromNBT(nbt);
-		if (nbt.hasKey("age"))
-		{
-			this.age = nbt.getInteger("age");
-		}
-		if (nbt.hasKey("slices"))
-		{
-			this.topSlices = nbt.getInteger("slices");
-		}
-		if (nbt.hasKey("slices_max"))
-		{
-			this.topSlicesMax = nbt.getInteger("slices_max");
-		}
-		if (nbt.hasKey("double_stacked"))
-		{
-			this.isDoubleStacked = nbt.getBoolean("double_stacked");
-		}
-	}
+    public boolean isUnwaxed() {
+        return cheeseStage == EnumCheeseStage.UNWAXED;
+    }
 
-	@Override
-	public boolean readFromStream(ByteBuf stream)
-	{
-		this.cheese = CheeseIO.loadFromStream(stream);
-		this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
-		this.age = stream.readInt();
-		this.topSlices = stream.readInt();
-		this.topSlicesMax = stream.readInt();
-		this.isDoubleStacked = stream.readBoolean();
-		return false;
-	}
+    public ItemStack yankSlices(int count, boolean doYank) {
+        final int yankedCount = MathHelper.clamp(count, 0, getSlices());
+        final int quantity = yankedCount * cheesePerSlice;
+        if (quantity > 0) {
+            if (doYank) {
+                if (this.topSlices <= yankedCount) {
+                    if (isDoubleStacked) {
+                        this.topSlices = this.topSlicesMax + this.topSlices - yankedCount;
+                        isDoubleStacked = false;
+                    } else if (this.topSlices == yankedCount) {
+                        this.topSlices = 0;
+                    } else {
+                        // Should never happen. Something is wrong with getSlices() implementation
+                        GrowthcraftMilk.logger.warn("Something is wrong with cheese yanking. Please report as bug.");
+                        return ItemStack.EMPTY;
+                    }
+                } else
+                    this.topSlices -= yankedCount;
+                setStage(EnumCheeseStage.CUT);
+            }
+            return cheese.getCheeseItems().asStack(quantity);
+        }
+        return ItemStack.EMPTY;
+    }
 
-	@Override
-	public boolean writeToStream(ByteBuf stream)
-	{
-		CheeseIO.writeToStream(stream, cheese);
-		cheeseStage.writeToStream(stream);
-		stream.writeInt(age);
-		stream.writeInt(topSlices);
-		stream.writeInt(topSlicesMax);
-		stream.writeBoolean(isDoubleStacked);
-		return false;
-	}
+    public boolean stackWheel(ItemStack stack, boolean doStack) {
+        if (isDoubleStacked)
+            return false;
 
-	public void update()
-	{
-		if (!isAged())
-		{
-			if (canAge())
-			{
-				if (this.age < this.ageMax)
-				{
-					this.age += 1;
-				}
-				else
-				{
-					setStage(EnumCheeseStage.AGED);
-				}
-			}
-		}
-	}
+        if (stack.getItem() == getBlockTopItemStack().getItem()) {
+            int meta = stack.getMetadata();
+
+            EnumCheeseStage stage = CheeseUtils.getStageFromMeta(meta);
+            if (stage != cheeseStage) {
+                if (stage != EnumCheeseStage.CUT && stage != EnumCheeseStage.AGED)
+                    return false;
+                if (cheeseStage != EnumCheeseStage.CUT && cheeseStage != EnumCheeseStage.AGED)
+                    return false;
+            }
+
+            int variantID = CheeseUtils.getVariantIDFromMeta(meta);
+            if (variantID != cheese.getVariantID())
+                return false;
+
+            // Do stacking
+            boolean mustBeCut = stage == EnumCheeseStage.CUT || cheeseStage == EnumCheeseStage.CUT;
+            int curSlices = CheeseUtils.getTopSlicesFromMeta(meta);
+            if (curSlices != topSlicesMax) {
+                if (topSlices != topSlicesMax)
+                    return false;    // At least one of them must be a full wheel!
+
+                if (doStack) {
+                    isDoubleStacked = true;
+                    topSlices = curSlices;
+                    if (mustBeCut)
+                        cheeseStage = EnumCheeseStage.CUT;
+                }
+            } else {
+                if (doStack) {
+                    isDoubleStacked = true;
+                    if (mustBeCut)
+                        cheeseStage = EnumCheeseStage.CUT;
+                }
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    public ItemStack asFullStack() {
+        return yankSlices(getSlices(), false);
+    }
+
+    public ItemStack getBlockTopItemStack() {
+        return cheese.getCheeseBlocks().asStackForStage(topSlices, cheeseStage);
+    }
+
+    public int canWaxing(ItemStack stack) {
+        if (isUnwaxed() && getType().canWax(stack)) {
+            int requiredAmount = isDoubleStacked ? 2 : 1;
+            if (stack.getCount() >= requiredAmount)
+                return requiredAmount;
+        }
+        return 0;
+    }
+
+    public int canStack(ItemStack stack) {
+        return stackWheel(stack, false) ? 1 : 0;
+    }
+
+    public void writeToNBT(NBTTagCompound nbt) {
+        CheeseIO.writeToNBT(nbt, cheese);
+        cheeseStage.writeToNBT(nbt);
+        nbt.setInteger("age", age);
+        nbt.setInteger("slices", topSlices);
+        nbt.setInteger("slices_max", topSlicesMax);
+        nbt.setBoolean("double_stacked", isDoubleStacked);
+    }
+
+    /**
+     * When the tileentity is reloaded from an ItemStack
+     *
+     * @param nbt tag compound to read
+     */
+    public void readFromNBT(NBTTagCompound nbt) {
+        this.cheese = CheeseIO.loadFromNBT(nbt);
+        this.cheeseStage = EnumCheeseStage.loadFromNBT(nbt);
+        if (nbt.hasKey("age")) {
+            this.age = nbt.getInteger("age");
+        }
+        if (nbt.hasKey("slices")) {
+            this.topSlices = nbt.getInteger("slices");
+        }
+        if (nbt.hasKey("slices_max")) {
+            this.topSlicesMax = nbt.getInteger("slices_max");
+        }
+        if (nbt.hasKey("double_stacked")) {
+            this.isDoubleStacked = nbt.getBoolean("double_stacked");
+        }
+    }
+
+    @Override
+    public boolean readFromStream(ByteBuf stream) {
+        this.cheese = CheeseIO.loadFromStream(stream);
+        this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
+        this.age = stream.readInt();
+        this.topSlices = stream.readInt();
+        this.topSlicesMax = stream.readInt();
+        this.isDoubleStacked = stream.readBoolean();
+        return false;
+    }
+
+    @Override
+    public boolean writeToStream(ByteBuf stream) {
+        CheeseIO.writeToStream(stream, cheese);
+        cheeseStage.writeToStream(stream);
+        stream.writeInt(age);
+        stream.writeInt(topSlices);
+        stream.writeInt(topSlicesMax);
+        stream.writeBoolean(isDoubleStacked);
+        return false;
+    }
+
+    public void update() {
+        if (!isAged()) {
+            if (canAge()) {
+                if (this.age < this.ageMax) {
+                    this.age += 1;
+                } else {
+                    setStage(EnumCheeseStage.AGED);
+                }
+            }
+        }
+    }
 }

@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ItemGrape extends ItemFood {
 
-    public ItemGrape (String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
+    public ItemGrape(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -20,20 +20,20 @@ public class ItemGrape extends ItemFood {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-		if( !this.isInCreativeTab(tab) )
-			return;
-        for ( int i = 0; i < GrapeTypes.values().length; i++ ) {
-        	GrapeTypes type = GrapeTypes.values()[i];
+        if (!this.isInCreativeTab(tab))
+            return;
+        for (int i = 0; i < GrapeTypes.values().length; i++) {
+            GrapeTypes type = GrapeTypes.values()[i];
             subItems.add(new ItemStack(this, 1, type.getVariantID()));
         }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        for (int i = 0; i < GrapeTypes.values().length; i++ ) {
-        	GrapeTypes type = GrapeTypes.values()[i];
-            if ( stack.getItemDamage() == type.getVariantID() ) {
-                return  this.getUnlocalizedName() + "." + type.getName();
+        for (int i = 0; i < GrapeTypes.values().length; i++) {
+            GrapeTypes type = GrapeTypes.values()[i];
+            if (stack.getItemDamage() == type.getVariantID()) {
+                return this.getUnlocalizedName() + "." + type.getName();
             } else {
                 continue;
             }

@@ -68,10 +68,10 @@ public class BlockBambooStalk extends Block {
 
         Block blockDown = worldIn.getBlockState(pos.down()).getBlock();
 
-        if ( !(blockDown instanceof BlockAir) && !(blockDown instanceof BlockBambooStalk) ) {
+        if (!(blockDown instanceof BlockAir) && !(blockDown instanceof BlockBambooStalk)) {
             // TODO: Add Bamboo Spread Chance to GrowthcraftBamboo GrowthcraftBambooConfig
             int j = rand.nextInt(10);
-            if ( j == 1) {
+            if (j == 1) {
                 // Then spawn a BambooShoot if the random block is air and it is on top of a non-block air.
                 BlockPos posSouthWest = new BlockPos(pos.south(2).west(2));
 
@@ -80,7 +80,7 @@ public class BlockBambooStalk extends Block {
                 int offsetEast = rand.nextInt(2);
 
                 // If the random block is Air and the below block is Dirt
-                if ( worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast)).getBlock() instanceof BlockAir
+                if (worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast)).getBlock() instanceof BlockAir
                         && worldIn.getBlockState(posSouthWest.north(offsetNorth).east(offsetEast).down()).getBlock() instanceof BlockDirt) {
                     worldIn.setBlockState(posSouthWest.north(offsetNorth).east(offsetEast),
                             GrowthcraftBambooBlocks.bambooShoot.getDefaultState().withProperty(BlockBambooShoot.STAGE, 0));

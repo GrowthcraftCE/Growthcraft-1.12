@@ -6,7 +6,8 @@ import growthcraft.cellar.shared.config.UserApis;
 public class GrowthcraftCellarApis {
     public static CellarBoozeBuilderFactory boozeBuilderFactory;
     public static UserApis userApis;
-	
-	private GrowthcraftCellarApis() {}
-    
+
+    private GrowthcraftCellarApis() {
+    }
+
 }

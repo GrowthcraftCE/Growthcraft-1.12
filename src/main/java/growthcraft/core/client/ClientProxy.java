@@ -6,20 +6,20 @@ import growthcraft.core.common.Init;
 
 public class ClientProxy extends CommonProxy {
 
-	@Override
-	public void init() {
-		super.init();
+    @Override
+    public void init() {
+        super.init();
         registerSpecialRenders();
-	}
-	
-	@Override
-    public void postRegisterItems() {
-    	super.postRegisterItems();
-    	registerModelBakeryVariants();
     }
-	
+
+    @Override
+    public void postRegisterItems() {
+        super.postRegisterItems();
+        registerModelBakeryVariants();
+    }
+
     public void registerModelBakeryVariants() {
-    	GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(GrowthcraftCoreItems.CrowbarTypes.class);
+        GrowthcraftCoreItems.crowbar.registerModelBakeryVariants(GrowthcraftCoreItems.CrowbarTypes.class);
     }
 
     public void registerSpecialRenders() {

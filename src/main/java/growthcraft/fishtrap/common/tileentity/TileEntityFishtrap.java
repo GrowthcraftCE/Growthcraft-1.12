@@ -74,22 +74,22 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     }
 
     private void doFishing() {
-        if ( !getWorld().isRemote ) {
+        if (!getWorld().isRemote) {
             // If strictBait is required then we need to ensure there is bait also if bait is required then we need
             // to ensure that there is any bait.
             if (GrowthcraftFishtrapConfig.strictBait && !hasBait(GrowthcraftFishtrapConfig.strictBait)
-                || GrowthcraftFishtrapConfig.baitRequired && !hasBait() ) {
+                    || GrowthcraftFishtrapConfig.baitRequired && !hasBait()) {
                 return;
             }
 
             // Get a random item from the Fishing_Rod LootTable. Pulled this from the EntityFishHook class.
-            LootContext.Builder lootContextBuilder = new LootContext.Builder((WorldServer)this.world);
+            LootContext.Builder lootContextBuilder = new LootContext.Builder((WorldServer) this.world);
             List<ItemStack> result = this.world.getLootTableManager().getLootTableFromLocation(
                     this.getLootTableList()).generateLootForPools(new Random(),
                     lootContextBuilder.build());
 
             for (ItemStack itemstack : result) {
-                if ( !this.isInventoryFull(this.handlerOutput)) {
+                if (!this.isInventoryFull(this.handlerOutput)) {
                     this.addStackToInventory(this.handlerOutput, itemstack, false);
                 }
             }
@@ -102,12 +102,12 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         return hasBait(false);
     }
 
-    public boolean hasBait(boolean strict){
-        if ( strict ) {
+    public boolean hasBait(boolean strict) {
+        if (strict) {
             List<ItemStack> oreDictionaryBaitFishing = OreDictionary.getOres("baitFishing");
             ItemStack baitStack = this.handlerInput.getStackInSlot(0);
-            for ( ItemStack itemStack: oreDictionaryBaitFishing ) {
-                if (itemStack.getUnlocalizedName().contentEquals(baitStack.getUnlocalizedName()) ) {
+            for (ItemStack itemStack : oreDictionaryBaitFishing) {
+                if (itemStack.getUnlocalizedName().contentEquals(baitStack.getUnlocalizedName())) {
                     return true;
                 }
             }
@@ -115,15 +115,17 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         }
         return this.handlerInput.getStackInSlot(0).getCount() > 0;
     }
+
     /**
      * Determine which loot table should be used.
+     *
      * @return ResourceLocation of the LootTable
      */
     private ResourceLocation getLootTableList() {
         ResourceLocation lootTableList;
         lootTableList = LootTableList.GAMEPLAY_FISHING;
 
-        if ( this.handlerInput.getStackInSlot(0).getCount() > 0 ) {
+        if (this.handlerInput.getStackInSlot(0).getCount() > 0) {
             this.handlerInput.getStackInSlot(0).shrink(1);
             lootTableList = LootTableList.GAMEPLAY_FISHING_FISH;
         }
@@ -133,16 +135,17 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
 
     /**
      * Add the stack to the handler.
-     * @param handler Inventory handler.
-     * @param stack ItemStack to be added to the given Inventory Handler
+     *
+     * @param handler  Inventory handler.
+     * @param stack    ItemStack to be added to the given Inventory Handler
      * @param simulate Not implemented
      * @return ItemStack that cannot be added to the inventory.
      */
     private ItemStack addStackToInventory(IItemHandler handler, ItemStack stack, boolean simulate) {
         ItemStack remainder = stack;
-        for(int slot = 0; slot < handler.getSlots(); slot++) {
+        for (int slot = 0; slot < handler.getSlots(); slot++) {
             remainder = handler.insertItem(slot, stack, simulate);
-            if ( remainder == ItemStack.EMPTY) break;
+            if (remainder == ItemStack.EMPTY) break;
         }
         //markDirtyAndUpdate();
         return remainder;
@@ -167,8 +170,8 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
      */
     private boolean isInventoryFull(IItemHandler handler) {
         int filledSlots = 0;
-        for ( int slot = 0; slot < handler.getSlots(); slot++ ) {
-            if(handler.getStackInSlot(slot).getCount() == handler.getSlotLimit(slot)) filledSlots++;
+        for (int slot = 0; slot < handler.getSlots(); slot++) {
+            if (handler.getStackInSlot(slot).getCount() == handler.getSlotLimit(slot)) filledSlots++;
         }
         return filledSlots == handler.getSlots();
     }
@@ -187,6 +190,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
 
     /**
      * Check to determine if the surrounding blocks are static fluid.
+     *
      * @return returns true if the block is surrounded by water
      */
     private boolean inWater() {
@@ -205,10 +209,10 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
                 pos.offset(EnumFacing.DOWN)
         };
 
-        for(BlockPos neighborPos : neighborBlockPos) {
+        for (BlockPos neighborPos : neighborBlockPos) {
             IBlockState state = this.world.getBlockState(neighborPos);
             Block block = state.getBlock();
-            if(!(block instanceof BlockStaticLiquid)) {
+            if (!(block instanceof BlockStaticLiquid)) {
                 underFluid = false;
                 break;
             }
@@ -221,7 +225,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         if (!underFluid) {
             Block block0 = this.world.getBlockState(upDownNeighborBlockPos[0]).getBlock();
             Block block1 = this.world.getBlockState(upDownNeighborBlockPos[1]).getBlock();
-            if ( block0 instanceof BlockStaticLiquid && block1 instanceof BlockStaticLiquid ) {
+            if (block0 instanceof BlockStaticLiquid && block1 instanceof BlockStaticLiquid) {
                 underFluid = true;
             }
         }
@@ -260,7 +264,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 
-        if ( capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
 
             if (facing == null) {
                 return (T) new CombinedInvWrapper(handlerInput, handlerOutput);
@@ -268,7 +272,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
 
             switch (facing) {
                 case UP:
-                    return (T)this.handlerInput;
+                    return (T) this.handlerInput;
                 case EAST:
                     return null;
                 case WEST:
@@ -278,7 +282,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
                 case SOUTH:
                     return null;
                 default:
-                    return (T)this.handlerOutput;
+                    return (T) this.handlerOutput;
             }
         }
 

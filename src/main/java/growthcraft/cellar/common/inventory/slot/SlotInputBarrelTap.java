@@ -7,23 +7,21 @@ import net.minecraft.item.ItemStack;
 
 public class SlotInputBarrelTap extends SlotInput {
 
-	public SlotInputBarrelTap(IInventory inv, int index, int x, int y) {
-		super(inv, index, x, y);
-	}
+    public SlotInputBarrelTap(IInventory inv, int index, int x, int y) {
+        super(inv, index, x, y);
+    }
 
-	@Override
-	public boolean isItemValid(ItemStack stack)
-	{
-		return isValidBarrelTap(stack);
-	}
-	
-	@Override
-    public int getSlotStackLimit()
-    {
+    @Override
+    public boolean isItemValid(ItemStack stack) {
+        return isValidBarrelTap(stack);
+    }
+
+    @Override
+    public int getSlotStackLimit() {
         return 1;
     }
-	
-	public static boolean isValidBarrelTap(ItemStack stack) {
-		return GrowthcraftCellarItems.barrelTap.getItem().equals(stack.getItem());
-	}
+
+    public static boolean isValidBarrelTap(ItemStack stack) {
+        return GrowthcraftCellarItems.barrelTap.getItem().equals(stack.getItem());
+    }
 }

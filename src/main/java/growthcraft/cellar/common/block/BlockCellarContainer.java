@@ -12,15 +12,12 @@ import net.minecraft.world.World;
 /**
  * Base class for Cellar machines and the like
  */
-public abstract class BlockCellarContainer extends GrowthcraftBlockContainer
-{
-	public BlockCellarContainer(Material material)
-	{
-		super(material);
-	}
+public abstract class BlockCellarContainer extends GrowthcraftBlockContainer {
+    public BlockCellarContainer(Material material) {
+        super(material);
+    }
 
-	protected boolean openGui(EntityPlayer player, World world, BlockPos pos)
-	{
+    protected boolean openGui(EntityPlayer player, World world, BlockPos pos) {
 /*		final TileEntity te = getTileEntity(world, pos);
 		if (te instanceof IInteractionObject)
 		{
@@ -28,14 +25,13 @@ public abstract class BlockCellarContainer extends GrowthcraftBlockContainer
 			return true;
 		}
 		return false; */
-		return GuiBindingBlockCellar.openGui(this, player, world, pos);
-	}
+        return GuiBindingBlockCellar.openGui(this, player, world, pos);
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 /*		if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ)) return true;
 		return !playerIn.isSneaking() && openGui(playerIn, worldIn, pos); */
-		return GuiBindingBlockCellar.onBlockActivated(this, worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-	}
+        return GuiBindingBlockCellar.onBlockActivated(this, worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
 }

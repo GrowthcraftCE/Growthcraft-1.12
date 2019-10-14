@@ -25,13 +25,13 @@ public class WailaDataProvider implements IWailaDataProvider {
     public List<String> getWailaBody(ItemStack itemStack, List<String> tooltip, IWailaDataAccessor accessor, IWailaConfigHandler config) {
         final TileEntity tileEntity = accessor.getTileEntity();
 
-        if ( tileEntity instanceof TileEntityFermentBarrel ) {
+        if (tileEntity instanceof TileEntityFermentBarrel) {
             // TODO: Sync TileEntityFermentBarrel server object with client. Otherwise client has to opne the GUI to get an update.
 
             float progress = ((TileEntityFermentBarrel) tileEntity).getDeviceProgressScaled(100);
             FluidTank fluidTank = ((TileEntityFermentBarrel) tileEntity).getFluidTank(0);
 
-            if ( fluidTank.getFluidAmount() > 0 ) {
+            if (fluidTank.getFluidAmount() > 0) {
                 tooltip.add(TextFormatting.GREEN + String.format("%dmb %s", fluidTank.getFluidAmount(), fluidTank.getFluid().getLocalizedName()));
                 tooltip.add(TextFormatting.GREEN + "Progress: " + progress + "%");
             } else {
