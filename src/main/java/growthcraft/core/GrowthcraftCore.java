@@ -30,66 +30,63 @@ import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
-     dependencies = "after:rustic;"+
-                    "after:forestry")
+        dependencies = "after:rustic;" +
+                "after:forestry")
 public class GrowthcraftCore {
 
-	public static final String CLIENT_PROXY_CLASS = "growthcraft.core.client.ClientProxy";
-	public static final String SERVER_PROXY_CLASS = "growthcraft.core.common.CommonProxy";
-	
+    public static final String CLIENT_PROXY_CLASS = "growthcraft.core.client.ClientProxy";
+    public static final String SERVER_PROXY_CLASS = "growthcraft.core.common.CommonProxy";
+
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftCore instance;
 
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
-    
-	@Mod.EventHandler
-	public void construct(FMLConstructionEvent event)
-	{
-		GrowthcraftCoreApis.tabGrowthcraft = new TabGrowthcraft();
-		MinecraftForge.EVENT_BUS.register(this);
-	}
-    
+
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        GrowthcraftCoreApis.tabGrowthcraft = new TabGrowthcraft();
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
     @Mod.EventHandler
     @SuppressWarnings("deprecation")
     public void preInit(FMLPreInitializationEvent event) {
-		GrowthcraftCoreConfig.preInit();
+        GrowthcraftCoreConfig.preInit();
 
         Init.preInitBlocks();
         Init.preInitItems();
-        
-        if( Compat.isModAvailable_Rustic() ) {
-        	InitRustic.preInitBlocks();
-        	InitRustic.preInitItems();
-        	InitRustic.preInitFluids();
+
+        if (Compat.isModAvailable_Rustic()) {
+            InitRustic.preInitBlocks();
+            InitRustic.preInitItems();
+            InitRustic.preInitFluids();
         }
-        if( Compat.isModAvailable_Forestry() )
-        	InitForestry.preInitFluids();
-        
+        if (Compat.isModAvailable_Forestry())
+            InitForestry.preInitFluids();
+
         proxy.preInit();
 
         RecipeSorter.register("minecraft:shapeless_comparator", ShapelessItemComparableRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
         RecipeSorter.register("minecraft:shapeless_multi", ShapelessMultiRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
     }
-    
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event)
-	{
-		IForgeRegistry<Block> registry = event.getRegistry();
+
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+        IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
-	}
+    }
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event)
-	{
-		IForgeRegistry<Item> registry = event.getRegistry();
-		
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        IForgeRegistry<Item> registry = event.getRegistry();
+
         Init.registerBlockItems(registry);
         Init.registerItems(registry);
-        
+
         proxy.postRegisterItems();
-	}
+    }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
@@ -99,18 +96,17 @@ public class GrowthcraftCore {
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-    	proxy.postInit();
-    	Init.registerBlockOres();
-    	if( Compat.isModAvailable_Rustic() )
-    		InitRustic.registerBlockOres();
+        proxy.postInit();
+        Init.registerBlockOres();
+        if (Compat.isModAvailable_Rustic())
+            InitRustic.registerBlockOres();
     }
-    
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event)
-	{
+
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void registerModels(ModelRegistryEvent event) {
         Init.registerItemRenders();
         Init.registerBlockRenders();
-	}
+    }
 
 }

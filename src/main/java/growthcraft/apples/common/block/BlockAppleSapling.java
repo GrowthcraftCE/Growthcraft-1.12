@@ -30,7 +30,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     );
 
     public BlockAppleSapling(String unlocalizedName) {
-    	super(Material.PLANTS);
+        super(Material.PLANTS);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setSoundType(SoundType.PLANT);
@@ -44,11 +44,11 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 ) {
-        	if( ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0) ) {
-				grow(worldIn, rand, pos, state);
-				ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-			}
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
+            if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0)) {
+                grow(worldIn, rand, pos, state);
+                ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
+            }
         }
     }
 
@@ -65,13 +65,13 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
         super.updateTick(worldIn, pos, state, rand);
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
             this.grow(worldIn, pos, state, rand);
         }
     }
 
     public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (((Integer)state.getValue(STAGE)).intValue() == 0) {
+        if (((Integer) state.getValue(STAGE)).intValue() == 0) {
             worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
             this.markBlockUpdate(worldIn, pos);
         } else {
@@ -79,10 +79,10 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
         }
     }
 
-    private void markBlockUpdate(World worldIn, BlockPos pos ) {
+    private void markBlockUpdate(World worldIn, BlockPos pos) {
         worldIn.markBlockRangeForRenderUpdate(pos, pos);
         worldIn.notifyBlockUpdate(pos, worldIn.getBlockState(pos), worldIn.getBlockState(pos), 3);
-        worldIn.scheduleBlockUpdate(pos, this, 0,0);
+        worldIn.scheduleBlockUpdate(pos, this, 0, 0);
     }
 
     @Override
@@ -93,7 +93,7 @@ public class BlockAppleSapling extends BlockBush implements IGrowable {
     @Override
     public int getMetaFromState(IBlockState state) {
         int i = 0;
-        i = i | ((Integer)state.getValue(STAGE)).intValue() << 3;
+        i = i | ((Integer) state.getValue(STAGE)).intValue() << 3;
         return i;
     }
 

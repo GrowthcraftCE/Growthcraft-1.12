@@ -26,193 +26,162 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITickable, INBTItemSerializable
-{
-	// SpatialRandom instance
-	// Crash: @SideOnly(Side.CLIENT)
-	private SpatialRandom sprand = new SpatialRandom();
-	
-	// Pulsar instance
-	private PulseStepper wheyPulsar = new PulseStepper(TickUtils.seconds(15), 10);
+public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITickable, INBTItemSerializable {
+    // SpatialRandom instance
+    // Crash: @SideOnly(Side.CLIENT)
+    private SpatialRandom sprand = new SpatialRandom();
 
-	// the following variables are responsible for step tracking
-	/// This pulse stepper is used to control the 'drip' animation
-	// Crash: @SideOnly(Side.CLIENT)
-	private PulseStepper animPulsar = new PulseStepper(10, 4);
+    // Pulsar instance
+    private PulseStepper wheyPulsar = new PulseStepper(TickUtils.seconds(15), 10);
 
-	/// The server will increment this value whenever it does a drip step
-	private int serverStep;
+    // the following variables are responsible for step tracking
+    /// This pulse stepper is used to control the 'drip' animation
+    // Crash: @SideOnly(Side.CLIENT)
+    private PulseStepper animPulsar = new PulseStepper(10, 4);
 
-	/// Clients will set this value to the serverStep value and proceed with the drip animation
-	@SideOnly(Side.CLIENT)
-	private int clientStep;
+    /// The server will increment this value whenever it does a drip step
+    private int serverStep;
 
-	private CheeseCurd cheeseCurd = new CheeseCurd();
+    /// Clients will set this value to the serverStep value and proceed with the drip animation
+    @SideOnly(Side.CLIENT)
+    private int clientStep;
 
-	private IPancheonTile getPancheonTile()
-	{
-		for (int i = 1; i < 3; ++i)
-		{
-			BlockPos ofsPos = getPos().down(i);
-			final TileEntity te = world.getTileEntity(ofsPos);
-			if (te instanceof IPancheonTile)
-			{
-				return (IPancheonTile)te;
-			}
-			else
-			{
-				if (!world.isAirBlock(ofsPos)) break;
-			}
-		}
-		return null;
-	}
-	
-	public ICheeseType getCheeseType() {
-		return cheeseCurd.getType();
-	}
+    private CheeseCurd cheeseCurd = new CheeseCurd();
 
-	public int getRenderColor()
-	{
-		return cheeseCurd.getRenderColor();
-	}
+    private IPancheonTile getPancheonTile() {
+        for (int i = 1; i < 3; ++i) {
+            BlockPos ofsPos = getPos().down(i);
+            final TileEntity te = world.getTileEntity(ofsPos);
+            if (te instanceof IPancheonTile) {
+                return (IPancheonTile) te;
+            } else {
+                if (!world.isAirBlock(ofsPos)) break;
+            }
+        }
+        return null;
+    }
 
-	public float getProgress()
-	{
-		return cheeseCurd.getAgeProgress();
-	}
+    public ICheeseType getCheeseType() {
+        return cheeseCurd.getType();
+    }
 
-	public boolean isDried()
-	{
-		return cheeseCurd.isDried();
-	}
+    public int getRenderColor() {
+        return cheeseCurd.getRenderColor();
+    }
 
-	@Override
-	public void update()
-	{
-		if (!world.isRemote)
-		{
-			if (cheeseCurd.needClientUpdate)
-			{
-				cheeseCurd.needClientUpdate = false;
-				markForUpdate();
-			}
-			cheeseCurd.update();
-			if (wheyPulsar.update() == PulseStepper.State.PULSE)
-			{
-				if( !isDried() ) 
-				{
-					final IPancheonTile pancheonTile = getPancheonTile();
-					// When a pancheon is present, try filling it with Whey
-					if (pancheonTile != null)
-					{
-						final IFluidTankOperable fh = pancheonTile.getPancheonFluidHandler();
-						final FluidStack stack = GrowthcraftMilkFluids.whey.asFluidStack(100);
-						if (fh.canFill(EnumFacing.UP, stack.getFluid()))
-						{
-							fh.fill(EnumFacing.UP, stack, true);
-						}
-					}
-					// regardless of a pancheon being present, the curd SHOULD drip
-					serverStep++;
-					markDirtyAndUpdate();
-				}
-			}
-		}
-		else
-		{
-			if (clientStep != serverStep)
-			{
-				this.clientStep = serverStep;
-				animPulsar.reset();
-			}
+    public float getProgress() {
+        return cheeseCurd.getAgeProgress();
+    }
 
-			if (animPulsar.update() == PulseStepper.State.PULSE)
-			{
-				if( !isDried() ) {
-					final Pair<Double, Double> p = sprand.nextCenteredD2();
-					final double px = (double)pos.getX() + 0.5 + p.left * 0.5;
-					final double py = (double)pos.getY() + 2.0/16.0;
-					final double pz = (double)pos.getZ() + 0.5 + p.right * 0.5;
-					FXHelper.dropParticle(world, px, py, pz, GrowthcraftMilkFluids.whey.getItemColor());
-				}
-			}
-		}
-	}
+    public boolean isDried() {
+        return cheeseCurd.isDried();
+    }
 
-	protected void readCheeseCurdFromNBT(NBTTagCompound nbt)
-	{
-		cheeseCurd.readFromNBT(nbt);
-	}
+    @Override
+    public void update() {
+        if (!world.isRemote) {
+            if (cheeseCurd.needClientUpdate) {
+                cheeseCurd.needClientUpdate = false;
+                markForUpdate();
+            }
+            cheeseCurd.update();
+            if (wheyPulsar.update() == PulseStepper.State.PULSE) {
+                if (!isDried()) {
+                    final IPancheonTile pancheonTile = getPancheonTile();
+                    // When a pancheon is present, try filling it with Whey
+                    if (pancheonTile != null) {
+                        final IFluidTankOperable fh = pancheonTile.getPancheonFluidHandler();
+                        final FluidStack stack = GrowthcraftMilkFluids.whey.asFluidStack(100);
+                        if (fh.canFill(EnumFacing.UP, stack.getFluid())) {
+                            fh.fill(EnumFacing.UP, stack, true);
+                        }
+                    }
+                    // regardless of a pancheon being present, the curd SHOULD drip
+                    serverStep++;
+                    markDirtyAndUpdate();
+                }
+            }
+        } else {
+            if (clientStep != serverStep) {
+                this.clientStep = serverStep;
+                animPulsar.reset();
+            }
 
-	protected void readWheyPulsarFromNBT(NBTTagCompound nbt)
-	{
-		wheyPulsar.readFromNBT(nbt, "whey_pulsar");
-	}
+            if (animPulsar.update() == PulseStepper.State.PULSE) {
+                if (!isDried()) {
+                    final Pair<Double, Double> p = sprand.nextCenteredD2();
+                    final double px = (double) pos.getX() + 0.5 + p.left * 0.5;
+                    final double py = (double) pos.getY() + 2.0 / 16.0;
+                    final double pz = (double) pos.getZ() + 0.5 + p.right * 0.5;
+                    FXHelper.dropParticle(world, px, py, pz, GrowthcraftMilkFluids.whey.getItemColor());
+                }
+            }
+        }
+    }
 
-	@Override
-	public void readFromNBTForItem(NBTTagCompound nbt)
-	{
-		super.readFromNBTForItem(nbt);
-		readCheeseCurdFromNBT(nbt);
-		readWheyPulsarFromNBT(nbt);
-	}
+    protected void readCheeseCurdFromNBT(NBTTagCompound nbt) {
+        cheeseCurd.readFromNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
-	public void readFromNBT_HangingCurds(NBTTagCompound nbt)
-	{
-		readCheeseCurdFromNBT(nbt);
-		readWheyPulsarFromNBT(nbt);
-	}
+    protected void readWheyPulsarFromNBT(NBTTagCompound nbt) {
+        wheyPulsar.readFromNBT(nbt, "whey_pulsar");
+    }
 
-	protected void writeCheeseCurdToNBT(NBTTagCompound nbt)
-	{
-		cheeseCurd.writeToNBT(nbt);
-	}
+    @Override
+    public void readFromNBTForItem(NBTTagCompound nbt) {
+        super.readFromNBTForItem(nbt);
+        readCheeseCurdFromNBT(nbt);
+        readWheyPulsarFromNBT(nbt);
+    }
 
-	protected void writeWheyPulsarToNBT(NBTTagCompound nbt)
-	{
-		wheyPulsar.writeToNBT(nbt, "whey_pulsar");
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
+    public void readFromNBT_HangingCurds(NBTTagCompound nbt) {
+        readCheeseCurdFromNBT(nbt);
+        readWheyPulsarFromNBT(nbt);
+    }
 
-	@Override
-	public void writeToNBTForItem(NBTTagCompound nbt)
-	{
-		super.writeToNBTForItem(nbt);
-		writeCheeseCurdToNBT(nbt);
-		writeWheyPulsarToNBT(nbt);
-	}
+    protected void writeCheeseCurdToNBT(NBTTagCompound nbt) {
+        cheeseCurd.writeToNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
-	public void writeToNBT_HangingCurds(NBTTagCompound nbt)
-	{
-		writeCheeseCurdToNBT(nbt);
-		writeWheyPulsarToNBT(nbt);
-	}
+    protected void writeWheyPulsarToNBT(NBTTagCompound nbt) {
+        wheyPulsar.writeToNBT(nbt, "whey_pulsar");
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
-	public boolean readFromStream_HangingCurds(ByteBuf stream) throws IOException
-	{
-		cheeseCurd.readFromStream(stream);
-		wheyPulsar.readFromStream(stream);
-		this.serverStep = stream.readInt();
-		return true;
-	}
+    @Override
+    public void writeToNBTForItem(NBTTagCompound nbt) {
+        super.writeToNBTForItem(nbt);
+        writeCheeseCurdToNBT(nbt);
+        writeWheyPulsarToNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
-	public boolean writeToStream_HangingCurds(ByteBuf stream) throws IOException
-	{
-		cheeseCurd.writeToStream(stream);
-		wheyPulsar.writeToStream(stream);
-		stream.writeInt(serverStep);
-		return true;
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
+    public void writeToNBT_HangingCurds(NBTTagCompound nbt) {
+        writeCheeseCurdToNBT(nbt);
+        writeWheyPulsarToNBT(nbt);
+    }
 
-	public ItemStack asItemStack()
-	{
-		ICheeseType type = cheeseCurd.getType();
-		final ItemStack stack = type.getCurdBlocks().asStack();
-		final NBTTagCompound tag = ItemBlockHangingCurds.openNBT(stack);
-		writeToNBTForItem(tag);
-		return stack;
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
+    public boolean readFromStream_HangingCurds(ByteBuf stream) throws IOException {
+        cheeseCurd.readFromStream(stream);
+        wheyPulsar.readFromStream(stream);
+        this.serverStep = stream.readInt();
+        return true;
+    }
+
+    @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)
+    public boolean writeToStream_HangingCurds(ByteBuf stream) throws IOException {
+        cheeseCurd.writeToStream(stream);
+        wheyPulsar.writeToStream(stream);
+        stream.writeInt(serverStep);
+        return true;
+    }
+
+    public ItemStack asItemStack() {
+        ICheeseType type = cheeseCurd.getType();
+        final ItemStack stack = type.getCurdBlocks().asStack();
+        final NBTTagCompound tag = ItemBlockHangingCurds.openNBT(stack);
+        writeToNBTForItem(tag);
+        return stack;
+    }
 }

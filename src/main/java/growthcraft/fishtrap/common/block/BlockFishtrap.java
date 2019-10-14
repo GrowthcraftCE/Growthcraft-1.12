@@ -38,8 +38,7 @@ public class BlockFishtrap extends GrowthcraftBlockContainer {
     }
 
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
+    public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
@@ -69,7 +68,7 @@ public class BlockFishtrap extends GrowthcraftBlockContainer {
         // on breakBlock, drop the inventory into the world.
         TileEntityFishtrap te = (TileEntityFishtrap) worldIn.getTileEntity(pos);
         IItemHandler handler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
-        for(int slot = 0; slot < handler.getSlots(); slot++) {
+        for (int slot = 0; slot < handler.getSlots(); slot++) {
             ItemStack stack = handler.getStackInSlot(slot);
             InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), stack);
         }
@@ -83,7 +82,7 @@ public class BlockFishtrap extends GrowthcraftBlockContainer {
             return true;
         } else {
             final TileEntityFishtrap te = getTileEntity(worldIn, pos);
-            if ( te != null ) {
+            if (te != null) {
                 playerIn.openGui(Reference.MODID, GuiHandler.FISHTRAP, worldIn, pos.getX(), pos.getY(), pos.getZ());
                 return true;
             }

@@ -33,6 +33,6 @@ public class BlockBambooDoor extends BlockDoor {
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         // return new ItemStack(GrowthcraftBambooItems.itemBambooDoor, 1);
-    	return GrowthcraftBambooItems.itemBambooDoor.asStack(1);
+        return GrowthcraftBambooItems.itemBambooDoor.asStack(1);
     }
 }

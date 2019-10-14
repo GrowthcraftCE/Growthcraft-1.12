@@ -8,27 +8,27 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
-	public void preInit() {
-	    registerTitleEntities();
+    public void preInit() {
+        registerTitleEntities();
         TheOneProbeHandler.register();
-	}
-	
+    }
+
     public void init() {
         if (GrowthcraftCoreConfig.blockSaltOreWorldGen) {
             GameRegistry.registerWorldGenerator(new BlockSaltGeneration(), 0);
         }
     }
-    
-	public void postInit() {
 
-	}
+    public void postInit() {
 
-	@SuppressWarnings("deprecation")
+    }
+
+    @SuppressWarnings("deprecation")
     public void registerTitleEntities() {
     }
-    
+
     public void postRegisterItems() {
-    	
+
     }
 
 

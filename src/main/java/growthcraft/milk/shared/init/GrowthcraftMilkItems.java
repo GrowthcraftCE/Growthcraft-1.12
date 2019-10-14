@@ -15,8 +15,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class GrowthcraftMilkItems {
-	
-	private GrowthcraftMilkItems() {}
+
+    private GrowthcraftMilkItems() {
+    }
 
     public static ItemDefinition stomach;
     public static ItemDefinition thistleSeed;
@@ -38,34 +39,34 @@ public class GrowthcraftMilkItems {
 
     public static ItemTypeDefinition<ItemBoozeBottle> kumisBottle;
 
-	private static boolean canWax(WaxedCheeseTypes type, ItemStack stack) {
-		String oreName;
-		switch( type ) {
-		case MONTEREY:
-			oreName = "materialBeeswaxBlack";
-			break;
-		case GOUDA:
-			oreName = "materialBeeswaxNormal";	// Is Yellow
-			break;
-		case PROVOLONE:
-			oreName = "materialBeeswaxWhite";
-			break;
-		default:
-		case CHEDDAR:
-			oreName = "materialBeeswaxRed";
-			break;
-		}
-		
-		int[] oreIDsStack = OreDictionary.getOreIDs(stack);
-		int oreIDWax = OreDictionary.getOreID(oreName);
-		
-		for( int id : oreIDsStack ) {
-			if( id == oreIDWax )
-				return true;
-		}
-		return false;
-	}
-    
+    private static boolean canWax(WaxedCheeseTypes type, ItemStack stack) {
+        String oreName;
+        switch (type) {
+            case MONTEREY:
+                oreName = "materialBeeswaxBlack";
+                break;
+            case GOUDA:
+                oreName = "materialBeeswaxNormal";    // Is Yellow
+                break;
+            case PROVOLONE:
+                oreName = "materialBeeswaxWhite";
+                break;
+            default:
+            case CHEDDAR:
+                oreName = "materialBeeswaxRed";
+                break;
+        }
+
+        int[] oreIDsStack = OreDictionary.getOreIDs(stack);
+        int oreIDWax = OreDictionary.getOreID(oreName);
+
+        for (int id : oreIDsStack) {
+            if (id == oreIDWax)
+                return true;
+        }
+        return false;
+    }
+
     public enum ButterTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
         UNSALTED(0, "unsalted"),
         SALTED(1, "salted");
@@ -88,20 +89,20 @@ public class GrowthcraftMilkItems {
             return this.NAME;
         }
 
-		@Override
-		public int getVariantID() {
-			return this.ID;
-		}
+        @Override
+        public int getVariantID() {
+            return this.ID;
+        }
 
-		@Override
-		public ItemStack asStack(int size) {
-			return GrowthcraftMilkItems.butter.asStack(1, getVariantID());
-		}
+        @Override
+        public ItemStack asStack(int size) {
+            return GrowthcraftMilkItems.butter.asStack(1, getVariantID());
+        }
 
-		@Override
-		public ItemStack asStack() {
-			return asStack(1);
-		}
+        @Override
+        public ItemStack asStack() {
+            return asStack(1);
+        }
     }
 
     public enum IceCreamTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
@@ -130,20 +131,20 @@ public class GrowthcraftMilkItems {
             return this.NAME;
         }
 
-		@Override
+        @Override
         public int getVariantID() {
             return this.ID;
         }
 
-		@Override
-		public ItemStack asStack(int size) {
-			return GrowthcraftMilkItems.iceCream.asStack(size, getVariantID());
-		}
+        @Override
+        public ItemStack asStack(int size) {
+            return GrowthcraftMilkItems.iceCream.asStack(size, getVariantID());
+        }
 
-		@Override
-		public ItemStack asStack() {
-			return asStack(1);
-		}
+        @Override
+        public ItemStack asStack() {
+            return asStack(1);
+        }
     }
 
     public enum YogurtTypes implements IStringSerializable, IObjectVariant, IItemStackFactory {
@@ -172,27 +173,27 @@ public class GrowthcraftMilkItems {
             return this.NAME;
         }
 
-		@Override
+        @Override
         public int getVariantID() {
             return this.ID;
         }
-		
-		@Override
-		public ItemStack asStack(int size) {
-			return GrowthcraftMilkItems.yogurt.asStack(size, getVariantID());
-		}
 
-		@Override
-		public ItemStack asStack() {
-			return asStack(1);
-		}
-	}
+        @Override
+        public ItemStack asStack(int size) {
+            return GrowthcraftMilkItems.yogurt.asStack(size, getVariantID());
+        }
+
+        @Override
+        public ItemStack asStack() {
+            return asStack(1);
+        }
+    }
 
     public enum WaxedCheeseTypes implements ICheeseType, IObjectVariant, IStringSerializable {
         CHEDDAR(0, "cheddar", 0xed9200),
         MONTEREY(1, "monterey", 0xf5f5da),
-	    GOUDA(2, "gouda", 0xEEDC82),
-	    PROVOLONE(3, "provolone", 0xFFFDD0);
+        GOUDA(2, "gouda", 0xEEDC82),
+        PROVOLONE(3, "provolone", 0xFFFDD0);
 
         private int ID;
         private ResourceLocation name;
@@ -200,7 +201,7 @@ public class GrowthcraftMilkItems {
 
         WaxedCheeseTypes(int id, String name, int color) {
             this.ID = id;
-            this.name = new ResourceLocation( Reference.MODID, name );
+            this.name = new ResourceLocation(Reference.MODID, name);
             this.color = color;
         }
 
@@ -213,72 +214,72 @@ public class GrowthcraftMilkItems {
         public String getName() {
             return this.name.getResourcePath();
         }
-        
-		@Override
-		public ResourceLocation getRegistryName() {
-			return this.name;
-		}
 
-		@Override
+        @Override
+        public ResourceLocation getRegistryName() {
+            return this.name;
+        }
+
+        @Override
         public int getVariantID() {
             return this.ID;
         }
 
-		@Override
-		public boolean canWax(ItemStack stack) {
-			return GrowthcraftMilkItems.canWax(this, stack);
-		}
+        @Override
+        public boolean canWax(ItemStack stack) {
+            return GrowthcraftMilkItems.canWax(this, stack);
+        }
 
-		@Override
-		public int getColor() {
-			return this.color;
-		}
+        @Override
+        public int getColor() {
+            return this.color;
+        }
 
-		@Override
-		public ICheeseItemStackFactory getCheeseItems() {
-			return new ICheeseItemStackFactory() {
-				@Override
-				public ItemStack asStack(int size) {
-					// return new ItemStack(GrowthcraftMilkItems.itemWaxedCheeseSlice,size,getVariantID());
-					return GrowthcraftMilkItems.waxedCheeseSlice.asStack(size, getVariantID());
-				}
-			};
-		}
+        @Override
+        public ICheeseItemStackFactory getCheeseItems() {
+            return new ICheeseItemStackFactory() {
+                @Override
+                public ItemStack asStack(int size) {
+                    // return new ItemStack(GrowthcraftMilkItems.itemWaxedCheeseSlice,size,getVariantID());
+                    return GrowthcraftMilkItems.waxedCheeseSlice.asStack(size, getVariantID());
+                }
+            };
+        }
 
-		@Override
-		public ICheeseBlockStackFactory getCheeseBlocks() {
-			return new ICheeseBlockStackFactory() {
-				@Override
-				public ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage) {
-					return GrowthcraftMilkBlocks.waxedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, slices, stage));
-				}
+        @Override
+        public ICheeseBlockStackFactory getCheeseBlocks() {
+            return new ICheeseBlockStackFactory() {
+                @Override
+                public ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage) {
+                    return GrowthcraftMilkBlocks.waxedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, slices, stage));
+                }
 
-				@Override
-				public EnumCheeseStage getInitialStage() {
-					return EnumCheeseStage.UNWAXED;
-				}
-			};
-		}
+                @Override
+                public EnumCheeseStage getInitialStage() {
+                    return EnumCheeseStage.UNWAXED;
+                }
+            };
+        }
 
-		@Override
-		public ICheeseCurdStackFactory getCurdBlocks() {
-			return new ICheeseCurdStackFactory() {
-				@Override
-				public ItemStack asStack(int size) {
-					return GrowthcraftMilkBlocks.waxedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
-				}
-			};
-		}
+        @Override
+        public ICheeseCurdStackFactory getCurdBlocks() {
+            return new ICheeseCurdStackFactory() {
+                @Override
+                public ItemStack asStack(int size) {
+                    return GrowthcraftMilkBlocks.waxedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(WaxedCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
+                }
+            };
+        }
 
-		@Override
-		public ICheeseFluidStackFactory getFluids() {
-			return new ICheeseFluidStackFactory() {
-				@Override
-				public FluidStack asFluidStack(int amount) {
-					return GrowthcraftMilkFluids.cheesesWaxed.get(WaxedCheeseTypes.this).asFluidStack(amount);
-				}
-			};
-		}
+        @Override
+        public ICheeseFluidStackFactory getFluids() {
+            return new ICheeseFluidStackFactory() {
+                @Override
+                public FluidStack asFluidStack(int amount) {
+                    return GrowthcraftMilkFluids.cheesesWaxed.get(WaxedCheeseTypes.this).asFluidStack(amount);
+                }
+            };
+        }
 
     }
 
@@ -291,7 +292,7 @@ public class GrowthcraftMilkItems {
 
         SimpleCheeseTypes(int id, String name, int color) {
             this.ID = id;
-            this.name = new ResourceLocation( Reference.MODID, name );
+            this.name = new ResourceLocation(Reference.MODID, name);
             this.color = color;
         }
 
@@ -304,61 +305,61 @@ public class GrowthcraftMilkItems {
         public String getName() {
             return this.name.getResourcePath();
         }
-        
-		@Override
-		public ResourceLocation getRegistryName() {
-			return this.name;
-		}
 
-		@Override
+        @Override
+        public ResourceLocation getRegistryName() {
+            return this.name;
+        }
+
+        @Override
         public int getVariantID() {
             return this.ID;
         }
 
-		@Override
-		public boolean canWax(ItemStack stack) {
-			return false;
-		}
+        @Override
+        public boolean canWax(ItemStack stack) {
+            return false;
+        }
 
-		@Override
-		public int getColor() {
-			return this.color;
-		}
+        @Override
+        public int getColor() {
+            return this.color;
+        }
 
-		@Override
-		public ICheeseItemStackFactory getCheeseItems() {
-			return new ICheeseItemStackFactory() {
-				@Override
-				public ItemStack asStack(int size) {
-					return GrowthcraftMilkItems.simpleCheeseSlice.asStack(size, getVariantID());
-				}
-			};
-		}
+        @Override
+        public ICheeseItemStackFactory getCheeseItems() {
+            return new ICheeseItemStackFactory() {
+                @Override
+                public ItemStack asStack(int size) {
+                    return GrowthcraftMilkItems.simpleCheeseSlice.asStack(size, getVariantID());
+                }
+            };
+        }
 
-		@Override
-		public ICheeseBlockStackFactory getCheeseBlocks() {
-			return null;
-		}
+        @Override
+        public ICheeseBlockStackFactory getCheeseBlocks() {
+            return null;
+        }
 
-		@Override
-		public ICheeseCurdStackFactory getCurdBlocks() {
-			return new ICheeseCurdStackFactory() {
-				@Override
-				public ItemStack asStack(int size) {
-					return GrowthcraftMilkBlocks.simpleCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(SimpleCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
-				}
-			};
-		}
+        @Override
+        public ICheeseCurdStackFactory getCurdBlocks() {
+            return new ICheeseCurdStackFactory() {
+                @Override
+                public ItemStack asStack(int size) {
+                    return GrowthcraftMilkBlocks.simpleCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(SimpleCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
+                }
+            };
+        }
 
-		@Override
-		public ICheeseFluidStackFactory getFluids() {
-			return new ICheeseFluidStackFactory() {
-				@Override
-				public FluidStack asFluidStack(int amount) {
-					return GrowthcraftMilkFluids.cheesesSimple.get(SimpleCheeseTypes.this).asFluidStack(amount);
-				}
-			};
-		}
+        @Override
+        public ICheeseFluidStackFactory getFluids() {
+            return new ICheeseFluidStackFactory() {
+                @Override
+                public FluidStack asFluidStack(int amount) {
+                    return GrowthcraftMilkFluids.cheesesSimple.get(SimpleCheeseTypes.this).asFluidStack(amount);
+                }
+            };
+        }
     }
 
     public enum AgedCheeseTypes implements IStringSerializable, ICheeseType, IObjectVariant {
@@ -367,7 +368,7 @@ public class GrowthcraftMilkItems {
         APPENZELLER(2, "appenzeller", 0xf3e2a7),
         ASIAGO(3, "asiago", 0xbfb68d),
         PARMESAN(4, "parmesan", 0xd8d5c6),
-	    CASU_MARZU(5, "casu_marzu", 0xF1E9D2);
+        CASU_MARZU(5, "casu_marzu", 0xF1E9D2);
 
         private int ID;
         private ResourceLocation name;
@@ -375,7 +376,7 @@ public class GrowthcraftMilkItems {
 
         AgedCheeseTypes(int id, String name, int color) {
             this.ID = id;
-            this.name = new ResourceLocation( Reference.MODID, name );
+            this.name = new ResourceLocation(Reference.MODID, name);
             this.color = color;
         }
 
@@ -388,74 +389,74 @@ public class GrowthcraftMilkItems {
         public String getName() {
             return this.name.getResourcePath();
         }
-        
-		@Override
-		public ResourceLocation getRegistryName() {
-			return this.name;
-		}
 
-		@Override
+        @Override
+        public ResourceLocation getRegistryName() {
+            return this.name;
+        }
+
+        @Override
         public int getVariantID() {
             return this.ID;
         }
 
-		@Override
-		public boolean canWax(ItemStack stack) {
-			return false;
-		}
+        @Override
+        public boolean canWax(ItemStack stack) {
+            return false;
+        }
 
-		@Override
-		public int getColor() {
-			return this.color;
-		}
+        @Override
+        public int getColor() {
+            return this.color;
+        }
 
-		@Override
-		public ICheeseItemStackFactory getCheeseItems() {
-			return new ICheeseItemStackFactory() {
-				@Override
-				public ItemStack asStack(int size) {
+        @Override
+        public ICheeseItemStackFactory getCheeseItems() {
+            return new ICheeseItemStackFactory() {
+                @Override
+                public ItemStack asStack(int size) {
 //					return new ItemStack(GrowthcraftMilkItems.itemAgedCheeseSlice,size,getVariantID());
-					return GrowthcraftMilkItems.agedCheeseSlice.asStack(size, getVariantID());
-				}
-			};
-		}
+                    return GrowthcraftMilkItems.agedCheeseSlice.asStack(size, getVariantID());
+                }
+            };
+        }
 
-		@Override
-		public ICheeseBlockStackFactory getCheeseBlocks() {
-			return new ICheeseBlockStackFactory() {
+        @Override
+        public ICheeseBlockStackFactory getCheeseBlocks() {
+            return new ICheeseBlockStackFactory() {
 
-				@Override
-				public ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage) {
-					return GrowthcraftMilkBlocks.agedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, slices, stage));
-				}
+                @Override
+                public ItemStack asStackForStage(int size, int slices, EnumCheeseStage stage) {
+                    return GrowthcraftMilkBlocks.agedCheeseBlock.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, slices, stage));
+                }
 
-				@Override
-				public EnumCheeseStage getInitialStage() {
-					return EnumCheeseStage.UNAGED;
-				}
-			};
-		}
+                @Override
+                public EnumCheeseStage getInitialStage() {
+                    return EnumCheeseStage.UNAGED;
+                }
+            };
+        }
 
-		@Override
-		public ICheeseCurdStackFactory getCurdBlocks() {
-			return new ICheeseCurdStackFactory() {
-				@Override
-				public ItemStack asStack(int size) {
-					return GrowthcraftMilkBlocks.agedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
-				}
-			};
-		}
+        @Override
+        public ICheeseCurdStackFactory getCurdBlocks() {
+            return new ICheeseCurdStackFactory() {
+                @Override
+                public ItemStack asStack(int size) {
+                    return GrowthcraftMilkBlocks.agedCheeseCurds.asStack(size, CheeseUtils.getItemMetaFor(AgedCheeseTypes.this, 4, EnumCheeseStage.UNAGED));
+                }
+            };
+        }
 
-		@Override
-		public ICheeseFluidStackFactory getFluids() {
-			return new ICheeseFluidStackFactory() {
-				@Override
-				public FluidStack asFluidStack(int amount) {
-					return GrowthcraftMilkFluids.cheesesAged.get(AgedCheeseTypes.this).asFluidStack(amount);
-				}
-			};
-		}
+        @Override
+        public ICheeseFluidStackFactory getFluids() {
+            return new ICheeseFluidStackFactory() {
+                @Override
+                public FluidStack asFluidStack(int amount) {
+                    return GrowthcraftMilkFluids.cheesesAged.get(AgedCheeseTypes.this).asFluidStack(amount);
+                }
+            };
+        }
     }
-   
+
 
 }

@@ -75,8 +75,8 @@ public class BlockBeeHive extends GrowthcraftRotatableBlockContainer {
 
     @Override
     public void onNeighborChange(IBlockAccess world, BlockPos pos, BlockPos neighbor) {
-        if ( world instanceof World ) {
-            updateTick((World)world, pos, world.getBlockState(pos), rand);
+        if (world instanceof World) {
+            updateTick((World) world, pos, world.getBlockState(pos), rand);
         }
         super.onNeighborChange(world, pos, neighbor);
     }
@@ -112,15 +112,12 @@ public class BlockBeeHive extends GrowthcraftRotatableBlockContainer {
     }
 
     @Override
-    public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
-    {
+    public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side) {
         return true;
     }
 
-    protected void setDefaultDirection(World world, BlockPos pos, IBlockState state)
-    {
-        if (!world.isRemote)
-        {
+    protected void setDefaultDirection(World world, BlockPos pos, IBlockState state) {
+        if (!world.isRemote) {
             EnumFacing facing = BlockUtils.getDefaultDirection(world, pos, state);
             world.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
         }
@@ -133,22 +130,19 @@ public class BlockBeeHive extends GrowthcraftRotatableBlockContainer {
     }
 
     @Override
-    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
         super.onBlockAdded(worldIn, pos, state);
         setDefaultDirection(worldIn, pos, state);
     }
 
     @Override
-    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack)
-    {
+    public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
         super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
         setOrientWhenPlacing(worldIn, pos, state, placer);
     }
 
     @Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 
@@ -160,8 +154,7 @@ public class BlockBeeHive extends GrowthcraftRotatableBlockContainer {
     @SuppressWarnings("deprecation")
     @Override
     @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
         return true;
     }
 }

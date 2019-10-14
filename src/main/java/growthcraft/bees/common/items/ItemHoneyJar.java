@@ -7,9 +7,9 @@ import net.minecraft.init.Items;
 public class ItemHoneyJar extends GrowthcraftItemFoodBase {
 
     public ItemHoneyJar(String unlocalizedName) {
-    	super(6, false);
-		this.setContainerItem(Items.FLOWER_POT);
-		this.setMaxStackSize(1);
+        super(6, false);
+        this.setContainerItem(Items.FLOWER_POT);
+        this.setMaxStackSize(1);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }

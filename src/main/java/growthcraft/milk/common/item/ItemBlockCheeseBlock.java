@@ -29,133 +29,116 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extends ItemBlockCheeseBase<T> implements IItemTileBlock
-{
-	public ItemBlockCheeseBlock(Block block, T[] typeLookup)
-	{
-		super(block, typeLookup);
-		this.maxStackSize = 1;
-	}
+public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extends ItemBlockCheeseBase<T> implements IItemTileBlock {
+    public ItemBlockCheeseBlock(Block block, T[] typeLookup) {
+        super(block, typeLookup);
+        this.maxStackSize = 1;
+    }
 
-	private NBTTagCompound getTileTagCompoundABS(ItemStack stack)
-	{
-		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
-		if (!tag.hasKey("te_cheese_block"))
-		{
-			final NBTTagCompound cheeseTag = new NBTTagCompound();
-			final ICheeseType cheese = getTypeForVariantID(CheeseUtils.getVariantIDFromMeta(stack.getItemDamage())); // EnumCheeseType.getSafeById(EnumCheeseType.getTypeFromMeta(stack.getItemDamage()));
-			final EnumCheeseStage stage = CheeseUtils.getStageFromMeta(stack.getItemDamage());
-			final int slices = CheeseUtils.getTopSlicesFromMeta(stack.getItemDamage());
-			CheeseIO.writeToNBT(cheeseTag, cheese);
-			stage.writeToNBT(cheeseTag);
-			cheeseTag.setInteger("slices", slices);
-			tag.setTag("te_cheese_block", cheeseTag);
-		}
-		return tag.getCompoundTag("te_cheese_block");
-	}
-
-	@Override
-	public void setTileTagCompound(ItemStack stack, NBTTagCompound tileTag)
-	{
-		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
-		tag.setTag("te_cheese_block", tileTag);
-	}
-
-	@Override
-	public NBTTagCompound getTileTagCompound(ItemStack stack)
-	{
-		final NBTTagCompound tag = getTileTagCompoundABS(stack);
-		return tag;
-	}
-
-	public ICheeseType getCheeseType(ItemStack stack)
-	{
-		final NBTTagCompound tag = getTileTagCompoundABS(stack);
-		return CheeseIO.loadFromNBT(tag);
-	}
-
-	public EnumCheeseStage getCheeseStage(ItemStack stack)
-	{
-		final NBTTagCompound tag = getTileTagCompoundABS(stack);
-		return EnumCheeseStage.loadFromNBT(tag);
-	}
-	
-	@Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) { 
-		// Handle shift click behavior
-		IBlockState iblockstate = worldIn.getBlockState(pos);
-        Block block = iblockstate.getBlock();
-        if( block instanceof BlockCheeseBlock ) {
-        	// FIXME: Copied logic from GrowthcraftBlockContainer.handleOnUseItem() . Avoid code duplication!
-        	BlockCheeseBlock cheeseBlock = (BlockCheeseBlock)block;
-        	TileEntityCheeseBlock te = cheeseBlock.getTileEntity(worldIn, pos);
-        	if( te != null ) {
-        		ItemStack onHand = player.getHeldItem(hand);
-        		if( te.tryPlaceItem(IItemOperable.Action.RIGHT, player, onHand) ) {
-        			cheeseBlock.markBlockForUpdate(worldIn, pos);
-        			return EnumActionResult.SUCCESS;
-        		}
-        	}
+    private NBTTagCompound getTileTagCompoundABS(ItemStack stack) {
+        final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
+        if (!tag.hasKey("te_cheese_block")) {
+            final NBTTagCompound cheeseTag = new NBTTagCompound();
+            final ICheeseType cheese = getTypeForVariantID(CheeseUtils.getVariantIDFromMeta(stack.getItemDamage())); // EnumCheeseType.getSafeById(EnumCheeseType.getTypeFromMeta(stack.getItemDamage()));
+            final EnumCheeseStage stage = CheeseUtils.getStageFromMeta(stack.getItemDamage());
+            final int slices = CheeseUtils.getTopSlicesFromMeta(stack.getItemDamage());
+            CheeseIO.writeToNBT(cheeseTag, cheese);
+            stage.writeToNBT(cheeseTag);
+            cheeseTag.setInteger("slices", slices);
+            tag.setTag("te_cheese_block", cheeseTag);
         }
-		
-    	return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+        return tag.getCompoundTag("te_cheese_block");
+    }
+
+    @Override
+    public void setTileTagCompound(ItemStack stack, NBTTagCompound tileTag) {
+        final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
+        tag.setTag("te_cheese_block", tileTag);
+    }
+
+    @Override
+    public NBTTagCompound getTileTagCompound(ItemStack stack) {
+        final NBTTagCompound tag = getTileTagCompoundABS(stack);
+        return tag;
+    }
+
+    public ICheeseType getCheeseType(ItemStack stack) {
+        final NBTTagCompound tag = getTileTagCompoundABS(stack);
+        return CheeseIO.loadFromNBT(tag);
+    }
+
+    public EnumCheeseStage getCheeseStage(ItemStack stack) {
+        final NBTTagCompound tag = getTileTagCompoundABS(stack);
+        return EnumCheeseStage.loadFromNBT(tag);
+    }
+
+    @Override
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        // Handle shift click behavior
+        IBlockState iblockstate = worldIn.getBlockState(pos);
+        Block block = iblockstate.getBlock();
+        if (block instanceof BlockCheeseBlock) {
+            // FIXME: Copied logic from GrowthcraftBlockContainer.handleOnUseItem() . Avoid code duplication!
+            BlockCheeseBlock cheeseBlock = (BlockCheeseBlock) block;
+            TileEntityCheeseBlock te = cheeseBlock.getTileEntity(worldIn, pos);
+            if (te != null) {
+                ItemStack onHand = player.getHeldItem(hand);
+                if (te.tryPlaceItem(IItemOperable.Action.RIGHT, player, onHand)) {
+                    cheeseBlock.markBlockForUpdate(worldIn, pos);
+                    return EnumActionResult.SUCCESS;
+                }
+            }
+        }
+
+        return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
     }
 
 
-	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		return super.getUnlocalizedName(stack) +
-			"." + getCheeseType(stack).getRegistryName().getResourcePath() +
-			"." + getCheeseStage(stack).getName();
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return super.getUnlocalizedName(stack) +
+                "." + getCheeseType(stack).getRegistryName().getResourcePath() +
+                "." + getCheeseStage(stack).getName();
+    }
 
-	public int getTopSlices(ItemStack stack)
-	{
-		return getTileTagCompound(stack).getInteger("slices");
-	}
+    public int getTopSlices(ItemStack stack) {
+        return getTileTagCompound(stack).getInteger("slices");
+    }
 
-	public int getTopSlicesMax(ItemStack stack)
-	{
-		return getTileTagCompound(stack).getInteger("slices_max");
-	}
-	
-	@Override
-    public int getMetadata(int damage)
-    {
+    public int getTopSlicesMax(ItemStack stack) {
+        return getTileTagCompound(stack).getInteger("slices_max");
+    }
+
+    @Override
+    public int getMetadata(int damage) {
         int numSlices = CheeseUtils.getTopSlicesFromMeta(damage);
-        if( numSlices <= 0 ) {
-        	GrowthcraftMilk.logger.warn("Cheese item meta returned slicescount=0.");
-        	numSlices = 1;
+        if (numSlices <= 0) {
+            GrowthcraftMilk.logger.warn("Cheese item meta returned slicescount=0.");
+            numSlices = 1;
         }
         return (numSlices - 1) << 2;
     }
 
-	public static NBTTagCompound openNBT(ItemStack stack)
-	{
-		final Item item = stack.getItem();
-		if (item instanceof ItemBlockCheeseBlock)
-		{
-			return ((ItemBlockCheeseBlock<?>)item).getTileTagCompound(stack);
-		}
-		else
-		{
-			// throw error
-		}
-		return null;
-	}
-	
+    public static NBTTagCompound openNBT(ItemStack stack) {
+        final Item item = stack.getItem();
+        if (item instanceof ItemBlockCheeseBlock) {
+            return ((ItemBlockCheeseBlock<?>) item).getTileTagCompound(stack);
+        } else {
+            // throw error
+        }
+        return null;
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
-    {
-		if( !this.isInCreativeTab(tab) )
-			return;
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        if (!this.isInCreativeTab(tab))
+            return;
 
-    	for( T type : getAllVariants() ) {
-    		ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
-    		ItemStack stack = blockStackFactory.asStackForStage(4, blockStackFactory.getInitialStage());
-    		subItems.add(stack);
-    	}
+        for (T type : getAllVariants()) {
+            ICheeseBlockStackFactory blockStackFactory = type.getCheeseBlocks();
+            ItemStack stack = blockStackFactory.asStackForStage(4, blockStackFactory.getInitialStage());
+            subItems.add(stack);
+        }
     }
 }

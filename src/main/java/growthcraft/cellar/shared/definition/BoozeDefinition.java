@@ -7,8 +7,8 @@ import growthcraft.core.shared.definition.FluidTypeDefinition;
 
 public class BoozeDefinition extends FluidTypeDefinition<Booze> {
 
-	public BoozeDefinition(@Nonnull Booze boozeFluid) {
-		super(boozeFluid);
-	}
+    public BoozeDefinition(@Nonnull Booze boozeFluid) {
+        super(boozeFluid);
+    }
 
 }

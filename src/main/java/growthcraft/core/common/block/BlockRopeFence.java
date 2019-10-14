@@ -31,14 +31,14 @@ public class BlockRopeFence extends BlockRopeBase {
     private static final AxisAlignedBB WEST_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 0, 0.0625 * 7, 0.0625 * 7, 0.0625 * 7, 0.0625 * 9, 0.0625 * 9);
     private static final AxisAlignedBB UP_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 9, 0.0625 * 7, 0.0625 * 9, 0.0625 * 16, 0.0625 * 9);
     private static final AxisAlignedBB DOWN_BOUNDING_BOX = new AxisAlignedBB(0.0625 * 7, 0.0625 * 0, 0.0625 * 7, 0.0625 * 9, 0.0625 * 7, 0.0625 * 9);
-    
+
     public static final PropertyBool NORTH = PropertyBool.create("north");
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
-    
+
     public BlockRopeFence(String unlocalizedName) {
         super(Material.CARPET);
         this.setUnlocalizedName(unlocalizedName);
@@ -56,20 +56,20 @@ public class BlockRopeFence extends BlockRopeBase {
 
     @Override
     protected void populateCollisionBoxes(IBlockState actualState, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes) {
-    	addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
-    	
-    	if( actualState.getValue(NORTH) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_BOUNDING_BOX);
-    	if( actualState.getValue(EAST) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_BOUNDING_BOX);
-    	if( actualState.getValue(SOUTH) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_BOUNDING_BOX);
-    	if( actualState.getValue(WEST) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_BOUNDING_BOX);
-    	if( actualState.getValue(UP) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, UP_BOUNDING_BOX);
-    	if( actualState.getValue(DOWN) )
-    		addCollisionBoxToList(pos, entityBox, collidingBoxes, DOWN_BOUNDING_BOX);
+        addCollisionBoxToList(pos, entityBox, collidingBoxes, KNOT_BOUNDING_BOX);
+
+        if (actualState.getValue(NORTH))
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTH_BOUNDING_BOX);
+        if (actualState.getValue(EAST))
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, EAST_BOUNDING_BOX);
+        if (actualState.getValue(SOUTH))
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTH_BOUNDING_BOX);
+        if (actualState.getValue(WEST))
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, WEST_BOUNDING_BOX);
+        if (actualState.getValue(UP))
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, UP_BOUNDING_BOX);
+        if (actualState.getValue(DOWN))
+            addCollisionBoxToList(pos, entityBox, collidingBoxes, DOWN_BOUNDING_BOX);
     }
 
     @Override
@@ -80,7 +80,7 @@ public class BlockRopeFence extends BlockRopeBase {
     @Override
     public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
         // Always return a rope when broken
-        if ( !worldIn.isRemote) {
+        if (!worldIn.isRemote) {
             ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
             InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
         }
@@ -102,12 +102,12 @@ public class BlockRopeFence extends BlockRopeBase {
     public boolean isOpaqueCube(IBlockState state) {
         return false;
     }
-    
-	@SuppressWarnings("deprecation")
-	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-		return BlockFaceShape.UNDEFINED;
-	}
+
+    @SuppressWarnings("deprecation")
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
 
     @Override
     public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side) {
@@ -119,7 +119,7 @@ public class BlockRopeFence extends BlockRopeBase {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
 //        return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || BlockHopsBush.class.isInstance(block);
         return block instanceof IBlockRope;
-        
+
     }
 
     @Override
@@ -131,22 +131,22 @@ public class BlockRopeFence extends BlockRopeBase {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    	boolean vN = canConnectRopeTo(worldIn, pos, EnumFacing.NORTH);
-    	boolean vE = canConnectRopeTo(worldIn, pos, EnumFacing.EAST);
-    	boolean vS = canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH);
-    	boolean vW = canConnectRopeTo(worldIn, pos, EnumFacing.WEST);
-    	boolean vU = canConnectRopeTo(worldIn, pos, EnumFacing.UP);
-    	boolean vD = canConnectRopeTo(worldIn, pos, EnumFacing.DOWN);
-    	
-    	if( !vN && !vE && !vS && !vW && !vU && !vD ) {
-    		vN = true;
-    		vE = true;
-    		vS = true;
-    		vW = true;
-    		vU = true;
-    		vD = true;
-    	}
-    	
+        boolean vN = canConnectRopeTo(worldIn, pos, EnumFacing.NORTH);
+        boolean vE = canConnectRopeTo(worldIn, pos, EnumFacing.EAST);
+        boolean vS = canConnectRopeTo(worldIn, pos, EnumFacing.SOUTH);
+        boolean vW = canConnectRopeTo(worldIn, pos, EnumFacing.WEST);
+        boolean vU = canConnectRopeTo(worldIn, pos, EnumFacing.UP);
+        boolean vD = canConnectRopeTo(worldIn, pos, EnumFacing.DOWN);
+
+        if (!vN && !vE && !vS && !vW && !vU && !vD) {
+            vN = true;
+            vE = true;
+            vS = true;
+            vW = true;
+            vU = true;
+            vD = true;
+        }
+
         return state.withProperty(NORTH, vN)
                 .withProperty(EAST, vE)
                 .withProperty(SOUTH, vS)
@@ -164,7 +164,7 @@ public class BlockRopeFence extends BlockRopeBase {
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState();
-}
+    }
 
     @Override
     public int getMetaFromState(IBlockState state) {

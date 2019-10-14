@@ -24,119 +24,99 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> extends ItemBlockCheeseBase<T> implements IItemTileBlock
-{
-	public ItemBlockHangingCurds(Block block, T[] typeLookup)
-	{
-		super(block, typeLookup);
-	}
+public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> extends ItemBlockCheeseBase<T> implements IItemTileBlock {
+    public ItemBlockHangingCurds(Block block, T[] typeLookup) {
+        super(block, typeLookup);
+    }
 
-	private NBTTagCompound getTileTagCompoundABS(ItemStack stack)
-	{
-		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
-		if (!tag.hasKey("te_curd_block"))
-		{
-			final NBTTagCompound curdTag = new NBTTagCompound();
-			final ICheeseType cheeseType = getTypeForVariantID(CheeseUtils.getVariantIDFromMeta(stack.getItemDamage())); // EnumCheeseType.getSafeById(EnumCheeseType.getTypeFromMeta(stack.getItemDamage()));
-			CheeseIO.writeToNBT(curdTag, cheeseType);
-			tag.setTag("te_curd_block", curdTag);
-		}
-		return tag.getCompoundTag("te_curd_block");
-	}
+    private NBTTagCompound getTileTagCompoundABS(ItemStack stack) {
+        final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
+        if (!tag.hasKey("te_curd_block")) {
+            final NBTTagCompound curdTag = new NBTTagCompound();
+            final ICheeseType cheeseType = getTypeForVariantID(CheeseUtils.getVariantIDFromMeta(stack.getItemDamage())); // EnumCheeseType.getSafeById(EnumCheeseType.getTypeFromMeta(stack.getItemDamage()));
+            CheeseIO.writeToNBT(curdTag, cheeseType);
+            tag.setTag("te_curd_block", curdTag);
+        }
+        return tag.getCompoundTag("te_curd_block");
+    }
 
-	public ICheeseType getCheeseType(ItemStack stack)
-	{
-		final NBTTagCompound tag = getTileTagCompoundABS(stack);
-		return CheeseIO.loadFromNBT(tag);
-	}
+    public ICheeseType getCheeseType(ItemStack stack) {
+        final NBTTagCompound tag = getTileTagCompoundABS(stack);
+        return CheeseIO.loadFromNBT(tag);
+    }
 
-	@Override
-	public void setTileTagCompound(ItemStack stack, NBTTagCompound tileTag)
-	{
-		final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
-		tag.setTag("te_curd_block", tileTag);
-	}
+    @Override
+    public void setTileTagCompound(ItemStack stack, NBTTagCompound tileTag) {
+        final NBTTagCompound tag = NBTHelper.openItemStackTag(stack);
+        tag.setTag("te_curd_block", tileTag);
+    }
 
-	@Override
-	public NBTTagCompound getTileTagCompound(ItemStack stack)
-	{
-		final NBTTagCompound tag = getTileTagCompoundABS(stack);
+    @Override
+    public NBTTagCompound getTileTagCompound(ItemStack stack) {
+        final NBTTagCompound tag = getTileTagCompoundABS(stack);
 /*		final ICheeseType type = getCheeseType(stack);
 		if (stack.getItemDamage() != type.getMetaForInitialStage())
 		{
 			stack.setItemDamage(type.getMetaForInitialStage());
 		} */
-		return tag;
-	}
+        return tag;
+    }
 
-	public boolean isDried(ItemStack stack)
-	{
-		final NBTTagCompound nbt = getTileTagCompound(stack);
-		if (nbt.hasKey("dried"))
-		{
-			return nbt.getBoolean("dried");
-		}
-		return false;
-	}
+    public boolean isDried(ItemStack stack) {
+        final NBTTagCompound nbt = getTileTagCompound(stack);
+        if (nbt.hasKey("dried")) {
+            return nbt.getBoolean("dried");
+        }
+        return false;
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack stack)
-	{
-		String str = super.getUnlocalizedName(stack);
-		str += "." + getCheeseType(stack).getRegistryName().getResourcePath();
-		if (isDried(stack)) str += ".dried";
-		return str;
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        String str = super.getUnlocalizedName(stack);
+        str += "." + getCheeseType(stack).getRegistryName().getResourcePath();
+        if (isDried(stack)) str += ".dried";
+        return str;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	@SuppressWarnings({"unchecked", "rawtypes"})
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
-	{
-		final NBTTagCompound nbt = getTileTagCompound(stack);
-		if (nbt.hasKey("dried") && nbt.getBoolean("dried"))
-		{
-			tooltip.add(I18n.format("grcmilk.hanging_curds.dried"));
-		}
-		else
-		{
-			final int age = nbt.getInteger("age");
-			if (age > 0)
-			{
-				final int ageMax = nbt.getInteger("age_max");
-				final int t = age * 100 / (ageMax > 0 ? ageMax : 1200);
-				tooltip.add(I18n.format("grcmilk.hanging_curds.drying.prefix") +
-					I18n.format("grcmilk.hanging_curds.drying.progress.format", t));
-			}
-		}
-		super.addInformation(stack, worldIn, tooltip, flagIn);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        final NBTTagCompound nbt = getTileTagCompound(stack);
+        if (nbt.hasKey("dried") && nbt.getBoolean("dried")) {
+            tooltip.add(I18n.format("grcmilk.hanging_curds.dried"));
+        } else {
+            final int age = nbt.getInteger("age");
+            if (age > 0) {
+                final int ageMax = nbt.getInteger("age_max");
+                final int t = age * 100 / (ageMax > 0 ? ageMax : 1200);
+                tooltip.add(I18n.format("grcmilk.hanging_curds.drying.prefix") +
+                        I18n.format("grcmilk.hanging_curds.drying.progress.format", t));
+            }
+        }
+        super.addInformation(stack, worldIn, tooltip, flagIn);
+    }
 
-	public static NBTTagCompound openNBT(ItemStack stack)
-	{
-		final Item item = stack.getItem();
-		if (item instanceof ItemBlockHangingCurds)
-		{
-			return ((ItemBlockHangingCurds)item).getTileTagCompound(stack);
-		}
-		else
-		{
-			// throw error
-		}
-		return null;
-	}
-	
+    public static NBTTagCompound openNBT(ItemStack stack) {
+        final Item item = stack.getItem();
+        if (item instanceof ItemBlockHangingCurds) {
+            return ((ItemBlockHangingCurds) item).getTileTagCompound(stack);
+        } else {
+            // throw error
+        }
+        return null;
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
-    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems)
-    {
-		if( !this.isInCreativeTab(tab) )
-			return;
+    public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
+        if (!this.isInCreativeTab(tab))
+            return;
 
-    	for( T type : getAllVariants() ) {
-    		ICheeseCurdStackFactory curdStackFactory = type.getCurdBlocks();
-    		ItemStack stack = curdStackFactory.asStack();
-    		subItems.add(stack);
-    	}
+        for (T type : getAllVariants()) {
+            ICheeseCurdStackFactory curdStackFactory = type.getCurdBlocks();
+            ItemStack stack = curdStackFactory.asStack();
+            subItems.add(stack);
+        }
     }
 }

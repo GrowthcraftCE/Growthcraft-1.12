@@ -20,7 +20,8 @@ public class GrowthcraftRiceConfig extends Configuration {
     private static final String CATEGORY_CELLAR = "growthcraft-cellar-interop";
 
 
-    private GrowthcraftRiceConfig() { }
+    private GrowthcraftRiceConfig() {
+    }
 
 
     // VALUES
@@ -56,7 +57,7 @@ public class GrowthcraftRiceConfig extends Configuration {
     }};
 
     public static List<String> ADD_GRASS_DROPS = new ArrayList<String>() {{
-       add("growthcraft_rice:rice");
+        add("growthcraft_rice:rice");
     }};
 
     public static void preInit(FMLPreInitializationEvent e) {
@@ -73,7 +74,7 @@ public class GrowthcraftRiceConfig extends Configuration {
         } catch (Exception e) {
             GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Rice!", e);
         } finally {
-            if ( configuration.hasChanged() ) {
+            if (configuration.hasChanged()) {
                 configuration.save();
             }
         }
@@ -82,14 +83,14 @@ public class GrowthcraftRiceConfig extends Configuration {
     private static void initGeneralConfig() {
 
         boneMealIgnoreLight = configuration.getBoolean(
-          "boneMealIgnoreLight",
-          CATEGORY_GENERAL,
-          boneMealIgnoreLight,
-          "Allow for bonemeal to force growth regardless of light level."
+                "boneMealIgnoreLight",
+                CATEGORY_GENERAL,
+                boneMealIgnoreLight,
+                "Allow for bonemeal to force growth regardless of light level."
         );
 
         riceGrowthMinLight = configuration.getInt(
-          "riceGrowthMinLight",
+                "riceGrowthMinLight",
                 CATEGORY_GENERAL,
                 riceGrowthMinLight,
                 1, 15,
@@ -108,7 +109,7 @@ public class GrowthcraftRiceConfig extends Configuration {
                 "fermentTime",
                 CATEGORY_GENERAL,
                 fermentTime,
-                100,4000,
+                100, 4000,
                 "General fermentation time for Growthcraft Rice Booze.");
 
         enableDiscardButton = configuration.getBoolean(
@@ -127,7 +128,7 @@ public class GrowthcraftRiceConfig extends Configuration {
         CULTIVATOR_HARVEST_TABLE = Arrays.asList(configuration.getStringList(
                 "cultivator_harvest_table",
                 CATEGORY_GENERAL,
-                CULTIVATOR_HARVEST_TABLE.toArray(new String[0]) ,
+                CULTIVATOR_HARVEST_TABLE.toArray(new String[0]),
                 "Add the item's registry name on a new line for each item you want the culivator to drop when it cultivates."));
 
         CULTIVATOR_HARVEST_TABLE_CHANCE = configuration.getInt(
@@ -146,7 +147,9 @@ public class GrowthcraftRiceConfig extends Configuration {
 
     private static void initDebugConfig() {
         logLevel = configuration.getString("logLevel", CATEGORY_GENERAL, logLevel, "Set standard logging levels. (INFO, ERROR, DEBUG)");
-        if ( logLevel.equalsIgnoreCase("debug")) { isDebug = true; }
+        if (logLevel.equalsIgnoreCase("debug")) {
+            isDebug = true;
+        }
     }
 
 }

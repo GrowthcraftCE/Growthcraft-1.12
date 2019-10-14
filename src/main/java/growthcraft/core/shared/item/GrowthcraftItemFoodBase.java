@@ -71,9 +71,9 @@ public class GrowthcraftItemFoodBase extends ItemFood {
             EntityPlayer player = (EntityPlayer) entityLiving;
 
             // Add the stats, even in creative mode
-			player.getFoodStats().addStats(this, stack);
+            player.getFoodStats().addStats(this, stack);
 
-			if (!player.capabilities.isCreativeMode) {
+            if (!player.capabilities.isCreativeMode) {
                 if (!worldIn.isRemote) {
                     stack = stack.copy();
                     final ItemStack result = ItemUtils.consumeStack(stack.splitStack(1));

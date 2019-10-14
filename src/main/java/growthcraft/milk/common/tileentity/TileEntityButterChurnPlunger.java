@@ -7,39 +7,32 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityButterChurnPlunger extends GrowthcraftTileBase implements ITickable
-{
-	@SideOnly(Side.CLIENT)
-	public float animProgress;
-	@SideOnly(Side.CLIENT)
-	public int animDir;
+public class TileEntityButterChurnPlunger extends GrowthcraftTileBase implements ITickable {
+    @SideOnly(Side.CLIENT)
+    public float animProgress;
+    @SideOnly(Side.CLIENT)
+    public int animDir;
 
-	@Override
-	public void update()
-	{
-		if (world.isRemote)
-		{
-			TileEntity master = world.getTileEntity(getPos().down());
-			if( master == null || !(master instanceof TileEntityButterChurn) )
-				return;
-			TileEntityButterChurn bcMaster = (TileEntityButterChurn)master;
-			
-			final float step = 1.0f / 5.0f;
-			if (bcMaster.getShaftState() == 0)
-			{
-				this.animDir = -1;
-			}
-			else
-			{
-				this.animDir = 1;
-			}
+    @Override
+    public void update() {
+        if (world.isRemote) {
+            TileEntity master = world.getTileEntity(getPos().down());
+            if (master == null || !(master instanceof TileEntityButterChurn))
+                return;
+            TileEntityButterChurn bcMaster = (TileEntityButterChurn) master;
 
-			if (animDir > 0 && animProgress < 1.0f || animDir < 0 && animProgress > 0)
-			{
-				this.animProgress = MathHelper.clamp(this.animProgress + step * animDir, 0.0f, 1.0f);
-			}
-		}
-	}
+            final float step = 1.0f / 5.0f;
+            if (bcMaster.getShaftState() == 0) {
+                this.animDir = -1;
+            } else {
+                this.animDir = 1;
+            }
+
+            if (animDir > 0 && animProgress < 1.0f || animDir < 0 && animProgress > 0) {
+                this.animProgress = MathHelper.clamp(this.animProgress + step * animDir, 0.0f, 1.0f);
+            }
+        }
+    }
 	
 /*
 	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)

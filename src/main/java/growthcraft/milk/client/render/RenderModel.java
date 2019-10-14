@@ -20,27 +20,27 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.client.MinecraftForgeClient;
 
 public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer<T> {
-	
-	private final IProperty<Boolean> modelProp;
-	
-	public RenderModel(IProperty<Boolean> modelProp) {
-		super();
-		this.modelProp = modelProp;
-	}
-	
-	protected boolean prepare(T te, Tessellator tessellator, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
-		BlockPos pos = te.getPos();
-		IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
-		IBlockState state = world.getBlockState(pos);
-		if( state.getBlock() != te.getBlockType() )
-			return false; // Preventing a crash on states.
-		state = state.withProperty(modelProp, true);
-		
-		BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
+
+    private final IProperty<Boolean> modelProp;
+
+    public RenderModel(IProperty<Boolean> modelProp) {
+        super();
+        this.modelProp = modelProp;
+    }
+
+    protected boolean prepare(T te, Tessellator tessellator, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
+        BlockPos pos = te.getPos();
+        IBlockAccess world = MinecraftForgeClient.getRegionRenderCache(te.getWorld(), pos);
+        IBlockState state = world.getBlockState(pos);
+        if (state.getBlock() != te.getBlockType())
+            return false; // Preventing a crash on states.
+        state = state.withProperty(modelProp, true);
+
+        BlockRendererDispatcher blockrendererdispatcher = Minecraft.getMinecraft().getBlockRendererDispatcher();
         IBakedModel capModel = blockrendererdispatcher.getModelForState(state);
-        if( capModel == null )
-        	return false; // No model.
-		
+        if (capModel == null)
+            return false; // No model.
+
         BufferBuilder renderer = tessellator.getBuffer();
         this.bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
         RenderHelper.disableStandardItemLighting();
@@ -48,12 +48,9 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
         GlStateManager.enableBlend();
         GlStateManager.disableCull();
 
-        if (Minecraft.isAmbientOcclusionEnabled())
-        {
+        if (Minecraft.isAmbientOcclusionEnabled()) {
             GlStateManager.shadeModel(GL11.GL_SMOOTH);
-        }
-        else
-        {
+        } else {
             GlStateManager.shadeModel(GL11.GL_FLAT);
         }
 
@@ -63,10 +60,10 @@ public class RenderModel<T extends TileEntity> extends TileEntitySpecialRenderer
         blockrendererdispatcher.getBlockModelRenderer().renderModel(world, capModel, state, pos, renderer, false);
 //        renderer.setTranslation(0, 0, 0);
         return true;
-	}
-	
-	protected void finish() {
+    }
+
+    protected void finish() {
         GlStateManager.enableCull();
-		RenderHelper.enableStandardItemLighting();
-	}
+        RenderHelper.enableStandardItemLighting();
+    }
 }

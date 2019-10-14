@@ -17,17 +17,17 @@ public class ItemBeesWax extends GrowthcraftItemBase {
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-		if( !this.isInCreativeTab(tab) )
-			return;
-        for ( int i = 0; i < BeesWaxTypes.values().length; i++ ) {
+        if (!this.isInCreativeTab(tab))
+            return;
+        for (int i = 0; i < BeesWaxTypes.values().length; i++) {
             subItems.add(new ItemStack(this, 1, i));
         }
     }
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-        for ( int i = 0; i < BeesWaxTypes.values().length; i++ ) {
-            if ( stack.getItemDamage() == i ) {
+        for (int i = 0; i < BeesWaxTypes.values().length; i++) {
+            if (stack.getItemDamage() == i) {
                 return this.getUnlocalizedName() + "." + BeesWaxTypes.values()[i].getName();
             } else {
                 continue;

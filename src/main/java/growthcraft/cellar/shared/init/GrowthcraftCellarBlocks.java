@@ -3,8 +3,9 @@ package growthcraft.cellar.shared.init;
 import growthcraft.core.shared.definition.BlockDefinition;
 
 public class GrowthcraftCellarBlocks {
-	
-	GrowthcraftCellarBlocks() {}
+
+    GrowthcraftCellarBlocks() {
+    }
 
     public static BlockDefinition brewKettle;
     public static BlockDefinition fermentBarrel;

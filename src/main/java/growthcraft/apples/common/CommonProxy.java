@@ -1,7 +1,7 @@
 package growthcraft.apples.common;
 
 public class CommonProxy {
-	// REVISE_TEAM
+    // REVISE_TEAM
 
     public void init() {
     }
@@ -10,17 +10,17 @@ public class CommonProxy {
         registerTileEntities();
     }
 
-	public void postInit() {
-		
-	}
-	
+    public void postInit() {
+
+    }
+
     public void registerTileEntities() {
     }
 
-	public void postRegisterItems() {
-	}
-	
-	public void registerStateMappers() {
-	}
+    public void postRegisterItems() {
+    }
+
+    public void registerStateMappers() {
+    }
 
 }

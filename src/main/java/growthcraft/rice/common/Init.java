@@ -82,7 +82,7 @@ public class Init {
         GrowthcraftRiceBlocks.riceCrop.registerItemRender();
     }
 
-    public static void  registerTileEntities() {
+    public static void registerTileEntities() {
         // TODO: register tile entities.
     }
 
@@ -91,11 +91,11 @@ public class Init {
     ////////////
 
     public static void preInitItems() {
-        GrowthcraftRiceItems.cultivator = new ItemDefinition( new ItemCultivator("cultivator"));
-        GrowthcraftRiceItems.rice = new ItemDefinition( new ItemRice("rice"));
-        GrowthcraftRiceItems.rice_ball = new ItemDefinition( new ItemRiceBall("rice_ball"));
-        GrowthcraftRiceItems.rice_cooked = new ItemDefinition( new ItemFoodRice("rice_cooked"));
-        GrowthcraftRiceItems.sakeBottle = new ItemTypeDefinition<ItemBoozeBottle>( new ItemBoozeBottle() );
+        GrowthcraftRiceItems.cultivator = new ItemDefinition(new ItemCultivator("cultivator"));
+        GrowthcraftRiceItems.rice = new ItemDefinition(new ItemRice("rice"));
+        GrowthcraftRiceItems.rice_ball = new ItemDefinition(new ItemRiceBall("rice_ball"));
+        GrowthcraftRiceItems.rice_cooked = new ItemDefinition(new ItemFoodRice("rice_cooked"));
+        GrowthcraftRiceItems.sakeBottle = new ItemTypeDefinition<ItemBoozeBottle>(new ItemBoozeBottle());
     }
 
     /**
@@ -133,9 +133,9 @@ public class Init {
 
         Iterator iterator = GrowthcraftRiceConfig.ADD_GRASS_DROPS.iterator();
         while (iterator.hasNext()) {
-            String itemRegistryName = (String)iterator.next();
+            String itemRegistryName = (String) iterator.next();
             Item item = Item.REGISTRY.getObject(new ResourceLocation(itemRegistryName));
-            if ( item != null ) {
+            if (item != null) {
                 ItemStack itemStack = new ItemStack(item);
                 MinecraftForge.addGrassSeed(itemStack, 1);
             }
@@ -208,7 +208,7 @@ public class Init {
 
     private static void registerFermentations() {
         // TODO: Implement boozeBuidlerFactory for Sake
-    	// TODO: Add configuration for brewing yield amount as it is done in grapes module
+        // TODO: Add configuration for brewing yield amount as it is done in grapes module
         final int fermentTime = GrowthcraftCellarConfig.fermentTime;
 
         final FluidStack[] fs = BoozeHelper.boozeDefintionsToFluidStacks(sakeBooze);
@@ -224,121 +224,121 @@ public class Init {
 
         // SAKE_WATER, Water and Rice in the Brew Kettle
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid())
-            .tags(BoozeTag.SAKE)
-            .brewsFrom(
-                new FluidStack(FluidRegistry.WATER, 200),
-                GrowthcraftRiceItems.rice.asStack(),
-                true,
-                TickUtils.minutes(GrowthcraftRiceConfig.brewTime),
-                new Residue(GrowthcraftRiceItems.rice_cooked.asStack(), 1.0F));
+                .tags(BoozeTag.SAKE)
+                .brewsFrom(
+                        new FluidStack(FluidRegistry.WATER, 200),
+                        GrowthcraftRiceItems.rice.asStack(),
+                        true,
+                        TickUtils.minutes(GrowthcraftRiceConfig.brewTime),
+                        new Residue(GrowthcraftRiceItems.rice_cooked.asStack(), 1.0F));
 
         // TODO: Implement Moto Sake Mash made from Sake Yeast.
         // SAKE_MASH, SAKE_WATER and Mushrooms (Koji) or Sake Yeast (Moto, Not Implemented)
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_MASH.ordinal()].getFluid())
-            .tags(BoozeTag.SAKE, BoozeTag.MASH)
-            .brewsFrom(
-                new FluidStack(GrowthcraftRiceFluids.sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid(), 250),
-                new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
-                false,
-                TickUtils.minutes(1),
-                Residue.newDefault(0.0F))
-            .brewsFrom(
-                new FluidStack(GrowthcraftRiceFluids.sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid(), 250),
-                new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
-                false,
-                TickUtils.minutes(1),
-                Residue.newDefault(0.0F));
+                .tags(BoozeTag.SAKE, BoozeTag.MASH)
+                .brewsFrom(
+                        new FluidStack(GrowthcraftRiceFluids.sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid(), 250),
+                        new ItemStack(Item.getItemFromBlock(Blocks.BROWN_MUSHROOM)),
+                        false,
+                        TickUtils.minutes(1),
+                        Residue.newDefault(0.0F))
+                .brewsFrom(
+                        new FluidStack(GrowthcraftRiceFluids.sakeBooze[SakeTypes.SAKE_WATER.ordinal()].getFluid(), 250),
+                        new ItemStack(Item.getItemFromBlock(Blocks.RED_MUSHROOM)),
+                        false,
+                        TickUtils.minutes(1),
+                        Residue.newDefault(0.0F));
 
         // SAKE_FERMENTED, Sake Mash and Nether Wort in Fermentation Barrel
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_FERMENTED.ordinal()].getFluid())
-            .tags(BoozeTag.SAKE, BoozeTag.FERMENTED)
-            .fermentsFrom(
-                fs[SakeTypes.SAKE_MASH.ordinal()],
-                new ItemStack(Items.NETHER_WART),
-                (int)(fermentTime * 0.66) )
-            .getEffect()
-            .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
-            .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(1), 0);
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED)
+                .fermentsFrom(
+                        fs[SakeTypes.SAKE_MASH.ordinal()],
+                        new ItemStack(Items.NETHER_WART),
+                        (int) (fermentTime * 0.66))
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
+                .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(1), 0);
 
         // SAKE_POTENT, SAKE_FERMENTED and Glowstone in Fermentation Barrel
         GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POTENT.ordinal()].getFluid()))
-            .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT)
-            .fermentsFrom(
-                fs[SakeTypes.SAKE_FERMENTED.ordinal()],
-                new ItemStack(Items.GLOWSTONE_DUST),
-                fermentTime)
-            .getEffect()
-            .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
-            .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(1), 1);
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT)
+                .fermentsFrom(
+                        fs[SakeTypes.SAKE_FERMENTED.ordinal()],
+                        new ItemStack(Items.GLOWSTONE_DUST),
+                        fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
+                .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(1), 1);
 
         // SAKE_EXTENDED, SAKE_FERMENTED + Redstone
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_EXTENDED.ordinal()].getFluid())
-            .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
-            .fermentsFrom(
-                fs[SakeTypes.SAKE_FERMENTED.ordinal()],
-                new ItemStack(Items.REDSTONE),
-                fermentTime)
-            .getEffect()
-            .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
-            .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
-            
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
+                .fermentsFrom(
+                        fs[SakeTypes.SAKE_FERMENTED.ordinal()],
+                        new ItemStack(Items.REDSTONE),
+                        fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
+                .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
+
         // TODO: SAKE_HYPEREXTENDED, SAKE_EXTENDED + Redstone
         GrowthcraftCellarApis.boozeBuilderFactory.create(sakeBooze[SakeTypes.SAKE_HYPEREXTENDED.ordinal()].getFluid())
-            .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
-            .fermentsFrom(
-                fs[SakeTypes.SAKE_EXTENDED.ordinal()],
-                new ItemStack(Items.REDSTONE),
-                fermentTime)
-            .getEffect()
-            .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
-            .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(8), 0);
-        
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+                .fermentsFrom(
+                        fs[SakeTypes.SAKE_EXTENDED.ordinal()],
+                        new ItemStack(Items.REDSTONE),
+                        fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
+                .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(8), 0);
+
         // TODO: SAKE_POTENT_EXTENDED, SAKE_POTENT + Redstone
         GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()].getFluid()))
-            .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.EXTENDED)
-            .fermentsFrom(
-                fs[SakeTypes.SAKE_POTENT.ordinal()],
-                new ItemStack(Items.REDSTONE),
-                fermentTime)
-            .getEffect()
-            .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
-            .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 1);
-            
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.EXTENDED)
+                .fermentsFrom(
+                        fs[SakeTypes.SAKE_POTENT.ordinal()],
+                        new ItemStack(Items.REDSTONE),
+                        fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
+                .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 1);
+
         // TODO: SAKE_POTENT_HYPEREXTENDED, SAKE_POTENT_EXTENDED + Redstone
         GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()].getFluid()))
-            .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.HYPER_EXTENDED)
-            .fermentsFrom(
-                fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()],
-                new ItemStack(Items.REDSTONE),
-                fermentTime)
-            .getEffect()
-            .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
-            .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(8), 1);
-        
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.HYPER_EXTENDED)
+                .fermentsFrom(
+                        fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()],
+                        new ItemStack(Items.REDSTONE),
+                        fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
+                .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(8), 1);
+
         // TODO: SAKE_POISONED
         GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POISONED.ordinal()].getFluid()))
-        	.tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POISONED)
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 //        	.fermentsFromFallback(fs[SakeTypes.SAKE_WATER.ordinal()], fermentTime)
 //        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_WATER.ordinal()], GrowthcraftRiceConfig.brewTime, null)		// Disabled, because it would appear strange if non alcoholic drink would turn to alcoholic drinks
 //        	.fermentsFromFallback(fs[SakeTypes.SAKE_MASH.ordinal()], fermentTime)
 //        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_MASH.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_FERMENTED.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_FERMENTED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_EXTENDED.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_EXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-        	.fermentsFromFallback(fs[SakeTypes.SAKE_POISONED.ordinal()], fermentTime)
-        		.brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POISONED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
-			.getEffect()
-				.setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
-				.createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .fermentsFromFallback(fs[SakeTypes.SAKE_FERMENTED.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_FERMENTED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .fermentsFromFallback(fs[SakeTypes.SAKE_POTENT.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .fermentsFromFallback(fs[SakeTypes.SAKE_EXTENDED.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_EXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .fermentsFromFallback(fs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_HYPEREXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .fermentsFromFallback(fs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .fermentsFromFallback(fs[SakeTypes.SAKE_POISONED.ordinal()], fermentTime)
+                .brewsFromFallback(spoilInputFs[SakeTypes.SAKE_POISONED.ordinal()], GrowthcraftRiceConfig.brewTime, null)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
+                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
 
 
     }

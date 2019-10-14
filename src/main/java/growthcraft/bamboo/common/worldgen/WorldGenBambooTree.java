@@ -23,9 +23,9 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
     }
 
     public boolean canGrow(World worldIn, BlockPos pos, int height) {
-        for ( int i = 1; i <= height; i++ ) {
+        for (int i = 1; i <= height; i++) {
             Block block = worldIn.getBlockState(pos.up(i)).getBlock();
-            if ( ! ( block instanceof BlockAir ) ) {
+            if (!(block instanceof BlockAir)) {
                 return false;
             }
         }
@@ -45,18 +45,18 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
                 for (int i = 1; i <= height; i++) {
                     worldIn.setBlockState(pos.up(i), GrowthcraftBambooBlocks.bambooStalk.getDefaultState());
 
-                    if ( i == height ) {
+                    if (i == height) {
                         // Then this is last iteration and we need to generate the leaves.
-                        spawnLeaves(worldIn, pos.up(i+1));
+                        spawnLeaves(worldIn, pos.up(i + 1));
                         spawnLeaves(worldIn, pos.up(i).north());
                         spawnLeaves(worldIn, pos.up(i).east());
                         spawnLeaves(worldIn, pos.up(i).south());
                         spawnLeaves(worldIn, pos.up(i).west());
                         // Lower ring of leaves
-                        spawnLeaves(worldIn, pos.up(i-3).north());
-                        spawnLeaves(worldIn, pos.up(i-3).east());
-                        spawnLeaves(worldIn, pos.up(i-3).south());
-                        spawnLeaves(worldIn, pos.up(i-3).west());
+                        spawnLeaves(worldIn, pos.up(i - 3).north());
+                        spawnLeaves(worldIn, pos.up(i - 3).east());
+                        spawnLeaves(worldIn, pos.up(i - 3).south());
+                        spawnLeaves(worldIn, pos.up(i - 3).west());
                     }
                 }
                 return true;
@@ -66,7 +66,7 @@ public class WorldGenBambooTree extends WorldGenAbstractTree {
     }
 
     private void spawnLeaves(World worldIn, BlockPos pos) {
-        if (worldIn.getBlockState(pos).getBlock() instanceof BlockAir ) {
+        if (worldIn.getBlockState(pos).getBlock() instanceof BlockAir) {
             worldIn.setBlockState(pos, GrowthcraftBambooBlocks.bambooLeaves.getDefaultState());
         }
     }

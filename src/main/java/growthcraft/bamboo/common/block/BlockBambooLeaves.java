@@ -35,7 +35,7 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable {
     }
 
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {CHECK_DECAY, DECAYABLE});
+        return new BlockStateContainer(this, new IProperty[]{CHECK_DECAY, DECAYABLE});
     }
 
     /**
@@ -43,8 +43,12 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable {
      */
     public int getMetaFromState(IBlockState state) {
         int i = 0;
-        if (!state.getValue(DECAYABLE) ) { i |= 4; }
-        if ( state.getValue(CHECK_DECAY) ) { i |= 8;  }
+        if (!state.getValue(DECAYABLE)) {
+            i |= 4;
+        }
+        if (state.getValue(CHECK_DECAY)) {
+            i |= 8;
+        }
         return i;
     }
 
@@ -56,11 +60,13 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable {
     }
 
     @Override
-    public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos) { return true; }
+    public boolean isShearable(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos) {
+        return true;
+    }
 
     @Override
     public List<ItemStack> onSheared(@Nonnull ItemStack item, IBlockAccess world, BlockPos pos, int fortune) {
-        return Arrays.asList(GrowthcraftBambooBlocks.bambooLeaves.getItemAsStack(1) );
+        return Arrays.asList(GrowthcraftBambooBlocks.bambooLeaves.getItemAsStack(1));
     }
 
     @SuppressWarnings("deprecation")

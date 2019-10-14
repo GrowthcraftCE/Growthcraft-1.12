@@ -13,6 +13,7 @@ import java.util.Random;
 public class BeeHiveWorldGen extends WorldGenerator {
 
     public BeeHiveWorldGen() {
+        // Do nothing ...
     }
 
     @Override
@@ -20,7 +21,7 @@ public class BeeHiveWorldGen extends WorldGenerator {
         IBlockState state = world.getBlockState(blockPos);
         IBlockState blockStateDown = world.getBlockState(blockPos.down());
 
-        if ( state.getBlock() instanceof BlockLeaves && blockStateDown.getBlock() instanceof BlockAir) {
+        if (state.getBlock() instanceof BlockLeaves && blockStateDown.getBlock() instanceof BlockAir) {
             world.setBlockState(blockPos.down(), GrowthcraftBeesBlocks.beeHive.getDefaultState());
             return true;
         }

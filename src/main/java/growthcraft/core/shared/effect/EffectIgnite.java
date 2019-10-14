@@ -11,56 +11,47 @@ import net.minecraft.world.World;
 /**
  * I set fireeeeeee to the blaaaze, okay no.
  */
-public class EffectIgnite extends AbstractEffect
-{
-	// REVISE_ME 0
-	
-	private int time;
+public class EffectIgnite extends AbstractEffect {
+    // REVISE_ME 0
 
-	public EffectIgnite(int t)
-	{
-		this.time = t;
-	}
+    private int time;
 
-	public EffectIgnite()
-	{
-		this(15);
-	}
+    public EffectIgnite(int t) {
+        this.time = t;
+    }
 
-	public int getTime()
-	{
-		return time;
-	}
+    public EffectIgnite() {
+        this(15);
+    }
 
-	public EffectIgnite setTime(int t)
-	{
-		this.time = t;
-		return this;
-	}
+    public int getTime() {
+        return time;
+    }
 
-	@Override
-	public void apply(World world, Entity entity, Random random, Object data)
-	{
-		// ???????
-		entity.extinguish();
-	}
+    public EffectIgnite setTime(int t) {
+        this.time = t;
+        return this;
+    }
 
-	@SuppressWarnings("deprecation")
-	@Override
-	protected void getActualDescription(List<String> list)
-	{
-		list.add(I18n.translateToLocalFormatted("effect.ignite.desc", time));
-	}
+    @Override
+    public void apply(World world, Entity entity, Random random, Object data) {
+        // ???????
+        entity.extinguish();
+    }
 
-	@Override
-	protected void readFromNBT(NBTTagCompound data)
-	{
-		this.time = data.getInteger("time");
-	}
+    @SuppressWarnings("deprecation")
+    @Override
+    protected void getActualDescription(List<String> list) {
+        list.add(I18n.translateToLocalFormatted("effect.ignite.desc", time));
+    }
 
-	@Override
-	protected void writeToNBT(NBTTagCompound data)
-	{
-		data.setInteger("time", time);
-	}
+    @Override
+    protected void readFromNBT(NBTTagCompound data) {
+        this.time = data.getInteger("time");
+    }
+
+    @Override
+    protected void writeToNBT(NBTTagCompound data) {
+        data.setInteger("time", time);
+    }
 }

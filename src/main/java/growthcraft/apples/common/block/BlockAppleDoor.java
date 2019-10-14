@@ -30,7 +30,13 @@ public class BlockAppleDoor extends BlockDoor {
         return GrowthcraftApplesItems.itemAppleDoor.getItem();
     }
 
+    /**
+     *      
+     *
+     * @deprecated (when, why, refactoring advice...)      
+     */
     @Override
+    @Deprecated
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return GrowthcraftApplesItems.itemAppleDoor.asStack(1);
     }

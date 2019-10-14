@@ -19,146 +19,123 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class BoozeEffect extends AbstractEffect {
-	// REVISE_ME 0
-	
-	public static class BoozeEffectList extends EffectList
-	{
-		/**
-		 * Adds the description of all the internal effects
-		 *
-		 * @param list - list to add description lines to
-		 */
-		@Override
-		public void getDescription(List<String> list)
-		{
-			for (IEffect effect : effects)
-			{
-				effect.getDescription(list);
-			}
-		}
-	}
+    // REVISE_ME 0
 
-	private EffectTipsy tipsyEffect;
-	private EffectList effects = new BoozeEffectList();
-	private Fluid booze;
+    public static class BoozeEffectList extends EffectList {
+        /**
+         * Adds the description of all the internal effects
+         *
+         * @param list - list to add description lines to
+         */
+        @Override
+        public void getDescription(List<String> list) {
+            for (IEffect effect : effects) {
+                effect.getDescription(list);
+            }
+        }
+    }
 
-	public BoozeEffect(@Nonnull Fluid flu)
-	{
-		this.booze = flu;
-	}
+    private EffectTipsy tipsyEffect;
+    private EffectList effects = new BoozeEffectList();
+    private Fluid booze;
 
-	public BoozeEffect() {}
+    public BoozeEffect(@Nonnull Fluid flu) {
+        this.booze = flu;
+    }
 
-	public BoozeEffect clearEffects()
-	{
-		effects.clear();
-		return this;
-	}
+    public BoozeEffect() {
+    }
 
-	public BoozeEffect addEffect(IEffect effect)
-	{
-		effects.add(effect);
-		return this;
-	}
+    public BoozeEffect clearEffects() {
+        effects.clear();
+        return this;
+    }
 
-	public EffectAddPotionEffect createPotionEntry(@Nonnull Potion p, int time, int level)
-	{
-		final BoozePotionEffectFactory factory = new BoozePotionEffectFactory(booze, p, time, level);
-		final EffectAddPotionEffect effect = new EffectAddPotionEffect(factory);
-		addEffect(effect);
-		return effect;
-	}
+    public BoozeEffect addEffect(IEffect effect) {
+        effects.add(effect);
+        return this;
+    }
 
-	public BoozeEffect addPotionEntry(@Nonnull Potion p, int time, int level)
-	{
-		createPotionEntry(p, time, level);
-		return this;
-	}
+    public EffectAddPotionEffect createPotionEntry(@Nonnull Potion p, int time, int level) {
+        final BoozePotionEffectFactory factory = new BoozePotionEffectFactory(booze, p, time, level);
+        final EffectAddPotionEffect effect = new EffectAddPotionEffect(factory);
+        addEffect(effect);
+        return effect;
+    }
 
-	public EffectTipsy getTipsyEffect()
-	{
-		return tipsyEffect;
-	}
+    public BoozeEffect addPotionEntry(@Nonnull Potion p, int time, int level) {
+        createPotionEntry(p, time, level);
+        return this;
+    }
 
-	public BoozeEffect setTipsyEffect(EffectTipsy tipsy)
-	{
-		this.tipsyEffect = tipsy;
-		return this;
-	}
+    public EffectTipsy getTipsyEffect() {
+        return tipsyEffect;
+    }
 
-	public BoozeEffect setTipsy(float chance, int time)
-	{
-		setTipsyEffect(new EffectTipsy().setTipsy(chance, time));
-		return this;
-	}
+    public BoozeEffect setTipsyEffect(EffectTipsy tipsy) {
+        this.tipsyEffect = tipsy;
+        return this;
+    }
 
-	public BoozeEffect clearTipsy()
-	{
-		this.tipsyEffect = null;
-		return this;
-	}
+    public BoozeEffect setTipsy(float chance, int time) {
+        setTipsyEffect(new EffectTipsy().setTipsy(chance, time));
+        return this;
+    }
 
-	public EffectList getEffects()
-	{
-		return effects;
-	}
+    public BoozeEffect clearTipsy() {
+        this.tipsyEffect = null;
+        return this;
+    }
 
-	public boolean canCauseTipsy()
-	{
-		return tipsyEffect != null && tipsyEffect.canCauseTipsy();
-	}
+    public EffectList getEffects() {
+        return effects;
+    }
 
-	public boolean hasEffects()
-	{
-		return effects.size() > 0;
-	}
+    public boolean canCauseTipsy() {
+        return tipsyEffect != null && tipsyEffect.canCauseTipsy();
+    }
 
-	public boolean isValid()
-	{
-		return canCauseTipsy() || hasEffects();
-	}
+    public boolean hasEffects() {
+        return effects.size() > 0;
+    }
 
-	@Override
-	public void apply(World world, Entity entity, Random random, Object data)
-	{
-		if (tipsyEffect != null) tipsyEffect.apply(world, entity, random, data);
-		effects.apply(world, entity, random, data);
-	}
+    public boolean isValid() {
+        return canCauseTipsy() || hasEffects();
+    }
 
-	@Override
-	protected void getActualDescription(List<String> list)
-	{
-		if (tipsyEffect != null) tipsyEffect.getDescription(list);
-		effects.getDescription(list);
-	}
+    @Override
+    public void apply(World world, Entity entity, Random random, Object data) {
+        if (tipsyEffect != null) tipsyEffect.apply(world, entity, random, data);
+        effects.apply(world, entity, random, data);
+    }
 
-	@Override
-	protected void readFromNBT(NBTTagCompound data)
-	{
-		this.booze = null;
-		this.tipsyEffect = null;
-		if (data.hasKey("tipsy_effect"))
-		{
-			this.tipsyEffect = (EffectTipsy)CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "tipsy_effect");
-		}
-		this.effects = (BoozeEffectList)CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effects");
-		if (data.hasKey("fluid.name"))
-		{
-			this.booze = FluidRegistry.getFluid(data.getString("fluid.name"));
-		}
-	}
+    @Override
+    protected void getActualDescription(List<String> list) {
+        if (tipsyEffect != null) tipsyEffect.getDescription(list);
+        effects.getDescription(list);
+    }
 
-	@Override
-	protected void writeToNBT(NBTTagCompound data)
-	{
-		if (tipsyEffect != null)
-		{
-			tipsyEffect.writeToNBT(data, "tipsy_effect");
-		}
-		effects.writeToNBT(data, "effects");
-		if (booze != null)
-		{
-			data.setString("fluid.name", booze.getName());
-		}
-	}
+    @Override
+    protected void readFromNBT(NBTTagCompound data) {
+        this.booze = null;
+        this.tipsyEffect = null;
+        if (data.hasKey("tipsy_effect")) {
+            this.tipsyEffect = (EffectTipsy) CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "tipsy_effect");
+        }
+        this.effects = (BoozeEffectList) CoreRegistry.instance().getEffectsRegistry().loadEffectFromNBT(data, "effects");
+        if (data.hasKey("fluid.name")) {
+            this.booze = FluidRegistry.getFluid(data.getString("fluid.name"));
+        }
+    }
+
+    @Override
+    protected void writeToNBT(NBTTagCompound data) {
+        if (tipsyEffect != null) {
+            tipsyEffect.writeToNBT(data, "tipsy_effect");
+        }
+        effects.writeToNBT(data, "effects");
+        if (booze != null) {
+            data.setString("fluid.name", booze.getName());
+        }
+    }
 }

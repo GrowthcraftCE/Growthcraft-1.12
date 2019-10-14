@@ -18,5 +18,5 @@ public class BlockFluidSkimMilk extends GrowthcraftBlockFluid {
         return EnumBlockRenderType.MODEL;
     }
 */
-    
+
 }

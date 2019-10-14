@@ -29,7 +29,7 @@ public class BlockAppleLog extends BlockLog {
     public IBlockState getStateFromMeta(int meta) {
         IBlockState state = this.getDefaultState();
 
-        switch (meta & 12){
+        switch (meta & 12) {
             case 0:
                 state = state.withProperty(LOG_AXIS, BlockLog.EnumAxis.Y);
                 break;
@@ -50,8 +50,7 @@ public class BlockAppleLog extends BlockLog {
     public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        switch (state.getValue(LOG_AXIS))
-        {
+        switch (state.getValue(LOG_AXIS)) {
             case Y:
                 i = 0;
                 break;
@@ -70,7 +69,7 @@ public class BlockAppleLog extends BlockLog {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] { LOG_AXIS });
+        return new BlockStateContainer(this, new IProperty[]{LOG_AXIS});
     }
 
 }

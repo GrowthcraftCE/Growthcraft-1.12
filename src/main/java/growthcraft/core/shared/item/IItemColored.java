@@ -4,6 +4,6 @@ import net.minecraft.item.ItemStack;
 
 public interface IItemColored {
 
-	int getColor(ItemStack stack);
+    int getColor(ItemStack stack);
 
 }

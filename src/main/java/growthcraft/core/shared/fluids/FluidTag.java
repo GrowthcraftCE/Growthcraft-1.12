@@ -5,33 +5,28 @@ import javax.annotation.Nonnull;
 import net.minecraft.util.text.translation.I18n;
 
 public class FluidTag {
-	// REVISE_ME 0
-	
-	private final String name;
+    // REVISE_ME 0
 
-	public FluidTag(@Nonnull String n)
-	{
-		this.name = n;
-	}
+    private final String name;
 
-	public String getName()
-	{
-		return name;
-	}
+    public FluidTag(@Nonnull String n) {
+        this.name = n;
+    }
 
-	public String getUnlocalizedName()
-	{
-		return "fluids.tag." + getName();
-	}
+    public String getName() {
+        return name;
+    }
 
-	@SuppressWarnings("deprecation")
-	public String getLocalizedName()
-	{
-		return I18n.translateToLocal(getUnlocalizedName());
-	}
+    public String getUnlocalizedName() {
+        return "fluids.tag." + getName();
+    }
 
-	public String toString()
-	{
-		return getName();
-	}
+    @SuppressWarnings("deprecation")
+    public String getLocalizedName() {
+        return I18n.translateToLocal(getUnlocalizedName());
+    }
+
+    public String toString() {
+        return getName();
+    }
 }

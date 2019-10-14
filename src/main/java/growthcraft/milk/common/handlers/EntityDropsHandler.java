@@ -12,7 +12,7 @@ public class EntityDropsHandler {
 
     @SubscribeEvent
     public void onEnityDrops(LivingDropsEvent event) {
-        if ( event.getEntityLiving() instanceof EntityCow ) {
+        if (event.getEntityLiving() instanceof EntityCow) {
             Entity eventEntity = event.getEntity();
             ItemStack itemStackStomach = GrowthcraftMilkItems.stomach.asStack();
             EntityItem entityItem = new EntityItem(eventEntity.world, eventEntity.posX, eventEntity.posY, eventEntity.posZ, itemStackStomach);

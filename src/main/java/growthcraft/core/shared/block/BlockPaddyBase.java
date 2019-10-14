@@ -18,16 +18,15 @@ import java.util.Random;
 
 /**
  * BlockPaddyBase
- *
+ * <p>
  * The BlockPaddyBase is designed to be mainly used for the BlockPaddy, which is a Rice Paddy for growing rice. There
  * could be other uses for flooding a field of FARMLAND for growing crops.
- *
+ * <p>
  * A paddy is designed to be created by activating a FARMLAND block with a Growthcraft Cultivator and then adding a
  * Fluid of choice to the paddy block. Typically we would only add water to a paddy block, but you never know what the
  * future entails (hint towards liquid uranium maybe for hyper growing crops?).
- *
+ * <p>
  * Ideally you should be able to place a FluidStack into a BlockPaddy that will in-turn "flood" the neighbor blocks.
- *
  */
 public class BlockPaddyBase extends GrowthcraftBlockBase {
 
@@ -42,19 +41,21 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
         super(material);
         this.setTickRandomly(true);
         this.setDefaultState(
-            this.blockState.getBaseState()
-                    .withProperty(MOISTURE, false)
-                    .withProperty(IS_RADIOACTIVE, false)
-                    .withProperty(NORTH, false)
-                    .withProperty(EAST, false)
-                    .withProperty(SOUTH, false)
-                    .withProperty(WEST, false)
+                this.blockState.getBaseState()
+                        .withProperty(MOISTURE, false)
+                        .withProperty(IS_RADIOACTIVE, false)
+                        .withProperty(NORTH, false)
+                        .withProperty(EAST, false)
+                        .withProperty(SOUTH, false)
+                        .withProperty(WEST, false)
         );
     }
 
     @SuppressWarnings("deprecation")
     @Override
-    public boolean isOpaqueCube(IBlockState state) { return false; }
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
 
     @SuppressWarnings("deprecation")
     @Override
@@ -75,7 +76,7 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[]{ MOISTURE, IS_RADIOACTIVE, NORTH, EAST, SOUTH, WEST });
+        return new BlockStateContainer(this, new IProperty[]{MOISTURE, IS_RADIOACTIVE, NORTH, EAST, SOUTH, WEST});
     }
 
     @SuppressWarnings("deprecation")
@@ -86,7 +87,7 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
                 .withProperty(NORTH, canConnectPaddyTo(worldIn, pos, EnumFacing.NORTH))
                 .withProperty(EAST, canConnectPaddyTo(worldIn, pos, EnumFacing.EAST))
                 .withProperty(SOUTH, canConnectPaddyTo(worldIn, pos, EnumFacing.SOUTH))
-                .withProperty(WEST, canConnectPaddyTo(worldIn,pos,EnumFacing.WEST));
+                .withProperty(WEST, canConnectPaddyTo(worldIn, pos, EnumFacing.WEST));
     }
 
     public boolean canConnectPaddyTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
@@ -102,10 +103,10 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         // Get the some current state values so that we do not have to recalculate some of them.
-        boolean isConnectedNorth = (boolean)state.getValue(NORTH);
-        boolean isConnectedEast = (boolean)state.getValue(EAST);
-        boolean isConnectedSouth = (boolean)state.getValue(SOUTH);
-        boolean isConnectedWest = (boolean)state.getValue(WEST);
+        boolean isConnectedNorth = (boolean) state.getValue(NORTH);
+        boolean isConnectedEast = (boolean) state.getValue(EAST);
+        boolean isConnectedSouth = (boolean) state.getValue(SOUTH);
+        boolean isConnectedWest = (boolean) state.getValue(WEST);
 
         if (this.hasRadioactiveSource(worldIn, pos)) {
             worldIn.setBlockState(pos, state.withProperty(MOISTURE, true)
@@ -115,7 +116,7 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
                     .withProperty(SOUTH, isConnectedSouth)
                     .withProperty(WEST, isConnectedWest), 3
             );
-        } else if ( this.hasFluidSource(worldIn, pos) ) {
+        } else if (this.hasFluidSource(worldIn, pos)) {
             worldIn.setBlockState(pos, state.withProperty(MOISTURE, true)
                     .withProperty(IS_RADIOACTIVE, false)
                     .withProperty(NORTH, isConnectedNorth)
@@ -163,7 +164,7 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
 
             // TODO: Implement CONFIG for radioactive fluid names.
             if (FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()) != null
-                && FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()).getName() == "yellorium")
+                    && FluidRegistry.lookupFluidForBlock(worldIn.getBlockState(blockpos$mutableblockpos).getBlock()).getName() == "yellorium")
                 return true;
         }
 
@@ -171,10 +172,10 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
     }
 
     public boolean isRadioactive(World worldIn, BlockPos pos) {
-        return hasRadioactiveSource((IBlockAccess)worldIn, pos);
+        return hasRadioactiveSource((IBlockAccess) worldIn, pos);
     }
 
     public boolean isMoisture(World worldIn, BlockPos pos) {
-        return hasFluidSource((IBlockAccess)worldIn, pos);
+        return hasFluidSource((IBlockAccess) worldIn, pos);
     }
 }

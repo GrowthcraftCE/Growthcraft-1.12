@@ -96,7 +96,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     public void update() {
         if (!world.isRemote) {
             world.markBlockRangeForRenderUpdate(pos, pos);
-            world.notifyBlockUpdate(pos, world.getBlockState(pos),world.getBlockState(pos),3 );
+            world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
             world.scheduleBlockUpdate(pos, getBlockType(), 0, 0);
             fermentBarrel.update();
         }

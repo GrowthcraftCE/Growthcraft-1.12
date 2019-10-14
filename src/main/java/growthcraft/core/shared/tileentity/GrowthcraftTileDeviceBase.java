@@ -24,192 +24,163 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
  */
-public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks
-{
-	private FluidTanks tanks;
+public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks {
+    private FluidTanks tanks;
 
-	public GrowthcraftTileDeviceBase()
-	{
-		super();
-		this.tanks = new FluidTanks(createTanks());
-	}
+    public GrowthcraftTileDeviceBase() {
+        super();
+        this.tanks = new FluidTanks(createTanks());
+    }
 
-	protected void markFluidDirty()
-	{
-		markDirty();
-	}
+    protected void markFluidDirty() {
+        markDirty();
+    }
 
-	protected FluidTank[] createTanks()
-	{
-		return new FluidTank[] {};
-	}
+    protected FluidTank[] createTanks() {
+        return new FluidTank[]{};
+    }
 
-	@Override
-	public boolean canFill(EnumFacing from, Fluid fluid)
-	{
-		return true;
-	}
+    @Override
+    public boolean canFill(EnumFacing from, Fluid fluid) {
+        return true;
+    }
 
-	@Override
-	public boolean canDrain(EnumFacing from, Fluid fluid)
-	{
-		return true;
-	}
+    @Override
+    public boolean canDrain(EnumFacing from, Fluid fluid) {
+        return true;
+    }
 
-	protected FluidStack doDrain(EnumFacing dir, int amount, boolean shouldDrain)
-	{
-		return null;
-	}
+    protected FluidStack doDrain(EnumFacing dir, int amount, boolean shouldDrain) {
+        return null;
+    }
 
-	protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean shouldDrain)
-	{
-		return null;
-	}
+    protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean shouldDrain) {
+        return null;
+    }
 
-	@Override
-	public FluidStack drain(EnumFacing dir, int amount, boolean shouldDrain)
-	{
-		final FluidStack result = doDrain(dir, amount, shouldDrain);
-		if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
-		return result;
-	}
+    @Override
+    public FluidStack drain(EnumFacing dir, int amount, boolean shouldDrain) {
+        final FluidStack result = doDrain(dir, amount, shouldDrain);
+        if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
+        return result;
+    }
 
-	@Override
-	public FluidStack drain(EnumFacing dir, FluidStack stack, boolean shouldDrain)
-	{
-		if (!FluidTest.isValid(stack)) return null;
-		final FluidStack result = doDrain(dir, stack, shouldDrain);
-		if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
-		return result;
-	}
+    @Override
+    public FluidStack drain(EnumFacing dir, FluidStack stack, boolean shouldDrain) {
+        if (!FluidTest.isValid(stack)) return null;
+        final FluidStack result = doDrain(dir, stack, shouldDrain);
+        if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
+        return result;
+    }
 
-	protected int doFill(EnumFacing dir, FluidStack stack, boolean shouldFill)
-	{
-		return 0;
-	}
+    protected int doFill(EnumFacing dir, FluidStack stack, boolean shouldFill) {
+        return 0;
+    }
 
-	@Override
-	public int fill(EnumFacing dir, FluidStack stack, boolean shouldFill)
-	{
-		final int result = doFill(dir, stack, shouldFill);
-		if (shouldFill && result != 0) markFluidDirty();
-		return result;
-	}
+    @Override
+    public int fill(EnumFacing dir, FluidStack stack, boolean shouldFill) {
+        final int result = doFill(dir, stack, shouldFill);
+        if (shouldFill && result != 0) markFluidDirty();
+        return result;
+    }
 
-	@Override
-	public FluidTankInfo[] getTankInfo(EnumFacing from)
-	{
-		return tanks.getTankInfo(from);
-	}
-	
-	@Override
-	public IFluidTankProperties[] getTankProperties(EnumFacing from) {
-		return tanks.getTankProperties(from);
-	}
+    @Override
+    public FluidTankInfo[] getTankInfo(EnumFacing from) {
+        return tanks.getTankInfo(from);
+    }
 
-	public IFluidTanks getTanks()
-	{
-		return tanks;
-	}
+    @Override
+    public IFluidTankProperties[] getTankProperties(EnumFacing from) {
+        return tanks.getTankProperties(from);
+    }
 
-	@Override
-	public int getTankCount()
-	{
-		return tanks.getTankCount();
-	}
+    public IFluidTanks getTanks() {
+        return tanks;
+    }
 
-	@Override
-	public FluidTank[] getFluidTanks()
-	{
-		return tanks.getFluidTanks();
-	}
+    @Override
+    public int getTankCount() {
+        return tanks.getTankCount();
+    }
 
-	@Override
-	public int getFluidAmountScaled(int scalar, int slot)
-	{
-		return tanks.getFluidAmountScaled(scalar, slot);
-	}
+    @Override
+    public FluidTank[] getFluidTanks() {
+        return tanks.getFluidTanks();
+    }
 
-	@Override
-	public float getFluidAmountRate(int slot)
-	{
-		return tanks.getFluidAmountRate(slot);
-	}
+    @Override
+    public int getFluidAmountScaled(int scalar, int slot) {
+        return tanks.getFluidAmountScaled(scalar, slot);
+    }
 
-	@Override
-	public boolean isFluidTankFilled(int slot)
-	{
-		return tanks.isFluidTankFilled(slot);
-	}
+    @Override
+    public float getFluidAmountRate(int slot) {
+        return tanks.getFluidAmountRate(slot);
+    }
 
-	@Override
-	public boolean isFluidTankFull(int slot)
-	{
-		return tanks.isFluidTankFull(slot);
-	}
+    @Override
+    public boolean isFluidTankFilled(int slot) {
+        return tanks.isFluidTankFilled(slot);
+    }
 
-	@Override
-	public boolean isFluidTankEmpty(int slot)
-	{
-		return tanks.isFluidTankEmpty(slot);
-	}
+    @Override
+    public boolean isFluidTankFull(int slot) {
+        return tanks.isFluidTankFull(slot);
+    }
 
-	@Override
-	public int getFluidAmount(int slot)
-	{
-		return tanks.getFluidAmount(slot);
-	}
+    @Override
+    public boolean isFluidTankEmpty(int slot) {
+        return tanks.isFluidTankEmpty(slot);
+    }
 
-	@Override
-	public FluidTank getFluidTank(int slot)
-	{
-		return tanks.getFluidTank(slot);
-	}
+    @Override
+    public int getFluidAmount(int slot) {
+        return tanks.getFluidAmount(slot);
+    }
 
-	@Override
-	public FluidStack getFluidStack(int slot)
-	{
-		return tanks.getFluidStack(slot);
-	}
+    @Override
+    public FluidTank getFluidTank(int slot) {
+        return tanks.getFluidTank(slot);
+    }
 
-	@Override
-	public FluidStack drainFluidTank(int slot, int amount, boolean shouldDrain)
-	{
-		final FluidStack result = tanks.drainFluidTank(slot, amount, shouldDrain);
-		if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
-		return result;
-	}
+    @Override
+    public FluidStack getFluidStack(int slot) {
+        return tanks.getFluidStack(slot);
+    }
 
-	@Override
-	public int fillFluidTank(int slot, FluidStack fluid, boolean shouldFill)
-	{
-		final int result = tanks.fillFluidTank(slot, fluid, shouldFill);
-		if (shouldFill && result != 0) markFluidDirty();
-		return result;
-	}
+    @Override
+    public FluidStack drainFluidTank(int slot, int amount, boolean shouldDrain) {
+        final FluidStack result = tanks.drainFluidTank(slot, amount, shouldDrain);
+        if (shouldDrain && FluidTest.isValid(result)) markFluidDirty();
+        return result;
+    }
 
-	@Override
-	public void setFluidStack(int slot, FluidStack stack)
-	{
-		tanks.setFluidStack(slot, stack);
-		markFluidDirty();
-	}
+    @Override
+    public int fillFluidTank(int slot, FluidStack fluid, boolean shouldFill) {
+        final int result = tanks.fillFluidTank(slot, fluid, shouldFill);
+        if (shouldFill && result != 0) markFluidDirty();
+        return result;
+    }
 
-	@Override
-	public Fluid getFluid(int slot)
-	{
-		return tanks.getFluid(slot);
-	}
+    @Override
+    public void setFluidStack(int slot, FluidStack stack) {
+        tanks.setFluidStack(slot, stack);
+        markFluidDirty();
+    }
 
-	@Override
-	public void clearTank(int slot)
-	{
-		tanks.clearTank(slot);
-		markFluidDirty();
-	}
+    @Override
+    public Fluid getFluid(int slot) {
+        return tanks.getFluid(slot);
+    }
+
+    @Override
+    public void clearTank(int slot) {
+        tanks.clearTank(slot);
+        markFluidDirty();
+    }
 
     @SuppressWarnings("unchecked")
-	@Nullable
+    @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
 
@@ -219,63 +190,55 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
                 facing = EnumFacing.UP;
             }
 
-            return (T)new FluidHandlerBlockWrapper(this, facing);
+            return (T) new FluidHandlerBlockWrapper(this, facing);
         }
-        
+
         return super.getCapability(capability, facing);
     }
-	
-	protected void readTanksFromNBT(NBTTagCompound nbt)
-	{
-		if (tanks != null)
-			tanks.readFromNBT(nbt);
-	}
 
-	@Override
-	public void readFromNBTForItem(NBTTagCompound nbt)
-	{
-		super.readFromNBTForItem(nbt);
-		readTanksFromNBT(nbt);
-	}
+    protected void readTanksFromNBT(NBTTagCompound nbt) {
+        if (tanks != null)
+            tanks.readFromNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_READ)
-	public void readFromNBT_DeviceBase(NBTTagCompound nbt)
-	{
-		readTanksFromNBT(nbt);
-	}
+    @Override
+    public void readFromNBTForItem(NBTTagCompound nbt) {
+        super.readFromNBTForItem(nbt);
+        readTanksFromNBT(nbt);
+    }
 
-	private void writeTanksToNBT(NBTTagCompound nbt)
-	{
-		if (tanks != null)
-			tanks.writeToNBT(nbt);
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
+    public void readFromNBT_DeviceBase(NBTTagCompound nbt) {
+        readTanksFromNBT(nbt);
+    }
 
-	@Override
-	public void writeToNBTForItem(NBTTagCompound nbt)
-	{
-		super.writeToNBTForItem(nbt);
-		writeTanksToNBT(nbt);
-	}
+    private void writeTanksToNBT(NBTTagCompound nbt) {
+        if (tanks != null)
+            tanks.writeToNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NBT_WRITE)
-	public void writeToNBT_DeviceBase(NBTTagCompound nbt)
-	{
-		writeTanksToNBT(nbt);
-	}
+    @Override
+    public void writeToNBTForItem(NBTTagCompound nbt) {
+        super.writeToNBTForItem(nbt);
+        writeTanksToNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_READ)
-	public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		if (tanks != null)
-			tanks.readFromStream(stream);
-		return true;
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
+    public void writeToNBT_DeviceBase(NBTTagCompound nbt) {
+        writeTanksToNBT(nbt);
+    }
 
-	@TileEventHandler(event=TileEventHandler.EventType.NETWORK_WRITE)
-	public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException
-	{
-		if (tanks != null)
-			tanks.writeToStream(stream);
-		return false;
-	}
+    @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
+    public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException {
+        if (tanks != null)
+            tanks.readFromStream(stream);
+        return true;
+    }
+
+    @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)
+    public boolean writeToStream_FluidTanks(ByteBuf stream) throws IOException {
+        if (tanks != null)
+            tanks.writeToStream(stream);
+        return false;
+    }
 }

@@ -15,7 +15,8 @@ import javax.annotation.Nullable;
 
 public class GrowthcraftRiceItems {
 
-    public GrowthcraftRiceItems() {}
+    public GrowthcraftRiceItems() {
+    }
 
     public static ItemTypeDefinition cultivator;
     public static ItemDefinition rice;

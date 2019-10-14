@@ -4,9 +4,12 @@ import net.minecraft.item.ItemStack;
 
 public interface ICheesePressRecipe {
 
-	ItemStack getInputItemStack();
-	ItemStack getOutputItemStack();
-	int getTimeMax();
-	boolean isMatchingRecipe(ItemStack stack);
+    ItemStack getInputItemStack();
+
+    ItemStack getOutputItemStack();
+
+    int getTimeMax();
+
+    boolean isMatchingRecipe(ItemStack stack);
 
 }

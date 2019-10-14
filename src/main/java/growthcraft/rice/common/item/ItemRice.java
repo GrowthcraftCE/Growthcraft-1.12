@@ -29,7 +29,7 @@ public class ItemRice extends ItemSeeds {
         IBlockState state = worldIn.getBlockState(pos);
         IBlockState stateBlockAbove = worldIn.getBlockState(pos.up());
 
-        if ( facing == EnumFacing.UP && state.getBlock() instanceof BlockPaddyBase && stateBlockAbove.getBlock() instanceof BlockAir) {
+        if (facing == EnumFacing.UP && state.getBlock() instanceof BlockPaddyBase && stateBlockAbove.getBlock() instanceof BlockAir) {
             IBlockState plantState = getPlant(worldIn, pos);
             worldIn.setBlockState(pos.up(), plantState);
             itemstack.shrink(1);

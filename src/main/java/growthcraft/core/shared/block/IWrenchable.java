@@ -9,7 +9,6 @@ import net.minecraft.world.World;
  * Interface used by PlayerInteractAmazingStick to act like a wrench,
  * use onBlockActivated instead for regular wrench actions
  */
-public interface IWrenchable
-{
-	public boolean wrenchBlock(World world, BlockPos pos, EntityPlayer player, ItemStack wrench);
+public interface IWrenchable {
+    public boolean wrenchBlock(World world, BlockPos pos, EntityPlayer player, ItemStack wrench);
 }

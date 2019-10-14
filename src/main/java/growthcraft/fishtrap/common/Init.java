@@ -18,52 +18,53 @@ import net.minecraftforge.registries.IForgeRegistry;
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
-	private Init() {}
-	
-	//////////
-	// Blocks
-	//////////
+    private Init() {
+    }
+
+    //////////
+    // Blocks
+    //////////
 
     public static void initBlocks() {
-    	GrowthcraftFishtrapBlocks.fishtrap = new BlockDefinition( new BlockFishtrap("fishtrap") );
+        GrowthcraftFishtrapBlocks.fishtrap = new BlockDefinition(new BlockFishtrap("fishtrap"));
 
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
-    	GrowthcraftFishtrapBlocks.fishtrap.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftFishtrapBlocks.fishtrap.registerBlock(registry);
+        GrowthcraftFishtrapBlocks.fishtrap.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftFishtrapBlocks.fishtrap.registerBlock(registry);
     }
-    
+
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
-    	GrowthcraftFishtrapBlocks.fishtrap.registerBlockItem(registry);
+        GrowthcraftFishtrapBlocks.fishtrap.registerBlockItem(registry);
     }
 
     @SideOnly(Side.CLIENT)
     public static void registerBlockRenders() {
-    	GrowthcraftFishtrapBlocks.fishtrap.registerItemRender();
+        GrowthcraftFishtrapBlocks.fishtrap.registerItemRender();
     }
 
     public static void registerTileEntities() {
         GameRegistry.registerTileEntity(TileEntityFishtrap.class, Reference.MODID + ":fishtrap");
     }
 
-        //////////
-	// Items
-	//////////
+    //////////
+    // Items
+    //////////
     public static void registerItemOres() {
-	    if (GrowthcraftFishtrapConfig.FISHTRAP_BAIT_TABLE.size() > 0) {
+        if (GrowthcraftFishtrapConfig.FISHTRAP_BAIT_TABLE.size() > 0) {
             GrowthcraftFishtrapConfig.FISHTRAP_BAIT_TABLE.forEach(
-                    name -> OreDictionary.registerOre("baitFishing", Item.REGISTRY.getObject( new ResourceLocation(name)))
-                    );
+                    name -> OreDictionary.registerOre("baitFishing", Item.REGISTRY.getObject(new ResourceLocation(name)))
+            );
         }
     }
-	
-	//////////
-	// Recipes
-	//////////
+
+    //////////
+    // Recipes
+    //////////
 
     private static void registerCraftingRecipes() {
-    	// TODO: RECIPE_REGISTER!
+        // TODO: RECIPE_REGISTER!
 /*
         GameRegistry.addRecipe(GrowthcraftFishtrapBlocks.fishtrap.asStack(1),
                 "ACA", "CBC", "ACA",
@@ -77,9 +78,9 @@ public class Init {
     private static void registerSmeltingRecipes() {
 
     }
-    
+
     public static void registerRecipes() {
-    	registerCraftingRecipes();
-    	registerSmeltingRecipes();
-    }	
+        registerCraftingRecipes();
+        registerSmeltingRecipes();
+    }
 }

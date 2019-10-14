@@ -12,8 +12,15 @@ import java.util.Random;
 
 public class GrowthcraftPlaySound {
 
+    private GrowthcraftPlaySound() {
+        // Do nothing at this time.
+    }
+
+    private static final Random rand = new Random();
+
     /**
      * Only play this sound if a player is within a specific range.
+     *
      * @param world
      * @param pos
      * @param soundEvent
@@ -22,18 +29,20 @@ public class GrowthcraftPlaySound {
      */
     public static void onlyNearByPlayers(World world, BlockPos pos, SoundEvent soundEvent, SoundCategory soundCategory, int range) {
 
-        Random rand = new Random();
+        List<EntityPlayer> listEntities = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(
+                pos.getX() - (double) range,
+                pos.getY() - (double) range,
+                pos.getZ() - (double) range,
+                pos.getX() + (double) range,
+                pos.getY() + (double) range,
+                pos.getZ() + (double) range));
 
-        List<EntityPlayer> listEnitities = world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.getX() - range, pos.getY() - range, pos.getZ() - range, pos.getX() + range, pos.getY() + range, pos.getZ() + range));
-
-        for (EntityPlayer player : listEnitities) {
+        for (EntityPlayer player : listEntities) {
             BlockPos playerPos = player.getPosition();
-            world.playSound((EntityPlayer)null, playerPos.getY(), playerPos.getY(), playerPos.getZ(), soundEvent, soundCategory, 10000.0F, 0.8F + rand.nextFloat() * 0.2F);
+            world.playSound((EntityPlayer) null, playerPos.getY(), playerPos.getY(), playerPos.getZ(), soundEvent, soundCategory, 10000.0F, 0.8F + rand.nextFloat() * 0.2F);
         }
 
     }
-
-
 
 
 }
