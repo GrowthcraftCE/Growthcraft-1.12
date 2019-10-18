@@ -643,6 +643,9 @@ public class Init {
                     inputItem = Items.NETHER_WART;
                     fermentOffset = 0.66F;
                     registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+                    // Mod-Compat: Forestry Milk
+                    inputFluid = new FluidStack(FluidRegistry.getFluid("milk"), 200);
+                    registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
                     break;
                 case KUMIS_POTENT:
                     outputFluid = kumisBooze[KumisTypes.KUMIS_POTENT.ordinal()].getFluid();
