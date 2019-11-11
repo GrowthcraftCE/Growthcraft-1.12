@@ -1,0 +1,28 @@
+{
+  "type": "growthcraft:shapeless_recipe_bottles_to_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_whey"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_whey"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_whey"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_whey"
+    }
+  ],
+  "result": {
+    "type": "minecraft:item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+      "FluidName": "fluid_whey",
+      "Amount": 1000
+    }
+  }
+}

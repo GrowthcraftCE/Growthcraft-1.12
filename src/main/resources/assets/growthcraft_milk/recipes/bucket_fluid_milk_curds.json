@@ -1,0 +1,28 @@
+{
+  "type": "growthcraft:shapeless_recipe_bottles_to_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_milk_curds"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_milk_curds"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_milk_curds"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_milk_curds"
+    }
+  ],
+  "result": {
+    "type": "minecraft:item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+      "FluidName": "fluid_milk_curds",
+      "Amount": 1000
+    }
+  }
+}

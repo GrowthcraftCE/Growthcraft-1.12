@@ -1,0 +1,28 @@
+{
+  "type": "growthcraft:shapeless_recipe_bottles_to_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_rennet"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_rennet"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_rennet"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_rennet"
+    }
+  ],
+  "result": {
+    "type": "minecraft:item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+      "FluidName": "fluid_rennet",
+      "Amount": 1000
+    }
+  }
+}

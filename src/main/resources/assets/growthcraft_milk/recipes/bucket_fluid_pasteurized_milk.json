@@ -1,0 +1,28 @@
+{
+  "type": "growthcraft:shapeless_recipe_bottles_to_bucket",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_pasteurized_milk"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_pasteurized_milk"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_pasteurized_milk"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_pasteurized_milk"
+    }
+  ],
+  "result": {
+    "type": "minecraft:item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+      "FluidName": "fluid_pasteurized_milk",
+      "Amount": 1000
+    }
+  }
+}
