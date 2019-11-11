@@ -2,8 +2,6 @@ package growthcraft.core.shared.crafting.recipe;
 
 import com.google.gson.JsonObject;
 import growthcraft.bees.common.crafting.recipe.ShapelessRecipeWithBucket;
-import growthcraft.core.shared.GrowthcraftLogger;
-import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -34,6 +32,7 @@ public class ShapelessRecipeContainerConversion extends ShapelessOreRecipe {
 
     /**
      * Add an empty bucket to the output of the recipe.
+     *
      * @param inv Crafting inventory grid
      * @return List of ItemStacks to return
      */
@@ -43,11 +42,11 @@ public class ShapelessRecipeContainerConversion extends ShapelessOreRecipe {
 
         for (int i = 0; i < nonnulllist.size(); ++i) {
             ItemStack itemstack = inv.getStackInSlot(i);
-            GrowthcraftLogger.getLogger(Reference.MODID).info("Remaining Items[CraftingInventory]: " + i + " " + itemstack.getUnlocalizedName());
             nonnulllist.set(i, FluidContainerRegistry.getContainerItemWithFallback(itemstack));
         }
 
-        return nonnulllist;    }
+        return nonnulllist;
+    }
 
     public static class Factory implements IRecipeFactory {
         @Override
@@ -55,7 +54,6 @@ public class ShapelessRecipeContainerConversion extends ShapelessOreRecipe {
             final String group = JsonUtils.getString(jsonObject, "group", "");
             final NonNullList<Ingredient> ingredients = UtilRecipeParser.parseShapeless(jsonContext, jsonObject);
             final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(jsonObject, "result"), jsonContext);
-            GrowthcraftLogger.getLogger(Reference.MODID).debug("Loading recipe for " + result.getItem().getRegistryName());
             return new ShapelessRecipeWithBucket(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
         }
 
