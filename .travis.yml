@@ -8,7 +8,7 @@ addons:
   sonarcloud:
     organization: "growthcraftce"
     token:
-      secure: "7486e4580da856d6cc81cb9f52ab0c1fe661ed93"
+      secure: "$SONAR_TOKEN"
 
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
