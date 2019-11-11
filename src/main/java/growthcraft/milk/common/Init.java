@@ -643,6 +643,7 @@ public class Init {
                     inputItem = Items.NETHER_WART;
                     fermentOffset = 0.66F;
                     registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
+
                     // Mod-Compat: Forestry Milk
                     if (FluidRegistry.getFluid("milk") != null ) {
                         inputFluid = new FluidStack(FluidRegistry.getFluid("milk"), 200);

@@ -16,5 +16,5 @@ item.rice.name=Rice
 item.rice_ball.name=Onigiri
 item.cultivator.name=Cultivator
 
-tile.ricepaddy.name=Rice Paddy
+tile.ricePaddy.name=Rice Paddy
 tile.ricecrop.name=Rice
