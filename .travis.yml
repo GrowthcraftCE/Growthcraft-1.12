@@ -7,8 +7,7 @@ dist: trusty
 addons:
   sonarcloud:
     organization: "growthcraftce"
-    token:
-      secure: "$SONAR_TOKEN"
+    token: $SONAR_TOKEN
 
 before_cache:
 - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
