@@ -1,5 +1,5 @@
 {
-  "type": "growthcraft:shapeless_recipe_bottles_to_bucket",
+  "type": "growthcraft:shapeless_recipe_container_conversion",
   "ingredients": [
     {
       "item": "minecraft:bucket"

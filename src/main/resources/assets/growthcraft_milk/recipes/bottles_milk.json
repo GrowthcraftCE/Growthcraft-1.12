@@ -1,6 +1,6 @@
 {
   "_comment": [ "Convert a vanilla bucket of milk into four bottles of milk." ],
-  "type": "growthcraft:shapeless_recipe_bucket_to_bottles",
+  "type": "growthcraft:shapeless_recipe_container_conversion",
   "ingredients": [
     {
       "item": "minecraft:milk_bucket"

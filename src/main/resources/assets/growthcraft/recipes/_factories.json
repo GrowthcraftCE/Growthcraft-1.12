@@ -1,6 +1,5 @@
 {
   "recipes": {
-    "shapeless_recipe_bucket_to_bottles": "growthcraft.core.shared.crafting.recipe.ShapelessRecipeBucketToBottles$Factory",
-    "shapeless_recipe_bottles_to_bucket": "growthcraft.core.shared.crafting.recipe.ShapelessRecipeBottlesToBucket$Factory"
+    "shapeless_recipe_container_conversion": "growthcraft.core.shared.crafting.recipe.ShapelessRecipeContainerConversion$Factory"
   }
 }

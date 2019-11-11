@@ -1,6 +1,6 @@
 {
   "_comment": [ "Converts four Growthcraft bottles of milk to a vanilla bucket milk." ],
-  "type": "growthcraft:shapeless_recipe_bottles_to_bucket",
+  "type": "growthcraft:shapeless_recipe_container_conversion",
   "ingredients": [
     {
       "item": "minecraft:bucket"

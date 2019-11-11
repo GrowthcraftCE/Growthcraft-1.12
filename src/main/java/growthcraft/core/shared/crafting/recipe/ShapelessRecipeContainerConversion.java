@@ -20,9 +20,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ShapelessRecipeBucketToBottles  extends ShapelessOreRecipe {
+public class ShapelessRecipeContainerConversion extends ShapelessOreRecipe {
 
-    public ShapelessRecipeBucketToBottles(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result) {
+    public ShapelessRecipeContainerConversion(@Nullable ResourceLocation group, NonNullList<Ingredient> input, @Nonnull ItemStack result) {
         super(group, input, result);
     }
 
@@ -34,8 +34,8 @@ public class ShapelessRecipeBucketToBottles  extends ShapelessOreRecipe {
 
     /**
      * Add an empty bucket to the output of the recipe.
-     * @param inv
-     * @return
+     * @param inv Crafting inventory grid
+     * @return List of ItemStacks to return
      */
     @Override
     public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inv) {
@@ -61,7 +61,5 @@ public class ShapelessRecipeBucketToBottles  extends ShapelessOreRecipe {
 
 
     }
-
-
 
 }
