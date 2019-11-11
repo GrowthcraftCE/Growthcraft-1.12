@@ -1,0 +1,28 @@
+{
+  "type": "growthcraft:shapeless_recipe_container_conversion",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_skim_milk"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_skim_milk"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_skim_milk"
+    },
+    {
+      "item": "growthcraft_milk:bottlefluid_skim_milk"
+    }
+  ],
+  "result": {
+    "type": "minecraft:item_nbt",
+    "item": "forge:bucketFilled",
+    "nbt": {
+      "FluidName": "fluid_skim_milk",
+      "Amount": 1000
+    }
+  }
+}
