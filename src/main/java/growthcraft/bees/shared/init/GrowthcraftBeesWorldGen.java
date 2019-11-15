@@ -15,9 +15,9 @@ public class GrowthcraftBeesWorldGen implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator iChunkGenerator, IChunkProvider iChunkProvider) {
-        int x = chunkX + random.nextInt(16);
-        int z = chunkX + random.nextInt(16);
-        int y = chunkX + random.nextInt(16) + 64;
+        int x = chunkX + random.nextInt(15);
+        int z = chunkX + random.nextInt(15);
+        int y = chunkX + random.nextInt(15) + 64;
 
         beeHiveWorldGen.generate(world, random, new BlockPos(x, y, z));
     }
