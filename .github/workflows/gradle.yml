@@ -19,3 +19,20 @@ jobs:
       run:  ./gradlew setupCIWorkspace
     - name: Build with Gradle
       run: ./gradlew build
+      
+  release:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+    - uses: actions/checkout@master
+    - name: Create release
+      uses: Roang-zero1/github-create-release-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create GitHub release
+      uses: Roang-zero1/github-upload-release-artifacts-action@master
+      with:
+        args:  
+        - build/libs
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
