@@ -21,7 +21,9 @@ jobs:
       run: ./gradlew build
       
   release:
+    
     runs-on: ubuntu-latest
+    
     needs: [build]
     steps:
     - uses: actions/checkout@master
@@ -34,5 +36,6 @@ jobs:
       with:
         args:  
         - build/libs
+        - build/releases
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
