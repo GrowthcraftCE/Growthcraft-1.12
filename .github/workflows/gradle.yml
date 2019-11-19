@@ -34,8 +34,6 @@ jobs:
     - name: Create GitHub release
       uses: Roang-zero1/github-upload-release-artifacts-action@master
       with:
-        args:  
-        - build/libs
-        - build/releases
+        args: build/libs
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
