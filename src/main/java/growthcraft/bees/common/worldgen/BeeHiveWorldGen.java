@@ -34,7 +34,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
         IBlockState blockStateDown = world.getBlockState(mutableBlockPos.down());
 
         if (state.getBlock() instanceof BlockLeaves && blockStateDown.getBlock() instanceof BlockAir) {
-            generateBeeHive(world, random, mutableBlockPos.down());
+            setBlockToBeeHive(world, random, mutableBlockPos.down());
         }
 
     }
@@ -45,7 +45,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
      * @param random A random seed for randomness in generating
      * @param blockPos The BlockPos of the current chunk
      */
-    private static void generateBeeHive(World world, Random random, BlockPos blockPos) {
+    private static void setBlockToBeeHive(World world, Random random, BlockPos blockPos) {
         world.setBlockState(blockPos, GrowthcraftBeesBlocks.beeHive.getDefaultState());
     }
 

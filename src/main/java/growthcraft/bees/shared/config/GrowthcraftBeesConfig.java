@@ -37,6 +37,7 @@ public class GrowthcraftBeesConfig {
     public static int honeyMeadColor = 0xA3610C;
 
     public static boolean worldgenBeeHive = true;
+    public static int worldgenBeeHiveRarity = 10;
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();
@@ -128,6 +129,15 @@ public class GrowthcraftBeesConfig {
                 CATEGORY_BEEHIVE,
                 worldgenBeeHive,
                 "Generate BeeHives in the world."
+        );
+
+        worldgenBeeHiveRarity = configuration.getInt(
+                "beeHiveRarity",
+                CATEGORY_BEEHIVE,
+                worldgenBeeHiveRarity,
+                0,
+                100,
+                "Rarity of BeeHive generation. Higher the value, more likely it will generate in chunk."
         );
 
     }
