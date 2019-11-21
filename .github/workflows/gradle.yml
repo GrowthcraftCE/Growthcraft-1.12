@@ -1,10 +1,11 @@
-name: Build Growthcraft
+name: Growthcraft
 
 on: [push]
 
 jobs:
   build:
 
+    name: Build Growthcraft
     runs-on: ubuntu-latest
 
     steps:
@@ -19,9 +20,12 @@ jobs:
       run:  ./gradlew setupCIWorkspace
     - name: Build with Gradle
       run: ./gradlew build
-      
+    - name: SonarCloud Analysis
+      run: ./sonar-scanner
+        
   release:
     
+    name: Release on Tag
     runs-on: ubuntu-latest
     
     needs: [build]
