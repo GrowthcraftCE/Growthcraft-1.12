@@ -21,7 +21,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
     - name: SonarCloud Analysis
-      run: ./sonar-scanner
+      run: ./gradlew sonarqube -Dsonar.host.url=https://sonarcloud.io
         
   release:
     
