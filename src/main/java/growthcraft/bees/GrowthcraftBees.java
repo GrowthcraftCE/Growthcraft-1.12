@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
         dependencies = "required-after:" + growthcraft.cellar.shared.Reference.MODID)
@@ -43,10 +44,12 @@ public class GrowthcraftBees {
     public static final UserBeesConfig userBeesConfig = new UserBeesConfig();
     public static final UserFlowersConfig userFlowersConfig = new UserFlowersConfig();
 
+    public static Logger logger;
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
         GrowthcraftBeesConfig.preInit(event);
+        logger = event.getModLog();
 
         Init.preInitItems();
         Init.preInitBlocks();

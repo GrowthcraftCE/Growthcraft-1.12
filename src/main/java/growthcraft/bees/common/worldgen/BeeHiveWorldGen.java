@@ -1,15 +1,16 @@
 package growthcraft.bees.common.worldgen;
 
+import growthcraft.bees.GrowthcraftBees;
+import growthcraft.bees.shared.config.GrowthcraftBeesConfig;
 import growthcraft.bees.shared.init.GrowthcraftBeesBlocks;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
-import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
 import java.util.Random;
@@ -18,25 +19,64 @@ public class BeeHiveWorldGen implements IWorldGenerator {
 
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator iChunkGenerator, IChunkProvider iChunkProvider) {
-        final BlockPos.MutableBlockPos mutableBlockPos = new BlockPos.MutableBlockPos();
-        BlockPos chunk = new BlockPos(chunkX, 0, chunkZ);
+        final MutableBlockPos mutableBlockPos = new MutableBlockPos();
 
-        if(!isValidBiome(world, chunk)) {
+        BlockPos chunkCenterPos = new BlockPos(
+                chunkX * 16 + 8,
+                world.getHeight(chunkX * 16 + 8, chunkZ * 16 + 8),
+                chunkZ * 16 + 8);
+
+        BlockPos chunkNorthWest = new BlockPos(
+                chunkX * 16 + 4,
+                world.getHeight(chunkX * 16 + 2, chunkZ * 16 + 2),
+                chunkZ * 16 + 4);
+
+        BlockPos chunkSouthEast = new BlockPos(
+                chunkX * 16 + 12,
+                world.getHeight(chunkX * 16 + 8, chunkZ * 16 + 8),
+                chunkZ * 16 + 12);
+
+        if(!isValidBiome(world, chunkCenterPos)) {
             return;
         }
 
-        int x = chunk.getX() + random.nextInt(16);
-        int z = chunk.getZ() + random.nextInt(16);
-        int y = world.getHeight(x, z) - 1;
+        // Check for randomness to generate a beehive in this chunk or not.
+        if(random.nextInt(100) <= GrowthcraftBeesConfig.worldgenBeeHiveRarity) {
+            int spawnedBeeHive = 0;
 
-        mutableBlockPos.setPos(x, y, z);
-        IBlockState state = world.getBlockState(mutableBlockPos);
-        IBlockState blockStateDown = world.getBlockState(mutableBlockPos.down());
+            mutableBlockPos.setPos(chunkCenterPos.getX(), chunkCenterPos.getY(), chunkCenterPos.getZ());
+            IBlockState state = world.getBlockState(mutableBlockPos.down());
 
-        if (state.getBlock() instanceof BlockLeaves && blockStateDown.getBlock() instanceof BlockAir) {
-            setBlockToBeeHive(world, random, mutableBlockPos.down());
+            if ( GrowthcraftBeesConfig.isDebug) {
+                GrowthcraftBees.logger.warn(
+                        String.format(
+                                "[DEBUG] Checking blocks in chunk [ %d, %d ] for generating BeeHive at [x = %d, y = %d, z = %d] %s",
+                                chunkX,
+                                chunkZ,
+                                mutableBlockPos.getX(),
+                                mutableBlockPos.getY(),
+                                mutableBlockPos.getZ(),
+                                state.getBlock().getRegistryName()
+                        )
+                );
+            }
+
+            // Get an area of blocks to check for leaves to spawn the beeHives
+            Iterable<BlockPos> blocksInArea = BlockPos.getAllInBox(chunkNorthWest, chunkSouthEast);
+
+            for ( BlockPos pos : blocksInArea ) {
+                IBlockState blockState = world.getBlockState(pos);
+                if ( blockState.getBlock() instanceof BlockLeaves
+                        && world.getBlockState(pos.down()).getBlock() instanceof BlockAir ) {
+                    setBlockToBeeHive(world, random, pos.down());
+                    spawnedBeeHive++;
+                }
+                if ( spawnedBeeHive >= GrowthcraftBeesConfig.maxBeeHivesPerChunk ) {
+                    break;
+                }
+            }
+
         }
-
     }
 
     /**
@@ -46,6 +86,10 @@ public class BeeHiveWorldGen implements IWorldGenerator {
      * @param blockPos The BlockPos of the current chunk
      */
     private static void setBlockToBeeHive(World world, Random random, BlockPos blockPos) {
+        if ( GrowthcraftBeesConfig.isDebug) {
+            GrowthcraftBees.logger
+                    .error(String.format("[DEBUG] Generating beehive at %d %d %d", blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+        }
         world.setBlockState(blockPos, GrowthcraftBeesBlocks.beeHive.getDefaultState());
     }
 
@@ -57,8 +101,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
      * @return
      */
     private static boolean isValidBiome(World world, BlockPos chunk) {
-        final Biome biome = world.getBiomeForCoordsBody(new BlockPos(chunk.getX(), chunk.getY(), chunk.getZ()));
-        return (BiomeDictionary.hasType(biome, BiomeDictionary.Type.END) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER));
+        return (world.provider.getDimension() == 0);
     }
 
 }
