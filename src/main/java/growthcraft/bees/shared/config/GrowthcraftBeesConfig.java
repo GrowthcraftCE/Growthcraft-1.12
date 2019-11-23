@@ -37,6 +37,9 @@ public class GrowthcraftBeesConfig {
     public static int honeyMeadColor = 0xA3610C;
 
     public static boolean worldgenBeeHive = true;
+    public static int worldgenBeeHiveRarity = 10;
+    public static int worldGenBeeHiveRadius = 4;
+    public static int maxBeeHivesPerChunk = 4;
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();
@@ -128,6 +131,32 @@ public class GrowthcraftBeesConfig {
                 CATEGORY_BEEHIVE,
                 worldgenBeeHive,
                 "Generate BeeHives in the world."
+        );
+
+        worldgenBeeHiveRarity = configuration.getInt(
+                "beeHiveRarity",
+                CATEGORY_BEEHIVE,
+                worldgenBeeHiveRarity,
+                0,
+                100,
+                "Rarity of BeeHive generation. Higher the value, more likely it will generate in chunk."
+        );
+
+        worldGenBeeHiveRadius = configuration.getInt(
+                "worldGenBeeHiveRadius",
+                CATEGORY_BEEHIVE,
+                worldGenBeeHiveRadius,
+                1,
+                7,
+                "Maximum radius from the center of the chunk that a beeHive will be generated."
+        );
+        maxBeeHivesPerChunk = configuration.getInt(
+                "maxBeeHivesPerChunk",
+                CATEGORY_BEEHIVE,
+                maxBeeHivesPerChunk,
+                1,
+                16,
+                "Maximum number of beeHives that will be generated per chunk."
         );
 
     }

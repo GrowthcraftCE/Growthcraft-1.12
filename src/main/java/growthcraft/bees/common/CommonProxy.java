@@ -1,7 +1,7 @@
 package growthcraft.bees.common;
 
 import growthcraft.bees.shared.config.GrowthcraftBeesConfig;
-import growthcraft.bees.shared.init.GrowthcraftBeesWorldGen;
+import growthcraft.bees.common.worldgen.BeeHiveWorldGen;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -9,7 +9,7 @@ public class CommonProxy {
 
     public void init() {
         if (GrowthcraftBeesConfig.worldgenBeeHive) {
-            GameRegistry.registerWorldGenerator(new GrowthcraftBeesWorldGen(), 0);
+            GameRegistry.registerWorldGenerator(new BeeHiveWorldGen(), 0);
         }
     }
 
