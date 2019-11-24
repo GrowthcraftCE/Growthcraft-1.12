@@ -37,9 +37,9 @@ public class GrowthcraftBeesConfig {
     public static int honeyMeadColor = 0xA3610C;
 
     public static boolean worldgenBeeHive = true;
-    public static int worldgenBeeHiveRarity = 10;
-    public static int worldGenBeeHiveRadius = 4;
-    public static int maxBeeHivesPerChunk = 4;
+    public static int worldgenBeeHiveRarity = 3;
+    public static int worldGenBeeHiveRadius = 6;
+    public static int maxBeeHivesPerChunk = 1;
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();

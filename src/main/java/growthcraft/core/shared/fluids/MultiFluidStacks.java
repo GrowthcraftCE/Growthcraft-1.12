@@ -1,16 +1,15 @@
 package growthcraft.core.shared.fluids;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MultiFluidStacks implements IMultiFluidStacks {
     private List<FluidStack> fluidStacks;
@@ -37,10 +36,8 @@ public class MultiFluidStacks implements IMultiFluidStacks {
 
     @Override
     public int getAmount() {
-        for (FluidStack stack : fluidStacks) {
-            return stack.amount;
-        }
-        return 0;
+        // Resturn the amount in the first fluid stack.
+        return fluidStacks.get(0).amount > 0 ? fluidStacks.get(0).amount : 0;
     }
 
     @Override

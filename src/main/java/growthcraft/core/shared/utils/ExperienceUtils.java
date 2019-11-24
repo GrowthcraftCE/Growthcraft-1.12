@@ -4,7 +4,11 @@ import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.MathHelper;
 
+import java.util.Random;
+
 public class ExperienceUtils {
+    private static Random random = new Random();
+
     private ExperienceUtils() {
     }
 
@@ -16,7 +20,7 @@ public class ExperienceUtils {
         } else if (exp < 1.0F) {
             j = MathHelper.floor((float) amount * exp);
 
-            if (j < MathHelper.ceil((float) amount * exp) && (float) Math.random() < (float) amount * exp - (float) j) {
+            if (j < MathHelper.ceil((float) amount * exp) && (float) random.nextDouble() < (float) amount * exp - (float) j) {
                 ++j;
             }
 

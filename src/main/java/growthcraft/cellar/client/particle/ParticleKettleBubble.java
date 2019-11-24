@@ -12,8 +12,12 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.Random;
+
 @SideOnly(Side.CLIENT)
 public class ParticleKettleBubble extends Particle {
+    private static Random random = new Random();
+
     private final BlockPos originPos;
     private final FluidTanksParams params;
 
@@ -42,15 +46,17 @@ public class ParticleKettleBubble extends Particle {
         this.setParticleTextureIndex(32);
         this.setSize(0.02F, 0.02F);
         this.particleScale *= this.rand.nextFloat() * 0.3F + 0.2F;
-        this.motionX = xSpeedIn * 0.20000000298023224D + (Math.random() * 2.0D - 1.0D) * 0.019999999552965164D;
-        this.motionY = ySpeedIn * 0.20000000298023224D + (Math.random() * 2.0D - 1.0D) * 0.019999999552965164D;
-        this.motionZ = zSpeedIn * 0.20000000298023224D + (Math.random() * 2.0D - 1.0D) * 0.019999999552965164D;
-        this.particleMaxAge = (int) (8.0D / (Math.random() * 0.8D + 0.2D));
+        this.motionX = xSpeedIn * 0.20000000298023224D + (random.nextDouble() * 2.0D - 1.0D) * 0.019999999552965164D;
+        this.motionY = ySpeedIn * 0.20000000298023224D + (random.nextDouble() * 2.0D - 1.0D) * 0.019999999552965164D;
+        this.motionZ = zSpeedIn * 0.20000000298023224D + (random.nextDouble() * 2.0D - 1.0D) * 0.019999999552965164D;
+        this.particleMaxAge = random.nextInt((8 - 2)+1) ;
+
 
         this.originPos = new BlockPos(this.posX, this.posY, this.posZ);
         this.params = params;
     }
 
+    @Override
     public void onUpdate() {
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;

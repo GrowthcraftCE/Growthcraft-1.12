@@ -1,12 +1,17 @@
 package growthcraft.cellar.common.lib.network;
 
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.INetHandler;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.NetHandlerPlayServer;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.FMLEmbeddedChannel;
 import net.minecraftforge.fml.common.network.FMLOutboundHandler;
@@ -15,17 +20,7 @@ import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumMap;
-import java.util.LinkedList;
-import java.util.List;
-
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.Unpooled;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
+import java.util.*;
 
 @ChannelHandler.Sharable
 public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, AbstractPacket> {
@@ -93,7 +88,7 @@ public class PacketPipeline extends MessageToMessageCodec<FMLProxyPacket, Abstra
             throw new NullPointerException("No packet registered for discriminator: " + discriminator);
         }
 
-        final AbstractPacket pkt = clazz.newInstance();
+        final AbstractPacket pkt = clazz.newInstance(); //NOSONAR
         pkt.decodeInto(ctx, payload.slice());
 
         EntityPlayer player;
