@@ -32,7 +32,7 @@ public class ParticleDrop extends Particle {
         setSize(0.01F, 0.01F);
         this.particleGravity = 0.06F;
         this.bobTimer = 40;
-        this.particleMaxAge = (int) (64.0D / (random.nextDouble() * 0.8D + 0.2D));
+        this.particleMaxAge = random.nextInt((320 - 64)+1);
         this.motionX = 0.0D;
         this.motionY = 0.0D;
         this.motionZ = 0.0D;

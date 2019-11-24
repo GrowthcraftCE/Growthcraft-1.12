@@ -59,7 +59,7 @@ public class AbstractClassRegistry<T extends INBTSerializableContext> {
 
         // This should be a utility method in the future or something, its used so much now...
         try {
-            instance = klass.newInstance();
+            instance = klass.newInstance(); //NOSONAR
         } catch (InstantiationException e) {
             throw new IllegalStateException("Failed to create a new instance of an illegal class " + klass, e);
         } catch (IllegalAccessException e) {

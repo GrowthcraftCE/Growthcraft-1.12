@@ -1,12 +1,5 @@
 package growthcraft.core.shared.block;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.events.EventTankDrained;
@@ -22,8 +15,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -45,6 +36,12 @@ import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase implements IDroppableBlock, IWrenchable, ITileEntityProvider {
     protected Random rand = new Random();
@@ -81,7 +78,6 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
     }
 
     protected void fellBlockFromWrench(World world, BlockPos pos) {
-//		final int metadata = world.getBlockMetadata(pos);
         final IBlockState state = world.getBlockState(pos);
         final List<ItemStack> drops = new ArrayList<ItemStack>();
         if (shouldDropTileStack(world, pos, state, 0)) {
@@ -384,7 +380,7 @@ public abstract class GrowthcraftBlockContainer extends GrowthcraftBlockBase imp
     public TileEntity createNewTileEntity(World world, int unused) {
         if (tileEntityType != null) {
             try {
-                return tileEntityType.newInstance();
+                return tileEntityType.newInstance(); //NOSONAR
             } catch (InstantiationException e) {
                 throw new IllegalStateException("Failed to create a new instance of an illegal class " + this.tileEntityType, e);
             } catch (IllegalAccessException e) {

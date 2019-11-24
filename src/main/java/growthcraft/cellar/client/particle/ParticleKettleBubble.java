@@ -49,7 +49,8 @@ public class ParticleKettleBubble extends Particle {
         this.motionX = xSpeedIn * 0.20000000298023224D + (random.nextDouble() * 2.0D - 1.0D) * 0.019999999552965164D;
         this.motionY = ySpeedIn * 0.20000000298023224D + (random.nextDouble() * 2.0D - 1.0D) * 0.019999999552965164D;
         this.motionZ = zSpeedIn * 0.20000000298023224D + (random.nextDouble() * 2.0D - 1.0D) * 0.019999999552965164D;
-        this.particleMaxAge = (int) (8.0D / (random.nextDouble() * 0.8D + 0.2D));
+        this.particleMaxAge = random.nextInt((8 - 2)+1) ;
+
 
         this.originPos = new BlockPos(this.posX, this.posY, this.posZ);
         this.params = params;
