@@ -7,12 +7,15 @@ import net.minecraft.client.particle.Particle;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 @SideOnly(Side.CLIENT)
 public class ParticleDrop extends Particle {
+    private static Random random = new Random();
     /**
      * The height of the current bob
      */
@@ -29,7 +32,7 @@ public class ParticleDrop extends Particle {
         setSize(0.01F, 0.01F);
         this.particleGravity = 0.06F;
         this.bobTimer = 40;
-        this.particleMaxAge = (int) (64.0D / (Math.random() * 0.8D + 0.2D));
+        this.particleMaxAge = (int) (64.0D / (random.nextDouble() * 0.8D + 0.2D));
         this.motionX = 0.0D;
         this.motionY = 0.0D;
         this.motionZ = 0.0D;

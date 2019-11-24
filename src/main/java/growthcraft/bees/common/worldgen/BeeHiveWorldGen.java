@@ -12,6 +12,7 @@ import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
+import org.apache.logging.log4j.Level;
 
 import java.util.Random;
 
@@ -36,7 +37,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
                 world.getHeight(chunkX * 16 + 8, chunkZ * 16 + 8),
                 chunkZ * 16 + 12);
 
-        if(!isValidBiome(world, chunkCenterPos)) {
+        if(!isValidBiome(world)) {
             return;
         }
 
@@ -48,8 +49,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
             IBlockState state = world.getBlockState(mutableBlockPos.down());
 
             if ( GrowthcraftBeesConfig.isDebug) {
-                GrowthcraftBees.logger.warn(
-                        String.format(
+                GrowthcraftBees.logger.log(Level.DEBUG,
                                 "[DEBUG] Checking blocks in chunk [ %d, %d ] for generating BeeHive at [x = %d, y = %d, z = %d] %s",
                                 chunkX,
                                 chunkZ,
@@ -57,7 +57,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
                                 mutableBlockPos.getY(),
                                 mutableBlockPos.getZ(),
                                 state.getBlock().getRegistryName()
-                        )
+
                 );
             }
 
@@ -68,7 +68,7 @@ public class BeeHiveWorldGen implements IWorldGenerator {
                 IBlockState blockState = world.getBlockState(pos);
                 if ( blockState.getBlock() instanceof BlockLeaves
                         && world.getBlockState(pos.down()).getBlock() instanceof BlockAir ) {
-                    setBlockToBeeHive(world, random, pos.down());
+                    setBlockToBeeHive(world, pos.down());
                     spawnedBeeHive++;
                 }
                 if ( spawnedBeeHive >= GrowthcraftBeesConfig.maxBeeHivesPerChunk ) {
@@ -82,13 +82,11 @@ public class BeeHiveWorldGen implements IWorldGenerator {
     /**
      * Attempt to generate a beehive.
      * @param world The current world instance
-     * @param random A random seed for randomness in generating
      * @param blockPos The BlockPos of the current chunk
      */
-    private static void setBlockToBeeHive(World world, Random random, BlockPos blockPos) {
+    private static void setBlockToBeeHive(World world, BlockPos blockPos) {
         if ( GrowthcraftBeesConfig.isDebug) {
-            GrowthcraftBees.logger
-                    .error(String.format("[DEBUG] Generating beehive at %d %d %d", blockPos.getX(), blockPos.getY(), blockPos.getZ()));
+            GrowthcraftBees.logger.log(Level.DEBUG, "Generating beehive at %d %d %d ", blockPos.getX(), blockPos.getY(), blockPos.getZ());
         }
         world.setBlockState(blockPos, GrowthcraftBeesBlocks.beeHive.getDefaultState());
     }
@@ -96,11 +94,9 @@ public class BeeHiveWorldGen implements IWorldGenerator {
     /**
      * Determine if the current biome is fit for generating bee hives.
      * @param world The current world instance
-     * @param chunkX
-     * @param chunkZ
      * @return
      */
-    private static boolean isValidBiome(World world, BlockPos chunk) {
+    private static boolean isValidBiome(World world) {
         return (world.provider.getDimension() == 0);
     }
 
