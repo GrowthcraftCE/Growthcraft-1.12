@@ -13,4 +13,9 @@ public class GrowthcraftCellarBlocks {
     public static BlockDefinition fruitPress;
     public static BlockDefinition fruitPresser;
 
+    public static BlockDefinition blockCorkLog;
+    public static BlockDefinition blockCorkLogStripped;
+    public static BlockDefinition blockCorkLeaves;
+    public static BlockDefinition blockCorkSapling;
+
 }

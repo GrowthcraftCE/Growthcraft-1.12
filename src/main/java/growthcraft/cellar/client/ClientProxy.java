@@ -26,6 +26,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init() {
         super.init();
+        Init.registerBlockColorHandlers();
         registerSpecialRenders();
         GrowthcraftCellar.guiProvider.register("growthcraft_cellar:fruit_press", GuiFruitPress.class);
         GrowthcraftCellar.guiProvider.register("growthcraft_cellar:brew_kettle", GuiBrewKettle.class);
