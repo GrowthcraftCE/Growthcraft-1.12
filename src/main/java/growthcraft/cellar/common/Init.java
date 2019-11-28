@@ -20,15 +20,18 @@ import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.shared.processing.heatsource.user.UserHeatSourceEntry;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.definition.BlockDefinition;
+import growthcraft.core.shared.definition.BlockTypeDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.effect.EffectRegistry;
 import growthcraft.core.shared.handlers.BlockColorHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -54,7 +57,7 @@ public class Init {
         GrowthcraftCellarBlocks.fruitPresser = new BlockDefinition(new BlockFruitPresser("fruit_presser"));
         GrowthcraftCellarBlocks.blockCorkLog = new BlockDefinition(new BlockCorkLog("cork_log"));
         GrowthcraftCellarBlocks.blockCorkLogStripped = new BlockDefinition(new BlockCorkLogStripped("cork_log_stripped"));
-        GrowthcraftCellarBlocks.blockCorkLeaves = new BlockDefinition( new BlockCorkLeaves("cork_leaves"));
+        GrowthcraftCellarBlocks.blockCorkLeaves = new BlockTypeDefinition<BlockCorkLeaves>( new BlockCorkLeaves("cork_leaves"));
 
     }
 
@@ -128,6 +131,10 @@ public class Init {
         GameRegistry.registerTileEntity(TileEntityFruitPresser.class, Reference.MODID + ":fruit_presser");
     }
 
+    @SideOnly(Side.CLIENT)
+    public static void setCustomBlockStateMappers() {
+        ModelLoader.setCustomStateMapper(GrowthcraftCellarBlocks.blockCorkLeaves.getBlock(), (new StateMap.Builder().ignore(BlockCorkLeaves.DECAYABLE, BlockCorkLeaves.CHECK_DECAY)).build());
+    }
     ///////////
     // Items
     ///////////

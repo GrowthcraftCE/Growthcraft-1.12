@@ -50,6 +50,7 @@ gui.grc.switch=Switch Tanks
 
 # Tile Entities
 tile.brew_kettle.name=Brew Kettle
+tile.cork_leaves.name=Cork Leaves
 tile.cork_log.name=Cork Wood
 tile.cork_log_stripped.name=Cork Wood (Stripped)
 tile.culture_jar.name=Culture Jar

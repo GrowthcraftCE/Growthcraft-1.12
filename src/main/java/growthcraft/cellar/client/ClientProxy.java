@@ -38,6 +38,11 @@ public class ClientProxy extends CommonProxy {
         GrowthcraftCellarItems.yeast.registerModelBakeryVariants(EnumYeast.class);
     }
 
+    @Override
+    public void registerStateMappers() {
+        Init.setCustomBlockStateMappers();
+    }
+
     public void registerSpecialRenders() {
         Init.registerBlockSpecialRenders();
     }

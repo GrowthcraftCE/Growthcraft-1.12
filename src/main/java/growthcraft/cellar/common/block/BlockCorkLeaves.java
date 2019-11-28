@@ -78,11 +78,11 @@ public class BlockCorkLeaves extends BlockLeaves implements IShearable {
     public int getMetaFromState(IBlockState state) {
         int i = 0;
 
-        if ( !(state.getValue(DECAYABLE)).booleanValue() ) {
+        if (!((Boolean) state.getValue(DECAYABLE)).booleanValue()) {
             i |= 4;
         }
 
-        if ( (state.getValue(CHECK_DECAY)).booleanValue() ) {
+        if (((Boolean) state.getValue(CHECK_DECAY)).booleanValue()) {
             i |= 8;
         }
 
@@ -137,8 +137,6 @@ public class BlockCorkLeaves extends BlockLeaves implements IShearable {
 
     @Override
     public void harvestBlock(World worldIn, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        // SYNC: Copied from net.minecraft.block.BlockOldLeaf.harvestBlock() . Keep in sync with it on changes.
-
         if (!worldIn.isRemote && stack.getItem() == Items.SHEARS) {
             player.addStat(StatList.getBlockStats(this));
         } else {
