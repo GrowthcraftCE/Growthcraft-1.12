@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Random;
 
 public class BlockCorkLogStripped extends GrowthcraftBlockLog {
 
@@ -48,5 +49,11 @@ public class BlockCorkLogStripped extends GrowthcraftBlockLog {
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
         addCollisionBoxToList(pos, entityBox, collidingBoxes, AABB_FULL_BLOCK);
+    }
+
+    @Override
+    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
+        super.updateTick(worldIn, pos, state, rand);
+        // Need to check for randomness and rate of bark regrowth.
     }
 }

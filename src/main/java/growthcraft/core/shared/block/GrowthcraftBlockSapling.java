@@ -18,9 +18,9 @@ import net.minecraftforge.common.ForgeHooks;
 import java.util.Random;
 
 public class GrowthcraftBlockSapling extends BlockBush implements IGrowable {
-    public static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
+    private static final PropertyInteger STAGE = PropertyInteger.create("stage", 0, 1);
 
-    protected static AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+    private static AxisAlignedBB boundingBox = new AxisAlignedBB(
             0.09999999403953552D, 0.0D, 0.09999999403953552D,
             0.8999999761481421D, 0.800000011920929D, 0.8999999761481421D
     );
@@ -34,17 +34,15 @@ public class GrowthcraftBlockSapling extends BlockBush implements IGrowable {
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDING_BOX;
+        return boundingBox;
     }
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         super.updateTick(worldIn, pos, state, rand);
-        if (worldIn.getLightFromNeighbors(pos.up()) >= 9) {
-            if (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0)) {
-                grow(worldIn, rand, pos, state);
-                ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
-            }
+        if ((worldIn.getLightFromNeighbors(pos.up()) >= 9) && (ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextInt(7) == 0))) {
+            grow(worldIn, rand, pos, state);
+            ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
         }
     }
 

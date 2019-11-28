@@ -189,6 +189,7 @@ public class BlockApple extends BlockBush implements ICropDataProvider, IGrowabl
         return (float) getAge(state) / 7.0F;
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(Items.APPLE);

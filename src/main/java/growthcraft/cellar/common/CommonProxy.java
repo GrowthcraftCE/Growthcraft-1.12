@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 public class CommonProxy {
 
     public void preInit() {
+        // Nothing to do here at this time.
     }
 
     public void init() {
@@ -20,9 +21,11 @@ public class CommonProxy {
     }
 
     public void postRegisterItems() {
+        // Nothing to do here at this time.
     }
 
     public void registerStateMappers() {
+        // Nothing to do here at this time.
     }
 
 }

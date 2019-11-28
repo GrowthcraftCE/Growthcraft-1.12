@@ -8,12 +8,17 @@ import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.biome.BiomeColorHelper;
 
 public class BlockColorHandler {
-    public static void registerBlockColorHandler(Block block, int hex_color) {
+
+    private BlockColorHandler() {
+        // Nothing to do at this time.
+    }
+
+    public static void registerBlockColorHandler(Block block, int hexColor) {
 
         BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
         blockColors.registerBlockColorHandler(
-                (state, worldIn, pos, tintindex) -> {
-                    float[] color = ColorUtils.getFloat4ARGB(hex_color);
+                (state, worldIn, pos, tintIndex) -> {
+                    float[] color = ColorUtils.getFloat4ARGB(hexColor);
                     if (worldIn != null && pos != null) {
                         float[] baseColor = ColorUtils.getFloat4ARGB(ColorizerFoliage.getFoliageColorBasic());
                         float[] curColor = ColorUtils.getFloat4ARGB(BiomeColorHelper.getFoliageColorAtPos(worldIn, pos));

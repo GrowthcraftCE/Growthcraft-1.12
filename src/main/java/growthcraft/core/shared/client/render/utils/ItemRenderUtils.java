@@ -8,6 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ItemRenderUtils {
+    private ItemRenderUtils() {
+        // Do nothing at this time.
+    }
     public static void registerItemColorHandler(Item colorableItem) {
         ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
         itemColors.registerItemColorHandler(new IItemColor() {

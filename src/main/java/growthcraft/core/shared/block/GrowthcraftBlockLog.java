@@ -60,6 +60,9 @@ public class GrowthcraftBlockLog extends BlockLog {
                 break;
             case NONE:
                 i = 12;
+                break;
+            default:
+                i = 0;
         }
 
         return i;
