@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Random;
 
 public class BlockCorkLeaves extends BlockLeaves implements IShearable {
-    public static final int LEAVES_COLOR = 0x58e21d; // 0x013220
+    public static final int LEAVES_COLOR = 0x013220;
 
     public BlockCorkLeaves(String unlocalizedName) {
         this.setUnlocalizedName(unlocalizedName);

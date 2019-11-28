@@ -57,6 +57,8 @@ public class Init {
         GrowthcraftCellarBlocks.fruitPresser = new BlockDefinition(new BlockFruitPresser("fruit_presser"));
         GrowthcraftCellarBlocks.blockCorkLog = new BlockDefinition(new BlockCorkLog("cork_log"));
         GrowthcraftCellarBlocks.blockCorkLogStripped = new BlockDefinition(new BlockCorkLogStripped("cork_log_stripped"));
+        GrowthcraftCellarBlocks.blockCorkSapling = new BlockDefinition(new BlockCorkSapling("cork_sapling"));
+
         GrowthcraftCellarBlocks.blockCorkLeaves = new BlockTypeDefinition<BlockCorkLeaves>( new BlockCorkLeaves("cork_leaves"));
 
     }
@@ -82,6 +84,9 @@ public class Init {
         GrowthcraftCellarBlocks.blockCorkLogStripped.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarBlocks.blockCorkLogStripped.registerBlock(registry);
 
+        GrowthcraftCellarBlocks.blockCorkSapling.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.blockCorkSapling.registerBlock(registry);
+
         GrowthcraftCellarBlocks.blockCorkLeaves.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarBlocks.blockCorkLeaves.registerBlock(registry);
 
@@ -94,6 +99,7 @@ public class Init {
         GrowthcraftCellarBlocks.fruitPress.registerBlockItem(registry);
         GrowthcraftCellarBlocks.blockCorkLog.registerBlockItem(registry);
         GrowthcraftCellarBlocks.blockCorkLogStripped.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.blockCorkSapling.registerBlockItem(registry);
         GrowthcraftCellarBlocks.blockCorkLeaves.registerBlockItem(registry);
     }
 
@@ -104,6 +110,7 @@ public class Init {
         GrowthcraftCellarBlocks.fruitPress.registerItemRender();
         GrowthcraftCellarBlocks.blockCorkLog.registerItemRender();
         GrowthcraftCellarBlocks.blockCorkLogStripped.registerItemRender();
+        GrowthcraftCellarBlocks.blockCorkSapling.registerItemRender();
         GrowthcraftCellarBlocks.blockCorkLeaves.registerItemRender();
 
     }

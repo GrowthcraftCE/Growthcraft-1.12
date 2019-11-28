@@ -31,6 +31,7 @@ fluids.tag.young=Young
 
 # Items
 item.achievement_dummy.name=Is Trouble Brewing?
+item.cork_bark.name=Cork Bark
 item.yeast.brewers.name=Brewer's Yeast
 item.yeast.lager.name=Lager Yeast
 item.yeast.bayanus.name=Bayanus Yeast
@@ -53,6 +54,7 @@ tile.brew_kettle.name=Brew Kettle
 tile.cork_leaves.name=Cork Leaves
 tile.cork_log.name=Cork Wood
 tile.cork_log_stripped.name=Cork Wood (Stripped)
+tile.cork_sapling=Cork Sapling
 tile.culture_jar.name=Culture Jar
 tile.ferment_barrel.name=Fermentation Barrel
 tile.fruit_press.name=Fruit Press
