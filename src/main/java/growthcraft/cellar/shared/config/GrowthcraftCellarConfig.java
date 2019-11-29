@@ -1,13 +1,12 @@
 package growthcraft.cellar.shared.config;
 
-import java.io.File;
-
-import org.apache.logging.log4j.Level;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.GrowthcraftLogger;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Level;
+
+import java.io.File;
 
 public class GrowthcraftCellarConfig {
     // OPEN
@@ -34,8 +33,13 @@ public class GrowthcraftCellarConfig {
     // Configurable settings.
     public static boolean allowFallbackRecipes = true;
 
+    // Cork Tree Settings
+    public static int corkBarkGrowthChance = 50;
+
     /* CATEGORIES */
+    private static final String CATEGORY_GENERAL = "general";
     private static final String CATEGORY_PRODUCTION = "production";
+    private static final String CATEGORY_CORKTREE = "cork_tree";
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();
@@ -59,10 +63,21 @@ public class GrowthcraftCellarConfig {
     private static void initGeneralConfig() {
         // OPEN_ADHOC
 
+        // Production Category
         allowFallbackRecipes = configuration.getBoolean(
                 "allowFallbackRecipes",
                 CATEGORY_PRODUCTION, true,
                 "If true then fallback recipes are activated. E.g. booze spoiling when using invalid ingredient.");
+
+        // Cork Tree Category Settings
+        corkBarkGrowthChance = configuration.getInt(
+                "corkBarkGrowthChance",
+                CATEGORY_CORKTREE,
+                corkBarkGrowthChance,
+                0,
+                100,
+                "Chance per ticket that stripped cork log will regrow cork bark."
+        );
 
     }
 }

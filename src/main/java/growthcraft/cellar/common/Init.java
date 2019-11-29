@@ -1,26 +1,13 @@
 package growthcraft.cellar.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
 import growthcraft.cellar.client.render.RenderBrewKettle;
 import growthcraft.cellar.client.render.RenderCultureJar;
 import growthcraft.cellar.client.render.RenderFruitPress;
-import growthcraft.cellar.common.block.BlockBrewKettle;
-import growthcraft.cellar.common.block.BlockCultureJar;
-import growthcraft.cellar.common.block.BlockFermentBarrel;
-import growthcraft.cellar.common.block.BlockFruitPress;
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.common.item.ItemBarrelTap;
-import growthcraft.cellar.common.item.ItemBrewKettleLid;
-import growthcraft.cellar.common.item.ItemChievDummy;
-import growthcraft.cellar.common.item.ItemYeast;
+import growthcraft.cellar.common.block.*;
+import growthcraft.cellar.common.item.*;
 import growthcraft.cellar.common.potion.PotionCellar;
 import growthcraft.cellar.common.stats.CellarAchievement;
-import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
-import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
-import growthcraft.cellar.common.tileentity.TileEntityFruitPresser;
+import growthcraft.cellar.common.tileentity.*;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.Reference;
@@ -33,22 +20,26 @@ import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import growthcraft.cellar.shared.processing.heatsource.user.UserHeatSourceEntry;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.definition.BlockDefinition;
+import growthcraft.core.shared.definition.BlockTypeDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.effect.EffectRegistry;
+import growthcraft.core.shared.handlers.BlockColorHandler;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
     private Init() {
@@ -64,18 +55,41 @@ public class Init {
         GrowthcraftCellarBlocks.cultureJar = new BlockDefinition(new BlockCultureJar("culture_jar"));
         GrowthcraftCellarBlocks.fruitPress = new BlockDefinition(new BlockFruitPress("fruit_press"));
         GrowthcraftCellarBlocks.fruitPresser = new BlockDefinition(new BlockFruitPresser("fruit_presser"));
+        GrowthcraftCellarBlocks.blockCorkLog = new BlockDefinition(new BlockCorkLog("cork_log"));
+        GrowthcraftCellarBlocks.blockCorkLogStripped = new BlockDefinition(new BlockCorkLogStripped("cork_log_stripped"));
+        GrowthcraftCellarBlocks.blockCorkSapling = new BlockDefinition(new BlockCorkSapling("cork_sapling"));
+
+        GrowthcraftCellarBlocks.blockCorkLeaves = new BlockTypeDefinition<BlockCorkLeaves>( new BlockCorkLeaves("cork_leaves"));
+
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
         GrowthcraftCellarBlocks.brewKettle.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarBlocks.brewKettle.registerBlock(registry);
+
         GrowthcraftCellarBlocks.fermentBarrel.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarBlocks.fermentBarrel.registerBlock(registry);
+
         GrowthcraftCellarBlocks.cultureJar.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarBlocks.cultureJar.registerBlock(registry);
+
         GrowthcraftCellarBlocks.fruitPress.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarBlocks.fruitPress.registerBlock(registry);
+
         GrowthcraftCellarBlocks.fruitPresser.registerBlock(registry);
+
+        GrowthcraftCellarBlocks.blockCorkLog.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.blockCorkLog.registerBlock(registry);
+
+        GrowthcraftCellarBlocks.blockCorkLogStripped.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.blockCorkLogStripped.registerBlock(registry);
+
+        GrowthcraftCellarBlocks.blockCorkSapling.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.blockCorkSapling.registerBlock(registry);
+
+        GrowthcraftCellarBlocks.blockCorkLeaves.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarBlocks.blockCorkLeaves.registerBlock(registry);
+
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
@@ -83,6 +97,10 @@ public class Init {
         GrowthcraftCellarBlocks.fermentBarrel.registerBlockItem(registry);
         GrowthcraftCellarBlocks.cultureJar.registerBlockItem(registry);
         GrowthcraftCellarBlocks.fruitPress.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.blockCorkLog.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.blockCorkLogStripped.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.blockCorkSapling.registerBlockItem(registry);
+        GrowthcraftCellarBlocks.blockCorkLeaves.registerBlockItem(registry);
     }
 
     public static void registerBlockRenders() {
@@ -90,6 +108,19 @@ public class Init {
         GrowthcraftCellarBlocks.fermentBarrel.registerItemRender();
         GrowthcraftCellarBlocks.cultureJar.registerItemRender();
         GrowthcraftCellarBlocks.fruitPress.registerItemRender();
+        GrowthcraftCellarBlocks.blockCorkLog.registerItemRender();
+        GrowthcraftCellarBlocks.blockCorkLogStripped.registerItemRender();
+        GrowthcraftCellarBlocks.blockCorkSapling.registerItemRender();
+        GrowthcraftCellarBlocks.blockCorkLeaves.registerItemRender();
+
+    }
+
+    @SideOnly(Side.CLIENT)
+    public static void registerBlockColorHandlers() {
+        BlockColorHandler.registerBlockColorHandler(
+                GrowthcraftCellarBlocks.blockCorkLeaves.getBlock(),
+                BlockCorkLeaves.LEAVES_COLOR
+        );
     }
 
     @SideOnly(Side.CLIENT)
@@ -107,6 +138,10 @@ public class Init {
         GameRegistry.registerTileEntity(TileEntityFruitPresser.class, Reference.MODID + ":fruit_presser");
     }
 
+    @SideOnly(Side.CLIENT)
+    public static void setCustomBlockStateMappers() {
+        ModelLoader.setCustomStateMapper(GrowthcraftCellarBlocks.blockCorkLeaves.getBlock(), (new StateMap.Builder().ignore(BlockCorkLeaves.DECAYABLE, BlockCorkLeaves.CHECK_DECAY)).build());
+    }
     ///////////
     // Items
     ///////////
@@ -116,6 +151,7 @@ public class Init {
         GrowthcraftCellarItems.yeast = new ItemDefinition(new ItemYeast("yeast"));
         GrowthcraftCellarItems.brewKettleLid = new ItemDefinition(new ItemBrewKettleLid("brew_kettle_lid"));
         GrowthcraftCellarItems.barrelTap = new ItemDefinition(new ItemBarrelTap("barrel_tap"));
+        GrowthcraftCellarItems.itemCorkBark = new ItemDefinition(new ItemCorkBark("cork_bark"));
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -126,6 +162,8 @@ public class Init {
         GrowthcraftCellarItems.brewKettleLid.registerItem(registry);
         GrowthcraftCellarItems.barrelTap.getItem().setCreativeTab(tabGrowthcraft);
         GrowthcraftCellarItems.barrelTap.registerItem(registry);
+        GrowthcraftCellarItems.itemCorkBark.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCellarItems.itemCorkBark.registerItem(registry);
     }
 
     public static void registerItemRenders() {
@@ -133,6 +171,8 @@ public class Init {
         GrowthcraftCellarItems.yeast.registerRenders(EnumYeast.class);
         GrowthcraftCellarItems.brewKettleLid.registerRender();
         GrowthcraftCellarItems.barrelTap.registerRender();
+        GrowthcraftCellarItems.itemCorkBark.registerRender();
+
     }
 
     ///////////

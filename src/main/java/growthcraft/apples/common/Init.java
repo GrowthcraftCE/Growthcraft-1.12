@@ -1,16 +1,6 @@
 package growthcraft.apples.common;
 
-import growthcraft.apples.common.block.BlockApple;
-import growthcraft.apples.common.block.BlockAppleDoor;
-import growthcraft.apples.common.block.BlockAppleFence;
-import growthcraft.apples.common.block.BlockAppleFenceGate;
-import growthcraft.apples.common.block.BlockAppleLeaves;
-import growthcraft.apples.common.block.BlockAppleLog;
-import growthcraft.apples.common.block.BlockApplePlanks;
-import growthcraft.apples.common.block.BlockAppleSapling;
-import growthcraft.apples.common.block.BlockAppleSlabDouble;
-import growthcraft.apples.common.block.BlockAppleSlabHalf;
-import growthcraft.apples.common.block.BlockAppleStairs;
+import growthcraft.apples.common.block.*;
 import growthcraft.apples.common.item.ItemAppleDoor;
 import growthcraft.apples.common.item.ItemAppleLeaves;
 import growthcraft.apples.shared.Reference;
@@ -37,8 +27,8 @@ import growthcraft.core.shared.effect.EffectAddPotionEffect;
 import growthcraft.core.shared.effect.EffectRandomList;
 import growthcraft.core.shared.effect.EffectWeightedRandomList;
 import growthcraft.core.shared.effect.SimplePotionEffectFactory;
+import growthcraft.core.shared.handlers.BlockColorHandler;
 import growthcraft.core.shared.item.OreItemStacks;
-import growthcraft.core.shared.utils.ColorUtils;
 import growthcraft.core.shared.utils.TickUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
@@ -57,9 +47,7 @@ import net.minecraft.item.ItemSlab;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.biome.BiomeColorHelper;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
@@ -67,8 +55,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 import static growthcraft.apples.shared.init.GrowthcraftApplesFluids.appleCiderBooze;
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
     private Init() {
@@ -150,25 +138,10 @@ public class Init {
 
     @SideOnly(Side.CLIENT)
     public static void registerBlockColorHandlers() {
-        BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
-        blockColors.registerBlockColorHandler(
-                (state, worldIn, pos, tintindex) -> {
-                    float[] color = ColorUtils.getFloat4ARGB(BlockAppleLeaves.LEAVES_COLOR);
-                    if (worldIn != null && pos != null) {
-                        float[] baseColor = ColorUtils.getFloat4ARGB(ColorizerFoliage.getFoliageColorBasic());
-                        float[] curColor = ColorUtils.getFloat4ARGB(BiomeColorHelper.getFoliageColorAtPos(worldIn, pos));
-
-                        float[] colorRatio = new float[3];
-                        for (int i = 1; i < 3; i++)
-                            colorRatio[i - 1] = curColor[i] / baseColor[i]; // (curColor[i] - baseColor[i]) / baseColor[i] + 1.0f;
-
-                        for (int i = 1; i < 3; i++)
-                            color[i] *= colorRatio[i - 1];
-                    }
-
-                    return ColorUtils.getIntARGB(color);
-                },
-                GrowthcraftApplesBlocks.blockAppleLeaves.getBlock());
+        BlockColorHandler.registerBlockColorHandler(
+                GrowthcraftApplesBlocks.blockAppleLeaves.getBlock(),
+                BlockAppleLeaves.LEAVES_COLOR
+                );
     }
 
     /*

@@ -126,6 +126,8 @@ public class GrowthcraftCellar {
         IForgeRegistry<Block> registry = event.getRegistry();
 
         Init.registerBlocks(registry);
+
+        proxy.registerStateMappers();
     }
 
     @SubscribeEvent

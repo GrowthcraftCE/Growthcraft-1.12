@@ -1,0 +1,7 @@
+{
+  "parent": "block/cube_column",
+  "textures": {
+    "end": "growthcraft_cellar:blocks/cork_log/cork_log_side",
+    "side": "growthcraft_cellar:blocks/cork_log/cork_log_side"
+  }
+}
