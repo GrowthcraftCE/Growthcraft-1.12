@@ -35,6 +35,7 @@ public class GrowthcraftCellarConfig {
 
     // Cork Tree Settings
     public static int corkBarkGrowthChance = 50;
+
     /* CATEGORIES */
     private static final String CATEGORY_GENERAL = "general";
     private static final String CATEGORY_PRODUCTION = "production";
