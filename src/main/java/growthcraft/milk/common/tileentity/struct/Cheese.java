@@ -244,7 +244,7 @@ public class Cheese implements IStreamable {
         return false;
     }
 
-    public void update() {
+    public boolean update() {
         if (!isAged()) {
             if (canAge()) {
                 if (this.age < this.ageMax) {
@@ -252,7 +252,9 @@ public class Cheese implements IStreamable {
                 } else {
                     setStage(EnumCheeseStage.AGED);
                 }
+                return true;
             }
         }
+        return false;
     }
 }
