@@ -166,7 +166,7 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
         cheeseCurd.readFromStream(stream);
         wheyPulsar.readFromStream(stream);
         this.serverStep = stream.readInt();
-        return true;
+        return false;
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)

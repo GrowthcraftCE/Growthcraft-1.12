@@ -2,6 +2,7 @@ package growthcraft.core.shared.io.stream;
 
 import java.io.UnsupportedEncodingException;
 
+import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.io.ConstID;
 import io.netty.buffer.ByteBuf;
 import net.minecraftforge.fluids.Fluid;
@@ -54,16 +55,20 @@ public class StreamUtils {
         stream.writeBytes(bytes);
     }
 
-    public static void readFluidTank(ByteBuf stream, FluidTank tank) {
+    public static boolean readFluidTank(ByteBuf stream, FluidTank tank) {
         final int capacity = stream.readInt();
         final String fluidIdName = readStringASCII(stream); // = stream.readInt();
         final int fluidAmount = stream.readInt();
 
         final Fluid fluid = !fluidIdName.equals(ConstID.NO_FLUID) ? FluidRegistry.getFluid(fluidIdName) : null;
         final FluidStack fluidStack = fluid != null ? new FluidStack(fluid, fluidAmount) : null;
+        
+        boolean hasChanged = tank.getCapacity() != capacity || !FluidTest.areStacksIdentical(tank.getFluid(), fluidStack);
 
         tank.setCapacity(capacity);
         tank.setFluid(fluidStack);
+        
+        return hasChanged;
     }
 
     public static void writeFluidTank(ByteBuf stream, FluidTank tank) {

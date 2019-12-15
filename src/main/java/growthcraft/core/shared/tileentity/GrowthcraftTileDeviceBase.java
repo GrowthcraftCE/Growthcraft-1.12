@@ -232,7 +232,7 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
     public boolean readFromStream_FluidTanks(ByteBuf stream) throws IOException {
         if (tanks != null)
             tanks.readFromStream(stream);
-        return true;
+        return false;
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)

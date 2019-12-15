@@ -154,7 +154,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
     protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain) {
 //		if (dir == EnumFacing.UP) return null;
         final DeviceFluidSlot fluidSlot = getActiveFluidSlot();
-        if (FluidTest.areStacksEqual(fluidSlot.get(), stack)) {
+        if (FluidTest.areFluidsEqual(fluidSlot.get(), stack)) {
             return fluidSlot.consume(stack, doDrain);
         }
         return null;
