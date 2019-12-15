@@ -6,6 +6,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GrowthcraftTreeWorldGen extends WorldGenAbstractTree {
@@ -15,6 +17,8 @@ public class GrowthcraftTreeWorldGen extends WorldGenAbstractTree {
 
     private Block blockLog;
     private Block blockLeaves;
+
+    private Random random = new Random();
 
     public GrowthcraftTreeWorldGen(Block blockLog, Block blockLeaves, int minTreeHeight, int maxTreeHeight, boolean notify) {
         super(notify);
@@ -35,123 +39,24 @@ public class GrowthcraftTreeWorldGen extends WorldGenAbstractTree {
         if (!worldIn.isRemote) {
             final int maxGrowthHeight = rand.nextInt(maxTreeHeight - minTreeHeight) + minTreeHeight;
 
+            BlockPos baseBlockPos = pos.down();
+
             if (canGrow(worldIn, pos, maxGrowthHeight)) {
-                worldIn.setBlockState(pos, blockLog.getDefaultState());
+                // Spawn the wood logs for the tree.
                 for (int i = 1; i <= maxGrowthHeight; i++) {
-                    worldIn.setBlockState(pos.up(i), blockLog.getDefaultState());
-                    if (i == maxGrowthHeight) {
-                        // Top layer
-                        spawnLeaves(worldIn, pos.up(i + 1));
-                        spawnLeaves(worldIn, pos.up(i + 1).north());
-                        spawnLeaves(worldIn, pos.up(i + 1).east());
-                        spawnLeaves(worldIn, pos.up(i + 1).south());
-                        spawnLeaves(worldIn, pos.up(i + 1).west());
+                    worldIn.setBlockState(baseBlockPos.up(i), blockLog.getDefaultState());
+                }
 
-                        // Top Layer -1
-                        spawnLeaves(worldIn, pos.up(i).north());
-                        spawnLeaves(worldIn, pos.up(i).north(2));
-
-                        spawnLeaves(worldIn, pos.up(i).east());
-                        spawnLeaves(worldIn, pos.up(i).east().north());
-                        spawnLeaves(worldIn, pos.up(i).east().north(2));
-                        spawnLeaves(worldIn, pos.up(i).east(2));
-                        spawnLeaves(worldIn, pos.up(i).east(2).north());
-                        spawnLeaves(worldIn, pos.up(i).east().south());
-                        spawnLeaves(worldIn, pos.up(i).east().south(2));
-                        spawnLeaves(worldIn, pos.up(i).east(2).south());
-
-                        spawnLeaves(worldIn, pos.up(i).west());
-                        spawnLeaves(worldIn, pos.up(i).west().north());
-                        spawnLeaves(worldIn, pos.up(i).west().north(2));
-                        spawnLeaves(worldIn, pos.up(i).west(2));
-                        spawnLeaves(worldIn, pos.up(i).west(2).north());
-                        spawnLeaves(worldIn, pos.up(i).west().south());
-                        spawnLeaves(worldIn, pos.up(i).west().south(2));
-
-                        spawnLeaves(worldIn, pos.up(i).south());
-                        spawnLeaves(worldIn, pos.up(i).south(2));
-
-                        // Top Layer -2
-                        spawnLeaves(worldIn, pos.up(i - 1).north());
-                        spawnLeaves(worldIn, pos.up(i - 1).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).north(3));
-
-                        spawnLeaves(worldIn, pos.up(i - 1).east());
-                        spawnLeaves(worldIn, pos.up(i - 1).east().north());
-                        spawnLeaves(worldIn, pos.up(i - 1).east().north(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).east().north(3));
-                        spawnLeaves(worldIn, pos.up(i - 1).east().south());
-                        spawnLeaves(worldIn, pos.up(i - 1).east().south(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).east().south(3));
-                        spawnLeaves(worldIn, pos.up(i - 1).east(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).east(2).north());
-                        spawnLeaves(worldIn, pos.up(i - 1).east(2).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).east(2).south());
-                        spawnLeaves(worldIn, pos.up(i - 1).east(2).south(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).east(3));
-                        spawnLeaves(worldIn, pos.up(i - 1).east(3).north());
-                        spawnLeaves(worldIn, pos.up(i - 1).east(3).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).east(3).south());
-
-                        spawnLeaves(worldIn, pos.up(i - 1).west());
-                        spawnLeaves(worldIn, pos.up(i - 1).west().north());
-                        spawnLeaves(worldIn, pos.up(i - 1).west().north(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).west().north(3));
-                        spawnLeaves(worldIn, pos.up(i - 1).west().south());
-                        spawnLeaves(worldIn, pos.up(i - 1).west().south(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).west().south(3));
-                        spawnLeaves(worldIn, pos.up(i - 1).west(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).west(2).north());
-                        spawnLeaves(worldIn, pos.up(i - 1).west(2).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).west(2).south());
-                        spawnLeaves(worldIn, pos.up(i - 1).west(2).south(1));
-                        spawnLeaves(worldIn, pos.up(i - 1).west(3));
-                        spawnLeaves(worldIn, pos.up(i - 1).west(3).north());
-                        spawnLeaves(worldIn, pos.up(i - 1).west(3).south());
-
-                        spawnLeaves(worldIn, pos.up(i - 1).south());
-                        spawnLeaves(worldIn, pos.up(i - 1).south(2));
-                        spawnLeaves(worldIn, pos.up(i - 1).south(3));
-
-                        // Top Layer -3
-                        spawnLeaves(worldIn, pos.up(i - 2).north());
-                        spawnLeaves(worldIn, pos.up(i - 2).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).north(3));
-
-                        spawnLeaves(worldIn, pos.up(i - 2).east());
-                        spawnLeaves(worldIn, pos.up(i - 2).east().north());
-                        spawnLeaves(worldIn, pos.up(i - 2).east().north(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).east().north(3));
-                        spawnLeaves(worldIn, pos.up(i - 2).east().south());
-                        spawnLeaves(worldIn, pos.up(i - 2).east().south(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).east(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).east(2).north());
-                        spawnLeaves(worldIn, pos.up(i - 2).east(2).south());
-                        spawnLeaves(worldIn, pos.up(i - 2).east(2).south(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).east(2).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).east(3));
-                        spawnLeaves(worldIn, pos.up(i - 2).east(3).south());
-
-                        spawnLeaves(worldIn, pos.up(i - 2).west());
-                        spawnLeaves(worldIn, pos.up(i - 2).west().north());
-                        spawnLeaves(worldIn, pos.up(i - 2).west().north(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).west().north(3));
-                        spawnLeaves(worldIn, pos.up(i - 2).west().south());
-                        spawnLeaves(worldIn, pos.up(i - 2).west().south(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).west().south(3));
-                        spawnLeaves(worldIn, pos.up(i - 2).west(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).west(2).north());
-                        spawnLeaves(worldIn, pos.up(i - 2).west(2).north(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).west(2).south());
-                        spawnLeaves(worldIn, pos.up(i - 2).west(2).south(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).west(3));
-                        spawnLeaves(worldIn, pos.up(i - 2).west(3).north());
-                        spawnLeaves(worldIn, pos.up(i - 2).west(3).south());
-
-                        spawnLeaves(worldIn, pos.up(i - 2).south());
-                        spawnLeaves(worldIn, pos.up(i - 2).south(2));
-                        spawnLeaves(worldIn, pos.up(i - 2).south(3));
-
+                // Spawn the leaves downward, starting at max height + 1.
+                for (int layerId = maxGrowthHeight + 1; layerId >= maxGrowthHeight - 4; layerId--) {
+                    if (layerId == maxGrowthHeight + 1) {
+                        spawnLeavesOnRadius(worldIn, pos.up(layerId), 1, false);
+                    } else if (layerId == maxGrowthHeight) {
+                        spawnLeavesOnRadius(worldIn, pos.up(layerId), 2, false);
+                    } else if (layerId == maxGrowthHeight - 1) {
+                        spawnLeavesOnRadius(worldIn, pos.up(layerId), 3, true);
+                    } else if ( layerId == maxGrowthHeight - 2 ) {
+                        spawnLeavesOnRadius(worldIn, pos.up(layerId), 3, true);
                     }
                 }
 
@@ -171,12 +76,40 @@ public class GrowthcraftTreeWorldGen extends WorldGenAbstractTree {
         return true;
     }
 
+    /**
+     * Spawn a given block leaves at the given block pos.
+     * @param worldIn The world instance.
+     * @param pos BlockPos to spawn a leaf block.
+     */
     private void spawnLeaves(World worldIn, BlockPos pos) {
         if (isReplaceable(worldIn, pos)) {
             worldIn.setBlockState(pos, blockLeaves.getDefaultState());
         }
     }
 
+    /**
+     * Spawn a set leaves around a give block position.
+     * @param worldIn The world object.
+     * @param centerPos Center of the area to spawn leaves.
+     * @param radius Radius to spawn the leaves.
+     * @param randomLeaves Determine if leaves should be random.
+     */
+    private void spawnLeavesOnRadius(World worldIn, BlockPos centerPos, int radius, boolean randomLeaves) {
+        // List of block positions to spawn leaves.
+        BlockPos posUpperLeft = new BlockPos(centerPos.getX() + radius, centerPos.getY(), centerPos.getZ() + radius );
+        BlockPos posLowerRight = new BlockPos(centerPos.getX() - radius, centerPos.getY(), centerPos.getZ() - radius );
 
+        Iterable<BlockPos> blockPosList = BlockPos.getAllInBox(posUpperLeft, posLowerRight);
+
+        blockPosList.forEach( blockPos -> {
+            boolean spawnBlock = true;
+            // Check if there is already a block in this position.
+            if ( worldIn.getBlockState(blockPos).getBlock() instanceof BlockAir ) {
+                //if ( randomLeaves && random.nextInt(100) <= 5 ) spawnBlock = false;
+                if ( spawnBlock ) spawnLeaves(worldIn, blockPos);
+            }
+        } );
+
+    }
 
 }

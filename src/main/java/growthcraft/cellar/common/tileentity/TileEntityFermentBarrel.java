@@ -28,7 +28,10 @@ import net.minecraftforge.fluids.FluidTank;
 import java.io.IOException;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice implements IInventory, ITickable, ITileProgressiveDevice, INBTItemSerializable {
-    public static enum FermentBarrelDataID {
+
+    private static final String NBTNAME = "ferment_barrel";
+
+    public enum FermentBarrelDataID {
         TIME,
         TIME_MAX,
         UNKNOWN;
@@ -95,9 +98,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void update() {
         if (!world.isRemote) {
-            world.markBlockRangeForRenderUpdate(pos, pos);
-            world.notifyBlockUpdate(pos, world.getBlockState(pos), world.getBlockState(pos), 3);
-            world.scheduleBlockUpdate(pos, getBlockType(), 0, 0);
+            this.markDirtyAndUpdate();
             fermentBarrel.update();
         }
     }
@@ -134,23 +135,23 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void readFromNBTForItem(NBTTagCompound nbt) {
         super.readFromNBTForItem(nbt);
-        fermentBarrel.readFromNBT(nbt, "ferment_barrel");
+        fermentBarrel.readFromNBT(nbt, NBTNAME);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
     public void readFromNBT_FermentBarrel(NBTTagCompound nbt) {
-        fermentBarrel.readFromNBT(nbt, "ferment_barrel");
+        fermentBarrel.readFromNBT(nbt, NBTNAME);
     }
 
     @Override
     public void writeToNBTForItem(NBTTagCompound nbt) {
         super.writeToNBTForItem(nbt);
-        fermentBarrel.writeToNBT(nbt, "ferment_barrel");
+        fermentBarrel.writeToNBT(nbt, NBTNAME);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
     public void writeToNBT_FermentBarrel(NBTTagCompound nbt) {
-        fermentBarrel.writeToNBT(nbt, "ferment_barrel");
+        fermentBarrel.writeToNBT(nbt, NBTNAME);
     }
 
     @Override
