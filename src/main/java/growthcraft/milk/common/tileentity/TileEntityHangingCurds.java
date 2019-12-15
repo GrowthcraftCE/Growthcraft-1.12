@@ -82,7 +82,7 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
         if (!world.isRemote) {
             if (cheeseCurd.needClientUpdate) {
                 cheeseCurd.needClientUpdate = false;
-                markForUpdate();
+                markForUpdate(true);
             }
             cheeseCurd.update();
             if (wheyPulsar.update() == PulseStepper.State.PULSE) {
@@ -98,7 +98,7 @@ public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITick
                     }
                     // regardless of a pancheon being present, the curd SHOULD drip
                     serverStep++;
-                    markDirtyAndUpdate();
+                    markDirtyAndUpdate(true);
                 }
             }
         } else {

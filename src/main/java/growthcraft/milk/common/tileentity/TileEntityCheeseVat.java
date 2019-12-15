@@ -516,7 +516,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
     @Override
     protected void markFluidDirty() {
         markForRecipeCheck();
-        markDirtyAndUpdate();
+        markDirtyAndUpdate(true);
     }
 
     @Override

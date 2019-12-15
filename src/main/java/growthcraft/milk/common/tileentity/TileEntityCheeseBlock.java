@@ -148,7 +148,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
             if (cheese.needClientUpdate) {
                 cheese.needClientUpdate = false;
                 if (cheese.hasSlices()) {
-                    markForUpdate();
+                    markForUpdate(true);
                 } else {
                     world.setBlockToAir(getPos());
                 }
@@ -204,7 +204,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
             } else
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
         }
-        markDirtyAndUpdate(); // Test, if correct
+        markDirtyAndUpdate(true); // Test, if correct
     }
 
     @Override
@@ -219,7 +219,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
             if (!ItemUtils.isEmpty(stack)) {
                 ItemUtils.addStackToPlayer(stack, player, false);
             }
-            markDirtyAndUpdate();
+            markDirtyAndUpdate(true);
             cheese.needClientUpdate |= true;
             return true;
         }

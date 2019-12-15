@@ -19,6 +19,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 
 /**
@@ -31,15 +32,22 @@ import net.minecraftforge.common.capabilities.Capability;
 public abstract class GrowthcraftTileBase extends TileEntity implements IStreamable, IAltNBTSerializable {
     protected static TileEventHandlerMap<GrowthcraftTileBase> HANDLERS = new TileEventHandlerMap<GrowthcraftTileBase>();
 
-    public void markForUpdate() {
-        IBlockState curState = getWorld().getBlockState(pos);
-        world.markBlockRangeForRenderUpdate(pos, pos);
-        world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+    public void markForUpdate(boolean triggerRenderUpdate) {
+        IBlockState curState = world.getBlockState(pos);
+        if( triggerRenderUpdate ) {
+        	world.markBlockRangeForRenderUpdate(pos, pos);
+        	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+        }
+        else if(world instanceof WorldServer) {
+//        	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER); // | BlockFlags.SUPRESS_RENDER); //BlockFlags.UPDATE_AND_SYNC | BlockFlags.SUPRESS_RENDER);
+        	WorldServer worldSrv = (WorldServer)world;
+        	worldSrv.getPlayerChunkMap().markBlockForUpdate(pos);
+        }
     }
 
-    public void markDirtyAndUpdate() {
+    public void markDirtyAndUpdate(boolean triggerRenderUpdate) {
         markDirty();
-        markForUpdate();
+        markForUpdate(triggerRenderUpdate);
     }
 
     @Override
@@ -117,7 +125,7 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
                     dirty = true;
                 }
             }
-            if (dirty) markForUpdate();
+            if (dirty) markForUpdate(false);
         }
     }
 

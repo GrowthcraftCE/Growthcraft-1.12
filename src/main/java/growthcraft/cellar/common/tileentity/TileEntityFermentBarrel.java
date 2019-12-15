@@ -98,7 +98,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void update() {
         if (!world.isRemote) {
-            this.markDirtyAndUpdate();
             fermentBarrel.update();
         }
     }
@@ -233,7 +232,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
         fermentBarrel.markForRecipeRecheck();
         if (index == 1) {
             // Changing tap has a visual feedback
-            this.markDirtyAndUpdate();
+            this.markDirtyAndUpdate(true);
         }
     }
 

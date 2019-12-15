@@ -111,11 +111,11 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
             } else {
                 this.shaftState = 0;
             }
-            markForUpdate();
+            markForUpdate(true);
         } else {
             if (shaftState != 0) {
                 this.shaftState = 0;
-                markForUpdate();
+                markForUpdate(true);
             }
             this.churns = 0;
         }

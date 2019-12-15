@@ -121,7 +121,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
     protected void markFluidDirty() {
         // Ferment Jars need to update their rendering state when a fluid
         // changes, most of the other cellar blocks are unaffected by this
-        markForUpdate();
+        markForUpdate(true);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
             }
             getActiveDevice().update();
             if (jarDeviceState != lastState) {
-                markDirtyAndUpdate();
+                markDirtyAndUpdate(true);
             }
         }
     }

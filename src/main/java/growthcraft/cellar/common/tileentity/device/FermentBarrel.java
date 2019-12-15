@@ -157,15 +157,14 @@ public class FermentBarrel extends DeviceBase {
             if (time >= getTimeMax()) {
                 resetTime();
                 fermentItem();
-                markDirty();
             }
+            markDirtyAndUpdate(false);
         } else {
             if (time != 0) {
                 resetTime();
-                markDirty();
+                markDirtyAndUpdate(false);
             }
         }
-
 
     }
 

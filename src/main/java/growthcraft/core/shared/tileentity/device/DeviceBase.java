@@ -5,6 +5,7 @@ import java.util.Random;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.io.nbt.INBTSerializableContext;
 import growthcraft.core.shared.io.stream.IStreamable;
+import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.inventory.IInventory;
@@ -12,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldServer;
 
 public class DeviceBase implements INBTSerializableContext, IStreamable {
     protected Random random = new Random();
@@ -40,17 +42,38 @@ public class DeviceBase implements INBTSerializableContext, IStreamable {
         return null;
     }
 
-    protected void markForUpdate() {
-        BlockPos pos = parent.getPos();
-        IBlockState curState = getWorld().getBlockState(pos);
+    protected void markForUpdate(boolean triggerRenderUpdate) {
+    	// TODO: Make all tile entities in Growthcraft being derived from GrowthcraftTileBase
+    	if( parent instanceof GrowthcraftTileBase ) {
+    		GrowthcraftTileBase ParentGrcTB = (GrowthcraftTileBase)parent;
+    		ParentGrcTB.markForUpdate(triggerRenderUpdate);
+    	}
+    	else {
+            BlockPos pos = parent.getPos();
+            World world = getWorld();
+            IBlockState curState = world.getBlockState(pos);
 
-        getWorld().markBlockRangeForRenderUpdate(pos, pos);
-        getWorld().notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
-        getWorld().scheduleBlockUpdate(pos, parent.getBlockType(), 0, 0);
+            if( triggerRenderUpdate ) {
+            	world.markBlockRangeForRenderUpdate(pos, pos);
+            	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+//	            getWorld().scheduleBlockUpdate(pos, parent.getBlockType(), 0, 0);
+            }
+            else { // if(world instanceof WorldServer) {
+//            	WorldServer worldSrv = (WorldServer)world;
+//            	worldSrv.getPlayerChunkMap().markBlockForUpdate(pos);
+	            getWorld().notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER);	// Not working
+//	            getWorld().scheduleBlockUpdate(pos, parent.getBlockType(), 0, 0);
+            }
+    	}
     }
 
     protected void markDirty() {
         parent.markDirty();
+    }
+    
+    protected void markDirtyAndUpdate(boolean triggerRenderUpdate) {
+    	markDirty();
+    	markForUpdate(triggerRenderUpdate);
     }
 
     /**
