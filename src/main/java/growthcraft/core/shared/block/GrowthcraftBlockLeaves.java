@@ -1,6 +1,7 @@
 package growthcraft.core.shared.block;
 
 import growthcraft.core.shared.definition.BlockDefinition;
+import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;
@@ -123,6 +124,7 @@ public class GrowthcraftBlockLeaves extends BlockLeaves implements IShearable  {
 
     @Override
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+
         return blockSapling.getItem();
     }
 
