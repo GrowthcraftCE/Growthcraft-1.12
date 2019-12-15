@@ -58,10 +58,8 @@ public class DeviceBase implements INBTSerializableContext, IStreamable {
             	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
 //	            getWorld().scheduleBlockUpdate(pos, parent.getBlockType(), 0, 0);
             }
-            else { // if(world instanceof WorldServer) {
-//            	WorldServer worldSrv = (WorldServer)world;
-//            	worldSrv.getPlayerChunkMap().markBlockForUpdate(pos);
-	            getWorld().notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER);	// Not working
+            else if(!world.isRemote) {
+	            getWorld().notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER);
 //	            getWorld().scheduleBlockUpdate(pos, parent.getBlockType(), 0, 0);
             }
     	}

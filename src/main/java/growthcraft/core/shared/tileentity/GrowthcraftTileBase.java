@@ -38,10 +38,8 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
         	world.markBlockRangeForRenderUpdate(pos, pos);
         	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
         }
-        else if(world instanceof WorldServer) {
-//        	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER); // | BlockFlags.SUPRESS_RENDER); //BlockFlags.UPDATE_AND_SYNC | BlockFlags.SUPRESS_RENDER);
-        	WorldServer worldSrv = (WorldServer)world;
-        	worldSrv.getPlayerChunkMap().markBlockForUpdate(pos);
+        else if(!world.isRemote) {
+        	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER);
         }
     }
 
