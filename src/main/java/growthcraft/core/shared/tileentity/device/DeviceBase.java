@@ -43,6 +43,8 @@ public class DeviceBase implements INBTSerializableContext, IStreamable {
     }
 
     protected void markForUpdate(boolean triggerRenderUpdate) {
+    	System.out.println("CALLED DeviceBase.markForUpdate(" + triggerRenderUpdate + ")");		// DEBUG
+    	
     	// TODO: Make all tile entities in Growthcraft being derived from GrowthcraftTileBase
     	if( parent instanceof GrowthcraftTileBase ) {
     		GrowthcraftTileBase ParentGrcTB = (GrowthcraftTileBase)parent;
@@ -66,10 +68,12 @@ public class DeviceBase implements INBTSerializableContext, IStreamable {
     }
 
     protected void markDirty() {
+    	System.out.println("CALLED DeviceBase.markDirty()");		// DEBUG
         parent.markDirty();
     }
     
     protected void markDirtyAndUpdate(boolean triggerRenderUpdate) {
+    	System.out.println("CALLED DeviceBase.markDirtyAndUpdate()");		// DEBUG
     	markDirty();
     	markForUpdate(triggerRenderUpdate);
     }

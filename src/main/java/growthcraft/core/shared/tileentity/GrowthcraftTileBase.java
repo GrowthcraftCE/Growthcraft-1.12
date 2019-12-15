@@ -33,6 +33,8 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
     protected static TileEventHandlerMap<GrowthcraftTileBase> HANDLERS = new TileEventHandlerMap<GrowthcraftTileBase>();
 
     public void markForUpdate(boolean triggerRenderUpdate) {
+    	System.out.println("CALLED GrowthcraftTileBase.markForUpdate(" + triggerRenderUpdate + ")");	// DEBUG
+    	
         IBlockState curState = world.getBlockState(pos);
         if( triggerRenderUpdate ) {
         	world.markBlockRangeForRenderUpdate(pos, pos);
@@ -42,8 +44,17 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
         	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER);
         }
     }
+    
+    @Override
+    public void markDirty() {
+    	System.out.println("CALLED GrowthcraftTileBase.markDirty()");	// DEBUG
+    	
+    	super.markDirty();
+    }
 
     public void markDirtyAndUpdate(boolean triggerRenderUpdate) {
+    	System.out.println("CALLED DeviceBase.markDirtyAndUpdate(" + triggerRenderUpdate + ")");		// DEBUG
+    	
         markDirty();
         markForUpdate(triggerRenderUpdate);
     }
@@ -123,7 +134,8 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
                     dirty = true;
                 }
             }
-            if (dirty) markForUpdate(false);
+            if (dirty)
+            	markForUpdate(true);
         }
     }
 
