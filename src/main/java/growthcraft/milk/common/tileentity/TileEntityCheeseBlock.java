@@ -131,8 +131,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
     public boolean readFromStream_CheeseBlock(ByteBuf stream) throws IOException {
-        cheese.readFromStream(stream);
-        return true;
+        return cheese.readFromStream(stream);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)

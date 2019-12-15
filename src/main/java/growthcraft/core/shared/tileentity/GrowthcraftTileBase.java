@@ -33,7 +33,7 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
     protected static TileEventHandlerMap<GrowthcraftTileBase> HANDLERS = new TileEventHandlerMap<GrowthcraftTileBase>();
 
     public void markForUpdate(boolean triggerRenderUpdate) {
-    	System.out.println("CALLED GrowthcraftTileBase.markForUpdate(" + triggerRenderUpdate + ")");	// DEBUG
+//    	System.out.println("CALLED GrowthcraftTileBase.markForUpdate(" + triggerRenderUpdate + ")");	// DEBUG_BlockUpdate
     	
         IBlockState curState = world.getBlockState(pos);
         if( triggerRenderUpdate ) {
@@ -47,13 +47,13 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
     
     @Override
     public void markDirty() {
-    	System.out.println("CALLED GrowthcraftTileBase.markDirty()");	// DEBUG
+//    	System.out.println("CALLED GrowthcraftTileBase.markDirty()");	// DEBUG_BlockUpdate
     	
     	super.markDirty();
     }
 
     public void markDirtyAndUpdate(boolean triggerRenderUpdate) {
-    	System.out.println("CALLED DeviceBase.markDirtyAndUpdate(" + triggerRenderUpdate + ")");		// DEBUG
+//    	System.out.println("CALLED DeviceBase.markDirtyAndUpdate(" + triggerRenderUpdate + ")");		// DEBUG_BlockUpdate
     	
         markDirty();
         markForUpdate(triggerRenderUpdate);
@@ -127,14 +127,14 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         if (packet.getTileEntityType() == 127) {
             final NBTTagCompound tag = packet.getNbtCompound();
-            boolean dirty = false;
+            boolean requiresClientUpdate = false;
             if (tag != null) {
                 final ByteBuf stream = Unpooled.copiedBuffer(tag.getByteArray("P"));
                 if (readFromStream(stream)) {
-                    dirty = true;
+                	requiresClientUpdate = true;
                 }
             }
-            if (dirty)
+            if (requiresClientUpdate)
             	markForUpdate(true);
         }
     }

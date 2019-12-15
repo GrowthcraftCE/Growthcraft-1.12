@@ -102,7 +102,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements IRotatab
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-    	System.out.println("CALLED BlockFermentBarrel.getActualState()");	// DEBUG
+//    	System.out.println("CALLED BlockFermentBarrel.getActualState()");	// DEBUG_BlockUpdate
     	
         final TileEntityFermentBarrel te = getTileEntity(worldIn, pos);
         if (te != null) {

@@ -224,13 +224,31 @@ public class Cheese implements IStreamable {
 
     @Override
     public boolean readFromStream(ByteBuf stream) {
-        this.cheese = CheeseIO.loadFromStream(stream);
-        this.cheeseStage = EnumCheeseStage.loadFromStream(stream);
-        this.age = stream.readInt();
-        this.topSlices = stream.readInt();
-        this.topSlicesMax = stream.readInt();
-        this.isDoubleStacked = stream.readBoolean();
-        return false;
+    	ICheeseType newCheese = CheeseIO.loadFromStream(stream);	// Is not null!
+    	EnumCheeseStage newCheeseStage = EnumCheeseStage.loadFromStream(stream);	// Is not null!
+    	int newAge = stream.readInt();
+    	int newTopSlices = stream.readInt();
+    	int newTopSlicesMax = stream.readInt();
+    	boolean newIsDoubleStacked = stream.readBoolean();
+    	
+    	if (!this.cheese.equals(newCheese) ||
+    		!this.cheeseStage.equals(newCheeseStage) ||
+    		this.age != newAge ||
+    		this.topSlices != newTopSlices ||
+    		this.topSlicesMax != newTopSlicesMax ||
+    		this.isDoubleStacked != newIsDoubleStacked ) {
+    		
+	        this.cheese = newCheese;
+	        this.cheeseStage = newCheeseStage;
+	        this.age = newAge;
+	        this.topSlices = newTopSlices;
+	        this.topSlicesMax = newTopSlicesMax;
+	        this.isDoubleStacked = newIsDoubleStacked;
+	        
+	        return true;
+    	}
+    	else
+    		return false;
     }
 
     @Override
