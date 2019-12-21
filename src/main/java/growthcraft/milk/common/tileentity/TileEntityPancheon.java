@@ -101,7 +101,7 @@ public class TileEntityPancheon extends GrowthcraftTileDeviceBase implements ITi
     @Override
     protected void markFluidDirty() {
         super.markFluidDirty();
-        markDirtyAndUpdate();
+        markDirtyAndUpdate(true);
     }
 
     @Override

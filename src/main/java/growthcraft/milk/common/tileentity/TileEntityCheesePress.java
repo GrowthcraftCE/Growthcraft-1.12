@@ -215,7 +215,7 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
         this.screwState = state ? 1 : 0;
         if (oldScrewState != screwState) {
 //			isAnim = true;
-            markDirtyAndUpdate();
+            markDirtyAndUpdate(true);
         }
         return oldScrewState != screwState;
     }

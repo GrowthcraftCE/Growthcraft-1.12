@@ -400,7 +400,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
 
     @Override
     protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain) {
-        if (!FluidTest.areStacksEqual(wasteFluidSlot.get(), stack)) return null;
+        if (!FluidTest.areFluidsEqual(wasteFluidSlot.get(), stack)) return null;
         return doDrain(dir, stack.amount, doDrain);
     }
 
@@ -516,7 +516,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
     @Override
     protected void markFluidDirty() {
         markForRecipeCheck();
-        markDirtyAndUpdate();
+        markDirtyAndUpdate(true);
     }
 
     @Override

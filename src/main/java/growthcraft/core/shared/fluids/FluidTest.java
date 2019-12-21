@@ -54,12 +54,21 @@ public class FluidTest {
         return false;
     }
 
-    public static boolean areStacksEqual(@Nullable FluidStack expected, @Nullable FluidStack other) {
+    public static boolean areFluidsEqual(@Nullable FluidStack expected, @Nullable FluidStack other) {
         if (expected == null) {
             return other == null;
         } else {
             if (other == null) return false;
             return expected.isFluidEqual(other);
+        }
+    }
+    
+    public static boolean areStacksIdentical(@Nullable FluidStack expected, @Nullable FluidStack other) {
+        if (expected == null) {
+            return other == null;
+        } else {
+            if (other == null) return false;
+            return expected.isFluidStackIdentical(other);
         }
     }
 
@@ -71,7 +80,7 @@ public class FluidTest {
     }
 
     public static boolean fluidMatches(@Nullable FluidStack expected, @Nullable FluidStack other) {
-        return areStacksEqual(expected, other);
+        return areFluidsEqual(expected, other);
     }
 
     public static boolean fluidMatches(@Nullable IMultiFluidStacks expected, @Nullable FluidStack other) {
