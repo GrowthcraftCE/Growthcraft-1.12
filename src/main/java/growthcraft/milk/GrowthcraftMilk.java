@@ -1,5 +1,6 @@
 package growthcraft.milk;
 
+import growthcraft.milk.common.handlers.HarvestDropsEventHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -54,6 +55,7 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
 
         userApis.setConfigDirectory(event.getModConfigurationDirectory());
 
