@@ -1,12 +1,13 @@
 package growthcraft.milk;
 
 import growthcraft.milk.common.handlers.HarvestDropsEventHandler;
+import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import growthcraft.milk.common.CommonProxy;
 import growthcraft.milk.common.Init;
-import growthcraft.milk.common.handlers.EntityDropsHandler;
+import growthcraft.milk.common.handlers.EntityDropsEventHandler;
 import growthcraft.milk.shared.GrowthcraftMilkUserApis;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.block.Block;
@@ -41,6 +42,7 @@ public class GrowthcraftMilk {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    public static final GrowthcraftMilkConfig config = new GrowthcraftMilkConfig();
     public static Logger logger = LogManager.getLogger(Reference.MODID);
 
     public static final GrowthcraftMilkUserApis userApis = new GrowthcraftMilkUserApis();
@@ -55,7 +57,10 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void preInit(FMLPreInitializationEvent event) {
+        config.preInit(event, "growthcraft/growthcraft-milk.cfg");
+
         MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
+        MinecraftForge.EVENT_BUS.register(new EntityDropsEventHandler());
 
         userApis.setConfigDirectory(event.getModConfigurationDirectory());
 
@@ -83,7 +88,7 @@ public class GrowthcraftMilk {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-        MinecraftForge.EVENT_BUS.register(new EntityDropsHandler());
+        //MinecraftForge.EVENT_BUS.register(new EntityDropsEventHandler());
         userApis.postInit();
 
         Init.registerItemOres();
