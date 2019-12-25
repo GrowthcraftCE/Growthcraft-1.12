@@ -34,7 +34,7 @@ public class HarvestDropsEventHandler {
 
         if (random.nextInt(100) <= chanceVineDropGrapeSeeds) {
             // Randomly get a grape seed.
-            int randomGrapeSeed = random.nextInt(GrapeTypes.values().length - 1);
+            int randomGrapeSeed = random.nextInt(GrapeTypes.values().length);
             GrapeTypes grapeTypes = GrapeTypes.values()[randomGrapeSeed];
             int metaGrapeSeed = grapeTypes.getVariantID();
             ItemStack itemStack = new ItemStack(GrowthcraftGrapesItems.grape_seed.getItem(), 1, metaGrapeSeed);
