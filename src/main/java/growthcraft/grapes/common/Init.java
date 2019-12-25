@@ -9,8 +9,8 @@ import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
@@ -401,7 +401,7 @@ public class Init {
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
                 .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0)
-                .toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
         GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_WINE_POISONED.ordinal()].getFluid())
                 .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 //			.fermentsFromFallback(fs[WineTypes.RED_JUICE.ordinal()], fermentTime)
@@ -423,7 +423,7 @@ public class Init {
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
                 .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0)
-                .toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
         GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_WINE_POISONED.ordinal()].getFluid())
                 .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.POISONED)
 //			.fermentsFromFallback(fs[WineTypes.GREEN_JUICE.ordinal()], fermentTime)
@@ -445,7 +445,7 @@ public class Init {
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.05f), TickUtils.seconds(90))
                 .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0)
-                .toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
     ////////////

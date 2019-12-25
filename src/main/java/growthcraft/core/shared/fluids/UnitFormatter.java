@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Joiner;
 
-import growthcraft.core.shared.config.GrowthcraftConfiguration;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.CoreRegistry;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
@@ -54,7 +54,7 @@ public class UnitFormatter {
             if (tags == null || tags.size() == 0) return null;
             String str = "";
             for (FluidTag tag : tags) {
-                if (GrowthcraftConfiguration.hidePoisonedBooze && tag.getName().equals("poisoned"))
+                if (GrowthcraftCore.config.getHidePoisonedBooze() && tag.getName().equals("poisoned"))
                     continue;    // REVISE_ME
                 str += ((str.length() == 0) ? "" : ", ") + tag.getLocalizedName();
             }

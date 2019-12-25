@@ -6,10 +6,6 @@ import java.util.List;
 import growthcraft.cellar.shared.block.BlockFluidBooze;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.fluids.Booze;
-import growthcraft.cellar.shared.booze.BoozeEffect;
-import growthcraft.cellar.shared.booze.BoozeEntry;
-import growthcraft.cellar.shared.booze.BoozeRegistry;
-import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
@@ -20,8 +16,6 @@ import growthcraft.core.shared.fluids.FluidDictionary;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.ResourceLocation;
@@ -29,7 +23,6 @@ import net.minecraftforge.common.ForgeModContainer;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
 public class BoozeRegistryHelper {
@@ -96,7 +89,7 @@ public class BoozeRegistryHelper {
             final ItemStack bucket = UniversalBucket.getFilledBucket(ForgeModContainer.getInstance().universalBucket, boozes[i].getFluid());
 
             int bottleVariantID = values[i].getVariantID();
-            final FluidStack fluidStack = boozes[i].asFluidStack(GrowthcraftCoreConfig.bottleCapacity);
+            final FluidStack fluidStack = boozes[i].asFluidStack(GrowthcraftCoreConfig.BOTTLE_CAPACITY);
             FluidContainerRegistry.registerFluidContainer(fluidStack, bottle.asStack(1, bottleVariantID), FluidContainerRegistry.EMPTY_BOTTLE);
 
 //OFF			GameRegistry.addShapelessRecipe(bottle.asStack(3, bottleVariantID), bucket, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE, Items.GLASS_BOTTLE);
