@@ -1,48 +1,42 @@
 package growthcraft.core.shared.config;
 
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.Reference;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import org.apache.logging.log4j.Level;
 
 import java.io.File;
 
-import org.apache.logging.log4j.Level;
-
-import growthcraft.core.shared.Reference;
-import growthcraft.core.shared.GrowthcraftLogger;
-
 public class GrowthcraftConfiguration extends Configuration {
-    // REVISE_TEAM 0: Reused pattern from GrowthcraftBambooConfig, correct?
-    // REVISE_ME 0: Remove cellar dependency.
-    // INITIALIZE
 
-    private static Configuration configuration;
+    private Configuration configuration;
 
-    // Categories
-    private static final String CATEGORY_GENERAL = "general";
-    private static final String CATEGORY_BOOZE = "Booze/Effects";
+    /* Categories */
+    private static final String categoryGeneral = "general";
 
-    // Values
-    public static boolean isDebug = false;
-    public static String logLevel = "info";
-    public static boolean hidePoisonedBooze = true;
+    /* Default Values */
+    private Level logLevel = Level.INFO;
 
-/*    public GrowthcraftConfiguration(File configDirectory, String name) {
-        configuration = new Configuration(new File(configDirectory.getPath(), "growthcraft/" + name + ".cfg"));
-    } */
+    public GrowthcraftConfiguration() { /* Nothing to do */ }
 
-    public void preInit(FMLPreInitializationEvent e) {
-        File directory = e.getModConfigurationDirectory();
-        configuration = new Configuration(new File(directory.getPath(), "modtut.cfg"));
-        readConfig();
+     protected void preInit(FMLPreInitializationEvent event, String configFilePath) {
+        File directory = event.getModConfigurationDirectory();
+        configuration = new Configuration(
+                new File(directory.getPath(), configFilePath)
+        );
+        readConfig(configFilePath);
     }
 
-    public static void readConfig() {
+    protected void readConfig(String configFilePath) {
         try {
             configuration.load();
-            initDebugConfig();
-            initBoozeConfig();
+            initGeneralConfig();
         } catch (Exception e) {
-            GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Bamboo!", e);
+            GrowthcraftLogger.getLogger(Reference.MODID).log(
+                    Level.ERROR,
+                    String.format("Unable to read configuration file at: %s", configFilePath)
+            );
         } finally {
             if (configuration.hasChanged()) {
                 configuration.save();
@@ -50,11 +44,39 @@ public class GrowthcraftConfiguration extends Configuration {
         }
     }
 
-    private static void initDebugConfig() {
-        logLevel = configuration.getString("logLevel", CATEGORY_GENERAL, logLevel, "Set standard logging levels. (INFO, ERROR, DEBUG)");
+    /**
+     * Initialize the general configuration. By default this will also initialize the debug config
+     * and set the log level for mod that is using this configuration.
+     * You should override this method and append your custom configurations.
+     */
+    protected void initGeneralConfig() {
+        // Always call the initialization of the debug configuration as we need it for logging.
+        initDebugConfig();
     }
 
-    private static void initBoozeConfig() {
-        hidePoisonedBooze = configuration.getBoolean("hidePoisoned", CATEGORY_BOOZE, hidePoisonedBooze, "Should purposely poisoned booze have its effect hidden?");
+    /**
+     * Initialize the log level for the module. This function is private as it should not be allowed to the overriden unless the caller decides not call super on initGeneralConfig.
+     */
+    private void initDebugConfig() {
+        logLevel = Level.getLevel(
+                configuration.getString(
+                        "logLevel",
+                        categoryGeneral,
+                        logLevel.toString(),
+                        "Set standard logging levels, such as INFO, DEBUG, ERROR"
+                )
+        );
+    }
+
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    /**
+     * Sub-modules should call this to check the verbosity of logging.
+     * @return
+     */
+    public Level getLogLevel() {
+        return logLevel;
     }
 }

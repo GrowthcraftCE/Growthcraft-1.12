@@ -88,7 +88,7 @@ public class BlockCheesePress extends BlockOrientable {
         ItemStack held = playerIn.getHeldItem(hand);
         if (super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ))
             return true;
-        if (GrowthcraftMilkConfig.cheesePressHandOperated && held.isEmpty()) {
+        if (GrowthcraftMilkConfig.CHEESE_PRESS_HAND_OPERATED && held.isEmpty()) {
             if (!playerIn.isSneaking()) {
                 final TileEntityCheesePress cheesePress = getTileEntity(worldIn, pos);
                 if (cheesePress != null) {
@@ -119,7 +119,7 @@ public class BlockCheesePress extends BlockOrientable {
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos) {
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
         if (!worldIn.isRemote) {
-            if (GrowthcraftMilkConfig.cheesePressRedstoneOperated) {
+            if (GrowthcraftMilkConfig.CHEESE_PRESS_REDSTONE_OPERATED) {
                 this.updatePressState(worldIn, pos);
             }
         }

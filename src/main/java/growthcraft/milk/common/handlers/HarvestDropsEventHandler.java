@@ -1,5 +1,6 @@
 package growthcraft.milk.common.handlers;
 
+import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.shared.init.GrowthcraftMilkItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTallGrass;
@@ -10,6 +11,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import java.util.Random;
 
 public class HarvestDropsEventHandler {
+    Random random = new Random();
 
     @SubscribeEvent
     public void onHarvestDrops(HarvestDropsEvent event) {
@@ -20,9 +22,7 @@ public class HarvestDropsEventHandler {
     }
 
     private void doAdditionalDrop(HarvestDropsEvent event ) {
-        Random random = new Random();
-
-        if ( random.nextInt(100) <= 2 ) {
+        if ( random.nextInt(100) <= GrowthcraftMilk.config.getThistleDropChance()) {
             ItemStack thistleStack = new ItemStack(GrowthcraftMilkItems.thistleSeed.getItem());
             event.getDrops().add(thistleStack);
         }

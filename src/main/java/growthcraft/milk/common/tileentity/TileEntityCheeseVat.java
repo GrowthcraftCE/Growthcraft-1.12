@@ -167,13 +167,13 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
     protected FluidTank[] createTanks() {
         return new FluidTank[]{
                 // milk
-                new FluidTank(GrowthcraftMilkConfig.cheeseVatPrimaryTankCapacity),
+                new FluidTank(GrowthcraftMilkConfig.CHEESE_VAT_PRIMARY_TANK_CAPACITY),
                 // rennet
-                new FluidTank(GrowthcraftMilkConfig.cheeseVatRennetTankCapacity),
+                new FluidTank(GrowthcraftMilkConfig.CHEESE_VAT_RENNET_TANK_CAPACITY),
                 // waste
-                new FluidTank(GrowthcraftMilkConfig.cheeseVatWasteTankCapacity),
+                new FluidTank(GrowthcraftMilkConfig.CHEESE_VAT_WASTE_TANK_CAPACITY),
                 // recipe fluid
-                new FluidTank(GrowthcraftMilkConfig.cheeseVatRecipeTankCapacity)
+                new FluidTank(GrowthcraftMilkConfig.CHEESE_VAT_RECIPE_TANK_CAPACITY)
         };
     }
 
@@ -240,7 +240,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
             decrStackSize(slot, 1);
             primaryFluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(milkStack, GrowthcraftMilkFluids.curds.getFluid()));
             rennetFluidSlot.clear();
-            wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.cheeseVatMilkToCurdsWheyAmount), true);
+            wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.CHEESE_VAT_MILK_TO_CURDS_WHEY_AMOUNT), true);
             GrowthcraftMilk.MILK_BUS.post(new EventCheeseVatMadeCurds(this));
         }
         return true;
@@ -252,7 +252,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
             if (!checkOnly) {
                 final Fluid fluid = SimpleCheeseTypes.RICOTTA.getFluids().getFluid(); // GrowthcraftMilkFluids.cheeses.get(EnumCheeseType.RICOTTA).getFluid();
                 primaryFluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(primaryFluidSlot.get(), fluid));
-                wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.cheeseVatWheyToRicottaWheyAmount), true);
+                wasteFluidSlot.fill(GrowthcraftMilkFluids.whey.asFluidStack(GrowthcraftMilkConfig.CHEESE_VAT_WHEY_TO_RICOTTA_WHEY_AMOUNT), true);
                 GrowthcraftMilk.MILK_BUS.post(new EventCheeseVatMadeCheeseFluid(this));
             }
             return true;
@@ -326,7 +326,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
         final FluidStack stack = primaryFluidSlot.get();
         if (FluidTest.hasTags(stack, MilkFluidTags.MILK_CURDS)) {
             if (commitMilkCurdRecipe(true)) {
-                setupProgress(GrowthcraftMilkConfig.cheeseVatCheeseTime);
+                setupProgress(GrowthcraftMilkConfig.CHEESE_VAT_CHEESE_TIME);
                 setVatState(CheeseVatState.PREPARING_CHEESE);
             }
         }
@@ -438,7 +438,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
         if (FluidTest.hasTags(milkStack, MilkFluidTags.MILK)) {
             GrowthcraftMilk.logger.debug("Activating Curd Transition.");
             if (activateCurdTransition(true)) {
-                setupProgress(GrowthcraftMilkConfig.cheeseVatCurdTime);
+                setupProgress(GrowthcraftMilkConfig.CHEESE_VAT_CURD_TIME);
                 setVatState(CheeseVatState.PREPARING_CURDS);
                 playSuccessfulSwordActivationFX();
                 return true;
@@ -446,7 +446,7 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
         } else if (FluidTest.hasTags(milkStack, MilkFluidTags.WHEY)) {
             GrowthcraftMilk.logger.debug("Activating Whey Transition.");
             if (activateWheyTransition(true)) {
-                setupProgress(GrowthcraftMilkConfig.cheeseVatWheyTime);
+                setupProgress(GrowthcraftMilkConfig.CHEESE_VAT_WHEY_TIME);
                 setVatState(CheeseVatState.PREPARING_RICOTTA);
                 playSuccessfulSwordActivationFX();
                 return true;

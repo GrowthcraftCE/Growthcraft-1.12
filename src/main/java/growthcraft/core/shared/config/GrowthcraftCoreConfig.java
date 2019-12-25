@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GrowthcraftCoreConfig {
-    // TODO: Keep either this class or GrowthcraftConfiguration
+    // TODO: Keep either this class or GrowthcraftCoreConfiguration
 
     // TODO: Need to make a super class so that sub-modules can extend.
 
