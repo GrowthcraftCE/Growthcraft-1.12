@@ -22,7 +22,7 @@ public class Cheese implements IStreamable {
     private int topSlicesMax = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
     private int topSlices = 4; // GrowthcraftMilkConfig.cheeseMaxSlices;
     private boolean isDoubleStacked = false;
-    private final int cheesePerSlice = GrowthcraftMilkConfig.CHEESE_ITEM_PER_BLOCK_SLICE;
+    private static final int CHEESE_PER_SLICE = GrowthcraftMilkConfig.CHEESE_ITEM_PER_BLOCK_SLICE;
     private ICheeseType cheese = WaxedCheeseTypes.CHEDDAR;
     private EnumCheeseStage cheeseStage = EnumCheeseStage.UNWAXED; // EnumCheeseType.CHEDDAR.stages.get(0);
 
@@ -99,7 +99,7 @@ public class Cheese implements IStreamable {
 
     public ItemStack yankSlices(int count, boolean doYank) {
         final int yankedCount = MathHelper.clamp(count, 0, getSlices());
-        final int quantity = yankedCount * cheesePerSlice;
+        final int quantity = yankedCount * CHEESE_PER_SLICE;
         if (quantity > 0) {
             if (doYank) {
                 if (this.topSlices <= yankedCount) {
@@ -221,31 +221,30 @@ public class Cheese implements IStreamable {
 
     @Override
     public boolean readFromStream(ByteBuf stream) {
-    	ICheeseType newCheese = CheeseIO.loadFromStream(stream);	// Is not null!
-    	EnumCheeseStage newCheeseStage = EnumCheeseStage.loadFromStream(stream);	// Is not null!
-    	int newAge = stream.readInt();
-    	int newTopSlices = stream.readInt();
-    	int newTopSlicesMax = stream.readInt();
-    	boolean newIsDoubleStacked = stream.readBoolean();
-    	
-    	if (!this.cheese.equals(newCheese) ||
-    		!this.cheeseStage.equals(newCheeseStage) ||
-    		this.age != newAge ||
-    		this.topSlices != newTopSlices ||
-    		this.topSlicesMax != newTopSlicesMax ||
-    		this.isDoubleStacked != newIsDoubleStacked ) {
-    		
-	        this.cheese = newCheese;
-	        this.cheeseStage = newCheeseStage;
-	        this.age = newAge;
-	        this.topSlices = newTopSlices;
-	        this.topSlicesMax = newTopSlicesMax;
-	        this.isDoubleStacked = newIsDoubleStacked;
-	        
-	        return true;
-    	}
-    	else
-    		return false;
+        ICheeseType newCheese = CheeseIO.loadFromStream(stream);    // Is not null!
+        EnumCheeseStage newCheeseStage = EnumCheeseStage.loadFromStream(stream);    // Is not null!
+        int newAge = stream.readInt();
+        int newTopSlices = stream.readInt();
+        int newTopSlicesMax = stream.readInt();
+        boolean newIsDoubleStacked = stream.readBoolean();
+
+        if (!this.cheese.equals(newCheese) ||
+                !this.cheeseStage.equals(newCheeseStage) ||
+                this.age != newAge ||
+                this.topSlices != newTopSlices ||
+                this.topSlicesMax != newTopSlicesMax ||
+                this.isDoubleStacked != newIsDoubleStacked) {
+
+            this.cheese = newCheese;
+            this.cheeseStage = newCheeseStage;
+            this.age = newAge;
+            this.topSlices = newTopSlices;
+            this.topSlicesMax = newTopSlicesMax;
+            this.isDoubleStacked = newIsDoubleStacked;
+
+            return true;
+        } else
+            return false;
     }
 
     @Override
@@ -260,15 +259,13 @@ public class Cheese implements IStreamable {
     }
 
     public boolean update() {
-        if (!isAged()) {
-            if (canAge()) {
-                if (this.age < this.ageMax) {
-                    this.age += 1;
-                } else {
-                    setStage(EnumCheeseStage.AGED);
-                }
-                return true;
+        if (!isAged() && canAge()) {
+            if (this.age < this.ageMax) {
+                this.age += 1;
+            } else {
+                setStage(EnumCheeseStage.AGED);
             }
+            return true;
         }
         return false;
     }

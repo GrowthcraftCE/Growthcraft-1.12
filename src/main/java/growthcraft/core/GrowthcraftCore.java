@@ -46,7 +46,7 @@ public class GrowthcraftCore {
     public static CommonProxy proxy;
 
     public static final GrowthcraftCoreConfig config = new GrowthcraftCoreConfig();
-    public static Logger logger = LogManager.getLogger(Reference.MODID);
+    public static final Logger logger = LogManager.getLogger(Reference.MODID);
 
     @Mod.EventHandler
     public void construct(FMLConstructionEvent event) {

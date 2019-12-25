@@ -12,7 +12,6 @@ import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.utils.BoozeHelper;
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
