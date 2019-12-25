@@ -17,6 +17,7 @@ import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
@@ -363,7 +364,7 @@ public class Init {
                 .brewsFromFallback(spoilInputFs[AppleCiderTypes.APPLE_CIDER_POISONED.ordinal()], TickUtils.minutes(1), null)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
-                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
     ////////

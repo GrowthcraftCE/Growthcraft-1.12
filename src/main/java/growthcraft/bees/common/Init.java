@@ -15,6 +15,7 @@ import growthcraft.bees.shared.init.GrowthcraftBeesFluids;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.BeesWaxTypes;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.MeadTypes;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.GrowthcraftCoreApis;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
@@ -350,7 +351,7 @@ public class Init {
                 .brewsFromFallback(spoilInputFs[MeadTypes.MEAD_POISONED.ordinal()], TickUtils.minutes(1), null)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
-                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
 

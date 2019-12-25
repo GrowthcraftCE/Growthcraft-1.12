@@ -397,8 +397,8 @@ public class Init {
 
 
     public static int roundToBottles(int fluidAmount) {
-        int numBottles = fluidAmount / GrowthcraftCoreConfig.bottleCapacity;
-        return numBottles * GrowthcraftCoreConfig.bottleCapacity;
+        int numBottles = fluidAmount / GrowthcraftCoreConfig.BOTTLE_CAPACITY;
+        return numBottles * GrowthcraftCoreConfig.BOTTLE_CAPACITY;
     }
 
     public static void registerFluidOres() {
@@ -546,7 +546,7 @@ public class Init {
     }
 
     public static void initFluids() {
-        int restCapRounded = roundToBottles(FluidContainerRegistry.BUCKET_VOLUME - 2 * GrowthcraftCoreConfig.bottleCapacity);
+        int restCapRounded = roundToBottles(FluidContainerRegistry.BUCKET_VOLUME - 2 * GrowthcraftCoreConfig.BOTTLE_CAPACITY);
 
         final List<Fluid> milks = Compat.getMilkFluids();
         for (Fluid f : milks) {
@@ -554,7 +554,7 @@ public class Init {
 
             MilkRegistry.instance().pancheon().addRecipe(
                     new FluidStack(f, 1000),
-                    GrowthcraftMilkFluids.cream.asFluidStack(2 * GrowthcraftCoreConfig.bottleCapacity), GrowthcraftMilkFluids.skimMilk.asFluidStack(restCapRounded),
+                    GrowthcraftMilkFluids.cream.asFluidStack(2 * GrowthcraftCoreConfig.BOTTLE_CAPACITY), GrowthcraftMilkFluids.skimMilk.asFluidStack(restCapRounded),
                     TickUtils.minutes(1));
         }
     }

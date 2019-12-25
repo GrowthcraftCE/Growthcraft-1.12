@@ -28,6 +28,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
         dependencies = "after:rustic;" +
@@ -43,6 +45,9 @@ public class GrowthcraftCore {
     @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
     public static CommonProxy proxy;
 
+    public static final GrowthcraftCoreConfig config = new GrowthcraftCoreConfig();
+    public static Logger logger = LogManager.getLogger(Reference.MODID);
+
     @Mod.EventHandler
     public void construct(FMLConstructionEvent event) {
         GrowthcraftCoreApis.tabGrowthcraft = new TabGrowthcraft();
@@ -52,7 +57,7 @@ public class GrowthcraftCore {
     @Mod.EventHandler
     @SuppressWarnings("deprecation")
     public void preInit(FMLPreInitializationEvent event) {
-        GrowthcraftCoreConfig.preInit();
+        config.preInit(event, "growthcraft/growthcraft-core.cfg");
 
         Init.preInitBlocks();
         Init.preInitItems();

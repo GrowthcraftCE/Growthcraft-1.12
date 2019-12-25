@@ -20,7 +20,7 @@ public class GrowthcraftConfiguration extends Configuration {
 
     public GrowthcraftConfiguration() { /* Nothing to do */ }
 
-     protected void preInit(FMLPreInitializationEvent event, String configFilePath) {
+     public void preInit(FMLPreInitializationEvent event, String configFilePath) {
         File directory = event.getModConfigurationDirectory();
         configuration = new Configuration(
                 new File(directory.getPath(), configFilePath)
