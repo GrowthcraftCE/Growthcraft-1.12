@@ -9,9 +9,9 @@ import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.GrowthcraftCoreApis;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
@@ -246,7 +246,7 @@ public class Init {
                 .brewsFromFallback(spoilInputFs[LagerTypes.LAGER_POISONED.ordinal()], TickUtils.minutes(1), null)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
-                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
     private static void registerHopAleFermentations() {
@@ -360,7 +360,7 @@ public class Init {
                 .brewsFromFallback(spoilInputFs[HopAleTypes.ALE_POISONED.ordinal()], TickUtils.minutes(1), null)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(45))
-                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCoreConfig.hidePoisonedBooze);
+                .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
     private static void registerFermentations() {

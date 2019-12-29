@@ -61,7 +61,7 @@ public class TileEntityFruitPresser extends GrowthcraftTileBase implements ITick
     public boolean readFromStream_FruitPresser(ByteBuf stream) throws IOException {
         this.trans = stream.readFloat();
         this.transPrev = stream.readFloat();
-        return true;
+        return false;
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)

@@ -131,8 +131,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
     public boolean readFromStream_CheeseBlock(ByteBuf stream) throws IOException {
-        cheese.readFromStream(stream);
-        return true;
+        return cheese.readFromStream(stream);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)
@@ -148,7 +147,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
             if (cheese.needClientUpdate) {
                 cheese.needClientUpdate = false;
                 if (cheese.hasSlices()) {
-                    markForUpdate();
+                    markForUpdate(true);
                 } else {
                     world.setBlockToAir(getPos());
                 }
@@ -204,7 +203,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
             } else
                 player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
         }
-        markDirtyAndUpdate(); // Test, if correct
+        markDirtyAndUpdate(true); // Test, if correct
     }
 
     @Override
@@ -219,7 +218,7 @@ public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITicka
             if (!ItemUtils.isEmpty(stack)) {
                 ItemUtils.addStackToPlayer(stack, player, false);
             }
-            markDirtyAndUpdate();
+            markDirtyAndUpdate(true);
             cheese.needClientUpdate |= true;
             return true;
         }

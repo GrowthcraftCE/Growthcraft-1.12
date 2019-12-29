@@ -109,7 +109,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
     @Override
     protected void markFluidDirty() {
         super.markFluidDirty();
-        markDirtyAndUpdate();
+        markDirtyAndUpdate(true);
     }
 
     /************

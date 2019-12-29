@@ -93,7 +93,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
     protected void markFluidDirty() {
         // Brew Kettles need to update their rendering state when a fluid
         // changes, most of the other cellar blocks are unaffected by this
-        markForUpdate();
+        markForUpdate(true);
     }
 
     @Override
@@ -313,7 +313,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
         this.clearTank(1);
         this.getFluidTank(0).fill(f1, true);
         this.getFluidTank(1).fill(f0, true);
-        markForUpdate();
+        markForUpdate(true);
     }
 
     public boolean hasLid() {

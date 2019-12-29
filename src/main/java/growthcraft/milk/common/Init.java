@@ -397,8 +397,8 @@ public class Init {
 
 
     public static int roundToBottles(int fluidAmount) {
-        int numBottles = fluidAmount / GrowthcraftCoreConfig.bottleCapacity;
-        return numBottles * GrowthcraftCoreConfig.bottleCapacity;
+        int numBottles = fluidAmount / GrowthcraftCoreConfig.BOTTLE_CAPACITY;
+        return numBottles * GrowthcraftCoreConfig.BOTTLE_CAPACITY;
     }
 
     public static void registerFluidOres() {
@@ -429,7 +429,7 @@ public class Init {
 
     public static void preInitFluids() {
         final IEffect milkEffect = EffectMilk.create(GrowthcraftCellarPotions.potionTipsy);
-        if (GrowthcraftMilkConfig.milkEnabled) {
+        if (GrowthcraftMilkConfig.MILK_ENABLED) {
             FluidMilk fluidMilk = (FluidMilk) new FluidMilk("fluid_milk");
             ItemFoodBottleFluid foodBottleMilk = (ItemFoodBottleFluid) new ItemFoodBottleFluid(fluidMilk, 4, 0.3f, false);
             foodBottleMilk.setEffect(milkEffect).setAlwaysEdible();
@@ -446,7 +446,7 @@ public class Init {
         {
             final EffectList list = new EffectList();
             list.add(milkEffect);
-            if (GrowthcraftMilkConfig.fantasyMilkEffects) {
+            if (GrowthcraftMilkConfig.FANTASY_MILK_EFFECTS) {
                 // Idea from here: http://www.altmedicine101.com/buttermilk
                 list.add(new EffectExtinguish());
                 list.add(EffectUtils.createAddPotionEffect(MobEffects.FIRE_RESISTANCE, TickUtils.seconds(15), 0));
@@ -478,7 +478,7 @@ public class Init {
         {
             final EffectList list = new EffectList();
             list.add(milkEffect);
-            if (GrowthcraftMilkConfig.fantasyMilkEffects) {
+            if (GrowthcraftMilkConfig.FANTASY_MILK_EFFECTS) {
                 list.add(EffectUtils.createAddPotionEffect(MobEffects.SPEED, TickUtils.seconds(15), 0));
             }
             foodBottleSkimMilk.setEffect(list).setAlwaysEdible();
@@ -492,7 +492,7 @@ public class Init {
         ItemFoodBottleFluid foodBottleWhey = new ItemFoodBottleFluid(fluidWhey, 1, 0.1f, false);
         {
             final EffectList list = new EffectList();
-            if (GrowthcraftMilkConfig.fantasyMilkEffects) {
+            if (GrowthcraftMilkConfig.FANTASY_MILK_EFFECTS) {
                 list.add(EffectUtils.createAddPotionEffect(MobEffects.STRENGTH, TickUtils.seconds(10), 0));
                 list.add(EffectUtils.createAddPotionEffect(MobEffects.RESISTANCE, TickUtils.seconds(10), 0));
             }
@@ -515,38 +515,38 @@ public class Init {
         // Set the fluid color and density for each of the fluid sub-types
         kumisBooze[KumisTypes.KUMIS_FERMENTED.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisFermentedColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_FERMENTED_COLOR)
                 .setDensity(1120);
         kumisBooze[KumisTypes.KUMIS_POTENT.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisPotentColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_POTENT_COLOR)
                 .setDensity(1120);
         kumisBooze[KumisTypes.KUMIS_EXTENDED.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisExtendedColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_EXTENDED_COLOR)
                 .setDensity(1120);
         kumisBooze[KumisTypes.KUMIS_HYPEREXTENDED.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisHyperExtendedColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_HYPER_EXTENDED_COLOR)
                 .setDensity(1120);
         kumisBooze[KumisTypes.KUMIS_POTENT_EXTENDED.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisPotentExtendedColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_POTENT_EXTENDED_COLOR)
                 .setDensity(1120);
         kumisBooze[KumisTypes.KUMIS_POTENT_HYPEREXTENDED.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisPotentHyperExtendedColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_POTENT_HYPER_EXTENDED_COLOR)
                 .setDensity(1120);
         kumisBooze[KumisTypes.KUMIS_POISONED.ordinal()]
                 .getFluid()
-                .setColor(GrowthcraftMilkConfig.kumisPoisonedColor)
+                .setColor(GrowthcraftMilkConfig.KUMIS_POISONED_COLOR)
                 .setDensity(1120);
 
         preInitCheeseFluids();
     }
 
     public static void initFluids() {
-        int restCapRounded = roundToBottles(FluidContainerRegistry.BUCKET_VOLUME - 2 * GrowthcraftCoreConfig.bottleCapacity);
+        int restCapRounded = roundToBottles(FluidContainerRegistry.BUCKET_VOLUME - 2 * GrowthcraftCoreConfig.BOTTLE_CAPACITY);
 
         final List<Fluid> milks = Compat.getMilkFluids();
         for (Fluid f : milks) {
@@ -554,7 +554,7 @@ public class Init {
 
             MilkRegistry.instance().pancheon().addRecipe(
                     new FluidStack(f, 1000),
-                    GrowthcraftMilkFluids.cream.asFluidStack(2 * GrowthcraftCoreConfig.bottleCapacity), GrowthcraftMilkFluids.skimMilk.asFluidStack(restCapRounded),
+                    GrowthcraftMilkFluids.cream.asFluidStack(2 * GrowthcraftCoreConfig.BOTTLE_CAPACITY), GrowthcraftMilkFluids.skimMilk.asFluidStack(restCapRounded),
                     TickUtils.minutes(1));
         }
     }

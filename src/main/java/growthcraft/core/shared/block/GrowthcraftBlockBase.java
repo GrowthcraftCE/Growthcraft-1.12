@@ -30,6 +30,8 @@ public abstract class GrowthcraftBlockBase extends Block {
     }
 
     public void markBlockForUpdate(World worldIn, BlockPos pos) {
+//    	System.out.println("CALLED GrowthcraftBlockBase.markBlockForUpdate()");	// DEBUG_BlockUpdate
+    	
         IBlockState state = worldIn.getBlockState(pos);
         worldIn.markBlockRangeForRenderUpdate(pos, pos);
         worldIn.notifyBlockUpdate(pos, state, state, BlockFlags.UPDATE_AND_SYNC);

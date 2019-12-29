@@ -148,7 +148,7 @@ public class BrewKettle extends DeviceBase {
         } else {
             brewingSlot.consume(1);
         }
-        markForUpdate();
+        markForUpdate(true);
         MinecraftForge.EVENT_BUS.post(new EventBrewed(parent, recipe));
     }
 
@@ -166,7 +166,7 @@ public class BrewKettle extends DeviceBase {
                 brewItem(recipe);
             }
         } else {
-            if (resetTime()) markForUpdate();
+            if (resetTime()) markForUpdate(true);
         }
     }
 

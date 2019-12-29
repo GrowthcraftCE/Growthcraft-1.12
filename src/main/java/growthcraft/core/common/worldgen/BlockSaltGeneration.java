@@ -15,8 +15,8 @@ import java.util.Random;
 public class BlockSaltGeneration implements IWorldGenerator {
 
     // Needs to be configurable
-    private int minHieght = GrowthcraftCoreConfig.blockSaltOreMinHeight;
-    private int maxHieght = GrowthcraftCoreConfig.blockSaltOreMaxHeight;
+    private int minHieght = GrowthcraftCoreConfig.BLOCK_SALT_ORE_MIN_HEIGHT;
+    private int maxHieght = GrowthcraftCoreConfig.BLOCK_SALT_ORE_MAX_HEIGHT;
 
     private WorldGenerator salt_overworld;
 
@@ -44,7 +44,7 @@ public class BlockSaltGeneration implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.getDimension()) {
             case 0: // Overworld
-                this.runGenerator(salt_overworld, world, random, chunkX, chunkZ, GrowthcraftCoreConfig.blockSaltOreChanceToSpawn, minHieght, maxHieght);
+                this.runGenerator(salt_overworld, world, random, chunkX, chunkZ, GrowthcraftCoreConfig.BLOCK_SALT_ORE_CHANCE_TO_SPAWN, minHieght, maxHieght);
                 break;
             case 1: // The End
                 break;

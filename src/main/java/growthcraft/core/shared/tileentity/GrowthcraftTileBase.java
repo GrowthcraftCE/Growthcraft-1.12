@@ -19,6 +19,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.capabilities.Capability;
 
 /**
@@ -31,15 +32,31 @@ import net.minecraftforge.common.capabilities.Capability;
 public abstract class GrowthcraftTileBase extends TileEntity implements IStreamable, IAltNBTSerializable {
     protected static TileEventHandlerMap<GrowthcraftTileBase> HANDLERS = new TileEventHandlerMap<GrowthcraftTileBase>();
 
-    public void markForUpdate() {
-        IBlockState curState = getWorld().getBlockState(pos);
-        world.markBlockRangeForRenderUpdate(pos, pos);
-        world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+    public void markForUpdate(boolean triggerRenderUpdate) {
+//    	System.out.println("CALLED GrowthcraftTileBase.markForUpdate(" + triggerRenderUpdate + ")");	// DEBUG_BlockUpdate
+    	
+        IBlockState curState = world.getBlockState(pos);
+        if( triggerRenderUpdate ) {
+        	world.markBlockRangeForRenderUpdate(pos, pos);
+        	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.UPDATE_AND_SYNC);
+        }
+        else if(!world.isRemote) {
+        	world.notifyBlockUpdate(pos, curState, curState, BlockFlags.SYNC | BlockFlags.SUPRESS_RENDER);
+        }
+    }
+    
+    @Override
+    public void markDirty() {
+//    	System.out.println("CALLED GrowthcraftTileBase.markDirty()");	// DEBUG_BlockUpdate
+    	
+    	super.markDirty();
     }
 
-    public void markDirtyAndUpdate() {
+    public void markDirtyAndUpdate(boolean triggerRenderUpdate) {
+//    	System.out.println("CALLED DeviceBase.markDirtyAndUpdate(" + triggerRenderUpdate + ")");		// DEBUG_BlockUpdate
+    	
         markDirty();
-        markForUpdate();
+        markForUpdate(triggerRenderUpdate);
     }
 
     @Override
@@ -110,14 +127,15 @@ public abstract class GrowthcraftTileBase extends TileEntity implements IStreama
     public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
         if (packet.getTileEntityType() == 127) {
             final NBTTagCompound tag = packet.getNbtCompound();
-            boolean dirty = false;
+            boolean requiresClientUpdate = false;
             if (tag != null) {
                 final ByteBuf stream = Unpooled.copiedBuffer(tag.getByteArray("P"));
                 if (readFromStream(stream)) {
-                    dirty = true;
+                	requiresClientUpdate = true;
                 }
             }
-            if (dirty) markForUpdate();
+            if (requiresClientUpdate)
+            	markForUpdate(true);
         }
     }
 
