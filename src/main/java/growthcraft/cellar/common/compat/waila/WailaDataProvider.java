@@ -28,7 +28,7 @@ public class WailaDataProvider implements IWailaDataProvider {
         // TODO: Sync TileEntity server object with client when getDeviceProgressScaled is called client side. Otherwise client has to opne the GUI to get an update.
         if(tileEntity instanceof ITileProgressiveDevice){
             float progress = ((ITileProgressiveDevice) tileEntity).getDeviceProgressScaled(100);
-            if(progress >= 0){
+            if(progress > 0){
                 tooltip.add(TextFormatting.GREEN + "Progress: " + progress + "%");
             }
         }
