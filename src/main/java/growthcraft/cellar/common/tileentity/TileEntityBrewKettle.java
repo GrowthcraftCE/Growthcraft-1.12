@@ -14,6 +14,7 @@ import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemUtils;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
@@ -74,6 +75,9 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
     private SpatialRandom sprand = new SpatialRandom();
     // Crash: @SideOnly(Side.CLIENT)
     private boolean animLastLid = false;    // NOTE: Only use it inside update() on the client side.
+
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{brewKettle };}
 
     @Override
     protected FluidTank[] createTanks() {
@@ -190,7 +194,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
     }
 
     public boolean canBrew() {
-        return brewKettle.canBrew();
+        return brewKettle.canProcess();
     }
 
     public boolean hasFluid() {

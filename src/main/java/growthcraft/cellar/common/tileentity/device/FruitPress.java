@@ -4,8 +4,10 @@ import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.common.Residue;
+import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
 import growthcraft.cellar.shared.processing.pressing.IPressingRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
@@ -14,12 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FruitPress extends DeviceProgressive {
+public class FruitPress extends DeviceProgressive<IPressingRecipe> {
     private float pomace;
     private DeviceFluidSlot fluidSlot;
     private DeviceInventorySlot inputSlot;
     private DeviceInventorySlot residueSlot;
-    private IPressingRecipe currentResult;
+
 
     /**
      * @param te - parent tile
@@ -41,30 +43,34 @@ public class FruitPress extends DeviceProgressive {
         return getWorld().getBlockState(parent.getPos().up()).getValue(BlockFruitPresser.TYPE_PRESSED) == PressState.PRESSED;
     }
 
-    private boolean preparePressing() {
-        this.currentResult = null;
-        final ItemStack primarySlotItem = inputSlot.get();
-        if (primarySlotItem == null) return false;
+    @Override
+    protected IPressingRecipe loadRecipe() {
+        return CellarRegistry.instance().pressing().getPressingRecipe(inputSlot.get());
+    }
 
-        if (!isPressed()) return false;
-
+    @Override
+    protected float getSpeedMultiplier(){
+        return super.getSpeedMultiplier()*(isPressed()? 1:0);
+    }
+    @Override
+    protected boolean canProcess() {
+        IPressingRecipe recipe = getWorkingRecipe();
+        if (inputSlot.get() == null) return false;
         if (fluidSlot.isFull()) return false;
 
-        final IPressingRecipe result = CellarRegistry.instance().pressing().getPressingRecipe(primarySlotItem);
-        if (result == null) return false;
-        if (!inputSlot.hasEnough(result.getInput())) return false;
-        this.currentResult = result;
-        setTimeMax(currentResult.getTime());
+        if (recipe == null) return false;
+        if (!inputSlot.hasEnough((recipe.getInput()))) return false;
 
         if (fluidSlot.isEmpty()) return true;
 
-        final FluidStack stack = currentResult.getFluidStack();
+        final FluidStack stack = recipe.getFluidStack();
         return stack.isFluidEqual(fluidSlot.get());
     }
 
     public void producePomace() {
-        if (currentResult == null) return;
-        final Residue residue = currentResult.getResidue();
+        IPressingRecipe recipe = getWorkingRecipe();
+        if (recipe == null) return;
+        final Residue residue = recipe.getResidue();
         if (residue != null) {
             this.pomace = this.pomace + residue.pomaceRate;
             if (this.pomace >= 1.0F) {
@@ -75,26 +81,18 @@ public class FruitPress extends DeviceProgressive {
         }
     }
 
-    public void pressItem() {
-        if (currentResult == null) return;
+    @Override
+    public void process(IPressingRecipe recipe) {
         final ItemStack pressingItem = inputSlot.get();
         producePomace();
-        final FluidStack fluidstack = currentResult.getFluidStack();
+        final FluidStack fluidstack = recipe.getFluidStack();
         fluidSlot.fill(fluidstack, true);
-        inputSlot.consume(currentResult.getInput());
+        inputSlot.consume(recipe.getInput());
     }
 
+    @Override
     public void update() {
-        if (preparePressing()) {
-            increaseTime();
-            if (getTime() >= getTimeMax()) {
-                resetTime();
-                pressItem();
-                markDirty();
-            }
-        } else {
-            if (resetTime()) markDirty();
-        }
+        super.update();
     }
 
     @Override

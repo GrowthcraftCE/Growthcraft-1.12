@@ -6,6 +6,7 @@ import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.inventory.AccesibleSlots;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
@@ -43,6 +44,9 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
     private DeviceFluidSlot inputFluidSlot = new DeviceFluidSlot(this, 0);
     private DeviceFluidSlot outputFluidSlot = new DeviceFluidSlot(this, 1);
     private DeviceInventorySlot outputInventorySlot = new DeviceInventorySlot(this, 0);
+
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{};}
 
     @Override
     protected FluidTank[] createTanks() {

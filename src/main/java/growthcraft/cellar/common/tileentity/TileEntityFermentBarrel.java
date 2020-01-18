@@ -9,6 +9,7 @@ import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.inventory.InventoryProcessor;
 import growthcraft.core.shared.io.nbt.INBTItemSerializable;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import io.netty.buffer.ByteBuf;
@@ -26,6 +27,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice implements IInventory, ITickable, ITileProgressiveDevice, INBTItemSerializable {
 
@@ -53,6 +56,9 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0, 1, 0);
 
     @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{fermentBarrel};}
+
+    @Override
     protected FluidTank[] createTanks() {
         return new FluidTank[]{new CellarTank(GrowthcraftCellarConfig.fermentBarrelMaxCap, this)};
     }
@@ -78,7 +84,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     }
 
     public int getTime() {
-        return fermentBarrel.getTime();
+        return (int)fermentBarrel.getTime();
     }
 
     public int getTimeMax() {
@@ -172,7 +178,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void sendGUINetworkData(Container container, IContainerListener iCrafting) {
         super.sendGUINetworkData(container, iCrafting);
-        iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME.ordinal(), fermentBarrel.getTime());
+        iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME.ordinal(), (int)fermentBarrel.getTime());
         iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME_MAX.ordinal(), fermentBarrel.getTimeMax());    // Not fermentBarrel.getTimeMaxDefault() !
     }
 
@@ -223,13 +229,11 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     protected void markFluidDirty() {
         super.markFluidDirty();
-        fermentBarrel.markForRecipeRecheck();
     }
 
     @Override
     public void onInventoryChanged(IInventory inv, int index) {
         super.onInventoryChanged(inv, index);
-        fermentBarrel.markForRecipeRecheck();
         if (index == 1) {
             // Changing tap has a visual feedback
             this.markDirtyAndUpdate(true);

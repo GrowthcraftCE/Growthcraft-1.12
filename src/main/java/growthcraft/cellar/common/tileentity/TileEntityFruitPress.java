@@ -5,6 +5,7 @@ import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import net.minecraft.entity.player.EntityPlayer;
@@ -33,6 +34,9 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
     private static final int[] allSlotIds = new int[]{0, 1};
     private static final int[] residueSlotIds = new int[]{0};
     private FruitPress fruitPress = new FruitPress(this, 0, 0, 1);
+
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{fruitPress};}
 
     @Override
     protected FluidTank[] createTanks() {
@@ -170,7 +174,7 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
     @Override
     public void sendGUINetworkData(Container container, IContainerListener iCrafting) {
         super.sendGUINetworkData(container, iCrafting);
-        iCrafting.sendWindowProperty(container, FruitPressDataID.TIME, fruitPress.getTime());
+        iCrafting.sendWindowProperty(container, FruitPressDataID.TIME, (int)fruitPress.getTime());
         iCrafting.sendWindowProperty(container, FruitPressDataID.TIME_MAX, fruitPress.getTimeMax());
     }
 

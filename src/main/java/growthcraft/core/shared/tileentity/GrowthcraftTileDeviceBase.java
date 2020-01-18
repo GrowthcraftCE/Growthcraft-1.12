@@ -1,6 +1,8 @@
 package growthcraft.core.shared.tileentity;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Nullable;
 
@@ -8,11 +10,16 @@ import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.handlers.FluidHandlerBlockWrapper;
 import growthcraft.core.shared.fluids.FluidTanks;
 import growthcraft.core.shared.fluids.IFluidTanks;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
+import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IFluidTankOperable;
+import growthcraft.core.shared.tileentity.feature.ITileDevice;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
@@ -24,7 +31,7 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 /**
  * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
  */
-public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks {
+public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks,ITileDevice {
     private FluidTanks tanks;
 
     public GrowthcraftTileDeviceBase() {
@@ -32,9 +39,31 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
         this.tanks = new FluidTanks(createTanks());
     }
 
+
+
     protected void markFluidDirty() {
         markDirty();
+        if(getWorld().isRemote){return;}
+        for(DeviceBase dev : getDevices()){
+            if(dev instanceof DeviceProgressive){
+                ((DeviceProgressive) dev).markForRecipeRecheck();
+            }
+        }
     }
+
+    @Override
+    public void onInventoryChanged(IInventory inv, int index) {
+        super.onInventoryChanged(inv, index);
+        //I don't know why getWorld would return null
+        if(getWorld() == null){return;}
+        if(getWorld().isRemote){return;}
+        for(DeviceBase dev : getDevices()){
+            if(dev instanceof DeviceProgressive){
+                ((DeviceProgressive) dev).markForRecipeRecheck();
+            }
+        }
+    }
+
 
     protected FluidTank[] createTanks() {
         return new FluidTank[]{};

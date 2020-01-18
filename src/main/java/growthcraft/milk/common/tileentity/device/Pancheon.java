@@ -8,7 +8,7 @@ import growthcraft.milk.shared.processing.pancheon.IPancheonRecipe;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.FluidStack;
 
-public class Pancheon extends DeviceProgressive {
+public class Pancheon extends DeviceProgressive<IPancheonRecipe> {
     private DeviceFluidSlot inputSlot;
     private DeviceFluidSlot topSlot;
     private DeviceFluidSlot bottomSlot;
@@ -36,28 +36,21 @@ public class Pancheon extends DeviceProgressive {
      *
      * @return recipe
      */
-    private IPancheonRecipe getRecipe() {
-        return MilkRegistry.instance().pancheon().getRecipe(inputSlot.get());
-    }
-
-    /**
-     * Get the matching recipe AND it can be worked on with the current pancheon
-     *
-     * @return recipe
-     */
-    public IPancheonRecipe getWorkingRecipe() {
-        final IPancheonRecipe recipe = getRecipe();
+    @Override
+    protected IPancheonRecipe loadRecipe() {
+        IPancheonRecipe recipe = MilkRegistry.instance().pancheon().getRecipe(inputSlot.get());
         if (recipe == null) return null;
         if (!this.topSlot.hasMatchingWithCapacity(recipe.getTopOutputFluid())) return null;
         if (!this.bottomSlot.hasMatchingWithCapacity(recipe.getBottomOutputFluid())) return null;
         return recipe;
     }
 
+
     /**
      * Complete the process and commit the changes
      */
     private void commitRecipe() {
-        final IPancheonRecipe recipe = getRecipe();
+        final IPancheonRecipe recipe = loadRecipe();
         if (recipe != null) {
             this.inputSlot.consume(recipe.getInputFluid().amount, true);
 

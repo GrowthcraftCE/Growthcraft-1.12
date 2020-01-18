@@ -6,6 +6,7 @@ import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
@@ -46,6 +47,9 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
     private int time;
     private boolean needRecipeRecheck = true;
     private ICheesePressRecipe workingRecipe;
+
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{};}
 
     public void markForRecipeCheck() {
         this.needRecipeRecheck = true;

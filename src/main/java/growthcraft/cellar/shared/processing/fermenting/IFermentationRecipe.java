@@ -2,12 +2,13 @@ package growthcraft.cellar.shared.processing.fermenting;
 
 import javax.annotation.Nullable;
 
+import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface IFermentationRecipe {
+public interface IFermentationRecipe extends IProcessingRecipeBase {
 
     IMultiFluidStacks getInputFluidStack();
 

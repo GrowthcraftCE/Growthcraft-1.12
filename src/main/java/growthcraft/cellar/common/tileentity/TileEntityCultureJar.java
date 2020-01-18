@@ -9,6 +9,7 @@ import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.ITileHeatedDevice;
@@ -65,6 +66,9 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
         this.yeastGen.setConsumption(GrowthcraftCellarConfig.cultureJarConsumption);
     }
 
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{cultureGen,yeastGen};}
+
     public boolean isHeated() {
         return cultureGen.isHeated();
     }
@@ -119,6 +123,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
 
     @Override
     protected void markFluidDirty() {
+        super.markFluidDirty();
         // Ferment Jars need to update their rendering state when a fluid
         // changes, most of the other cellar blocks are unaffected by this
         markForUpdate(true);
@@ -205,9 +210,9 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
     @Override
     public void sendGUINetworkData(Container container, IContainerListener iCrafting) {
         super.sendGUINetworkData(container, iCrafting);
-        iCrafting.sendWindowProperty(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), yeastGen.getTime());
+        iCrafting.sendWindowProperty(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), (int)yeastGen.getTime());
         iCrafting.sendWindowProperty(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
-        iCrafting.sendWindowProperty(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), cultureGen.getTime());
+        iCrafting.sendWindowProperty(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), (int)cultureGen.getTime());
         iCrafting.sendWindowProperty(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
         iCrafting.sendWindowProperty(container, CultureJarDataId.HEAT_AMOUNT.ordinal(), (int) (heatComponent.getHeatMultiplier() * 0x7FFF));
     }
