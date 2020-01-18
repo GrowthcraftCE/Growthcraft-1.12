@@ -28,7 +28,7 @@ public class DriedCurdsCheesePressRecipe implements ICheesePressRecipe {
     }
 
     @Override
-    public int getTimeMax() {
+    public int getTime() {
         return time;
     }
 
@@ -49,4 +49,6 @@ public class DriedCurdsCheesePressRecipe implements ICheesePressRecipe {
     public String toString() {
         return String.format("DriedCurdsCheesePressRecipe({%s} / %d = {%s})", getOutputItemStack(), time, getInputItemStack());
     }
+
+
 }
