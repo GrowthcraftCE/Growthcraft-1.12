@@ -1,5 +1,6 @@
 package growthcraft.cellar.common.tileentity;
 
+import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
@@ -88,8 +89,12 @@ public class TileEntityFruitPress extends TileEntityCellarDevice implements ITic
         return allSlotIds;
     }
 
+    public boolean isPressed(){
+        return getWorld().getBlockState(this.getPos().up()).getValue(BlockFruitPresser.TYPE_PRESSED) == BlockFruitPresser.PressState.PRESSED;
+    }
     @Override
     public boolean canInsertItem(int index, ItemStack stack, EnumFacing side) {
+        if(isPressed()) return false;
         // allow the insertion of a raw item from ANY side
         if (index == 0) return true;
         return false;

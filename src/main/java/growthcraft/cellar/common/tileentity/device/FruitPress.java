@@ -2,6 +2,7 @@ package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.processing.pressing.IPressingRecipe;
@@ -34,11 +35,12 @@ public class FruitPress extends DeviceProgressive<IPressingRecipe> {
         this.residueSlot = new DeviceInventorySlot(te, rs);
     }
 
-    /**
-     * @return meta - the metadata for the FruitPresser usually above the fruit press
-     */
+
     public boolean isPressed() {
-        return getWorld().getBlockState(parent.getPos().up()).getValue(BlockFruitPresser.TYPE_PRESSED) == PressState.PRESSED;
+       if(parent instanceof TileEntityFruitPress){
+           return ((TileEntityFruitPress)parent).isPressed();
+       }
+        return false;
     }
 
     @Override
