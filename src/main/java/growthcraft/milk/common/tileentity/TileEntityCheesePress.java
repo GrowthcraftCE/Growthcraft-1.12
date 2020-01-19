@@ -13,8 +13,6 @@ import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.tileentity.device.CheesePress;
-import growthcraft.milk.shared.MilkRegistry;
-import growthcraft.milk.shared.processing.cheesepress.ICheesePressRecipe;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;

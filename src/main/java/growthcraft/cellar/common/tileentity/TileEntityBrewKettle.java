@@ -98,6 +98,7 @@ public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITic
         // Brew Kettles need to update their rendering state when a fluid
         // changes, most of the other cellar blocks are unaffected by this
         markForUpdate(true);
+        super.markFluidDirty();
     }
 
     @Override

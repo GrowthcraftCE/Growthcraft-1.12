@@ -1,6 +1,7 @@
 package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.shared.CellarRegistry;
+import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.culturing.ICultureRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
@@ -46,9 +47,12 @@ public class CultureGenerator extends DeviceProgressive<ICultureRecipe> {
     protected boolean canProcess() {
         ICultureRecipe recipe = getWorkingRecipe();
         if(recipe == null) return false;
-        if(!fluidSlot.hasContent()) return false;
-        if (!fluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
-        return invSlot.isEmpty() || invSlot.hasMatchingWithCapacity(recipe.getOutputItemStack());
+        //Checks for input fluids
+        if(!fluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
+        //Checks for output items
+        if(!invSlot.hasCapacityFor(recipe.getOutputItemStack())) return false;
+
+        return true;
     }
 
     @Override

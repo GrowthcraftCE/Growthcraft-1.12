@@ -7,16 +7,13 @@ import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
-import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
-import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidStack;
 
 public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
     // TODO: Create same recipe caching mechanism as for barrels. Is more performant, if recipe check is avoided on each TileEntity update.
@@ -67,35 +64,25 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
         return CellarRegistry.instance().brewing().findRecipe(GrowthcraftFluidUtils.removeStackTags(inputFluidSlot.get()), brewingSlot.get(), hasLid);
     }
 
-    @Override
-    public IBrewingRecipe getWorkingRecipe() {
-        if (!isHeated()) return null;
-
-        final IBrewingRecipe recipe = loadRecipe();
-        if (recipe == null) return null;
-
-        if (brewingSlot.isEmpty()) return null;
-
-        // Avatair: Why the double check for input item and input fluid?
-        if (!CellarRegistry.instance().brewing().isFallbackRecipe(recipe)) {
-            final IMultiItemStacks expected = recipe.getInputItemStack();
-            if (!brewingSlot.hasEnough(expected)) return null;
-        }
-
-        final FluidStack inputFluid = recipe.getInputFluidStack();
-        if (!inputFluidSlot.hasEnough(inputFluid)) return null;
-
-        if (outputFluidSlot.isEmpty()) return recipe;
-
-        final FluidStack outputFluid = recipe.asFluidStack();
-        if (!outputFluidSlot.hasCapacityFor(outputFluid)) return null;
-
-        return super.getWorkingRecipe();
-    }
 
     @Override
     public boolean canProcess() {
-        return getWorkingRecipe() != null;
+        IBrewingRecipe recipe = getWorkingRecipe();
+        if(recipe == null) return false;
+        //Checks for input fluids
+        //TODO: the fluidstack becomes null when deleted from the GUI of the brewKettle?, this should be fixed
+        if(inputFluidSlot.get() == null){
+            return false;
+        }
+        if(!inputFluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
+        //Checks for input items
+        if(!brewingSlot.hasEnough(recipe.getInputItemStack())) return false;
+        //Checks for output fluids
+        if(!outputFluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
+        //Checks for output items
+        if(!residueSlot.hasCapacityFor(recipe.getResidue().residueItem)) return false;
+
+        return true;
     }
 
     private void produceGrain(IBrewingRecipe recipe) {
@@ -110,7 +97,6 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
     }
 
     protected void process(IBrewingRecipe recipe) {
-        if(!canProcess()) return;
         produceGrain(recipe);
         inputFluidSlot.consume(GrowthcraftFluidUtils.replaceFluidStackTags(recipe.getInputFluidStack(), inputFluidSlot.get()), true);
         outputFluidSlot.fill(recipe.asFluidStack(), true);

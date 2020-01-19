@@ -18,6 +18,10 @@ public class ChurnRecipe implements IChurnRecipe {
     }
 
     @Override
+    public int getTime() {
+        return 0;
+    }
+    @Override
     public boolean isValidForRecipe(FluidStack stack) {
         if (stack == null) return false;
         if (!inputFluid.isFluidEqual(stack)) return false;
@@ -53,4 +57,6 @@ public class ChurnRecipe implements IChurnRecipe {
                 FluidFormatString.format(outputFluid),
                 outputItem);
     }
+
+
 }

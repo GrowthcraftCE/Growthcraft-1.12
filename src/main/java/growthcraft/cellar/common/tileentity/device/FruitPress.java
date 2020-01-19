@@ -4,10 +4,8 @@ import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.common.Residue;
-import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
 import growthcraft.cellar.shared.processing.pressing.IPressingRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
@@ -55,16 +53,15 @@ public class FruitPress extends DeviceProgressive<IPressingRecipe> {
     @Override
     protected boolean canProcess() {
         IPressingRecipe recipe = getWorkingRecipe();
-        if (inputSlot.get() == null) return false;
-        if (fluidSlot.isFull()) return false;
+        if(recipe == null) return false;
+        //Checks for input items
+        if(!recipe.getInput().containsItemStack(inputSlot.get())) return false;
+        //Checks for output fluids
+        if(!fluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
+        //Checks for output items
+        if(!residueSlot.hasCapacityFor(recipe.getResidue().residueItem)) return false;
 
-        if (recipe == null) return false;
-        if (!inputSlot.hasEnough((recipe.getInput()))) return false;
-
-        if (fluidSlot.isEmpty()) return true;
-
-        final FluidStack stack = recipe.getFluidStack();
-        return stack.isFluidEqual(fluidSlot.get());
+        return true;
     }
 
     public void producePomace() {
@@ -83,7 +80,6 @@ public class FruitPress extends DeviceProgressive<IPressingRecipe> {
 
     @Override
     public void process(IPressingRecipe recipe) {
-        final ItemStack pressingItem = inputSlot.get();
         producePomace();
         final FluidStack fluidstack = recipe.getFluidStack();
         fluidSlot.fill(fluidstack, true);

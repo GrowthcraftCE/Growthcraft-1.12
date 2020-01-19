@@ -8,11 +8,9 @@ import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import growthcraft.core.shared.item.ItemUtils;
-import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
@@ -20,14 +18,12 @@ import net.minecraftforge.fluids.FluidStack;
 public class FermentBarrel extends DeviceProgressive<IFermentationRecipe> {
 
     private DeviceInventorySlot fermentSlot;
-    private DeviceInventorySlot tapSlot;
     private DeviceFluidSlot fluidSlot;
 
     public FermentBarrel(TileEntityFermentBarrel te, int fermentSlotId, int tapSlotId, int fluidSlotId) {
         super(te);
         this.timeMax = GrowthcraftCellarConfig.fermentTime;
         this.fermentSlot = new DeviceInventorySlot(te, fermentSlotId);
-        this.tapSlot = new DeviceInventorySlot(te, tapSlotId);
         this.fluidSlot = new DeviceFluidSlot(te, fluidSlotId);
     }
 
@@ -39,9 +35,14 @@ public class FermentBarrel extends DeviceProgressive<IFermentationRecipe> {
 
 
     protected boolean canProcess() {
-        if (ItemUtils.isEmpty(fermentSlot.get())) return false;
-        if (fluidSlot.isEmpty()) return false;
-        return getWorkingRecipe() != null;
+        IFermentationRecipe recipe = getWorkingRecipe();
+        if(recipe == null) return false;
+        //Checks for input fluids
+        if(!recipe.getInputFluidStack().containsFluidStack(fluidSlot.get())) return false;
+        //Checks for input items
+        if(!recipe.getFermentingItemStack().containsItemStack(fermentSlot.get())) return false;
+
+        return true;
     }
 
     @Override
@@ -66,10 +67,6 @@ public class FermentBarrel extends DeviceProgressive<IFermentationRecipe> {
         }
     }
 
-    @Override
-    public void update() {
-        super.update();
-    }
 
     // I/O Stuff
 

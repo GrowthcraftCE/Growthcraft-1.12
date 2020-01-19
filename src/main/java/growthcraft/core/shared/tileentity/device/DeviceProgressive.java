@@ -1,9 +1,9 @@
 package growthcraft.core.shared.tileentity.device;
 
 import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
+import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
 public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBase {
     protected double time;
@@ -12,7 +12,7 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
     protected boolean recheckRecipe = true;
     private T activeRecipe;
 
-    public DeviceProgressive(TileEntity te) {
+    public DeviceProgressive(GrowthcraftTileDeviceBase te) {
         super(te);
     }
 
@@ -114,10 +114,11 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
         final T recipe = getWorkingRecipe();
         if (canProcess()) {
             setTimeMax(recipe.getTime());
-            increaseTime();
             if (time >= timeMax) {
-                resetTime();
                 process(recipe);
+                resetTime();
+            }else{
+                increaseTime();
             }
         } else {
             if (resetTime()) markForUpdate(true);
