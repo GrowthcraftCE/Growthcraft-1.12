@@ -33,7 +33,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 
     private static AccesibleSlots accessibleSlots = new AccesibleSlots(new int[][]{
             {0},
-            {0},
+            {},
             {0},
             {0},
             {0},
