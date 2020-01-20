@@ -1,7 +1,5 @@
 package growthcraft.cellar.common.tileentity.device;
 
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.common.Residue;
@@ -61,9 +59,7 @@ public class FruitPress extends DeviceProgressive<IPressingRecipe> {
         //Checks for output fluids
         if(!fluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
         //Checks for output items
-        if(!residueSlot.hasCapacityFor(recipe.getResidue().residueItem)) return false;
-
-        return true;
+        return residueSlot.hasCapacityFor(recipe.getResidue().residueItem);
     }
 
     public void producePomace() {
@@ -88,10 +84,6 @@ public class FruitPress extends DeviceProgressive<IPressingRecipe> {
         inputSlot.consume(recipe.getInput());
     }
 
-    @Override
-    public void update() {
-        super.update();
-    }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {

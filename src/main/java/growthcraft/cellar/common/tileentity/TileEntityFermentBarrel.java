@@ -27,8 +27,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice implements IInventory, ITickable, ITileProgressiveDevice, INBTItemSerializable {
 
@@ -53,7 +51,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 
     // Constants
     private static final int[] accessableSlotIds = new int[]{0};
-    private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0, 1, 0);
+    private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0,  0);
 
     @Override
     public DeviceBase[] getDevices(){return new DeviceBase[]{fermentBarrel};}
@@ -226,10 +224,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
         return doDrain(from, resource.amount, shouldDrain);
     }
 
-    @Override
-    protected void markFluidDirty() {
-        super.markFluidDirty();
-    }
 
     @Override
     public void onInventoryChanged(IInventory inv, int index) {

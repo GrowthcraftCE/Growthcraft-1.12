@@ -26,7 +26,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 /**
- * Extend this base class if you want a base class with an `Inventory` and `Fluid Tanks`
+ * Extend this base class if you want a TileEntity that cam process items or fluids
  */
 public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventoryBase implements IFluidTankOperable, IFluidTanks,ITileDevice {
     private FluidTanks tanks;
@@ -43,7 +43,7 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
         if(getWorld().isRemote){return;}
         for(DeviceBase dev : getDevices()){
             if(dev instanceof DeviceProgressive){
-                ((DeviceProgressive) dev).markForRecipeRecheck();
+                ((DeviceProgressive<?>) dev).markForRecipeRecheck();
             }
         }
     }
@@ -56,7 +56,7 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
         if(getWorld().isRemote){return;}
         for(DeviceBase dev : getDevices()){
             if(dev instanceof DeviceProgressive){
-                ((DeviceProgressive) dev).markForRecipeRecheck();
+                ((DeviceProgressive<?>) dev).markForRecipeRecheck();
             }
         }
     }
@@ -76,6 +76,7 @@ public abstract class GrowthcraftTileDeviceBase extends GrowthcraftTileInventory
         return true;
     }
 
+    //TODO: maybe merge these methods with drain
     protected FluidStack doDrain(EnumFacing dir, int amount, boolean shouldDrain) {
         return null;
     }

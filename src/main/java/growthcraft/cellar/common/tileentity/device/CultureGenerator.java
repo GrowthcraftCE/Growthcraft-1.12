@@ -1,11 +1,8 @@
 package growthcraft.cellar.common.tileentity.device;
 
 import growthcraft.cellar.shared.CellarRegistry;
-import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.culturing.ICultureRecipe;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-import growthcraft.cellar.shared.processing.fermenting.IFermentationRecipe;
-import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
@@ -44,15 +41,14 @@ public class CultureGenerator extends DeviceProgressive<ICultureRecipe> {
         return heatComponent.isHeated();
     }
 
+    @Override
     protected boolean canProcess() {
         ICultureRecipe recipe = getWorkingRecipe();
         if(recipe == null) return false;
         //Checks for input fluids
         if(!fluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
         //Checks for output items
-        if(!invSlot.hasCapacityFor(recipe.getOutputItemStack())) return false;
-
-        return true;
+        return invSlot.hasCapacityFor(recipe.getOutputItemStack());
     }
 
     @Override
@@ -62,8 +58,4 @@ public class CultureGenerator extends DeviceProgressive<ICultureRecipe> {
         invSlot.increaseStack(recipe.getOutputItemStack());
     }
 
-    @Override
-    public void update() {
-        super.update();
-    }
 }

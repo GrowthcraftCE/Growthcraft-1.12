@@ -154,8 +154,4 @@ public class YeastGenerator extends DeviceProgressive {
         }
     }
 
-    @Override
-    public void update() {
-        super.update();
-    }
 }

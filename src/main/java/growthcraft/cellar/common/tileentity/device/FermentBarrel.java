@@ -20,7 +20,7 @@ public class FermentBarrel extends DeviceProgressive<IFermentationRecipe> {
     private DeviceInventorySlot fermentSlot;
     private DeviceFluidSlot fluidSlot;
 
-    public FermentBarrel(TileEntityFermentBarrel te, int fermentSlotId, int tapSlotId, int fluidSlotId) {
+    public FermentBarrel(TileEntityFermentBarrel te, int fermentSlotId, int fluidSlotId) {
         super(te);
         this.timeMax = GrowthcraftCellarConfig.fermentTime;
         this.fermentSlot = new DeviceInventorySlot(te, fermentSlotId);
@@ -33,23 +33,20 @@ public class FermentBarrel extends DeviceProgressive<IFermentationRecipe> {
         return CellarRegistry.instance().fermenting().findRecipe(GrowthcraftFluidUtils.removeStackTags(fluidSlot.get()), fermentSlot.get());
     }
 
-
+    @Override
     protected boolean canProcess() {
         IFermentationRecipe recipe = getWorkingRecipe();
         if(recipe == null) return false;
         //Checks for input fluids
         if(!recipe.getInputFluidStack().containsFluidStack(fluidSlot.get())) return false;
         //Checks for input items
-        if(!recipe.getFermentingItemStack().containsItemStack(fermentSlot.get())) return false;
-
-        return true;
+        return recipe.getFermentingItemStack().containsItemStack(fermentSlot.get());
     }
 
     @Override
     public void process(IFermentationRecipe recipe) {
         final ItemStack fermentItem = fermentSlot.get();
-        if (!ItemUtils.isEmpty(fermentItem)) {
-            if (recipe != null) {
+        if (!ItemUtils.isEmpty(fermentItem) && recipe != null) {
                 final FluidStack outputFluidStack = recipe.getOutputFluidStack();
                 if (outputFluidStack != null) {
                     fluidSlot.set(GrowthcraftFluidUtils.exchangeFluid(fluidSlot.get(), outputFluidStack.getFluid()));
@@ -63,7 +60,6 @@ public class FermentBarrel extends DeviceProgressive<IFermentationRecipe> {
                         fermentSlot.consume(fermenter.getStackSize());
                     }
                 }
-            }
         }
     }
 
