@@ -7,22 +7,18 @@ import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
-import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
-import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
+import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fluids.FluidStack;
 
-public class BrewKettle extends DeviceBase {
+public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
     // TODO: Create same recipe caching mechanism as for barrels. Is more performant, if recipe check is avoided on each TileEntity update.
 
     private float grain;
-    private double time;
-    private double timeMax;
     private DeviceInventorySlot brewingSlot;
     private DeviceInventorySlot residueSlot;
     private DeviceInventorySlot lidSlot;
@@ -44,38 +40,6 @@ public class BrewKettle extends DeviceBase {
         this.grain = g;
     }
 
-    public double getTime() {
-        return time;
-    }
-
-    public void setTime(double t) {
-        this.time = t;
-    }
-
-    public double getTimeMax() {
-        return timeMax;
-    }
-
-    public void setTimeMax(double t) {
-        this.timeMax = t;
-    }
-
-    public boolean resetTime() {
-        if (time != 0) {
-            setTime(0);
-            return true;
-        }
-        return false;
-    }
-
-    public float getProgress() {
-        if (timeMax == 0) return 0f;
-        return (float) (time / timeMax);
-    }
-
-    public int getProgressScaled(int scale) {
-        return (int) (getProgress() * scale);
-    }
 
     public BrewKettle setHeatMultiplier(float h) {
         heatComponent.setHeatMultiplier(h);
@@ -94,38 +58,31 @@ public class BrewKettle extends DeviceBase {
         return inputFluidSlot.hasContent() || outputFluidSlot.hasContent();
     }
 
-    private IBrewingRecipe findRecipe() {
+    @Override
+    protected IBrewingRecipe loadRecipe() {
         boolean hasLid = GrowthcraftCellarItems.brewKettleLid.equals(lidSlot.get().getItem());
         return CellarRegistry.instance().brewing().findRecipe(GrowthcraftFluidUtils.removeStackTags(inputFluidSlot.get()), brewingSlot.get(), hasLid);
     }
 
-    public IBrewingRecipe getWorkingRecipe() {
-        if (!isHeated()) return null;
 
-        final IBrewingRecipe recipe = findRecipe();
-        if (recipe == null) return null;
-
-        if (brewingSlot.isEmpty()) return null;
-
-        // Avatair: Why the double check for input item and input fluid?
-        if (!CellarRegistry.instance().brewing().isFallbackRecipe(recipe)) {
-            final IMultiItemStacks expected = recipe.getInputItemStack();
-            if (!brewingSlot.hasEnough(expected)) return null;
+    @Override
+    public boolean canProcess() {
+        IBrewingRecipe recipe = getWorkingRecipe();
+        if(recipe == null) return false;
+        //Checks for input fluids
+        //TODO: the fluidstack becomes null when deleted from the GUI of the brewKettle?, this should be fixed
+        if(inputFluidSlot.get() == null){
+            return false;
         }
+        if(!inputFluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
+        //Checks for input items
+        if(!brewingSlot.hasEnough(recipe.getInputItemStack())) return false;
+        //Checks for output fluids
+        if(!outputFluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
+        //Checks for output items
+        if(!residueSlot.hasCapacityFor(recipe.getResidue().residueItem)) return false;
 
-        final FluidStack inputFluid = recipe.getInputFluidStack();
-        if (!inputFluidSlot.hasEnough(inputFluid)) return null;
-
-        if (outputFluidSlot.isEmpty()) return recipe;
-
-        final FluidStack outputFluid = recipe.asFluidStack();
-        if (!outputFluidSlot.hasCapacityFor(outputFluid)) return null;
-
-        return recipe;
-    }
-
-    public boolean canBrew() {
-        return getWorkingRecipe() != null;
+        return true;
     }
 
     private void produceGrain(IBrewingRecipe recipe) {
@@ -139,7 +96,7 @@ public class BrewKettle extends DeviceBase {
         }
     }
 
-    private void brewItem(IBrewingRecipe recipe) {
+    protected void process(IBrewingRecipe recipe) {
         produceGrain(recipe);
         inputFluidSlot.consume(GrowthcraftFluidUtils.replaceFluidStackTags(recipe.getInputFluidStack(), inputFluidSlot.get()), true);
         outputFluidSlot.fill(recipe.asFluidStack(), true);
@@ -152,28 +109,19 @@ public class BrewKettle extends DeviceBase {
         MinecraftForge.EVENT_BUS.post(new EventBrewed(parent, recipe));
     }
 
+    @Override
+    protected float getSpeedMultiplier(){
+        return super.getSpeedMultiplier()*getHeatMultiplier();
+    }
+
     public void update() {
         heatComponent.update();
-        final IBrewingRecipe recipe = getWorkingRecipe();
-        if (recipe != null) {
-            this.timeMax = (double) recipe.getTime();
-
-            final float multiplier = getHeatMultiplier();
-            this.time += multiplier * 1;
-
-            if (time >= timeMax) {
-                resetTime();
-                brewItem(recipe);
-            }
-        } else {
-            if (resetTime()) markForUpdate(true);
-        }
+        super.update();
     }
 
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        this.time = data.getDouble("time");
         this.grain = data.getFloat("grain");
         heatComponent.readFromNBT(data, "heat_component");
     }
@@ -181,7 +129,6 @@ public class BrewKettle extends DeviceBase {
     @Override
     public void writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
-        data.setDouble("time", time);
         data.setFloat("grain", grain);
         heatComponent.writeToNBT(data, "heat_component");
     }
@@ -192,8 +139,6 @@ public class BrewKettle extends DeviceBase {
     @Override
     public boolean readFromStream(ByteBuf buf) {
         super.readFromStream(buf);
-        this.time = buf.readDouble();
-        this.timeMax = buf.readDouble();
         this.grain = buf.readFloat();
         heatComponent.readFromStream(buf);
         return false;
@@ -205,8 +150,6 @@ public class BrewKettle extends DeviceBase {
     @Override
     public boolean writeToStream(ByteBuf buf) {
         super.writeToStream(buf);
-        buf.writeDouble(time);
-        buf.writeDouble(timeMax);
         buf.writeFloat(grain);
         heatComponent.writeToStream(buf);
         return false;

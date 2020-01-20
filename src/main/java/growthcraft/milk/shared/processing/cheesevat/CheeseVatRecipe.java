@@ -81,4 +81,9 @@ public class CheeseVatRecipe implements ICheeseVatRecipe {
     public String toString() {
         return String.format("CheeseVatRecipe(output_fluids: %s, output_items: %s, input_fluids: %s, input_items: %s)", outputFluids, outputItems, inputFluids, inputItems);
     }
+
+    @Override
+    public int getTime() {
+        return 0;
+    }
 }

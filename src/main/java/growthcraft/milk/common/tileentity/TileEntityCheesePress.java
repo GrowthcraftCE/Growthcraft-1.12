@@ -5,14 +5,14 @@ import java.io.IOException;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
-import growthcraft.core.shared.tileentity.GrowthcraftTileInventoryBase;
+import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
-import growthcraft.milk.shared.MilkRegistry;
-import growthcraft.milk.shared.processing.cheesepress.ICheesePressRecipe;
+import growthcraft.milk.common.tileentity.device.CheesePress;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -24,7 +24,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implements ITickable, IItemOperable, ITileProgressiveDevice {
+public class TileEntityCheesePress extends GrowthcraftTileDeviceBase implements ITickable, IItemOperable, ITileProgressiveDevice {
     private static int[][] accessibleSlots = {
             {0},
             {0},
@@ -40,50 +40,20 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
     public float animProgress;
     @SideOnly(Side.CLIENT)
     public int animDir;
-
     private int screwState;
     private DeviceInventorySlot invSlot = new DeviceInventorySlot(this, 0);
-    private int time;
-    private boolean needRecipeRecheck = true;
-    private ICheesePressRecipe workingRecipe;
-
-    public void markForRecipeCheck() {
-        this.needRecipeRecheck = true;
-    }
-
-    private void setupWorkingRecipe() {
-        final ICheesePressRecipe recipe = MilkRegistry.instance().cheesePress().findRecipe(invSlot.get());
-        if (recipe != workingRecipe) {
-            if (workingRecipe != null) {
-                this.time = 0;
-            }
-            this.workingRecipe = recipe;
-        }
-    }
-
-    protected ICheesePressRecipe getWorkingRecipe() {
-        if (workingRecipe == null) {
-            setupWorkingRecipe();
-        }
-        return workingRecipe;
-    }
+    private final CheesePress cheesePress = new CheesePress(this);
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{cheesePress};}
 
     @Override
     public float getDeviceProgress() {
-        final ICheesePressRecipe recipe = getWorkingRecipe();
-        if (recipe != null) {
-            return (float) time / (float) recipe.getTimeMax();
-        }
-        return 0.0f;
+        return cheesePress.getProgress();
     }
 
     @Override
     public int getDeviceProgressScaled(int scale) {
-        final ICheesePressRecipe recipe = getWorkingRecipe();
-        if (recipe != null) {
-            return time * scale / recipe.getTimeMax();
-        }
-        return 0;
+        return cheesePress.getProgressScaled(scale);
     }
 
     public boolean isPressed() {
@@ -102,7 +72,7 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
     @Override
     public void onInventoryChanged(IInventory inv, int index) {
         super.onInventoryChanged(inv, index);
-        markForRecipeCheck();
+        cheesePress.markForRecipeRecheck();
     }
 
     @Override
@@ -158,41 +128,10 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
 			isAnim = true;*/
     }
 
-    private void commitRecipe() {
-        final ICheesePressRecipe recipe = getWorkingRecipe();
-        if (recipe != null) {
-            invSlot.set(recipe.getOutputItemStack().copy());
-            this.workingRecipe = null;
-        }
-    }
+
 
     private void updateEntityServer() {
-        if (needRecipeRecheck) {
-            needRecipeRecheck = false;
-            setupWorkingRecipe();
-        }
-
-        final ICheesePressRecipe recipe = getWorkingRecipe();
-        if (recipe != null) {
-            // work can only progress if the cheese press is active.
-            if (isPressed()) {
-                if (time < recipe.getTimeMax()) {
-                    time++;
-                } else {
-                    this.time = 0;
-                    commitRecipe();
-                }
-            }
-            // otherwise the cheese press will lose its progress?
-            else {
-                if (time > 0) time--;
-            }
-        } else {
-            if (time != 0) {
-                this.time = 0;
-                markDirty();
-            }
-        }
+        cheesePress.update();
     }
 
     @Override
@@ -270,26 +209,22 @@ public class TileEntityCheesePress extends GrowthcraftTileInventoryBase implemen
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
     public void readFromNBT_CheesePress(NBTTagCompound nbt) {
         this.screwState = nbt.getInteger("screw_state");
-        this.time = nbt.getInteger("time");
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
     public void writeToNBT_CheesePress(NBTTagCompound nbt) {
         nbt.setInteger("screw_state", screwState);
-        nbt.setInteger("time", time);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
     public boolean readFromStream_CheesePress(ByteBuf stream) throws IOException {
         this.screwState = stream.readInt();
-        this.time = stream.readInt();
         return false;
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)
     public boolean writeToStream_CheesePress(ByteBuf stream) throws IOException {
         stream.writeInt(screwState);
-        stream.writeInt(time);
         return false;
     }
 }

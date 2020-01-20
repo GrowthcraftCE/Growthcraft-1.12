@@ -2,6 +2,7 @@ package growthcraft.milk.common.tileentity;
 
 import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
@@ -12,6 +13,9 @@ import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityPancheon extends GrowthcraftTileDeviceBase implements ITickable, ITileProgressiveDevice, IPancheonTile {
     private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
+
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{pancheon};}
 
     @Override
     public float getDeviceProgress() {

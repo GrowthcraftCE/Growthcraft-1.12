@@ -2,13 +2,14 @@ package growthcraft.milk.shared.processing.cheesevat;
 
 import java.util.List;
 
+import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 
-public interface ICheeseVatRecipe {
+public interface ICheeseVatRecipe extends IProcessingRecipeBase {
 
     List<FluidStack> getOutputFluidStacks();
 

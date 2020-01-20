@@ -13,6 +13,7 @@ import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
@@ -53,6 +54,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements ITickable, IItemOperable, ITileHeatedDevice, ITileNamedFluidTanks, ITileProgressiveDevice {
+
+
     public static enum FluidTankType {
         PRIMARY,
         RENNET,
@@ -91,6 +94,11 @@ public class TileEntityCheeseVat extends GrowthcraftTileDeviceBase implements IT
     private CheeseVatState vatState = CheeseVatState.IDLE;
     private float progress;
     private int progressMax;
+
+    @Override
+    public DeviceBase[] getDevices() {
+        return new DeviceBase[]{};
+    }
 
     public boolean isIdle() {
         return vatState == CheeseVatState.IDLE;

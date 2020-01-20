@@ -8,6 +8,7 @@ import java.util.Set;
 
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
 import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.CoreRegistry;
@@ -80,7 +81,8 @@ public class YeastGenerator extends DeviceProgressive {
      *
      * @return true, the generator can produce yeast, false otherwise
      */
-    public boolean canProduceYeast() {
+    @Override
+    public boolean canProcess() {
         if (fluidSlot.getAmount() < consumption) return false;
         final ItemStack yeastItem = invSlot.get();
         // we can ignore null items, this will fallback to the initProduceYeast
@@ -134,7 +136,8 @@ public class YeastGenerator extends DeviceProgressive {
         }
     }
 
-    public void produceYeast() {
+    @Override
+    public void process(IProcessingRecipeBase recipe) {
         if (invSlot.isEmpty()) {
             initProduceYeast();
         } else {
@@ -153,15 +156,6 @@ public class YeastGenerator extends DeviceProgressive {
 
     @Override
     public void update() {
-        if (canProduceYeast()) {
-            increaseTime();
-            if (time >= timeMax) {
-                resetTime();
-                produceYeast();
-                markDirty();
-            }
-        } else {
-            if (resetTime()) markDirty();
-        }
+        super.update();
     }
 }

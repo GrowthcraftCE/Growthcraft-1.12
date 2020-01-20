@@ -26,7 +26,7 @@ public class CheesePressRecipe implements ICheesePressRecipe {
     }
 
     @Override
-    public int getTimeMax() {
+    public int getTime() {
         return time;
     }
 

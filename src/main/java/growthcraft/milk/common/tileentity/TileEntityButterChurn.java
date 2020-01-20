@@ -6,11 +6,13 @@ import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.inventory.AccesibleSlots;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.item.ItemUtils;
+import growthcraft.milk.common.tileentity.device.Churn;
 import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.processing.churn.IChurnRecipe;
 import io.netty.buffer.ByteBuf;
@@ -26,12 +28,12 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
     public static enum WorkState {
         NONE,
         CHURN,
-        PRODUCE;
+        PRODUCE
     }
 
     private static AccesibleSlots accessibleSlots = new AccesibleSlots(new int[][]{
             {0},
-            {},
+            {0},
             {0},
             {0},
             {0},
@@ -39,10 +41,13 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
     });
 
     private int shaftState;
-    private int churns;
     private DeviceFluidSlot inputFluidSlot = new DeviceFluidSlot(this, 0);
     private DeviceFluidSlot outputFluidSlot = new DeviceFluidSlot(this, 1);
     private DeviceInventorySlot outputInventorySlot = new DeviceInventorySlot(this, 0);
+
+    private Churn churn = new Churn(this, 0,1,0);
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{churn};}
 
     @Override
     protected FluidTank[] createTanks() {
@@ -83,42 +88,17 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
         return accessibleSlots.sideContains(side, index);
     }
 
-    private IChurnRecipe getWorkingRecipe() {
-        final FluidStack stack = inputFluidSlot.get();
-        if (stack != null) {
-            final IChurnRecipe recipe = MilkRegistry.instance().churn().getRecipe(stack);
-            return recipe;
-        }
-        return null;
-    }
 
     public WorkState doWork() {
         WorkState state = WorkState.NONE;
-        final IChurnRecipe recipe = getWorkingRecipe();
-        if (recipe != null) {
-            state = WorkState.CHURN;
-            this.churns++;
-            if (churns >= recipe.getChurns()) {
-                this.churns = 0;
-                inputFluidSlot.consume(recipe.getInputFluidStack(), true);
-                outputFluidSlot.fill(recipe.getOutputFluidStack(), true);
-                outputInventorySlot.increaseStack(recipe.getOutputItemStack());
-                state = WorkState.PRODUCE;
-            }
-
-            if (shaftState == 0) {
+        if (shaftState == 0) {
                 this.shaftState = 1;
-            } else {
-                this.shaftState = 0;
-            }
-            markForUpdate(true);
+                churn.update();
         } else {
-            if (shaftState != 0) {
                 this.shaftState = 0;
-                markForUpdate(true);
-            }
-            this.churns = 0;
+                churn.update();
         }
+        markForUpdate(true);
         return state;
     }
 
@@ -173,7 +153,7 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
 //		if (dir == EnumFacing.UP) return 0;
         int result = 0;
 
-        if (MilkRegistry.instance().churn().isFluidIngredient(stack)) {
+        if (canFill(dir, stack.getFluid())) {
             result = inputFluidSlot.fill(stack, doFill);
         }
 
@@ -213,26 +193,22 @@ public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
     public void readFromNBT_ButterChurn(NBTTagCompound nbt) {
         this.shaftState = nbt.getInteger("shaft_state");
-        this.churns = nbt.getInteger("churns");
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
     public void writeToNBT_ButterChurn(NBTTagCompound nbt) {
         nbt.setInteger("shaft_state", shaftState);
-        nbt.setInteger("churns", churns);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
     public boolean readFromStream_ButterChurn(ByteBuf stream) throws IOException {
         this.shaftState = stream.readInt();
-        this.churns = stream.readInt();
         return false;
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)
     public boolean writeToStream_ButterChurn(ByteBuf stream) throws IOException {
         stream.writeInt(shaftState);
-        stream.writeInt(churns);
         return false;
     }
 }

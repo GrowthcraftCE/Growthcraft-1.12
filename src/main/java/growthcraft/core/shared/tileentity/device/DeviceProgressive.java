@@ -1,28 +1,83 @@
 package growthcraft.core.shared.tileentity.device;
 
+import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
+import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
-public class DeviceProgressive extends DeviceBase {
-    protected int time;
+public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBase {
+    protected double time;
     protected int timeMax;
+    //protected boolean shouldUseCachedRecipe = GrowthcraftCellarConfig.fermentBarrelUseCachedRecipe;
+    protected boolean recheckRecipe = true;
+    private T activeRecipe;
 
-    public DeviceProgressive(TileEntity te) {
+    public DeviceProgressive(GrowthcraftTileDeviceBase te) {
         super(te);
     }
 
+    //TODO:Move to DeviceBase, or make a DeviceRecipe class?
+    //Buffered recipe logic
+
+    protected T loadRecipe() {
+        return null;
+    }
+
+    public void markForRecipeRecheck() {
+        this.recheckRecipe = true;
+    }
+
+    public T refreshRecipe() {
+        final T recipe = loadRecipe();
+        if (recipe != null && recipe != activeRecipe) {
+            if (activeRecipe != null) {
+                resetTime();
+            }
+            this.activeRecipe = recipe;
+            markDirty();
+        } else {
+            if (recipe == null && activeRecipe != null) {
+                activeRecipe = null;
+                resetTime();
+                markDirty();
+            }
+        }
+        this.recheckRecipe = false;
+        return activeRecipe;
+    }
+
+    protected boolean canProcess(){return activeRecipe != null;}
+
+    protected void process(T recipe){if(!canProcess()) return;}
+
+    public T getWorkingRecipe() {
+        if (recheckRecipe) {refreshRecipe();}
+        return activeRecipe;
+    }
+
+    //Progress and time related stuff
+
+    protected float getSpeedMultiplier(){
+        return 1f;
+    }
+
     public float getProgress() {
-        if (timeMax <= 0) return 0f;
-        return (float) time / timeMax;
+        final int tmx = getTimeMax();
+        if (tmx > 0) {
+            return (float) time / (float) tmx;
+        }
+        return 0.0f;
     }
 
     public int getProgressScaled(int scale) {
-        if (timeMax <= 0) return 0;
-        return this.time * scale / timeMax;
+        final int tmx = getTimeMax();
+        if (tmx > 0) {
+            return (int) this.time * scale / tmx;
+        }
+        return 0;
     }
 
-    public int getTime() {
+    public double getTime() {
         return time;
     }
 
@@ -38,6 +93,9 @@ public class DeviceProgressive extends DeviceBase {
         this.timeMax = t;
     }
 
+    /**
+     * @return time was reset, false otherwise
+     */
     public boolean resetTime() {
         if (this.time != 0) {
             setTime(0);
@@ -48,11 +106,26 @@ public class DeviceProgressive extends DeviceBase {
 
 
     public void increaseTime() {
-        time++;
+        time+=getSpeedMultiplier();
     }
 
     public void update() {
+
+        final T recipe = getWorkingRecipe();
+        if (canProcess()) {
+            setTimeMax(recipe.getTime());
+            if (time >= timeMax) {
+                process(recipe);
+                resetTime();
+            }else{
+                increaseTime();
+            }
+        } else {
+            if (resetTime()) markForUpdate(true);
+        }
     }
+
+    //Data stuff
 
     /**
      * @param data - nbt data to read from
@@ -60,7 +133,7 @@ public class DeviceProgressive extends DeviceBase {
     @Override
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
-        this.time = data.getInteger("time");
+        this.time = data.getDouble("time");
         //this.timeMax = data.getInteger("timeMax");
     }
 
@@ -70,7 +143,7 @@ public class DeviceProgressive extends DeviceBase {
     @Override
     public void writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
-        data.setInteger("time", time);
+        data.setDouble("time", time);
         //data.setInteger("timeMax", timeMax);
     }
 
@@ -80,7 +153,7 @@ public class DeviceProgressive extends DeviceBase {
     @Override
     public boolean readFromStream(ByteBuf buf) {
         super.readFromStream(buf);
-        this.time = buf.readInt();
+        this.time = buf.readDouble();
         //this.timeMax = buf.readInt();
         return false;
     }
@@ -91,7 +164,7 @@ public class DeviceProgressive extends DeviceBase {
     @Override
     public boolean writeToStream(ByteBuf buf) {
         super.writeToStream(buf);
-        buf.writeInt(time);
+        buf.writeDouble(time);
         //buf.writeInt(timeMax);
         return false;
     }
