@@ -1,8 +1,8 @@
 package growthcraft.core.common;
 
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.worldgen.BlockSaltGeneration;
 import growthcraft.core.shared.compat.theoneprobe.TheOneProbeHandler;
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
@@ -13,9 +13,11 @@ public class CommonProxy {
     }
 
     public void init() {
-        if (GrowthcraftCoreConfig.BLOCK_SALT_ORE_WORLD_GEN) {
+
+        if (GrowthcraftCore.config.getBlockSaltOreWorldGen()) {
             GameRegistry.registerWorldGenerator(new BlockSaltGeneration(), 0);
         }
+
     }
 
     public void postInit() {
