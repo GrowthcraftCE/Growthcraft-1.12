@@ -1,7 +1,6 @@
 package growthcraft.core.common.worldgen;
 
 import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
