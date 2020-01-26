@@ -1,13 +1,15 @@
 package growthcraft.cellar.common.tileentity.device;
 
+import growthcraft.cellar.GrowthcraftCellar;
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.events.EventBrewed;
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.shared.processing.brewing.IBrewingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
-import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
+import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
@@ -16,7 +18,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.MinecraftForge;
 
 public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
-    // TODO: Create same recipe caching mechanism as for barrels. Is more performant, if recipe check is avoided on each TileEntity update.
+    // TODO: Create same recipe caching mechanism as for barrels.
+    //  Is more performant, if recipe check is avoided on each TileEntity update.
 
     private float grain;
     private DeviceInventorySlot brewingSlot;
@@ -40,14 +43,13 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
         this.grain = g;
     }
 
+    public float getHeatMultiplier() {
+        return heatComponent.getHeatMultiplier();
+    }
 
     public BrewKettle setHeatMultiplier(float h) {
         heatComponent.setHeatMultiplier(h);
         return this;
-    }
-
-    public float getHeatMultiplier() {
-        return heatComponent.getHeatMultiplier();
     }
 
     public boolean isHeated() {
@@ -68,19 +70,28 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
     @Override
     public boolean canProcess() {
         IBrewingRecipe recipe = getWorkingRecipe();
-        if(recipe == null) return false;
-        //Checks for input fluids
-        //TODO: the fluidstack becomes null when deleted from the GUI of the brewKettle?, this should be fixed
-        if(inputFluidSlot.get() == null){
+
+        //TODO: Implement more permanent solution for UserApi for brewing. This is the
+        // section that throws the NullPointer when there is a misconfiguration with the
+        // recipe config file.
+        try {
+            if (recipe == null) return false;
+            //Checks for input fluids
+            //TODO: the fluidstack becomes null when deleted from the GUI of the brewKettle?, this should be fixed
+            if (inputFluidSlot.get() == null) {
+                return false;
+            }
+            if (!inputFluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
+            //Checks for input items
+            if (!brewingSlot.hasEnough(recipe.getInputItemStack())) return false;
+            //Checks for output fluids
+            if (!outputFluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
+            //Checks for output items
+            return residueSlot.hasCapacityFor(recipe.getResidue().residueItem);
+        } catch (NullPointerException e) {
+            GrowthcraftCore.logger.error("There is an error in the growthcraft_cellar brewing recipes. Delete the brewing.json file or update it with the new entries from brewing.json.default");
             return false;
         }
-        if(!inputFluidSlot.hasEnough(recipe.getInputFluidStack())) return false;
-        //Checks for input items
-        if(!brewingSlot.hasEnough(recipe.getInputItemStack())) return false;
-        //Checks for output fluids
-        if(!outputFluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
-        //Checks for output items
-        return residueSlot.hasCapacityFor(recipe.getResidue().residueItem);
     }
 
     private void produceGrain(IBrewingRecipe recipe) {
@@ -109,8 +120,8 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
     }
 
     @Override
-    protected float getSpeedMultiplier(){
-        return super.getSpeedMultiplier()*getHeatMultiplier();
+    protected float getSpeedMultiplier() {
+        return super.getSpeedMultiplier() * getHeatMultiplier();
     }
 
     @Override

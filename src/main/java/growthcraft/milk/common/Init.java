@@ -153,13 +153,13 @@ public class Init {
     }
 
     public static void registerTileEntities() {
-        registerTileEntity(TileEntityPancheon.class, Reference.MODID + ":pancheon");
-        registerTileEntity(TileEntityButterChurn.class, Reference.MODID + ":churn");
-        registerTileEntity(TileEntityButterChurnPlunger.class, Reference.MODID + ":churn_plunger");
-        registerTileEntity(TileEntityCheeseBlock.class, Reference.MODID + ":cheese_block");
-        registerTileEntity(TileEntityHangingCurds.class, Reference.MODID + ":cheese_curds");
-        registerTileEntity(TileEntityCheeseVat.class, Reference.MODID + ":cheese_vat");
-        registerTileEntity(TileEntityCheesePress.class, Reference.MODID + ":cheese_press");
+        registerTileEntity(TileEntityPancheon.class, new ResourceLocation(Reference.MODID, "pancheon"));
+        registerTileEntity(TileEntityButterChurn.class, new ResourceLocation(Reference.MODID, "churn"));
+        registerTileEntity(TileEntityButterChurnPlunger.class, new ResourceLocation(Reference.MODID, "churn_plunger"));
+        registerTileEntity(TileEntityCheeseBlock.class, new ResourceLocation(Reference.MODID, "cheese_block"));
+        registerTileEntity(TileEntityHangingCurds.class, new ResourceLocation(Reference.MODID, "cheese_curds"));
+        registerTileEntity(TileEntityCheeseVat.class, new ResourceLocation(Reference.MODID, "cheese_vat"));
+        registerTileEntity(TileEntityCheesePress.class, new ResourceLocation(Reference.MODID, "cheese_press"));
     }
 
     @SideOnly(Side.CLIENT)
@@ -430,8 +430,8 @@ public class Init {
     public static void preInitFluids() {
         final IEffect milkEffect = EffectMilk.create(GrowthcraftCellarPotions.potionTipsy);
         if (GrowthcraftMilkConfig.MILK_ENABLED) {
-            FluidMilk fluidMilk = (FluidMilk) new FluidMilk("fluid_milk");
-            ItemFoodBottleFluid foodBottleMilk = (ItemFoodBottleFluid) new ItemFoodBottleFluid(fluidMilk, 4, 0.3f, false);
+            FluidMilk fluidMilk = new FluidMilk("fluid_milk");
+            ItemFoodBottleFluid foodBottleMilk = new ItemFoodBottleFluid(fluidMilk, 4, 0.3f, false);
             foodBottleMilk.setEffect(milkEffect).setAlwaysEdible();
             GrowthcraftMilkFluids.milk = new FluidDetailsBuilder(
                     fluidMilk,
@@ -581,8 +581,13 @@ public class Init {
         CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftMilkFluids.rennet.getFluid(), MilkFluidTags.RENNET);
         CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftMilkFluids.whey.getFluid(), MilkFluidTags.WHEY);
 
-        GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.rennet.getFluid())
-                .brewsFrom(new FluidStack(FluidRegistry.WATER, 1000), new OreItemStacks("rennetSource"), false, TickUtils.minutes(1), null);
+        GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.rennet.getFluid()).brewsFrom(
+                new FluidStack(FluidRegistry.WATER, 1000),
+                new OreItemStacks("rennetSource"),
+                false,
+                TickUtils.minutes(1),
+                Residue.newDefault(0.0F)
+        );
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.pasteurizedMilk.getFluid())
                 .brewsFrom(GrowthcraftMilkFluids.skimMilk.asFluidStack(250), new ItemStack(Items.SUGAR), false, TickUtils.minutes(1), new Residue(GrowthcraftMilkItems.starterCulture.asStack(1), 1.0f));
@@ -645,7 +650,7 @@ public class Init {
                     registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
 
                     // Mod-Compat: Forestry Milk
-                    if (FluidRegistry.getFluid("milk") != null ) {
+                    if (FluidRegistry.getFluid("milk") != null) {
                         inputFluid = new FluidStack(FluidRegistry.getFluid("milk"), 200);
                         registerFermentation(outputFluid, inputFluid, fluidTags, inputItem, fermentTime * fermentOffset, alcoholRate, tipsyDuration, potionEffect, potionDuration);
                     }
@@ -948,7 +953,7 @@ public class Init {
                     final ItemBlockHangingCurds<?> actualCurd = (ItemBlockHangingCurds<?>) actual.getItem();
                     final ItemBlockHangingCurds<?> expectedCurd = (ItemBlockHangingCurds<?>) expected.getItem();
                     if (expectedCurd.getCheeseType(expected) == actualCurd.getCheeseType(actual)) {
-                        if (actualCurd.isDried(actual)) return true;
+                        return actualCurd.isDried(actual);
                     }
                 }
                 return false;
