@@ -150,9 +150,8 @@ public class DeviceInventorySlot {
      */
     public boolean hasCapacityFor(ItemStack stack) {
         if (ItemUtils.isEmpty(stack)) return true;
-        if (hasContent()) {
-            if (!hasMatching(stack)) return false;
-        }
+        if (hasContent() && !hasMatching(stack)) return false;
+
         return getAvailableCapacity() >= stack.getCount();
     }
 
