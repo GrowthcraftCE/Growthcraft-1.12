@@ -1,12 +1,16 @@
 package growthcraft.milk.common.tileentity.device;
 
+import growthcraft.core.shared.item.MultiItemStacks;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
+import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.processing.cheesevat.ICheeseVatRecipe;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidRegistry;
 
 public class CheeseVat extends DeviceProgressive<ICheeseVatRecipe> {
     private DeviceFluidSlot primaryFluidSlot;
@@ -15,7 +19,7 @@ public class CheeseVat extends DeviceProgressive<ICheeseVatRecipe> {
     private TileHeatingComponent heatComponent;
 
 
-
+    //TODO: To be implemented
     public CheeseVat(GrowthcraftTileDeviceBase te, int primFluidSlot_id, int rennetFluidSlot_id, int wasteFluidSlot_id) {
         super(te);
         primaryFluidSlot = new DeviceFluidSlot(te,primFluidSlot_id);
@@ -39,16 +43,14 @@ public class CheeseVat extends DeviceProgressive<ICheeseVatRecipe> {
     }
     @Override
     protected ICheeseVatRecipe loadRecipe() {
-        //ICheeseVatRecipe recipe = MilkRegistry.instance().cheeseVat().findRecipe(fluids, items);
+        //return MilkRegistry.instance().cheeseVat().findRecipe();
         return null;
     }
 
     @Override
     protected boolean canProcess() {
         ICheeseVatRecipe recipe = getWorkingRecipe();
-        if (recipe == null) return false;
-
-        return false;
+        return !(recipe == null);
     }
 
 

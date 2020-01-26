@@ -80,9 +80,7 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
         //Checks for output fluids
         if(!outputFluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
         //Checks for output items
-        if(!residueSlot.hasCapacityFor(recipe.getResidue().residueItem)) return false;
-
-        return true;
+        return residueSlot.hasCapacityFor(recipe.getResidue().residueItem);
     }
 
     private void produceGrain(IBrewingRecipe recipe) {
@@ -96,6 +94,7 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
         }
     }
 
+    @Override
     protected void process(IBrewingRecipe recipe) {
         produceGrain(recipe);
         inputFluidSlot.consume(GrowthcraftFluidUtils.replaceFluidStackTags(recipe.getInputFluidStack(), inputFluidSlot.get()), true);
@@ -114,6 +113,7 @@ public class BrewKettle extends DeviceProgressive<IBrewingRecipe> {
         return super.getSpeedMultiplier()*getHeatMultiplier();
     }
 
+    @Override
     public void update() {
         heatComponent.update();
         super.update();
