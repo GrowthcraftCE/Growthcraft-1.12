@@ -20,86 +20,86 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 public class Init {
 
-	//////////////
+    //////////////
     // Blocks
     //////////////
 
     public static void preInitBlocks() {
-        GrowthcraftCoreBlocks.rope_fence = new BlockDefinition( new BlockRopeFence( "rope_fence" ) );
-        GrowthcraftCoreBlocks.salt_block = new BlockDefinition( new BlockSalt("salt_block") );
-        GrowthcraftCoreBlocks.salt_ore = new BlockDefinition( new BlockSaltOre("salt_ore") );
-        GrowthcraftCoreBlocks.rope_knot = new BlockDefinition( new BlockRopeKnot("rope_knot") );
+        GrowthcraftCoreBlocks.rope_fence = new BlockDefinition(new BlockRopeFence("rope_fence"));
+        GrowthcraftCoreBlocks.salt_block = new BlockDefinition(new BlockSalt("salt_block"));
+        GrowthcraftCoreBlocks.salt_ore = new BlockDefinition(new BlockSaltOre("salt_ore"));
+        GrowthcraftCoreBlocks.rope_knot = new BlockDefinition(new BlockRopeKnot("rope_knot"));
     }
-    
+
     public static void registerBlockOres() {
-		OreDictionary.registerOre("oreSalt", GrowthcraftCoreBlocks.salt_ore.getBlock());
+        OreDictionary.registerOre("oreSalt", GrowthcraftCoreBlocks.salt_ore.getBlock());
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
-    	GrowthcraftCoreBlocks.salt_block.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCoreBlocks.salt_block.registerBlock(registry);	// ITEM!
-    	GrowthcraftCoreBlocks.rope_fence.registerBlock(registry);
-    	GrowthcraftCoreBlocks.rope_knot.registerBlock(registry);
-    	GrowthcraftCoreBlocks.salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCoreBlocks.salt_ore.registerBlock(registry);		// ITEM!
+        GrowthcraftCoreBlocks.salt_block.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreBlocks.salt_block.registerBlock(registry);    // ITEM!
+        GrowthcraftCoreBlocks.rope_fence.registerBlock(registry);
+        GrowthcraftCoreBlocks.rope_knot.registerBlock(registry);
+        GrowthcraftCoreBlocks.salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreBlocks.salt_ore.registerBlock(registry);        // ITEM!
     }
-    
+
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
-    	GrowthcraftCoreBlocks.salt_block.registerBlockItem(registry);
-    	GrowthcraftCoreBlocks.salt_ore.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.salt_block.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.salt_ore.registerBlockItem(registry);
     }
 
     public static void registerBlockRenders() {
-    	GrowthcraftCoreBlocks.salt_block.registerItemRender();
-    	GrowthcraftCoreBlocks.salt_ore.registerItemRender();
+        GrowthcraftCoreBlocks.salt_block.registerItemRender();
+        GrowthcraftCoreBlocks.salt_ore.registerItemRender();
     }
 
     //////////////
     // Items
     //////////////
-    
+
     public static void preInitItems() {
-        GrowthcraftCoreItems.crowbar = new ItemDefinition( new ItemCrowbar("crowbar") );
-        GrowthcraftCoreItems.salt = new ItemDefinition( new ItemSalt("salt") );
-        GrowthcraftCoreItems.rope = new ItemDefinition( new ItemRope("rope") );
+        GrowthcraftCoreItems.crowbar = new ItemDefinition(new ItemCrowbar("crowbar"));
+        GrowthcraftCoreItems.salt = new ItemDefinition(new ItemSalt("salt"));
+        GrowthcraftCoreItems.rope = new ItemDefinition(new ItemRope("rope"));
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
-    	GrowthcraftCoreItems.crowbar.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCoreItems.crowbar.registerItem(registry);
-    	GrowthcraftCoreItems.salt.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCoreItems.salt.registerItem(registry);
-    	GrowthcraftCoreItems.rope.getItem().setCreativeTab(tabGrowthcraft);
-    	GrowthcraftCoreItems.rope.registerItem(registry);
-        
+        GrowthcraftCoreItems.crowbar.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreItems.crowbar.registerItem(registry);
+        GrowthcraftCoreItems.salt.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreItems.salt.registerItem(registry);
+        GrowthcraftCoreItems.rope.getItem().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreItems.rope.registerItem(registry);
+
         registerItemOres();
     }
-    
+
     private static void registerItemOres() {
-		OreDictionary.registerOre("materialSalt", GrowthcraftCoreItems.salt.getItem());
-		OreDictionary.registerOre("foodSalt", GrowthcraftCoreItems.salt.getItem());
-		OreDictionary.registerOre("dustSalt", GrowthcraftCoreItems.salt.getItem());
-		OreDictionary.registerOre("itemSalt", GrowthcraftCoreItems.salt.getItem());
-		OreDictionary.registerOre("lumpSalt", GrowthcraftCoreItems.salt.getItem());
+        OreDictionary.registerOre("materialSalt", GrowthcraftCoreItems.salt.getItem());
+        OreDictionary.registerOre("foodSalt", GrowthcraftCoreItems.salt.getItem());
+        OreDictionary.registerOre("dustSalt", GrowthcraftCoreItems.salt.getItem());
+        OreDictionary.registerOre("itemSalt", GrowthcraftCoreItems.salt.getItem());
+        OreDictionary.registerOre("lumpSalt", GrowthcraftCoreItems.salt.getItem());
     }
 
     public static void registerItemRenders() {
-    	GrowthcraftCoreItems.salt.registerRender();
-    	GrowthcraftCoreItems.rope.registerRender();
-    	GrowthcraftCoreItems.crowbar.registerRenders(GrowthcraftCoreItems.CrowbarTypes.class);
+        GrowthcraftCoreItems.salt.registerRender();
+        GrowthcraftCoreItems.rope.registerRender();
+        GrowthcraftCoreItems.crowbar.registerRenders(GrowthcraftCoreItems.CrowbarTypes.class);
     }
-    
+
     //////////////
     // Recipes
     //////////////
-    
+
     public static void registerRecipes() {
         registerCraftingRecipes();
     }
 
     private static void registerCraftingRecipes() {
-    	// TODO: RECIPE_REGISTER!
-	    // TODO: Recipes are done via JSON now. You could try and just do a bunch of json-based recipes, if you haven't already.
+        // TODO: RECIPE_REGISTER!
+        // TODO: Recipes are done via JSON now. You could try and just do a bunch of json-based recipes, if you haven't already.
 
 //        Item ironIngot = Items.IRON_INGOT;
 //
@@ -124,5 +124,5 @@ public class Init {
 //		GameRegistry.addRecipe(GrowthcraftCoreItems.rope.asStack(8), new Object[] {"A", 'A', Items.LEAD});
     }
 
-    
+
 }

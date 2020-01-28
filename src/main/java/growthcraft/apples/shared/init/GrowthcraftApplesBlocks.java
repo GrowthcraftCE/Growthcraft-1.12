@@ -19,7 +19,7 @@ public class GrowthcraftApplesBlocks {
     public static BlockTypeDefinition<BlockSlab> blockAppleSlabHalf;
     public static BlockTypeDefinition<BlockSlab> blockAppleSlabDouble;
     public static BlockDefinition blockAppleStairs;
-    
+
     public static BlockBoozeDefinition[] appleCiderFluidBlocks;
 
 }

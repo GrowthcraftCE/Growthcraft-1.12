@@ -9,31 +9,25 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.registries.IForgeRegistry;
 
-public class GrowthcraftBlockFluidDefinition extends BlockTypeDefinition<GrowthcraftBlockFluid>
-{
-	public GrowthcraftBlockFluidDefinition(@Nonnull GrowthcraftBlockFluid fluid)
-	{
-		super(fluid);
-	}
+public class GrowthcraftBlockFluidDefinition extends BlockTypeDefinition<GrowthcraftBlockFluid> {
+    public GrowthcraftBlockFluidDefinition(@Nonnull GrowthcraftBlockFluid fluid) {
+        super(fluid);
+    }
 
-	public void register(IForgeRegistry<Block> registry, ResourceLocation name)
-	{
-		super.registerBlock(registry, name);
-	}
+    public void register(IForgeRegistry<Block> registry, ResourceLocation name) {
+        super.registerBlock(registry, name);
+    }
 
-	public static GrowthcraftBlockFluidDefinition create(Fluid fluid, Material mat)
-	{
-		return new GrowthcraftBlockFluidDefinition(new GrowthcraftBlockFluid(fluid, mat));
-	}
+    public static GrowthcraftBlockFluidDefinition create(Fluid fluid, Material mat) {
+        return new GrowthcraftBlockFluidDefinition(new GrowthcraftBlockFluid(fluid, mat));
+    }
 
-	public static GrowthcraftBlockFluidDefinition create(Fluid fluid)
-	{
-		return create(fluid, Material.WATER);
-	}
+    public static GrowthcraftBlockFluidDefinition create(Fluid fluid) {
+        return create(fluid, Material.WATER);
+    }
 
-	@SuppressWarnings({"rawtypes"})
-	public static GrowthcraftBlockFluidDefinition create(FluidTypeDefinition def)
-	{
-		return create(def.getFluid());
-	}
+    @SuppressWarnings({"rawtypes"})
+    public static GrowthcraftBlockFluidDefinition create(FluidTypeDefinition def) {
+        return create(def.getFluid());
+    }
 }

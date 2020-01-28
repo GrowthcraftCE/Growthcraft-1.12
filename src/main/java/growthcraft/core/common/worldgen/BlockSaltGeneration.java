@@ -1,6 +1,6 @@
 package growthcraft.core.common.worldgen;
 
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -15,8 +15,8 @@ import java.util.Random;
 public class BlockSaltGeneration implements IWorldGenerator {
 
     // Needs to be configurable
-    private int minHieght = GrowthcraftCoreConfig.blockSaltOreMinHeight;
-    private int maxHieght = GrowthcraftCoreConfig.blockSaltOreMaxHeight;
+    private int minHieght = GrowthcraftCore.config.getBlockSaltOreMinHeight();
+    private int maxHieght = GrowthcraftCore.config.getBlockSaltOreMaxHeight();
 
     private WorldGenerator salt_overworld;
 
@@ -44,7 +44,7 @@ public class BlockSaltGeneration implements IWorldGenerator {
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
         switch (world.provider.getDimension()) {
             case 0: // Overworld
-                this.runGenerator(salt_overworld, world, random, chunkX, chunkZ, GrowthcraftCoreConfig.blockSaltOreChanceToSpawn, minHieght, maxHieght);
+                this.runGenerator(salt_overworld, world, random, chunkX, chunkZ, GrowthcraftCore.config.getBlockSaltOreChanceToSpawn(), minHieght, maxHieght);
                 break;
             case 1: // The End
                 break;

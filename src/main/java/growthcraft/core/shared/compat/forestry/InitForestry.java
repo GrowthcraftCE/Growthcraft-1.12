@@ -4,13 +4,14 @@ import growthcraft.core.shared.definition.FluidDefinition;
 import net.minecraftforge.fluids.FluidRegistry;
 
 public class InitForestry {
-	private InitForestry() {}
-	
-	////////////
-	// Fluids
-	////////////
+    private InitForestry() {
+    }
 
-	public static void preInitFluids() {
-		ForestryModFluids.milk = new FluidDefinition(FluidRegistry.getFluid("milk"));
-	}
+    ////////////
+    // Fluids
+    ////////////
+
+    public static void preInitFluids() {
+        ForestryModFluids.milk = new FluidDefinition(FluidRegistry.getFluid("milk"));
+    }
 }

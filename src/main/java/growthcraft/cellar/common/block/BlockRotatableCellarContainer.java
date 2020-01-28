@@ -16,54 +16,47 @@ import net.minecraft.world.World;
 
 public abstract class BlockRotatableCellarContainer extends GrowthcraftRotatableBlockContainer {
 
-	public BlockRotatableCellarContainer(Material material) {
-		super(material);
-	}
-	
-	@Override
-	public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side)
-	{
-		return true;
-	}
-	
-	protected void setDefaultDirection(World world, BlockPos pos, IBlockState state)
-	{
-		if (!world.isRemote)
-		{
-			EnumFacing facing = BlockUtils.getDefaultDirection(world, pos, state);
-			world.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
-		}
-	}
-	
-	protected EnumFacing setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, boolean allDirections) {
-		EnumFacing facing;
-		if( allDirections ) {
-			facing = EnumFacing.getDirectionFromEntityLiving(pos, placer);	
-		}
-		else {
-			facing = EnumFacing.fromAngle(placer.rotationYaw);
-		}
-		worldIn.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
-		return facing;
-	}
-	
-	@Override
-	public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state)
-	{
-		super.onBlockAdded(worldIn, pos, state);
-		setDefaultDirection(worldIn, pos, state);
-	}
-	
-	// GUI
-	
-	protected boolean openGui(EntityPlayer player, World world, BlockPos pos)
-	{
-		return GuiBindingBlockCellar.openGui(this, player, world, pos);
-	}
+    public BlockRotatableCellarContainer(Material material) {
+        super(material);
+    }
 
-	@Override
-	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-	{
-		return GuiBindingBlockCellar.onBlockActivated(this, worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
-	}
+    @Override
+    public boolean isRotatable(IBlockAccess world, BlockPos pos, EnumFacing side) {
+        return true;
+    }
+
+    protected void setDefaultDirection(World world, BlockPos pos, IBlockState state) {
+        if (!world.isRemote) {
+            EnumFacing facing = BlockUtils.getDefaultDirection(world, pos, state);
+            world.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
+        }
+    }
+
+    protected EnumFacing setOrientWhenPlacing(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, boolean allDirections) {
+        EnumFacing facing;
+        if (allDirections) {
+            facing = EnumFacing.getDirectionFromEntityLiving(pos, placer);
+        } else {
+            facing = EnumFacing.fromAngle(placer.rotationYaw);
+        }
+        worldIn.setBlockState(pos, state.withProperty(TYPE_ROTATION, facing), BlockFlags.UPDATE_AND_SYNC);
+        return facing;
+    }
+
+    @Override
+    public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
+        super.onBlockAdded(worldIn, pos, state);
+        setDefaultDirection(worldIn, pos, state);
+    }
+
+    // GUI
+
+    protected boolean openGui(EntityPlayer player, World world, BlockPos pos) {
+        return GuiBindingBlockCellar.openGui(this, player, world, pos);
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+        return GuiBindingBlockCellar.onBlockActivated(this, worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
 }

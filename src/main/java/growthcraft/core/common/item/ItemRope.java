@@ -32,7 +32,7 @@ public class ItemRope extends Item {
 
         Block block = worldIn.getBlockState(pos).getBlock();
 
-        if(block == Blocks.OAK_FENCE) {
+        if (block == Blocks.OAK_FENCE) {
             // If the target block is a BlockFence, then replace it with a RopeKnot block.
             worldIn.setBlockState(pos, GrowthcraftCoreBlocks.rope_knot.getDefaultState());
             // Decrease the player inventory as we used the rope.

@@ -53,16 +53,16 @@ public class GrowthcraftCoreItems {
         public int getVariantID() {
             return this.ID;
         }
-        
+
         @Override
         public ItemStack asStack(int amount) {
-        	return GrowthcraftCoreItems.crowbar.asStack(amount, getVariantID());
+            return GrowthcraftCoreItems.crowbar.asStack(amount, getVariantID());
         }
-        
+
         @Override
         public ItemStack asStack() {
-        	return asStack(1);
+            return asStack(1);
         }
     }
-    
+
 }

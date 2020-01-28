@@ -30,7 +30,7 @@ public abstract class BlockAppleSlab extends BlockSlab {
         Blocks.FIRE.setFireInfo(this, 5, 20);
 
         IBlockState state = this.blockState.getBaseState();
-        if(!this.isDouble()) {
+        if (!this.isDouble()) {
             state = state.withProperty(HALF, EnumBlockHalf.BOTTOM);
         }
 
@@ -65,7 +65,7 @@ public abstract class BlockAppleSlab extends BlockSlab {
     @SuppressWarnings("deprecation")
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        if(!this.isDouble()) {
+        if (!this.isDouble()) {
             return this.getDefaultState().withProperty(HALF, EnumBlockHalf.values()[meta % EnumBlockHalf.values().length]);
         }
         return this.getDefaultState();
@@ -73,10 +73,10 @@ public abstract class BlockAppleSlab extends BlockSlab {
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        if(this.isDouble()) {
+        if (this.isDouble()) {
             return 0;
         }
-        return ((EnumBlockHalf)state.getValue(HALF)).ordinal() + 1;
+        return ((EnumBlockHalf) state.getValue(HALF)).ordinal() + 1;
 
     }
 

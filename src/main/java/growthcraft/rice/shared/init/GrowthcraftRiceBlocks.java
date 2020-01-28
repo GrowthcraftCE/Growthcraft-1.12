@@ -4,7 +4,8 @@ import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.core.shared.definition.BlockDefinition;
 
 public class GrowthcraftRiceBlocks {
-    private GrowthcraftRiceBlocks() {}
+    private GrowthcraftRiceBlocks() {
+    }
 
     public static BlockDefinition ricePaddy;
     public static BlockDefinition riceCrop;

@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "axis=y":  { "model": "growthcraft_cellar:cork_log_stripped" },
+    "axis=z":   { "model": "growthcraft_cellar:cork_log_stripped", "x": 90 },
+    "axis=x":   { "model": "growthcraft_cellar:cork_log_stripped", "x": 90, "y": 90 },
+    "axis=none": { "model": "growthcraft_cellar:cork_bark_stripped" }
+  }
+}

@@ -20,8 +20,8 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 public class BlockCultureJar extends BlockCellarContainer {
-    
-	private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
+
+    private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(
             0.0625 * 4, 0.0625 * 0, 0.0625 * 4,
             0.0625 * 12, 0.0625 * 9, 0.0625 * 12);
 
@@ -31,7 +31,7 @@ public class BlockCultureJar extends BlockCellarContainer {
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.3F);
         this.setSoundType(SoundType.GLASS);
-		setTileEntityType(TileEntityCultureJar.class);
+        setTileEntityType(TileEntityCultureJar.class);
     }
 
     @Override
@@ -67,10 +67,9 @@ public class BlockCultureJar extends BlockCellarContainer {
     public BlockRenderLayer getBlockLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
-    
-	@Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
+
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
     }
 

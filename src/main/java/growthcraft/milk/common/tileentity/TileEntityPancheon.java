@@ -2,6 +2,7 @@ package growthcraft.milk.common.tileentity;
 
 import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.milk.common.tileentity.device.Pancheon;
@@ -10,118 +11,105 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-public class TileEntityPancheon extends GrowthcraftTileDeviceBase implements ITickable, ITileProgressiveDevice, IPancheonTile
-{
-	private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
+public class TileEntityPancheon extends GrowthcraftTileDeviceBase implements ITickable, ITileProgressiveDevice, IPancheonTile {
+    private Pancheon pancheon = new Pancheon(this, 0, 2, 1);
 
-	@Override
-	public float getDeviceProgress()
-	{
-		return pancheon.getProgress();
-	}
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{pancheon};}
 
-	@Override
-	public int getDeviceProgressScaled(int scale)
-	{
-		return pancheon.getProgressScaled(scale);
-	}
+    @Override
+    public float getDeviceProgress() {
+        return pancheon.getProgress();
+    }
 
-	/**
-	 * Pancheons have 3 fluid slots, the first is its `input` slot
-	 * The second slot is its `bottom` output slot
-	 * And the thirs is its `top` slot
-	 * Though the capacity of each is 1000 mB, the pancheon can only contain
-	 * a total of 1000 mB, not 3k
-	 *
-	 * @return fluid tanks
-	 */
-	@Override
-	protected FluidTank[] createTanks()
-	{
-		return new FluidTank[] {
-			new FluidTank(1000),
-			new FluidTank(1000),
-			new FluidTank(1000)
-		};
-	}
+    @Override
+    public int getDeviceProgressScaled(int scale) {
+        return pancheon.getProgressScaled(scale);
+    }
 
-	protected int getPresentTankIndex()
-	{
-		for (int i = getTankCount() - 1; i > 0; --i)
-		{
-			if (isFluidTankFilled(i))
-			{
-				return i;
-			}
-		}
-		return 0;
-	}
+    /**
+     * Pancheons have 3 fluid slots, the first is its `input` slot
+     * The second slot is its `bottom` output slot
+     * And the thirs is its `top` slot
+     * Though the capacity of each is 1000 mB, the pancheon can only contain
+     * a total of 1000 mB, not 3k
+     *
+     * @return fluid tanks
+     */
+    @Override
+    protected FluidTank[] createTanks() {
+        return new FluidTank[]{
+                new FluidTank(1000),
+                new FluidTank(1000),
+                new FluidTank(1000)
+        };
+    }
 
-	/**
-	 * Pancheon tanks are treated as a Stack.
-	 * When a tank at the end if filled, it will be returned, if its
-	 * empty then it returns the tank before it and so forth.
-	 *
-	 * @return the active fluid tank
-	 */
-	public FluidTank getPresentTank()
-	{
-		return getFluidTank(getPresentTankIndex());
-	}
+    protected int getPresentTankIndex() {
+        for (int i = getTankCount() - 1; i > 0; --i) {
+            if (isFluidTankFilled(i)) {
+                return i;
+            }
+        }
+        return 0;
+    }
 
-	public boolean outputTanksHaveFluid()
-	{
-		return isFluidTankFilled(1) || isFluidTankFilled(2);
-	}
+    /**
+     * Pancheon tanks are treated as a Stack.
+     * When a tank at the end if filled, it will be returned, if its
+     * empty then it returns the tank before it and so forth.
+     *
+     * @return the active fluid tank
+     */
+    public FluidTank getPresentTank() {
+        return getFluidTank(getPresentTankIndex());
+    }
 
-	@Override
-	public void update()
-	{
-		if (!world.isRemote)
-		{
-			pancheon.update();
-		}
-	}
+    public boolean outputTanksHaveFluid() {
+        return isFluidTankFilled(1) || isFluidTankFilled(2);
+    }
 
-	@Override
-	protected FluidStack doDrain(EnumFacing dir, int amount, boolean doDrain)
-	{
-		return getPresentTank().drain(amount, doDrain);
-	}
+    @Override
+    public void update() {
+        if (!world.isRemote) {
+            pancheon.update();
+        }
+    }
 
-	@Override
-	protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain)
-	{
-		/**
-		 * @todo Drain from bottom fluid tank when dir == DOWN
-		 */
+    @Override
+    protected FluidStack doDrain(EnumFacing dir, int amount, boolean doDrain) {
+        return getPresentTank().drain(amount, doDrain);
+    }
 
-		if (!FluidTest.isValid(stack)) return null;
-		final FluidTank tank = getPresentTank();
-		final FluidStack expected = tank.getFluid();
-		if (expected != null && expected.isFluidEqual(stack))
-		{
-			return tank.drain(stack.amount, doDrain);
-		}
-		return null;
-	}
+    @Override
+    protected FluidStack doDrain(EnumFacing dir, FluidStack stack, boolean doDrain) {
+        /**
+         * @todo Drain from bottom fluid tank when dir == DOWN
+         */
 
-	@Override
-	protected int doFill(EnumFacing dir, FluidStack stack, boolean doFill)
-	{
-		if (outputTanksHaveFluid()) return 0;
-		return fillFluidTank(0, stack, doFill);
-	}
+        if (!FluidTest.isValid(stack)) return null;
+        final FluidTank tank = getPresentTank();
+        final FluidStack expected = tank.getFluid();
+        if (expected != null && expected.isFluidEqual(stack)) {
+            return tank.drain(stack.amount, doDrain);
+        }
+        return null;
+    }
 
-	@Override
-	protected void markFluidDirty()
-	{
-		super.markFluidDirty();
-		markDirtyAndUpdate();
-	}
+    @Override
+    protected int doFill(EnumFacing dir, FluidStack stack, boolean doFill) {
+        if (outputTanksHaveFluid()) return 0;
+        return fillFluidTank(0, stack, doFill);
+    }
 
-	@Override
-	public IFluidTankOperable getPancheonFluidHandler() {
-		return this;
-	}
+    @Override
+    protected void markFluidDirty() {
+        super.markFluidDirty();
+        markDirtyAndUpdate(true);
+    }
+
+    @Override
+    public IFluidTankOperable getPancheonFluidHandler() {
+        return this;
+    }
 }

@@ -18,14 +18,15 @@ public class GrowthcraftFishtrapConfig {
     private static final String CATEGORY_GENERAL = "general";
     private static final String CATEGORY_FISHTRAP = "fishtrap";
 
-    private GrowthcraftFishtrapConfig() {}
+    private GrowthcraftFishtrapConfig() {
+    }
 
     public static boolean isDebug = false;
     public static String logLevel = "info";
 
     public static boolean baitRequired = false;
     public static boolean strictBait = false;
-    public static List<String> FISHTRAP_BAIT_TABLE = new ArrayList<String>(){{
+    public static List<String> FISHTRAP_BAIT_TABLE = new ArrayList<String>() {{
         add("minecraft:rotten_flesh");
         add("minecraft:fish");
     }};
@@ -45,7 +46,7 @@ public class GrowthcraftFishtrapConfig {
         } catch (Exception e) {
             GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Fishtrap!", e);
         } finally {
-            if ( configuration.hasChanged() ) {
+            if (configuration.hasChanged()) {
                 configuration.save();
             }
         }
@@ -53,10 +54,10 @@ public class GrowthcraftFishtrapConfig {
 
     private static void initGeneralConfig() {
         logLevel = configuration.getString(
-            "log_level",
-            CATEGORY_GENERAL,
-            logLevel,
-            "Log level specific to GrowthcraftFishtrap."
+                "log_level",
+                CATEGORY_GENERAL,
+                logLevel,
+                "Log level specific to GrowthcraftFishtrap."
         );
     }
 
@@ -75,17 +76,19 @@ public class GrowthcraftFishtrapConfig {
         );
 
         FISHTRAP_BAIT_TABLE = Arrays.asList(configuration.getStringList(
-           "fishtrap_bait_list",
-           CATEGORY_FISHTRAP,
-           FISHTRAP_BAIT_TABLE.toArray(new String[0]),
-           "Add the item's registry name on a new line for each item you want the fishtrap to use it as bait."
+                "fishtrap_bait_list",
+                CATEGORY_FISHTRAP,
+                FISHTRAP_BAIT_TABLE.toArray(new String[0]),
+                "Add the item's registry name on a new line for each item you want the fishtrap to use it as bait."
         ));
 
     }
 
     private static void initDebugConfig() {
         logLevel = configuration.getString("logLevel", CATEGORY_GENERAL, logLevel, "Set standard logging levels. (INFO, ERROR, DEBUG)");
-        if ( logLevel.equalsIgnoreCase("debug")) { isDebug = true; }
+        if (logLevel.equalsIgnoreCase("debug")) {
+            isDebug = true;
+        }
     }
 
 }

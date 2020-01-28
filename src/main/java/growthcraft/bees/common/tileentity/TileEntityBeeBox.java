@@ -51,7 +51,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
         if (index == 0) {
             markDirty();
         } else if (index > 0) {
-            markDirtyAndUpdate();
+            markDirtyAndUpdate(true);
         }
     }
 
@@ -166,7 +166,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
 
     private void setBeeStack(ItemStack itemstack) {
         setInventorySlotContents(ContainerBeeBox.SlotId.BEE, itemstack);
-        markDirtyAndUpdate();
+        markDirtyAndUpdate(true);
     }
 
     public void spawnBee() {
@@ -188,7 +188,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
             final ItemStack stack = getStackInSlot(i);
             if (ItemUtils.isEmpty(stack)) {
                 setInventorySlotContents(i, GrowthcraftBeesItems.honeyCombEmpty.asStack());
-                markDirtyAndUpdate();
+                markDirtyAndUpdate(true);
                 n--;
             }
         }
@@ -211,7 +211,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
             }
         }
         if (shouldMark) {
-            markDirtyAndUpdate();
+            markDirtyAndUpdate(true);
             return true;
         }
         return false;
@@ -232,7 +232,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
             }
         }
         if (shouldMark) {
-            markDirtyAndUpdate();
+            markDirtyAndUpdate(true);
             return true;
         }
         return false;
@@ -306,7 +306,7 @@ public class TileEntityBeeBox extends GrowthcraftTileInventoryBase implements IT
                     setTime(time);
                     world.playEvent(AuxFX.BONEMEAL, getPos(), 0);
                     ItemUtils.consumeStackOnPlayer(stack, player);
-                    markDirtyAndUpdate();
+                    markDirtyAndUpdate(true);
                 }
                 return true;
             } else if (item == Items.GLASS_BOTTLE) {

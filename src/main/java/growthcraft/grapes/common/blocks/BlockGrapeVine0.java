@@ -24,94 +24,86 @@ public class BlockGrapeVine0 extends BlockGrapeVineBase {
             new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 4, 0.0625 * 10),
             new AxisAlignedBB(0.0625 * 6, 0.0625 * 0, 0.0625 * 6, 0.0625 * 10, 0.0625 * 14, 0.0625 * 10)
     };
-    
+
     private final BlockGrapeVine1 blockVine1;
     private final IGrapeType[] grapeTypes;
-	
-	public BlockGrapeVine0(IGrapeType[] grapeTypes, BlockGrapeVine1 blockVine1) {
-		super();
-		setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineSeedlingGrowthRate);
-		setTickRandomly(true);
-		setHardness(0.0F);
-		setSoundType(SoundType.PLANT);
-		
-		this.blockVine1 = blockVine1;
-		this.grapeTypes = grapeTypes;
-	}
-	
+
+    public BlockGrapeVine0(IGrapeType[] grapeTypes, BlockGrapeVine1 blockVine1) {
+        super();
+        setGrowthRateMultiplier(GrowthcraftGrapesConfig.grapeVineSeedlingGrowthRate);
+        setTickRandomly(true);
+        setHardness(0.0F);
+        setSoundType(SoundType.PLANT);
+
+        this.blockVine1 = blockVine1;
+        this.grapeTypes = grapeTypes;
+    }
+
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        if ( this.getAge(state) == 0 ) {
+        if (this.getAge(state) == 0) {
             return BOUNDING_BOXES[0];
-        }
-        else {
+        } else {
             return BOUNDING_BOXES[1];
         }
     }
 
-	@SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean p_185477_7_) {
     }
-    
-	@Override
-	public int getMaxAge() {
-		return 1;
-	}
-	
-	/************
-	 * DROPS
-	 ************/
-	
-	@Override
-	public Item getItemDropped(IBlockState state, Random rand, int fortune)
-	{
-    	int typeID = state.getValue(SUBTYPE);
-    	IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
-		return type.asSeedsStack().getItem();
-	}
 
-	@Override
-	public int quantityDropped(Random random)
-	{
-		return 1;
-	}
-	
+    @Override
+    public int getMaxAge() {
+        return 1;
+    }
+
+    /************
+     * DROPS
+     ************/
+
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+        int typeID = state.getValue(SUBTYPE);
+        IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+        return type.asSeedsStack().getItem();
+    }
+
+    @Override
+    public int quantityDropped(Random random) {
+        return 1;
+    }
+
     @Override
     public int damageDropped(IBlockState state) {
-    	int typeID = state.getValue(SUBTYPE);
-    	IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
-    	return type.asSeedsStack().getItemDamage();    	
+        int typeID = state.getValue(SUBTYPE);
+        IGrapeType type = GrapeTypeUtils.getTypeBySubID(grapeTypes, typeID);
+        return type.asSeedsStack().getItemDamage();
     }
-	
-	/************
-	 * TICK
-	 ************/
-	@Override
-	protected boolean canUpdateGrowth(World world, BlockPos pos)
-	{
-		// TODO Check it!
-		return world.getLight(pos.up()) >= 9;
-	}
 
-	@Override
-	protected IBlockState doGrowth(World world, BlockPos pos, IBlockState state)
-	{
-		IBlockState newState;
-		
-		int age = getAge(state);
-		if (age <= 0)
-		{
-			newState = incrementGrowth(world, pos, state);
-		}
-		else
-		{
-			int type = state.getValue(SUBTYPE);
-			newState = blockVine1.getDefaultState().withProperty(SUBTYPE, type); 
-			world.setBlockState(pos, newState, BlockFlags.UPDATE_AND_SYNC);
-		}
-		
-		return newState;
-	}
+    /************
+     * TICK
+     ************/
+    @Override
+    protected boolean canUpdateGrowth(World world, BlockPos pos) {
+        // TODO Check it!
+        return world.getLight(pos.up()) >= 9;
+    }
+
+    @Override
+    protected IBlockState doGrowth(World world, BlockPos pos, IBlockState state) {
+        IBlockState newState;
+
+        int age = getAge(state);
+        if (age <= 0) {
+            newState = incrementGrowth(world, pos, state);
+        } else {
+            int type = state.getValue(SUBTYPE);
+            newState = blockVine1.getDefaultState().withProperty(SUBTYPE, type);
+            world.setBlockState(pos, newState, BlockFlags.UPDATE_AND_SYNC);
+        }
+
+        return newState;
+    }
 
 }

@@ -16,12 +16,12 @@ public class HarvestDropsEventHandler {
     @SubscribeEvent
     public void onHarvestBlocks(HarvestDropsEvent event) {
         Block harvestedBlock = event.getState().getBlock();
-        if ( harvestedBlock instanceof BlockVine && !event.isSilkTouching() && event.getHarvester() != null ) {
+        if (harvestedBlock instanceof BlockVine && !event.isSilkTouching() && event.getHarvester() != null) {
             ItemStack heldItemStack = event.getHarvester().getHeldItemMainhand();
 
             // We do not want to add additional drops if the player is using shears on the vines.
             boolean isShears = heldItemStack != null ? heldItemStack.getItem() instanceof ItemShears : true;
-            if ( ! isShears ) {
+            if (!isShears) {
                 doAdditionalDrop(event);
             }
         }
@@ -29,11 +29,13 @@ public class HarvestDropsEventHandler {
 
     private void doAdditionalDrop(HarvestDropsEvent event) {
         int chanceVineDropHopSeeds = GrowthcraftHopsConfig.changeVineDropHopSeeds;
-        if (chanceVineDropHopSeeds == 0) { return; }
+        if (chanceVineDropHopSeeds == 0) {
+            return;
+        }
 
         Random random = new Random();
 
-        if ( random.nextInt(100) <= chanceVineDropHopSeeds ) {
+        if (random.nextInt(100) <= chanceVineDropHopSeeds) {
             ItemStack itemStack = new ItemStack(GrowthcraftHopsItems.hop_seeds.getItem(), 1);
             event.getDrops().add(itemStack);
         }

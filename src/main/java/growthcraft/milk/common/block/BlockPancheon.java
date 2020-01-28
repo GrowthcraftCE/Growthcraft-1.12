@@ -62,16 +62,12 @@ public class BlockPancheon extends GrowthcraftBlockContainer {
     public boolean isFullCube(IBlockState state) {
         return false;
     }
-    
-	@Override
-    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face)
-    {
-        if (face == EnumFacing.UP)
-        {
+
+    @Override
+    public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        if (face == EnumFacing.UP) {
             return BlockFaceShape.BOWL;
-        }
-        else
-        {
+        } else {
             return face != EnumFacing.DOWN ? BlockFaceShape.UNDEFINED : BlockFaceShape.SOLID;
         }
     }

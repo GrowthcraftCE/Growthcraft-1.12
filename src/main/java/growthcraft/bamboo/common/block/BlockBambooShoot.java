@@ -59,7 +59,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
         super.updateTick(worldIn, pos, state, rand);
-        if ( worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
+        if (worldIn.getLightFromNeighbors(pos.up()) >= 9 && rand.nextInt(7) == 0) {
             this.grow(worldIn, pos, state, rand);
         }
 
@@ -74,7 +74,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     @Override
     public int getMetaFromState(IBlockState state) {
         int i = 0;
-        i = i | ((Integer)state.getValue(STAGE)).intValue() << 3;
+        i = i | ((Integer) state.getValue(STAGE)).intValue() << 3;
         return i;
     }
 
@@ -85,14 +85,14 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     }
 
     public void grow(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if (((Integer)state.getValue(STAGE)).intValue() == 0) {
+        if (((Integer) state.getValue(STAGE)).intValue() == 0) {
             worldIn.setBlockState(pos, state.cycleProperty(STAGE), 4);
         } else {
             this.generateTree(worldIn, pos, state, rand);
         }
     }
 
-    public void generateTree( World worldIn, BlockPos pos, IBlockState state, Random rand ) {
+    public void generateTree(World worldIn, BlockPos pos, IBlockState state, Random rand) {
         if (!net.minecraftforge.event.terraingen.TerrainGen.saplingGrowTree(worldIn, rand, pos)) return;
         WorldGenerator worldGenerator = new WorldGenBambooTree(true, false);
         worldGenerator.generate(worldIn, rand, pos);

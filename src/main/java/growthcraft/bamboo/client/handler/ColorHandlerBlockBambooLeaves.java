@@ -16,7 +16,7 @@ public class ColorHandlerBlockBambooLeaves implements IBlockColor {
     @Override
     public int colorMultiplier(IBlockState state, @Nullable IBlockAccess worldIn, @Nullable BlockPos pos, int tintIndex) {
         int color = 0;
-        switch ( tintIndex ) {
+        switch (tintIndex) {
             case 0:
                 color = 6192150;
                 break;

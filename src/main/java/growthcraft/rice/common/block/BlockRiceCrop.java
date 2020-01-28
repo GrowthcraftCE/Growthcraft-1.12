@@ -36,15 +36,15 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable {
             new AxisAlignedBB(0.0625 * 2, 0.0625 * 0, 0.0625 * 2, 0.0625 * 14, 0.0625 * 14, 0.0625 * 14),
     };
 
-    public static class RiceStage
-    {
+    public static class RiceStage {
         public static final int SPROUTING = 0;
         public static final int SPROUT = 1;
         public static final int SAPLING = 2;
         public static final int FLOWERING = 3;
         public static final int MATURE = 4;
 
-        private RiceStage() {}
+        private RiceStage() {
+        }
     }
 
     public BlockRiceCrop(String unlocalizedName) {
@@ -115,7 +115,7 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable {
         IBlockState downBlockState = worldIn.getBlockState(posDown);
 
         // IS_RADIOACTIVE causes a double growth.
-        if ( downBlockState.getBlock() instanceof BlockPaddyBase && downBlockState.getValue(IS_RADIOACTIVE) ) {
+        if (downBlockState.getBlock() instanceof BlockPaddyBase && downBlockState.getValue(IS_RADIOACTIVE)) {
             this.grow(worldIn, pos, state);
         }
 
@@ -135,7 +135,7 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable {
         BlockPos posDown = pos.down();
         IBlockState downBlockState = world.getBlockState(posDown);
 
-        if ( downBlockState.getBlock() instanceof BlockPaddyBase && downBlockState.getValue(IS_RADIOACTIVE) ) {
+        if (downBlockState.getBlock() instanceof BlockPaddyBase && downBlockState.getValue(IS_RADIOACTIVE)) {
             drops.add(new ItemStack(GrowthcraftRiceItems.rice.getItem()));
         }
 

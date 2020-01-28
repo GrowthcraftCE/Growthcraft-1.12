@@ -6,8 +6,8 @@ import net.minecraft.item.ItemStack;
 
 public interface IPressingRecipe extends IProcessingRecipe {
 
-	IMultiItemStacks getInput();
+    IMultiItemStacks getInput();
 
-	boolean matchesRecipe(ItemStack itemStack);
+    boolean matchesRecipe(ItemStack itemStack);
 
 }

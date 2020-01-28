@@ -33,48 +33,44 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
 
     @Override
     public String getUnlocalizedName(ItemStack stack) {
-    for (int i = 0; i < GrapeTypes.values().length; i++ ) {
-    	GrapeTypes type = GrapeTypes.values()[i];
-        if ( stack.getItemDamage() == type.getVariantID() ) {
-            return  this.getUnlocalizedName() + "." + type.getName();
-        } else {
-            continue;
+        for (int i = 0; i < GrapeTypes.values().length; i++) {
+            GrapeTypes type = GrapeTypes.values()[i];
+            if (stack.getItemDamage() == type.getVariantID()) {
+                return this.getUnlocalizedName() + "." + type.getName();
+            } else {
+                continue;
+            }
         }
+        return super.getUnlocalizedName() + "." + GrapeTypes.PURPLE.getName();
     }
-    return super.getUnlocalizedName() + "." + GrapeTypes.PURPLE.getName();
-}
 
     /**
      * Called when a Block is right-clicked with this Item
      */
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
-    {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack itemstack = player.getHeldItem(hand);
         net.minecraft.block.state.IBlockState state = worldIn.getBlockState(pos);
-        if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) && worldIn.isAirBlock(pos.up()))
-        {
-        	IGrapeType type = GrapeTypeUtils.getTypeByVariantID(GrapeTypes.values(), itemstack.getMetadata());
-        	if( type == null )
-        		return EnumActionResult.FAIL;
-        	IBlockState plantState = getPlant(worldIn, pos).withProperty(BlockGrapeVineBase.SUBTYPE, type.getPlantSubTypeID());
+        if (facing == EnumFacing.UP && player.canPlayerEdit(pos.offset(facing), facing, itemstack) && state.getBlock().canSustainPlant(state, worldIn, pos, EnumFacing.UP, this) && worldIn.isAirBlock(pos.up())) {
+            IGrapeType type = GrapeTypeUtils.getTypeByVariantID(GrapeTypes.values(), itemstack.getMetadata());
+            if (type == null)
+                return EnumActionResult.FAIL;
+            IBlockState plantState = getPlant(worldIn, pos).withProperty(BlockGrapeVineBase.SUBTYPE, type.getPlantSubTypeID());
 
-        	worldIn.setBlockState(pos.up(), plantState);
+            worldIn.setBlockState(pos.up(), plantState);
             itemstack.shrink(1);
             return EnumActionResult.SUCCESS;
-        }
-        else
-        {
+        } else {
             return EnumActionResult.FAIL;
         }
     }
 
     @Override
     public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> subItems) {
-		if( !this.isInCreativeTab(tab) )
-			return;
-        for ( int i = 0; i < GrapeTypes.values().length; i++ ) {
-        	GrapeTypes type = GrapeTypes.values()[i];
+        if (!this.isInCreativeTab(tab))
+            return;
+        for (int i = 0; i < GrapeTypes.values().length; i++) {
+            GrapeTypes type = GrapeTypes.values()[i];
             subItems.add(new ItemStack(this, 1, type.getVariantID()));
         }
     }

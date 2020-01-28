@@ -11,53 +11,44 @@ import net.minecraft.block.state.IBlockState;
 /**
  * As the name implies, this class is used in place of a List for Block keys
  */
-public class BlockKey extends HashKey
-{
-	public final Block block;
-	public final int meta;
+public class BlockKey extends HashKey {
+    public final Block block;
+    public final int meta;
 
-	public BlockKey(@Nonnull Block pBlock, int pMeta)
-	{
-		super();
-		this.block = pBlock;
-		this.meta = pMeta;
-		generateHashCode();
-	}
-	
-	public BlockKey(@Nonnull IBlockState pBlockState)
-	{
-		this(pBlockState.getBlock(), pBlockState.getBlock().getMetaFromState(pBlockState));
-	}
+    public BlockKey(@Nonnull Block pBlock, int pMeta) {
+        super();
+        this.block = pBlock;
+        this.meta = pMeta;
+        generateHashCode();
+    }
 
-	public BlockKey(@Nonnull Block pBlock)
-	{
-		this(pBlock, 0);
-	}
+    public BlockKey(@Nonnull IBlockState pBlockState) {
+        this(pBlockState.getBlock(), pBlockState.getBlock().getMetaFromState(pBlockState));
+    }
 
-	public Block getBlock()
-	{
-		return block;
-	}
+    public BlockKey(@Nonnull Block pBlock) {
+        this(pBlock, 0);
+    }
 
-	public int getMetadata()
-	{
-		return meta;
-	}
+    public Block getBlock() {
+        return block;
+    }
 
-	public boolean matches(@Nullable Block pBlock, int pMeta)
-	{
-		if (pBlock == null) return false;
-		return pBlock == block && (meta == ItemKey.WILDCARD_VALUE || pMeta == meta);
-	}
+    public int getMetadata() {
+        return meta;
+    }
 
-	public boolean matches(@Nonnull BlockKey key)
-	{
-		return matches(key.getBlock(), key.getMetadata());
-	}
+    public boolean matches(@Nullable Block pBlock, int pMeta) {
+        if (pBlock == null) return false;
+        return pBlock == block && (meta == ItemKey.WILDCARD_VALUE || pMeta == meta);
+    }
 
-	private void generateHashCode()
-	{
-		this.hash = block.hashCode();
-		this.hash = 31 * hash + meta;
-	}
+    public boolean matches(@Nonnull BlockKey key) {
+        return matches(key.getBlock(), key.getMetadata());
+    }
+
+    private void generateHashCode() {
+        this.hash = block.hashCode();
+        this.hash = 31 * hash + meta;
+    }
 }

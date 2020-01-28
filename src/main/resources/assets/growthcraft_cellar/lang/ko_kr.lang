@@ -49,6 +49,7 @@ gui.grc.switch=통 위치 바꾸기
 
 # Tile Entities
 tile.brew_kettle.name=양조용 솥단지
+tile.cork_log.name=Cork Wood
 tile.culture_jar.name=배양 단지
 tile.ferment_barrel.name=숙성용 나무통
 tile.fruit_press.name=과일 압착기

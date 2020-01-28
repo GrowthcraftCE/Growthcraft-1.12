@@ -11,66 +11,57 @@ import growthcraft.core.shared.item.MultiItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FermentationFallbackRecipe implements IFermentationRecipe
-{
-	private final IMultiFluidStacks inputFluidStack;
-	private final FluidStack outputFluidStack;
-	private final int time;
+public class FermentationFallbackRecipe implements IFermentationRecipe {
+    private final IMultiFluidStacks inputFluidStack;
+    private final FluidStack outputFluidStack;
+    private final int time;
 
-	public FermentationFallbackRecipe(@Nonnull IMultiFluidStacks pInputFluidStack, @Nonnull FluidStack pOutputFluidStack, int pTime)
-	{
-		this.inputFluidStack = pInputFluidStack;
-		this.outputFluidStack = pOutputFluidStack;
-		this.time = pTime;
-	}
-	
-	@Override
-	public IMultiFluidStacks getInputFluidStack()
-	{
-		return inputFluidStack;
-	}
+    public FermentationFallbackRecipe(@Nonnull IMultiFluidStacks pInputFluidStack, @Nonnull FluidStack pOutputFluidStack, int pTime) {
+        this.inputFluidStack = pInputFluidStack;
+        this.outputFluidStack = pOutputFluidStack;
+        this.time = pTime;
+    }
 
-	@Override
-	public FluidStack getOutputFluidStack()
-	{
-		return outputFluidStack;
-	}
+    @Override
+    public IMultiFluidStacks getInputFluidStack() {
+        return inputFluidStack;
+    }
 
-	@Override
-	public int getTime()
-	{
-		return time;
-	}
+    @Override
+    public FluidStack getOutputFluidStack() {
+        return outputFluidStack;
+    }
 
-	@Override
-	public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack)
-	{
-		if (FluidTest.isValid(fluidStack) && ItemTest.isValid(itemStack))
-		{
-			return FluidTest.hasEnough(inputFluidStack, fluidStack);
-		}
-		return false;
-	}
+    @Override
+    public int getTime() {
+        return time;
+    }
 
-	@Override
-	public boolean matchesIngredient(@Nullable FluidStack fluidStack)
-	{
-		return FluidTest.fluidMatches(inputFluidStack, fluidStack);
-	}
+    @Override
+    public boolean matchesRecipe(@Nullable FluidStack fluidStack, @Nullable ItemStack itemStack) {
+        if (FluidTest.isValid(fluidStack) && ItemTest.isValid(itemStack)) {
+            return FluidTest.hasEnough(inputFluidStack, fluidStack);
+        }
+        return false;
+    }
 
-	@Override
-	public boolean matchesIngredient(@Nullable ItemStack stack)
-	{
-		return true;
-	}
+    @Override
+    public boolean matchesIngredient(@Nullable FluidStack fluidStack) {
+        return FluidTest.fluidMatches(inputFluidStack, fluidStack);
+    }
 
-	@Override
-	public boolean isItemIngredient(ItemStack stack) {
-		return true;
-	}
+    @Override
+    public boolean matchesIngredient(@Nullable ItemStack stack) {
+        return true;
+    }
 
-	@Override
-	public IMultiItemStacks getFermentingItemStack() {
-		return MultiItemStacks.EMPTY;
-	}
+    @Override
+    public boolean isItemIngredient(ItemStack stack) {
+        return true;
+    }
+
+    @Override
+    public IMultiItemStacks getFermentingItemStack() {
+        return MultiItemStacks.EMPTY;
+    }
 }

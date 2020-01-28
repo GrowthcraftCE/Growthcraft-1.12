@@ -7,22 +7,22 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void init() {
-    	super.init();
-    	Init.registerFluidColorHandlers();
-    	registerSpecialRenders();
+        super.init();
+        Init.registerFluidColorHandlers();
+        registerSpecialRenders();
     }
 
     public void registerModelBakeryVariants() {
-    	Init.registerModelBakeryVariants();
+        Init.registerModelBakeryVariants();
     }
 
     public void registerSpecialRenders() {
-    	Init.registerBlockSpecialRenders();
+        Init.registerBlockSpecialRenders();
     }
 
-	@Override
+    @Override
     public void postRegisterItems() {
-    	super.postRegisterItems();
-    	registerModelBakeryVariants();
+        super.postRegisterItems();
+        registerModelBakeryVariants();
     }
 }

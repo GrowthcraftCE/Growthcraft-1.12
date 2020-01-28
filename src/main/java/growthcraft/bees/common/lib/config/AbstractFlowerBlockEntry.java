@@ -3,28 +3,26 @@ package growthcraft.bees.common.lib.config;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 
-public abstract class AbstractFlowerBlockEntry implements IFlowerBlockEntry
-{
-	private final Block block;
-	private final int meta; 
-	
-	public AbstractFlowerBlockEntry(IBlockState blockState) {
-		this(blockState.getBlock(), blockState.getBlock().getMetaFromState(blockState));
-	}
+public abstract class AbstractFlowerBlockEntry implements IFlowerBlockEntry {
+    private final Block block;
+    private final int meta;
 
-	public AbstractFlowerBlockEntry(Block block, int meta)
-	{
-		this.block = block;
-		this.meta = meta;
-	}
+    public AbstractFlowerBlockEntry(IBlockState blockState) {
+        this(blockState.getBlock(), blockState.getBlock().getMetaFromState(blockState));
+    }
 
-	@Override
-	public Block getBlock() {
-		return block;
-	}
+    public AbstractFlowerBlockEntry(Block block, int meta) {
+        this.block = block;
+        this.meta = meta;
+    }
 
-	@Override
-	public int getBlockMeta() {
-		return meta;
-	}
+    @Override
+    public Block getBlock() {
+        return block;
+    }
+
+    @Override
+    public int getBlockMeta() {
+        return meta;
+    }
 }

@@ -16,7 +16,7 @@ public class TheOneProbeCompat {
 
     public static void register() {
         // prevent this class from being registered again.
-        if ( !registered ) {
+        if (!registered) {
             FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "growthcraft.core.shared.compat.theoneprobe.TheOneProbeCompat$GetTheOneProbe");
             registered = true;
         }
@@ -38,7 +38,7 @@ public class TheOneProbeCompat {
 
                 @Override
                 public void addProbeInfo(ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {
-                    if ( blockState.getBlock() instanceof ITheOneProbeInfoProvider) {
+                    if (blockState.getBlock() instanceof ITheOneProbeInfoProvider) {
                         ITheOneProbeInfoProvider provider = (ITheOneProbeInfoProvider) blockState.getBlock();
                         provider.addProbeInfo(mode, probeInfo, player, world, blockState, data);
                     }

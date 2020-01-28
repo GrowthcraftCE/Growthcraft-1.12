@@ -1,7 +1,6 @@
 package growthcraft.cellar.common.tileentity.device;
 
-import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
+import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.processing.pressing.IPressingRecipe;
@@ -14,113 +13,87 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;
 
-public class FruitPress extends DeviceProgressive
-{
-	private float pomace;
-	private DeviceFluidSlot fluidSlot;
-	private DeviceInventorySlot inputSlot;
-	private DeviceInventorySlot residueSlot;
-	private IPressingRecipe currentResult;
+public class FruitPress extends DeviceProgressive<IPressingRecipe> {
+    private float pomace;
+    private DeviceFluidSlot fluidSlot;
+    private DeviceInventorySlot inputSlot;
+    private DeviceInventorySlot residueSlot;
 
-	/**
-	 * @param te - parent tile
-	 * @param fs - fluid tank id
-	 * @param is - input inventory slot id
-	 * @param rs - residue inventory slot id
-	 */
-	public FruitPress(TileEntityCellarDevice te, int fs, int is, int rs)
-	{
-		super(te);
-		this.fluidSlot = new DeviceFluidSlot(te, fs);
-		this.inputSlot = new DeviceInventorySlot(te, is);
-		this.residueSlot = new DeviceInventorySlot(te, rs);
-	}
 
-	/**
-	 * @return meta - the metadata for the FruitPresser usually above the fruit press
-	 */
-	public boolean isPressed()
-	{
-		return getWorld().getBlockState(parent.getPos().up()).getValue(BlockFruitPresser.TYPE_PRESSED) == PressState.PRESSED;
-	}
+    /**
+     * @param te - parent tile
+     * @param fs - fluid tank id
+     * @param is - input inventory slot id
+     * @param rs - residue inventory slot id
+     */
+    public FruitPress(TileEntityCellarDevice te, int fs, int is, int rs) {
+        super(te);
+        this.fluidSlot = new DeviceFluidSlot(te, fs);
+        this.inputSlot = new DeviceInventorySlot(te, is);
+        this.residueSlot = new DeviceInventorySlot(te, rs);
+    }
 
-	private boolean preparePressing()
-	{
-		this.currentResult = null;
-		final ItemStack primarySlotItem = inputSlot.get();
-		if (primarySlotItem == null) return false;
 
-		if (!isPressed()) return false;
+    public boolean isPressed() {
+       if(parent instanceof TileEntityFruitPress){
+           return ((TileEntityFruitPress)parent).isPressed();
+       }
+        return false;
+    }
 
-		if (fluidSlot.isFull()) return false;
+    @Override
+    protected IPressingRecipe loadRecipe() {
+        return CellarRegistry.instance().pressing().getPressingRecipe(inputSlot.get());
+    }
 
-		final IPressingRecipe result = CellarRegistry.instance().pressing().getPressingRecipe(primarySlotItem);
-		if (result == null) return false;
-		if (!inputSlot.hasEnough(result.getInput())) return false;
-		this.currentResult = result;
-		setTimeMax(currentResult.getTime());
+    @Override
+    protected float getSpeedMultiplier(){
+        return super.getSpeedMultiplier()*(isPressed()? 1:0);
+    }
+    @Override
+    protected boolean canProcess() {
+        IPressingRecipe recipe = getWorkingRecipe();
+        if(recipe == null) return false;
+        //Checks for input items
+        if(!recipe.getInput().containsItemStack(inputSlot.get())) return false;
+        //Checks for output fluids
+        if(!fluidSlot.hasCapacityFor(recipe.getFluidStack())) return false;
+        //Checks for output items
+        return residueSlot.hasCapacityFor(recipe.getResidue().residueItem);
+    }
 
-		if (fluidSlot.isEmpty()) return true;
+    public void producePomace() {
+        IPressingRecipe recipe = getWorkingRecipe();
+        if (recipe == null) return;
+        final Residue residue = recipe.getResidue();
+        if (residue != null) {
+            this.pomace = this.pomace + residue.pomaceRate;
+            if (this.pomace >= 1.0F) {
+                this.pomace = this.pomace - 1.0F;
+                final ItemStack residueResult = ItemUtils.mergeStacks(residueSlot.get(), residue.residueItem);
+                if (!ItemUtils.isEmpty(residueResult)) residueSlot.set(residueResult);
+            }
+        }
+    }
 
-		final FluidStack stack = currentResult.getFluidStack();
-		return stack.isFluidEqual(fluidSlot.get());
-	}
+    @Override
+    public void process(IPressingRecipe recipe) {
+        producePomace();
+        final FluidStack fluidstack = recipe.getFluidStack();
+        fluidSlot.fill(fluidstack, true);
+        inputSlot.consume(recipe.getInput());
+    }
 
-	public void producePomace()
-	{
-		if (currentResult == null) return;
-		final Residue residue = currentResult.getResidue();
-		if (residue != null)
-		{
-			this.pomace = this.pomace + residue.pomaceRate;
-			if (this.pomace >= 1.0F)
-			{
-				this.pomace = this.pomace - 1.0F;
-				final ItemStack residueResult = ItemUtils.mergeStacks(residueSlot.get(), residue.residueItem);
-				if (!ItemUtils.isEmpty(residueResult)) residueSlot.set(residueResult);
-			}
-		}
-	}
 
-	public void pressItem()
-	{
-		if (currentResult == null) return;
-		final ItemStack pressingItem = inputSlot.get();
-		producePomace();
-		final FluidStack fluidstack = currentResult.getFluidStack();
-		fluidSlot.fill(fluidstack, true);
-		inputSlot.consume(currentResult.getInput());
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound data) {
+        super.readFromNBT(data);
+        this.pomace = data.getFloat("pomace");
+    }
 
-	public void update()
-	{
-		if (preparePressing())
-		{
-			increaseTime();
-			if (getTime() >= getTimeMax())
-			{
-				resetTime();
-				pressItem();
-				markDirty();
-			}
-		}
-		else
-		{
-			if (resetTime()) markDirty();
-		}
-	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound data)
-	{
-		super.readFromNBT(data);
-		this.pomace = data.getFloat("pomace");
-	}
-
-	@Override
-	public void writeToNBT(NBTTagCompound data)
-	{
-		super.writeToNBT(data);
-		data.setFloat("pomace", pomace);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound data) {
+        super.writeToNBT(data);
+        data.setFloat("pomace", pomace);
+    }
 }

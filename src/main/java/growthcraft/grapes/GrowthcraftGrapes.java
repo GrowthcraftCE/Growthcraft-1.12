@@ -24,75 +24,75 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
-		dependencies = "required-after:" + growthcraft.cellar.shared.Reference.MODID)
+        dependencies = "required-after:" + growthcraft.cellar.shared.Reference.MODID)
 public class GrowthcraftGrapes {
-	static final String CLIENT_PROXY_CLASS = "growthcraft.grapes.client.ClientProxy";
-	static final String SERVER_PROXY_CLASS = "growthcraft.grapes.common.CommonProxy";
+    static final String CLIENT_PROXY_CLASS = "growthcraft.grapes.client.ClientProxy";
+    static final String SERVER_PROXY_CLASS = "growthcraft.grapes.common.CommonProxy";
 
-	@Mod.Instance(Reference.MODID)
-	public static GrowthcraftGrapes instance;
+    @Mod.Instance(Reference.MODID)
+    public static GrowthcraftGrapes instance;
 
-	@SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
-	public static CommonProxy proxy;
+    @SidedProxy(serverSide = SERVER_PROXY_CLASS, clientSide = CLIENT_PROXY_CLASS)
+    public static CommonProxy proxy;
 
-	@Mod.EventHandler
-	public static void preInit(FMLPreInitializationEvent event) {
-		MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
+    @Mod.EventHandler
+    public static void preInit(FMLPreInitializationEvent event) {
+        MinecraftForge.EVENT_BUS.register(new HarvestDropsEventHandler());
 
-		Init.preInitBlocks();
-		Init.preInitItems();
-		Init.preInitFluids();
-		Init.preInitLootTables();
-		proxy.preInit();
-	}
+        Init.preInitBlocks();
+        Init.preInitItems();
+        Init.preInitFluids();
+        Init.preInitLootTables();
+        proxy.preInit();
+    }
 
-	@Mod.EventHandler
-	public static void init(FMLInitializationEvent event) {
-		proxy.init();
-		Init.initBoozes();
-		if (Compat.isModAvailable_Rustic())
-			RusticGrapesRecipes.initBoozes();
-		Init.initRecipes();
-		Init.registerRecipes();
-		if (Compat.isModAvailable_Thaumcraft()) {
-			GrapesAspectRegistry.register();
-		}
-	}
+    @Mod.EventHandler
+    public static void init(FMLInitializationEvent event) {
+        proxy.init();
+        Init.initBoozes();
+        if (Compat.isModAvailable_Rustic())
+            RusticGrapesRecipes.initBoozes();
+        Init.initRecipes();
+        Init.registerRecipes();
+        if (Compat.isModAvailable_Thaumcraft()) {
+            GrapesAspectRegistry.register();
+        }
+    }
 
-	@Mod.EventHandler
-	public static void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit();
-		Init.registerItemOres();
-	}
+    @Mod.EventHandler
+    public static void postInit(FMLPostInitializationEvent event) {
+        proxy.postInit();
+        Init.registerItemOres();
+    }
 
-	@Mod.EventHandler
-	public void construct(FMLConstructionEvent event) {
-		MinecraftForge.EVENT_BUS.register(this);
-	}
+    @Mod.EventHandler
+    public void construct(FMLConstructionEvent event) {
+        MinecraftForge.EVENT_BUS.register(this);
+    }
 
-	@SubscribeEvent
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		IForgeRegistry<Block> registry = event.getRegistry();
+    @SubscribeEvent
+    public void registerBlocks(RegistryEvent.Register<Block> event) {
+        IForgeRegistry<Block> registry = event.getRegistry();
 
-		Init.registerBlocks(registry);
-		Init.registerFluidBlocks(registry);
-	}
+        Init.registerBlocks(registry);
+        Init.registerFluidBlocks(registry);
+    }
 
-	@SubscribeEvent
-	public void registerItems(RegistryEvent.Register<Item> event) {
-		IForgeRegistry<Item> registry = event.getRegistry();
+    @SubscribeEvent
+    public void registerItems(RegistryEvent.Register<Item> event) {
+        IForgeRegistry<Item> registry = event.getRegistry();
 
-		Init.registerItems(registry);
+        Init.registerItems(registry);
 
-		proxy.postRegisterItems();
-	}
+        proxy.postRegisterItems();
+    }
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void registerModels(ModelRegistryEvent event) {
-		Init.registerItemRenders();
-		Init.registerBlockRenders();
-		Init.registerFluidRenders();
-	}
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void registerModels(ModelRegistryEvent event) {
+        Init.registerItemRenders();
+        Init.registerBlockRenders();
+        Init.registerFluidRenders();
+    }
 
 }

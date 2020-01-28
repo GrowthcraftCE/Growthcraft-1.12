@@ -17,12 +17,12 @@ public class HarvestDropsEventHandler {
     @SubscribeEvent
     public void onHarvestDrops(HarvestDropsEvent event) {
         Block harvestedBlock = event.getState().getBlock();
-        if ( harvestedBlock instanceof BlockVine && !event.isSilkTouching() && event.getHarvester() != null ) {
+        if (harvestedBlock instanceof BlockVine && !event.isSilkTouching() && event.getHarvester() != null) {
             ItemStack heldItemStack = event.getHarvester().getHeldItemMainhand();
 
             // We do not want to add additional drops if the player is using shears on the vines.
-            boolean isShears = heldItemStack != null ? heldItemStack.getItem() instanceof ItemShears: true;
-            if ( ! isShears ) {
+            boolean isShears = heldItemStack != null ? heldItemStack.getItem() instanceof ItemShears : true;
+            if (!isShears) {
                 doAdditionalDrop(event);
             }
         }
@@ -32,9 +32,9 @@ public class HarvestDropsEventHandler {
         int chanceVineDropGrapeSeeds = GrowthcraftGrapesConfig.chanceVineDropGrapeSeeds;
         Random random = new Random();
 
-        if ( random.nextInt(100) <= chanceVineDropGrapeSeeds ) {
+        if (random.nextInt(100) <= chanceVineDropGrapeSeeds) {
             // Randomly get a grape seed.
-            int randomGrapeSeed = random.nextInt(GrapeTypes.values().length - 1);
+            int randomGrapeSeed = random.nextInt(GrapeTypes.values().length);
             GrapeTypes grapeTypes = GrapeTypes.values()[randomGrapeSeed];
             int metaGrapeSeed = grapeTypes.getVariantID();
             ItemStack itemStack = new ItemStack(GrowthcraftGrapesItems.grape_seed.getItem(), 1, metaGrapeSeed);

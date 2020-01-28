@@ -5,8 +5,8 @@ import net.minecraft.tileentity.TileEntity;
 
 public class CellarContainer extends GrowthcraftContainer {
 
-	public CellarContainer(TileEntity te) {
-		super(te);
-	}
+    public CellarContainer(TileEntity te) {
+        super(te);
+    }
 
 }

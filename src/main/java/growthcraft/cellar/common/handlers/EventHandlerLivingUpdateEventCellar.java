@@ -7,34 +7,28 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-public class EventHandlerLivingUpdateEventCellar
-{
-	// REVISE_ME 0
-	
-	@SubscribeEvent
-	public void onEntityUpdate(LivingUpdateEvent event)
-	{
-		final EntityLivingBase ent = event.getEntityLiving();
+public class EventHandlerLivingUpdateEventCellar {
+    // REVISE_ME 0
 
-		if (ent.isPotionActive(GrowthcraftCellarPotions.potionTipsy))
-		{
-			if (ent.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getDuration() == 0)
-			{
-				ent.removePotionEffect(GrowthcraftCellarPotions.potionTipsy);
-				return;
-			}
+    @SubscribeEvent
+    public void onEntityUpdate(LivingUpdateEvent event) {
+        final EntityLivingBase ent = event.getEntityLiving();
 
-			final int lvl = ent.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getAmplifier();
+        if (ent.isPotionActive(GrowthcraftCellarPotions.potionTipsy)) {
+            if (ent.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getDuration() == 0) {
+                ent.removePotionEffect(GrowthcraftCellarPotions.potionTipsy);
+                return;
+            }
 
-			if (lvl >= 3)
-			{
-				ent.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0));
+            final int lvl = ent.getActivePotionEffect(GrowthcraftCellarPotions.potionTipsy).getAmplifier();
 
-				if (lvl >= 4)
-				{
-					ent.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0));
-				}
-			}
-		}
-	}
+            if (lvl >= 3) {
+                ent.addPotionEffect(new PotionEffect(MobEffects.NAUSEA, 200, 0));
+
+                if (lvl >= 4) {
+                    ent.addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100, 0));
+                }
+            }
+        }
+    }
 }

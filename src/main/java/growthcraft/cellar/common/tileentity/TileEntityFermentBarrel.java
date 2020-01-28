@@ -9,6 +9,7 @@ import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.inventory.InventoryProcessor;
 import growthcraft.core.shared.io.nbt.INBTItemSerializable;
+import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import io.netty.buffer.ByteBuf;
@@ -28,7 +29,10 @@ import net.minecraftforge.fluids.FluidTank;
 import java.io.IOException;
 
 public class TileEntityFermentBarrel extends TileEntityCellarDevice implements IInventory, ITickable, ITileProgressiveDevice, INBTItemSerializable {
-    public static enum FermentBarrelDataID {
+
+    private static final String NBTNAME = "ferment_barrel";
+
+    public enum FermentBarrelDataID {
         TIME,
         TIME_MAX,
         UNKNOWN;
@@ -47,7 +51,10 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
 
     // Constants
     private static final int[] accessableSlotIds = new int[]{0};
-    private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0, 1, 0);
+    private final FermentBarrel fermentBarrel = new FermentBarrel(this, 0,  0);
+
+    @Override
+    public DeviceBase[] getDevices(){return new DeviceBase[]{fermentBarrel};}
 
     @Override
     protected FluidTank[] createTanks() {
@@ -75,7 +82,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     }
 
     public int getTime() {
-        return fermentBarrel.getTime();
+        return (int)fermentBarrel.getTime();
     }
 
     public int getTimeMax() {
@@ -95,9 +102,6 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void update() {
         if (!world.isRemote) {
-            world.markBlockRangeForRenderUpdate(pos, pos);
-            world.notifyBlockUpdate(pos, world.getBlockState(pos),world.getBlockState(pos),3 );
-            world.scheduleBlockUpdate(pos, getBlockType(), 0, 0);
             fermentBarrel.update();
         }
     }
@@ -134,23 +138,23 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void readFromNBTForItem(NBTTagCompound nbt) {
         super.readFromNBTForItem(nbt);
-        fermentBarrel.readFromNBT(nbt, "ferment_barrel");
+        fermentBarrel.readFromNBT(nbt, NBTNAME);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
     public void readFromNBT_FermentBarrel(NBTTagCompound nbt) {
-        fermentBarrel.readFromNBT(nbt, "ferment_barrel");
+        fermentBarrel.readFromNBT(nbt, NBTNAME);
     }
 
     @Override
     public void writeToNBTForItem(NBTTagCompound nbt) {
         super.writeToNBTForItem(nbt);
-        fermentBarrel.writeToNBT(nbt, "ferment_barrel");
+        fermentBarrel.writeToNBT(nbt, NBTNAME);
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
     public void writeToNBT_FermentBarrel(NBTTagCompound nbt) {
-        fermentBarrel.writeToNBT(nbt, "ferment_barrel");
+        fermentBarrel.writeToNBT(nbt, NBTNAME);
     }
 
     @Override
@@ -172,7 +176,7 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
     @Override
     public void sendGUINetworkData(Container container, IContainerListener iCrafting) {
         super.sendGUINetworkData(container, iCrafting);
-        iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME.ordinal(), fermentBarrel.getTime());
+        iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME.ordinal(), (int)fermentBarrel.getTime());
         iCrafting.sendWindowProperty(container, FermentBarrelDataID.TIME_MAX.ordinal(), fermentBarrel.getTimeMax());    // Not fermentBarrel.getTimeMaxDefault() !
     }
 
@@ -220,19 +224,13 @@ public class TileEntityFermentBarrel extends TileEntityCellarDevice implements I
         return doDrain(from, resource.amount, shouldDrain);
     }
 
-    @Override
-    protected void markFluidDirty() {
-        super.markFluidDirty();
-        fermentBarrel.markForRecipeRecheck();
-    }
 
     @Override
     public void onInventoryChanged(IInventory inv, int index) {
         super.onInventoryChanged(inv, index);
-        fermentBarrel.markForRecipeRecheck();
         if (index == 1) {
             // Changing tap has a visual feedback
-            this.markDirtyAndUpdate();
+            this.markDirtyAndUpdate(true);
         }
     }
 

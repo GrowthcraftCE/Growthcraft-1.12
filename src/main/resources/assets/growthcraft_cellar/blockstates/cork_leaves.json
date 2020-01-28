@@ -1,0 +1,8 @@
+{
+  "defaults" : {
+    "model": "growthcraft_cellar:cork_leaves"
+  },
+  "variants": {
+    "normal": { "model": "growthcraft_cellar:cork_leaves" }
+  }
+}

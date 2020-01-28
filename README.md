@@ -1,7 +1,7 @@
 Growthcraft
 ===========
 [![](http://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://minecraft.curseforge.com/projects/growthcraft-community-edition/)
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-4.1.0-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.12)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-4.1.2.200-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.12)
 [![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-14.23.4.2768-yellow.svg)](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html)
 [![Java Version](https://img.shields.io/badge/JAVA-8-blue.svg)](https://www.java.com/en/)
 [![Build Status](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.12.svg?branch=development)](https://travis-ci.org/GrowthcraftCE/Growthcraft-1.12)
@@ -14,7 +14,7 @@ The original forum post can be found on the [Minecraft Forums mod page](http://w
 ## Wiki
 
 We are using the [Gamepedia FTB Wiki](http://ftb.gamepedia.com/GrowthCraft) for publishing how the plugins work and tutorials.
-For technical details please read our [Github Wiki](https://github.com/GrowthcraftCE/Growthcraft-1.11/wiki).
+For technical details please read our [Github Wiki](https://github.com/GrowthcraftCE/Growthcraft-1.12/wiki).
 
 ## Contributing
 
