@@ -14,6 +14,7 @@ import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
@@ -29,29 +30,54 @@ public class Init {
         GrowthcraftCoreBlocks.salt_block = new BlockDefinition(new BlockSalt("salt_block"));
         GrowthcraftCoreBlocks.salt_ore = new BlockDefinition(new BlockSaltOre("salt_ore"));
         GrowthcraftCoreBlocks.rope_knot = new BlockDefinition(new BlockRopeKnot("rope_knot"));
+
+        // region RopeKnotBlocks
+        GrowthcraftCoreBlocks.rope_knot_dark_oak = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_dark_oak", Blocks.DARK_OAK_FENCE));
+        // endregion
     }
 
     public static void registerBlockOres() {
         OreDictionary.registerOre("oreSalt", GrowthcraftCoreBlocks.salt_ore.getBlock());
+
+        // region RopeKnotBlocks
+        OreDictionary.registerOre("ropeKnotFence", GrowthcraftCoreBlocks.rope_knot_dark_oak.getBlock());
+        // endregion
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
         GrowthcraftCoreBlocks.salt_block.getBlock().setCreativeTab(tabGrowthcraft);
-        GrowthcraftCoreBlocks.salt_block.registerBlock(registry);    // ITEM!
+        GrowthcraftCoreBlocks.salt_block.registerBlock(registry);
+        GrowthcraftCoreBlocks.salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreBlocks.salt_ore.registerBlock(registry);
+
+        // region NonItemBlocks
         GrowthcraftCoreBlocks.rope_fence.registerBlock(registry);
         GrowthcraftCoreBlocks.rope_knot.registerBlock(registry);
-        GrowthcraftCoreBlocks.salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
-        GrowthcraftCoreBlocks.salt_ore.registerBlock(registry);        // ITEM!
+        //endregion
+
+        // region RopeKnotBlocks
+        GrowthcraftCoreBlocks.rope_knot_dark_oak.registerBlock(registry);
+        // endregion
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
         GrowthcraftCoreBlocks.salt_block.registerBlockItem(registry);
         GrowthcraftCoreBlocks.salt_ore.registerBlockItem(registry);
+
+        // region RopeKnotBlockItems
+        GrowthcraftCoreBlocks.rope_knot_dark_oak.registerBlockItem(registry);
+        // endregion
     }
 
     public static void registerBlockRenders() {
         GrowthcraftCoreBlocks.salt_block.registerItemRender();
         GrowthcraftCoreBlocks.salt_ore.registerItemRender();
+
+        // region RopeKnotBlocks
+        GrowthcraftCoreBlocks.rope_knot_dark_oak.registerItemRender();
+        // endregion
+
     }
 
     //////////////

@@ -54,7 +54,22 @@ public class BlockRopeKnot extends BlockRopeBase {
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
+    private Block baseFence;
+
+    /**
+     * Construct a default RopeKnot on an oak fence.
+     * @param unlocalizedName The unlocalized name for the rope knot fence.
+     */
     public BlockRopeKnot(String unlocalizedName) {
+        this(unlocalizedName, Blocks.OAK_FENCE);
+    }
+
+    /**
+     * Construct a dynamic RopeKnot on a given fence block.
+     * @param unlocalizedName The unlocalized name for the rope knot fence.
+     * @param baseFence The block of the given fence type that this rope knot will attach to.
+     */
+    public BlockRopeKnot(String unlocalizedName, Block baseFence) {
         super(Material.WOOD);
         this.setUnlocalizedName(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
@@ -73,6 +88,8 @@ public class BlockRopeKnot extends BlockRopeBase {
                 .withProperty(DOWN, Boolean.valueOf(false)));
 
         this.useNeighborBrightness = true;
+
+        this.baseFence = baseFence;
     }
 
     @SuppressWarnings("deprecation")
@@ -87,6 +104,9 @@ public class BlockRopeKnot extends BlockRopeBase {
         return false;
     }
 
+    public Block getFenceBlock() {
+        return baseFence;
+    }
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
