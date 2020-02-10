@@ -1,19 +1,16 @@
 package growthcraft.cellar.shared.booze;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import growthcraft.cellar.shared.block.BlockFluidBooze;
 import growthcraft.cellar.shared.CellarRegistry;
-import growthcraft.cellar.shared.fluids.Booze;
+import growthcraft.cellar.shared.block.BlockFluidBooze;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
+import growthcraft.cellar.shared.fluids.Booze;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.CoreRegistry;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.IObjectVariant;
-import growthcraft.core.shared.fluids.FluidDictionary;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
+import growthcraft.core.shared.fluids.FluidDictionary;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -24,6 +21,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BoozeRegistryHelper {
     private BoozeRegistryHelper() {

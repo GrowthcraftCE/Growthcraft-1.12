@@ -1,7 +1,5 @@
 package growthcraft.core.shared.io.nbt;
 
-import java.util.List;
-
 import growthcraft.core.shared.fluids.UnitFormatter;
 import growthcraft.core.shared.io.ConstID;
 import net.minecraft.nbt.NBTTagCompound;
@@ -9,6 +7,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.List;
 
 public class TagFormatterFluidHandler {
     // REVISE_ME 0: move to nbt

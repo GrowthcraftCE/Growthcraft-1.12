@@ -1,15 +1,11 @@
 package growthcraft.cellar.client.gui;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
-import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.lib.network.PacketClearTankButton;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.client.gui.widget.GuiButtonDiscard;
 import growthcraft.core.shared.client.gui.widget.WidgetDeviceProgressIcon;
 import growthcraft.core.shared.client.gui.widget.WidgetFluidTank;
@@ -18,6 +14,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiFruitPress extends GuiCellar<ContainerFruitPress, TileEntityFruitPress> {

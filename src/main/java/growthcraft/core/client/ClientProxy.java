@@ -1,8 +1,7 @@
 package growthcraft.core.client;
 
-import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import growthcraft.core.common.CommonProxy;
-import growthcraft.core.common.Init;
+import growthcraft.core.shared.init.GrowthcraftCoreItems;
 
 public class ClientProxy extends CommonProxy {
 

@@ -1,14 +1,13 @@
 package growthcraft.milk.client.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-
 import growthcraft.core.shared.utils.Easing;
 import growthcraft.milk.common.block.BlockCheesePress;
 import growthcraft.milk.common.tileentity.TileEntityCheesePress;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.math.BlockPos;
+import org.lwjgl.opengl.GL11;
+
+import javax.annotation.Nonnull;
 
 public class RenderCheesePress extends RenderModel<TileEntityCheesePress> {
     double SCALE = 1.0 / 16.0;

@@ -1,17 +1,17 @@
 package growthcraft.cellar.client.gui;
 
-import java.util.List;
-
 import growthcraft.cellar.common.inventory.CellarContainer;
-import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.core.shared.client.gui.GrowthcraftGuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiCellar<C extends CellarContainer, T extends TileEntityCellarDevice> extends GrowthcraftGuiContainer<C, T> {

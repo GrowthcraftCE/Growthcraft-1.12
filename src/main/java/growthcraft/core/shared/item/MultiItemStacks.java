@@ -1,13 +1,12 @@
 package growthcraft.core.shared.item;
 
-import java.util.Arrays;
-import java.util.List;
+import growthcraft.core.shared.definition.IMultiItemStacks;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
-import growthcraft.core.shared.definition.IMultiItemStacks;
-import net.minecraft.item.ItemStack;
+import java.util.Arrays;
+import java.util.List;
 
 public class MultiItemStacks implements IMultiItemStacks {
     private List<ItemStack> itemStacks;

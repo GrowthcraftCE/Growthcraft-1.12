@@ -1,20 +1,17 @@
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-
 import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.inventory.AccesibleSlots;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
+import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
-import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.milk.common.tileentity.device.Churn;
 import growthcraft.milk.shared.MilkRegistry;
-import growthcraft.milk.shared.processing.churn.IChurnRecipe;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -23,6 +20,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
 
 public class TileEntityButterChurn extends GrowthcraftTileDeviceBase implements IItemOperable {
     public static enum WorkState {

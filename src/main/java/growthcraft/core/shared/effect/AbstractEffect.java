@@ -1,9 +1,9 @@
 package growthcraft.core.shared.effect;
 
-import java.util.List;
-
 import growthcraft.core.shared.CoreRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.List;
 
 /**
  * Because sometimes you want an Effect that does ABSOLUTELY NOTHING.

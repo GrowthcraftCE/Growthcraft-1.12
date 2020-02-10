@@ -1,5 +1,6 @@
 package growthcraft.bamboo.common.worldgen;
 
+import growthcraft.bamboo.shared.init.GrowthcraftBambooBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.util.math.BlockPos;
@@ -7,8 +8,6 @@ import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
 import java.util.Random;
-
-import growthcraft.bamboo.shared.init.GrowthcraftBambooBlocks;
 
 public class WorldGenBambooTree extends WorldGenAbstractTree {
 

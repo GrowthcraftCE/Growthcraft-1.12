@@ -1,12 +1,12 @@
 package growthcraft.core.shared.block;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.item.ItemKey;
 import growthcraft.core.shared.utils.HashKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * As the name implies, this class is used in place of a List for Block keys

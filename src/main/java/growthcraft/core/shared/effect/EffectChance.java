@@ -1,15 +1,15 @@
 package growthcraft.core.shared.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.config.description.Describer;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Has a random chance of applying its sub effect to the target

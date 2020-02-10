@@ -1,10 +1,10 @@
 package growthcraft.cellar.shared.processing.heatsource.user;
 
+import growthcraft.core.shared.config.schema.ICommentable;
+import growthcraft.core.shared.item.ItemKey;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import growthcraft.core.shared.item.ItemKey;
-import growthcraft.core.shared.config.schema.ICommentable;
 
 public class UserHeatSourceEntry implements ICommentable {
     public String comment = "";

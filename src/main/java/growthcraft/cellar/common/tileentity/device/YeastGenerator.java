@@ -1,27 +1,23 @@
 package growthcraft.cellar.common.tileentity.device;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
 import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.CoreRegistry;
+import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.item.WeightedItemStack;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
-import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import java.util.*;
 
 public class YeastGenerator extends DeviceProgressive {
     protected int consumption = 1200 / 16;

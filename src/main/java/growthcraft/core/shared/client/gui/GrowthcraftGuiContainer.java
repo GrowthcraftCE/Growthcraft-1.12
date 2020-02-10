@@ -1,11 +1,5 @@
 package growthcraft.core.shared.client.gui;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import java.util.List;
-
-import org.lwjgl.opengl.GL11;
-
 import growthcraft.core.shared.client.gui.widget.WidgetManager;
 import growthcraft.core.shared.fluids.UnitFormatter;
 import growthcraft.core.shared.utils.ColorUtils;
@@ -24,6 +18,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public abstract class GrowthcraftGuiContainer<C extends Container, T extends TileEntity> extends GuiContainer {

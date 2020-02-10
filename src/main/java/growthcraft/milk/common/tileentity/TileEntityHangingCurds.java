@@ -1,16 +1,14 @@
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-
-import growthcraft.core.shared.io.nbt.INBTItemSerializable;
 import growthcraft.core.shared.client.utils.FXHelper;
+import growthcraft.core.shared.io.nbt.INBTItemSerializable;
+import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
+import growthcraft.core.shared.tileentity.event.TileEventHandler;
+import growthcraft.core.shared.tileentity.feature.IFluidTankOperable;
 import growthcraft.core.shared.utils.Pair;
 import growthcraft.core.shared.utils.PulseStepper;
 import growthcraft.core.shared.utils.SpatialRandom;
 import growthcraft.core.shared.utils.TickUtils;
-import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
-import growthcraft.core.shared.tileentity.event.TileEventHandler;
-import growthcraft.core.shared.tileentity.feature.IFluidTankOperable;
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.common.tileentity.struct.CheeseCurd;
 import growthcraft.milk.shared.definition.ICheeseType;
@@ -25,6 +23,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.IOException;
 
 public class TileEntityHangingCurds extends GrowthcraftTileBase implements ITickable, INBTItemSerializable {
     // SpatialRandom instance

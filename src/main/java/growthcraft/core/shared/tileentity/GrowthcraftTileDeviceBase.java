@@ -1,13 +1,9 @@
 package growthcraft.core.shared.tileentity;
 
-import java.io.IOException;
-
-import javax.annotation.Nullable;
-
-import growthcraft.core.shared.fluids.FluidTest;
-import growthcraft.core.shared.handlers.FluidHandlerBlockWrapper;
 import growthcraft.core.shared.fluids.FluidTanks;
+import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.fluids.IFluidTanks;
+import growthcraft.core.shared.handlers.FluidHandlerBlockWrapper;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
@@ -24,6 +20,9 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import javax.annotation.Nullable;
+import java.io.IOException;
 
 /**
  * Extend this base class if you want a TileEntity that cam process items or fluids

@@ -1,16 +1,10 @@
 package growthcraft.bees.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.shared.Reference;
 import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.core.shared.block.BlockUtils;
+import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -29,6 +23,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockBeeBox extends GrowthcraftRotatableBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(

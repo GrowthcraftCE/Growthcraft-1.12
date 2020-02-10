@@ -1,14 +1,13 @@
 package growthcraft.cellar.shared.processing.heatsource;
 
-import java.util.HashMap;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.ItemKey;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+
+import javax.annotation.Nonnull;
+import java.util.HashMap;
 
 public class HeatSourceRegistry {
     static class HeatMap extends HashMap<Integer, IHeatSourceBlock> {

@@ -1,18 +1,13 @@
 package growthcraft.core.shared.config;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-
 import com.google.common.io.Files;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.Reference;
 import net.minecraftforge.common.config.Configuration.UnicodeInputStreamReader;
+
+import java.io.*;
 
 public abstract class AbstractUserJSONConfig {
     // INITIALIZE

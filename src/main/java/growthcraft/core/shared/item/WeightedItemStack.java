@@ -1,9 +1,9 @@
 package growthcraft.core.shared.item;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
+
+import javax.annotation.Nonnull;
 
 public class WeightedItemStack extends WeightedRandom.Item {
     public final ItemStack itemStack;

@@ -1,8 +1,8 @@
 package growthcraft.core.shared.inventory;
 
-import java.util.Arrays;
-
 import net.minecraft.util.EnumFacing;
+
+import java.util.Arrays;
 
 public class AccesibleSlots {
     private int[][] accessibleSlots;

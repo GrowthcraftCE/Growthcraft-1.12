@@ -1,13 +1,6 @@
 package growthcraft.milk.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.milk.common.tileentity.TileEntityButterChurn;
@@ -33,6 +26,11 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockButterChurnPlunger extends GrowthcraftRotatableBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX_UP = new AxisAlignedBB(

@@ -1,15 +1,14 @@
 package growthcraft.bees.common.lib.config.user;
 
-import java.io.BufferedReader;
-
-import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.common.lib.config.BeesRegistry;
 import growthcraft.bees.common.lib.config.ForcedFlowerBlockEntry;
 import growthcraft.bees.shared.Reference;
-import growthcraft.core.shared.item.ItemKey;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
+import growthcraft.core.shared.item.ItemKey;
 import net.minecraft.block.Block;
+
+import java.io.BufferedReader;
 
 public class UserFlowersConfig extends AbstractUserJSONConfig {
     private final UserFlowersEntries defaultEntries = new UserFlowersEntries();

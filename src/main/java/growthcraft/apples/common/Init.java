@@ -18,7 +18,6 @@ import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.common.block.BlockRopeKnot;
 import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.BlockTypeDefinition;

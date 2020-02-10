@@ -4,7 +4,6 @@ import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.init.GrowthcraftCellarItems.EnumYeast;
 import growthcraft.core.shared.item.GrowthcraftItemBase;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;

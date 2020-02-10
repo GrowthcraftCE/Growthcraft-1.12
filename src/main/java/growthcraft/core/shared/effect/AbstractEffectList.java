@@ -1,12 +1,11 @@
 package growthcraft.core.shared.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base class for defining Effect lists

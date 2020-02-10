@@ -1,13 +1,13 @@
 package growthcraft.core.shared.block;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public abstract class GrowthcraftBlockBase extends Block {
     public GrowthcraftBlockBase(Material material) {

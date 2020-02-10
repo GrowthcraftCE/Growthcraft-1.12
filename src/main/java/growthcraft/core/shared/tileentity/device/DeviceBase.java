@@ -1,7 +1,5 @@
 package growthcraft.core.shared.tileentity.device;
 
-import java.util.Random;
-
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.io.nbt.INBTSerializableContext;
 import growthcraft.core.shared.io.stream.IStreamable;
@@ -13,7 +11,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
+
+import java.util.Random;
 
 public class DeviceBase implements INBTSerializableContext, IStreamable {
     protected Random random = new Random();

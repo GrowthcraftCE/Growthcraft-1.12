@@ -1,11 +1,9 @@
 package growthcraft.cellar.common.block;
 
-import java.util.Random;
-
-import growthcraft.cellar.shared.Reference;
-import growthcraft.cellar.shared.init.GrowthcraftCellarBlocks;
 import growthcraft.cellar.common.block.BlockFruitPresser.Orient;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.init.GrowthcraftCellarBlocks;
 import growthcraft.core.shared.block.BlockFlags;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -21,6 +19,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockFruitPress extends BlockRotatableCellarContainer {
     // INITIALIZE

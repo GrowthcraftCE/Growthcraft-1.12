@@ -1,10 +1,10 @@
 package growthcraft.cellar.client.render;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.core.shared.client.render.TileFluidTanksSpecialRenderer;
 import growthcraft.core.shared.utils.BBox;
+
+import javax.annotation.Nonnull;
 
 public class RenderFruitPress extends TileFluidTanksSpecialRenderer<TileEntityFruitPress> {
     public static final BBox BBOX_FLUID = BBox.newCube(3, 4, 3, 10, 10, 10).scale(1.0 / 16.0);

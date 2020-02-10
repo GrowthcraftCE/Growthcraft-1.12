@@ -1,15 +1,10 @@
 package growthcraft.core.shared.legacy;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-
 import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionUtils;
 import net.minecraftforge.common.ForgeHooks;
@@ -21,6 +16,9 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.eventhandler.Event;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Register simple items that contain fluids here. Useful for buckets, bottles, and things that have

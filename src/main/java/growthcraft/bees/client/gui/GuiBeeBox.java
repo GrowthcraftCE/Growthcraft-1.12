@@ -1,6 +1,5 @@
 package growthcraft.bees.client.gui;
 
-import net.minecraftforge.fml.relauncher.SideOnly;
 import growthcraft.bees.common.inventory.ContainerBeeBox;
 import growthcraft.bees.common.tileentity.TileEntityBeeBox;
 import growthcraft.bees.shared.Reference;
@@ -8,6 +7,7 @@ import growthcraft.core.shared.client.gui.GrowthcraftGuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class GuiBeeBox extends GrowthcraftGuiContainer<ContainerBeeBox, TileEntityBeeBox> {

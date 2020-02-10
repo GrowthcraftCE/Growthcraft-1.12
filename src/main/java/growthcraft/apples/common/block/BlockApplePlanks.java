@@ -1,5 +1,6 @@
 package growthcraft.apples.common.block;
 
+import growthcraft.apples.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -8,8 +9,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.Random;
-
-import growthcraft.apples.shared.Reference;
 
 public class BlockApplePlanks extends Block {
 

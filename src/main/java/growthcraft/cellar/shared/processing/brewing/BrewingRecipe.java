@@ -1,15 +1,14 @@
 package growthcraft.cellar.shared.processing.brewing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import growthcraft.cellar.shared.processing.common.ProcessingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class BrewingRecipe extends BrewingFallbackRecipe {
     private IMultiItemStacks inputItemStack;

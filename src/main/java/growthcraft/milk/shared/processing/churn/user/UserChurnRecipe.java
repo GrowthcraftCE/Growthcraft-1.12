@@ -1,8 +1,5 @@
 package growthcraft.milk.shared.processing.churn.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import growthcraft.core.shared.config.schema.FluidStackSchema;
 import growthcraft.core.shared.config.schema.ICommentable;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
@@ -10,6 +7,9 @@ import growthcraft.milk.shared.processing.churn.ChurnRecipe;
 import growthcraft.milk.shared.processing.churn.IChurnRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserChurnRecipe implements ICommentable {
     public String comment = "";

@@ -1,10 +1,10 @@
 package growthcraft.cellar.shared.fluids;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.fluids.GrowthcraftFluid;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
 
 public class Booze extends GrowthcraftFluid {
     // REVISE_ME 0

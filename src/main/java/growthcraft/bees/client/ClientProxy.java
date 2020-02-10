@@ -4,9 +4,6 @@ import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.client.gui.GuiBeeBox;
 import growthcraft.bees.common.CommonProxy;
 import growthcraft.bees.common.Init;
-import growthcraft.bees.shared.Reference;
-import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 
 public class ClientProxy extends CommonProxy {
 

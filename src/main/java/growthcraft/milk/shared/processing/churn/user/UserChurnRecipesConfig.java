@@ -1,7 +1,5 @@
 package growthcraft.milk.shared.processing.churn.user;
 
-import java.io.BufferedReader;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import growthcraft.core.shared.config.schema.FluidStackSchema;
@@ -11,6 +9,8 @@ import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.processing.churn.IChurnRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.io.BufferedReader;
 
 /**
  * This allows users to define new brewing recipes.

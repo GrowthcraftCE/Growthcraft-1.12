@@ -1,10 +1,6 @@
 package growthcraft.core.shared.item;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.handlers.FluidHandlerContainerItemWrapper;
-import growthcraft.core.shared.item.IFluidContainerItem;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -14,6 +10,9 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Generic fluid bottle for growthcraft fluids that are edible

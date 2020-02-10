@@ -1,16 +1,12 @@
 package growthcraft.milk.common.tileentity.device;
 
-import growthcraft.core.shared.item.MultiItemStacks;
 import growthcraft.core.shared.tileentity.GrowthcraftTileDeviceBase;
 import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
-import growthcraft.milk.shared.MilkRegistry;
 import growthcraft.milk.shared.processing.cheesevat.ICheeseVatRecipe;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.fluids.FluidRegistry;
 
 public class CheeseVat extends DeviceProgressive<ICheeseVatRecipe> {
     private DeviceFluidSlot primaryFluidSlot;

@@ -1,10 +1,5 @@
 package growthcraft.cellar.shared.booze;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.booze.effect.EffectTipsy;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.effect.AbstractEffect;
@@ -17,6 +12,10 @@ import net.minecraft.potion.Potion;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 public class BoozeEffect extends AbstractEffect {
     // REVISE_ME 0

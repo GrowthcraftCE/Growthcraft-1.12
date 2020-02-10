@@ -1,25 +1,21 @@
 package growthcraft.cellar.client.gui;
 
-import java.util.List;
-
 import growthcraft.cellar.GrowthcraftCellar;
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
-import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.lib.network.PacketClearTankButtonWByte;
 import growthcraft.cellar.common.lib.network.PacketSwitchTankButton;
 import growthcraft.cellar.common.tileentity.TileEntityBrewKettle;
-import growthcraft.core.shared.client.gui.widget.GuiButtonDiscard;
-import growthcraft.core.shared.client.gui.widget.GuiButtonSwitch;
-import growthcraft.core.shared.client.gui.widget.WidgetDeviceProgressIcon;
-import growthcraft.core.shared.client.gui.widget.WidgetFluidTank;
-import growthcraft.core.shared.client.gui.widget.WidgetHeatIcon;
+import growthcraft.cellar.shared.Reference;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.core.shared.client.gui.widget.*;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class GuiBrewKettle extends GuiCellar<ContainerBrewKettle, TileEntityBrewKettle> {

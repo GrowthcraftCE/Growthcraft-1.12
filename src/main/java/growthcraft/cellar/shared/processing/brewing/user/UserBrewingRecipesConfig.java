@@ -1,17 +1,17 @@
 package growthcraft.cellar.shared.processing.brewing.user;
 
-import java.io.BufferedReader;
-
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.config.schema.ResidueSchema;
-import growthcraft.core.shared.definition.IMultiItemStacks;
-import growthcraft.core.shared.config.schema.FluidStackSchema;
-import growthcraft.core.shared.config.schema.ItemKeySchema;
+import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
+import growthcraft.core.shared.config.schema.FluidStackSchema;
+import growthcraft.core.shared.config.schema.ItemKeySchema;
+import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.io.BufferedReader;
 
 /**
  * This allows users to define new brewing recipes.

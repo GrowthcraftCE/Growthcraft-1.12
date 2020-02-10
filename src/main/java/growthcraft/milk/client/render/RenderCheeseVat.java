@@ -1,10 +1,10 @@
 package growthcraft.milk.client.render;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.client.render.TileFluidTanksSpecialRenderer;
 import growthcraft.core.shared.utils.BBox;
 import growthcraft.milk.common.tileentity.TileEntityCheeseVat;
+
+import javax.annotation.Nonnull;
 
 public class RenderCheeseVat extends TileFluidTanksSpecialRenderer<TileEntityCheeseVat> {
     private static final BBox fluidBBox = BBox.newCube(2, 1, 2, 12, 12, 12).scale(1.0 / 16.0);

@@ -1,11 +1,11 @@
 package growthcraft.core.shared.client.gui.widget;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import growthcraft.core.shared.client.gui.GrowthcraftGuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WidgetManager<C extends Container, T extends TileEntity> {
     public final GrowthcraftGuiContainer<C, T> gui;

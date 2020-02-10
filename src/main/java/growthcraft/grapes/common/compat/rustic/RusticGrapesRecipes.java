@@ -1,7 +1,5 @@
 package growthcraft.grapes.common.compat.rustic;
 
-import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
-
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
@@ -15,6 +13,8 @@ import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.WineTypes;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import static growthcraft.grapes.shared.init.GrowthcraftGrapesFluids.grapeWineBooze;
 
 public class RusticGrapesRecipes {
     private RusticGrapesRecipes() {

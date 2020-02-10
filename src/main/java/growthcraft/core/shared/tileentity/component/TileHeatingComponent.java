@@ -1,12 +1,12 @@
 package growthcraft.core.shared.tileentity.component;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.io.nbt.INBTSerializableContext;
 import growthcraft.core.shared.io.stream.IStreamable;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nonnull;
 
 public class TileHeatingComponent implements INBTSerializableContext, IStreamable {
     private TileEntity tileEntity;

@@ -1,10 +1,10 @@
 package growthcraft.milk.common.lib.processing;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.milk.common.item.ItemBlockHangingCurds;
 import growthcraft.milk.shared.processing.cheesepress.ICheesePressRecipe;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class DriedCurdsCheesePressRecipe implements ICheesePressRecipe {
     private ItemStack inputStack;

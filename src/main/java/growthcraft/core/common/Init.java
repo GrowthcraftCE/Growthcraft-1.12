@@ -1,7 +1,5 @@
 package growthcraft.core.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.block.BlockRopeFence;
 import growthcraft.core.common.block.BlockRopeKnot;
@@ -19,6 +17,8 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
 
