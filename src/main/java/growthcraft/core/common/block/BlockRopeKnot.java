@@ -53,6 +53,7 @@ public class BlockRopeKnot extends BlockRopeBase {
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
     private Block baseFence;
+    private boolean sneakBreak = false;
 
     /**
      * Construct a default RopeKnot on an oak fence.
@@ -148,7 +149,8 @@ public class BlockRopeKnot extends BlockRopeBase {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (playerIn.isSneaking()) {
             // Put the Fence back.
-            worldIn.setBlockState(pos, Blocks.OAK_FENCE.getDefaultState());
+            worldIn.setBlockState(pos, baseFence.getDefaultState());
+            sneakBreak = true;
         } else {
             /* Do nothing special, we might need to do something special later. */
         }
@@ -160,7 +162,9 @@ public class BlockRopeKnot extends BlockRopeBase {
         // Always return a rope when broken
         ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
-        InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(baseFence));
+        if ( !sneakBreak ) {
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(baseFence));
+        }
     }
 
     @Override
