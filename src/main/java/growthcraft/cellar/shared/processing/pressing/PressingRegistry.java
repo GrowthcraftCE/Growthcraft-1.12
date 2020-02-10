@@ -1,17 +1,16 @@
 package growthcraft.cellar.shared.processing.pressing;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PressingRegistry {
     private List<IPressingRecipe> recipes = new ArrayList<IPressingRecipe>();

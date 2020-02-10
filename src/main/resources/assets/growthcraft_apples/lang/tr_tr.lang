@@ -9,6 +9,7 @@ tile.apple_planks.name=Elma Tahtası
 tile.apple_sapling.name=Elma Fidanı
 tile.apple_slab_half.name=Elma Ağacı Basamağı
 tile.apple_stairs.name=Elma Ağacı Merdiven
+tile.rope_knot_apple.name=Apple Fence (Rope)
 
 # Fluids
 fluid.fluid_booze_apple_juice=Elma Suyu

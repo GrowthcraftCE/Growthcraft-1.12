@@ -1,11 +1,11 @@
 package growthcraft.core.shared.config.schema;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import growthcraft.core.shared.definition.IItemStackListProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class OreItemSchema implements IItemStackListProvider, IValidatable, ICommentable {
     public String comment = "";

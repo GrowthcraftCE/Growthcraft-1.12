@@ -1,8 +1,5 @@
 package growthcraft.core.common.block;
 
-import java.util.List;
-import java.util.Random;
-
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
@@ -21,6 +18,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class BlockRopeFence extends BlockRopeBase {
 

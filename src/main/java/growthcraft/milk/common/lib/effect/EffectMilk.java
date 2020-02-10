@@ -1,11 +1,5 @@
 package growthcraft.milk.common.lib.effect;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import growthcraft.core.shared.effect.IEffect;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import net.minecraft.entity.Entity;
@@ -15,6 +9,8 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import java.util.*;
 
 /**
  * This is an effect similar to drinking milk, however it can blacklist certain

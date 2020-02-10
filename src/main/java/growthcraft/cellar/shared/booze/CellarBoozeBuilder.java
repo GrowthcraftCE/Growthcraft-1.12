@@ -1,10 +1,6 @@
 package growthcraft.cellar.shared.booze;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.CellarRegistry;
-import growthcraft.cellar.shared.booze.BoozeEffect;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
@@ -13,6 +9,9 @@ import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * If you find yourself making some seriously gnarly spaghetti code, this may

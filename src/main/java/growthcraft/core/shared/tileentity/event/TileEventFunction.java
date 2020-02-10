@@ -1,13 +1,12 @@
 package growthcraft.core.shared.tileentity.event;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.io.stream.IStreamable;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 public class TileEventFunction {
     private Method method;

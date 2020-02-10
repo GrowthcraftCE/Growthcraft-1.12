@@ -1,14 +1,10 @@
 package growthcraft.cellar.common.block;
 
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
+import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.BlockUtils;
 import growthcraft.core.shared.block.IRotatableBlock;
-import growthcraft.cellar.common.tileentity.TileEntityFermentBarrel;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -24,6 +20,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.Random;
 
 public class BlockFermentBarrel extends BlockCellarContainer implements IRotatableBlock {
 

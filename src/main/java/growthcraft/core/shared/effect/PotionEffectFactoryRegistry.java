@@ -1,9 +1,9 @@
 package growthcraft.core.shared.effect;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.AbstractClassRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
 
 public class PotionEffectFactoryRegistry extends AbstractClassRegistry<IPotionEffectFactory> {
     // REVISE_ME 0

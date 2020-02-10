@@ -1,14 +1,9 @@
 package growthcraft.core.shared.fluids;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import growthcraft.core.shared.definition.DuplicateRegistrationException;
 
 import javax.annotation.Nonnull;
-
-import growthcraft.core.shared.definition.DuplicateRegistrationException;
+import java.util.*;
 
 public class FluidTagsRegistry {
     // REVISE_ME 0

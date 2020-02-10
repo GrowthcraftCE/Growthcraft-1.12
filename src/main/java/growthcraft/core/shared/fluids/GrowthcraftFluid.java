@@ -1,13 +1,12 @@
 package growthcraft.core.shared.fluids;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.config.description.IDescribable;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * An extension of the default Forge Fluid class, adding descriptions and color

@@ -1,7 +1,5 @@
 package growthcraft.core.common.block;
 
-import java.util.Random;
-
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.BlockOre;
@@ -12,6 +10,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class BlockSaltOre extends BlockOre {
 

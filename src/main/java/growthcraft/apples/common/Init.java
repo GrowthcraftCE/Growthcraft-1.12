@@ -78,10 +78,12 @@ public class Init {
         GrowthcraftApplesBlocks.blockAppleSlabHalf = new BlockTypeDefinition<BlockSlab>(new BlockAppleSlabHalf("apple_slab_half"));
         GrowthcraftApplesBlocks.blockAppleSlabDouble = new BlockTypeDefinition<BlockSlab>(new BlockAppleSlabDouble("apple_slab_double"));
         GrowthcraftApplesBlocks.blockAppleStairs = new BlockDefinition(new BlockAppleStairs("apple_stairs", GrowthcraftApplesBlocks.blockApplePlanks.getDefaultState()));
+        GrowthcraftApplesBlocks.ropeKnotApple = new BlockDefinition(new BlockAppleFenceRopeKnot("rope_knot_apple", GrowthcraftApplesBlocks.blockAppleFence.getBlock()));
     }
 
     public static void registerBlockOres() {
         OreDictionary.registerOre("plankWood", GrowthcraftApplesBlocks.blockApplePlanks.getItem());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftApplesBlocks.ropeKnotApple.getBlock());
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
@@ -104,6 +106,7 @@ public class Init {
         GrowthcraftApplesBlocks.blockAppleSlabDouble.registerBlock(registry);
         GrowthcraftApplesBlocks.blockAppleStairs.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftApplesBlocks.blockAppleStairs.registerBlock(registry);
+        GrowthcraftApplesBlocks.ropeKnotApple.registerBlock(registry);
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
@@ -119,6 +122,7 @@ public class Init {
                         GrowthcraftApplesBlocks.blockAppleSlabHalf.getBlock(),
                         GrowthcraftApplesBlocks.blockAppleSlabDouble.getBlock()));
         GrowthcraftApplesBlocks.blockAppleStairs.registerBlockItem(registry);
+        GrowthcraftApplesBlocks.ropeKnotApple.registerBlockItem(registry);
 
     }
 

@@ -9,6 +9,7 @@ tile.apple_planks.name=사과나무 판자
 tile.apple_sapling.name=사과나무 묘목
 tile.apple_slab_half.name=사과나무 반 블록
 tile.apple_stairs.name=사과나무 계단
+tile.rope_knot_apple.name=Apple Fence (Rope)
 
 # Fluids
 fluid.fluid_booze_apple_juice=사과 주스

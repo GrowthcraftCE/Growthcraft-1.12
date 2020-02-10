@@ -1,7 +1,6 @@
 package growthcraft.core.common;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.common.block.BlockRopeFence;
 import growthcraft.core.common.block.BlockRopeKnot;
 import growthcraft.core.common.block.BlockSalt;
@@ -14,12 +13,18 @@ import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
+
 public class Init {
 
+    private Init() {
+        /* Do Nothing */
+    }
     //////////////
     // Blocks
     //////////////
@@ -29,29 +34,90 @@ public class Init {
         GrowthcraftCoreBlocks.salt_block = new BlockDefinition(new BlockSalt("salt_block"));
         GrowthcraftCoreBlocks.salt_ore = new BlockDefinition(new BlockSaltOre("salt_ore"));
         GrowthcraftCoreBlocks.rope_knot = new BlockDefinition(new BlockRopeKnot("rope_knot"));
+
+        // region RopeKnotBlocks
+        GrowthcraftCoreBlocks.ropeKnotOak = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_oak", Blocks.OAK_FENCE));
+        GrowthcraftCoreBlocks.ropeKnotDarkOak = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_dark_oak", Blocks.DARK_OAK_FENCE));
+        GrowthcraftCoreBlocks.ropeKnotAcacia = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_acacia", Blocks.ACACIA_FENCE));
+        GrowthcraftCoreBlocks.ropeKnotSpruce = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_spruce", Blocks.SPRUCE_FENCE));
+        GrowthcraftCoreBlocks.ropeKnotBirch = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_birch", Blocks.BIRCH_FENCE));
+        GrowthcraftCoreBlocks.ropeKnotJungle = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_jungle", Blocks.JUNGLE_FENCE));
+        GrowthcraftCoreBlocks.ropeKnotNetherBrick = new BlockDefinition(
+                new BlockRopeKnot("rope_knot_nether_brick", Blocks.NETHER_BRICK_FENCE));
+        // endregion
     }
 
     public static void registerBlockOres() {
         OreDictionary.registerOre("oreSalt", GrowthcraftCoreBlocks.salt_ore.getBlock());
+
+        // region RopeKnotBlocks
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotOak.getBlock());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotDarkOak.getBlock());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotAcacia.getBlock());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotSpruce.getBlock());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotBirch.getBlock());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotJungle.getBlock());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftCoreBlocks.ropeKnotNetherBrick.getBlock());
+        // endregion
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
         GrowthcraftCoreBlocks.salt_block.getBlock().setCreativeTab(tabGrowthcraft);
-        GrowthcraftCoreBlocks.salt_block.registerBlock(registry);    // ITEM!
+        GrowthcraftCoreBlocks.salt_block.registerBlock(registry);
+        GrowthcraftCoreBlocks.salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
+        GrowthcraftCoreBlocks.salt_ore.registerBlock(registry);
+
+        // region NonItemBlocks
         GrowthcraftCoreBlocks.rope_fence.registerBlock(registry);
         GrowthcraftCoreBlocks.rope_knot.registerBlock(registry);
-        GrowthcraftCoreBlocks.salt_ore.getBlock().setCreativeTab(tabGrowthcraft);
-        GrowthcraftCoreBlocks.salt_ore.registerBlock(registry);        // ITEM!
+        //endregion
+
+        // region RopeKnotBlocks
+        GrowthcraftCoreBlocks.ropeKnotOak.registerBlock(registry);
+        GrowthcraftCoreBlocks.ropeKnotDarkOak.registerBlock(registry);
+        GrowthcraftCoreBlocks.ropeKnotAcacia.registerBlock(registry);
+        GrowthcraftCoreBlocks.ropeKnotSpruce.registerBlock(registry);
+        GrowthcraftCoreBlocks.ropeKnotBirch.registerBlock(registry);
+        GrowthcraftCoreBlocks.ropeKnotJungle.registerBlock(registry);
+        GrowthcraftCoreBlocks.ropeKnotNetherBrick.registerBlock(registry);
+        // endregion
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
         GrowthcraftCoreBlocks.salt_block.registerBlockItem(registry);
         GrowthcraftCoreBlocks.salt_ore.registerBlockItem(registry);
+
+        // region RopeKnotBlockItems
+        GrowthcraftCoreBlocks.ropeKnotOak.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.ropeKnotDarkOak.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.ropeKnotAcacia.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.ropeKnotSpruce.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.ropeKnotBirch.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.ropeKnotJungle.registerBlockItem(registry);
+        GrowthcraftCoreBlocks.ropeKnotNetherBrick.registerBlockItem(registry);
+        // endregion
     }
 
     public static void registerBlockRenders() {
         GrowthcraftCoreBlocks.salt_block.registerItemRender();
         GrowthcraftCoreBlocks.salt_ore.registerItemRender();
+
+        // region RopeKnotBlocks
+        GrowthcraftCoreBlocks.ropeKnotOak.registerItemRender();
+        GrowthcraftCoreBlocks.ropeKnotDarkOak.registerItemRender();
+        GrowthcraftCoreBlocks.ropeKnotAcacia.registerItemRender();
+        GrowthcraftCoreBlocks.ropeKnotSpruce.registerItemRender();
+        GrowthcraftCoreBlocks.ropeKnotBirch.registerItemRender();
+        GrowthcraftCoreBlocks.ropeKnotJungle.registerItemRender();
+        GrowthcraftCoreBlocks.ropeKnotNetherBrick.registerItemRender();
+        // endregion
+
     }
 
     //////////////
@@ -98,30 +164,7 @@ public class Init {
     }
 
     private static void registerCraftingRecipes() {
-        // TODO: RECIPE_REGISTER!
-        // TODO: Recipes are done via JSON now. You could try and just do a bunch of json-based recipes, if you haven't already.
-
-//        Item ironIngot = Items.IRON_INGOT;
-//
-//        // Crowbar Recipes
-//        for ( EnumDyeColor dye : EnumDyeColor.values() ) {
-//            GameRegistry.addShapedRecipe( GrowthcraftCoreItems.crowbar.asStack(1, dye.getMetadata() ),
-//                    "  I", "DI ", "ID ",
-//                    'I', ironIngot,
-//                    'D', new ItemStack(Items.DYE, 1, dye.getDyeDamage())
-//                    );
-//        }
-//
-//        GameRegistry.addRecipe( GrowthcraftCoreBlocks.salt_block.asStack(1),
-//                "SSS", "SSS", "SSS",
-//                'S', GrowthcraftCoreItems.salt.getItem()
-//        );
-//        GameRegistry.addRecipe( GrowthcraftCoreItems.salt.asStack(9),
-//                "S",
-//                'S', GrowthcraftCoreBlocks.salt_block.getBlock()
-//        );
-//        
-//		GameRegistry.addRecipe(GrowthcraftCoreItems.rope.asStack(8), new Object[] {"A", 'A', Items.LEAD});
+        /* No longer used. Use JSON recipe instead. */
     }
 
 

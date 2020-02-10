@@ -1,12 +1,5 @@
 package growthcraft.core.shared.fluids;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import growthcraft.core.shared.legacy.FluidContainerRegistry.FluidContainerData;
@@ -17,14 +10,11 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidActionResult;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fluids.*;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import java.util.*;
 
 public class GrowthcraftFluidUtils {
     private static Map<Fluid, List<FluidContainerData>> fluidData;

@@ -1,11 +1,11 @@
 package growthcraft.cellar.shared.processing.brewing;
 
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.processing.common.IProcessingRecipe;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
 
 public interface IBrewingRecipe extends IProcessingRecipe {
     IMultiItemStacks getInputItemStack();

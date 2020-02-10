@@ -1,8 +1,8 @@
 package growthcraft.core.shared.fluids;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.text.translation.I18n;
+
+import javax.annotation.Nonnull;
 
 public class FluidTag {
     // REVISE_ME 0

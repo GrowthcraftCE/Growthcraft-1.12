@@ -1,15 +1,12 @@
 package growthcraft.milk;
 
-import growthcraft.milk.common.handlers.HarvestDropsEventHandler;
-import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import growthcraft.milk.common.CommonProxy;
 import growthcraft.milk.common.Init;
 import growthcraft.milk.common.handlers.EntityDropsEventHandler;
+import growthcraft.milk.common.handlers.HarvestDropsEventHandler;
 import growthcraft.milk.shared.GrowthcraftMilkUserApis;
 import growthcraft.milk.shared.Reference;
+import growthcraft.milk.shared.config.GrowthcraftMilkConfig;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -28,6 +25,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Reference.MODID, name = Reference.NAME, version = Reference.VERSION,
         dependencies = "required-after:" + growthcraft.core.shared.Reference.MODID + ";" +

@@ -1,15 +1,15 @@
 package growthcraft.cellar.shared.processing.heatsource.user;
 
-import java.io.BufferedReader;
-import java.util.Map;
-
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.core.shared.item.ItemKey;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
+import growthcraft.core.shared.item.ItemKey;
 import net.minecraft.block.Block;
 import net.minecraft.util.ResourceLocation;
+
+import java.io.BufferedReader;
+import java.util.Map;
 
 /**
  * Provides users with the ability to set blocks as heat sources for Growthcraft

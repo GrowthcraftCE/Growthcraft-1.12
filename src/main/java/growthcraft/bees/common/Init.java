@@ -15,12 +15,6 @@ import growthcraft.bees.shared.init.GrowthcraftBeesFluids;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.BeesWaxTypes;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.MeadTypes;
-import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.shared.CoreRegistry;
-import growthcraft.core.shared.GrowthcraftCoreApis;
-import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
-import growthcraft.core.shared.definition.BlockDefinition;
-import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
 import growthcraft.cellar.shared.booze.BoozeTag;
@@ -29,6 +23,16 @@ import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
+import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.CoreRegistry;
+import growthcraft.core.shared.GrowthcraftCoreApis;
+import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
+import growthcraft.core.shared.definition.BlockDefinition;
+import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
+import growthcraft.core.shared.effect.EffectAddPotionEffect;
+import growthcraft.core.shared.effect.EffectWeightedRandomList;
+import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.fluids.FluidFactory;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetailsBuilder;
 import growthcraft.core.shared.fluids.TaggedFluidStacks;
@@ -38,10 +42,6 @@ import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import growthcraft.core.shared.utils.LootUtils;
 import growthcraft.core.shared.utils.TickUtils;
-import growthcraft.core.shared.definition.ItemTypeDefinition;
-import growthcraft.core.shared.effect.EffectAddPotionEffect;
-import growthcraft.core.shared.effect.EffectWeightedRandomList;
-import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -66,10 +66,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
-import static growthcraft.bees.shared.init.GrowthcraftBeesFluids.meadBooze;
 import static growthcraft.bees.shared.init.GrowthcraftBeesBlocks.meadBoozeFluidBlocks;
+import static growthcraft.bees.shared.init.GrowthcraftBeesFluids.meadBooze;
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
     private Init() {

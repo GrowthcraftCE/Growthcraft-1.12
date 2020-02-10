@@ -1,7 +1,6 @@
 package growthcraft.core.shared.block;
 
 import growthcraft.core.shared.definition.BlockDefinition;
-import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.properties.IProperty;

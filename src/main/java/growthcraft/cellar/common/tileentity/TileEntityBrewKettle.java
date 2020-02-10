@@ -1,9 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
-import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.cellar.client.particle.emitter.BrewKettleLidSteamEmitter;
 import growthcraft.cellar.client.particle.params.FluidTanksParams;
 import growthcraft.cellar.client.render.RenderBrewKettle;
@@ -11,27 +7,23 @@ import growthcraft.cellar.client.utils.FXHelperCellar;
 import growthcraft.cellar.common.inventory.ContainerBrewKettle;
 import growthcraft.cellar.common.tileentity.device.BrewKettle;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
+import growthcraft.cellar.shared.init.GrowthcraftCellarItems;
 import growthcraft.core.shared.client.utils.FXHelper;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
-import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
-import growthcraft.core.shared.tileentity.feature.IItemOperable;
 import growthcraft.core.shared.tileentity.feature.ITileHeatedDevice;
 import growthcraft.core.shared.tileentity.feature.ITileProgressiveDevice;
 import growthcraft.core.shared.utils.Pair;
-import growthcraft.core.shared.utils.PulseStepper;
 import growthcraft.core.shared.utils.SpatialRandom;
 import growthcraft.core.shared.utils.Triplet;
-import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
 import io.netty.buffer.ByteBuf;
-import io.netty.util.internal.MathUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -39,8 +31,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.IOException;
 
 public class TileEntityBrewKettle extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice // , IItemOperable
 {

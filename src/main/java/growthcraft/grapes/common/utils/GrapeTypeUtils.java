@@ -1,7 +1,6 @@
 package growthcraft.grapes.common.utils;
 
 import growthcraft.grapes.shared.definition.IGrapeType;
-import net.minecraft.item.ItemStack;
 
 public class GrapeTypeUtils {
 

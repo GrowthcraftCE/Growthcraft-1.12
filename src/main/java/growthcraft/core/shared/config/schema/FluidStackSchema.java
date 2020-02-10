@@ -1,12 +1,12 @@
 package growthcraft.core.shared.config.schema;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.definition.IFluidStackFactory;
 import growthcraft.core.shared.utils.StringUtils;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
 
 public class FluidStackSchema implements IFluidStackFactory, IValidatable, ICommentable {
     public String comment;

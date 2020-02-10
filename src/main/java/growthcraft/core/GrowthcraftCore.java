@@ -1,13 +1,13 @@
 package growthcraft.core;
 
+import growthcraft.core.common.CommonProxy;
+import growthcraft.core.common.Init;
+import growthcraft.core.common.creativetabs.TabGrowthcraft;
 import growthcraft.core.shared.GrowthcraftCoreApis;
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.compat.Compat;
 import growthcraft.core.shared.compat.forestry.InitForestry;
 import growthcraft.core.shared.compat.rustic.InitRustic;
-import growthcraft.core.common.CommonProxy;
-import growthcraft.core.common.Init;
-import growthcraft.core.common.creativetabs.TabGrowthcraft;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
@@ -38,6 +38,8 @@ public class GrowthcraftCore {
 
     public static final String CLIENT_PROXY_CLASS = "growthcraft.core.client.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "growthcraft.core.common.CommonProxy";
+
+    public static final String ORE_ROPE_KNOT_FENCE = "ropeKnotFence";
 
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftCore instance;

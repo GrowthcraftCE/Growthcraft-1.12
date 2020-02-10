@@ -1,14 +1,14 @@
 package growthcraft.cellar.shared.processing.pressing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.processing.common.ProcessingRecipe;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class PressingRecipe extends ProcessingRecipe implements IPressingRecipe {
     private IMultiItemStacks inputItemStack;

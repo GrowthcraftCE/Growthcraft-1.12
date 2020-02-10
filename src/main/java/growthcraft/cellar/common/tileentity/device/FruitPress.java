@@ -1,14 +1,14 @@
 package growthcraft.cellar.common.tileentity.device;
 
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.common.tileentity.TileEntityFruitPress;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.cellar.shared.processing.pressing.IPressingRecipe;
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
+import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
-import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidStack;

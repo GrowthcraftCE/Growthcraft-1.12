@@ -1,8 +1,8 @@
 package growthcraft.cellar.shared;
 
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.booze.BoozeEntry;
 import growthcraft.cellar.shared.booze.BoozeRegistry;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.processing.brewing.BrewingRegistry;
 import growthcraft.cellar.shared.processing.culturing.CulturingRegistry;
 import growthcraft.cellar.shared.processing.fermenting.FermentingRegistry;

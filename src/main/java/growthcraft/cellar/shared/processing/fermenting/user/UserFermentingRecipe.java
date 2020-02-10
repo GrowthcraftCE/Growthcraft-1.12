@@ -1,11 +1,11 @@
 package growthcraft.cellar.shared.processing.fermenting.user;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.config.schema.FluidStackSchema;
 import growthcraft.core.shared.config.schema.ICommentable;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
 import growthcraft.core.shared.config.schema.MultiFluidStackSchema;
+
+import javax.annotation.Nonnull;
 
 public class UserFermentingRecipe implements ICommentable {
     public String comment = "";

@@ -1,16 +1,15 @@
 package growthcraft.core.shared.compat;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import growthcraft.core.shared.compat.forestry.ForestryModFluids;
 import growthcraft.milk.shared.init.GrowthcraftMilkFluids;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Loader;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 // Note: no imports from other mods should be added here 
 

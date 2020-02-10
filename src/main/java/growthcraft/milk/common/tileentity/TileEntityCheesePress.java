@@ -1,7 +1,5 @@
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
@@ -23,6 +21,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.io.IOException;
 
 public class TileEntityCheesePress extends GrowthcraftTileDeviceBase implements ITickable, IItemOperable, ITileProgressiveDevice {
     private static int[][] accessibleSlots = {

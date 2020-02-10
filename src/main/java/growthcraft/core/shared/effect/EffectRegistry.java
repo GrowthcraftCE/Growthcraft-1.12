@@ -1,9 +1,9 @@
 package growthcraft.core.shared.effect;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.AbstractClassRegistry;
 import net.minecraft.nbt.NBTTagCompound;
+
+import javax.annotation.Nonnull;
 
 public class EffectRegistry extends AbstractClassRegistry<IEffect> {
     // REVISE_ME 0

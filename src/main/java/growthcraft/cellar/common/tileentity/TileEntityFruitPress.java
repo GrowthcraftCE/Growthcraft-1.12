@@ -1,10 +1,10 @@
 package growthcraft.cellar.common.tileentity;
 
 import growthcraft.cellar.common.block.BlockFruitPresser;
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerFruitPress;
 import growthcraft.cellar.common.tileentity.device.FruitPress;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;

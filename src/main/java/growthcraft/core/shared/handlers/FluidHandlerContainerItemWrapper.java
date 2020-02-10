@@ -1,8 +1,5 @@
 package growthcraft.core.shared.handlers;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.item.IFluidContainerItem;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.item.Item;
@@ -15,6 +12,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.FluidTankProperties;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class FluidHandlerContainerItemWrapper implements IFluidHandlerItem, ICapabilityProvider {
 

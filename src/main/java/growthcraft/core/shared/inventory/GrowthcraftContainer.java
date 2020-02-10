@@ -6,7 +6,6 @@ import growthcraft.core.shared.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.shared.inventory.slot.SlotPlayerHotbar;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.feature.IGuiNetworkSync;
-import growthcraft.core.shared.utils.Platform;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;

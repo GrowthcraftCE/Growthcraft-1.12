@@ -1,16 +1,13 @@
 package growthcraft.bamboo.common;
 
-import growthcraft.bamboo.GrowthcraftBamboo;
 import growthcraft.bamboo.client.handler.ColorHandlerBlockBambooLeaves;
 import growthcraft.bamboo.common.block.*;
 import growthcraft.bamboo.common.item.ItemBambooCoal;
 import growthcraft.bamboo.common.item.ItemBambooDoor;
 import growthcraft.bamboo.common.item.ItemBambooStick;
-import growthcraft.bamboo.shared.Reference;
-import growthcraft.bamboo.shared.config.GrowthcraftBambooConfig;
 import growthcraft.bamboo.shared.init.GrowthcraftBambooBlocks;
 import growthcraft.bamboo.shared.init.GrowthcraftBambooItems;
-import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.BlockTypeDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
@@ -23,24 +20,17 @@ import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSlab;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.apache.logging.log4j.Level;
-
-import java.io.File;
 
 import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
     private Init() {
     }
-
-    private static Configuration configuration;
 
     ////////
     // Blocks
@@ -57,6 +47,7 @@ public class Init {
         GrowthcraftBambooBlocks.bambooStalk = new BlockDefinition(new BlockBambooStalk("bamboo_stalk"));
         GrowthcraftBambooBlocks.bambooShoot = new BlockDefinition(new BlockBambooShoot("bamboo_shoot"));
         GrowthcraftBambooBlocks.blockBambooDoor = new BlockDefinition(new BlockBambooDoor("bamboo_door"));
+        GrowthcraftBambooBlocks.ropeKnotBamboo = new BlockDefinition(new BlockBambooFenceRopeKnot("rope_knot_bamboo", GrowthcraftBambooBlocks.bambooFence.getBlock()));
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
@@ -78,6 +69,7 @@ public class Init {
         GrowthcraftBambooBlocks.bambooShoot.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftBambooBlocks.bambooShoot.registerBlock(registry);
         GrowthcraftBambooBlocks.blockBambooDoor.registerBlock(registry);
+        GrowthcraftBambooBlocks.ropeKnotBamboo.registerBlock(registry);
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
@@ -92,10 +84,12 @@ public class Init {
         GrowthcraftBambooBlocks.bambooLeaves.registerBlockItem(registry);
         GrowthcraftBambooBlocks.bambooStalk.registerBlockItem(registry);
         GrowthcraftBambooBlocks.bambooShoot.registerBlockItem(registry);
+        GrowthcraftBambooBlocks.ropeKnotBamboo.registerBlockItem(registry);
     }
 
     public static void registerBlockOres() {
         OreDictionary.registerOre("plankWood", GrowthcraftBambooBlocks.bambooPlank.getItem());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftBambooBlocks.ropeKnotBamboo.getBlock());
     }
 
     public static void registerBlockRenders() {
@@ -108,6 +102,7 @@ public class Init {
         GrowthcraftBambooBlocks.bambooStalk.registerItemRender();
         GrowthcraftBambooBlocks.bambooShoot.registerItemRender();
         GrowthcraftBambooBlocks.blockBambooDoor.registerItemRender();
+        GrowthcraftBambooBlocks.ropeKnotBamboo.registerItemRender();
     }
 
     public static void registerBlockColorHandlers() {
@@ -166,36 +161,11 @@ public class Init {
     }
 
     private static void registerCraftingRecipes() {
-
+        /* Nothing to do here at this time. */
     }
 
     public static void registerSmeltingRecipes() {
         GameRegistry.addSmelting(GrowthcraftBambooBlocks.bambooStalk.getItemAsStack(1), GrowthcraftBambooItems.bambooCoal.asStack(1), 0.4f);
     }
 
-    // Config
-
-    public void preInitConfig(FMLPreInitializationEvent e) {
-        File directory = e.getModConfigurationDirectory();
-        configuration = new Configuration(new File(directory.getPath(), "modtut.cfg"));
-        readConfig();
-    }
-
-    private static void readConfig() {
-        Configuration configuration = GrowthcraftBamboo.configuration;
-        try {
-            configuration.load();
-            initDebugConfig(configuration);
-        } catch (Exception e) {
-            GrowthcraftLogger.getLogger(Reference.MODID).log(Level.ERROR, "Unable to load configuration files for Growthcraft Bamboo!", e);
-        } finally {
-            if (configuration.hasChanged()) {
-                configuration.save();
-            }
-        }
-    }
-
-    private static void initDebugConfig(Configuration configuration) {
-        GrowthcraftBambooConfig.logLevel = configuration.getString("logLevel", GrowthcraftBambooConfig.CATEGORY_GENERAL, GrowthcraftBambooConfig.logLevel, "Set standard logging levels. (INFO, ERROR, DEBUG)");
-    }
 }

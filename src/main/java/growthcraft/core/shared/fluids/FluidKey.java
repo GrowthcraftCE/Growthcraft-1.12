@@ -1,14 +1,14 @@
 package growthcraft.core.shared.fluids;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IFluidStackFactory;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import growthcraft.core.shared.utils.HashKey;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * As the name implies, this class is used in place of a List for Fluid keys

@@ -1,8 +1,5 @@
 package growthcraft.core.shared.item;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import growthcraft.core.shared.utils.HashKey;
@@ -11,6 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * As the name implies, this class is used in place of a List for Item keys

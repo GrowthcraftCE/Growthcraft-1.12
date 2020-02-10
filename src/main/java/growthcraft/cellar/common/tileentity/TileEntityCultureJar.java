@@ -1,14 +1,12 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerCultureJar;
-import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
+import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
@@ -26,6 +24,8 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import java.io.IOException;
 
 public class TileEntityCultureJar extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice {
     public static enum CultureJarDataId {

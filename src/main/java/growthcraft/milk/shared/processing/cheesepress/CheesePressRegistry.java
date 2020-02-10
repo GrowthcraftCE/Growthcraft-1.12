@@ -1,15 +1,14 @@
 package growthcraft.milk.shared.processing.cheesepress;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.ItemTest;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheesePressRegistry {
     private List<ICheesePressRecipe> recipes = new ArrayList<ICheesePressRecipe>();

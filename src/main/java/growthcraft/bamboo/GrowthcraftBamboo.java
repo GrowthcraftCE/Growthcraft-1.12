@@ -57,7 +57,7 @@ public class GrowthcraftBamboo {
 
     @Mod.EventHandler
     public static void postInit(FMLPostInitializationEvent event) {
-        // Nothing to do here at this time.
+        Init.registerBlockOres();
     }
 
     @Mod.EventHandler

@@ -1,7 +1,5 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
 import growthcraft.cellar.common.block.BlockFruitPresser;
 import growthcraft.cellar.common.block.BlockFruitPresser.PressState;
 import growthcraft.cellar.shared.init.GrowthcraftCellarBlocks;
@@ -10,8 +8,9 @@ import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+
+import java.io.IOException;
 
 public class TileEntityFruitPresser extends GrowthcraftTileBase implements ITickable {
     // INITIALIZE

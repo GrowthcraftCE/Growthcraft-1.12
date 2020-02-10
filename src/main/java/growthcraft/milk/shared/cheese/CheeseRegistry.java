@@ -1,18 +1,17 @@
 package growthcraft.milk.shared.cheese;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.milk.shared.Reference;
 import growthcraft.milk.shared.definition.ICheeseFluidStackFactory;
 import growthcraft.milk.shared.definition.ICheeseType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class CheeseRegistry {
     private Map<ResourceLocation, Integer> cheeseNameToId = new HashMap<ResourceLocation, Integer>();

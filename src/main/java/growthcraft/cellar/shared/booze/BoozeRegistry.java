@@ -1,12 +1,5 @@
 package growthcraft.cellar.shared.booze;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.booze.modifier.IModifierFunction;
 import growthcraft.core.shared.GrowthcraftLogger;
@@ -14,6 +7,12 @@ import growthcraft.core.shared.fluids.FluidTag;
 import growthcraft.core.shared.fluids.GrowthcraftFluidUtils;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BoozeRegistry {
     // REVISE_ME 0

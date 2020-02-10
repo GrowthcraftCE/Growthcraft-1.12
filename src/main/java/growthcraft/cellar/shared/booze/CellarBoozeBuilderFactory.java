@@ -1,9 +1,9 @@
 package growthcraft.cellar.shared.booze;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.config.UserApis;
 import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
 
 public class CellarBoozeBuilderFactory {
     private UserApis userApis;

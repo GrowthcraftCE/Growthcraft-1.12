@@ -1,10 +1,5 @@
 package growthcraft.core.shared.item;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -20,6 +15,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Utility class for item handling.

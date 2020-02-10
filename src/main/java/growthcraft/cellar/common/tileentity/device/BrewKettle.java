@@ -1,6 +1,5 @@
 package growthcraft.cellar.common.tileentity.device;
 
-import growthcraft.cellar.GrowthcraftCellar;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.events.EventBrewed;

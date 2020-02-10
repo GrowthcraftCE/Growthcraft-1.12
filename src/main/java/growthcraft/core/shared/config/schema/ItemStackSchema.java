@@ -1,10 +1,5 @@
 package growthcraft.core.shared.config.schema;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.definition.IItemStackFactory;
 import growthcraft.core.shared.definition.IItemStackListProvider;
 import growthcraft.core.shared.definition.IMultiItemStacks;
@@ -14,6 +9,10 @@ import growthcraft.core.shared.utils.StringUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemStackSchema implements IItemStackFactory, IItemStackListProvider, IValidatable, ICommentable {
     public String comment;

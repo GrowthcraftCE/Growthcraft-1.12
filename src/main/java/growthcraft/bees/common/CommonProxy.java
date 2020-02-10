@@ -1,7 +1,7 @@
 package growthcraft.bees.common;
 
-import growthcraft.bees.shared.config.GrowthcraftBeesConfig;
 import growthcraft.bees.common.worldgen.BeeHiveWorldGen;
+import growthcraft.bees.shared.config.GrowthcraftBeesConfig;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {

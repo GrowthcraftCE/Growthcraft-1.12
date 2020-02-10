@@ -1,11 +1,7 @@
 package growthcraft.cellar.common.block;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
-import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.common.tileentity.TileEntityCultureJar;
+import growthcraft.cellar.shared.Reference;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -18,6 +14,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockCultureJar extends BlockCellarContainer {
 

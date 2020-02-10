@@ -1,9 +1,5 @@
 package growthcraft.milk.common.block;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.milk.common.tileentity.TileEntityPancheon;
 import growthcraft.milk.shared.Reference;
@@ -17,6 +13,9 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BlockPancheon extends GrowthcraftBlockContainer {
 

@@ -1,20 +1,19 @@
 package growthcraft.cellar.shared.processing.fermenting.user;
 
-import java.io.BufferedReader;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.Reference;
-import growthcraft.core.shared.definition.IMultiFluidStacks;
-import growthcraft.core.shared.definition.IMultiItemStacks;
+import growthcraft.core.shared.GrowthcraftLogger;
+import growthcraft.core.shared.config.AbstractUserJSONConfig;
 import growthcraft.core.shared.config.schema.FluidStackSchema;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
 import growthcraft.core.shared.config.schema.MultiFluidStackSchema;
-import growthcraft.core.shared.GrowthcraftLogger;
-import growthcraft.core.shared.config.AbstractUserJSONConfig;
+import growthcraft.core.shared.definition.IMultiFluidStacks;
+import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.io.BufferedReader;
 
 public class UserFermentingRecipesConfig extends AbstractUserJSONConfig {
     protected UserFermentingRecipes defaultRecipes = new UserFermentingRecipes();

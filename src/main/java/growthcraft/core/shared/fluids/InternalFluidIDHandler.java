@@ -1,10 +1,10 @@
 package growthcraft.core.shared.fluids;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Fluid identification has changed to strings for never MC version.

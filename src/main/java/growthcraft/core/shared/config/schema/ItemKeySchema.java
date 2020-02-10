@@ -1,15 +1,14 @@
 package growthcraft.core.shared.config.schema;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.definition.IItemStackListProvider;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.item.OreItemStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemKeySchema extends ItemStackSchema implements IItemStackListProvider, IValidatable {
     public String ore;

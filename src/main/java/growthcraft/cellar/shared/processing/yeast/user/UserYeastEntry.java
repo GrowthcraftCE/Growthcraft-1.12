@@ -1,12 +1,11 @@
 package growthcraft.cellar.shared.processing.yeast.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.config.schema.ICommentable;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserYeastEntry implements ICommentable {
     public String comment = "";

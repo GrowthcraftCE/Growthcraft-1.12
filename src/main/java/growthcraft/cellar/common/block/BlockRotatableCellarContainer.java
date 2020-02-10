@@ -2,7 +2,6 @@ package growthcraft.cellar.common.block;
 
 import growthcraft.core.shared.block.BlockFlags;
 import growthcraft.core.shared.block.BlockUtils;
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

@@ -20,6 +20,13 @@ item.salt.name=암염
 itemGroup.Growthcraft=그로우스크래프트
 
 tile.rope_knot.name=밧줄 매듭
+tile.rope_knot_oak.name=Oak Fence (Rope)
+tile.rope_knot_dark_oak.name=Dark Oak Fence (Rope)
+tile.rope_knot_acacia.name=Acacia Fence (Rope)
+tile.rope_knot_spruce.name=Spruce Fence (Rope)
+tile.rope_knot_birch.name=Birch Fence (Rope)
+tile.rope_knot_jungle.name=Jungle Fence (Rope)
+tile.rope_knot_nether_brick.name=Nether Brick Fence (Rope)
 tile.rope_fence.name=밧줄
 tile.salt_block.name=암염 블록
 tile.salt_ore.name=암염 광석

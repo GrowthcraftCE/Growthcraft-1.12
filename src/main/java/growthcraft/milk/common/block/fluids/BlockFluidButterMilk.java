@@ -1,9 +1,8 @@
 package growthcraft.milk.common.block.fluids;
 
+import growthcraft.core.shared.block.GrowthcraftBlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
-
-import growthcraft.core.shared.block.GrowthcraftBlockFluid;
 
 public class BlockFluidButterMilk extends GrowthcraftBlockFluid {
 

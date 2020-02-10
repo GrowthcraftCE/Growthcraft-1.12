@@ -1,16 +1,10 @@
 package growthcraft.core.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.block.FenceUtils;
 import growthcraft.core.shared.block.IBlockRope;
 import growthcraft.core.shared.init.GrowthcraftCoreItems;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFence;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -30,6 +24,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockRopeKnot extends BlockRopeBase {
 
@@ -54,10 +52,32 @@ public class BlockRopeKnot extends BlockRopeBase {
     public static final PropertyBool UP = PropertyBool.create("up");
     public static final PropertyBool DOWN = PropertyBool.create("down");
 
+    private Block baseFence;
+    private boolean sneakBreak = false;
+
+    /**
+     * Construct a default RopeKnot on an oak fence.
+     *
+     * @param unlocalizedName The unlocalized name for the rope knot fence.
+     */
     public BlockRopeKnot(String unlocalizedName) {
+        this(unlocalizedName, Blocks.OAK_FENCE);
+    }
+
+    /**
+     * Construct a dynamic RopeKnot on a given fence block.
+     *
+     * @param unlocalizedName The unlocalized name for the rope knot fence.
+     * @param baseFence       The block of the given fence type that this rope knot will attach to.
+     */
+    public BlockRopeKnot(String unlocalizedName, Block baseFence) {
+        this(unlocalizedName, baseFence, Reference.MODID);
+    }
+
+    public BlockRopeKnot(String unlocalizedName, Block baseFence, String modid) {
         super(Material.WOOD);
         this.setUnlocalizedName(unlocalizedName);
-        this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
+        this.setRegistryName(new ResourceLocation(modid, unlocalizedName));
 
         this.setHardness(3);
         this.setResistance(20);
@@ -73,6 +93,8 @@ public class BlockRopeKnot extends BlockRopeBase {
                 .withProperty(DOWN, Boolean.valueOf(false)));
 
         this.useNeighborBrightness = true;
+
+        this.baseFence = baseFence;
     }
 
     @SuppressWarnings("deprecation")
@@ -87,6 +109,9 @@ public class BlockRopeKnot extends BlockRopeBase {
         return false;
     }
 
+    public Block getFenceBlock() {
+        return baseFence;
+    }
 
     @Override
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean isActualState) {
@@ -124,8 +149,10 @@ public class BlockRopeKnot extends BlockRopeBase {
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (playerIn.isSneaking()) {
             // Put the Fence back.
-            worldIn.setBlockState(pos, Blocks.OAK_FENCE.getDefaultState());
+            worldIn.setBlockState(pos, baseFence.getDefaultState());
+            sneakBreak = true;
         } else {
+            /* Do nothing special, we might need to do something special later. */
         }
         return false;
     }
@@ -135,6 +162,9 @@ public class BlockRopeKnot extends BlockRopeBase {
         // Always return a rope when broken
         ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);
         InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), rope);
+        if ( !sneakBreak ) {
+            InventoryHelper.spawnItemStack(worldIn, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(baseFence));
+        }
     }
 
     @Override
@@ -154,7 +184,6 @@ public class BlockRopeKnot extends BlockRopeBase {
     @Override
     public boolean canConnectRopeTo(IBlockAccess world, BlockPos pos, EnumFacing facing) {
         Block block = world.getBlockState(pos.offset(facing)).getBlock();
-        // return block instanceof BlockRopeFence || block instanceof BlockRopeKnot || block instanceof BlockGrapeVineBush || block instanceof BlockHopsBush;
         return block instanceof IBlockRope;
     }
 

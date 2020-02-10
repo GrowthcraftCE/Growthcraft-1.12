@@ -1,11 +1,5 @@
 package growthcraft.core.shared.inventory;
 
-import java.lang.reflect.Constructor;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.tileentity.feature.IInteractionObject;
@@ -17,6 +11,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import java.lang.reflect.Constructor;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Cross Ported from YATM
