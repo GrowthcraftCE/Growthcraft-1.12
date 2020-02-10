@@ -9,7 +9,7 @@
     },
     {
       "when": { "north": 2 },
-      "apply": { "model": "minecraft:oak_fence_side", "uvlock": true }
+      "apply": { "model": "minecraft:spruce_fence_side", "uvlock": true }
     },
     {
       "when": { "east": 1 },
@@ -17,7 +17,7 @@
     },
     {
       "when": { "east": 2 },
-      "apply": { "model": "minecraft:oak_fence_side", "y": 90, "uvlock": true }
+      "apply": { "model": "minecraft:spruce_fence_side", "y": 90, "uvlock": true }
     },
     {
       "when": { "south": 1 },
@@ -25,7 +25,7 @@
     },
     {
       "when": { "south": 2 },
-      "apply": { "model": "minecraft:oak_fence_side", "y": 180, "uvlock": true }
+      "apply": { "model": "minecraft:spruce_fence_side", "y": 180, "uvlock": true }
     },
     {
       "when": { "west": 1 },
@@ -33,7 +33,7 @@
     },
     {
       "when": { "west": 2 },
-      "apply": { "model": "minecraft:oak_fence_side", "y": 270, "uvlock": true }
+      "apply": { "model": "minecraft:spruce_fence_side", "y": 270, "uvlock": true }
     }
   ]
 }
