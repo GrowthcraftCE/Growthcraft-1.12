@@ -10,10 +10,13 @@ import growthcraft.bamboo.shared.Reference;
 import growthcraft.bamboo.shared.config.GrowthcraftBambooConfig;
 import growthcraft.bamboo.shared.init.GrowthcraftBambooBlocks;
 import growthcraft.bamboo.shared.init.GrowthcraftBambooItems;
+import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.common.block.BlockRopeKnot;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.BlockTypeDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.init.GrowthcraftCoreBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.BlockSlab;
@@ -57,6 +60,7 @@ public class Init {
         GrowthcraftBambooBlocks.bambooStalk = new BlockDefinition(new BlockBambooStalk("bamboo_stalk"));
         GrowthcraftBambooBlocks.bambooShoot = new BlockDefinition(new BlockBambooShoot("bamboo_shoot"));
         GrowthcraftBambooBlocks.blockBambooDoor = new BlockDefinition(new BlockBambooDoor("bamboo_door"));
+        GrowthcraftBambooBlocks.ropeKnotBamboo = new BlockDefinition(new BlockBambooFenceRopeKnot("rope_knot_bamboo", GrowthcraftBambooBlocks.bambooFence.getBlock()));
     }
 
     public static void registerBlocks(IForgeRegistry<Block> registry) {
@@ -78,6 +82,7 @@ public class Init {
         GrowthcraftBambooBlocks.bambooShoot.getBlock().setCreativeTab(tabGrowthcraft);
         GrowthcraftBambooBlocks.bambooShoot.registerBlock(registry);
         GrowthcraftBambooBlocks.blockBambooDoor.registerBlock(registry);
+        GrowthcraftBambooBlocks.ropeKnotBamboo.registerBlock(registry);
     }
 
     public static void registerBlockItems(IForgeRegistry<Item> registry) {
@@ -92,10 +97,12 @@ public class Init {
         GrowthcraftBambooBlocks.bambooLeaves.registerBlockItem(registry);
         GrowthcraftBambooBlocks.bambooStalk.registerBlockItem(registry);
         GrowthcraftBambooBlocks.bambooShoot.registerBlockItem(registry);
+        GrowthcraftBambooBlocks.ropeKnotBamboo.registerBlockItem(registry);
     }
 
     public static void registerBlockOres() {
         OreDictionary.registerOre("plankWood", GrowthcraftBambooBlocks.bambooPlank.getItem());
+        OreDictionary.registerOre(GrowthcraftCore.ORE_ROPE_KNOT_FENCE, GrowthcraftBambooBlocks.ropeKnotBamboo.getBlock());
     }
 
     public static void registerBlockRenders() {
@@ -108,6 +115,7 @@ public class Init {
         GrowthcraftBambooBlocks.bambooStalk.registerItemRender();
         GrowthcraftBambooBlocks.bambooShoot.registerItemRender();
         GrowthcraftBambooBlocks.blockBambooDoor.registerItemRender();
+        GrowthcraftBambooBlocks.ropeKnotBamboo.registerItemRender();
     }
 
     public static void registerBlockColorHandlers() {

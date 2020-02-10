@@ -39,6 +39,8 @@ public class GrowthcraftCore {
     public static final String CLIENT_PROXY_CLASS = "growthcraft.core.client.ClientProxy";
     public static final String SERVER_PROXY_CLASS = "growthcraft.core.common.CommonProxy";
 
+    public static final String ORE_ROPE_KNOT_FENCE = "ropeKnotFence";
+
     @Mod.Instance(Reference.MODID)
     public static GrowthcraftCore instance;
 

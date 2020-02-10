@@ -2,7 +2,7 @@
   "parent": "block/block",
   "textures": {
     "0": "growthcraft:blocks/rope_knot",
-    "1": "blocks/planks_big_oak",
+    "1": "blocks/planks_oak",
     "particle": "growthcraft:blocks/rope_knot"
   },
   "display": {
