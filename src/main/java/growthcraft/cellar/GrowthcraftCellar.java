@@ -100,7 +100,7 @@ public class GrowthcraftCellar {
 
         GrowthcraftCellarApis.userApis.init();
 
-        if (Compat.isModAvailable_Thaumcraft()) {
+        if (Compat.isModAvailableThaumcraft()) {
             CellarAspectRegistry.register();
         }
     }

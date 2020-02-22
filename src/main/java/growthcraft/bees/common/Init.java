@@ -349,7 +349,6 @@ public class Init {
                 .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
-
     ////////
     // User Apis
     ////////
@@ -366,6 +365,7 @@ public class Init {
     ////////
 
     public static void registerRecipes() {
+        /* Do Nothing */
     }
 
     public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
@@ -442,7 +442,6 @@ public class Init {
                     Items.BUCKET
             ).setRegistryName(toRegName("honey_ore_to_bucket")));
         }
-        // TODO: RECIPE_REGISTER!
     }
 
     private static ResourceLocation toRegName(String name) {
