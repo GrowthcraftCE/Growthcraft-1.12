@@ -47,7 +47,7 @@ public class GrowthcraftApples {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         Init.initBoozes();
-        if (Compat.isModAvailable_Rustic())
+        if (Compat.isModAvailableRustic())
             RusticApplesRecipes.initBoozes();
         Init.registerRecipes();
     }

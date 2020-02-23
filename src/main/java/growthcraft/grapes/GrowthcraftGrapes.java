@@ -50,11 +50,11 @@ public class GrowthcraftGrapes {
     public static void init(FMLInitializationEvent event) {
         proxy.init();
         Init.initBoozes();
-        if (Compat.isModAvailable_Rustic())
+        if (Compat.isModAvailableRustic())
             RusticGrapesRecipes.initBoozes();
         Init.initRecipes();
         Init.registerRecipes();
-        if (Compat.isModAvailable_Thaumcraft()) {
+        if (Compat.isModAvailableThaumcraft()) {
             GrapesAspectRegistry.register();
         }
     }

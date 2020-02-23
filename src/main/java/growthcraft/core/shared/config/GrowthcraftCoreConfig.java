@@ -5,15 +5,13 @@ import growthcraft.core.shared.legacy.FluidContainerRegistry;
 public class GrowthcraftCoreConfig extends GrowthcraftConfiguration {
 
     public static final String CATEGORY_NAME_WORLDGEN = "worldgen";
+    public static final int BOTTLE_CAPACITY = FluidContainerRegistry.BOTTLE_VOLUME;
+    private static final String CATEGORY_BOOZE = "Booze/Effects";
     private boolean blockSaltOreWorldGen = true;
     private int blockSaltOreMinHeight = 10;
     private int blockSaltOreMaxHeight = 64;
     private int blockSaltOreChanceToSpawn = 5;
-
-    private static final String CATEGORY_BOOZE = "Booze/Effects";
     private boolean hidePoisonedBooze = true;
-
-    public static final int BOTTLE_CAPACITY = FluidContainerRegistry.BOTTLE_VOLUME;
 
     public GrowthcraftCoreConfig() {
         super();
@@ -68,22 +66,27 @@ public class GrowthcraftCoreConfig extends GrowthcraftConfiguration {
                 "Set to false to disable worldgen of rock salt ores."
         );
 
-
     }
 
     public boolean getHidePoisonedBooze() {
         return hidePoisonedBooze;
     }
 
-    public boolean getBlockSaltOreWorldGen() { return blockSaltOreWorldGen; }
+    public boolean getBlockSaltOreWorldGen() {
+        return blockSaltOreWorldGen;
+    }
 
-    public int getBlockSaltOreMinHeight() { return blockSaltOreMinHeight; }
+    public int getBlockSaltOreMinHeight() {
+        return blockSaltOreMinHeight;
+    }
 
-    public int getBlockSaltOreMaxHeight() { return blockSaltOreMaxHeight; }
+    public int getBlockSaltOreMaxHeight() {
+        return blockSaltOreMaxHeight;
+    }
 
-    public int getBlockSaltOreChanceToSpawn() { return blockSaltOreChanceToSpawn; }
-
-
+    public int getBlockSaltOreChanceToSpawn() {
+        return blockSaltOreChanceToSpawn;
+    }
 
 
 }

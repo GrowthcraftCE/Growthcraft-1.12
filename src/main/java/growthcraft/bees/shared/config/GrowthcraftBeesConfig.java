@@ -10,36 +10,28 @@ import java.io.File;
 
 public class GrowthcraftBeesConfig {
 
-    private static Configuration configuration;
-
     // Categories
     private static final String CATEGORY_GENERAL = "general";
     private static final String CATEGORY_BEEBOX = "beebox";
     private static final String CATEGORY_BEEHIVE = "beehive";
-
-
-    private GrowthcraftBeesConfig() {
-    }
-
     public static boolean isDebug = false;
     public static String logLevel = "info";
-
-
     public static boolean honeyEnabled = true;
-
     public static float beeBoxHoneyCombSpawnRate = 18.75f;
     public static float beeBoxHoneySpawnRate = 6.25f;
     public static float beeBoxBeeSpawnRate = 6.25f;
     public static float beeBoxFlowerSpawnRate = 6.25f;
     public static int beeBoxFlowerRadius = 5;
     public static float beeBoxBonusMultiplier = 2.5f;
-
     public static int honeyMeadColor = 0xA3610C;
-
     public static boolean worldgenBeeHive = true;
     public static int worldgenBeeHiveRarity = 3;
     public static int worldGenBeeHiveRadius = 6;
     public static int maxBeeHivesPerChunk = 1;
+    private static Configuration configuration;
+
+    private GrowthcraftBeesConfig() {
+    }
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();

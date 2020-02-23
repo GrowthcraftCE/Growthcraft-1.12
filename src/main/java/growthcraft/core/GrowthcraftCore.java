@@ -64,12 +64,12 @@ public class GrowthcraftCore {
         Init.preInitBlocks();
         Init.preInitItems();
 
-        if (Compat.isModAvailable_Rustic()) {
+        if (Compat.isModAvailableRustic()) {
             InitRustic.preInitBlocks();
             InitRustic.preInitItems();
             InitRustic.preInitFluids();
         }
-        if (Compat.isModAvailable_Forestry())
+        if (Compat.isModAvailableForestry())
             InitForestry.preInitFluids();
 
         proxy.preInit();
@@ -105,7 +105,7 @@ public class GrowthcraftCore {
     public void postInit(FMLPostInitializationEvent event) {
         proxy.postInit();
         Init.registerBlockOres();
-        if (Compat.isModAvailable_Rustic())
+        if (Compat.isModAvailableRustic())
             InitRustic.registerBlockOres();
     }
 
