@@ -8,7 +8,6 @@ import net.minecraft.nbt.NBTTagCompound;
 public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBase {
     protected double time;
     protected int timeMax;
-    //protected boolean shouldUseCachedRecipe = GrowthcraftCellarConfig.fermentBarrelUseCachedRecipe;
     protected boolean recheckRecipe = true;
     private T activeRecipe;
 
@@ -110,18 +109,21 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
     }
 
     public void update() {
-
-        final T recipe = getWorkingRecipe();
-        if (canProcess()) {
-            setTimeMax(recipe.getTime());
-            if (time >= timeMax) {
-                process(recipe);
-                resetTime();
-            }else{
-                increaseTime();
+        try {
+            final T recipe = getWorkingRecipe();
+            if (canProcess()) {
+                setTimeMax(recipe.getTime());
+                if (time >= timeMax) {
+                    process(recipe);
+                    resetTime();
+                } else {
+                    increaseTime();
+                }
+            } else {
+                if (resetTime()) markForUpdate(true);
             }
-        } else {
-            if (resetTime()) markForUpdate(true);
+        } catch (NullPointerException e) {
+            /* Do nothing as there is an issue with the recipe. */
         }
     }
 
@@ -134,7 +136,6 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
     public void readFromNBT(NBTTagCompound data) {
         super.readFromNBT(data);
         this.time = data.getDouble("time");
-        //this.timeMax = data.getInteger("timeMax");
     }
 
     /**
@@ -144,7 +145,6 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
     public void writeToNBT(NBTTagCompound data) {
         super.writeToNBT(data);
         data.setDouble("time", time);
-        //data.setInteger("timeMax", timeMax);
     }
 
     /**
@@ -154,7 +154,6 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
     public boolean readFromStream(ByteBuf buf) {
         super.readFromStream(buf);
         this.time = buf.readDouble();
-        //this.timeMax = buf.readInt();
         return false;
     }
 
@@ -165,7 +164,6 @@ public class DeviceProgressive<T extends IProcessingRecipeBase> extends DeviceBa
     public boolean writeToStream(ByteBuf buf) {
         super.writeToStream(buf);
         buf.writeDouble(time);
-        //buf.writeInt(timeMax);
         return false;
     }
 }
