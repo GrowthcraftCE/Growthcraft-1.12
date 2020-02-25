@@ -48,7 +48,6 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
     private ItemStackHandler handlerOutput;
     private ItemStackHandler handlerInput;
 
-
     public TileEntityFishtrap() {
         this.cooldown = 0;
         this.randomMaxCooldown = intMaxCooldown;
@@ -94,8 +93,9 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
                 }
             }
         }
-        GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, 3);
-
+        if (GrowthcraftFishtrapConfig.isFishtrapSoundEnabled()) {
+            GrowthcraftPlaySound.onlyNearByPlayers(this.world, pos, SoundEvents.BLOCK_TRIPWIRE_CLICK_ON, SoundCategory.BLOCKS, GrowthcraftFishtrapConfig.getFishtrapSoundRange());
+        }
     }
 
     public boolean hasBait() {
@@ -147,7 +147,6 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             remainder = handler.insertItem(slot, stack, simulate);
             if (remainder == ItemStack.EMPTY) break;
         }
-        //markDirtyAndUpdate();
         return remainder;
     }
 
@@ -304,13 +303,4 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
         return "growthcraft_fishtrap:fishtrap";
     }
 
-/*    @Override
-    public void onInventoryChanged(IInventory inv, int index) {
-        super.onInventoryChanged(inv, index);
-        if (index == 0) {
-            markDirty();
-        } else if (index > 0) {
-            markDirtyAndUpdate();
-        }
-    }*/
 }
