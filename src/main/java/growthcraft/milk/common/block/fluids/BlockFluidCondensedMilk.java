@@ -4,10 +4,10 @@ import growthcraft.core.shared.block.GrowthcraftBlockFluid;
 import net.minecraft.block.material.Material;
 import net.minecraftforge.fluids.Fluid;
 
-public class BlockFluidPasteurizedMilk extends GrowthcraftBlockFluid {
+public class BlockFluidCondensedMilk extends GrowthcraftBlockFluid {
 
-    public BlockFluidPasteurizedMilk(Fluid fluidPasteurizedMilk) {
-        super(fluidPasteurizedMilk, Material.WATER);
+    public BlockFluidCondensedMilk(Fluid fluidCondensedMilk) {
+        super(fluidCondensedMilk, Material.WATER);
         refreshColor();
     }
 

@@ -19,7 +19,7 @@ public class GrowthcraftMilkFluids {
     public static FluidDetails rennet;
     public static FluidDetails skimMilk;
     public static FluidDetails whey;
-    public static FluidDetails pasteurizedMilk;
+    public static FluidDetails condensedMilk;
 
     public static BoozeDefinition[] kumisBooze;
     public static FluidDetails kumis;

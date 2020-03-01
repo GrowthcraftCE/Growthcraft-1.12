@@ -21,7 +21,7 @@ fluid.fluid_rennet=凝乳酶
 
 fluid.fluid_skim_milk=脱脂奶
 fluid.fluid_whey=乳清
-fluid.fluid_pasteurized_milk=巴氏奶
+fluid.fluid_condensed_milk=巴氏奶
 
 # Items
 item.bottlefluid_milk.name=牛奶瓶
@@ -31,7 +31,7 @@ item.bottlefluid_milk_curds.name=凝乳瓶
 item.bottlefluid_rennet.name=凝乳酶瓶
 item.bottlefluid_skim_milk.name=脱脂奶瓶
 item.bottlefluid_whey.name=乳清瓶
-item.bottlefluid_pasteurized_milk.name=巴氏奶瓶
+item.bottlefluid_condensed_milk.name=巴氏奶瓶
 
 item.butter.salted.name=咸黄油
 item.butter.unsalted.name=黄油

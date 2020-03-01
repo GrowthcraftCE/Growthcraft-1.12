@@ -5,7 +5,7 @@
       "type": "minecraft:item_nbt",
       "item": "forge:bucketFilled",
       "nbt": {
-        "FluidName": "fluid_pasteurized_milk",
+        "FluidName": "fluid_condensed_milk",
         "Amount": 1000
       }
     },
@@ -24,7 +24,7 @@
 
   ],
   "result": {
-    "item": "growthcraft_milk:bottlefluid_pasteurized_milk",
+    "item": "growthcraft_milk:bottlefluid_condensed_milk",
     "count": 4
   }
 

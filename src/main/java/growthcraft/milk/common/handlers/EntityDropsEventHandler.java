@@ -20,15 +20,18 @@ public class EntityDropsEventHandler {
             EntityAgeable eventEntity = (EntityAgeable) event.getEntity();
             int randomDrop = random.nextInt(100);
 
-            if (GrowthcraftMilk.config.getBabyCowsOnlyDropStomach() && eventEntity.getGrowingAge() > 0) {
-                return;
+            if (randomDrop <= GrowthcraftMilk.config.getStomachDropChance()) {
+                addDrops(event, eventEntity, GrowthcraftMilkItems.stomach.asStack());
             }
 
-            if (randomDrop <= GrowthcraftMilk.config.getStomachDropChance()) {
-                ItemStack itemStackStomach = GrowthcraftMilkItems.stomach.asStack();
-                EntityItem entityItem = new EntityItem(eventEntity.world, eventEntity.posX, eventEntity.posY, eventEntity.posZ, itemStackStomach);
-                event.getDrops().add(entityItem);
-            }
+        }
+    }
+
+    private void addDrops(LivingDropsEvent event, EntityAgeable eventEntity, ItemStack stack) {
+        if ((GrowthcraftMilk.config.shouldBabyCowsDropStomach() && eventEntity.getGrowingAge() == 0)
+                || GrowthcraftMilk.config.shouldAdultCowsDropStomach()) {
+            EntityItem entityItem = new EntityItem(eventEntity.world, eventEntity.posX, eventEntity.posY, eventEntity.posZ, stack);
+            event.getDrops().add(entityItem);
         }
     }
 
