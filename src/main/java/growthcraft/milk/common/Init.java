@@ -221,7 +221,7 @@ public class Init {
         GrowthcraftMilkItems.waxedCheeseSlice.registerItem(registry);
         GrowthcraftMilkItems.simpleCheeseSlice.getItem().setCreativeTab(tabGrowthcraft);
         GrowthcraftMilkItems.simpleCheeseSlice.registerItem(registry);
-        GrowthcraftMilkItems.agedCheeseBlockItem.registerItem(registry, GrowthcraftMilkBlocks.agedCheeseBlock.getBlock().getRegistryName() /*new ResourceLocation(Reference.MODID, "cheese_aged")*/);
+        GrowthcraftMilkItems.agedCheeseBlockItem.registerItem(registry, GrowthcraftMilkBlocks.agedCheeseBlock.getBlock().getRegistryName());
         GrowthcraftMilkItems.waxedCheeseBlockItem.registerItem(registry, GrowthcraftMilkBlocks.waxedCheeseBlock.getBlock().getRegistryName());
         GrowthcraftMilkItems.agedCheeseCurdsItem.registerItem(registry, GrowthcraftMilkBlocks.agedCheeseCurds.getBlock().getRegistryName());
         GrowthcraftMilkItems.waxedCheeseCurdsItem.registerItem(registry, GrowthcraftMilkBlocks.waxedCheeseCurds.getBlock().getRegistryName());
@@ -745,7 +745,7 @@ public class Init {
                     .setTipsy(BoozeUtils.alcoholToTipsy(alcoholRate), TickUtils.seconds(tipsyDuration))
                     .addPotionEntry(potionEffect, TickUtils.minutes(potionDuration), 0);
         } catch (Exception ex) {
-
+            GrowthcraftMilk.logger.warn(String.format("Recipe for %s failed to register. %s", outputFluid.getUnlocalizedName(), ex));
         }
     }
 
