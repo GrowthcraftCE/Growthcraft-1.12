@@ -42,6 +42,8 @@ fluid.fluid_skim_milk=Skim Milk
 fluid.fluid_whey=Whey
 fluid.fluid_condensed_milk=Condensed Milk
 
+fluid.tags.rennet=Rennet
+
 # Items
 item.bottlefluid_milk.name=Milk Bottle
 item.bottlefluid_butter_milk.name=Butter Milk Bottle
