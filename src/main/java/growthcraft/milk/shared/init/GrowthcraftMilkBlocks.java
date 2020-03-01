@@ -14,7 +14,7 @@ public class GrowthcraftMilkBlocks {
     public static GrowthcraftBlockFluidDefinition blockFluidButterMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidCream;
     public static GrowthcraftBlockFluidDefinition blockFluidMilkCurds;
-    public static GrowthcraftBlockFluidDefinition blockFluidPasteurizedMilk;
+    public static GrowthcraftBlockFluidDefinition blockFluidCondensedMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidSkimMilk;
     public static GrowthcraftBlockFluidDefinition blockFluidWhey;
 

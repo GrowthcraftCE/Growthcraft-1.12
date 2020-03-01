@@ -4,10 +4,10 @@
     "model": "forge:fluid"
   },
   "variants": {
-    "fluid_pasteurized_milk": [
+    "fluid_condensed_milk": [
       {
         "custom": {
-          "fluid": "fluid_pasteurized_milk"
+          "fluid": "fluid_condensed_milk"
         }
       }
     ]

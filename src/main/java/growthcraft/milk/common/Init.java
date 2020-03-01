@@ -98,7 +98,7 @@ public class Init {
         GrowthcraftMilkBlocks.blockFluidButterMilk = GrowthcraftMilkFluids.butterMilk.getFluidBlockDefinition();
         GrowthcraftMilkBlocks.blockFluidCream = GrowthcraftMilkFluids.cream.getFluidBlockDefinition();
         GrowthcraftMilkBlocks.blockFluidMilkCurds = GrowthcraftMilkFluids.curds.getFluidBlockDefinition();
-        GrowthcraftMilkBlocks.blockFluidPasteurizedMilk = GrowthcraftMilkFluids.pasteurizedMilk.getFluidBlockDefinition();
+        GrowthcraftMilkBlocks.blockFluidCondensedMilk = GrowthcraftMilkFluids.condensedMilk.getFluidBlockDefinition();
         GrowthcraftMilkBlocks.blockFluidSkimMilk = GrowthcraftMilkFluids.skimMilk.getFluidBlockDefinition();
         GrowthcraftMilkBlocks.blockFluidWhey = GrowthcraftMilkFluids.whey.getFluidBlockDefinition();
 
@@ -503,9 +503,9 @@ public class Init {
                 .setFoodBottle(foodBottleWhey).build()
                 .setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft).setItemColor(0x94a860);
 
-        FluidPasteurizedMilk fluidPasteurizedMilk = new FluidPasteurizedMilk("fluid_pasteurized_milk");
-        GrowthcraftMilkFluids.pasteurizedMilk = new FluidDetailsBuilder(fluidPasteurizedMilk)
-                .setFluidBlockClass(BlockFluidPasteurizedMilk.class).build()
+        FluidCondensedMilk fluidCondensedMilk = new FluidCondensedMilk("fluid_condensed_milk");
+        GrowthcraftMilkFluids.condensedMilk = new FluidDetailsBuilder(fluidCondensedMilk)
+                .setFluidBlockClass(BlockFluidCondensedMilk.class).build()
                 .setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft).setItemColor(0xFFFFFA);
 
         /* Kumis */
@@ -574,7 +574,7 @@ public class Init {
         GrowthcraftMilkFluids.rennet.registerBlocks(registry, Reference.MODID, "rennet");
         GrowthcraftMilkFluids.skimMilk.registerBlocks(registry, Reference.MODID, "skim_milk");
         GrowthcraftMilkFluids.whey.registerBlocks(registry, Reference.MODID, "whey");
-        GrowthcraftMilkFluids.pasteurizedMilk.registerBlocks(registry, Reference.MODID, "pasteurized_milk");
+        GrowthcraftMilkFluids.condensedMilk.registerBlocks(registry, Reference.MODID, "condensed_milk");
 
         CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftMilkFluids.cream.getFluid(), MilkFluidTags.CREAM);
         CoreRegistry.instance().fluidDictionary().addFluidTags(GrowthcraftMilkFluids.curds.getFluid(), MilkFluidTags.MILK_CURDS);
@@ -589,7 +589,7 @@ public class Init {
                 Residue.newDefault(0.0F)
         );
 
-        GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.pasteurizedMilk.getFluid())
+        GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.condensedMilk.getFluid())
                 .brewsFrom(GrowthcraftMilkFluids.skimMilk.asFluidStack(250), new ItemStack(Items.SUGAR), false, TickUtils.minutes(1), new Residue(GrowthcraftMilkItems.starterCulture.asStack(1), 1.0f));
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftMilkFluids.skimMilk.getFluid())
@@ -759,7 +759,7 @@ public class Init {
         GrowthcraftMilkFluids.rennet.registerItems(registry, Reference.MODID, "rennet");
         GrowthcraftMilkFluids.skimMilk.registerItems(registry, Reference.MODID, "skim_milk");
         GrowthcraftMilkFluids.whey.registerItems(registry, Reference.MODID, "whey");
-        GrowthcraftMilkFluids.pasteurizedMilk.registerItems(registry, Reference.MODID, "pasteurized_milk");
+        GrowthcraftMilkFluids.condensedMilk.registerItems(registry, Reference.MODID, "condensed_milk");
 
         registerCheeseFluidItems(registry, GrowthcraftMilkFluids.cheesesSimple);
         registerCheeseFluidItems(registry, GrowthcraftMilkFluids.cheesesAged);
@@ -777,7 +777,7 @@ public class Init {
         GrowthcraftMilkFluids.rennet.registerRenderer();
         GrowthcraftMilkFluids.skimMilk.registerRenderer();
         GrowthcraftMilkFluids.whey.registerRenderer();
-        GrowthcraftMilkFluids.pasteurizedMilk.registerRenderer();
+        GrowthcraftMilkFluids.condensedMilk.registerRenderer();
         registerCheeseRenders(GrowthcraftMilkFluids.cheesesSimple);
         registerCheeseRenders(GrowthcraftMilkFluids.cheesesAged);
         registerCheeseRenders(GrowthcraftMilkFluids.cheesesWaxed);
@@ -796,7 +796,7 @@ public class Init {
         GrowthcraftMilkFluids.rennet.registerColorHandlers();
         GrowthcraftMilkFluids.skimMilk.registerColorHandlers();
         GrowthcraftMilkFluids.whey.registerColorHandlers();
-        GrowthcraftMilkFluids.pasteurizedMilk.registerColorHandlers();
+        GrowthcraftMilkFluids.condensedMilk.registerColorHandlers();
         registerCheeseColorHandlers(GrowthcraftMilkFluids.cheesesSimple);
         registerCheeseColorHandlers(GrowthcraftMilkFluids.cheesesAged);
         registerCheeseColorHandlers(GrowthcraftMilkFluids.cheesesWaxed);
