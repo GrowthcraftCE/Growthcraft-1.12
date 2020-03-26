@@ -82,7 +82,6 @@ public class GrowthcraftCellar {
 
         proxy.preInit();
         proxy.registerTitleEntities();
-//OFF        GrowthcraftCellarAchievements.instance().preInit();
 
         GrowthcraftCellarApis.userApis.preInit();
         GrowthcraftCellarApis.userApis.register();
