@@ -66,13 +66,21 @@ public class GrowthcraftContainer extends Container {
     }
 
     private boolean mergeWithComparativeSlot(int startSlotID, int endSlotID, ItemStack stack, @Nullable ItemStack matchStack) {
+        // Try and merge with a slot that has the same item.
         for (int i = startSlotID; i <= endSlotID; ++i) {
             if (stack.isEmpty()) break;
             final Slot subSlot = inventorySlots.get(i);
-            if ( (matchStack == null && subSlot.isItemValid(stack))
-                    || (ItemStack.areItemsEqual(subSlot.getStack(), matchStack) ) ) {
+
+            // if match stack is not null then we need to compare the ItemStacks in the slots.
+            if (matchStack != null && ItemStack.areItemsEqual(subSlot.getStack(), matchStack)) {
                 return mergeWithSlot(subSlot, stack);
             }
+            // if match stack is null, then just find the nearest empty stack.
+            if ( matchStack == null && subSlot.isItemValid(stack)
+                    && canAddItemToSlot(subSlot, stack, false)) {
+                return mergeWithSlot(subSlot, stack);
+            }
+
         }
         return false;
     }
