@@ -1,6 +1,6 @@
 container.fishtrap=Fishtrap
 
-tile.fishtrap.name=Fishtrap
+tile.fishtrap.name=Fishtrap (Deprecated)
 
 tile.fishtrap_oak.name=Fishtrap
 tile.fishtrap_birch.name=Fishtrap
