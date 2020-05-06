@@ -193,9 +193,10 @@ dependencies {
 
 sourceSets {
     main {
-        resources {
-            srcDir 'resources'
-        }
+        java { }
+        //resources {
+        //    srcDir 'resources'
+        //}
     }
 }
 

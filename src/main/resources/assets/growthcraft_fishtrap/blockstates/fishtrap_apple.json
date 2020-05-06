@@ -1,0 +1,22 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_apple" }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_apple", "y": 90, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_apple", "y": 180, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_apple", "y": 270, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_apple", "x": 90, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_apple", "x": 270, "uvlock": false }
+    }
+  ]
+}
