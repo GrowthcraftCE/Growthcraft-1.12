@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ACA",
+    "CBC",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "growthcraft_bamboo:bamboo_plank"
+    },
+    "B": {
+      "item": "minecraft:lead"
+    },
+    "C": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "growthcraft_fishtrap:fishtrap_bamboo"
+  }
+}

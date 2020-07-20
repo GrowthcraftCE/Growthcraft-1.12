@@ -1,0 +1,22 @@
+{
+  "multipart": [
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_acacia" }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_acacia", "y": 90, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_acacia", "y": 180, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_acacia", "y": 270, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_acacia", "x": 90, "uvlock": false }
+    },
+    {
+      "apply": { "model": "growthcraft_fishtrap:fishtrap_acacia", "x": 270, "uvlock": false }
+    }
+  ]
+}
