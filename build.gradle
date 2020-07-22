@@ -191,10 +191,6 @@ dependencies {
     deployerJars 'org.apache.maven.wagon:wagon-ssh:2.2'
 }
 
-sourceSets {
-    main { output.resourcesDir = output.classesDir }
-}
-
 processResources
         {
             // this will ensure that this task is redone when the versions change.
