@@ -192,12 +192,7 @@ dependencies {
 }
 
 sourceSets {
-    main {
-        java { }
-        //resources {
-        //    srcDir 'resources'
-        //}
-    }
+    main { output.resourcesDir = output.classesDir }
 }
 
 processResources
