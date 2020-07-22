@@ -1,3 +1,13 @@
 container.fishtrap=통발
 
 tile.fishtrap.name=통발
+
+tile.fishtrap_oak.name=통발
+tile.fishtrap_birch.name=통발
+tile.fishtrap_spruce.name=통발
+tile.fishtrap_darkoak.name=통발
+tile.fishtrap_jungle.name=통발
+tile.fishtrap_acacia.name=통발
+
+tile.fishtrap_apple.name=통발
+tile.fishtrap_bamboo.name=통발

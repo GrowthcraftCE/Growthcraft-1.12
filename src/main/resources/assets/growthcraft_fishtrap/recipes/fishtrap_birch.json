@@ -7,8 +7,8 @@
   ],
   "key": {
     "A": {
-      "type": "forge:ore_dict",
-      "ore": "plankWood"
+      "item": "minecraft:planks",
+      "data": 2
     },
     "B": {
       "item": "minecraft:lead"
@@ -18,6 +18,6 @@
     }
   },
   "result": {
-    "item": "growthcraft_fishtrap:fishtrap"
+    "item": "growthcraft_fishtrap:fishtrap_birch"
   }
 }
