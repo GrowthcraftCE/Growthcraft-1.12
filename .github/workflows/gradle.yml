@@ -14,7 +14,6 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8    
-        key:  
     - name: Setup Gradle
       run: chmod +x gradlew
     - name: Setup CI Workspace
