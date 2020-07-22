@@ -1,13 +1,12 @@
 package growthcraft.core.shared.tileentity.event;
 
+import net.minecraft.tileentity.TileEntity;
+
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import net.minecraft.tileentity.TileEntity;
 
 public class TileEventHandlerMap<T extends TileEntity> extends HashMap<Class<? extends T>, TileEventFunctionMap> {
     public static final long serialVersionUID = 1L;

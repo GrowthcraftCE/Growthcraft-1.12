@@ -1,9 +1,9 @@
 package growthcraft.cellar.shared.processing.culturing.user;
 
+import growthcraft.core.shared.config.schema.ICommentable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import growthcraft.core.shared.config.schema.ICommentable;
 
 public class UserCultureRecipes implements ICommentable {
     public String comment = "";

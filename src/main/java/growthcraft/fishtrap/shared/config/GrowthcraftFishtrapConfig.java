@@ -13,23 +13,22 @@ import java.util.List;
 
 public class GrowthcraftFishtrapConfig {
 
-    private static Configuration configuration;
-
     private static final String CATEGORY_GENERAL = "general";
     private static final String CATEGORY_FISHTRAP = "fishtrap";
-
-    private GrowthcraftFishtrapConfig() {
-    }
-
     public static boolean isDebug = false;
     public static String logLevel = "info";
-
     public static boolean baitRequired = false;
     public static boolean strictBait = false;
     public static List<String> FISHTRAP_BAIT_TABLE = new ArrayList<String>() {{
         add("minecraft:rotten_flesh");
         add("minecraft:fish");
     }};
+    private static Configuration configuration;
+    private static boolean enableFishtrapSound = true;
+    private static int fishtrapSoundRange = 3;
+
+    private GrowthcraftFishtrapConfig() {
+    }
 
     public static void preInit(FMLPreInitializationEvent e) {
         File directory = e.getModConfigurationDirectory();
@@ -75,6 +74,21 @@ public class GrowthcraftFishtrapConfig {
                 "Only bait in the authorizedFishBait list will be allowed."
         );
 
+        enableFishtrapSound = configuration.getBoolean(
+                "enableFishtrapSound",
+                CATEGORY_FISHTRAP,
+                enableFishtrapSound,
+                "Play a sound notifying nearby players that the fishtrap caught something"
+        );
+
+        fishtrapSoundRange = configuration.getInt(
+                "fishtrapSoundRange",
+                CATEGORY_FISHTRAP,
+                fishtrapSoundRange,
+                1, 10,
+                "Set the range that the fishtrap sounds can be heard. This is relative to the fishtrap BlockPos."
+        );
+
         FISHTRAP_BAIT_TABLE = Arrays.asList(configuration.getStringList(
                 "fishtrap_bait_list",
                 CATEGORY_FISHTRAP,
@@ -89,6 +103,14 @@ public class GrowthcraftFishtrapConfig {
         if (logLevel.equalsIgnoreCase("debug")) {
             isDebug = true;
         }
+    }
+
+    public static boolean isFishtrapSoundEnabled() {
+        return enableFishtrapSound;
+    }
+
+    public static int getFishtrapSoundRange() {
+        return fishtrapSoundRange;
     }
 
 }

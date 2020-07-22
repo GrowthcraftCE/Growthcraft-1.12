@@ -1,12 +1,6 @@
 package growthcraft.cellar.shared.booze;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.CellarRegistry;
-import growthcraft.cellar.shared.booze.BoozeEffect;
-import growthcraft.cellar.shared.booze.BoozeTag;
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.config.description.Describer;
 import growthcraft.core.shared.fluids.UnitFormatter;
@@ -15,6 +9,9 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class BoozeUtils {
     private BoozeUtils() {

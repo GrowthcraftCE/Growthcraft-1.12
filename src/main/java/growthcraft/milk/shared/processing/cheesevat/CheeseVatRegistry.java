@@ -1,11 +1,5 @@
 package growthcraft.milk.shared.processing.cheesevat;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
@@ -15,6 +9,11 @@ import growthcraft.milk.shared.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheeseVatRegistry {
     private List<ICheeseVatRecipe> recipes = new ArrayList<ICheeseVatRecipe>();

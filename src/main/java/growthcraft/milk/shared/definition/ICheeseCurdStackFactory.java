@@ -1,9 +1,9 @@
 package growthcraft.milk.shared.definition;
 
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IItemStackFactory;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nullable;
 
 public interface ICheeseCurdStackFactory extends IItemStackFactory {
     @Override

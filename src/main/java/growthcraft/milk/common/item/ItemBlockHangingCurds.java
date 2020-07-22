@@ -1,9 +1,5 @@
 package growthcraft.milk.common.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import growthcraft.core.shared.item.IItemTileBlock;
@@ -15,7 +11,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -23,6 +18,9 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> extends ItemBlockCheeseBase<T> implements IItemTileBlock {
     public ItemBlockHangingCurds(Block block, T[] typeLookup) {

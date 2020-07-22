@@ -1,8 +1,5 @@
 package growthcraft.cellar.shared.booze.effect;
 
-import java.util.List;
-import java.util.Random;
-
 import growthcraft.cellar.shared.init.GrowthcraftCellarPotions;
 import growthcraft.core.shared.IAchievement;
 import growthcraft.core.shared.effect.AbstractEffect;
@@ -17,6 +14,9 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+
+import java.util.List;
+import java.util.Random;
 
 public class EffectTipsy extends AbstractEffect {
     public static IAchievement achievement;

@@ -1,11 +1,11 @@
 package growthcraft.core.shared.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import growthcraft.core.shared.utils.Rectangle;
 import net.minecraft.inventory.Container;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TooltipManager<C extends Container, T extends TileEntity> {
     public static class TooltipIndex {

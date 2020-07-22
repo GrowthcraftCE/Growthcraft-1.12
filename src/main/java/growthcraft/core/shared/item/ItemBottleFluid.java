@@ -1,7 +1,5 @@
 package growthcraft.core.shared.item;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.handlers.FluidHandlerContainerItemWrapper;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import net.minecraft.init.Items;
@@ -10,6 +8,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
 
 /**
  * Generic fluid bottle for growthcraft fluids

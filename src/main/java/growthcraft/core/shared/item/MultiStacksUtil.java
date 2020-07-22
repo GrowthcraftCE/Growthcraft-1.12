@@ -1,10 +1,5 @@
 package growthcraft.core.shared.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.Reference;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
@@ -13,6 +8,10 @@ import growthcraft.core.shared.fluids.MultiFluidStacks;
 import growthcraft.core.shared.fluids.TaggedFluidStacks;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MultiStacksUtil {
     private MultiStacksUtil() {

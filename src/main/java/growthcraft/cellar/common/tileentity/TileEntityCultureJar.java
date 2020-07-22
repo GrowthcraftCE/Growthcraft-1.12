@@ -1,14 +1,12 @@
 package growthcraft.cellar.common.tileentity;
 
-import java.io.IOException;
-
-import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.common.inventory.ContainerCultureJar;
-import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.cellar.common.tileentity.device.CultureGenerator;
 import growthcraft.cellar.common.tileentity.device.YeastGenerator;
 import growthcraft.cellar.common.tileentity.fluids.CellarTank;
+import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.inventory.GrowthcraftInternalInventory;
+import growthcraft.core.shared.tileentity.component.TileHeatingComponent;
 import growthcraft.core.shared.tileentity.device.DeviceBase;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
@@ -28,28 +26,6 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 public class TileEntityCultureJar extends TileEntityCellarDevice implements ITickable, ITileHeatedDevice, ITileProgressiveDevice {
-    public static enum CultureJarDataId {
-        YEAST_GEN_TIME,
-        YEAST_GEN_TIME_MAX,
-        CULTURE_GEN_TIME,
-        CULTURE_GEN_TIME_MAX,
-        HEAT_AMOUNT,
-        UNKNOWN;
-
-        public static final CultureJarDataId[] VALID = new CultureJarDataId[]
-                {
-                        YEAST_GEN_TIME,
-                        YEAST_GEN_TIME_MAX,
-                        CULTURE_GEN_TIME,
-                        CULTURE_GEN_TIME_MAX,
-                        HEAT_AMOUNT
-                };
-
-        public static CultureJarDataId getByOrdinal(int ord) {
-            if (ord >= 0 && ord < VALID.length) return VALID[ord];
-            return UNKNOWN;
-        }
-    }
 
     private static final int[] accessibleSlots = new int[]{0};
     private TileHeatingComponent heatComponent;
@@ -67,7 +43,9 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
     }
 
     @Override
-    public DeviceBase[] getDevices(){return new DeviceBase[]{cultureGen,yeastGen};}
+    public DeviceBase[] getDevices() {
+        return new DeviceBase[]{cultureGen, yeastGen};
+    }
 
     public boolean isHeated() {
         return cultureGen.isHeated();
@@ -210,29 +188,29 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
     @Override
     public void sendGUINetworkData(Container container, IContainerListener iCrafting) {
         super.sendGUINetworkData(container, iCrafting);
-        iCrafting.sendWindowProperty(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), (int)yeastGen.getTime());
+        iCrafting.sendWindowProperty(container, CultureJarDataId.YEAST_GEN_TIME.ordinal(), (int) yeastGen.getTime());
         iCrafting.sendWindowProperty(container, CultureJarDataId.YEAST_GEN_TIME_MAX.ordinal(), yeastGen.getTimeMax());
-        iCrafting.sendWindowProperty(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), (int)cultureGen.getTime());
+        iCrafting.sendWindowProperty(container, CultureJarDataId.CULTURE_GEN_TIME.ordinal(), (int) cultureGen.getTime());
         iCrafting.sendWindowProperty(container, CultureJarDataId.CULTURE_GEN_TIME_MAX.ordinal(), cultureGen.getTimeMax());
         iCrafting.sendWindowProperty(container, CultureJarDataId.HEAT_AMOUNT.ordinal(), (int) (heatComponent.getHeatMultiplier() * 0x7FFF));
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_READ)
-    public void readFromNBT_CultureJar(NBTTagCompound nbt) {
+    public void readFromNBTCultureJar(NBTTagCompound nbt) {
         yeastGen.readFromNBT(nbt, "yeastgen");
         cultureGen.readFromNBT(nbt, "culture_gen");
         heatComponent.readFromNBT(nbt, "heat_component");
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NBT_WRITE)
-    public void writeToNBT_CultureJar(NBTTagCompound nbt) {
+    public void writeToNBTCultureJar(NBTTagCompound nbt) {
         yeastGen.writeToNBT(nbt, "yeastgen");
         cultureGen.writeToNBT(nbt, "culture_gen");
         heatComponent.writeToNBT(nbt, "heat_component");
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_READ)
-    public boolean readFromStream_YeastGen(ByteBuf stream) throws IOException {
+    public boolean readFromStreamYeastGen(ByteBuf stream) {
         this.jarDeviceState = stream.readInt();
         yeastGen.readFromStream(stream);
         cultureGen.readFromStream(stream);
@@ -241,7 +219,7 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
     }
 
     @TileEventHandler(event = TileEventHandler.EventType.NETWORK_WRITE)
-    public boolean writeToStream_YeastGen(ByteBuf stream) throws IOException {
+    public boolean writeToStreamYeastGen(ByteBuf stream) {
         stream.writeInt(jarDeviceState);
         yeastGen.writeToStream(stream);
         cultureGen.writeToStream(stream);
@@ -262,5 +240,28 @@ public class TileEntityCultureJar extends TileEntityCellarDevice implements ITic
     @Override
     public int getDeviceProgressScaled(int scale) {
         return getActiveClientDevice().getProgressScaled(scale);
+    }
+
+    public enum CultureJarDataId {
+        YEAST_GEN_TIME,
+        YEAST_GEN_TIME_MAX,
+        CULTURE_GEN_TIME,
+        CULTURE_GEN_TIME_MAX,
+        HEAT_AMOUNT,
+        UNKNOWN;
+
+        public static final CultureJarDataId[] VALID = new CultureJarDataId[]
+                {
+                        YEAST_GEN_TIME,
+                        YEAST_GEN_TIME_MAX,
+                        CULTURE_GEN_TIME,
+                        CULTURE_GEN_TIME_MAX,
+                        HEAT_AMOUNT
+                };
+
+        public static CultureJarDataId getByOrdinal(int ord) {
+            if (ord >= 0 && ord < VALID.length) return VALID[ord];
+            return UNKNOWN;
+        }
     }
 }

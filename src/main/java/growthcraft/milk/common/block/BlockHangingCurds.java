@@ -1,14 +1,7 @@
 package growthcraft.milk.common.block;
 
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.core.shared.block.BlockCheck;
-import growthcraft.milk.common.tileentity.TileEntityCheeseBlock;
+import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.milk.common.tileentity.TileEntityHangingCurds;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -28,8 +21,11 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Random;
 
 public class BlockHangingCurds extends GrowthcraftBlockContainer {
     private static final AxisAlignedBB BOUNDING_BOX = new AxisAlignedBB(

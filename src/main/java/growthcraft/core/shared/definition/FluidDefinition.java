@@ -1,10 +1,9 @@
 package growthcraft.core.shared.definition;
 
-import java.lang.reflect.Array;
+import net.minecraftforge.fluids.Fluid;
 
 import javax.annotation.Nonnull;
-
-import net.minecraftforge.fluids.Fluid;
+import java.lang.reflect.Array;
 
 public class FluidDefinition extends FluidTypeDefinition<Fluid> {
     public FluidDefinition(@Nonnull Fluid item) {

@@ -1,17 +1,16 @@
 package growthcraft.cellar.shared.processing.fermenting;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FermentingRegistry {
     private List<IFermentationRecipe> recipes = new ArrayList<IFermentationRecipe>();

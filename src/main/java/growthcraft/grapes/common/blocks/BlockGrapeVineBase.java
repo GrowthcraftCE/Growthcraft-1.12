@@ -19,10 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.EnumPlantType;
-import net.minecraftforge.common.IPlantable;
-import net.minecraftforge.fml.common.eventhandler.Event;
-
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.IPlantable;
 
 import javax.annotation.Nonnull;
 import java.util.List;

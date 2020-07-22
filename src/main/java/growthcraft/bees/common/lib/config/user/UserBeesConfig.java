@@ -1,15 +1,14 @@
 package growthcraft.bees.common.lib.config.user;
 
-import java.io.BufferedReader;
-
-import growthcraft.bees.GrowthcraftBees;
 import growthcraft.bees.common.lib.config.BeesRegistry;
 import growthcraft.bees.shared.Reference;
-import growthcraft.core.shared.item.ItemKey;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.config.AbstractUserJSONConfig;
+import growthcraft.core.shared.item.ItemKey;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.io.BufferedReader;
 
 public class UserBeesConfig extends AbstractUserJSONConfig {
     private final UserBeesEntries defaultEntries = new UserBeesEntries();

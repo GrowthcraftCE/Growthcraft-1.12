@@ -33,8 +33,9 @@ public class GrowthcraftMilkConfig extends GrowthcraftConfiguration {
 
     private int thistleDropChance = 2;
 
-    private int stomachDropChance = 50;
-    private boolean babyCowDropStomachOnly = true;
+    private int stomachDropChance = 10;
+    private boolean babyCowDropStomach = true;
+    private boolean adultCowDropStomach = true;
 
     public GrowthcraftMilkConfig() {
         super();
@@ -60,11 +61,18 @@ public class GrowthcraftMilkConfig extends GrowthcraftConfiguration {
                 "Percentage that cow stomach will drop when a cow is killed. Set to -1 to disable. "
         );
 
-        babyCowDropStomachOnly = getConfiguration().getBoolean(
-                "babyCowDropStomachOnly",
+        babyCowDropStomach = getConfiguration().getBoolean(
+                "babyCowDropStomach",
                 Configuration.CATEGORY_GENERAL,
-                babyCowDropStomachOnly,
-                "Set to true to only drop stomach from baby cows."
+                babyCowDropStomach,
+                "Set to true to drop stomach from baby cows."
+        );
+
+        adultCowDropStomach = getConfiguration().getBoolean(
+                "adultCowDropStomach",
+                Configuration.CATEGORY_GENERAL,
+                adultCowDropStomach,
+                "Set to true to drop stomach from adult cows."
         );
 
     }
@@ -77,8 +85,10 @@ public class GrowthcraftMilkConfig extends GrowthcraftConfiguration {
         return stomachDropChance;
     }
 
-    public boolean getBabyCowsOnlyDropStomach() {
-        return babyCowDropStomachOnly;
+    public boolean shouldBabyCowsDropStomach() {
+        return babyCowDropStomach;
     }
+
+    public boolean shouldAdultCowsDropStomach() { return adultCowDropStomach; }
 
 }

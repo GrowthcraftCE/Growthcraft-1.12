@@ -4,9 +4,9 @@ import growthcraft.core.shared.fluids.GrowthcraftFluid;
 import growthcraft.milk.shared.Reference;
 import net.minecraft.util.ResourceLocation;
 
-public class FluidPasteurizedMilk extends GrowthcraftFluid {
+public class FluidCondensedMilk extends GrowthcraftFluid {
 
-    public FluidPasteurizedMilk(String unlocalizedName) {
+    public FluidCondensedMilk(String unlocalizedName) {
         super(unlocalizedName, new ResourceLocation(Reference.MODID, "blocks/fluids/" + unlocalizedName + "_still"), new ResourceLocation(Reference.MODID, "blocks/fluids/" + unlocalizedName + "_flow"));
         this.setUnlocalizedName(unlocalizedName);
     }

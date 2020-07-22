@@ -1,17 +1,15 @@
 package growthcraft.core.shared.fluids;
 
-import java.util.Collection;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Joiner;
-
 import growthcraft.core.GrowthcraftCore;
 import growthcraft.core.shared.CoreRegistry;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
 
 /**
  * Utility class for formatting data into strings for descriptions, item names

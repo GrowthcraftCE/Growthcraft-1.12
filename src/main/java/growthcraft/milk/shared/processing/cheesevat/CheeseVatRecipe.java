@@ -1,10 +1,5 @@
 package growthcraft.milk.shared.processing.cheesevat;
 
-import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IMultiFluidStacks;
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.fluids.FluidTest;
@@ -12,6 +7,10 @@ import growthcraft.core.shared.item.ItemTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class CheeseVatRecipe implements ICheeseVatRecipe {
     private List<FluidStack> outputFluids;

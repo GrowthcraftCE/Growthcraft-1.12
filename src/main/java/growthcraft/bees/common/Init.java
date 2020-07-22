@@ -15,12 +15,6 @@ import growthcraft.bees.shared.init.GrowthcraftBeesFluids;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.BeesWaxTypes;
 import growthcraft.bees.shared.init.GrowthcraftBeesItems.MeadTypes;
-import growthcraft.core.GrowthcraftCore;
-import growthcraft.core.shared.CoreRegistry;
-import growthcraft.core.shared.GrowthcraftCoreApis;
-import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
-import growthcraft.core.shared.definition.BlockDefinition;
-import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeRegistryHelper;
 import growthcraft.cellar.shared.booze.BoozeTag;
@@ -29,6 +23,16 @@ import growthcraft.cellar.shared.config.GrowthcraftCellarConfig;
 import growthcraft.cellar.shared.definition.BlockBoozeDefinition;
 import growthcraft.cellar.shared.definition.BoozeDefinition;
 import growthcraft.cellar.shared.item.ItemBoozeBottle;
+import growthcraft.core.GrowthcraftCore;
+import growthcraft.core.shared.CoreRegistry;
+import growthcraft.core.shared.GrowthcraftCoreApis;
+import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
+import growthcraft.core.shared.definition.BlockDefinition;
+import growthcraft.core.shared.definition.ItemDefinition;
+import growthcraft.core.shared.definition.ItemTypeDefinition;
+import growthcraft.core.shared.effect.EffectAddPotionEffect;
+import growthcraft.core.shared.effect.EffectWeightedRandomList;
+import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import growthcraft.core.shared.fluids.FluidFactory;
 import growthcraft.core.shared.fluids.FluidFactory.FluidDetailsBuilder;
 import growthcraft.core.shared.fluids.TaggedFluidStacks;
@@ -38,10 +42,6 @@ import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
 import growthcraft.core.shared.utils.LootUtils;
 import growthcraft.core.shared.utils.TickUtils;
-import growthcraft.core.shared.definition.ItemTypeDefinition;
-import growthcraft.core.shared.effect.EffectAddPotionEffect;
-import growthcraft.core.shared.effect.EffectWeightedRandomList;
-import growthcraft.core.shared.effect.SimplePotionEffectFactory;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -66,10 +66,9 @@ import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
-
-import static growthcraft.bees.shared.init.GrowthcraftBeesFluids.meadBooze;
 import static growthcraft.bees.shared.init.GrowthcraftBeesBlocks.meadBoozeFluidBlocks;
+import static growthcraft.bees.shared.init.GrowthcraftBeesFluids.meadBooze;
+import static growthcraft.core.shared.GrowthcraftCoreApis.tabGrowthcraft;
 
 public class Init {
     private Init() {
@@ -121,14 +120,12 @@ public class Init {
 
     public static void registerItemOres() {
         OreDictionary.registerOre("materialWax", GrowthcraftBeesItems.beesWax.getItem());
-//		OreDictionary.registerOre("materialPressedwax", GrowthcraftBeesItems.beesWax.getItem());
         OreDictionary.registerOre("materialBeeswax", GrowthcraftBeesItems.beesWax.getItem());
         OreDictionary.registerOre("materialBeeswaxBlack", BeesWaxTypes.BLACK.asStack());
         OreDictionary.registerOre("materialBeeswaxRed", BeesWaxTypes.RED.asStack());
         OreDictionary.registerOre("materialBeeswaxBlue", BeesWaxTypes.BLUE.asStack());
         OreDictionary.registerOre("materialBeeswaxWhite", BeesWaxTypes.WHITE.asStack());
         OreDictionary.registerOre("materialBeeswaxNormal", BeesWaxTypes.NORMAL.asStack());
-//		OreDictionary.registerOre("beeQueen", GrowthcraftBeesItems.bee.getItem());
         OreDictionary.registerOre("materialWaxcomb", GrowthcraftBeesItems.honeyCombEmpty.getItem());
         OreDictionary.registerOre("beecomb", GrowthcraftBeesItems.honeyCombEmpty.getItem());
         OreDictionary.registerOre("materialHoneycomb", GrowthcraftBeesItems.honeyCombFilled.getItem());
@@ -136,7 +133,6 @@ public class Init {
         OreDictionary.registerOre("honeyDrop", GrowthcraftBeesItems.honeyJar.getItem());
         OreDictionary.registerOre("dropHoney", GrowthcraftBeesItems.honeyJar.getItem());
         OreDictionary.registerOre("jarHoney", GrowthcraftBeesItems.honeyJar.getItem());
-//		OreDictionary.registerOre("bucketHoney", GrowthcraftBeesItems.honeyJar.getItem());
     }
 
     public static void registerItems(IForgeRegistry<Item> registry) {
@@ -186,7 +182,7 @@ public class Init {
             ItemFoodBottleFluid foodBottleHoney = new ItemFoodBottleFluid(fluidHoney, 2, 0.2f, false);
             GrowthcraftBeesFluids.honey = new FluidDetailsBuilder(fluidHoney, FluidFactory.FEATURE_ALL_EDIBLE)
                     .setFoodBottle(foodBottleHoney).build()
-                    .setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft); //.setItemColor(0xFFAC01);
+                    .setCreativeTab(GrowthcraftCoreApis.tabGrowthcraft);
             GrowthcraftBeesFluids.honey.refreshItemColor();
         }
 
@@ -353,7 +349,6 @@ public class Init {
                 .createPotionEntry(MobEffects.POISON, TickUtils.seconds(90), 0).toggleDescription(!GrowthcraftCore.config.getHidePoisonedBooze());
     }
 
-
     ////////
     // User Apis
     ////////
@@ -370,6 +365,7 @@ public class Init {
     ////////
 
     public static void registerRecipes() {
+        /* Do Nothing */
     }
 
     public static void registerCraftingRecipes(IForgeRegistry<IRecipe> registry) {
@@ -380,41 +376,12 @@ public class Init {
         final ItemStack meadBottle = GrowthcraftBeesItems.honeyMeadBottle.asStack();
         final ItemStack meadBottle4 = GrowthcraftBeesItems.honeyMeadBottle.asStack(4);
 
-        // TODO: Use factory instead for these:
-
-        // Create mead booze
-/* FIXME and give me a can of whoopass. I'm dump and don't want to work, because I'm trying to be funny and to annoy the devs		
- 		registry.register(new ShapelessMultiRecipe(group.toString(),
-				meadBucket,
-				Items.BUCKET,
-				new TaggedFluidStacks(1000, BeesFluidTag.HONEY.getName()),
-				new FluidStack(FluidRegistry.WATER, 1000))
-					.setRegistryName(toRegName("mead_fluid_to_bucket_1")));
-		
-		registry.register(new ShapelessMultiRecipe(group.toString(),
-				meadBucket,
-				Items.BUCKET,
-				new OreItemStacks("bucketHoney"),
-				new FluidStack(FluidRegistry.WATER, 1000))
-					.setRegistryName(toRegName("mead_fluid_to_bucket_2"))); */
-
         registry.register(new ShapelessMultiRecipe(group.toString(),
                 meadBottle,
                 Items.GLASS_BOTTLE,
                 new TaggedFluidStacks(FluidContainerRegistry.BOTTLE_VOLUME, BeesFluidTag.HONEY.getName()),
                 new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BOTTLE_VOLUME))
                 .setRegistryName(toRegName("mead_fluid_to_bottle_1")));
-
-/* FIXME and give me a can of whoopass. I'm dump and don't want to work, because I'm trying to be funny and to annoy the devs
- 		registry.register(new ShapelessMultiRecipe(group.toString(),
-				meadBottle4,
-				Items.GLASS_BOTTLE,	// TODO: Make dynamically. Amount of bottles = floor(Bucket volume / Bottle volume)
-				Items.GLASS_BOTTLE,
-				Items.GLASS_BOTTLE,
-				Items.GLASS_BOTTLE,
-				new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName()),
-				new FluidStack(FluidRegistry.WATER, FluidContainerRegistry.BUCKET_VOLUME))
-					.setRegistryName(toRegName("mead_fluid_to_bottle_2")));*/
 
         // Honey extraction
         final ItemStack honeyStack = GrowthcraftBeesItems.honeyCombFilled.asStack();
@@ -429,7 +396,7 @@ public class Init {
                         Ingredient.fromItem(Items.FLOWER_POT)))
                 .setRegistryName(toRegName("honey_comb_filled_1")));
 
-        registry.register(new ShapelessMultiRecipe(group.toString(), GrowthcraftBeesFluids.honey.asBucketItemStack(),    // NOTE: For some reason ShapelessRecipes is not working with buckets ...
+        registry.register(new ShapelessMultiRecipe(group.toString(), GrowthcraftBeesFluids.honey.asBucketItemStack(),
                 honeyStack,
                 honeyStack,
                 honeyStack,
@@ -462,19 +429,19 @@ public class Init {
         ).setRegistryName(toRegName("honey_ore_to_jar")));
 
         /// To Honey Bucket from different sources
-        registry.register(new ShapelessMultiRecipe(group.toString(),
-                GrowthcraftBeesFluids.honey.asBucketItemStack(),
-                Items.BUCKET,
-                new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName())
-        ).setRegistryName(toRegName("honey_fluid_to_bucket")));
+        if (GrowthcraftBeesFluids.honey != null) {
+            registry.register(new ShapelessMultiRecipe(group.toString(),
+                    GrowthcraftBeesFluids.honey.asBucketItemStack(),
+                    Items.BUCKET,
+                    new TaggedFluidStacks(FluidContainerRegistry.BUCKET_VOLUME, BeesFluidTag.HONEY.getName())
+            ).setRegistryName(toRegName("honey_fluid_to_bucket")));
 
-        registry.register(new ShapelessOreRecipe(group,
-                GrowthcraftBeesFluids.honey.asBucketItemStack(),
-                "jarHoney",
-                Items.BUCKET
-        ).setRegistryName(toRegName("honey_ore_to_bucket")));
-
-        // TODO: RECIPE_REGISTER!
+            registry.register(new ShapelessOreRecipe(group,
+                    GrowthcraftBeesFluids.honey.asBucketItemStack(),
+                    "jarHoney",
+                    Items.BUCKET
+            ).setRegistryName(toRegName("honey_ore_to_bucket")));
+        }
     }
 
     private static ResourceLocation toRegName(String name) {

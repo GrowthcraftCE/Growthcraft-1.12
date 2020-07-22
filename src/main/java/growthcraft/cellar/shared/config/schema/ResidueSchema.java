@@ -1,10 +1,10 @@
 package growthcraft.cellar.shared.config.schema;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.config.schema.ItemKeySchema;
 import net.minecraft.item.ItemStack;
+
+import javax.annotation.Nonnull;
 
 public class ResidueSchema extends ItemKeySchema {
     public float pomace;

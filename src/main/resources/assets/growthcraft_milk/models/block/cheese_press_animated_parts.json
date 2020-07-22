@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11. Model by Alatyami & Kisutora.",
 	"textures": {
 		"2": "growthcraft_milk:blocks/cheese_press/vice_top",
-		"3": "growthcraft_milk:blocks/cheese_press/iron_frame"
+		"3": "growthcraft_milk:blocks/cheese_press/iron_frame",
+		"default": "growthcraft_milk:blocks/cheese_press/base"
 	},
 	"elements": [
 		{
@@ -11,7 +12,7 @@
 			"to": [3, 9, 12],
 			"faces": {
 				"north": {"uv": [0, 0, 1, 1], "texture": "#2"},
-				"east": {"uv": [0, 0, 8, 1], "texture": "#missing"},
+				"east": {"uv": [0, 0, 8, 1], "texture": "#default"},
 				"south": {"uv": [0, 0, 1, 1], "texture": "#2"},
 				"west": {"uv": [0, 0, 8, 1], "texture": "#2"},
 				"up": {"uv": [2, 4, 3, 12], "texture": "#2"},
@@ -27,7 +28,7 @@
 				"north": {"uv": [0, 0, 1, 1], "texture": "#2"},
 				"east": {"uv": [0, 0, 8, 1], "texture": "#2"},
 				"south": {"uv": [0, 0, 1, 1], "texture": "#2"},
-				"west": {"uv": [0, 0, 8, 1], "texture": "#missing"},
+				"west": {"uv": [0, 0, 8, 1], "texture": "#default"},
 				"up": {"uv": [13, 4, 14, 12], "texture": "#2"},
 				"down": {"uv": [2, 3, 3, 11], "texture": "#2"}
 			},
@@ -87,7 +88,7 @@
 			"to": [2, 9, 10],
 			"faces": {
 				"north": {"uv": [0, 0, 1, 1], "texture": "#2"},
-				"east": {"uv": [0, 0, 4, 1], "texture": "#missing"},
+				"east": {"uv": [0, 0, 4, 1], "texture": "#default"},
 				"south": {"uv": [0, 0, 1, 1], "texture": "#2"},
 				"west": {"uv": [0, 0, 4, 1], "texture": "#2"},
 				"up": {"uv": [1, 6, 2, 10], "texture": "#2"},
@@ -103,7 +104,7 @@
 				"north": {"uv": [0, 0, 1, 1], "texture": "#2"},
 				"east": {"uv": [0, 0, 4, 1], "texture": "#2"},
 				"south": {"uv": [0, 0, 1, 1], "texture": "#2"},
-				"west": {"uv": [0, 0, 4, 1], "texture": "#missing"},
+				"west": {"uv": [0, 0, 4, 1], "texture": "#default"},
 				"up": {"uv": [14, 6, 15, 10], "texture": "#2"},
 				"down": {"uv": [1, 7, 2, 11], "texture": "#2"}
 			},
@@ -174,8 +175,8 @@
 				"east": {"uv": [0, 4, 1, 8], "texture": "#3"},
 				"south": {"uv": [0, 0, 1, 4], "texture": "#3"},
 				"west": {"uv": [0, 12, 1, 16], "texture": "#3"},
-				"up": {"uv": [0, 0, 1, 1], "texture": "#missing"},
-				"down": {"uv": [0, 0, 1, 1], "texture": "#missing"}
+				"up": {"uv": [0, 0, 1, 1], "texture": "#default"},
+				"down": {"uv": [0, 0, 1, 1], "texture": "#default"}
 			},
 			"type": "cube"
 		}

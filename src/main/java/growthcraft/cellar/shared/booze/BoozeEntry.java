@@ -1,12 +1,11 @@
 package growthcraft.cellar.shared.booze;
 
-import java.util.Collection;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.CoreRegistry;
 import growthcraft.core.shared.fluids.FluidTag;
 import net.minecraftforge.fluids.Fluid;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
 
 public class BoozeEntry {
     // REVISE_ME 0

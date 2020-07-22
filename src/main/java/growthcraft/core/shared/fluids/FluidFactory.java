@@ -1,11 +1,8 @@
 package growthcraft.core.shared.fluids;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
-import growthcraft.core.shared.config.GrowthcraftCoreConfig;
-import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.block.GrowthcraftBlockFluid;
+import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
+import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.definition.FluidDefinition;
 import growthcraft.core.shared.definition.GrowthcraftBlockFluidDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
@@ -28,6 +25,9 @@ import net.minecraftforge.fluids.UniversalBucket;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * A simple factory for creating generic fluid bottles, blocks etc..

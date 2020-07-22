@@ -1,11 +1,11 @@
 package growthcraft.cellar.shared.processing.culturing;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.fluids.FluidTest;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class CultureRecipe implements ICultureRecipe {
     private FluidStack inputFluidStack;

@@ -16,5 +16,6 @@ public class GrowthcraftBambooBlocks {
     public static BlockDefinition bambooStalk;
     public static BlockDefinition bambooShoot;
     public static BlockDefinition blockBambooDoor;
+    public static BlockDefinition ropeKnotBamboo;
 
 }

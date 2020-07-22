@@ -1,9 +1,9 @@
 package growthcraft.cellar.shared.processing.fermenting.user;
 
+import growthcraft.core.shared.config.schema.ICommentable;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import growthcraft.core.shared.config.schema.ICommentable;
 
 public class UserFermentingRecipes implements ICommentable {
     public String comment = "";

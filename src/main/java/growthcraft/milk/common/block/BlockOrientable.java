@@ -1,12 +1,9 @@
 package growthcraft.milk.common.block;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.block.BlockFlags;
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
-import growthcraft.core.shared.block.GrowthcraftRotatableBlockContainer;
-import growthcraft.core.shared.block.IRotatableBlock;
 import growthcraft.core.shared.block.BlockUtils;
+import growthcraft.core.shared.block.GrowthcraftBlockContainer;
+import growthcraft.core.shared.block.IRotatableBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
@@ -18,6 +15,8 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockOrientable extends GrowthcraftBlockContainer implements IRotatableBlock {
 

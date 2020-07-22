@@ -1,12 +1,11 @@
 package growthcraft.cellar.client.gui;
 
+import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 
 import javax.annotation.Nullable;
-
-import growthcraft.core.shared.inventory.GrowthcraftGuiProvider;
 
 public class GuiHandler extends GrowthcraftGuiProvider implements IGuiHandler {
 

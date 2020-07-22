@@ -1,13 +1,5 @@
 package growthcraft.cellar.shared.processing.yeast;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.Reference;
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.item.ItemKey;
@@ -15,6 +7,13 @@ import growthcraft.core.shared.item.WeightedItemStack;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class YeastRegistry {
     private Set<ItemKey> yeastList = new HashSet<ItemKey>();

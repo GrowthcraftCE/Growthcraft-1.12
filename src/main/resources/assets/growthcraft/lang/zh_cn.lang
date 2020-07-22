@@ -20,6 +20,13 @@ item.salt.name=岩盐
 itemGroup.Growthcraft=生长工艺
 
 tile.rope_knot.name=绳结
+tile.rope_knot_oak.name=Oak Fence (Rope)
+tile.rope_knot_dark_oak.name=Dark Oak Fence (Rope)
+tile.rope_knot_acacia.name=Acacia Fence (Rope)
+tile.rope_knot_spruce.name=Spruce Fence (Rope)
+tile.rope_knot_birch.name=Birch Fence (Rope)
+tile.rope_knot_jungle.name=Jungle Fence (Rope)
+tile.rope_knot_nether_brick.name=Nether Brick Fence (Rope)
 tile.rope_fence.name=绳
 tile.salt_block.name=岩盐块
 tile.salt_ore.name=岩盐矿石

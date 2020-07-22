@@ -1,11 +1,8 @@
 package growthcraft.milk.common.block.fluids;
 
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumBlockRenderType;
-import net.minecraftforge.fluids.Fluid;
-
 import growthcraft.core.shared.block.GrowthcraftBlockFluid;
+import net.minecraft.block.material.Material;
+import net.minecraftforge.fluids.Fluid;
 
 public class BlockFluidSkimMilk extends GrowthcraftBlockFluid {
 

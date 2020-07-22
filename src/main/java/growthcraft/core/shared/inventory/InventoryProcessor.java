@@ -1,14 +1,5 @@
 package growthcraft.core.shared.inventory;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.definition.IMultiItemStacks;
 import growthcraft.core.shared.item.ItemTest;
 import growthcraft.core.shared.item.ItemUtils;
@@ -16,6 +7,10 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.MathHelper;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.*;
 
 /**
  * Utility class for handling some `painful` inventory operations

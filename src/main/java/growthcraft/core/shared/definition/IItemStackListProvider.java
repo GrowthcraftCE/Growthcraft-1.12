@@ -1,10 +1,9 @@
 package growthcraft.core.shared.definition;
 
-import java.util.List;
+import net.minecraft.item.ItemStack;
 
 import javax.annotation.Nonnull;
-
-import net.minecraft.item.ItemStack;
+import java.util.List;
 
 public interface IItemStackListProvider {
     /**

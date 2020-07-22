@@ -1,20 +1,16 @@
 package growthcraft.milk.common.tileentity;
 
-import java.io.IOException;
-import java.util.List;
-
 import growthcraft.core.shared.io.nbt.INBTItemSerializable;
+import growthcraft.core.shared.item.ItemTest;
+import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.GrowthcraftTileBase;
 import growthcraft.core.shared.tileentity.event.TileEventHandler;
 import growthcraft.core.shared.tileentity.feature.IItemOperable;
-import growthcraft.core.shared.item.ItemTest;
-import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.milk.GrowthcraftMilk;
 import growthcraft.milk.common.item.ItemBlockCheeseBlock;
 import growthcraft.milk.common.tileentity.struct.Cheese;
 import growthcraft.milk.shared.definition.EnumCheeseStage;
 import growthcraft.milk.shared.definition.ICheeseBlockStackFactory;
-import growthcraft.milk.shared.init.GrowthcraftMilkItems;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.state.IBlockState;
@@ -26,7 +22,9 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.oredict.OreDictionary;
+
+import java.io.IOException;
+import java.util.List;
 
 public class TileEntityCheeseBlock extends GrowthcraftTileBase implements ITickable, IItemOperable, INBTItemSerializable {
     private Cheese cheese = new Cheese();

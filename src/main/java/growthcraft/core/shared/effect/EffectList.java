@@ -1,13 +1,13 @@
 package growthcraft.core.shared.effect;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import growthcraft.core.shared.config.description.Describer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * An EffectList, as its name implies, is a list of IEffects, when it is applied

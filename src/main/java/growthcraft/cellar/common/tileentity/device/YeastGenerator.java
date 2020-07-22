@@ -1,27 +1,25 @@
 package growthcraft.cellar.common.tileentity.device;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
+import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.BoozeTag;
+import growthcraft.cellar.shared.processing.common.IProcessingRecipe;
 import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
 import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
-import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.core.shared.CoreRegistry;
+import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.item.WeightedItemStack;
 import growthcraft.core.shared.tileentity.device.DeviceFluidSlot;
 import growthcraft.core.shared.tileentity.device.DeviceInventorySlot;
 import growthcraft.core.shared.tileentity.device.DeviceProgressive;
-import growthcraft.core.shared.item.ItemUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandom;
 import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import javax.annotation.Nullable;
+import java.util.*;
 
 public class YeastGenerator extends DeviceProgressive {
     protected int consumption = 1200 / 16;
@@ -59,7 +57,7 @@ public class YeastGenerator extends DeviceProgressive {
      * @return biome
      */
     public Biome getCurrentBiome() {
-        return getWorld().getBiome(parent.getPos()); //.getBiomeGenForCoords(parent.xCoord, parent.zCoord);
+        return getWorld().getBiome(parent.getPos());
     }
 
     /**
@@ -72,8 +70,7 @@ public class YeastGenerator extends DeviceProgressive {
         // prevent production if the stack size is currently maxed
         if (stack.getCount() >= stack.getMaxStackSize()) return false;
         // prevent item pointless ticking with invalid items
-        if (!CellarRegistry.instance().yeast().isYeast(stack)) return false;
-        return true;
+        return CellarRegistry.instance().yeast().isYeast(stack);
     }
 
     /**
@@ -126,7 +123,7 @@ public class YeastGenerator extends DeviceProgressive {
             if (tempItemSet.size() > 0) {
                 tempItemList.addAll(tempItemSet);
 
-                final WeightedItemStack weightedItemStack = (WeightedItemStack) WeightedRandom.getRandomItem(getWorld().rand, tempItemList);
+                final WeightedItemStack weightedItemStack = WeightedRandom.getRandomItem(getWorld().rand, tempItemList);
                 if (weightedItemStack != null && weightedItemStack.itemStack != null) {
                     final ItemStack result = weightedItemStack.itemStack.copy();
                     invSlot.set(result);
@@ -137,7 +134,7 @@ public class YeastGenerator extends DeviceProgressive {
     }
 
     @Override
-    public void process(IProcessingRecipeBase recipe) {
+    public void process(@Nullable IProcessingRecipeBase recipe) {
         if (invSlot.isEmpty()) {
             initProduceYeast();
         } else {
@@ -152,6 +149,27 @@ public class YeastGenerator extends DeviceProgressive {
                 consumeFluid();
             }
         }
+    }
+
+    /**
+     * Yeast generation is different than the rest of the recipes. It does not use a traditional IProcessingRecipeBase
+     * recipe and thus we want to call super from DeviceProgressive after we try and process the yeast generation.
+     */
+    @Override
+    public void update() {
+        if(canProcess()) {
+            increaseTime();
+            if(time >= timeMax) {
+                resetTime();
+                process(null);
+                markDirty();
+            }
+        } else {
+            if(resetTime()) {
+                markDirty();
+            }
+        }
+        super.update();
     }
 
 }

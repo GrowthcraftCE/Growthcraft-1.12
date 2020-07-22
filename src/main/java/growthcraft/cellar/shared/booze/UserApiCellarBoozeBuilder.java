@@ -1,8 +1,5 @@
 package growthcraft.cellar.shared.booze;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.config.UserApis;
 import growthcraft.cellar.shared.processing.common.Residue;
 import growthcraft.core.shared.definition.IMultiFluidStacks;
@@ -10,6 +7,9 @@ import growthcraft.core.shared.item.MultiStacksUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * This is a variant to the CellarBoozeBuilder provided in the API

@@ -174,7 +174,7 @@ dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
     // deobfCompile "com.pam.harvestcraft:harvestcraft:1.12a"
-    deobfCompile "mcjty.theoneprobe:TheOneProbe-1.12:" + project.property('theoneprobe_version')
+    compile "mcjty.theoneprobe:TheOneProbe-1.12:" + project.property('theoneprobe_version')
     
     deobfProvided "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version') + ":api"
 
@@ -192,11 +192,7 @@ dependencies {
 }
 
 sourceSets {
-    main {
-        resources {
-            srcDir 'resources'
-        }
-    }
+    main { output.resourcesDir = output.classesDir }
 }
 
 processResources

@@ -1,7 +1,5 @@
 package growthcraft.core.shared.io.stream;
 
-import java.io.UnsupportedEncodingException;
-
 import growthcraft.core.shared.fluids.FluidTest;
 import growthcraft.core.shared.io.ConstID;
 import io.netty.buffer.ByteBuf;
@@ -9,6 +7,8 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * Utility class for handling data streams

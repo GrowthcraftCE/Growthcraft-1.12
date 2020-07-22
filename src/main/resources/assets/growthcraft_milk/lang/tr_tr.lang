@@ -40,7 +40,7 @@ fluid.fluid_rennet=Peynir Mayası
 
 fluid.fluid_skim_milk=Yağsız Süt
 fluid.fluid_whey=Peynir Altı Suyu
-fluid.fluid_pasteurized_milk=Pastörize Süt
+fluid.fluid_condensed_milk=Pastörize Süt
 
 # Items
 item.bottlefluid_milk.name=Süt Şişesi
@@ -50,7 +50,7 @@ item.bottlefluid_milk_curds.name=Süt Loru Şişesi
 item.bottlefluid_rennet.name=Peynir Mayası Şişesi
 item.bottlefluid_skim_milk.name=Yağsız Süt Şişesi
 item.bottlefluid_whey.name=Peynir Altı Suyu Şişesi
-item.bottlefluid_pasteurized_milk.name=Pastörize Süt Şişesi
+item.bottlefluid_condensed_milk.name=Pastörize Süt Şişesi
 
 item.butter.salted.name=Tuzlu Yağ
 item.butter.unsalted.name=Tuzsuz Yağ

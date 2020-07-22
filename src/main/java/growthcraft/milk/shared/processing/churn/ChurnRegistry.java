@@ -1,13 +1,5 @@
 package growthcraft.milk.shared.processing.churn;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import growthcraft.core.shared.GrowthcraftLogger;
 import growthcraft.core.shared.fluids.FluidKey;
 import growthcraft.core.shared.fluids.FluidTest;
@@ -15,6 +7,13 @@ import growthcraft.milk.shared.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class ChurnRegistry {
     private Map<Fluid, IChurnRecipe> recipes = new HashMap<Fluid, IChurnRecipe>();

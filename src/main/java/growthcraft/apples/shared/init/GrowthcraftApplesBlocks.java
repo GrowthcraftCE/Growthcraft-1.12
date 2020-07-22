@@ -22,4 +22,6 @@ public class GrowthcraftApplesBlocks {
 
     public static BlockBoozeDefinition[] appleCiderFluidBlocks;
 
+    public static BlockDefinition ropeKnotApple;
+
 }

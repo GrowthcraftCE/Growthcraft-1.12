@@ -1,6 +1,5 @@
 package growthcraft.milk.common.item;
 
-import growthcraft.core.shared.block.GrowthcraftBlockContainer;
 import growthcraft.core.shared.definition.IObjectVariant;
 import growthcraft.core.shared.io.nbt.NBTHelper;
 import growthcraft.core.shared.item.IItemTileBlock;

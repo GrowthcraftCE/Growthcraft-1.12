@@ -6,7 +6,6 @@ import growthcraft.core.shared.inventory.slot.SlotPlayerBackpack;
 import growthcraft.core.shared.inventory.slot.SlotPlayerHotbar;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.tileentity.feature.IGuiNetworkSync;
-import growthcraft.core.shared.utils.Platform;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IContainerListener;
@@ -16,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
 
 public class GrowthcraftContainer extends Container {
     protected static final int SLOT_W = 18;
@@ -45,31 +46,43 @@ public class GrowthcraftContainer extends Container {
         int start = -1;
         int end = -1;
 
-        for (Object sub : inventorySlots) {
-            if (slotClass.isInstance(sub)) {
-                final Slot subSlot = (Slot) sub;
+        for (Slot slot : inventorySlots) {
+            if (slotClass.isInstance(slot)) {
                 if (start < 0) {
-                    start = subSlot.slotNumber;
+                    start = slot.slotNumber;
                 }
-                end = subSlot.slotNumber;
+                end = slot.slotNumber;
             }
         }
         if (start <= -1 || end <= -1) return false;
 
-        boolean merged = false;
-        for (int i = start; i <= end; ++i) {
-            // Stop iterating if the stack has been successfully merged
-            if (stack.isEmpty()) break;
-            // Get the object at the given index
-            final Object obj = inventorySlots.get(i);
-            // Determine if the slot is the expected (in case the slots are interleaved)
-            if (slotClass.isInstance(obj)) {
-                final Slot subSlot = (Slot) obj;
-                // try to merge it
-                merged |= mergeWithSlot(subSlot, stack);
-            }
+        boolean merged = mergeWithComparativeSlot(start, end, stack, stack);
+
+        if(!merged) {
+            merged = mergeWithComparativeSlot(start, end, stack, null);
         }
+
         return merged;
+    }
+
+    private boolean mergeWithComparativeSlot(int startSlotID, int endSlotID, ItemStack stack, @Nullable ItemStack matchStack) {
+        // Try and merge with a slot that has the same item.
+        for (int i = startSlotID; i <= endSlotID; ++i) {
+            if (stack.isEmpty()) break;
+            final Slot subSlot = inventorySlots.get(i);
+
+            // if match stack is not null then we need to compare the ItemStacks in the slots.
+            if (matchStack != null && ItemStack.areItemsEqual(subSlot.getStack(), matchStack)) {
+                return mergeWithSlot(subSlot, stack);
+            }
+            // if match stack is null, then just find the nearest empty stack.
+            if ( matchStack == null && subSlot.isItemValid(stack)
+                    && canAddItemToSlot(subSlot, stack, false)) {
+                return mergeWithSlot(subSlot, stack);
+            }
+
+        }
+        return false;
     }
 
     public boolean mergeWithPlayer(ItemStack stack) {
@@ -90,10 +103,6 @@ public class GrowthcraftContainer extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int index) {
-//		if (Platform.isClient())
-//		{
-//			return ItemStack.EMPTY;
-//		}
 
         final Slot s = getSlot(index);
         ItemStack itemstack = ItemStack.EMPTY;

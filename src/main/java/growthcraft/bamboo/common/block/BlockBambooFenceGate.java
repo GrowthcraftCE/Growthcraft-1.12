@@ -1,5 +1,6 @@
 package growthcraft.bamboo.common.block;
 
+import growthcraft.bamboo.shared.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockHorizontal;
@@ -20,8 +21,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
-
-import growthcraft.bamboo.shared.Reference;
 
 public class BlockBambooFenceGate extends BlockHorizontal {
 

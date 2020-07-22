@@ -1,0 +1,22 @@
+{
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ACA",
+    "CBC",
+    "ACA"
+  ],
+  "key": {
+    "A": {
+      "item": "growthcraft_apples:apple_planks"
+    },
+    "B": {
+      "item": "minecraft:lead"
+    },
+    "C": {
+      "item": "minecraft:string"
+    }
+  },
+  "result": {
+    "item": "growthcraft_fishtrap:fishtrap_apple"
+  }
+}

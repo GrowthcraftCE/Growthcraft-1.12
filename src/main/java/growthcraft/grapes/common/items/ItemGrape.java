@@ -3,7 +3,6 @@ package growthcraft.grapes.common.items;
 import growthcraft.grapes.shared.Reference;
 import growthcraft.grapes.shared.init.GrowthcraftGrapesItems.GrapeTypes;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;

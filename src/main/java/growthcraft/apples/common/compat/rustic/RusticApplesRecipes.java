@@ -1,7 +1,5 @@
 package growthcraft.apples.common.compat.rustic;
 
-import static growthcraft.apples.shared.init.GrowthcraftApplesFluids.appleCiderBooze;
-
 import growthcraft.apples.shared.init.GrowthcraftApplesItems.AppleCiderTypes;
 import growthcraft.cellar.shared.GrowthcraftCellarApis;
 import growthcraft.cellar.shared.booze.BoozeTag;
@@ -11,6 +9,8 @@ import growthcraft.core.shared.item.OreItemStacks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import static growthcraft.apples.shared.init.GrowthcraftApplesFluids.appleCiderBooze;
 
 public class RusticApplesRecipes {
     private RusticApplesRecipes() {

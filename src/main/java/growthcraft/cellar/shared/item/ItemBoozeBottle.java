@@ -1,9 +1,5 @@
 package growthcraft.cellar.shared.item;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.BoozeEntry;
 import growthcraft.cellar.shared.booze.BoozeUtils;
@@ -31,6 +27,9 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContainerItem {
     private Booze[] boozes;

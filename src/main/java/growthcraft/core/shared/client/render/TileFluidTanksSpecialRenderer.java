@@ -1,7 +1,5 @@
 package growthcraft.core.shared.client.render;
 
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.client.utils.FluidRenderUtils;
 import growthcraft.core.shared.client.render.utils.RenderUtil;
 import growthcraft.core.shared.fluids.IFluidTanks;
@@ -10,6 +8,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fluids.FluidStack;
+
+import javax.annotation.Nonnull;
 
 public class TileFluidTanksSpecialRenderer<T extends TileEntity & IFluidTanks> extends TileEntitySpecialRenderer<T> {
     private final BBox fluidBBox;

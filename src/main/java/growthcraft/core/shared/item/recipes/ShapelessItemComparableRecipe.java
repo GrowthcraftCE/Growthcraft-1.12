@@ -1,11 +1,5 @@
 package growthcraft.core.shared.item.recipes;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.core.shared.item.IItemStackComparator;
 import growthcraft.core.shared.item.ItemUtils;
 import growthcraft.core.shared.legacy.FluidContainerRegistry;
@@ -13,8 +7,12 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class ShapelessItemComparableRecipe extends net.minecraftforge.registries.IForgeRegistryEntry.Impl<IRecipe> implements IRecipe {
     public final List<ItemStack> recipeItems;

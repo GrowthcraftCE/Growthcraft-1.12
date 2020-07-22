@@ -1,17 +1,11 @@
 package growthcraft.cellar.shared.booze;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Random;
-
-import javax.annotation.Nonnull;
-
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.modifier.IModifierFunction;
 import growthcraft.core.shared.CoreRegistry;
+import growthcraft.core.shared.config.description.Describer;
 import growthcraft.core.shared.effect.IPotionEffectFactory;
 import growthcraft.core.shared.fluids.FluidTag;
-import growthcraft.core.shared.config.description.Describer;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
@@ -19,6 +13,11 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+
+import javax.annotation.Nonnull;
+import java.util.Collection;
+import java.util.List;
+import java.util.Random;
 
 public class BoozePotionEffectFactory implements IPotionEffectFactory {
     // REVISE_ME 0

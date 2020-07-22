@@ -6,8 +6,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class GrowthcraftTreeWorldGen extends WorldGenAbstractTree {

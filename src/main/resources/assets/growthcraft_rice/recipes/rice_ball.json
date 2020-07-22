@@ -1,12 +1,16 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "rr",
-    "rr"
+    "rrr",
+    "rsr",
+    "rrr"
   ],
   "key": {
     "r": {
       "item": "growthcraft_rice:rice_cooked"
+    },
+    "s": {
+      "item": "growthcraft:salt"
     }
   },
   "result": {
