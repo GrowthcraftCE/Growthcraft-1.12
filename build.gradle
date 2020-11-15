@@ -61,9 +61,6 @@ repositories {
         name 'tterrag maven'
         url "http://maven.tterrag.com/"
     }
-    maven { // HWYLA
-        url "http://tehnut.info/maven"
-    }
     maven { // compatlayer
         name 'K-4u maven'
         url "http://maven.k-4u.nl/"
@@ -74,10 +71,6 @@ repositories {
     maven {
         name 'forge'
         url 'http://files.minecraftforge.net/maven'
-    }
-    maven {
-        name "Tehnut Maven FS"
-        url "http://tehnut.info/maven"
     }
     maven {
         name = "CoFH Maven"
@@ -100,6 +93,10 @@ repositories {
         // location of a maven mirror for JEI files, as a fallback
         name = "ModMaven"
         url = "modmaven.k-4u.nl"
+    }
+    maven {
+        name = "hwyla"
+        url "https://maven.tehnut.info"
     }
 }
 
@@ -244,8 +241,8 @@ task libJar(type: Jar) {
 }
 
 artifacts {
-    archives deobfJar
-    archives sourcesJar
+    //archives deobfJar
+    //archives sourcesJar
     archives libJar
 }
 
