@@ -185,8 +185,8 @@ public class Init {
                 .fermentsFrom(fs[LagerTypes.LAGER_YOUNG.ordinal()], new ItemStack(Items.NETHER_WART), (int) (fermentTime * 0.66))
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
-                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(90), 0)
-                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(90), 0);
+                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(60), 0)
+                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(60), 0);
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_POTENT.ordinal()].getFluid())
                 .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.POTENT)
@@ -194,26 +194,32 @@ public class Init {
                 .fermentsFrom(fs[LagerTypes.LAGER_EXTENDED.ordinal()], new OreItemStacks("dustGlowstone"), fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
-                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(90), 0)
-                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(90), 0);
+                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(60), 0)
+                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(60), 0);
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_EXTENDED.ordinal()].getFluid())
                 .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.EXTENDED)
                 .fermentsFrom(fs[LagerTypes.LAGER_NORMAL.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
+                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(60), 0)
+                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(60), 0);
+
+        GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_POTENTEXTENDED.ordinal()].getFluid())
+                .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.EXTENDED, BoozeTag.POTENT)
                 .fermentsFrom(fs[LagerTypes.LAGER_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
-                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(90), 0)
-                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(90), 0);
+                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(60), 0)
+                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(60), 0);
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_HYPEREXTENDED.ordinal()].getFluid())
                 .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.HYPER_EXTENDED)
-                .fermentsFrom(fs[LagerTypes.LAGER_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
-                .fermentsFrom(fs[LagerTypes.LAGER_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
+                .fermentsFrom(fs[LagerTypes.LAGER_POTENTEXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
-                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(90), 0)
-                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(90), 0);
+                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(360), 1)
+                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(360), 1);
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_INTOXICATED.ordinal()].getFluid())
                 .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.INTOXICATED)
