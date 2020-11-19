@@ -80,7 +80,8 @@ public class GrowthcraftHopsItems {
         LAGER_HYPEREXTENDED(4, "hyperextended"),
         LAGER_INTOXICATED(5, "intoxicated"),
         LAGER_POISONED(6, "poisoned"),
-        LAGER_POTENTEXTENDED(7, "potentextended");
+        LAGER_POTENTEXTENDED(7, "potentextended"),
+        LAGER_MAGICAL(8, "magical");
 
         private int ID;
         private String NAME;

@@ -33,7 +33,8 @@ public class GrowthcraftRiceItems {
         SAKE_HYPEREXTENDED(5, "sake_hyperextended"),
         SAKE_POTENT_EXTENDED(6, "sake_potent_extended"),
         SAKE_POTENT_HYPEREXTENDED(7, "sake_potent_hyperextended"),
-        SAKE_POISONED(8, "sake_poisoned");
+        SAKE_POISONED(8, "sake_poisoned"),
+        SAKE_MAGICAL(9, "sake_magical");
 
         private int ID;
         private String NAME;

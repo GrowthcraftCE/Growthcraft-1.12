@@ -292,7 +292,7 @@ public class Init {
 
         // Ambrosia - Ethereal Yeast
         GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.PURPLE_AMBROSIA.ordinal()].getFluid())
-                .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+                .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
                 .fermentsFrom(fs[WineTypes.PURPLE_WINE_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .fermentsFrom(fs[WineTypes.PURPLE_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .getEffect()
@@ -300,7 +300,7 @@ public class Init {
                 .addPotionEntry(MobEffects.HEALTH_BOOST, TickUtils.minutes(3), 0)
                 .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
         GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.RED_AMBROSIA.ordinal()].getFluid())
-                .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+                .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
                 .fermentsFrom(fs[WineTypes.RED_WINE_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .fermentsFrom(fs[WineTypes.RED_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .getEffect()
@@ -308,7 +308,7 @@ public class Init {
                 .addPotionEntry(MobEffects.HEALTH_BOOST, TickUtils.minutes(3), 0)
                 .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 0);
         GrowthcraftCellarApis.boozeBuilderFactory.create(grapeWineBooze[WineTypes.GREEN_AMBROSIA.ordinal()].getFluid())
-                .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED)
+                .tags(BoozeTag.WINE, BoozeTag.FERMENTED, BoozeTag.MAGICAL)
                 .fermentsFrom(fs[WineTypes.GREEN_WINE_POTENT.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .fermentsFrom(fs[WineTypes.GREEN_WINE_EXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .getEffect()

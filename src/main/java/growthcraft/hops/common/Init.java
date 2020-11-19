@@ -215,6 +215,14 @@ public class Init {
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_HYPEREXTENDED.ordinal()].getFluid())
                 .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.HYPER_EXTENDED)
+                .fermentsFrom(fs[LagerTypes.LAGER_EXTENDED.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
+                .addPotionEntry(MobEffects.SPEED, TickUtils.seconds(360), 1)
+                .addPotionEntry(MobEffects.HASTE, TickUtils.seconds(360), 1);
+
+        GrowthcraftCellarApis.boozeBuilderFactory.create(GrowthcraftHopsFluids.lagerBooze[LagerTypes.LAGER_MAGICAL.ordinal()].getFluid())
+                .tags(BoozeTag.FERMENTED, BoozeTag.CHILLED, BoozeTag.MAGICAL)
                 .fermentsFrom(fs[LagerTypes.LAGER_POTENTEXTENDED.ordinal()], new OreItemStacks("yeastEthereal"), fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.0419f), TickUtils.seconds(45))
