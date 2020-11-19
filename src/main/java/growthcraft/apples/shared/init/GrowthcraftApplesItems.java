@@ -23,7 +23,8 @@ public class GrowthcraftApplesItems {
         APPLE_CIDER_EXTENDED(3, "apple_cider_extended"),
         APPLE_CIDER_ETHEREAL(4, "apple_cider_ethereal"),
         APPLE_CIDER_INTOXICATED(5, "apple_cider_intoxicated"),
-        APPLE_CIDER_POISONED(6, "apple_cider_poisoned");
+        APPLE_CIDER_POISONED(6, "apple_cider_poisoned"),
+        APPLE_CIDER_POTENTEXTENDED(7, "apple_cider_potentextended");
 
         private int ID;
         private String NAME;
