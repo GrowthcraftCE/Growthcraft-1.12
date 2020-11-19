@@ -303,7 +303,7 @@ public class Init {
                 .addPotionEntry(MobEffects.REGENERATION, TickUtils.seconds(180), 0);
 
         GrowthcraftCellarApis.boozeBuilderFactory.create(meadBooze[MeadTypes.MEAD_HYPEREXTENDED.ordinal()].getFluid())
-                .tags(BoozeTag.FERMENTED, BoozeTag.EXTENDED, BeesFluidTag.MEAD)
+                .tags(BoozeTag.FERMENTED, BoozeTag.HYPER_EXTENDED, BeesFluidTag.MEAD)
                 .fermentsFrom(fs[MeadTypes.MEAD_EXTENDED.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.15f), TickUtils.seconds(90))
