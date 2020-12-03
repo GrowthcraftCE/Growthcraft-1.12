@@ -15,6 +15,7 @@ import growthcraft.core.shared.client.render.utils.ItemRenderUtils;
 import growthcraft.core.shared.definition.BlockDefinition;
 import growthcraft.core.shared.definition.ItemDefinition;
 import growthcraft.core.shared.definition.ItemTypeDefinition;
+import growthcraft.core.shared.item.OreItemStacks;
 import growthcraft.core.shared.utils.TickUtils;
 import growthcraft.rice.common.block.BlockPaddy;
 import growthcraft.rice.common.block.BlockRiceCrop;
@@ -304,12 +305,12 @@ public class Init {
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))
                 .addPotionEntry(MobEffects.RESISTANCE, TickUtils.minutes(3), 1);
 
-        // TODO: SAKE_POTENT_HYPEREXTENDED, SAKE_POTENT_EXTENDED + Redstone
-        GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_POTENT_HYPEREXTENDED.ordinal()].getFluid()))
-                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.HYPER_EXTENDED)
+        // TODO: SAKE_MAGICAL, SAKE_POTENT_EXTENDED + Redstone
+        GrowthcraftCellarApis.boozeBuilderFactory.create((sakeBooze[SakeTypes.SAKE_MAGICAL.ordinal()].getFluid()))
+                .tags(BoozeTag.SAKE, BoozeTag.FERMENTED, BoozeTag.POTENT, BoozeTag.MAGICAL)
                 .fermentsFrom(
                         fs[SakeTypes.SAKE_POTENT_EXTENDED.ordinal()],
-                        new ItemStack(Items.REDSTONE),
+                        new OreItemStacks("yeastEthereal"),
                         fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.10f), TickUtils.seconds(90))

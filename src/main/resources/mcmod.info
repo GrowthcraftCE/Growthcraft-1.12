@@ -3,148 +3,221 @@
   "modid": "growthcraft",
   "name": "Growthcraft",
   "description": "Growthcraft - A low tech farming and brewing mod.",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "mcversion": "1.12.2",
   "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
   "updateUrl": "",
-  "authorList": ["Alatyami", "Avatair", "Kisutora"],
+  "authorList": [
+    "Alatyami",
+    "Avatair",
+    "Kisutora"
+  ],
   "credits": "Gwafu for coming with a great mod and all the hard work of IceDragon200 and other contributors to GC-2.7",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": ["mod_MinecraftForge"]
+  "dependencies": [
+    "mod_MinecraftForge"
+  ]
 },
-{
-  "modid": "growthcraft_cellar",
-  "name": "Growthcraft Cellar",
-  "description": "Growthcraft Cellar - ",
-  "version": "4.2.0",
-  "mcversion": "1.12.2",
-  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-  "updateUrl": "",
-  "authorList": ["Alatyami", "Avatair", "Kisutora"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": ["mod_MinecraftForge", "growthcraft"],
-  "parent": "growthcraft"
-},{
-  "modid": "growthcraft_fishtrap",
-  "name": "Growthcraft Fishtrap",
-  "description": "Growthcraft Fishtrap - Fishing made simple. ",
-  "version": "4.2.0",
-  "mcversion": "1.12.2",
-  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-  "updateUrl": "",
-  "authorList": ["Alatyami", "Avatair", "Kisutora"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": ["mod_MinecraftForge", "growthcraft"],
-  "parent": "growthcraft"
-},
-{
-  "modid": "growthcraft_bees",
-  "name": "Growthcraft Bees",
-  "description": "Growthcraft Bees - ",
-  "version": "4.2.0",
-  "mcversion": "1.12.2",
-  "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-  "updateUrl": "",
-  "authorList": ["Alatyami", "Avatair", "Kisutora"],
-  "credits": "",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": ["mod_MinecraftForge", "growthcraft", "growthcraft_cellar"],
-  "parent": "growthcraft"
-},
- {
-   "modid": "growthcraft_grapes",
-   "name": "Growthcraft Grapes",
-   "description": "Growthcraft Grapes - Growing only the finest grapes in the land.",
-   "version": "4.2.0",
-   "mcversion": "1.12.2",
-   "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-   "updateUrl": "",
-   "authorList": ["Alatyami", "Avatair", "Kisutora"],
-   "credits": "",
-   "logoFile": "",
-   "screenshots": [],
-   "dependencies": ["mod_MinecraftForge", "growthcraft", "growthcraft_cellar"],
-   "parent": "growthcraft"
- },
-   {
-     "modid": "growthcraft_milk",
-     "name": "Growthcraft Milk",
-     "description": "Growthcraft Milk - ",
-     "version": "4.2.0",
-     "mcversion": "1.12.2",
-     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-     "updateUrl": "",
-     "authorList": ["Alatyami", "Avatair", "Kisutora"],
-     "credits": "1.7.10 (Sunconure)",
-     "logoFile": "",
-     "screenshots": [],
-     "dependencies": ["mod_MinecraftForge", "growthcraft", "growthcraft_cellar"],
-     "parent": "growthcraft"
-   },
-   {
-     "modid": "growthcraft_hops",
-     "name": "Growthcraft Hops",
-     "description": "Growthcraft Hops - ",
-     "version": "4.2.0",
-     "mcversion": "1.12.2",
-     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-     "updateUrl": "",
-     "authorList": ["Alatyami", "Avatair", "Kisutora"],
-     "credits": "1.7.10 IceDragon, Gwafu",
-     "logoFile": "",
-     "screenshots": [],
-     "dependencies": ["mod_MinecraftForge", "growthcraft"],
-     "parent": "growthcraft"
-   },
-   {
-     "modid": "growthcraft_bamboo",
-     "name": "Growthcraft Bamboo",
-     "description": "Growthcraft Bamboo - ",
-     "version": "4.2.0",
-     "mcversion": "1.12.2",
-     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
-     "updateUrl": "",
-     "authorList": ["Alatyami", "Avatair", "Kisutora"],
-     "credits": "1.7.10 IceDragon, Gwafu",
-     "logoFile": "",
-     "screenshots": [],
-     "dependencies": ["mod_MinecraftForge", "growthcraft"],
-     "parent": "growthcraft"
-   },
+  {
+    "modid": "growthcraft_cellar",
+    "name": "Growthcraft Cellar",
+    "description": "Growthcraft Cellar - ",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft"
+    ],
+    "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_fishtrap",
+    "name": "Growthcraft Fishtrap",
+    "description": "Growthcraft Fishtrap - Fishing made simple. ",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft"
+    ],
+    "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_bees",
+    "name": "Growthcraft Bees",
+    "description": "Growthcraft Bees - ",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft",
+      "growthcraft_cellar"
+    ],
+    "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_grapes",
+    "name": "Growthcraft Grapes",
+    "description": "Growthcraft Grapes - Growing only the finest grapes in the land.",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft",
+      "growthcraft_cellar"
+    ],
+    "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_milk",
+    "name": "Growthcraft Milk",
+    "description": "Growthcraft Milk - ",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "1.7.10 (Sunconure)",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft",
+      "growthcraft_cellar"
+    ],
+    "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_hops",
+    "name": "Growthcraft Hops",
+    "description": "Growthcraft Hops - ",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "1.7.10 IceDragon, Gwafu",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft"
+    ],
+    "parent": "growthcraft"
+  },
+  {
+    "modid": "growthcraft_bamboo",
+    "name": "Growthcraft Bamboo",
+    "description": "Growthcraft Bamboo - ",
+    "version": "4.2.1",
+    "mcversion": "1.12.2",
+    "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
+    "updateUrl": "",
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
+    "credits": "1.7.10 IceDragon, Gwafu",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft"
+    ],
+    "parent": "growthcraft"
+  },
   {
     "modid": "growthcraft_apples",
     "name": "Growthcraft Apples",
     "description": "Growthcraft Apples - Additional sources for Apple farming.",
-    "version": "4.2.0",
+    "version": "4.2.1",
     "mcversion": "1.12.2",
     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
     "updateUrl": "",
-    "authorList": ["Alatyami", "Avatair", "Kisutora"],
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
     "credits": "1.7.10 IceDragon, Gwafu",
     "logoFile": "",
     "screenshots": [],
-    "dependencies": ["mod_MinecraftForge", "growthcraft"],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft"
+    ],
     "parent": "growthcraft"
   },
   {
     "modid": "growthcraft_rice",
     "name": "Growthcraft Rice",
     "description": "Growthcraft Rice - Add rice farming and things to make with rice.",
-    "version": "4.2.0",
+    "version": "4.2.1",
     "mcversion": "1.12.2",
     "url": "https://github.com/GrowthcraftCE/Growthcraft-1.12",
     "updateUrl": "",
-    "authorList": ["Alatyami", "Avatair", "Kisutora"],
+    "authorList": [
+      "Alatyami",
+      "Avatair",
+      "Kisutora"
+    ],
     "credits": "1.7.10 IceDragon, Gwafu",
     "logoFile": "",
     "screenshots": [],
-    "dependencies": ["mod_MinecraftForge", "growthcraft"],
+    "dependencies": [
+      "mod_MinecraftForge",
+      "growthcraft"
+    ],
     "parent": "growthcraft"
   }
 ]

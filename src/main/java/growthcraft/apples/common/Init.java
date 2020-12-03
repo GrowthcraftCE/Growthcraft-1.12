@@ -230,7 +230,8 @@ public class Init {
         appleCiderBooze[AppleCiderTypes.APPLE_CIDER_ETHEREAL.ordinal()].getFluid().setColor(GrowthcraftApplesConfig.silkenNectarColor).setDensity(1010);
         appleCiderBooze[AppleCiderTypes.APPLE_CIDER_INTOXICATED.ordinal()].getFluid().setColor(GrowthcraftApplesConfig.appleCiderColor).setDensity(1010);
         appleCiderBooze[AppleCiderTypes.APPLE_CIDER_POISONED.ordinal()].getFluid().setColor(GrowthcraftApplesConfig.appleCiderColor).setDensity(1010);
-		
+        appleCiderBooze[AppleCiderTypes.APPLE_CIDER_POTENTEXTENDED.ordinal()].getFluid().setColor(GrowthcraftApplesConfig.appleCiderColor).setDensity(1010);
+
 		/*
     	APPLE_JUICE(0, "apple_juice"),
     	APPLE_CIDER_FERMENTED(1, "apple_cider_fermented"),
@@ -305,6 +306,13 @@ public class Init {
         GrowthcraftCellarApis.boozeBuilderFactory.create(appleCiderBooze[AppleCiderTypes.APPLE_CIDER_EXTENDED.ordinal()].getFluid())
                 .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED)
                 .fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_FERMENTED.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+                .fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
+                .getEffect()
+                .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
+                .addPotionEntry(MobEffects.ABSORPTION, TickUtils.seconds(90), 0);
+
+        GrowthcraftCellarApis.boozeBuilderFactory.create(appleCiderBooze[AppleCiderTypes.APPLE_CIDER_POTENTEXTENDED.ordinal()].getFluid())
+                .tags(BoozeTag.CIDER, BoozeTag.FERMENTED, BoozeTag.EXTENDED, BoozeTag.POTENT)
                 .fermentsFrom(fs[AppleCiderTypes.APPLE_CIDER_POTENT.ordinal()], new OreItemStacks("dustRedstone"), fermentTime)
                 .getEffect()
                 .setTipsy(BoozeUtils.alcoholToTipsy(0.045f), TickUtils.seconds(45))
