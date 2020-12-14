@@ -79,7 +79,7 @@ public abstract class BlockGrapeVineBase extends BlockBush implements IPlantable
     }
 
     protected float getGrowthRate(World world, BlockPos pos) {
-        return BlockCrops.getGrowthChance(this, world, pos);
+        return BlockCrops.getGrowthChance(world.getBlockState(pos).getBlock(), world, pos);
     }
 
     @Override
