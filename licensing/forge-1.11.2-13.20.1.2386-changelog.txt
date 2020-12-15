@@ -4841,45 +4841,45 @@ Build 1.8-11.14.3.1446:
 Build 1.7.10-10.13.4.1445-1.7.10:
 	LexManos: Bump version for new RB.
 
-Build 1.8-11.14.2.1444:
+Build 1.8-11.14.2.2444:
 	cpw:
 		Fix up the client/server fluid race condition that could cause the game to bail when an SSP game connects.
 		There's still a teeny gap, but it's MUCH less prominent than it was before.
 
-Build 1.8-11.14.2.1443:
+Build 1.8-11.14.2.2443:
 	lumien231: Added LivingExperienceDropsEvent to change the amount of experience an entity drops
 
-Build 1.8-11.14.2.1442:
+Build 1.8-11.14.2.2442:
 	jcoleman350: Added ItemMap type check to item frames and ItemRenderer, enabling vanilla style rendering for custom maps
 
-Build 1.8-11.14.2.1441:
+Build 1.8-11.14.2.2441:
 	LexManos: Redefine removal value in IRetextureableModel from null to empty string {""} due to ImmutibleMap not allowing null Values. Closes #1927
 
-Build 1.8-11.14.2.1440:
+Build 1.8-11.14.2.2440:
 	foka_12: Added a brewing registry system
 
-Build 1.8-11.14.2.1439:
+Build 1.8-11.14.2.2439:
 	LexManos: Limit Sign text to 384 json characters and strip control codes. This is 1.8.7's Sign fix. Thanks Searge.
 	LexManos: Remove worlds from WorldBorder when unloaded tol prevent memory leak, Closes #1923
 	LexManos: Missed patch for sign fix.
 
-Build 1.8-11.14.2.1437:
+Build 1.8-11.14.2.2437:
 	cpw:
 		Attempt to synchronize the state for vanilla client completions and quit the handler if the vanilla
 		thread has already setup the connection. Should fix #1924
 
-Build 1.8-11.14.2.1436:
+Build 1.8-11.14.2.2436:
 	LexManos: Change custom payload lock to be buffer itself incase multiple packets use the same backend buffer. Closes #1908
 
-Build 1.8-11.14.2.1435:
+Build 1.8-11.14.2.2435:
 	Fuami.cake:
 		Added Breaking Animation for Smart Models, Checking each layer.
 		Added Layered Smart Render Test.
 
-Build 1.8-11.14.2.1434:
+Build 1.8-11.14.2.2434:
 	LexManos: Update README.txt
 
-Build 1.8-11.14.2.1433:
+Build 1.8-11.14.2.2433:
 	fry: Fixed missing variant logging; added the possibility to specify the item variant in the blockstate json.
 	fry: fixed AT missing for getModelBlockDefinition
 	fry:
@@ -4889,13 +4889,13 @@ Build 1.8-11.14.2.1433:
 		 - added the ability to use forge blockstate texture information
 		 - removed unused code from the B3D example
 
-Build 1.8-11.14.2.1431:
+Build 1.8-11.14.2.2431:
 	fry: Fixed partial variant detection in the forge blockstate loader.
 
-Build 1.8-11.14.2.1430:
+Build 1.8-11.14.2.2430:
 	LexManos: Mitigate potential issue with users requesting lots of server status information by caching ServerStatus json.
 
-Build 1.8-11.14.2.1429:
+Build 1.8-11.14.2.2429:
 	clienthax:
 		Add missing forge patch from 1.8 port
 		https://github.com/MinecraftForge/MinecraftForge/blob/1.7.10/patches/minecraft/net/minecraft/client/Minecraft.java.patch#L88
@@ -4905,12 +4905,12 @@ Build 1.7.10-10.13.3.1428-1.7.10:
 		Fix up the client/server fluid race condition that could cause the game to bail when an SSP game connects.
 		There's still a teeny gap, but it's MUCH less prominent than it was before.
 
-Build 1.8-11.14.2.1427:
+Build 1.8-11.14.2.2427:
 	LexManos:
 		Hook BlockState's Json loading to add support for simplified Forge format.
 		See https://github.com/MinecraftForge/MinecraftForge/pull/1885 for more details.
 
-Build 1.8-11.14.2.1426:
+Build 1.8-11.14.2.2426:
 	cpw:
 		Attempt to disable the new splash screen if there are errors detected finishing up. Print a slightly more helpful error message.
 		
@@ -4931,7 +4931,7 @@ Build 1.8-11.14.2.1426:
 Build 1.7.10-10.13.3.1424-1.7.10:
 	cpw: So we can't print a lot of unicode in the splash screen, so restrict to a hard subset we know we CAN print, closes #1910
 
-Build 1.8-11.14.2.1423:
+Build 1.8-11.14.2.2423:
 	AlgorithmX2: Allow placing item frames on Solid Block Faces (isSideSolid)
 
 Build 1.7.10-10.13.3.1422-1.7.10:
@@ -4950,7 +4950,7 @@ Build 1.7.10-10.13.3.1422-1.7.10:
 		Conflicts:
 			fml/patches/minecraft/net/minecraft/client/Minecraft.java.patch
 
-Build 1.8-11.14.2.1421:
+Build 1.8-11.14.2.2421:
 	cpw:
 		MinecraftForge/FML@12ccf9cf49b76140841cdc5a459422ae4781de1a Rather than try to fall back to the backup level.dat in case of weirdness in the ID map, just fail hard. There is probably a serious modder derp in this case and there's nothing FML can do to recover the situation except avoid making it worse.
 		MinecraftForge/FML@e8cd368da30661ed2898fff232e2db787edcbdcc It's an IllegalState not an IllegalArgument *sigh*
@@ -11312,30 +11312,30 @@ Build 4.1.4.272:
 Build 4.1.4.271:
 	LexManos: New Plant API that allows for custom plants/soils.
 
-Build 4.2.1.270:
+Build 4.2.2.270:
 	LexManos: Added new hooks for modifying the items generated in chests during world gen.
 
-Build 4.2.1.269:
+Build 4.2.2.269:
 	LexManos: Redirect a lot of functions through WorldProvider for Mystcraft, allowing them to be overriden by the provider.
 
-Build 4.2.1.268:
+Build 4.2.2.268:
 	CovertJaguar: Fixed Entity Item render helper
 
-Build 4.2.1.267:
+Build 4.2.2.267:
 	ohai.iChun: Fix pick block key giving invalid spawn eggs
 	ohai.iChun: Logic derped
 	ohai.iChun: Logic derp (again)
 
-Build 4.2.1.266:
+Build 4.2.2.266:
 	LexManos: Added side sensitivity to standard EntityDiggingFX, added Block functions to override spawning of digging and breaking effects.
 
-Build 4.2.1.265:
+Build 4.2.2.265:
 	LexManos: Fix potential NPE in Custom item entity span code caused by item id misconfigurations.
 
-Build 4.2.1.264:
+Build 4.2.2.264:
 	LexManos: Fix recursion issue with new special item entity code.
 
-Build 4.2.1.263:
+Build 4.2.2.263:
 	Christian:
 		Update FML: 6c746ec
 		6c746ec Tidy code
@@ -11343,15 +11343,15 @@ Build 4.2.1.263:
 		1513b36 Add in the capability to read an internal version as <modid>.version from a file in the zip call versi
 		35852a6 Fix up reversed assignment for version fallback
 
-Build 4.2.1.261:
+Build 4.2.2.261:
 	pahimar: Changes to how PotionEffects are removed, now each PotionEffect can specify which ItemStacks can remove it's effect
 	pahimar: Inverted logic derp
 
-Build 4.2.1.260:
+Build 4.2.2.260:
 	LexManos: Package all of paulscode/ with the universal jar to help mac users who cant understand how to merge folders -.-
 
-Build 4.2.1.259:
-	LexManos: Bump version to 4.2.1 to mark the end of todays changes.
+Build 4.2.2.259:
+	LexManos: Bump version to 4.2.2 to mark the end of todays changes.
 
 Build 4.1.1.258:
 	LexManos: Fix potential issue with custom events where the constructor is not visible from the EventBus class, Should never arise but meh.
