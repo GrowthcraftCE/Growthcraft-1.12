@@ -153,6 +153,10 @@ minecraft {
     //makeObfSourceJar = false
 }
 
+jar.manifest {
+    attributes 'FMLAT': 'growthcraft_at.cfg'
+}
+
 dependencies {
     compile "mcjty.theoneprobe:TheOneProbe-1.12:" + project.property('theoneprobe_version')
 
