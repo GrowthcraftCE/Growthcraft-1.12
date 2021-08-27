@@ -109,4 +109,8 @@ public class BrewingRegistry {
     public boolean isFallbackRecipe(IBrewingRecipe recipe) {
         return (recipe instanceof BrewingFallbackRecipe) && !(recipe instanceof BrewingRecipe);
     }
+
+    public void removeRecipe(FluidStack toFluidStack, ItemStack toStack, boolean requiresLid) {
+        recipes.removeIf(r -> r.matchesRecipe(toFluidStack, toStack, requiresLid));
+    }
 }
