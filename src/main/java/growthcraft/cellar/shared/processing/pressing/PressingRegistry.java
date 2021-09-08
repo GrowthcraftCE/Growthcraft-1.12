@@ -24,6 +24,10 @@ public class PressingRegistry {
         addRecipe(new PressingRecipe(MultiStacksUtil.toMultiItemStacks(inputStack), resultFluid, time, residue));
     }
 
+    public void removeRecipe(ItemStack input) {
+        recipes.removeIf(r -> r.matchesRecipe(input));
+    }
+
     public IPressingRecipe getPressingRecipe(ItemStack itemstack) {
         if (itemstack == null) return null;
 

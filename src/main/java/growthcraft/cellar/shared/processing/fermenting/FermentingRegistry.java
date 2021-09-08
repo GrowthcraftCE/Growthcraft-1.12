@@ -125,4 +125,8 @@ public class FermentingRegistry {
     public boolean isFallbackRecipe(IFermentationRecipe recipe) {
         return (recipe instanceof FermentationFallbackRecipe) && !(recipe instanceof FermentationRecipe);
     }
+
+    public void removeRecipe(FluidStack inputFluid, ItemStack inputStack) {
+        recipes.removeIf(r -> r.matchesRecipe(inputFluid, inputStack));
+    }
 }
