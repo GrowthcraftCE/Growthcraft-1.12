@@ -8,7 +8,7 @@ public class ItemRiceBall extends GrowthcraftItemFoodBase {
     public ItemRiceBall(String unlocalizedName) {
         super(5, false);
         this.setMaxStackSize(64);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }
 

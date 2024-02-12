@@ -21,22 +21,22 @@ public class ItemGrapeSeed extends ItemSeeds implements IPlantable {
 
     public ItemGrapeSeed(String unlocalizedName) {
         super(GrowthcraftGrapesBlocks.grapeVine0.getBlock(), Blocks.FARMLAND);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < GrapeTypes.values().length; i++) {
             GrapeTypes type = GrapeTypes.values()[i];
             if (stack.getItemDamage() == type.getVariantID()) {
-                return this.getUnlocalizedName() + "." + type.getName();
+                return this.getTranslationKey() + "." + type.getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + GrapeTypes.PURPLE.getName();
+        return super.getTranslationKey() + "." + GrapeTypes.PURPLE.getName();
     }
 
     /**

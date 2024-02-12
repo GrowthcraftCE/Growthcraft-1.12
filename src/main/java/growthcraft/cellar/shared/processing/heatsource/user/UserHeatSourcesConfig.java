@@ -26,7 +26,7 @@ public class UserHeatSourcesConfig extends AbstractUserJSONConfig {
     }
 
     public UserHeatSourceEntry addDefault(ResourceLocation registryName, Map<Integer, Float> s) {
-        return addDefault(registryName.getResourceDomain(), registryName.getResourcePath(), s);
+        return addDefault(registryName.getNamespace(), registryName.getPath(), s);
     }
 
     @Override

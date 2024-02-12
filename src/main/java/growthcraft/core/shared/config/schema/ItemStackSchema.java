@@ -32,8 +32,8 @@ public class ItemStackSchema implements IItemStackFactory, IItemStackListProvide
     public ItemStackSchema(@Nonnull ItemStack stack) {
         final ResourceLocation resloc = stack.getItem().getRegistryName();
 //		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(stack.getItem());
-        this.mod_id = resloc.getResourceDomain(); // uuid.modId;
-        this.name = resloc.getResourcePath(); // uuid.name;
+        this.mod_id = resloc.getNamespace(); // uuid.modId;
+        this.name = resloc.getPath(); // uuid.name;
         this.amount = stack.getCount();
         this.meta = stack.getItemDamage();
         this.comment = stack.getDisplayName();

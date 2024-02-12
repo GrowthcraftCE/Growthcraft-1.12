@@ -27,7 +27,7 @@ public class GrowthcraftBlockSapling extends BlockBush implements IGrowable {
 
     public GrowthcraftBlockSapling(String modid, String unlocalizedName) {
         super(Material.PLANTS);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(modid, unlocalizedName));
         this.setSoundType(SoundType.PLANT);
     }

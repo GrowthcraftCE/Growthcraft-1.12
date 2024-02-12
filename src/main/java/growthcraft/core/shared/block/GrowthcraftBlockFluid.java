@@ -14,17 +14,17 @@ public class GrowthcraftBlockFluid extends BlockFluidClassic {
 
     public GrowthcraftBlockFluid(Fluid fluid, Material material) {
         super(fluid, material);
-        this.setUnlocalizedName(fluid.getUnlocalizedName());
+        this.setTranslationKey(fluid.getUnlocalizedName());
     }
 
     @Nonnull
     @Override
-    public String getUnlocalizedName() {
+    public String getTranslationKey() {
         Fluid fluid = FluidRegistry.getFluid(fluidName);
         if (fluid != null) {
             return fluid.getUnlocalizedName();
         }
-        return super.getUnlocalizedName();
+        return super.getTranslationKey();
     }
 
     public GrowthcraftBlockFluid refreshColor() {

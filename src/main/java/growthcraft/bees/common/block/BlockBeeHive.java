@@ -34,7 +34,7 @@ public class BlockBeeHive extends GrowthcraftRotatableBlockContainer {
 
     public BlockBeeHive(String unlocalizedName) {
         super(Material.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHarvestLevel("axe", 1);
         this.setTickRandomly(true);

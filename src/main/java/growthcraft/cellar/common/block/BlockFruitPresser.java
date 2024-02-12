@@ -47,7 +47,7 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
         setHardness(2.0F);
         this.setResistance(5.0F);
         setSoundType(SoundType.STONE);    // Formerly soundTypePiston
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHarvestLevel("axe", 0);
     }

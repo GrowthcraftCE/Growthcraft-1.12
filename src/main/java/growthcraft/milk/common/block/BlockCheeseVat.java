@@ -55,7 +55,7 @@ public class BlockCheeseVat extends GrowthcraftBlockContainer implements ITheOne
 
     public BlockCheeseVat(String unlocalizedName) {
         super(Material.IRON, MapColor.STONE);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setResistance(5.0F);
         this.setHardness(2.0F);

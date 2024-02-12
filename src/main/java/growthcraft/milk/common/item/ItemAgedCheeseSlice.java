@@ -12,7 +12,7 @@ public class ItemAgedCheeseSlice extends ItemFood {
 
     public ItemAgedCheeseSlice(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
@@ -29,14 +29,14 @@ public class ItemAgedCheeseSlice extends ItemFood {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < AgedCheeseTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + AgedCheeseTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + AgedCheeseTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + AgedCheeseTypes.GORGONZOLA.getName();
+        return super.getTranslationKey() + "." + AgedCheeseTypes.GORGONZOLA.getName();
     }
 }

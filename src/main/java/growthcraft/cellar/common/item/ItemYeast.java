@@ -15,13 +15,13 @@ public class ItemYeast extends GrowthcraftItemBase {
         super();
         setHasSubtypes(true);
         setMaxDamage(0);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName(stack) + "." + EnumYeast.getSafeByMeta(stack.getItemDamage()).toString().toLowerCase();
+    public String getTranslationKey(ItemStack stack) {
+        return super.getTranslationKey(stack) + "." + EnumYeast.getSafeByMeta(stack.getItemDamage()).toString().toLowerCase();
     }
 
     @Override

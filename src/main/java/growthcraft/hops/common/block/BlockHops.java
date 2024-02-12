@@ -73,7 +73,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
 
     public BlockHops(String unlocalizedName) {
         super(Material.PLANTS);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         setHardness(0.0F);
         setSoundType(SoundType.PLANT);

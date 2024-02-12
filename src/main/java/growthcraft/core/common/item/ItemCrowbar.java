@@ -10,7 +10,7 @@ import net.minecraft.util.NonNullList;
 public class ItemCrowbar extends Item {
 
     public ItemCrowbar(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
         this.setHasSubtypes(true);
     }
@@ -25,14 +25,14 @@ public class ItemCrowbar extends Item {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < CrowbarTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + CrowbarTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + CrowbarTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + CrowbarTypes.SILVER.getName();
+        return super.getTranslationKey() + "." + CrowbarTypes.SILVER.getName();
     }
 }

@@ -15,7 +15,7 @@ public class GrowthcraftBlockLog extends BlockLog {
 
     public GrowthcraftBlockLog(String modid, String unlocalizedName) {
         super();
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(modid, unlocalizedName));
         this.setHardness(2.0F);
         this.setSoundType(SoundType.WOOD);

@@ -28,7 +28,7 @@ public class BlockBambooStalk extends Block {
 
     public BlockBambooStalk(String unlocalizedName) {
         super(Material.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setResistance(5.0F);
         this.setHardness(2.0F);

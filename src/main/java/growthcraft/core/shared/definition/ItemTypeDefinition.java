@@ -38,7 +38,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
      * @param name - item name
      */
     public void registerItem(IForgeRegistry<Item> registry, ResourceLocation name) {
-        getItem().setUnlocalizedName(name.getResourcePath());
+        getItem().setTranslationKey(name.getPath());
         getItem().setRegistryName(name);
         registerItem(registry);
     }
@@ -55,7 +55,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 
     @SideOnly(Side.CLIENT)
     public void registerRender(int meta, String fileName) {
-        String modID = getItem().getRegistryName().getResourceDomain();
+        String modID = getItem().getRegistryName().getNamespace();
 
         ModelLoader.setCustomModelResourceLocation(getItem(), meta,
                 new ModelResourceLocation(new ResourceLocation(modID, fileName), "inventory"));
@@ -73,7 +73,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
         ResourceLocation itemResloc = getItem().getRegistryName();
 
         for (ET type : variants) {
-            registerRender(type.getVariantID(), itemResloc.getResourcePath() + "_" + type.getName());
+            registerRender(type.getVariantID(), itemResloc.getPath() + "_" + type.getName());
         }
     }
 
@@ -91,7 +91,7 @@ public class ItemTypeDefinition<T extends Item> extends ObjectDefinition<T> impl
 
         for (int i = 0; i < reslocs.length; i++) {
             ET type = variants[i];
-            reslocs[i] = new ResourceLocation(itemResloc.getResourceDomain(), itemResloc.getResourcePath() + "_" + type.getName());
+            reslocs[i] = new ResourceLocation(itemResloc.getNamespace(), itemResloc.getPath() + "_" + type.getName());
         }
 
         ModelBakery.registerItemVariants(getItem(), reslocs);

@@ -14,7 +14,7 @@ public class BlockBambooPlank extends Block {
 
     public BlockBambooPlank() {
         super(Material.WOOD);
-        this.setUnlocalizedName("bamboo_plank");
+        this.setTranslationKey("bamboo_plank");
         this.setRegistryName(new ResourceLocation(Reference.MODID, "bamboo_plank"));
         this.setResistance(5.0F);
         this.setHardness(2.0F);

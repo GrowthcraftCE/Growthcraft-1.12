@@ -21,7 +21,7 @@ public class ItemYogurt extends ItemFood {
 
     public ItemYogurt(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
@@ -37,15 +37,15 @@ public class ItemYogurt extends ItemFood {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < YogurtTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + YogurtTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + YogurtTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + YogurtTypes.PLAIN.getName();
+        return super.getTranslationKey() + "." + YogurtTypes.PLAIN.getName();
     }
 
     /**

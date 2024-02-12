@@ -107,7 +107,7 @@ public class TileEntityFishtrap extends TileEntity implements ITickable, ICapabi
             List<ItemStack> oreDictionaryBaitFishing = OreDictionary.getOres("baitFishing");
             ItemStack baitStack = this.handlerInput.getStackInSlot(0);
             for (ItemStack itemStack : oreDictionaryBaitFishing) {
-                if (itemStack.getUnlocalizedName().contentEquals(baitStack.getUnlocalizedName())) {
+                if (itemStack.getTranslationKey().contentEquals(baitStack.getTranslationKey())) {
                     return true;
                 }
             }

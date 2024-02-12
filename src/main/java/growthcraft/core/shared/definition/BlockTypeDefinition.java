@@ -119,7 +119,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
      * @param itemBlock - item class to register to
      */
     public void registerBlock(IForgeRegistry<Block> registry, ResourceLocation name) {
-        getBlock().setUnlocalizedName(name.getResourcePath());
+        getBlock().setTranslationKey(name.getPath());
         getBlock().setRegistryName(name);
 
         registerBlock(registry);
@@ -145,7 +145,7 @@ public class BlockTypeDefinition<T extends Block> extends ObjectDefinition<T> im
 
     @SideOnly(Side.CLIENT)
     public void registerItemRender(int meta, String fileName) {
-        String modID = getBlock().getRegistryName().getResourceDomain();
+        String modID = getBlock().getRegistryName().getNamespace();
 
         ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(getBlock()), meta,
                 new ModelResourceLocation(new ResourceLocation(modID, fileName), "inventory"));

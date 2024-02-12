@@ -138,9 +138,9 @@ public class ItemBoozeBottle extends ItemFoodBottleFluid implements IFluidContai
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         Booze booze = getFluid(stack);
-        return super.getUnlocalizedName() + "_" + booze.getName().substring(12);  // skipping "fluid_booze_" part
+        return super.getTranslationKey() + "_" + booze.getName().substring(12);  // skipping "fluid_booze_" part
     }
 
     @Override

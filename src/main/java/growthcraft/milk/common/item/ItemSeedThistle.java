@@ -10,7 +10,7 @@ public class ItemSeedThistle extends ItemSeeds {
 
     public ItemSeedThistle(String unlocalizedName) {
         super(GrowthcraftMilkBlocks.thistle.getBlock(), Blocks.FARMLAND);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

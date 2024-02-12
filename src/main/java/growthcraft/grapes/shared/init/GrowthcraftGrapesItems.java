@@ -23,9 +23,9 @@ public class GrowthcraftGrapesItems {
     public static ItemTypeDefinition<ItemBoozeBottle> grapeWine;
 
     public enum GrapeTypes implements IStringSerializable, IItemStackFactory, IObjectVariant, IGrapeType {
-        PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getUnlocalizedName()),
-        GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
-        RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName());
+        PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getTranslationKey()),
+        GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getTranslationKey()),
+        RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getTranslationKey());
 
         private int ID;
         private String NAME;

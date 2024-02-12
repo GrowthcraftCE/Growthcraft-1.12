@@ -25,7 +25,7 @@ import java.util.List;
 public class BlockBambooLeaves extends BlockLeaves implements IShearable {
 
     public BlockBambooLeaves(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setLightOpacity(1);
         this.setSoundType(SoundType.PLANT);
@@ -82,8 +82,8 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable {
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+    public BlockRenderLayer getRenderLayer() {
+        return Blocks.LEAVES.getRenderLayer();
     }
 
     @Override

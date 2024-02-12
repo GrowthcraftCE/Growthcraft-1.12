@@ -27,7 +27,7 @@ public class BlockPaddy extends BlockPaddyBase {
 
     public BlockPaddy(String unlocalizedName) {
         super(Material.GROUND);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
         this.setHardness(0.5F);
         this.setSoundType(SoundType.GROUND);
@@ -45,7 +45,7 @@ public class BlockPaddy extends BlockPaddyBase {
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, IBlockState state, EntityPlayer player) {
-        super.onBlockDestroyedByPlayer(worldIn, pos, state);
+        super.onPlayerDestroy(worldIn, pos, state);
 
         if (!player.capabilities.isCreativeMode) {
             Block.spawnAsEntity(worldIn, pos, new ItemStack(Item.getItemFromBlock(Blocks.DIRT), 1));

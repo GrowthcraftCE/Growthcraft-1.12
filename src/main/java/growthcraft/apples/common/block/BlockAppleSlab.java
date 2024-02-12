@@ -20,7 +20,7 @@ public abstract class BlockAppleSlab extends BlockSlab {
 
     public BlockAppleSlab(String unlocalizedName) {
         super(Material.WOOD, MapColor.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setSoundType(SoundType.WOOD);
         this.setResistance(5.0F);
@@ -38,8 +38,8 @@ public abstract class BlockAppleSlab extends BlockSlab {
     }
 
     @Override
-    public String getUnlocalizedName(int meta) {
-        return this.getUnlocalizedName();
+    public String getTranslationKey(int meta) {
+        return this.getTranslationKey();
     }
 
     @Override

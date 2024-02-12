@@ -33,7 +33,7 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
     private static final AxisAlignedBB BOUNDING_BOX_3 = new AxisAlignedBB(0.0625 * 2, 0.0625 * 0, 0.0625 * 2, 0.0625 * 14, 0.0625 * 16, 0.0625 * 14);
 
     public BlockThistle(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 
@@ -67,7 +67,7 @@ public class BlockThistle extends BlockCrops implements IGrowable, IPlantable {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
         super.addInformation(stack, worldIn, tooltip, flagIn);
-        tooltip.add(TextFormatting.BLUE + I18n.format(this.getUnlocalizedName() + ".tooltip"));
+        tooltip.add(TextFormatting.BLUE + I18n.format(this.getTranslationKey() + ".tooltip"));
     }
 
     @Override

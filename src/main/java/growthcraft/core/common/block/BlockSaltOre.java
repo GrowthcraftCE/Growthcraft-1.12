@@ -16,7 +16,7 @@ import java.util.Random;
 public class BlockSaltOre extends BlockOre {
 
     public BlockSaltOre(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(3.0F);
         this.setResistance(5.0F);

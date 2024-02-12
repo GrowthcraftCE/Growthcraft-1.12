@@ -68,7 +68,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
         setSoundType(SoundType.METAL);
         setTileEntityType(TileEntityBrewKettle.class);
         this.setHardness(2.0F);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_LID, false));
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
@@ -85,7 +85,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
     }
 
     @Override
-    public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+    public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (!worldIn.isRemote) {
             final TileEntityBrewKettle te = getTileEntity(worldIn, pos);
             if (te != null && !te.hasLid()) {

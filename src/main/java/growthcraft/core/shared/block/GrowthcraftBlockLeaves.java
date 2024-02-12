@@ -34,7 +34,7 @@ public class GrowthcraftBlockLeaves extends BlockLeaves implements IShearable  {
     private BlockDefinition blockSapling;
 
     public GrowthcraftBlockLeaves(String modid, String unlocalizedName, BlockDefinition block) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(modid, unlocalizedName));
         this.setCreativeTab(null);    // Will be initialized in Init class
         this.setDefaultState(this.blockState.getBaseState().withProperty(CHECK_DECAY, Boolean.valueOf(true)).withProperty(DECAYABLE, Boolean.valueOf(true)));
@@ -44,8 +44,8 @@ public class GrowthcraftBlockLeaves extends BlockLeaves implements IShearable  {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
-        return Blocks.LEAVES.getBlockLayer();
+    public BlockRenderLayer getRenderLayer() {
+        return Blocks.LEAVES.getRenderLayer();
     }
 
     @Override

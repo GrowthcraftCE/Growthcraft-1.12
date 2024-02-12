@@ -122,7 +122,7 @@ public class GrowthcraftRotatableBlockContainer extends GrowthcraftBlockContaine
     @Nonnull
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(TYPE_ROTATION, EnumFacing.getFront(meta));
+        return this.getDefaultState().withProperty(TYPE_ROTATION, EnumFacing.byIndex(meta));
     }
 
     @Override

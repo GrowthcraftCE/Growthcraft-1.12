@@ -35,7 +35,7 @@ public class BlockFermentBarrel extends BlockCellarContainer implements IRotatab
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
         this.setDefaultState(this.getBlockState().getBaseState().withProperty(TYPE_TAP, false).withProperty(TYPE_BARREL_ROTATION, BarrelRotation.HOR_NORTH));
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 
