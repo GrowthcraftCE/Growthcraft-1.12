@@ -47,12 +47,20 @@ public class GrowthcraftBlockLeaves extends BlockLeaves implements IShearable  {
     public BlockRenderLayer getRenderLayer() {
         return Blocks.LEAVES.getRenderLayer();
     }
-
+    
+    @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
         return Blocks.LEAVES.isOpaqueCube(state);
     }
-
+    
+    @SuppressWarnings("deprecation")
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return Blocks.LEAVES.isFullCube(state);
+    }
+    
+    @SuppressWarnings("deprecation")
     @SideOnly(Side.CLIENT)
     @Override
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side) {
