@@ -194,7 +194,7 @@ public class DeviceBeeBox extends DeviceBase {
                 // if the biasSpawn isn't invalid
                 if (biasSpawn > 0) {
                     // the higher the bias, the less likely the operation will flip
-                    if (random.nextInt(biasSpawn) == 0) {
+                    if (random.nextInt(biasSpawn + 1) == 0) {
                         // flip the operation
                         shouldFill = !shouldFill;
                     }
