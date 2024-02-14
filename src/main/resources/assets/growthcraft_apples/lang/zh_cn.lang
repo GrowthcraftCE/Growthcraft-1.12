@@ -11,10 +11,10 @@ tile.apple_slab_half.name=苹果木台阶
 tile.apple_stairs.name=苹果木楼梯
 tile.rope_knot_apple.name=Apple Fence (Rope)
 # Fluids
-fluid.fluid_booze_apple_juice=Apple Juice
-fluid.fluid_booze_apple_cider_fermented=Apple Cider
-fluid.fluid_booze_apple_cider_potent=Apple Cider
-fluid.fluid_booze_apple_cider_extended=Apple Cider
-fluid.fluid_booze_apple_cider_ethereal=Silken Nectar
-fluid.fluid_booze_apple_cider_intoxicated=Apple Cider
-fluid.fluid_booze_apple_cider_poisoned=Apple Cider
+fluid.fluid_booze_apple_juice=苹果果汁
+fluid.fluid_booze_apple_cider_fermented=苹果西打酒
+fluid.fluid_booze_apple_cider_potent=苹果西打酒
+fluid.fluid_booze_apple_cider_extended=苹果西打酒
+fluid.fluid_booze_apple_cider_ethereal=柔顺果蜜酒
+fluid.fluid_booze_apple_cider_intoxicated=苹果西打酒
+fluid.fluid_booze_apple_cider_poisoned=苹果西打酒

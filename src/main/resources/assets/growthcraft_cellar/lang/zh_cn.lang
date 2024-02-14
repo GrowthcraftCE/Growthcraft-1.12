@@ -24,24 +24,39 @@ fluids.tag.poisoned=毒酒
 fluids.tag.potent=高度
 fluids.tag.wine=葡萄酒
 fluids.tag.young=低度
+fluids.tag.cream=奶油
+fluids.tag.kumis=乳酒
+fluids.tag.mash=醪糟
+fluids.tag.sake=清酒
 
 # Items
-#item.achievement_dummy.name=难以酿造？
+item.achievement_dummy.name=难以酿造?
 item.yeast.brewers.name=酿酒酵母
-item.yeast.lager.name=窖藏啤酒酵母
+item.yeast.lager.name=啤酒酵母
 item.yeast.bayanus.name=贝酵母
 item.yeast.ethereal.name=乙醇酵母
-item.yeast.origin.name=原酵母
+item.yeast.origin.name=基础酵母
 
+item.cork_bark.name=软木皮
+item.brew_kettle_lid.name=酿壶盖
+item.barrel_tap.name=酒桶龙头
 
 # Gui
 container.brew_kettle=酿造锅
 container.grc.fermentBarrel=发酵桶
 container.grc.fruitPress=榨汁机
+container.growthcraft.brewKettle=Brew Kettle
+container.grc.CultureJar=培养罐
+gui.grc.discard=丢弃
+gui.grc.cantferment=无法发酵
+gui.grc.switch=换缸
 
 # Tile Entities
 tile.brew_kettle.name=酿造锅
-tile.cork_log.name=Cork Wood
+tile.cork_log.name=软木
 tile.culture_jar.name=发酵罐
 tile.ferment_barrel.name=发酵桶
 tile.fruit_press.name=榨汁机
+tile.cork_leaves.name=软木叶
+tile.cork_log_stripped.name=软木(剥皮)
+tile.cork_sapling.name=软木树苗
