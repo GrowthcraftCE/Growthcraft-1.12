@@ -10,7 +10,7 @@ public class BlockAppleFence extends BlockFence {
 
     public BlockAppleFence(String unlocalizedName) {
         super(Material.WOOD, MapColor.RED);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(2.0F);
         this.setHarvestLevel("axe", 1);

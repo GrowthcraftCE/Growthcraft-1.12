@@ -10,9 +10,12 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -120,4 +123,17 @@ public class BlockAppleLeaves extends GrowthcraftBlockLeaves implements IGrowabl
     public Item getItemDropped(IBlockState state, Random rand, int fortune) {
         return GrowthcraftApplesBlocks.blockAppleSapling.getItem();
     }
+    
+    // BlockRenderLayer.SOLID is currently a broken texture for this block.
+    @Override
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
+    }
+    
+    @Override
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+    
 }

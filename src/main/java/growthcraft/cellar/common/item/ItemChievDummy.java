@@ -12,7 +12,7 @@ public class ItemChievDummy extends Item {
         this.setMaxDamage(0);
 //		this.setCreativeTab(tabGrowthcraft);
 
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 }

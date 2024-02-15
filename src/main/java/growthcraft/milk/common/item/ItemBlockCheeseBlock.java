@@ -94,9 +94,9 @@ public class ItemBlockCheeseBlock<T extends ICheeseType & IObjectVariant> extend
 
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return super.getUnlocalizedName(stack) +
-                "." + getCheeseType(stack).getRegistryName().getResourcePath() +
+    public String getTranslationKey(ItemStack stack) {
+        return super.getTranslationKey(stack) +
+                "." + getCheeseType(stack).getRegistryName().getPath() +
                 "." + getCheeseStage(stack).getName();
     }
 

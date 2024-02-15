@@ -21,7 +21,7 @@ public class ItemIceCream extends ItemFood {
 
     public ItemIceCream(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
@@ -37,15 +37,15 @@ public class ItemIceCream extends ItemFood {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < IceCreamTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + IceCreamTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + IceCreamTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + IceCreamTypes.PLAIN.getName();
+        return super.getTranslationKey() + "." + IceCreamTypes.PLAIN.getName();
     }
 
     /**

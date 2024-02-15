@@ -38,7 +38,7 @@ public class NBTHelper {
      * @return null if the tag was null or empty, the tag otherwise
      */
     public static NBTTagCompound compoundTagPresence(@Nullable NBTTagCompound tag) {
-        if (tag != null && !tag.hasNoTags()) {
+        if (tag != null && !tag.isEmpty()) {
             return tag;
         }
         return null;

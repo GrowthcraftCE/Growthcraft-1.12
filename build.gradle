@@ -1,36 +1,24 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
+        //jcenter()
         maven {
             name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-        maven {
-            name = "gradle"
-            url "https://plugins.gradle.org/m2/"
-        }
-        maven {
-            name = "CurseForge"
-            url = "https://minecraft.curseforge.com/api/maven/"
+            url = "https://maven.minecraftforge.net"
         }
     }
-
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
-        classpath 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7'
+        classpath("com.anatawa12.forge:ForgeGradle:2.3-1.0.+") {
+            changing = true
+        }
     }
 }
 
 repositories {
-    mavenLocal()
-    maven {
+    /*maven {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
-    }
+    }*/
     maven { // CraftTweaker
         name 'jared maven'
         url "http://maven.blamejared.com/"
@@ -39,16 +27,16 @@ repositories {
         name 'tterrag maven'
         url "http://maven.tterrag.com/"
     }
-    maven { // compatlayer
+    /*maven { // compatlayer
         name 'K-4u maven'
         url "http://maven.k-4u.nl/"
-    }
+    }*/
     maven {
         url = "https://minecraft.curseforge.com/api/maven/"
     }
-    maven {
+    /*maven {
         name 'forge'
-        url 'http://files.minecraftforge.net/maven'
+        url 'https://maven.minecraftforge.net'
     }
     maven {
         name = "CoFH Maven"
@@ -61,7 +49,7 @@ repositories {
     maven {
         name "IC2 Forestry"
         url "http://maven.ic2.player.to/"
-    }
+    }*/
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
@@ -73,20 +61,12 @@ repositories {
         url = "modmaven.k-4u.nl"
     }
     maven {
-        name = "hwyla"
-        url "https://maven.tehnut.info"
+        name = "CurseMaven"
+        url = "https://cursemaven.com"
     }
 }
 
 apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'org.sonarqube'
-
-sonarqube {
-    properties {
-        property "sonar.projectName" , "Growthcraft-1.12"
-        property "sonar.projectKey", "growthcraft:Growthcraft-1.12"
-    }
-}
 
 ext.configFile = file "gradle.properties"
 configFile.withReader {
@@ -123,14 +103,11 @@ def getArtifactVersion() {
     } else {
         "SNAPSHOT-" + revision
     }
-
 }
 
 version = project.property('minecraft_version') + "-" + project.property('mod_version') + "-" + getArtifactVersion()
 group = "growthcraft"
 archivesBaseName = "growthcraft"
-
-
 
 extractAnnotationsJar.doFirst {
     sourceSets.main.output.resourcesDir.listFiles().each {
@@ -141,15 +118,15 @@ extractAnnotationsJar.doFirst {
     }
 }
 
-sourceCompatibility = targetCompatibility = '1.8' 
+sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
-    mappings = "snapshot_20171003"
+    mappings = "stable_39"
     //makeObfSourceJar = false
 }
 
@@ -162,10 +139,11 @@ dependencies {
 
     deobfProvided "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version') + ":api"
 
-    compile "rustic:Rustic:" + project.property('rustic_version')
+    compile "curse.maven:rustic-256141:3107974"
     compile "thaumcraft:Thaumcraft:" + project.property('minecraft_version') + ":" + project.property('thaumcraft_version')
-    compile "mcp.mobius.waila:Hwyla:" + project.property('hwyla_version')
-    compile "baubles:Baubles:" + project.property('minecraft_version_short') + ":" + project.property('baubles_version')
+    compile "curse.maven:hwyla-253449:2568751"
+    compile "curse.maven:baubles-227083:2518667"
+    compile "curse.maven:crafttweaker-239197:5013567"
 
     runtime "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version')
 }
@@ -177,6 +155,3 @@ processResources {
 }
 
 sourceSets { sourceSets -> main }
-
-
-

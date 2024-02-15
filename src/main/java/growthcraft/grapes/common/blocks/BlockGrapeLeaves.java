@@ -162,7 +162,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
             if (canGrowOutwardsOnRope(worldIn, pos)) {
                 final EnumFacing dir = BlockCheck.DIR4[rand.nextInt(4)];
 
-                BlockPos posDir = pos.add(dir.getFrontOffsetX(), 0, dir.getFrontOffsetZ());
+                BlockPos posDir = pos.add(dir.getXOffset(), 0, dir.getZOffset());
                 if (canGrowHere(worldIn, posDir)) {
                     int type = state.getValue(SUBTYPE);
                     worldIn.setBlockState(posDir, getDefaultState().withProperty(SUBTYPE, type), BlockFlags.UPDATE_AND_SYNC);
@@ -193,7 +193,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 
         for (int i = 0; i < 4; i++) {
             final EnumFacing dir = BlockCheck.DIR4[i];
-            BlockPos posDir = pos.add(dir.getFrontOffsetX(), 0, dir.getFrontOffsetZ());
+            BlockPos posDir = pos.add(dir.getXOffset(), 0, dir.getZOffset());
 
             if (canGrowHere(worldIn, posDir)) {
                 return true;
@@ -205,7 +205,7 @@ public class BlockGrapeLeaves extends BlockBush implements IGrowable, IBlockRope
 
     @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

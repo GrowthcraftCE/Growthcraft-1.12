@@ -21,8 +21,8 @@ public class BlockKeySchema implements ICommentable, IValidatable {
 //		final ResourceLocation resloc = new ResourceLocation(block.getUnlocalizedName());
 //		final UniqueIdentifier uuid = GameRegistry.findUniqueIdentifierFor(block);
         final ResourceLocation resloc = block.getRegistryName();
-        this.mod_id = resloc.getResourceDomain(); //uuid.modId;
-        this.name = resloc.getResourcePath(); // uuid.name;
+        this.mod_id = resloc.getNamespace(); //uuid.modId;
+        this.name = resloc.getPath(); // uuid.name;
         this.meta = pmeta;
         this.comment = block.getLocalizedName();
     }

@@ -24,7 +24,7 @@ public class ItemCultivator extends ItemHoe {
 
     public ItemCultivator(String unlocalizedName) {
         super(ToolMaterial.IRON);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }
 

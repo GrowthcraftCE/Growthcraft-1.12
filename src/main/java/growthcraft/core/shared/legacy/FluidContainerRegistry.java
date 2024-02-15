@@ -167,7 +167,7 @@ public abstract class FluidContainerRegistry {
             return false;
         }
         if (data.fluid == null || data.fluid.getFluid() == null) {
-            FMLLog.bigWarning("Invalid registration attempt for a fluid container item %s has occurred. The registration has been denied to prevent crashes. The mod responsible for the registration needs to correct this.", data.filledContainer.getItem().getUnlocalizedName(data.filledContainer));
+            FMLLog.bigWarning("Invalid registration attempt for a fluid container item %s has occurred. The registration has been denied to prevent crashes. The mod responsible for the registration needs to correct this.", data.filledContainer.getItem().getTranslationKey(data.filledContainer));
             return false;
         }
         containerFluidMap.put(new ContainerKey(data.filledContainer), data);

@@ -70,7 +70,7 @@ public class BlockPaddyBase extends GrowthcraftBlockBase {
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 

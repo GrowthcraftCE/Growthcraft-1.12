@@ -18,7 +18,7 @@ public class BlockBambooDoor extends BlockDoor {
 
     public BlockBambooDoor(String unlocalizedName) {
         super(Material.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setSoundType(SoundType.WOOD);
         this.disableStats();

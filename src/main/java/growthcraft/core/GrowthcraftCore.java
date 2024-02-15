@@ -80,10 +80,12 @@ public class GrowthcraftCore {
 
         RecipeSorter.register("minecraft:shapeless_comparator", ShapelessItemComparableRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
         RecipeSorter.register("minecraft:shapeless_multi", ShapelessMultiRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
-
-        CraftTweakerAPI.registerClass(BrewKettle.class);
-        CraftTweakerAPI.registerClass(FermentBarrel.class);
-        CraftTweakerAPI.registerClass(FruitPress.class);
+        
+        if (Compat.isModAvailableCraftTweaker()) {        	
+	        CraftTweakerAPI.registerClass(BrewKettle.class);
+	        CraftTweakerAPI.registerClass(FermentBarrel.class);
+	        CraftTweakerAPI.registerClass(FruitPress.class);
+        }
     }
 
     @SubscribeEvent

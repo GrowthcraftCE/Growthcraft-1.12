@@ -27,7 +27,7 @@ public class ItemAppleLeaves extends ItemLeaves {
      * different names based on their damage or NBT.
      */
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return leaves.getUnlocalizedName();
+    public String getTranslationKey(ItemStack stack) {
+        return leaves.getTranslationKey();
     }
 }

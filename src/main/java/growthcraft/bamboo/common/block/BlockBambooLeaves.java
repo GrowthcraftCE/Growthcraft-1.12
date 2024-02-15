@@ -17,6 +17,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.IShearable;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -25,7 +27,7 @@ import java.util.List;
 public class BlockBambooLeaves extends BlockLeaves implements IShearable {
 
     public BlockBambooLeaves(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setLightOpacity(1);
         this.setSoundType(SoundType.PLANT);
@@ -72,18 +74,19 @@ public class BlockBambooLeaves extends BlockLeaves implements IShearable {
     @SuppressWarnings("deprecation")
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return false;
+        return Blocks.LEAVES.isOpaqueCube(state);
     }
 
     @SuppressWarnings("deprecation")
     @Override
     public boolean isFullCube(IBlockState state) {
-        return false;
+        return Blocks.LEAVES.isFullCube(state);
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
-        return BlockRenderLayer.CUTOUT_MIPPED;
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return Blocks.LEAVES.getRenderLayer();
     }
 
     @Override

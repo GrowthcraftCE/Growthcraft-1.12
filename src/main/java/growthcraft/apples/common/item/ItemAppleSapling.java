@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 public class ItemAppleSapling extends Item {
 
     public ItemAppleSapling(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 }

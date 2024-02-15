@@ -11,7 +11,7 @@ public class BlockAppleStairs extends BlockStairs {
 
     public BlockAppleStairs(String unlocalizedName, IBlockState state) {
         super(state);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setResistance(5.0F);
         this.setHardness(2.0F);

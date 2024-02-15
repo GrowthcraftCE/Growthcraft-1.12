@@ -2,17 +2,46 @@ fluid.fluid_honey=蜂蜜
 
 item.bee.name=蜜蜂
 
-item.bees_wax.normal.name=蜂蜡
-item.bees_wax.red.name=红色蜂蜡
-item.bees_wax.black.name=黑色蜂蜡
+item.bees_wax.white.name=白色 蜂蜡
+item.bees_wax.orange.name=橙色 蜂蜡
+item.bees_wax.magenta.name=品红色 蜂蜡
+item.bees_wax.lightBlue.name=浅蓝色 蜂蜡
+item.bees_wax.normal.name=黄色 蜂蜡
+item.bees_wax.lime.name=黄绿色 蜂蜡
+item.bees_wax.pink.name=粉红色 蜂蜡
+item.bees_wax.gray.name=灰色 蜂蜡
+item.bees_wax.silver.name=淡灰色 蜂蜡
+item.bees_wax.cyan.name=青色 蜂蜡
+item.bees_wax.purple.name=紫色 蜂蜡
+item.bees_wax.blue.name=蓝色 蜂蜡
+item.bees_wax.brown.name=棕色 蜂蜡
+item.bees_wax.green.name=绿色 蜂蜡
+item.bees_wax.red.name=红色 蜂蜡
+item.bees_wax.black.name=黑色 蜂蜡
 
-item.bottlefluid_honey.name=蜜罐
+item.bottlefluid_honey.name=蜂蜜瓶
 
-item.honey_comb_empty.name=蜂窝
-item.honey_comb_filled.name=蜂窝
+item.honey_comb_empty.name=蜂窝 (空)
+item.honey_comb_filled.name=蜂窝 (满)
 
-item.honey_jar.name=蜂蜜
+item.honey_jar.name=蜂蜜罐
 
 container.growthcraft_bees.beeBox=蜂箱
 
 tile.beebox.name=蜂箱
+tile.beehive.name=蜂窝
+
+# Fluid Tags
+fluids.tag.mead=蜂蜜酒
+fluids.tag.honey=蜂蜜
+
+# Fluids
+fluid.fluid_booze_mead_young=低度 蜂蜜酒
+fluid.fluid_booze_mead_fermented=发酵 蜂蜜酒
+fluid.fluid_booze_mead_potent=高度 蜂蜜酒
+fluid.fluid_booze_mead_extended=上头 蜂蜜酒
+fluid.fluid_booze_mead_ethereal=魔法 蜂蜜酒
+fluid.fluid_booze_mead_intoxicated=沉醉 蜂蜜酒
+fluid.fluid_booze_mead_poisoned=过发酵 蜂蜜酒
+fluid.fluid_booze_mead_hyperextended=超上头 蜂蜜酒
+fluid.fluid_booze_mead_potentextended=超高度 蜂蜜酒

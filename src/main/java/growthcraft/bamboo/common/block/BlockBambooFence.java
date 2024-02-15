@@ -10,7 +10,7 @@ public class BlockBambooFence extends BlockFence {
 
     public BlockBambooFence(String unlocalizedName) {
         super(Material.WOOD, MapColor.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(2.0F);
         this.setHarvestLevel("axe", 1);

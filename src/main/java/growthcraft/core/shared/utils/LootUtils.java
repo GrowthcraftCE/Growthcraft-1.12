@@ -24,7 +24,7 @@ public class LootUtils {
     public static void addLootEntry(LootPool pool, Item item, int minCount, int maxCount, int weight) {
         LootFunction quantityFct = new SetCount(new LootCondition[]{}, new RandomValueRange(minCount, maxCount));
 
-        pool.addEntry(new LootEntryItem(item, weight, 0, new LootFunction[]{quantityFct}, new LootCondition[]{}, "growthcraft." + item.getUnlocalizedName()));
+        pool.addEntry(new LootEntryItem(item, weight, 0, new LootFunction[]{quantityFct}, new LootCondition[]{}, "growthcraft." + item.getTranslationKey()));
     }
 
     public static void addLootEntry(LootPool pool, ItemStack itemStack, int minCount, int maxCount, int weight) {
@@ -32,7 +32,7 @@ public class LootUtils {
         LootFunction quantityFct = new SetCount(new LootCondition[]{}, new RandomValueRange(minCount, maxCount));
 
         Item item = itemStack.getItem();
-        String name = "growthcraft." + item.getUnlocalizedName() + "." + itemStack.getMetadata();
+        String name = "growthcraft." + item.getTranslationKey() + "." + itemStack.getMetadata();
 
         pool.addEntry(new LootEntryItem(item, weight, 0, new LootFunction[]{metaFct, quantityFct}, new LootCondition[]{}, name));
     }

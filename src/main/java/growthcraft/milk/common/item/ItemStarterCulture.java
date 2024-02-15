@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ItemStarterCulture extends Item {
     public ItemStarterCulture(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 }

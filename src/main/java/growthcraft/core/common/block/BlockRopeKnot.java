@@ -76,7 +76,7 @@ public class BlockRopeKnot extends BlockRopeBase {
 
     public BlockRopeKnot(String unlocalizedName, Block baseFence, String modid) {
         super(Material.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(modid, unlocalizedName));
 
         this.setHardness(3);

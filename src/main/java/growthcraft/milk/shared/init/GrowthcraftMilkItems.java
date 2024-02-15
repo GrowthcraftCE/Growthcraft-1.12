@@ -212,7 +212,7 @@ public class GrowthcraftMilkItems {
 
         @Override
         public String getName() {
-            return this.name.getResourcePath();
+            return this.name.getPath();
         }
 
         @Override
@@ -303,7 +303,7 @@ public class GrowthcraftMilkItems {
 
         @Override
         public String getName() {
-            return this.name.getResourcePath();
+            return this.name.getPath();
         }
 
         @Override
@@ -387,7 +387,7 @@ public class GrowthcraftMilkItems {
 
         @Override
         public String getName() {
-            return this.name.getResourcePath();
+            return this.name.getPath();
         }
 
         @Override

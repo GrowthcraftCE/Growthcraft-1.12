@@ -25,7 +25,7 @@ public class BlockPancheon extends GrowthcraftBlockContainer {
 
     public BlockPancheon(String unlocalizedName) {
         super(Material.CLAY);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.6F);
         this.setHarvestLevel("pickaxe", 1);

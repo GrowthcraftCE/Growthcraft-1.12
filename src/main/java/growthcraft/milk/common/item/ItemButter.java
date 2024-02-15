@@ -12,7 +12,7 @@ public class ItemButter extends ItemFood {
 
     public ItemButter(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
@@ -27,14 +27,14 @@ public class ItemButter extends ItemFood {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < ButterTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + ButterTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + ButterTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + ButterTypes.UNSALTED.getName();
+        return super.getTranslationKey() + "." + ButterTypes.UNSALTED.getName();
     }
 }

@@ -16,7 +16,7 @@ import net.minecraftforge.oredict.OreDictionary;
 public class ItemRope extends Item {
 
     public ItemRope(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

@@ -41,7 +41,7 @@ public class BlockRopeFence extends BlockRopeBase {
 
     public BlockRopeFence(String unlocalizedName) {
         super(Material.CARPET);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.5F);
         this.setSoundType(SoundType.CLOTH);
@@ -78,7 +78,7 @@ public class BlockRopeFence extends BlockRopeBase {
     }
 
     @Override
-    public void onBlockDestroyedByPlayer(World worldIn, BlockPos pos, IBlockState state) {
+    public void onPlayerDestroy(World worldIn, BlockPos pos, IBlockState state) {
         // Always return a rope when broken
         if (!worldIn.isRemote) {
             ItemStack rope = GrowthcraftCoreItems.rope.asStack(1);

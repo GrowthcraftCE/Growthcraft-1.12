@@ -14,7 +14,7 @@ public class BlockApplePlanks extends Block {
 
     public BlockApplePlanks(String unlocalizedName) {
         super(Material.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setResistance(5.0F);
         this.setHardness(2.0F);
