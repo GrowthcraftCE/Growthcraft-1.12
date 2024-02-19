@@ -62,7 +62,7 @@ public class ItemIceCream extends ItemFood {
             if (entityplayer instanceof EntityPlayerMP) {
                 CriteriaTriggers.CONSUME_ITEM.trigger((EntityPlayerMP) entityplayer, stack);
             }
-            // Add a bowl to the player inventory as a result of consuming the ItemCheeseBowl
+            // Add a bowl to the player inventory as a result of consuming the ItemIceCream
             entityplayer.inventory.addItemStackToInventory(new ItemStack(Items.BOWL));
         }
 
