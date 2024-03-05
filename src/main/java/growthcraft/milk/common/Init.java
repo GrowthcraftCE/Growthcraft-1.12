@@ -181,8 +181,8 @@ public class Init {
         GrowthcraftMilkItems.cheeseCloth = new ItemDefinition(new ItemCheeseCloth("cheese_cloth"));
         GrowthcraftMilkItems.starterCulture = new ItemDefinition(new ItemStarterCulture("starter_culture"));
         GrowthcraftMilkItems.butter = new ItemDefinition(new ItemButter("butter", 2, 0.3F, false));
-        GrowthcraftMilkItems.iceCream = new ItemDefinition(new ItemIceCream("ice_cream", 2, 0.3F, false));
-        GrowthcraftMilkItems.yogurt = new ItemDefinition(new ItemYogurt("yogurt", 2, 0.3F, false));
+        GrowthcraftMilkItems.iceCream = new ItemDefinition(new ItemIceCream("ice_cream", 4, 0.4F, false));
+        GrowthcraftMilkItems.yogurt = new ItemDefinition(new ItemYogurt("yogurt", 3, 0.3F, false));
         GrowthcraftMilkItems.knife = new ItemDefinition(new ItemKnife("knife"));
         GrowthcraftMilkItems.agedCheeseSlice = new ItemDefinition(new ItemAgedCheeseSlice("cheese_aged_slice", 3, 0.3F, false));
         GrowthcraftMilkItems.agedCheeseBlockItem = new ItemDefinition(new ItemBlockCheeseBlock<AgedCheeseTypes>(GrowthcraftMilkBlocks.agedCheeseBlock.getBlock(), AgedCheeseTypes.values()));
