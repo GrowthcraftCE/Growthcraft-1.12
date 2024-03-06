@@ -21,14 +21,14 @@ jobs:
       run:  ./gradlew setupCIWorkspace
     - name: Build with Gradle
       run: ./gradlew build  
-    - name: Setup sonarqube
-      uses: warchant/setup-sonar-scanner@v8
-    - name: Run sonarqube
-      env:
-        # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: sonar-scanner
-             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-             -Dsonar.organization=growthcraftce
-             -Dsonar.host.url=https://sonarcloud.io/
-             -Dsonar.projectKey=growthcraft:Growthcraft-1.12
+    #- name: Setup sonarqube
+    #  uses: warchant/setup-sonar-scanner@v8
+    #- name: Run sonarqube
+    #  env:
+    #    # to get access to secrets.SONAR_TOKEN, provide GITHUB_TOKEN
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  run: sonar-scanner
+    #         -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+    #         -Dsonar.organization=growthcraftce
+    #         -Dsonar.host.url=https://sonarcloud.io/
+    #         -Dsonar.projectKey=growthcraft:Growthcraft-1.12
