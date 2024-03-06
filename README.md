@@ -1,6 +1,6 @@
 Growthcraft 4 for Minecraft 1.12.2 (Forge)
 ===========
-[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-4.2.2-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.12)
+[![Growthcraft Version](https://img.shields.io/badge/Growthcraft-4.3.0-orange.svg)](https://github.com/GrowthcraftCE/Growthcraft-1.12)
 [![](https://cf.way2muchnoise.eu/versions/growthcraft-community-edition_latest.svg)](https://www.curseforge.com/minecraft/mc-mods/growthcraft-community-edition)
 [![](https://cf.way2muchnoise.eu/short_growthcraft-community-edition.svg)](https://www.curseforge.com/minecraft/mc-mods/growthcraft-community-edition)
 [![Forge Version](https://img.shields.io/badge/Minecraft%20Forge-14.23.5.2847-yellow.svg)](https://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html)
