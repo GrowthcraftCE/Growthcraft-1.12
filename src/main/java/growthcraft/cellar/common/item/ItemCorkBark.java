@@ -8,7 +8,7 @@ public class ItemCorkBark extends GrowthcraftItemBase {
     public ItemCorkBark(String unlocalizedName) {
         super();
         setMaxDamage(0);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 }

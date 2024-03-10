@@ -16,7 +16,7 @@ public class BlockSalt extends Block {
 
     public BlockSalt(String unlocalizedName) {
         super(Material.CLAY);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.5F);
         this.setSoundType(SoundType.STONE);

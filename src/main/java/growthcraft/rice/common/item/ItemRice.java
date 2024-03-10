@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class ItemRice extends ItemSeeds {
     public ItemRice(String unlocalizedName) {
         super(GrowthcraftRiceBlocks.riceCrop.getBlock(), GrowthcraftRiceBlocks.ricePaddy.getBlock());
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

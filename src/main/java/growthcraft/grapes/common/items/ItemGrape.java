@@ -12,7 +12,7 @@ public class ItemGrape extends ItemFood {
 
     public ItemGrape(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
@@ -28,15 +28,15 @@ public class ItemGrape extends ItemFood {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < GrapeTypes.values().length; i++) {
             GrapeTypes type = GrapeTypes.values()[i];
             if (stack.getItemDamage() == type.getVariantID()) {
-                return this.getUnlocalizedName() + "." + type.getName();
+                return this.getTranslationKey() + "." + type.getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + GrapeTypes.PURPLE.getName();
+        return super.getTranslationKey() + "." + GrapeTypes.PURPLE.getName();
     }
 }

@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 public class ItemAppleDoor extends ItemDoor {
     public ItemAppleDoor(String unlocalizedName, Block block) {
         super(block);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 }

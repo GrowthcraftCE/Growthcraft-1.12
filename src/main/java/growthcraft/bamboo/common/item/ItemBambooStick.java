@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 public class ItemBambooStick extends Item {
 
     public ItemBambooStick(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

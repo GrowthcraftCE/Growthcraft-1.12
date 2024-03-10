@@ -1,5 +1,6 @@
 package growthcraft.core;
 
+import crafttweaker.CraftTweakerAPI;
 import growthcraft.core.common.CommonProxy;
 import growthcraft.core.common.Init;
 import growthcraft.core.common.creativetabs.TabGrowthcraft;
@@ -11,6 +12,9 @@ import growthcraft.core.shared.compat.rustic.InitRustic;
 import growthcraft.core.shared.config.GrowthcraftCoreConfig;
 import growthcraft.core.shared.item.recipes.ShapelessItemComparableRecipe;
 import growthcraft.core.shared.item.recipes.ShapelessMultiRecipe;
+import growthcraft.tweaker.BrewKettle;
+import growthcraft.tweaker.FermentBarrel;
+import growthcraft.tweaker.FruitPress;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -76,6 +80,12 @@ public class GrowthcraftCore {
 
         RecipeSorter.register("minecraft:shapeless_comparator", ShapelessItemComparableRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
         RecipeSorter.register("minecraft:shapeless_multi", ShapelessMultiRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
+        
+        if (Compat.isModAvailableCraftTweaker()) {        	
+	        CraftTweakerAPI.registerClass(BrewKettle.class);
+	        CraftTweakerAPI.registerClass(FermentBarrel.class);
+	        CraftTweakerAPI.registerClass(FruitPress.class);
+        }
     }
 
     @SubscribeEvent

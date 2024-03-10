@@ -19,7 +19,7 @@ public class ItemSeedHops extends ItemSeeds {
 
     public ItemSeedHops(String unlocalizedName) {
         super(GrowthcraftHopsBlocks.hops.getBlock(), Blocks.FARMLAND);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

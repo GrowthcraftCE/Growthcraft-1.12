@@ -28,8 +28,8 @@ public class CheeseIO {
 
     public static NBTTagCompound writeToNBT(NBTTagCompound tag, ICheeseType type) {
         ResourceLocation name = type.getRegistryName();
-        tag.setString("cheese_modid", name.getResourceDomain());
-        tag.setString("cheese_name", name.getResourcePath());
+        tag.setString("cheese_modid", name.getNamespace());
+        tag.setString("cheese_name", name.getPath());
         return tag;
     }
 }

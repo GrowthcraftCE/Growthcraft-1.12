@@ -48,7 +48,7 @@ public class BlockRiceCrop extends BlockCrops implements IGrowable, IPlantable {
     }
 
     public BlockRiceCrop(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }
 

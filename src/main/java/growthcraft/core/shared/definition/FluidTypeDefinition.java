@@ -54,7 +54,7 @@ public class FluidTypeDefinition<T extends Fluid> implements IFluidStackFactory 
         Item item = Item.getItemFromBlock(fluid.getBlock());
 
         // subString 6 because "fluid." is 6.
-        String modID = fluid.getBlock().getRegistryName().getResourceDomain();
+        String modID = fluid.getBlock().getRegistryName().getNamespace();
         ModelResourceLocation modelResourceLocation = new ModelResourceLocation(modID + ":" + fluid.getUnlocalizedName().substring(6), fluid.getName());
 
         // Set the custom mesh definition for the item using a lambda

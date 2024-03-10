@@ -69,9 +69,9 @@ public class ItemBlockHangingCurds<T extends ICheeseType & IObjectVariant> exten
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        String str = super.getUnlocalizedName(stack);
-        str += "." + getCheeseType(stack).getRegistryName().getResourcePath();
+    public String getTranslationKey(ItemStack stack) {
+        String str = super.getTranslationKey(stack);
+        str += "." + getCheeseType(stack).getRegistryName().getPath();
         if (isDried(stack)) str += ".dried";
         return str;
     }

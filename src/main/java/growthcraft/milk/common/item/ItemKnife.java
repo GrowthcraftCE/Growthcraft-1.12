@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 public class ItemKnife extends Item {
 
     public ItemKnife(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setContainerItem(this);
     }

@@ -17,7 +17,7 @@ public class GrowthcraftItemBase extends Item {
     }
 
     public GrowthcraftItemBase(String modId, String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(modId, unlocalizedName);
     }
 

@@ -7,7 +7,7 @@ public class ItemFoodRice extends GrowthcraftItemFoodBase {
 
     public ItemFoodRice(String unlocalizedName) {
         super(2, false);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }
 

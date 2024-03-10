@@ -27,22 +27,22 @@ public class GrowthcraftBeesItems {
     public static ItemTypeDefinition<ItemBoozeBottle> honeyMeadBottle;
 
     public enum BeesWaxTypes implements IStringSerializable, IItemStackFactory, IObjectVariant {
-        WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getUnlocalizedName()),
-        ORANGE(EnumDyeColor.ORANGE.getMetadata(), EnumDyeColor.ORANGE.getUnlocalizedName()),
-        MAGENTA(EnumDyeColor.MAGENTA.getMetadata(), EnumDyeColor.MAGENTA.getUnlocalizedName()),
-        LIGHTBLUE(EnumDyeColor.LIGHT_BLUE.getMetadata(), EnumDyeColor.LIGHT_BLUE.getUnlocalizedName()),
+        WHITE(EnumDyeColor.WHITE.getMetadata(), EnumDyeColor.WHITE.getTranslationKey()),
+        ORANGE(EnumDyeColor.ORANGE.getMetadata(), EnumDyeColor.ORANGE.getTranslationKey()),
+        MAGENTA(EnumDyeColor.MAGENTA.getMetadata(), EnumDyeColor.MAGENTA.getTranslationKey()),
+        LIGHTBLUE(EnumDyeColor.LIGHT_BLUE.getMetadata(), EnumDyeColor.LIGHT_BLUE.getTranslationKey()),
         NORMAL(EnumDyeColor.YELLOW.getMetadata(), "normal"),
-        LIME(EnumDyeColor.LIME.getMetadata(), EnumDyeColor.LIME.getUnlocalizedName()),
-        PINK(EnumDyeColor.PINK.getMetadata(), EnumDyeColor.PINK.getUnlocalizedName()),
-        GRAY(EnumDyeColor.GRAY.getMetadata(), EnumDyeColor.GRAY.getUnlocalizedName()),
-        SILVER(EnumDyeColor.SILVER.getMetadata(), EnumDyeColor.SILVER.getUnlocalizedName()),
-        CYAN(EnumDyeColor.CYAN.getMetadata(), EnumDyeColor.CYAN.getUnlocalizedName()),
-        PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getUnlocalizedName()),
-        BLUE(EnumDyeColor.BLUE.getMetadata(), EnumDyeColor.BLUE.getUnlocalizedName()),
-        BROWN(EnumDyeColor.BROWN.getMetadata(), EnumDyeColor.BROWN.getUnlocalizedName()),
-        GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getUnlocalizedName()),
-        RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getUnlocalizedName()),
-        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getUnlocalizedName());
+        LIME(EnumDyeColor.LIME.getMetadata(), EnumDyeColor.LIME.getTranslationKey()),
+        PINK(EnumDyeColor.PINK.getMetadata(), EnumDyeColor.PINK.getTranslationKey()),
+        GRAY(EnumDyeColor.GRAY.getMetadata(), EnumDyeColor.GRAY.getTranslationKey()),
+        SILVER(EnumDyeColor.SILVER.getMetadata(), EnumDyeColor.SILVER.getTranslationKey()),
+        CYAN(EnumDyeColor.CYAN.getMetadata(), EnumDyeColor.CYAN.getTranslationKey()),
+        PURPLE(EnumDyeColor.PURPLE.getMetadata(), EnumDyeColor.PURPLE.getTranslationKey()),
+        BLUE(EnumDyeColor.BLUE.getMetadata(), EnumDyeColor.BLUE.getTranslationKey()),
+        BROWN(EnumDyeColor.BROWN.getMetadata(), EnumDyeColor.BROWN.getTranslationKey()),
+        GREEN(EnumDyeColor.GREEN.getMetadata(), EnumDyeColor.GREEN.getTranslationKey()),
+        RED(EnumDyeColor.RED.getMetadata(), EnumDyeColor.RED.getTranslationKey()),
+        BLACK(EnumDyeColor.BLACK.getMetadata(), EnumDyeColor.BLACK.getTranslationKey());
 
         private int ID;
         private String NAME;

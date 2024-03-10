@@ -11,7 +11,7 @@ public class TabGrowthcraft extends CreativeTabs {
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return GrowthcraftCoreItems.crowbar.asStack();
     }
 }

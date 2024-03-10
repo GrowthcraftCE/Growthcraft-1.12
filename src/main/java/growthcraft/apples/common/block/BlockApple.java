@@ -56,7 +56,7 @@ public class BlockApple extends BlockBush implements ICropDataProvider, IGrowabl
 
     public BlockApple(String unlocalizedName) {
         super(Material.PLANTS);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setTickRandomly(true);
         this.setSoundType(SoundType.WOOD);
@@ -83,7 +83,7 @@ public class BlockApple extends BlockBush implements ICropDataProvider, IGrowabl
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World player, List<String> tooltip, ITooltipFlag advanced) {
         super.addInformation(stack, player, tooltip, advanced);
-        tooltip.add(TextFormatting.BLUE + I18n.format(this.getUnlocalizedName() + ".tooltip"));
+        tooltip.add(TextFormatting.BLUE + I18n.format(this.getTranslationKey() + ".tooltip"));
     }
 
     @Override

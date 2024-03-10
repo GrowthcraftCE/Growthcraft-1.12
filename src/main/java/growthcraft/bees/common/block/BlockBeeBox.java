@@ -42,7 +42,7 @@ public class BlockBeeBox extends GrowthcraftRotatableBlockContainer {
         setHardness(2.5F);
         setSoundType(SoundType.WOOD);
         this.setTickRandomly(true);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

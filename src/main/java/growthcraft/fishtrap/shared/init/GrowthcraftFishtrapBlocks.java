@@ -2,8 +2,6 @@ package growthcraft.fishtrap.shared.init;
 
 import growthcraft.core.shared.definition.BlockDefinition;
 
-import java.util.concurrent.BlockingQueue;
-
 public class GrowthcraftFishtrapBlocks {
 
     private GrowthcraftFishtrapBlocks() {

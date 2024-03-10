@@ -3,7 +3,6 @@ package growthcraft.cellar.common.tileentity.device;
 import growthcraft.cellar.common.tileentity.TileEntityCellarDevice;
 import growthcraft.cellar.shared.CellarRegistry;
 import growthcraft.cellar.shared.booze.BoozeTag;
-import growthcraft.cellar.shared.processing.common.IProcessingRecipe;
 import growthcraft.cellar.shared.processing.common.IProcessingRecipeBase;
 import growthcraft.cellar.shared.processing.yeast.YeastRegistry;
 import growthcraft.core.shared.CoreRegistry;

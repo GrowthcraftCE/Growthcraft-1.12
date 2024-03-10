@@ -30,7 +30,7 @@ public class BlockFishtrap extends GrowthcraftBlockContainer {
     public BlockFishtrap(String unlocalizedName) {
         super(Material.WOOD);
         this.setTileEntityType(TileEntityFishtrap.class);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(1.0F);
         this.setSoundType(SoundType.WOOD);

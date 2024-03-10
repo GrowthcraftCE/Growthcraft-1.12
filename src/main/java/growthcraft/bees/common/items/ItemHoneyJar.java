@@ -10,7 +10,7 @@ public class ItemHoneyJar extends GrowthcraftItemFoodBase {
         super(6, false);
         this.setContainerItem(Items.FLOWER_POT);
         this.setMaxStackSize(1);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
     }
 }

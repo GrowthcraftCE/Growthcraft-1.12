@@ -10,7 +10,7 @@ import net.minecraft.util.NonNullList;
 public class ItemBeesWax extends GrowthcraftItemBase {
 
     public ItemBeesWax(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(Reference.MODID, unlocalizedName);
         this.setHasSubtypes(true);
     }
@@ -25,14 +25,14 @@ public class ItemBeesWax extends GrowthcraftItemBase {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < BeesWaxTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + BeesWaxTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + BeesWaxTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + BeesWaxTypes.NORMAL.getName();
+        return super.getTranslationKey() + "." + BeesWaxTypes.NORMAL.getName();
     }
 }

@@ -12,7 +12,7 @@ public class ItemSimpleCheeseSlice extends ItemFood {
 
     public ItemSimpleCheeseSlice(String unlocalizedName, int amount, float saturation, boolean isWolfFood) {
         super(amount, saturation, isWolfFood);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHasSubtypes(true);
     }
@@ -28,14 +28,14 @@ public class ItemSimpleCheeseSlice extends ItemFood {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         for (int i = 0; i < SimpleCheeseTypes.values().length; i++) {
             if (stack.getItemDamage() == i) {
-                return this.getUnlocalizedName() + "." + SimpleCheeseTypes.values()[i].getName();
+                return this.getTranslationKey() + "." + SimpleCheeseTypes.values()[i].getName();
             } else {
                 continue;
             }
         }
-        return super.getUnlocalizedName() + "." + SimpleCheeseTypes.RICOTTA.getName();
+        return super.getTranslationKey() + "." + SimpleCheeseTypes.RICOTTA.getName();
     }
 }

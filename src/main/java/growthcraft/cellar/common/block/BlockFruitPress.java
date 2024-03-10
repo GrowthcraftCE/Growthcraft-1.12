@@ -31,7 +31,7 @@ public class BlockFruitPress extends BlockRotatableCellarContainer {
         setHardness(2.0F);
         this.setResistance(5.0F);
         setSoundType(SoundType.WOOD);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

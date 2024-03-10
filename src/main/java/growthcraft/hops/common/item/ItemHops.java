@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 public class ItemHops extends Item {
 
     public ItemHops(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
     }
 

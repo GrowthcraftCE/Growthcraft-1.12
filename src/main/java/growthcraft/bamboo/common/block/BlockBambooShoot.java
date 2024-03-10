@@ -28,7 +28,7 @@ public class BlockBambooShoot extends BlockBush implements IGrowable {
     );
 
     public BlockBambooShoot(String unlocalizedName) {
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setSoundType(SoundType.PLANT);
     }

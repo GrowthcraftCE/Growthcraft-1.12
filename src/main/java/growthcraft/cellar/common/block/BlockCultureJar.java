@@ -26,7 +26,7 @@ public class BlockCultureJar extends BlockCellarContainer {
 
     public BlockCultureJar(String unlocalizedName) {
         super(Material.GLASS);
-        this.setUnlocalizedName(unlocalizedName);
+        this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(0.3F);
         this.setSoundType(SoundType.GLASS);
@@ -63,7 +63,7 @@ public class BlockCultureJar extends BlockCellarContainer {
     }
 
     @Override
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.TRANSLUCENT;
     }
 

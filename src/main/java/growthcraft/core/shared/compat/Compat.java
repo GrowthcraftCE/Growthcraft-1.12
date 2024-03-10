@@ -22,6 +22,7 @@ public class Compat {
     public static final String MODID_RUSTIC = "rustic";
     public static final String MODID_THAUMCRAFT = "thaumcraft";
     public static final String MODID_ANIMANIA = "animania";
+    public static final String MODID_CRAFTTWEAKER = "crafttweaker";
 
     private Compat() { /* Do Nothing */ }
 
@@ -43,6 +44,10 @@ public class Compat {
 
     public static boolean isModAvailableAnimania() {
         return Loader.isModLoaded(MODID_ANIMANIA);
+    }
+    
+    public static boolean isModAvailableCraftTweaker() {
+    	return Loader.isModLoaded(MODID_CRAFTTWEAKER);
     }
 
     ////////////
