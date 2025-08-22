@@ -36,9 +36,10 @@ public class BlockFishtrap extends GrowthcraftBlockContainer {
         this.setSoundType(SoundType.WOOD);
         this.setHarvestLevel("axe", 1);
     }
-
+    
+    @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

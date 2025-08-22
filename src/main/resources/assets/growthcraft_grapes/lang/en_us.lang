@@ -9,6 +9,10 @@ item.grape_seed.red.name=Red Grape Seeds
 tile.grape_vine.name=Grape Vine
 tile.grape_vine_bush.name=Grape Vine
 tile.grape_vine_fruit.name=Grape Vine
+tile.native_grape_vine0.name=Grape Vine
+tile.native_grape_vine1.name=Grape Vine
+tile.native_grape_vine_leaves.name=Grape Vine
+tile.native_grape_fruit.name=Grape
 
 # Fluids
 fluid.fluid_booze_purple_juice=Purple Grape Juice

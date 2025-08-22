@@ -121,9 +121,10 @@ public class BlockGrapeVine1 extends BlockGrapeVineBase {
         }
         return super.getGrowthRate(world, pos);
     }
-
+    
+    @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 
