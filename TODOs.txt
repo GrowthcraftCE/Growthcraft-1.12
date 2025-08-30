@@ -7,10 +7,10 @@ DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in it
 -----------------
 To implement:
 -----------------
-TODO: Add green and red grape ice cream and yoghurt.
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
 TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food types.
 DOING: Brew kettle bounding boxes changes if lid is on.
+DONE: Add green and red grape ice cream and yoghurt.
 DONE: Step sound of apple and bamboo fence should be changed to wood.
 DONE: Change Grape blocks from BlockCrops to BlockBush
 
