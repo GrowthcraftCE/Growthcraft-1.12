@@ -21,8 +21,8 @@ BUG: Client and Server synchronisation for brewing kettle is not working unless 
 BUG: Bee box has a spamming block update.
 BUG: Cheese press is triggered when placing a neighbor block.
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
-BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 BUG: Fix string formatting with arguments when logging.
+DONE: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 DONE: Collision boxes for brewing kettle walls are not correct.
 DONE: Thistle recipe not working to get seeds.
 DONE: Ricotta bowl recipe not working.

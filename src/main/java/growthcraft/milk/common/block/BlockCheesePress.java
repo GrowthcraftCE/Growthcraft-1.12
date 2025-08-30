@@ -94,7 +94,7 @@ public class BlockCheesePress extends BlockOrientable {
                 if (cheesePress != null) {
                     if (cheesePress.toggle()) {
 //							world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
-                        worldIn.playSound((double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
+                        worldIn.playSound(null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3f, 0.5f);
                     }
                     return true;
                 }
@@ -109,7 +109,7 @@ public class BlockCheesePress extends BlockOrientable {
         if (cheesePress != null) {
             if (cheesePress.toggle(isPowered)) {
 //				world.playSoundEffect((double)x, (double)y, (double)z, "random.wood_click", 0.3f, 0.5f);
-                world.playSound((double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
+                world.playSound(null, pos, SoundEvents.BLOCK_WOOD_BUTTON_CLICK_ON, SoundCategory.BLOCKS, 0.3f, 0.5f);
             }
         }
     }

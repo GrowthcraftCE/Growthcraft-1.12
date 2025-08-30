@@ -94,7 +94,7 @@ public class BlockBrewKettle extends BlockCellarContainer {
                         final EntityItem item = (EntityItem) entityIn;
                         if (!GrowthcraftCellarItems.brewKettleLid.equals(item.getItem().getItem()) &&
                                 !ItemUtils.isEmpty(te.tryMergeItemIntoMainSlot(item.getItem()))) {
-                            worldIn.playSound((double) pos.getX(), (double) pos.getY(), (double) pos.getZ(), SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 0.3f, 0.5f, false);
+                            worldIn.playSound(null, pos, SoundEvents.ENTITY_GENERIC_SPLASH, SoundCategory.BLOCKS, 0.3f, 0.5f);
                         }
                     }
                 }
