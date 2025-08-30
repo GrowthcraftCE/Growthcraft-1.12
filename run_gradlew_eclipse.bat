@@ -1,1 +1,3 @@
-gradlew eclipse
+@echo off
+call gradlew eclipse
+pause
