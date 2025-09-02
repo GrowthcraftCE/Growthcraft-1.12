@@ -1,6 +1,6 @@
-# Upcoming
+# 4.4.0
 
-## Added Features
+## New Features
 
 - Added Red Grape and Green Grape variants of Ice Cream and Yogurt
 
