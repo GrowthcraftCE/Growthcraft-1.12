@@ -111,7 +111,9 @@ public class GrowthcraftMilkItems {
         GRAPEPURPLE(2, "grape_purple"),
         APPLE(3, "apple"),
         HONEY(4, "honey"),
-        WATERMELON(5, "watermelon");
+        WATERMELON(5, "watermelon"),
+        GRAPERED(6, "grape_red"),
+        GRAPEGREEN(7, "grape_green");
 
         private int ID;
         private String NAME;
@@ -153,7 +155,9 @@ public class GrowthcraftMilkItems {
         GRAPEPURPLE(2, "grape_purple"),
         APPLE(3, "apple"),
         HONEY(4, "honey"),
-        WATERMELON(5, "watermelon");
+        WATERMELON(5, "watermelon"),
+        GRAPERED(6, "grape_red"),
+    	GRAPEGREEN(7, "grape_green");
 
         private int ID;
         private String NAME;

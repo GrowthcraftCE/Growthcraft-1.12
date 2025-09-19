@@ -2,16 +2,16 @@
 To discuss:
 -----------------
 DONE: * Maximal 8 cheese stages? -> Needed to encode stage and cheese type in item meta.
-=> DECISSION: Using 4 cheese stages. [Discord:general, 14.01.2017]
+=> DECISION: Using 4 cheese stages. [Discord:general, 14.01.2017]
 
 -----------------
 To implement:
 -----------------
-TODO: Add green and red grape ice cream and yoghurt.
 TODO: Rope bounding boxes are not reacting according neighbor blocks.
-TODO: Step sound of apple fences should be changed to wood.
 TODO: Refactoring: Change Item and Block types to GC.Core types. Especially food types.
 DOING: Brew kettle bounding boxes changes if lid is on.
+DONE: Add green and red grape ice cream and yoghurt.
+DONE: Step sound of apple and bamboo fence should be changed to wood.
 DONE: Change Grape blocks from BlockCrops to BlockBush
 
 -----------------
@@ -21,8 +21,8 @@ BUG: Client and Server synchronisation for brewing kettle is not working unless 
 BUG: Bee box has a spamming block update.
 BUG: Cheese press is triggered when placing a neighbor block.
 BUG: Filling bottles with booze bucket always returning juice. Reason: NBTtags of UniversalBucket in class ShapelessRecipes not compared. 
-BUG: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 BUG: Fix string formatting with arguments when logging.
+DONE: No kind of block sounds, like fruit press pistons, splash sound when dropping items into brewing kettle a.s.o.
 DONE: Collision boxes for brewing kettle walls are not correct.
 DONE: Thistle recipe not working to get seeds.
 DONE: Ricotta bowl recipe not working.
