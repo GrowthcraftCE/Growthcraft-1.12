@@ -163,10 +163,10 @@ public class BlockFruitPresser extends BlockCellarContainer implements IWrenchab
 
         if (flag && pressed == PressState.UNPRESSED) {
             world.setBlockState(pos, state.withProperty(TYPE_PRESSED, PressState.PRESSED), BlockFlags.UPDATE_AND_SYNC);
-            world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.25F + 0.6F, false);
+            world.playSound(null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.25F + 0.6F);
         } else if (!flag && pressed == PressState.PRESSED) {
             world.setBlockState(pos, state.withProperty(TYPE_PRESSED, PressState.UNPRESSED), BlockFlags.UPDATE_AND_SYNC);
-            world.playSound((double) pos.getX() + 0.5D, (double) pos.getY() + 0.5D, (double) pos.getZ() + 0.5D, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.15F + 0.6F, false);
+            world.playSound(null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 0.5F, world.rand.nextFloat() * 0.15F + 0.6F);
         }
 
         markBlockForUpdate(world, pos);

@@ -251,7 +251,7 @@ public class BlockHops extends BlockBush implements IBlockRope, IPlantable, ICro
     }
 
     private float getGrowthRate(World world, BlockPos pos) {
-        return BlockCrops.getGrowthChance(this, world, pos);
+        return BlockCrops.getGrowthChance(world.getBlockState(pos).getBlock(), world, pos);
     }
 
     public void removeFruit(World world, BlockPos pos, IBlockState state) {

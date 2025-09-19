@@ -135,8 +135,6 @@ jar.manifest {
 }
 
 dependencies {
-    compile "mcjty.theoneprobe:TheOneProbe-1.12:" + project.property('theoneprobe_version')
-
     deobfProvided "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version') + ":api"
 
     compile "curse.maven:rustic-256141:3107974"
@@ -144,6 +142,7 @@ dependencies {
     compile "curse.maven:hwyla-253449:2568751"
     compile "curse.maven:baubles-227083:2518667"
     compile "curse.maven:crafttweaker-239197:5013567"
+    compile "curse.maven:the-one-probe-245211:2667280"
 
     runtime "mezz.jei:jei_" + project.property('minecraft_version') + ":" + project.property('jei_version')
 }

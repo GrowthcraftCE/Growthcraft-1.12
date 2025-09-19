@@ -5,6 +5,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.BlockWall;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
@@ -39,6 +40,7 @@ public class BlockAppleFenceGate extends BlockHorizontal {
         this.setTranslationKey(unlocalizedName);
         this.setRegistryName(new ResourceLocation(Reference.MODID, unlocalizedName));
         this.setHardness(2.0F);
+        this.setSoundType(SoundType.WOOD);
         this.setHarvestLevel("axe", 1);
         this.setResistance(5.0F);
         this.useNeighborBrightness = true;
